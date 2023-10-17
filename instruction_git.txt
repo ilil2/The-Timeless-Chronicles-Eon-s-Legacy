@@ -4,7 +4,7 @@ A faire une fois :
 
 A faire avant chaque fois :
 
-- git remote
+- git pull
 
 A faire après chaque fois :
 
