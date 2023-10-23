@@ -1,0 +1,277 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[french]{babel} % pour dire que le texte est en fran¸cais
+\usepackage{a4} % pour la taille
+\usepackage[T1]{fontenc} % pour les font postscript
+\usepackage[cyr]{aeguill} % Police vectorielle TrueType, guillemets fran¸cais
+\usepackage{epsfig} % pour g´erer les images
+\usepackage{amsmath, amsthm} % tr`es bon mode math´ematique
+\usepackage{amsfonts,amssymb}% permet la definition des ensembles
+\usepackage{float} % pour le placement des figure
+\usepackage{url} % pour une gestion efficace des url
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\title{Cahier des charges}
+\author{The Timeless Chronicles: Eon's Legacy}
+\date{}
+
+\begin{document}
+\large
+\maketitle
+\begin{center}
+    Noah Matthieu Abi Chahla\\
+    Otto Debrie\\
+    Corentin del Pozo\\
+    Nathan Hirth\\
+    Ilyann Gwinner\\
+\end{center}
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Introduction}
+\paragraph{}
+WarpGates Studio est une entreprise de d\'eveloppement et d'\'edition de jeux vid\'eo. Celle-ci fut fond\'ee en 2023, par 5 \'epitéens, dans le but d'offrir un espace cr\'eatif d'innovation et d'assouvir la passion du jeux vid\'eo des \'el\`eves. Ces valeurs sont tout d'abord une autonomie totale des d\'eveloppeur afin de proposer au plus large public une experience inoubliable \`a travers d'exellents jeux.
+
+\paragraph{}
+L'\'Ecole d'ingénieurs en infornatique Epita ayant pass\'e la commande d'un jeu innovant, les 5 membres fondateurs du studio ce sont r\'eunis aifn de d\'evelopper le meilleur jeu possible.
+
+\paragraph{}
+Ces membres sont les suivants:
+\begin{itemize}
+\item[\textbullet] \textbf{Noah-Matthieu Abi-Chahla} , CEO de WarpGate Studio et chef de projet, une personne sympathique qui aide à la cohésion de l'équipe. Son éloquence lui permet de représenter fiérement le studio.
+\item[\textbullet] \textbf{Otto Debrie} , homme serieux et travailleur mais dont l'humour permet de maintenir une ambiance agréable et décomplexée, sans nuir à la productivité du groupe. Il s'occupe également de l'écriture de l'histoire du jeu.
+\item[\textbullet] \textbf{Ilyann Gwinner} , véritable expert dans son domaine qui saura apporter de l' experience à l'équipe.
+\item[\textbullet] \textbf{Nathan Hirth} , surnomé "Narth", visionnaire et travailleur acharné qui fera tout pour que le projet soit une réussite.
+\item[\textbullet] \textbf{Corentin del Pozo} , un homme aux idées ingénieuses et à la vision claire qui permet une organisation sans faille du projet.
+\end{itemize}
+\paragraph{}
+Ayant \'et\'e demand\'e de cr\'eer un jeu \`a la foi innovant et amusant, nous avons m\^urement r\'efl\'echi au genre le plus adapt\'e. Nous sommes donc partis sur un rogue-like modifi\'e par l' impl\'ementation de la 3D et d'un multijoueur jusqu'\`a 4, avec differantes classes aux comp\'etences uniques d\'ebloqu\'ees par la mont\'ee en niveaux. 
+
+\paragraph{}
+En effet, cet id\'ee nous permet de d\'evelopper une infrastructure r\'eseau et un multijoueur enrichie par diff\'erantes classes et un syst\`eme de comp\'etences, et nous apprend \`a relier notre projet \`a des serveurs. De plus, le grand nombre d'ennemis dans ce genre se pr\`ete particuli\`erement bien au d\'eveloppement d'IA et à son interaction avec son environnement. Enfin, la 3D nous permet d'apprendre \`a mieux maitriser le moteur Godot. Ainsi ce projet permet d'exploiter la demande afin d'am\'eliorer nos comp\'etances personnelles tout en cr\'eant le jeu le plus ludique possible.
+
+
+\section{Présentation générale du projet}
+\subsection{Objet d'étude}
+Ce projet présente une multitude d'objectifs et d'enjeux pour nous. Avant tout, il représente notre première immersion dans un travail collaboratif et coopératif. Cette initiative est une opportunité inédite pour nous de nous engager dans un projet à la fois ambitieux par sa nature et exigeant en termes de temps, particulièrement dans un domaine qui nous tient à cœur et nous passionne.\\
+
+S'étendant sur une durée proche de neuf mois, ce projet offre une occasion unique d'apprentissage continu et intense. Il nous confronte à diverses compétences indispensables pour le développement de notre jeu. Ces compétences englobent plusieurs aspects, allant des graphismes, en passant par les langages de programmation, jusqu'à la complexité du réseau nécessaire pour un jeu multijoueur, sans oublier l'intelligence artificielle. Chacun de ces domaines demande un investissement profond pour parvenir à une maîtrise satisfaisante.\\
+
+Tout au long de ce voyage d'apprentissage, certaines de nos compétences existantes, comme le développement d'algorithmes en C sharp, seront approfondies. Simultanément, d'autres domaines, tels que le développement graphique en utilisant Gogot, l'élaboration d'intelligences artificielles, ou encore la mise en place d'architectures client/serveur, seront des terrains complètement nouveaux que nous explorerons et assimilerons au cours de ce projet.\\
+
+De plus, cette initiative est une opportunité précieuse pour consolider notre aptitude à collaborer efficacement en équipe. Elle favorise le partage de connaissances et d'expertises entre les membres. Ce partage mutuel est essentiel car il permet à chaque individu de s'appuyer sur les points forts des autres, favorisant ainsi la progression collective. En matière de programmation, la collaboration est souvent au cœur du processus. Ainsi, pour nous, la capacité à travailler en synergie est un élément clé pour la réussite de notre projet.\\
+
+\subsection{Etat de l'art}
+Le Roguelike est un genre créé en 1980 avec le lancement du jeu Rogue. Cet opus, reconnu comme l'initiateur du genre, a mis en avant une mécanique de jeu basée sur la découverte de donjons créés de manière aléatoire, peuplés de créatures et regorgeant de richesses. Rogue s'est distingué par son concept de mort définitive, où chaque faux pas peut être fatal, donnant un caractère impardonnable au jeu. Inspirés par cette catégorie, nous avons commencé notre projet. Toutefois, bien que s'inspirant du roguelike, nous y avons incorporé nos propres nouveautés.\\
+
+Tout en conservant la mécanique de lutte contre diverses créatures dans des salles variées et la difficulté extrême de ce type de jeu, le nôtre comporte également des affrontements contre des boss. Pour concevoir ces adversaires, nous nous sommes inspirés du jeu Elden Ring, réputé pour la complexité de ses combats contre des boss. De plus, Elden Ring permet une expérience multijoueur en mode coopératif. Nous avons repris cette mécanique c’est pour cela que dans notre jeu, affronter ces redoutables boss nécessitera stratégie et collaboration pour augmenter les chances de victoire.\\
+
+En termes de perspective, nous avons choisi d'adopter l'angle de caméra de jeux tels que Tomb Raider, proposant une vue à la troisième personne. Cette perspective offre une vision globale du personnage et de son environnement immédiat. Ce choix est motivé par la nature des combats rapprochés contre une multitude d'ennemis que propose notre jeu.\\
+
+Soul Knight, un jeu mobile, représente le principal rival de notre jeu. Il s'agit d'un rogue-like où les participants parcourent des donjons créés aléatoirement, combattant des ennemis et collectant équipements et armes. Soul Knight se distingue par sa difficulté constante, indépendamment du nombre de joueurs, et sa mort permanente. Ses graphismes sont simplifiés, en pixel art, dans un univers 2D.
+Bien que notre jeu emprunte certaines des spécificités de Soul Knight, notamment sa difficulté, nous avons opté pour une réalisation en 3D et décidé d'écarter le concept de mort permanente, tout en maintenant des conséquences lourdes en cas de décès.
+\section{Le jeu}
+\subsection{Le but du jeu}
+Le jeu se déroule en équipes de 1 à 4 joueurs en ligne, offrant une expérience collaborative très importante dans le déroulement du jeu. Chaque niveau présente un double défi : tout d'abord, il s'agit d'explorer méticuleusement la carte à la recherche du passage menant à la salle finale, puis de coopérer avec d'autres joueurs pour affronter les monstres disséminés à divers endroits sur la carte. Ces affrontements sont cruciaux pour renforcer les joueurs, les préparant ainsi aux épreuves futures. Une fois cette étape franchie, les joueurs doivent affronter un boss dont la principale mission est de protéger le portail permettant d'accéder au niveau suivant.
+\subsection{Le gameplay}
+
+\subsubsection{Les Classes}
+Au début de chaque partie, les joueurs ont l'opportunité de choisir parmi quatre classes différentes, chacune offrant des caractéristiques uniques. Il n'y a aucune restriction quant à la possibilité pour les joueurs de sélectionner la même classe à plusieurs reprises, leur permettant ainsi d'élaborer leur propre stratégie.\\ \\
+Voici un aperçu des différentes classes disponibles :\\ \\
+\textbf{Le Chevalier:}
+\begin{list}{}{\leftmargin 1cm} 
+\item \textsc{\underline{Points forts:}}
+Le Chevalier est équipé d'une grande épée et d'un bouclier, ce qui lui permet d'infliger des dégâts importants aux ennemis et de se protéger des attaques adverses. Il dispose également d'une grande réserve de points de vie, ce qui lui permet d'encaisser davantage de dégâts.
+\item \textsc{\underline{Points faibles:}}
+En raison de son armure lourde, le Chevalier est assez lent. Chaque attaque ou blocage de dégâts avec son bouclier consomme de l'énergie, bien qu'elle puisse se régénérer lentement s'il ne subit pas de dégâts. Lorsque son énergie est épuisée, il ne peut plus se protéger ni attaquer.
+\end{list}
+\textbf{L'Archer:}
+\begin{list}{}{\leftmargin 1cm} 
+\item \textsc{\underline{Points forts:}}
+L'Archer est capable de tirer des flèches à distance, ajustant la puissance et la précision en fonction de la durée de concentration avant de tirer. Il possède également la capacité de courir, ce qui lui permet de se déplacer plus rapidement.
+\item \textsc{\underline{Points faibles:}}
+Après un certain nombre de flèches tirées, l'Archer doit recharger son carquois, le rendant vulnérable, d'autant plus qu'il ne possède pas d'armes de corps à corps. Sa capacité de course consomme de l'énergie, qui se régénère lentement comme chez le Chevalier.
+\end{list}
+\textbf{Le Scientifique:}
+\begin{list}{}{\leftmargin 1cm} 
+\item \textsc{\underline{Points forts:}}
+Le Scientifique dispose d'une machine transportable qui lui permet de soigner ses alliés ou d'infliger des dégâts proportionnels au temps de charge de son rayon. Il possède également une importante réserve de points de vie.
+\item \textsc{\underline{Points faibles:}}
+Comme le Chevalier, le Scientifique est plus lent en raison de son équipement scientifique encombrant. Il doit parfois s'arrêter pour recharger son appareil en énergie, car chaque action du Scientifique en consomme. Contrairement à l'Archer et au Chevalier, l'énergie ne se régénère pas automatiquement. Pendant le rechargement, il est vulnérable.
+\end{list}
+\textbf{L'Assasin:}
+\begin{list}{}{\leftmargin 1cm} 
+\item \textsc{\underline{Points forts:}}
+L'Assasin est doté d'une grande agilité et d'une grande vitesse de base, ce qui lui permet de se déplacer rapidement sur le champ de bataille pour attaquer les ennemis avec son katana, infligeant ainsi des dégâts considérables. Il possède également une capacité spéciale qui lui permet d'esquiver des attaques.
+\item \textsc{\underline{Points faibles:}}
+L'Assasin n'utilise pas d'énergie pour ses actions de base, mais sa capacité spéciale consomme un tiers de sa barre d'énergie. Pour la recharger, il doit infliger des dégâts aux ennemis.
+\end{list}
+
+\subsubsection{Les Compétences}
+À la fin de chaque niveau, les joueurs ont l'opportunité de monter de niveau en fonction de l'expérience accumulée tout au long de la partie. Chaque fois qu'un joueur gagne un niveau, le jeu lui offre la possibilité de choisir une compétence supplémentaire pour son personnage. Au départ, chaque joueur dispose d'un nombre fixe de slot de compétence et doit décider s'il souhaite les utiliser pour acquérir une nouvelle compétence ou s'il préfère les conserver pour de meilleures compétences à venir. Une fois que le joueur a utilisé tous ses slots de compétence, il ne peut plus en acquérir de nouvelles et ne peut pas non plus modifier les compétences déjà sélectionnées. Par conséquent, il revient au joueur de réfléchir soigneusement à quelles capacités il souhaite conserver pour progresser efficacement dans le jeu. 
+\subsubsection{Le Drop des Mobs}
+Chaque créature ennemie laissera tomber deux types de récompenses en quantités variables : des points d'expérience pour progresser en niveaux, et de l'or qui constitue la monnaie du jeu. Lorsqu'un monstre est tué, tous les joueurs recevront la même quantité d'argent, mais cette donnée est individuelle pour chaque joueur, leur permettant ainsi de gérer leurs finances de manière autonome.
+\subsubsection{Les Niveaux}
+Le niveau d'expérience est commun à tous les joueurs, chaque fois qu'un joueur élimine un monstre, les points d'expérience lachés par le monstre sont directement ajoutés à la jauge commune. À la fin de chaque niveau, cette jauge d'expérience calcule les niveaux gagnés au cours de la partie.
+\subsubsection{L'achat d'item}
+Dans le jeu, entre chaque niveau, les joueurs auront l'opportunité de dépenser l'argent qu'ils ont accumulé pour acheter des objets qui les aideront dans leur aventure. Ces objets pourront être équipés dans des raccourcis, permettant aux joueurs de les utiliser rapidement en cours de partie. Cela offre une dimension stratégique intéressante, car les objets acquis peuvent influencer considérablement la progression des joueurs dans le jeu, ajoutant ainsi une dimension de personnalisation à leur expérience de jeu.\\ \\
+\textbf{Voici les différents items qui pourraient être proposés :}\\ \\
+\begin{tabular}{ | l | c | c | }
+ \hline			
+   \textbf{nom} & \textbf{description} & \textbf{prix (en or)} \\ \hline \hline
+    Potion de vitesse & Multiplie la vitesse par 1.5 pendant 30 secondes & 100 \\ \hline
+    Potion de vie & Soigne 40\% de la vie du joueur  & 150 \\ \hline 
+    Potion d'energie & Redonne 60\% de l'energie du joueur & 150 \\ \hline
+    Potion de resistance & Divise les degats subit par 2 pendant 30 secondes & 300 \\ \hline
+    Potion d'amnésie & Supprime une compétence aquises par le joueur & 1000 \\ \hline
+    Potion de résurrection & Ressusite un joueur a proximité (à 50\% de vie) & 1500 \\ \hline
+\end{tabular}
+
+\subsection{L'interface}
+\textbf{L'interface est divisée en 5 zones distinctes:}
+\begin{description}
+\item[Zone 1] Elle est située en bas à gauche et elle affiche les points de vie, ainsi que la jauge d'énergie. De plus, c'est dans cette zone que sera affiché votre pseudo choisi en début de partie.
+\item[Zone 2] Positionnée en bas à droite elle est réservée à l'affichage d'informations concernant votre personnage, telles que la classe que vous avez choisie, les améliorations que vous lui avez apportées, et, pour certaines classes, les différents "sorts" dont vous disposez.
+\item[Zone 3] Située au milieu en haut elle est dédiée à l'affichage du nombre de points d'expérience acquis par l'équipe. 
+\item[Zone 4] Elle se trouve dans le coin supérieur droit et sert à afficher la somme d'argent collectée au cours de la partie.
+\item[Zone 5] Elle est en haut à droite et abrite le chat qui permet de communiquer avec les autres joueurs.
+\end{description}
+\subsection{Pnj}
+Dans le jeu, la présence de PNJ sera relativement limitée. Il y aura un marchand qui offrira ses services en vendant des objets aux joueurs en échange de leur argent, tout en étant capable d'engager des dialogues avec eux. Un autre PNJ remplira le rôle de guide, fournissant aux joueurs des informations sur l'histoire du jeu et leur donnant des conseils pour les aider dans leur progression.
+\subsection{IA}
+\subsubsection{IA Mobs}
+L'intelligence artificielle de chaque type de créature dans le jeu peut varier en fonction de ses capacités distinctes. Cependant, en ce qui concerne leur déplacement, toutes les créatures se comportent de la même manière. Chacune d'entre elles choisira un joueur en fonction de plusieurs critères, tels que la distance qui les sépare et d'autres caractéristiques telles que l'aggro. Elles s'assureront qu'aucun obstacle ne se trouve entre le joueur et la créature afin d'éviter d'attaquer des joueurs qu'elles ne peuvent pas voir. Une fois leur cible choisie, elles tenteront de trouver un chemin pour s'en approcher.
+
+Lorsqu'une créature se trouve à portée du joueur, elle déclenchera son attaque pour toucher le joueur. Si la créature est attaquée par le joueur, elle sera momentanément incapable de lancer une attaque et reculera en réponse.
+\subsubsection{IA Boss}
+Les Boss sont des entités très particulières, cependant, elles partagent des similitudes avec l'intelligence artificielle des créatures classiques, notamment en ce qui concerne le calcul de la cible du joueur. Néanmoins, ce processus est plus complexe, prenant en compte davantage de caractéristiques. En ce qui concerne leurs attaques, les Boss disposent de différentes attaques ayant des portées variées. L'IA du Boss choisira laquelle parmi ces attaques est la plus optimale en fonction de la situation et des paramètres spécifiques définis pour le Boss.
+\subsection{Réseau}
+L'architecture réseau du jeu se caractérise de la manière suivante : \\
+Chaque joueur échange plusieurs informations avec le serveur, telles que les coordonnées et l'état de leur personnage. Ensuite, le serveur effectue des calculs pour toutes les entités du jeu en fonction des données recueillies, puis renvoie ces nouvelles données à tous les joueurs. Cette synchronisation permet à tous les joueurs de voir la même chose simultanément, garantissant une expérience de jeu cohérente.\\
+
+Il est à noter qu'un des joueurs qui héberge la partie recevra plus d'informations que les autres. Cela lui permet de constituer la sauvegarde du jeu, ce qui est essentiel pour la stabilité de la partie. En ayant une copie plus complète des données, ce joueur assure également que la partie peut être restaurée en cas de besoin, offrant ainsi une sécurité supplémentaire aux joueurs. \pagebreak \\
+\textbf{\underline{Schéma fonctionnel du réseau :}}\\ \\
+\normalsize
+\begin{tikzpicture}
+\draw (0, -4) -- (4, -4) -- (4, -8) -- (0, -8) -- (0, -4);
+\draw (8,-4) -- (12, -4) -- (12, -8) -- (8, -8) -- (8,-4);
+\draw (8, 0) -- (8, 4) -- (4, 4) -- (4, 0) -- (8, 0);
+\draw (2,-5.75) node{$Joueur$};
+\draw (2,-6.25) node{$Hebergeur\ de\ la\ partie$};
+\draw (10,-6) node{$Autres\ joueurs$};
+\draw (6,2) node{$Serveur$};
+\draw[<->,>=latex] (5, 0) -- (2, -4);
+\draw[<->,>=latex] (7,0) -- (10,-4);
+\end{tikzpicture}
+\large
+\section{Aspects économiques}
+\subsection{Dépenses}
+\subsubsection{Salaires}
+\paragraph{} Pour ce projet nous avons géneré une grille de salaire personnalisé. Cette grille correspond aux salaires par rapport aux 5 membre de l'équipe et leurs r\^oles.\\
+
+\begin{tabular}{ | l | c | r | } \hline
+   \textbf{Metier} & \textbf{Nom} & \textbf{Salaire} \\ \hline
+   Chef de Projet & Noah & 72438 €/brut/ans \\ \hline
+   Developpeur IA & Otto & 42912 €/brut/ans  \\ \hline
+   Developpeur IA & Nathan & 40132 €/brut/ans  \\ \hline
+   Developpeur Game Design & Corentin & 41262 €/brut/ans \\ \hline
+   Developpeur Serveur & Ilyann & 40912 €/brut/ans \\ \hline
+\end{tabular}
+
+\subsubsection{Serveurs}
+\paragraph{} Pour la partie serveur nous avons decider de partir sur la plateforme Amazon AWS. Nous avons choisit un derveur de type m6g.8xlarge à Paris avec vCPU 32 et 128 Gio d'espace memoire pour 633.64 € par mois.
+
+\subsubsection{Stratégie commerciale}
+\paragraph{} Pour pouvoir mettre en avant notre jeu, nous avons decider de faire une publiciter vidéo et de la soumettre a Google Ads. Cette opération devrai nous couter 12423.67 € (estimation Google Ads). Nous avons également décider de participer a des conventions et de diffuser le trailer a 2 mois avant sa sortie.
+
+\subsection{Revenus}
+\subsubsection{Investisseurs}
+\paragraph{} Pour recevoir une aide financière nous avons entamer une campagne sur Kickstarter. Avec cette campagne nous avons reussi a obtenir 118 000 €. Pour obtenir cela, nous avons creer plusieurs offres diffenrentes (prix deduit de la production). Nous avons choisit de faire une compagne pour de faire face a des investisseur pour pouvoir garder une liberté totale sur le jeu.\\
+
+\begin{tabular}{| l | c | r |} \hline
+   \textbf{Offre} & \textbf{Description} & \textbf{Prix} \\ \hline
+    & Boite collector complète contenant, un t-shirt  & \\
+   Premium + & dedicacé, le jeu, une figurine collector (en or) & 999.99 € \\ 
+    & le manuel d'aide a l'installation + la beta & \\ \hline
+     & Boite collector contenant, le jeu,  & \\
+   Premium & une figurine collector (plaqué or)& 499.99 € \\ 
+    & le manuel d'aide a l'installation + la beta & \\ \hline
+    & &  \\
+    Beta & accès a la beta& 99.99 € \\
+    & & \\ \hline
+    & & \\
+    Classique & accès au jeu & 39.99 € \\
+    & & \\ \hline
+\end{tabular}
+
+\subsubsection{Prix du jeu}
+\paragraph{} Le jeu sera vendu exclusivement sur Steam a hauteur de 39.99 €. Pour facilité les ventes, nous allns creer une reduction a appliquer a certains evenenements (anniversaire du jeu, noel, black friday). Le prix lors de ces evenements sera de 19.99 €.
+
+\subsection{Résumé}
+\paragraph{} Pour résumer, nous avons fait un tableau récapitulatif sur 2 ans (l'année de dévellopement et une année de comercialisation).\\
+
+\begin{tabular}{| l | c | r |} \hline
+   \textbf{Sujet} & \textbf{Durée} & \textbf{Prix} \\ \hline
+   Salaires & 1 ans & - 237 656 € \\ \hline
+   Serveurs & 2 ans & - 15 207.36 € \\ \hline
+   publicité & 2 mois & - 12 423.67 € \\ \hline
+   Total Perte & 2 ans & - 265 287.03 € \\ \hline
+   Kickstarter & 1 ans & + 118 000 € \\ \hline
+   Ventes hors reduction & 1 ans & + 152 000 € \\ \hline
+   Vente en reduction & 1 ans & + 200 000 € \\ \hline
+   Total gains & 2 ans & + 470 000 € \\ \hline \hline
+   \textbf{Total} & \textbf{2 ans} & \textbf{+ 204 712.97 €} \\ \hline
+\end{tabular}
+\section{Découpage du projet}
+\begin{tabular}{l l}
+Noah Matthieu Abi Chahla & Responsable Graphisme \\
+Otto Debrie & Responsable IA \\
+Corentin Del Pozo & Responsable Carte (Map) \\
+Nathan Hirth & Responsable Personnages \\
+Ilyann Gwinner & Responsable Réseau \\
+\end{tabular}
+
+\subsection*{Soutiens:}
+\begin{tabular}{l l}
+Noah Matthieu Abi Chahla & Soutien IA, Soutien Personnages \\
+Otto Debrie & Soutien Graphisme, Soutien Personnages \\
+Corentin Del Pozo & Soutien Réseau \\
+Nathan Hirth & Soutien Graphisme, Soutien IA \\
+Ilyann Gwinner & Soutien Carte \\
+\end{tabular}
+
+\subsection*{Répartition du travail par soutenance:}
+\begin{tabularx}{\textwidth}{|C|X|X|X|}\hline
+    Tache & Soutenance 1 & Soutenance 2 & Soutenance 3 \\ \hline
+    IA Mob & 50\% & 90\% & 100\% \\ \hline
+    IA Boss & 20\% & 75\% & 100\% \\ \hline
+    Interaction du joueurs & 0\% & 40\% & 100\% \\ \hline
+    Envoi/réception des données & 50\% & 90\% & 100\% \\ \hline
+    La Map & 25\% & 75\% & 100\% \\ \hline
+    Les Personnages & 20\% & 70\% & 100\% \\ \hline
+    Graphisme Entité & 20\% & 90\% & 100\% \\ \hline
+    Graphisme Map & 30\% & 60\% & 100\% \\ \hline
+    Sound Desing & 10\% & 60\% & 100\% \\ \hline
+    Animations & 10\% & 70\% & 100\% \\ \hline
+    Site web & 80\% & 90\% & 100\% \\ \hline
+    Identité visuelle & 30\% & 80\% & 100\% \\ \hline
+    UI & 30\% & 70\% & 100\% \\ \hline \hline
+    Projet Total & 20\% & 60\% & 100\% \\ \hline
+\end{tabularx}
+
+\section{Conclusion}
+Le projet "The Timeless Chronicles: Eon's Legacy" est une entreprise ambitieuse qui combine la passion pour les jeux vidéo avec un désir d'innovation et de créativité. Notre équipe de développement, composée de Noah Matthieu Abi Chahla, Otto Debrie, Corentin del Pozo, Nathan Hirth et Ilyann Gwinner, travaille en collaboration pour créer un jeu multijoueur innovant et captivant.
+
+Le jeu se base sur le genre du rogue-like, mais y apporte sa propre touche unique en intégrant des éléments de 3D, un multijoueur jusqu'à 4 joueurs, des classes de personnages avec des compétences spécifiques, et des combats contre des boss redoutables. Cette combinaison de caractéristiques offre une expérience de jeu immersive et exigeante pour les joueurs.
+
+Le projet englobe une variété de compétences, de la programmation au design graphique, en passant par la gestion du réseau et de l'intelligence artificielle. Les membres de l'équipe ont investi du temps et de l'énergie pour développer ces compétences, tout en travaillant en étroite collaboration pour atteindre les objectifs du projet.
+
+L'aspect économique du projet a été soigneusement planifié, avec des coûts estimés pour les salaires, les serveurs, la publicité et d'autres dépenses, ainsi que des sources de revenus telles que les investisseurs et les ventes du jeu. Le modèle économique du jeu est conçu pour être équilibré et rentable.\\
+
+En résumé, "The Timeless Chronicles: Eon's Legacy" est un projet passionnant qui allie créativité, innovation et compétences techniques pour créer un jeu vidéo multijoueur captivant. Notre équipe est déterminée à mener ce projet à bien et à offrir aux joueurs une expérience de jeu exceptionnelle. Nous attendons avec impatience les prochaines étapes de développement et sommes prêts à relever les défis qui se présentent à nous.\\
+
+\end{document}
+
