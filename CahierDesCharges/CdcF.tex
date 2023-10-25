@@ -8,24 +8,52 @@
 \usepackage{float} % pour le placement des figure
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}
+\usepackage{makecell}
 \usepackage{hyperref}
-\title{Cahier des charges}
-\author{The Timeless Chronicles: Eon's Legacy}
-\date{}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\graphicspath{ {./} }
+\pagestyle{fancy}
+\fancyhf{}
+
+
+
+
 
 \begin{document}
-\large
+\title{ \HUGE \textbf{ \textsc{\uppercase{WarpGates Studio}}}
+		\\ [2.0cm]
+		\Xhline{2pt} \\
+        [0.5cm]
+		\LARGE \uppercase{The Timeless Chronicles: \\ Eon's Legacy}\\
+        [0.5cm]
+		\Xhline{2pt} \\ 
+        [4cm]
+		\textsc{Cahier des charges}}
+  
+\author{
+		Noah Matthieu Abi Chahla\\
+        Otto Debrie\\
+        Corentin del Pozo\\
+        Nathan Hirth\\
+        Ilyann Gwinner
+}
+\date{}
 \maketitle
-\begin{center}
-    Noah Matthieu Abi Chahla\\
-    Otto Debrie\\
-    Corentin del Pozo\\
-    Nathan Hirth\\
-    Ilyann Gwinner\\
-\end{center}
-\pagebreak
+\newpage
+\large
+\pagestyle{fancy}
+\cfoot{\thepage}
 \tableofcontents
 \pagebreak
+
+\lhead{}
+\rhead{\textbf{The Timeless Chronicles: Eon's Legacy}}
+\lfoot{\textbf{WarpGates Studio}}
+\rfoot{\textbf{EPITA}}
+
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
 
 \section{Introduction}
 \paragraph{}
@@ -72,6 +100,8 @@ Bien que notre jeu emprunte certaines des spécificités de Soul Knight, notamme
 \section{Le jeu}
 \subsection{Le but du jeu}
 Le jeu se déroule en équipes de 1 à 4 joueurs en ligne, offrant une expérience collaborative très importante dans le déroulement du jeu. Chaque niveau présente un double défi : tout d'abord, il s'agit d'explorer méticuleusement la carte à la recherche du passage menant à la salle finale, puis de coopérer avec d'autres joueurs pour affronter les monstres disséminés à divers endroits sur la carte. Ces affrontements sont cruciaux pour renforcer les joueurs, les préparant ainsi aux épreuves futures. Une fois cette étape franchie, les joueurs doivent affronter un boss dont la principale mission est de protéger le portail permettant d'accéder au niveau suivant.
+\subsection{Histoire du jeu}
+Le jeu raconte l'histoire de 4 personnes issues de temporalités différentes, extraites de force de leur époque à cause de failles temporelles. Ces failles ont été causées par le dieu maléfique Éon ayant créé 4 portails temporels afin de dominer le monde. Les 4 héros doivent donc affronter des vagues d'ennemi à travers le temps et fermer les portails temporels gardés par 4 dieux maléfiques, afin de vaincre Éon.
 \subsection{Le gameplay}
 
 \subsubsection{Les Classes}
@@ -91,6 +121,7 @@ L'Archer est capable de tirer des flèches à distance, ajustant la puissance et
 \item \textsc{\underline{Points faibles:}}
 Après un certain nombre de flèches tirées, l'Archer doit recharger son carquois, le rendant vulnérable, d'autant plus qu'il ne possède pas d'armes de corps à corps. Sa capacité de course consomme de l'énergie, qui se régénère lentement comme chez le Chevalier.
 \end{list}
+\pagebreak
 \textbf{Le Scientifique:}
 \begin{list}{}{\leftmargin 1cm} 
 \item \textsc{\underline{Points forts:}}
@@ -144,11 +175,12 @@ L'intelligence artificielle de chaque type de créature dans le jeu peut varier 
 Lorsqu'une créature se trouve à portée du joueur, elle déclenchera son attaque pour toucher le joueur. Si la créature est attaquée par le joueur, elle sera momentanément incapable de lancer une attaque et reculera en réponse.
 \subsubsection{IA Boss}
 Les Boss sont des entités très particulières, cependant, elles partagent des similitudes avec l'intelligence artificielle des créatures classiques, notamment en ce qui concerne le calcul de la cible du joueur. Néanmoins, ce processus est plus complexe, prenant en compte davantage de caractéristiques. En ce qui concerne leurs attaques, les Boss disposent de différentes attaques ayant des portées variées. L'IA du Boss choisira laquelle parmi ces attaques est la plus optimale en fonction de la situation et des paramètres spécifiques définis pour le Boss.
+\pagebreak
 \subsection{Réseau}
 L'architecture réseau du jeu se caractérise de la manière suivante : \\
 Chaque joueur échange plusieurs informations avec le serveur, telles que les coordonnées et l'état de leur personnage. Ensuite, le serveur effectue des calculs pour toutes les entités du jeu en fonction des données recueillies, puis renvoie ces nouvelles données à tous les joueurs. Cette synchronisation permet à tous les joueurs de voir la même chose simultanément, garantissant une expérience de jeu cohérente.\\
 
-Il est à noter qu'un des joueurs qui héberge la partie recevra plus d'informations que les autres. Cela lui permet de constituer la sauvegarde du jeu, ce qui est essentiel pour la stabilité de la partie. En ayant une copie plus complète des données, ce joueur assure également que la partie peut être restaurée en cas de besoin, offrant ainsi une sécurité supplémentaire aux joueurs. \pagebreak \\
+Il est à noter qu'un des joueurs qui héberge la partie recevra plus d'informations que les autres. Cela lui permet de constituer la sauvegarde du jeu, ce qui est essentiel pour la stabilité de la partie. En ayant une copie plus complète des données, ce joueur assure également que la partie peut être restaurée en cas de besoin, offrant ainsi une sécurité supplémentaire aux joueurs. \\ \\
 \textbf{\underline{Schéma fonctionnel du réseau :}}\\ \\
 \normalsize
 \begin{tikzpicture}
@@ -163,6 +195,7 @@ Il est à noter qu'un des joueurs qui héberge la partie recevra plus d'informat
 \draw[<->,>=latex] (7,0) -- (10,-4);
 \end{tikzpicture}
 \large
+\pagebreak
 \section{Aspects économiques}
 \subsection{Dépenses}
 \subsubsection{Salaires}
@@ -221,6 +254,7 @@ Il est à noter qu'un des joueurs qui héberge la partie recevra plus d'informat
    Total gains & 2 ans & + 470 000 € \\ \hline \hline
    \textbf{Total} & \textbf{2 ans} & \textbf{+ 204 712.97 €} \\ \hline
 \end{tabular}
+\pagebreak
 \section{Découpage du projet}
 \begin{tabular}{l l}
 Noah Matthieu Abi Chahla & Responsable Graphisme \\
@@ -240,24 +274,24 @@ Ilyann Gwinner & Soutien Carte \\
 \end{tabular}
 
 \subsection*{Répartition du travail par soutenance:}
-\begin{tabular}{|c|c|c|c|}\hline
-    \textbf{Tache} & \textbf{Soutenance 1} & \textbf{Soutenance 2} & \textbf{Soutenance 3} \\ \hline
-    IA Mob & 50\% & 90\% & 100\% \\ \hline
-    IA Boss & 20\% & 75\% & 100\% \\ \hline
-    Interaction du joueurs & 0\% & 40\% & 100\% \\ \hline
-    Envoi/réception des données & 50\% & 90\% & 100\% \\ \hline
-    La Map & 25\% & 75\% & 100\% \\ \hline
-    Les Personnages & 20\% & 70\% & 100\% \\ \hline
-    Graphisme Entité & 20\% & 90\% & 100\% \\ \hline
-    Graphisme Map & 30\% & 60\% & 100\% \\ \hline
-    Sound Desing & 0\% & 60\% & 100\% \\ \hline
-    Animations & 10\% & 70\% & 100\% \\ \hline
-    Site web & 80\% & 90\% & 100\% \\ \hline
-    Identité visuelle & 30\% & 80\% & 100\% \\ \hline
-    UI & 0\% & 70\% & 100\% \\ \hline \hline
-    \textbf{Projet Total} & \textbf{25\%} & \textbf{70\%} & \textbf{100\%} \\ \hline
+\begin{tabular}{|c|c|c|}\hline
+    \textbf{Tache} & \textbf{Soutenance 1} & \textbf{Soutenance 2} \\ \hline
+    IA Mob & 90\% & 100\% \\ \hline
+    IA Boss  & 75\% & 100\% \\ \hline
+    Interaction du joueurs  & 40\% & 100\% \\ \hline
+    Envoi/réception des données  & 90\% & 100\% \\ \hline
+    La Map & 75\% & 100\% \\ \hline
+    Les Personnages & 70\% & 100\% \\ \hline
+    Graphisme Entité & 90\% & 100\% \\ \hline
+    Graphisme Map & 60\% & 100\% \\ \hline
+    Sound Desing & 60\% & 100\% \\ \hline
+    Animations  & 70\% & 100\% \\ \hline
+    Site web & 90\% & 100\% \\ \hline
+    Identité visuelle & 80\% & 100\% \\ \hline
+    UI & 70\% & 100\% \\ \hline \hline
+    \textbf{Projet Total} & \textbf{70\%} & \textbf{100\%} \\ \hline
 \end{tabular}
-
+\pagebreak
 \section{Conclusion}
 Le projet "The Timeless Chronicles: Eon's Legacy" est un jeu vidéo ambitieux qui combine la passion,le désir d'innovation et la créativité. Notre équipe de développement, composée de Noah Matthieu Abi Chahla, Otto Debrie, Corentin del Pozo, Nathan Hirth et Ilyann Gwinner, travaille en collaboration pour créer un jeu multijoueur innovant et captivant.
 
