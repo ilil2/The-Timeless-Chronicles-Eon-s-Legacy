@@ -8,7 +8,8 @@ A faire avant chaque fois :
 
 A faire après chaque fois :
 
-- git add *
-- git commit -m ""
 - git pull
+- git add *
+- git status
+- git commit -m ""
 - git push
