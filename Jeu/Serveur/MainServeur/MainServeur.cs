@@ -9,6 +9,9 @@ namespace Serveur;
 public class MainServeur
 {
     private int ID = 0;
+    private int[] ports = new[] {4242,4002};
+    private int nbr_serveur = 0;
+    private int nbr_joueur = 0;
     public void MainProgram()
     {
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
@@ -40,25 +43,21 @@ public class MainServeur
         
         Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
         tw.WriteLine($"bien conecté a {cc.Socket.LocalEndPoint}");
-        tw.Flush();     //envoie des données
+        tw.Flush();     //envoi des données
         
         try
         {
-            bool connect = true;        //varriable pour la deconnection du client
-            while (connect)             //boucle de connection
+            nbr_joueur++;
+            while (true)
             {
-                string requette = tr.ReadLine();        //recuperation de la chaine
-                if (requette == "quit")
+                if (nbr_joueur == 4)
                 {
-                    Console.WriteLine($"client {cc.id} s'est deconnecté");
-                    cc.Socket.Disconnect(false);                //deconnection du client
-                    connect = false;                                      //arret de la boucle
-                }
-                else
-                {
-                    Console.WriteLine($"{cc.id} : {requette}");         //affichage de la requette recue
-                    tw.WriteLine($"vous : {requette}");
-                    tw.Flush();                                         //envoie de la reponse
+                    tw.WriteLine($"newserv:{ports[nbr_serveur]}");
+                    
+                    nbr_serveur++;
+                    nbr_serveur = 0;
+                    
+                    tw.Flush();
                 }
             }
         }
@@ -72,6 +71,8 @@ public class MainServeur
     {
         public Socket Socket { get; set; }      //socket de l'objet
         public int id { get; set; }             //id de l'objet
+        
+        public int serv_id { get; set; }        //id du serveur
 
         public ClientCom(Socket s, int num)     //initialisation de l'objet
         {

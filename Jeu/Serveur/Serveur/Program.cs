@@ -1,16 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Net;
+using System.Net.Sockets;
+using System.Threading;
 
 using Serveur;
 
 int[] ports = new[] {4242,4002};
-int nbr_serveur = 0;
 
-static void Main(string[] args)
+for (int i = 0; i < ports.Length; i++)
 {
-    MainServeur ms = new MainServeur();
-    ms.MainProgram();
-}
-
-{
-    Main(null);
+    Serveur.Serveur.Prog ms = new Serveur.Serveur.Prog(ports[i]);
+    Thread th = new Thread(global::Serveur.Serveur.MainProgram);
+    th.Start(ms);
 }

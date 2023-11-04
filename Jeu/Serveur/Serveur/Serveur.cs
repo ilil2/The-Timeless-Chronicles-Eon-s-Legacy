@@ -8,10 +8,22 @@ namespace Serveur;
 public class Serveur
 {
     private int ID = 0;
-    public void MainProgram(int n)
+
+    public class Prog
     {
+        public int n { get; set; }
+
+        public Prog(int n)
+        {
+            this.n = n;
+        }
+    }
+
+    public void MainProgram(object o)
+    {
+        Prog pr = (Prog)o;
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
-        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
+        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), pr.n);
         soc.Bind(iep); //connection depuis n'importe ou
         
         soc.Listen(); //mise en ecoute du serveur
