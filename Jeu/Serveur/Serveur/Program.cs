@@ -12,9 +12,9 @@ using System.Diagnostics;
 using Serveur;
 using Serveur = Serveur.Serveur;
 
-int[] ports = new[] {4242,4002};
 
-for (int i = 0; i < ports.Length-1; i++)
+
+for (int i = 0; i < 1; i++)
 {
     /*Serveur.Serveur.Prog ms = new Serveur.Serveur.Prog(ports[i]);
     Thread th = new Thread(Serveur.Serveur.MainProgram);
@@ -23,7 +23,13 @@ for (int i = 0; i < ports.Length-1; i++)
 
 static void Main(string[] args)
 {
-    global::Serveur.Serveur ms = new global::Serveur.Serveur();
-    ms.MainProgram();
+    int[] ports = new[] {4242,4002};
+
+    StreamReader sr = new StreamReader("port.txt");
+    string? port = sr.ReadLine();
+    sr.Close();
+    
+    global::Serveur.Serveur ms = new global::Serveur.Serveur(); 
+    ms.MainProgram(global::Serveur.Serveur.AtoI(port));
 }
 

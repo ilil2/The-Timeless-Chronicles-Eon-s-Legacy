@@ -1,3 +1,1 @@
-cd ../Serveur
-dotnet run
-echo "1010"
+gnome-terminal -e 'bash -c "cd ../Serveur;dotnet run;read"'

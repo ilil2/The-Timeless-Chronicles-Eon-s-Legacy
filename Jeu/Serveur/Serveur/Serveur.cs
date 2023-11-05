@@ -40,13 +40,11 @@ public class Serveur
         return res;
     }
 
-    public void MainProgram()
+    public void MainProgram(int n)
     {
         //Prog pr = (Prog)o;
-        int pr = AtoI(Console.ReadLine());
-        Console.WriteLine(pr);
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
-        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 4242);
+        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
         soc.Bind(iep); //connection depuis n'importe ou
         
         soc.Listen(); //mise en ecoute du serveur
