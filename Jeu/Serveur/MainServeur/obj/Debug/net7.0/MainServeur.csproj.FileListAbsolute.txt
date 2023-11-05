@@ -1,0 +1,14 @@
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/bin/Debug/net7.0/MainServeur
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/bin/Debug/net7.0/MainServeur.deps.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/bin/Debug/net7.0/MainServeur.runtimeconfig.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/bin/Debug/net7.0/MainServeur.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/bin/Debug/net7.0/MainServeur.pdb
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.GeneratedMSBuildEditorConfig.editorconfig
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.AssemblyInfoInputs.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.AssemblyInfo.cs
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.csproj.CoreCompileInputs.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/refint/MainServeur.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.pdb
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/MainServeur.genruntimeconfig.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/MainServeur/obj/Debug/net7.0/ref/MainServeur.dll

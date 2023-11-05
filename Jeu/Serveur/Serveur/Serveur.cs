@@ -9,7 +9,7 @@ public class Serveur
 {
     private int ID = 0;
 
-    public class Prog
+    /*public class Prog
     {
         public int n { get; set; }
 
@@ -17,13 +17,36 @@ public class Serveur
         {
             this.n = n;
         }
+    }*/
+
+    public static int AtoI(string? s)
+    {
+        int res = 0;
+
+        foreach (var c in s)
+        {
+            if (char.IsNumber(c))
+            {
+                res += (int)c - 48;
+                res *= 10;
+            }
+            else
+            {
+                throw new InvalidCastException("veuillez rentrer un nombre en base 10");
+            }
+        }
+
+        res /= 10;
+        return res;
     }
 
-    public void MainProgram(object o)
+    public void MainProgram()
     {
-        Prog pr = (Prog)o;
+        //Prog pr = (Prog)o;
+        int pr = AtoI(Console.ReadLine());
+        Console.WriteLine(pr);
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
-        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), pr.n);
+        IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 4242);
         soc.Bind(iep); //connection depuis n'importe ou
         
         soc.Listen(); //mise en ecoute du serveur

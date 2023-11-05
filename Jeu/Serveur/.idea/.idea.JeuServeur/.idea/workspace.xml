@@ -10,8 +10,24 @@
   <component name="ChangeListManager">
     <list default="true" id="52b6cb91-9ea1-42fd-b47c-fb8246054989" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/apphost" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/apphost" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/Serveur.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/Serveur.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/Serveur.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/Serveur.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/Serveur.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/Serveur.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +36,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MainServeur/MainServeur.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MainServeur/Program.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -49,11 +72,11 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Project.Serveur">
+  <component name="RunManager" selected=".NET Project.MainServeur">
     <configuration name="MainServeur" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MainServeur" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -61,17 +84,17 @@
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/MainServeur/MainServeur.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
-      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net7.0" />
       <method v="2">
         <option name="Build" />
       </method>
     </configuration>
     <configuration name="Serveur" type="DotNetProject" factoryName=".NET Project">
-      <option name="EXE_PATH" value="" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Serveur/bin/Debug/net7.0/Serveur" />
       <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Serveur" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
@@ -79,13 +102,17 @@
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Serveur/Serveur.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
-      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="0" />
       <option name="PROJECT_KIND" value="DotNetCore" />
-      <option name="PROJECT_TFM" value="" />
+      <option name="PROJECT_TFM" value="net7.0" />
       <method v="2">
         <option name="Build" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue=".NET Project.MainServeur" />
+      <item itemvalue=".NET Project.Serveur" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,7 +123,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699117369159</updated>
       <workItem from="1699117370393" duration="2119000" />
-      <workItem from="1699202878279" duration="1001000" />
+      <workItem from="1699202878279" duration="6728000" />
     </task>
     <servers />
   </component>
@@ -105,5 +132,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/MainServeur/Program.cs</url>
+          <line>9</line>
+          <properties documentPath="$PROJECT_DIR$/MainServeur/Program.cs" initialLine="9" containingFunctionPresentation="">
+            <startOffsets>
+              <option value="180" />
+            </startOffsets>
+            <endOffsets>
+              <option value="207" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
