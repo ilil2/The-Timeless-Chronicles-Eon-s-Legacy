@@ -89,7 +89,7 @@ public class Serveur
                 else
                 {
                     Console.WriteLine($"{cc.id} : {requette}");         //affichage de la requette recue
-                    tw.WriteLine($"vous : {requette}");
+                    tw.WriteLine($"vous : {requette}"); 
                     tw.Flush();                                         //envoie de la reponse
                 }
             }

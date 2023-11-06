@@ -10,26 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="52b6cb91-9ea1-42fd-b47c-fb8246054989" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/MainServeur.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/MainServeur.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/bin/Debug/net7.0/MainServeur.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/MainServeur.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/apphost" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/Debug/net7.0/apphost" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/MainServeur.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainServeur/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/port.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/port.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/bin/Debug/net7.0/Serveur.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/bin/Debug/net7.0/Serveur.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/bin/Debug/net7.0/Serveur.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/bin/Debug/net7.0/Serveur.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/obj/Debug/net7.0/Serveur.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/Debug/net7.0/Serveur.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/obj/Debug/net7.0/Serveur.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/Debug/net7.0/Serveur.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Serveur/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/rider.project.restore.info" afterDir="false" />
     </list>
@@ -130,6 +112,7 @@
       <workItem from="1699202878279" duration="9463000" />
       <workItem from="1699219865095" duration="1026000" />
       <workItem from="1699266627908" duration="4131000" />
+      <workItem from="1699274437297" duration="1781000" />
     </task>
     <servers />
   </component>
