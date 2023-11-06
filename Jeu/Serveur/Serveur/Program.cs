@@ -25,11 +25,15 @@ static void Main(string[] args)
 {
     int[] ports = new[] {4242,4002};
 
-    StreamReader sr = new StreamReader("port.txt");
+    StreamReader sr = new StreamReader("../MainServeur/port.txt");
     string? port = sr.ReadLine();
     sr.Close();
-    
+    Console.WriteLine(port);
     global::Serveur.Serveur ms = new global::Serveur.Serveur(); 
     ms.MainProgram(global::Serveur.Serveur.AtoI(port));
+}
+
+{
+    Main(null);
 }
 

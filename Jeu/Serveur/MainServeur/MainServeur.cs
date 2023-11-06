@@ -3,6 +3,11 @@ using System.Net.Sockets;
 using System.Threading;
 using System.IO;
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+
 
 namespace Serveur;
 
@@ -30,7 +35,22 @@ public class MainServeur
             ID++;
             ClientCom clicom = new ClientCom(s, ID);        //creation de l'objet client
             Thread th = new Thread(com);                    //mise en place de la connection
-            th.Start(clicom);                               //demarage de la connection
+            th.Start(clicom); //demarage de la connection
+
+            if (nbr_joueur == 3)
+            {
+                StreamWriter sw = new StreamWriter("port.txt"); 
+                sw.Write(ports[nbr_serveur]);
+                sw.Close();
+    
+                Process p1 = new Process();
+                p1.StartInfo.FileName = "bash";
+                p1.StartInfo.Arguments = "exec.sh";
+                p1.Start(); /* Cette instruction ouvre un invite de commande n°2 */
+                
+                nbr_serveur++;
+                nbr_joueur = 0;
+            }
         }
     }
     
@@ -54,8 +74,7 @@ public class MainServeur
                 {
                     tw.WriteLine($"newserv:{ports[nbr_serveur]}");
                     
-                    nbr_serveur++;
-                    nbr_serveur = 0;
+                    System.Threading.Thread.Sleep(3000);
                     
                     tw.Flush();
                 }
