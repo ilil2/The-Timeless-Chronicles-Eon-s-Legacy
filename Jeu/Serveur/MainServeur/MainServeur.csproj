@@ -8,4 +8,8 @@
         <RootNamespace>Serveur</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Lib\Lib.csproj" />
+    </ItemGroup>
+
 </Project>

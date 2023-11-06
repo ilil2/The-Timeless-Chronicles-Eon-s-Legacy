@@ -19,26 +19,7 @@ public class Serveur
         }
     }*/
 
-    public static int AtoI(string? s)
-    {
-        int res = 0;
-
-        foreach (var c in s)
-        {
-            if (char.IsNumber(c))
-            {
-                res += (int)c - 48;
-                res *= 10;
-            }
-            else
-            {
-                throw new InvalidCastException("veuillez rentrer un nombre en base 10");
-            }
-        }
-
-        res /= 10;
-        return res;
-    }
+    
 
     public void MainProgram(int n)
     {
@@ -47,7 +28,7 @@ public class Serveur
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
         soc.Bind(iep); //connection depuis n'importe ou
         
-        soc.Listen(); //mise en ecoute du serveur
+        soc.Listen(4); //mise en ecoute du serveur
 
         Console.WriteLine("Serveur en marche");
 

@@ -12,3 +12,10 @@
 /home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/Debug/net7.0/Serveur.pdb
 /home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/Debug/net7.0/Serveur.genruntimeconfig.cache
 /home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/Debug/net7.0/ref/Serveur.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/bin/Debug/net7.0/Lib.deps.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/bin/Debug/net7.0/Lib.runtimeconfig.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/bin/Debug/net7.0/Lib
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/bin/Debug/net7.0/Lib.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/bin/Debug/net7.0/Lib.pdb
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/Debug/net7.0/Serveur.csproj.AssemblyReference.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/Debug/net7.0/Serveur.csproj.CopyComplete

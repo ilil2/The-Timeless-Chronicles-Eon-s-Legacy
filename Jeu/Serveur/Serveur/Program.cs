@@ -11,6 +11,7 @@ using System.Diagnostics;
 
 using Serveur;
 using Serveur = Serveur.Serveur;
+using Lib;
 
 
 
@@ -30,7 +31,7 @@ static void Main(string[] args)
     sr.Close();
     Console.WriteLine(port);
     global::Serveur.Serveur ms = new global::Serveur.Serveur(); 
-    ms.MainProgram(global::Serveur.Serveur.AtoI(port));
+    ms.MainProgram(Conversion.AtoI(port));
 }
 
 {
