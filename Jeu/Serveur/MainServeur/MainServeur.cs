@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
+using System.Net.NetworkInformation;
+
 using Lib;
 
 namespace Serveur;
@@ -15,7 +17,8 @@ namespace Serveur;
 public class MainServeur
 {
     private int ID = 0;
-    private int[] ports = new[] {4242,4002};
+    private List<int> ports_total = new List<int>() {4242,4002};
+    private List<int> ports = new List<int>() {4242};
     private int nbr_serveur = 0;
     private int nbr_joueur = 0;
     
@@ -25,6 +28,9 @@ public class MainServeur
     
     public void MainProgram()
     {
+        Thread ping = new Thread(ping_serv);
+        ping.Start();
+        
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 9191);
         soc.Bind(iep); //connection depuis n'importe ou
@@ -70,10 +76,10 @@ public class MainServeur
                 
                 if (requette == "start" && master)
                 {
-                    tw.WriteLine($"newserv:{ports[nbr_serveur]}");
+                    tw.WriteLine($"newserv:{ports[0]}");
                     
                     StreamWriter sw = new StreamWriter("port.txt"); 
-                    sw.Write(ports[nbr_serveur]);
+                    sw.Write(ports[0]);
                     sw.Close();
     
                     Process p1 = new Process();
@@ -89,7 +95,8 @@ public class MainServeur
                     tw.Flush();
                     
                     Thread.Sleep(2000);
-                    
+
+                    ports.Remove(ports[0]);
                     nbr_serveur++;
                     nbr_joueur = 0;
                 }
@@ -132,7 +139,7 @@ public class MainServeur
         {
             if (cc.game_id == start_game)
             {
-                tw.WriteLine($"newserv:{ports[nbr_serveur]}");
+                tw.WriteLine($"newserv:{ports[0]}");
                     
                 Thread.Sleep(3000);
                     
@@ -140,6 +147,24 @@ public class MainServeur
                 break;
             }
         }
+    }
+
+    public void ping_serv()
+    {
+        while (true)
+        {
+            foreach (var portNumber in ports_total)
+            {
+                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
+                TcpConnectionInformation[] tcpConnInfoArray = ipGlobalProperties.GetActiveTcpConnections();
+ 
+                foreach (TcpConnectionInformation tcp in tcpConnInfoArray) 
+                    if (tcp.LocalEndPoint.Port == portNumber || ports.Contains(portNumber) == false)
+                        ports.Add(portNumber);
+            }
+            Thread.Sleep(60000);
+        }
+        
     }
 
     class ClientCom         //type de l'objet client
