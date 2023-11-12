@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52b6cb91-9ea1-42fd-b47c-fb8246054989" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MainServeur/MainServeur.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/MainServeur.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serveur/Serveur.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/Serveur.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +130,7 @@
       <workItem from="1699219865095" duration="1026000" />
       <workItem from="1699266627908" duration="4131000" />
       <workItem from="1699274437297" duration="1781000" />
-      <workItem from="1699282414703" duration="8038000" />
+      <workItem from="1699282414703" duration="10693000" />
     </task>
     <servers />
   </component>
@@ -139,24 +139,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/MainServeur/MainServeur.cs</url>
-          <line>153</line>
-          <properties documentPath="$PROJECT_DIR$/MainServeur/MainServeur.cs" initialLine="153" containingFunctionPresentation="Method 'ping_serv'">
-            <startOffsets>
-              <option value="5301" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5313" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

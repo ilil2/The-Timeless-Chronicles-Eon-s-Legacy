@@ -69,9 +69,9 @@ public class Serveur
                 }
                 else
                 {
-                    Console.WriteLine($"{cc.id} : {requette}");         //affichage de la requette recue
+                    Console.WriteLine($"{cc.id} : {requette}");         //affichage de la requete recue
                     tw.WriteLine($"vous : {requette}"); 
-                    tw.Flush();                                         //envoie de la reponse
+                    tw.Flush();                                         //envoi de la reponse
                 }
             }
         }
