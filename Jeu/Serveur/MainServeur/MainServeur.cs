@@ -18,18 +18,45 @@ public class MainServeur
 {
     private int ID = 0;
     private List<int> ports_total = new List<int>() {4242,4002};
-    private List<int> ports = new List<int>() {4242};
+    private List<int> ports = new List<int>() {4242,4002};
     private int nbr_serveur = 0;
     private int nbr_joueur = 0;
     
     private Random rand = new Random();
     private List<int> id_games = new List<int> {};
     private int start_game = -1;
+
+    private List<string> user_ids_csv = new List<string>();
+    private List<string> user_passwords_csv = new List<string>();
+
+    public void CSV()
+    {
+        StreamReader sr = new StreamReader("comptes.csv");
+
+        string? line = sr.ReadLine();
+        while (line != null)
+        {
+            try
+            {
+                user_ids_csv.Add(line.Substring(0,line.IndexOf(';')));
+                user_passwords_csv.Add(line.Substring(line.IndexOf(';')+1));
+            }
+            catch
+            {
+                Console.Write("");
+            }
+            line = sr.ReadLine();
+        }
+        
+        sr.Close();
+    }
     
     public void MainProgram()
     {
         Thread ping = new Thread(ping_serv);
         ping.Start();
+        
+        CSV();
         
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 9191);
@@ -64,6 +91,57 @@ public class MainServeur
         Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
         tw.WriteLine($"bien conecté a {cc.Socket.LocalEndPoint}");
         tw.Flush();     //envoi des données
+
+        
+        tw.Write("vous connecter (o) ? ");
+        if (tr.ReadLine() == "o") 
+        { 
+            tw.WriteLine("connexion au compte");
+            string? user_id_csv = "";
+            while (user_ids_csv.Contains(user_id_csv))
+            {
+                tw.Write("Identifiant : ");
+                user_id_csv = tr.ReadLine();
+            }
+            
+            string? user_password_csv = "";
+            while (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == Lib.Hashing.ToSHA256(user_password_csv))
+            {
+                tw.Write("Mot de passe : ");
+                user_password_csv = tr.ReadLine();
+            }
+        }
+        else 
+        {
+            tw.WriteLine("creation du compte");
+            string? new_id_csv = "!";
+            while (user_ids_csv.Contains(new_id_csv) && Lib.StringManipulation.Contain(new_id_csv,"!?./:;,") == false)
+            {
+                tw.Write("Identifiant : ");
+                new_id_csv = tr.ReadLine();
+            }
+            
+            string? new_password_csv = "!";
+            string? confirm_password_csv = "";
+            while (new_password_csv == confirm_password_csv)
+            {
+                tw.Write("Mot de passe : ");
+                new_password_csv = tr.ReadLine();
+                
+                tw.Write("confirmer mot de passe : ");
+                confirm_password_csv = tr.ReadLine();
+            }
+
+            StreamWriter sw = new StreamWriter("compte.csv", true);
+            sw.WriteLine($"{new_id_csv};{new_password_csv}");
+            sw.Close();
+            
+            user_ids_csv.Add(new_id_csv);
+            user_passwords_csv.Add(new_password_csv);
+            
+            tw.WriteLine($"compte {new_id_csv} cree");
+        }
+        
         
         try
         {
