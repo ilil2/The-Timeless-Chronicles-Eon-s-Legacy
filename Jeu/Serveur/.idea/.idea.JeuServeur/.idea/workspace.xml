@@ -9,14 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52b6cb91-9ea1-42fd-b47c-fb8246054989" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Lib/StringManipulation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.JeuServeur/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lib/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Lib/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/MainServeur.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/MainServeur.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MainServeur/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Serveur/obj/rider.project.model.nuget.info" afterDir="false" />
-    </list>
+    <list default="true" id="52b6cb91-9ea1-42fd-b47c-fb8246054989" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,7 +23,7 @@
     <setting file="file://$PROJECT_DIR$/MainServeur/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -137,6 +130,7 @@
       <workItem from="1699274437297" duration="1781000" />
       <workItem from="1699282414703" duration="10693000" />
       <workItem from="1699815712989" duration="3604000" />
+      <workItem from="1699868861168" duration="744000" />
     </task>
     <servers />
   </component>

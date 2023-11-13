@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/JeuClient.csproj": {}
+  },
+  "projects": {
+    "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/JeuClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/JeuClient.csproj",
+        "projectName": "JeuClient",
+        "projectPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/JeuClient.csproj",
+        "packagesPath": "/home/ilyann/snap/godot4-mono/common/.nuget/packages/",
+        "outputPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ilyann/snap/godot4-mono/common/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Godot.SourceGenerators": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            },
+            "GodotSharp": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            },
+            "GodotSharpEditor": {
+              "target": "Package",
+              "version": "[4.1.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/snap/godot4-mono/4/usr/lib/dotnet/sdk/6.0.119/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

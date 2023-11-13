@@ -1,0 +1,17 @@
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.csproj.AssemblyReference.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.GeneratedMSBuildEditorConfig.editorconfig
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.AssemblyInfoInputs.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.AssemblyInfo.cs
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.csproj.CoreCompileInputs.cache
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/JeuClient.deps.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/JeuClient.runtimeconfig.json
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/JeuClient.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/ref/JeuClient.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/JeuClient.pdb
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/GodotSharp.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/bin/Debug/GodotSharpEditor.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.csproj.CopyComplete
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/ref/JeuClient.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.pdb
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Client/.godot/mono/temp/obj/Debug/JeuClient.genruntimeconfig.cache

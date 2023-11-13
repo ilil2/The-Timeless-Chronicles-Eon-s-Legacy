@@ -1,2 +1,2 @@
-﻿49256
-/private/var/folders/nr/zcgmcp9932d2z6swq0g0s5dw0000gn/T/AppTranslocation/0350B6E8-B49C-44E1-80CA-C71B88AB4213/d/Godot_mono.app/Contents/MacOS/Godot
+﻿46833
+/snap/godot4-mono/4/Godot_v4.1.1-stable_mono_linux.x86_64

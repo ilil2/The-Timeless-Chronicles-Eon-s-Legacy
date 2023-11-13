@@ -1,2 +1,3 @@
 res://Scenes/main_scene.tscn
-res://Ressources/Animations/info.txt
+res://Scripts/Lib/Convertions.cs
+res://Scripts/GameManager.cs
