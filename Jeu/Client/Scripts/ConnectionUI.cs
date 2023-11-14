@@ -9,8 +9,8 @@ public partial class ConnectionUI : Control
 	private LineEdit PasswordInscriptionNode;
 	private LineEdit PasswordConfirmInscriptionNode;
 	
-	private Button ConnectionButton;
-	private Button InscriptionButton;
+	public static Button ConnectionButton;
+	public static Button InscriptionButton;
 	private Button NoCompteButton;
 	private Button DejaCompteButton;
 	
@@ -21,8 +21,9 @@ public partial class ConnectionUI : Control
 	
 	private Label MenuName;
 	
-	private string _pseudo;
-	private string _password;
+	public static string _pseudo = "";
+	public static string _password = "";
+	public static string _confirm_password = "";
 
 	public override void _Ready()
 	{
@@ -85,8 +86,9 @@ public partial class ConnectionUI : Control
 		PasswordError.Text = "";
 		PasswordConfirmError.Text = "";
 		
-		_pseudo = PseudoConnectionNode.Text;
-		_password = PasswordConnectionNode.Text;
+		_pseudo = PseudoInscriptionNode.Text;
+		_password = PasswordInscriptionNode.Text;
+		_confirm_password = PasswordConfirmInscriptionNode.Text;
 		
 		if (CheckPseudo(_pseudo))
 		{

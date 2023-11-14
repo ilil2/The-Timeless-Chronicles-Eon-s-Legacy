@@ -33,6 +33,51 @@ public partial class GameManager : Node3D
 			Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
 			th.Start();							//lancement thread
 			
+			PackedScene connectionUI = GD.Load<PackedScene>("res://Scene/ConnectionUI.tscn");
+			Control connectionMenu = connectionUI.Instantiate<Control>();
+			AddChild(connectionMenu);
+
+			bool tentative_connection = true;
+			while (tentative_connection)
+			{
+				if (ConnectionUI.ConnectionButton.ButtonPressed)
+				{
+					if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
+						ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+						ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
+					{
+						tw.WriteLine($"conn:{ConnectionUI._pseudo};{ConnectionUI._password}");
+
+						if (tr.ReadLine() == "connection success")
+						{
+							tentative_connection = false;
+							string user_id = ConnectionUI._pseudo;
+						}
+					}
+				}
+
+				if (ConnectionUI.InscriptionButton.ButtonPressed)
+				{
+					if (ConnectionUI._password == ConnectionUI._confirm_password)
+					{
+						if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
+							ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
+						{
+							tw.WriteLine($"insc:{ConnectionUI._pseudo};{ConnectionUI._password}");
+
+							if (tr.ReadLine() == "creation success")
+							{
+								tentative_connection = false;
+								string user_id = ConnectionUI._pseudo;
+							}
+						}
+					}
+				}
+			}
+			
+			connectionMenu.Free();
+			
 			bool conn = true;					//connexion au serveur principal
 			bool join = false;					//partie rejointe
 			while (conn && conn2)
