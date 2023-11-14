@@ -92,54 +92,39 @@ public class MainServeur
         tw.WriteLine($"bien conecté a {cc.Socket.LocalEndPoint}");
         tw.Flush();     //envoi des données
 
-        
-        tw.Write("vous connecter (o) ? ");
-        if (tr.ReadLine() == "o") 
+        string line = tr.ReadLine();
+        if (line.Substring(0,4) == "conn") 
         { 
-            tw.WriteLine("connexion au compte");
             string? user_id_csv = "";
             while (user_ids_csv.Contains(user_id_csv))
             {
-                tw.Write("Identifiant : ");
-                user_id_csv = tr.ReadLine();
+                user_id_csv = line.Substring(5,line.IndexOf(';')-4);
             }
             
             string? user_password_csv = "";
             while (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == Lib.Hashing.ToSHA256(user_password_csv))
             {
-                tw.Write("Mot de passe : ");
-                user_password_csv = tr.ReadLine();
+                user_password_csv = line.Substring(line.IndexOf(';')+1);
             }
         }
         else 
         {
-            tw.WriteLine("creation du compte");
             string? new_id_csv = "!";
-            while (user_ids_csv.Contains(new_id_csv) && Lib.StringManipulation.Contain(new_id_csv,"!?./:;,") == false)
+            while (user_ids_csv.Contains(new_id_csv) == false && Lib.StringManipulation.Contain(new_id_csv,"!?./:;,") == false)
             {
-                tw.Write("Identifiant : ");
-                new_id_csv = tr.ReadLine();
+                new_id_csv = line.Substring(0,line.IndexOf(';'));
             }
             
-            string? new_password_csv = "!";
-            string? confirm_password_csv = "";
-            while (new_password_csv == confirm_password_csv)
-            {
-                tw.Write("Mot de passe : ");
-                new_password_csv = tr.ReadLine();
-                
-                tw.Write("confirmer mot de passe : ");
-                confirm_password_csv = tr.ReadLine();
-            }
+            string? new_password_csv;
+            new_password_csv = line.Substring(line.IndexOf(';')+1);
+            
 
-            StreamWriter sw = new StreamWriter("compte.csv", true);
+            StreamWriter sw = new StreamWriter("comptes.csv", true);
             sw.WriteLine($"{new_id_csv};{new_password_csv}");
             sw.Close();
             
             user_ids_csv.Add(new_id_csv);
             user_passwords_csv.Add(new_password_csv);
-            
-            tw.WriteLine($"compte {new_id_csv} cree");
         }
         
         
