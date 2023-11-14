@@ -1,0 +1,232 @@
+[gd_scene load_steps=6 format=3 uid="uid://bukpc7fa40grn"]
+
+[ext_resource type="Script" path="res://Scripts/ConnectionUI.cs" id="1_pn4u0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jctv"]
+font_size = 20
+font_color = Color(0.678431, 0.141176, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ngqys"]
+font_size = 20
+font_color = Color(0.678431, 0.141176, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yb5ta"]
+font_size = 34
+
+[sub_resource type="LabelSettings" id="LabelSettings_71d1n"]
+font_size = 20
+font_color = Color(0.678431, 0.141176, 0, 1)
+
+[node name="ConnectionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pn4u0")
+
+[node name="PseudoConnection" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.385
+anchor_top = 0.327
+anchor_right = 0.626
+anchor_bottom = 0.389
+offset_left = 0.479946
+offset_top = 0.103986
+offset_right = -0.152054
+offset_bottom = -0.0720184
+placeholder_text = "Pseudo"
+
+[node name="PasswordConnection" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384
+anchor_top = 0.448
+anchor_right = 0.627
+anchor_bottom = 0.509
+offset_left = -0.368004
+offset_top = -0.304009
+offset_right = -0.304039
+offset_bottom = 0.167998
+placeholder_text = "Password"
+
+[node name="PasswordInscription" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384
+anchor_top = 0.451
+anchor_right = 0.624
+anchor_bottom = 0.517
+offset_left = -2.368
+offset_top = -0.248023
+offset_right = 0.151985
+offset_bottom = -0.0160127
+placeholder_text = "Password"
+
+[node name="PasswordConfirmInscription" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.385
+anchor_top = 0.551
+anchor_right = 0.626
+anchor_bottom = 0.613
+offset_left = -0.519962
+offset_top = -0.0479994
+offset_right = -1.15193
+offset_bottom = -0.224023
+placeholder_text = "Password Confirm"
+
+[node name="PseudoInscription" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.385
+anchor_top = 0.327
+anchor_right = 0.626
+anchor_bottom = 0.389
+offset_left = 0.479977
+offset_top = 1.10399
+offset_right = -0.151993
+offset_bottom = 0.927982
+placeholder_text = "Pseudo"
+
+[node name="Connection" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38
+anchor_top = 0.591
+anchor_right = 0.494
+anchor_bottom = 0.668
+offset_left = 0.239971
+offset_top = 0.0319867
+offset_right = -0.0880203
+offset_bottom = 0.135972
+grow_horizontal = 2
+grow_vertical = 0
+text = "Connection"
+
+[node name="Inscription" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.381
+anchor_top = 0.645
+anchor_right = 0.494
+anchor_bottom = 0.722
+offset_left = -0.912014
+offset_top = 0.0399737
+offset_right = -0.0880203
+offset_bottom = 0.14396
+grow_horizontal = 2
+grow_vertical = 2
+text = "Inscription"
+
+[node name="NoCompte" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.503
+anchor_top = 0.593
+anchor_right = 0.626
+anchor_bottom = 0.667
+offset_left = 0.543976
+offset_top = -0.264035
+offset_right = -0.152054
+offset_bottom = -0.216036
+grow_horizontal = 2
+grow_vertical = 0
+text = "Pas de compte ?"
+flat = true
+
+[node name="DejaCompte" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.505
+anchor_top = 0.65
+anchor_right = 0.628
+anchor_bottom = 0.724
+offset_left = 0.240005
+offset_top = -0.200023
+offset_right = 0.543976
+offset_bottom = -0.152024
+grow_horizontal = 2
+grow_vertical = 2
+text = "Déjà un compte ?"
+flat = true
+
+[node name="PseudoError" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.386
+anchor_top = 0.392
+anchor_right = 0.626
+anchor_bottom = 0.435
+offset_left = 1.32799
+offset_top = -0.0160127
+offset_right = 0.847946
+offset_bottom = 0.119979
+label_settings = SubResource("LabelSettings_7jctv")
+horizontal_alignment = 1
+
+[node name="PasswordError" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.384
+anchor_top = 0.515
+anchor_right = 0.625
+anchor_bottom = 0.559
+offset_left = -0.368004
+offset_top = 0.279971
+offset_right = 1.0
+offset_bottom = -0.23201
+label_settings = SubResource("LabelSettings_ngqys")
+horizontal_alignment = 1
+
+[node name="PasswordConfirmError" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.386
+anchor_top = 0.61
+anchor_right = 0.625
+anchor_bottom = 0.653
+offset_left = -0.672009
+offset_top = -0.28004
+offset_bottom = -0.144067
+label_settings = SubResource("LabelSettings_7jctv")
+horizontal_alignment = 1
+
+[node name="MenuName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.397
+anchor_top = 0.167
+anchor_right = 0.61
+anchor_bottom = 0.253
+offset_left = -0.344017
+offset_top = -0.216007
+offset_right = 0.279984
+offset_bottom = 0.0559864
+grow_horizontal = 2
+grow_vertical = 2
+text = "Connection"
+label_settings = SubResource("LabelSettings_yb5ta")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConnectionError" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.69
+anchor_right = 0.655
+anchor_bottom = 0.733
+offset_left = 0.255997
+offset_top = -0.120037
+offset_right = 0.439964
+offset_bottom = -4.98403
+label_settings = SubResource("LabelSettings_71d1n")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Connection" to="." method="Connection"]
+[connection signal="pressed" from="Inscription" to="." method="Inscription"]
+[connection signal="pressed" from="NoCompte" to="." method="NoCompte"]
+[connection signal="pressed" from="DejaCompte" to="." method="DejaCompte"]

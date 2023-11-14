@@ -1,0 +1,162 @@
+using Godot;
+using System;
+
+public partial class ConnectionUI : Control
+{
+	private LineEdit PseudoConnectionNode;
+	private LineEdit PasswordConnectionNode;
+	private LineEdit PseudoInscriptionNode;
+	private LineEdit PasswordInscriptionNode;
+	private LineEdit PasswordConfirmInscriptionNode;
+	
+	private Button ConnectionButton;
+	private Button InscriptionButton;
+	private Button NoCompteButton;
+	private Button DejaCompteButton;
+	
+	private Label ConnectionError;
+	private Label PseudoError;
+	private Label PasswordError;
+	private Label PasswordConfirmError;
+	
+	private Label MenuName;
+	
+	private string _pseudo;
+	private string _password;
+
+	public override void _Ready()
+	{
+		//Recuperation des differents elements du menu
+		//Input
+		PseudoConnectionNode = GetNode<LineEdit>("PseudoConnection");
+		PasswordConnectionNode = GetNode<LineEdit>("PasswordConnection");
+		PseudoInscriptionNode = GetNode<LineEdit>("PseudoInscription");
+		PasswordInscriptionNode = GetNode<LineEdit>("PasswordInscription");
+		PasswordConfirmInscriptionNode = GetNode<LineEdit>("PasswordConfirmInscription");
+		
+		//Boutons
+		ConnectionButton = GetNode<Button>("Connection");
+		InscriptionButton = GetNode<Button>("Inscription");
+		NoCompteButton = GetNode<Button>("NoCompte");
+		DejaCompteButton = GetNode<Button>("DejaCompte");
+		
+		//Error
+		ConnectionError = GetNode<Label>("ConnectionError");
+		PseudoError = GetNode<Label>("PseudoError");
+		PasswordError = GetNode<Label>("PasswordError");
+		PasswordConfirmError = GetNode<Label>("PasswordConfirmError");
+		
+		//Titre
+		MenuName = GetNode<Label>("MenuName");
+		
+		InscriptionButton.Visible = false;
+		DejaCompteButton.Visible = false;
+
+		PseudoInscriptionNode.Visible = false;
+		PasswordInscriptionNode.Visible = false;
+		PasswordConfirmInscriptionNode.Visible = false;
+	}
+
+	public void Connection()
+	{
+		ConnectionError.Text = "";
+		
+		_pseudo = PseudoConnectionNode.Text;
+		_password = PasswordConnectionNode.Text;
+
+		if (CheckConnection())
+		{
+			GetTree().ChangeSceneToFile("res://Scene/jeu.tscn");
+		}
+		else
+		{
+			ConnectionError.Text = "Pseudo ou mot de passe incorrect";
+		}
+	}
+	
+	public bool CheckConnection()
+	{
+		return false;
+	}
+	
+	public void Inscription()
+	{
+		PseudoError.Text = "";
+		PasswordError.Text = "";
+		PasswordConfirmError.Text = "";
+		
+		_pseudo = PseudoConnectionNode.Text;
+		_password = PasswordConnectionNode.Text;
+		
+		if (CheckPseudo(_pseudo))
+		{
+			if (CheckPassword(_password))
+			{
+				GetTree().ChangeSceneToFile("res://Scene/jeu.tscn");
+			}
+			else
+			{
+				PasswordError.Text = "Mot de passe invalide";
+			}
+			
+		}
+		else
+		{
+			PseudoError.Text = "Pseudo invalide";
+		}
+	}
+	
+	public bool CheckPseudo(string pseudo)
+	{
+		if (pseudo != "" && pseudo.Length >= 4 && pseudo.Length <= 32)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public bool CheckPassword(string password)
+	{
+		if (password != "" && password.Length >= 8 && password.Length <= 32)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	public void NoCompte()
+	{
+		MenuName.Text = "Inscription";
+		ConnectionError.Text = "";
+		
+		ConnectionButton.Visible = false;
+		InscriptionButton.Visible = true;
+		NoCompteButton.Visible = false;
+		DejaCompteButton.Visible = true;
+
+		PseudoConnectionNode.Visible = false;
+		PasswordConnectionNode.Visible = false;
+		PseudoInscriptionNode.Visible = true;
+		PasswordInscriptionNode.Visible = true;
+		PasswordConfirmInscriptionNode.Visible = true;
+	}
+	
+	public void DejaCompte()
+	{
+		MenuName.Text = "Connection";
+		PseudoError.Text = "";
+		PasswordError.Text = "";
+		PasswordConfirmError.Text = "";
+		
+		ConnectionButton.Visible = true;
+		InscriptionButton.Visible = false;
+		NoCompteButton.Visible = true;
+		DejaCompteButton.Visible = false;
+		
+		PseudoConnectionNode.Visible = true;
+		PasswordConnectionNode.Visible = true;
+		PseudoInscriptionNode.Visible = false;
+		PasswordInscriptionNode.Visible = false;
+		PasswordConfirmInscriptionNode.Visible = false;
+	}
+}
