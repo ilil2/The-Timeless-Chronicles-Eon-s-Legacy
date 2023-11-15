@@ -1,0 +1,26 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsfr0jvwps7xy"]
+
+[ext_resource type="Script" path="res://Scripts/MapLvl1Script.cs" id="1_mjdtl"]
+[ext_resource type="Texture2D" uid="uid://bamogby5ofx5p" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_7sds7"]
+[ext_resource type="PackedScene" uid="uid://ct1s06we3eekm" path="res://Scenes/MapScenes/RoomScenes/Room1.tscn" id="2_vpi4y"]
+[ext_resource type="Texture2D" uid="uid://byej16v8b2g0x" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="3_nvv26"]
+[ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="4_w7mfw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
+albedo_texture = ExtResource("2_7sds7")
+roughness_texture = ExtResource("4_w7mfw")
+normal_enabled = true
+normal_texture = ExtResource("3_nvv26")
+uv1_scale = Vector3(25, 25, 25)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gcc1s"]
+material = SubResource("StandardMaterial3D_7r16a")
+size = Vector2(300, 300)
+
+[node name="MapLvl1" type="Node3D"]
+script = ExtResource("1_mjdtl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_gcc1s")
+
+[node name="Room1" parent="." instance=ExtResource("2_vpi4y")]
