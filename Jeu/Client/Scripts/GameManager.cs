@@ -71,11 +71,16 @@ public partial class GameManager : Node3D
 							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 							tw.Flush();
 							
-							if (tr.ReadLine() == "connection success")
+							string? line = tr.ReadLine();
+							if (line == "connection success")
 							{
 								tentative_connection = false;
 								string user_id = ConnectionUI._pseudo;
 								GD.Print("Leave");
+							}
+							else
+							{
+								ConnectionUI.erreur = line;
 							}
 						}
 					}
@@ -93,11 +98,16 @@ public partial class GameManager : Node3D
 								tw.Flush();
 								GD.Print("aaaaaaaa");
 								
-								if (tr.ReadLine() == "creation success")
+								string? line = tr.ReadLine();
+								if (line == "creation success")
 								{
 									tentative_connection = false;
 									string user_id = ConnectionUI._pseudo;
 									GD.Print("Leave");
+								}
+								else
+								{
+									ConnectionUI.erreur = line;
 								}
 							}
 						}

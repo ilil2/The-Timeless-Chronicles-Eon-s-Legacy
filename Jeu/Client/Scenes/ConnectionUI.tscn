@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bukpc7fa40grn"]
+[gd_scene load_steps=5 format=3 uid="uid://bukpc7fa40grn"]
 
 [ext_resource type="Script" path="res://Scripts/ConnectionUI.cs" id="1_pn4u0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jctv"]
-font_size = 20
-font_color = Color(0.678431, 0.141176, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ngqys"]
 font_size = 20
 font_color = Color(0.678431, 0.141176, 0, 1)
 
@@ -153,44 +149,17 @@ grow_vertical = 2
 text = "Déjà un compte ?"
 flat = true
 
-[node name="PseudoError" type="Label" parent="."]
+[node name="InscriptionError" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.386
-anchor_top = 0.392
-anchor_right = 0.626
-anchor_bottom = 0.435
-offset_left = 1.32799
-offset_top = -0.0160127
-offset_right = 0.847946
-offset_bottom = 0.119979
-label_settings = SubResource("LabelSettings_7jctv")
-horizontal_alignment = 1
-
-[node name="PasswordError" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.384
-anchor_top = 0.515
-anchor_right = 0.625
-anchor_bottom = 0.559
-offset_left = -0.368004
-offset_top = 0.279971
-offset_right = 1.0
-offset_bottom = -0.23201
-label_settings = SubResource("LabelSettings_ngqys")
-horizontal_alignment = 1
-
-[node name="PasswordConfirmError" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.386
-anchor_top = 0.61
-anchor_right = 0.625
-anchor_bottom = 0.653
-offset_left = -0.672009
-offset_top = -0.28004
-offset_bottom = -0.144067
+anchor_top = 0.716
+anchor_right = 0.627
+anchor_bottom = 0.759
+offset_left = 1.328
+offset_top = 0.0319824
+offset_right = -0.304077
+offset_bottom = 0.167969
 label_settings = SubResource("LabelSettings_7jctv")
 horizontal_alignment = 1
 

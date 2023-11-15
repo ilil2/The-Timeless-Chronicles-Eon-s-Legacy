@@ -111,11 +111,21 @@ public class MainServeur
                     {
                         user_id_csv = line.Substring(5, line.IndexOf(';') - 5);
                     }
+                    else
+                    {
+                        tw.WriteLine("Pseudo ou mot de passe incorrect");
+                        tw.Flush();
+                    }
 
                     if (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
                     {
                         user_password_csv = line.Substring(line.IndexOf(';') + 1);
                         connecte = true;
+                    }
+                    else
+                    {
+                        tw.WriteLine("Pseudo ou mot de passe incorrect");
+                        tw.Flush();
                     }
 
                     if (connecte)
@@ -129,7 +139,6 @@ public class MainServeur
                 else
                 {
                     new_id_csv = "!";
-                    Console.WriteLine(line.Substring(5, line.IndexOf(';') - 5));
                     if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false &&
                         StringManipulation.Contain(line.Substring(5, line.IndexOf(';') - 5), "!?./:;,") == false)
                     {
@@ -145,6 +154,11 @@ public class MainServeur
             
                         user_ids_csv.Add(new_id_csv);
                         user_passwords_csv.Add(new_password_csv);
+                    }
+                    else
+                    {
+                        tw.WriteLine("Pseudo ou mot de passe incorect");
+                        tw.Flush();
                     }
 
                     new_password_csv = line.Substring(line.IndexOf(';') + 1);

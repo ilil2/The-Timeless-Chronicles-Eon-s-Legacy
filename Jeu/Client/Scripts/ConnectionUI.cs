@@ -15,9 +15,7 @@ public partial class ConnectionUI : Control
 	private Button DejaCompteButton;
 	
 	private Label ConnectionError;
-	private Label PseudoError;
-	private Label PasswordError;
-	private Label PasswordConfirmError;
+	private Label InscriptionError;
 	
 	private Label MenuName;
 	
@@ -26,6 +24,7 @@ public partial class ConnectionUI : Control
 	public static string _confirm_password = "";
 	
 	public static bool in_connection = true;
+	public static string erreur = "";
 
 	public override void _Ready()
 	{
@@ -45,15 +44,15 @@ public partial class ConnectionUI : Control
 		
 		//Error
 		ConnectionError = GetNode<Label>("ConnectionError");
-		PseudoError = GetNode<Label>("PseudoError");
-		PasswordError = GetNode<Label>("PasswordError");
-		PasswordConfirmError = GetNode<Label>("PasswordConfirmError");
+		InscriptionError = GetNode<Label>("InscriptionError");
 		
 		//Titre
 		MenuName = GetNode<Label>("MenuName");
 		
 		InscriptionButton.Visible = false;
 		DejaCompteButton.Visible = false;
+		
+		InscriptionError.Visible = false;
 
 		PseudoInscriptionNode.Visible = false;
 		PasswordInscriptionNode.Visible = false;
@@ -68,82 +67,37 @@ public partial class ConnectionUI : Control
 		}
 		else if (InscriptionButton.ButtonPressed)
 		{
-			Inscription();
+			if (PasswordConnectionNode.Text == PasswordConfirmInscriptionNode.Text)
+				Inscription();
+			else
+				erreur = "confirmation incorect";
 		}
 		if (in_connection == false)
 		{
 			QueueFree();
 		}
+		ConnectionError.Text = erreur;
+		InscriptionError.Text = erreur;
 	}
 
 	public void Connection()
 	{
-		ConnectionError.Text = "";
-		
 		_pseudo = PseudoConnectionNode.Text;
 		_password = PasswordConnectionNode.Text;
-
-		if (CheckConnection() == false)
-		{
-			ConnectionError.Text = "Pseudo ou mot de passe incorrect";
-		}
-	}
-	
-	public bool CheckConnection()
-	{
-		return true;
 	}
 	
 	public void Inscription()
 	{
-		PseudoError.Text = "";
-		PasswordError.Text = "";
-		PasswordConfirmError.Text = "";
-		
 		_pseudo = PseudoInscriptionNode.Text;
 		_password = PasswordInscriptionNode.Text;
 		_confirm_password = PasswordConfirmInscriptionNode.Text;
-		
-		if (CheckPseudo(_pseudo))
-		{
-			if (CheckPassword(_password))
-			{
-				GetTree().ChangeSceneToFile("res://Scene/jeu.tscn");
-			}
-			else
-			{
-				PasswordError.Text = "Mot de passe invalide";
-			}
-			
-		}
-		else
-		{
-			PseudoError.Text = "Pseudo invalide";
-		}
-	}
-	
-	public bool CheckPseudo(string pseudo)
-	{
-		if (pseudo != "" && pseudo.Length >= 4 && pseudo.Length <= 32)
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	public bool CheckPassword(string password)
-	{
-		if (password != "" && password.Length >= 8 && password.Length <= 32)
-		{
-			return true;
-		}
-		return false;
 	}
 	
 	public void NoCompte()
 	{
 		MenuName.Text = "Inscription";
-		ConnectionError.Text = "";
+		ConnectionError.Visible = false;
+		InscriptionError.Visible = true;
 		
 		ConnectionButton.Visible = false;
 		InscriptionButton.Visible = true;
@@ -160,9 +114,8 @@ public partial class ConnectionUI : Control
 	public void DejaCompte()
 	{
 		MenuName.Text = "Connection";
-		PseudoError.Text = "";
-		PasswordError.Text = "";
-		PasswordConfirmError.Text = "";
+		InscriptionError.Visible = false;
+		ConnectionError.Visible = true;
 		
 		ConnectionButton.Visible = true;
 		InscriptionButton.Visible = false;
