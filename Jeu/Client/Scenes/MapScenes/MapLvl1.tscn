@@ -20,7 +20,7 @@ size = Vector2(300, 300)
 [node name="MapLvl1" type="Node3D"]
 script = ExtResource("1_mjdtl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_gcc1s")
 
 [node name="Room1" parent="." instance=ExtResource("2_vpi4y")]
