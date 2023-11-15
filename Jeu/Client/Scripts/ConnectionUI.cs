@@ -24,6 +24,8 @@ public partial class ConnectionUI : Control
 	public static string _pseudo = "";
 	public static string _password = "";
 	public static string _confirm_password = "";
+	
+	public static bool in_connection = true;
 
 	public override void _Ready()
 	{
@@ -57,6 +59,22 @@ public partial class ConnectionUI : Control
 		PasswordInscriptionNode.Visible = false;
 		PasswordConfirmInscriptionNode.Visible = false;
 	}
+	
+	public override void _Process(double delta)
+	{
+		if (ConnectionButton.ButtonPressed)
+		{
+			Connection();
+		}
+		else if (InscriptionButton.ButtonPressed)
+		{
+			Inscription();
+		}
+		if (in_connection == false)
+		{
+			QueueFree();
+		}
+	}
 
 	public void Connection()
 	{
@@ -65,11 +83,7 @@ public partial class ConnectionUI : Control
 		_pseudo = PseudoConnectionNode.Text;
 		_password = PasswordConnectionNode.Text;
 
-		if (CheckConnection())
-		{
-			GetTree().ChangeSceneToFile("res://Scene/jeu.tscn");
-		}
-		else
+		if (CheckConnection() == false)
 		{
 			ConnectionError.Text = "Pseudo ou mot de passe incorrect";
 		}
@@ -77,7 +91,7 @@ public partial class ConnectionUI : Control
 	
 	public bool CheckConnection()
 	{
-		return false;
+		return true;
 	}
 	
 	public void Inscription()

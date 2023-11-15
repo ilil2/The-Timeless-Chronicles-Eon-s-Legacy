@@ -89,42 +89,71 @@ public class MainServeur
         TextWriter tw = new StreamWriter(ns);               //chaine a envoyer
         
         Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
-        tw.WriteLine($"bien conecté a {cc.Socket.LocalEndPoint}");
-        tw.Flush();     //envoi des données
 
-        string line = tr.ReadLine();
-        if (line.Substring(0,4) == "conn") 
-        { 
-            string? user_id_csv = "";
-            while (user_ids_csv.Contains(user_id_csv))
-            {
-                user_id_csv = line.Substring(5,line.IndexOf(';')-4);
-            }
-            
-            string? user_password_csv = "";
-            while (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == Lib.Hashing.ToSHA256(user_password_csv))
-            {
-                user_password_csv = line.Substring(line.IndexOf(';')+1);
-            }
-        }
-        else 
+        string line;
+        string? user_id_csv = "";
+        string? user_password_csv = "";
+        string? new_id_csv = "";
+        string? new_password_csv = "";
+
+        bool incorect_conn = true;
+        
+        while (incorect_conn)
         {
-            string? new_id_csv = "!";
-            while (user_ids_csv.Contains(new_id_csv) == false && Lib.StringManipulation.Contain(new_id_csv,"!?./:;,") == false)
+            try
             {
-                new_id_csv = line.Substring(0,line.IndexOf(';'));
-            }
-            
-            string? new_password_csv;
-            new_password_csv = line.Substring(line.IndexOf(';')+1);
-            
+                line = tr.ReadLine();
+                Console.WriteLine(line);
+                if (line.Substring(0, 4) == "conn")
+                {
+                    bool connecte = false;
+                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)))
+                    {
+                        user_id_csv = line.Substring(5, line.IndexOf(';') - 5);
+                    }
 
-            StreamWriter sw = new StreamWriter("comptes.csv", true);
-            sw.WriteLine($"{new_id_csv};{new_password_csv}");
-            sw.Close();
+                    if (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
+                    {
+                        user_password_csv = line.Substring(line.IndexOf(';') + 1);
+                        connecte = true;
+                    }
+
+                    if (connecte)
+                    {
+                        tw.WriteLine("connection success");
+                        tw.Flush();
+                        incorect_conn = false;
+                        Console.WriteLine("connetion effectuée");
+                    }
+                }
+                else
+                {
+                    new_id_csv = "!";
+                    Console.WriteLine(line.Substring(5, line.IndexOf(';') - 5));
+                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false &&
+                        StringManipulation.Contain(line.Substring(5, line.IndexOf(';') - 5), "!?./:;,") == false)
+                    {
+                        new_id_csv = line.Substring(5, line.IndexOf(';') - 5);
+                        tw.WriteLine("creation success");
+                        tw.Flush();
+                        incorect_conn = false;
+                        Console.WriteLine("creation effectuée");
+                        
+                        StreamWriter sw_conn = new StreamWriter("comptes.csv", true);
+                        sw_conn.WriteLine($"{new_id_csv};{new_password_csv}");
+                        sw_conn.Close();
             
-            user_ids_csv.Add(new_id_csv);
-            user_passwords_csv.Add(new_password_csv);
+                        user_ids_csv.Add(new_id_csv);
+                        user_passwords_csv.Add(new_password_csv);
+                    }
+
+                    new_password_csv = line.Substring(line.IndexOf(';') + 1);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("deconnecté pendant connexion");
+            }
         }
         
         

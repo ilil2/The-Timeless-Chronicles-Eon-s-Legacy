@@ -226,7 +226,5 @@ offset_bottom = -4.98403
 label_settings = SubResource("LabelSettings_71d1n")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Connection" to="." method="Connection"]
-[connection signal="pressed" from="Inscription" to="." method="Inscription"]
 [connection signal="pressed" from="NoCompte" to="." method="NoCompte"]
 [connection signal="pressed" from="DejaCompte" to="." method="DejaCompte"]
