@@ -22,9 +22,8 @@ public class MainServeur
     private int nbr_serveur = 0;
     private int nbr_joueur = 0;
     
-    private Random rand = new Random();
-    private List<int> id_games = new List<int> {};
-    private int start_game = -1;
+    private List<string> id_games = new List<string> {};
+    private string start_game = "aaa";
 
     private List<string> user_ids_csv = new List<string>();
     private List<string> user_passwords_csv = new List<string>();
@@ -72,7 +71,7 @@ public class MainServeur
             Console.WriteLine("En attente ...");
             Socket s = soc.Accept();                        //acceptation des nouvelles connection
             ID++;
-            ClientCom clicom = new ClientCom(s, ID,0);        //creation de l'objet client
+            ClientCom clicom = new ClientCom(s, ID,"");        //creation de l'objet client
             Thread th = new Thread(com);                    //mise en place de la connection
             th.Start(clicom); //demarage de la connection
             
@@ -209,7 +208,7 @@ public class MainServeur
                 }
                 else if (requette == "newgame" && join == false)
                 {
-                    cc.game_id = rand.Next(1,1001);
+                    cc.game_id = IDGames.LetterID();
                     id_games.Add(cc.game_id);
                     master = true;
                     Console.WriteLine($"nouvelle game : {cc.game_id} par : {cc.id}");
@@ -219,9 +218,9 @@ public class MainServeur
 
                 else if (requette.Contains(' '))
                 {
-                    if (requette.Substring(0,8) == "joingame" && join == false && id_games.Contains(Conversion.AtoI(requette.Substring(9))))
+                    if (requette.Substring(0,8) == "joingame" && join == false && id_games.Contains(requette.Substring(9)))
                     {
-                        cc.game_id = Conversion.AtoI(requette.Substring(9));
+                        cc.game_id = requette.Substring(9);
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
                         tw.WriteLine($"{cc.game_id} rejoint");
                         join = false;
@@ -279,9 +278,9 @@ public class MainServeur
         public Socket Socket { get; set; }      //socket de l'objet
         public int id { get; set; }             //id de l'objet
         
-        public int game_id { get; set; }        //id du serveur
+        public string game_id { get; set; }        //id du serveur
 
-        public ClientCom(Socket s, int num,int game_id)     //initialisation de l'objet
+        public ClientCom(Socket s, int num,string game_id)     //initialisation de l'objet
         {
             this.Socket = s;
             this.id = num;

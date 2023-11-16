@@ -64,7 +64,7 @@ public partial class GameManager : Node3D
 				{
 					if (ConnectionUI.ConnectionButton.ButtonPressed)
 					{
-						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 16 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
 							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
