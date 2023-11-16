@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6uyq4x3bqt2n"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherArcherScrpit.cs" id="1_rw36k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
+radius = 0.513457
+height = 1.99835
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ryx"]
+albedo_color = Color(0.266667, 0.67451, 0.258824, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
+material = SubResource("StandardMaterial3D_i8ryx")
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_rw36k")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)
+shape = SubResource("CapsuleShape3D_hlrpq")
+
+[node name="PlayerBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
+mesh = SubResource("CapsuleMesh_vyull")

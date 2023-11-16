@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsepe6lwfpypt"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/CameraPlayer.cs" id="1_0gw2q"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/CameraPlayer.cs" id="1_obrbp"]
 
 [node name="CameraPlayer" type="Node3D"]
-script = ExtResource("1_0gw2q")
+script = ExtResource("1_obrbp")
 
 [node name="h" type="Node3D" parent="."]
 

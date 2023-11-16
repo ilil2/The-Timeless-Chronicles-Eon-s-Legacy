@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerManager : CharacterBody3D
+public partial class ArcherScrpit : CharacterBody3D
 {
 	//Variables des noeuds
 	Node3D h;
@@ -82,10 +82,10 @@ public partial class PlayerManager : CharacterBody3D
 		}
 		
 		//Calcul du saut
-		if (Input.IsActionJustPressed("jump") && on_floor && !_is_rolling)
-		{
-			_vertical_velocity = Vector3.Up * _jump_force;
-		}
+		//if (Input.IsActionJustPressed("jump") && on_floor && !_is_rolling)
+		//{
+		//	 _vertical_velocity = Vector3.Up * _jump_force;
+		//}
 
 		//Mouvement du joueur
 		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") || Input.IsActionPressed("right"))
