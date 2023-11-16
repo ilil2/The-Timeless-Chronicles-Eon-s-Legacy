@@ -138,8 +138,7 @@ public class MainServeur
                 else
                 {
                     new_id_csv = "!";
-                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false &&
-                        StringManipulation.Contain(line.Substring(5, line.IndexOf(';') - 5), "!?./:;,") == false)
+                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false)
                     {
                         new_id_csv = line.Substring(5, line.IndexOf(';') - 5);
                         tw.WriteLine("creation success");

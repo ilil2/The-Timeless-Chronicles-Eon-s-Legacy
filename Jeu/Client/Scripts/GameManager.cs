@@ -153,8 +153,7 @@ public partial class GameManager : Node3D
 						string rep = tr.ReadLine();
 						if (rep.Substring(0) == "join")
 						{
-							LobbyManager.ValidID = true;
-						}
+							LobbyManager.ValidID = true;						}
 					}
 				}
 				else

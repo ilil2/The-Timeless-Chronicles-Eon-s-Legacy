@@ -67,7 +67,7 @@ public partial class ConnectionUI : Control
 		}
 		else if (InscriptionButton.ButtonPressed)
 		{
-			if (PasswordConnectionNode.Text == PasswordConfirmInscriptionNode.Text)
+			if (PasswordInscriptionNode.Text == PasswordConfirmInscriptionNode.Text)
 				Inscription();
 			else
 				erreur = "confirmation incorect";
