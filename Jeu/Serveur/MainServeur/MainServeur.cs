@@ -166,7 +166,7 @@ public class MainServeur
             catch
             {
                 Console.WriteLine("deconnecté pendant connexion");
-                break;
+                incorect_conn = false;
             }
         }
         
@@ -212,7 +212,7 @@ public class MainServeur
                     id_games.Add(cc.game_id);
                     master = true;
                     Console.WriteLine($"nouvelle game : {cc.game_id} par : {cc.id}");
-                    tw.WriteLine($"l'ID de la game : {cc.game_id}");
+                    tw.WriteLine($"newgame:{cc.game_id}");
                     join = false;
                 }
 
@@ -222,7 +222,7 @@ public class MainServeur
                     {
                         cc.game_id = requette.Substring(9);
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
-                        tw.WriteLine($"{cc.game_id} rejoint");
+                        tw.WriteLine($"join");
                         join = false;
                     }
                 }

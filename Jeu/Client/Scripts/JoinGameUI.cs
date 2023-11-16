@@ -24,6 +24,7 @@ public partial class JoinGameUI : Control
 		//Verifie un bouton est presser et lequel c'est.
 		if (_backButton.ButtonPressed)
 		{
+			LobbyManager.ValidID = false;
 			LobbyManager.LobbyUI = true;
 			QueueFree();
 		}
@@ -32,6 +33,10 @@ public partial class JoinGameUI : Control
 		{
 			LobbyManager.IDJoinGame = _GameID.Text;
 			LobbyManager.JoinGamePressed = true;
+			if (LobbyManager.ValidID)
+			{
+				LobbyManager.JoinGamePressed = false;
+			}
 		}
 		
 	}

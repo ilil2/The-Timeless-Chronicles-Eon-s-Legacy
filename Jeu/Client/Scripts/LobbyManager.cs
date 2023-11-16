@@ -9,11 +9,14 @@ public partial class LobbyManager : Control
 	public static int MenuState = 0;
 
 	public static bool JoinGamePressed = false;
+	public static bool BackButtonPressed = false;
+	public static bool CreateButtonPressed = false;
 	public static string IDJoinGame = "";
 	public static bool StartGame = false;
+	public static bool ValidID = false;
 
 	public static bool InRunning = true;
-	
+	public static bool reset = false;
 	
 	public override void _Ready()
 	{
@@ -32,9 +35,10 @@ public partial class LobbyManager : Control
 
 			MenuState = 0;
 			LobbyUI = false;
+			reset = true;
 		}
 
-		if (JoinGameUI)
+		if (JoinGameUI && ValidID)
 		{
 			PackedScene JoinGameScene = GD.Load<PackedScene>("res://Scenes/JoinGameUI.tscn");
 			Control JoinGameMenu = JoinGameScene.Instantiate<Control>();
@@ -57,6 +61,18 @@ public partial class LobbyManager : Control
 		if (!InRunning)
 		{
 			QueueFree();
+		}
+		
+		if (reset)
+		{
+			JoinGamePressed = false;
+			BackButtonPressed = false;
+			CreateButtonPressed = false;
+			IDJoinGame = "";
+			StartGame = false;
+
+			InRunning = true;
+			reset = false;
 		}
 	}
 }

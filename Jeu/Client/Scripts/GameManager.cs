@@ -75,7 +75,6 @@ public partial class GameManager : Node3D
 							{
 								tentative_connection = false;
 								string user_id = ConnectionUI._pseudo;
-								GD.Print("Leave");
 							}
 							else
 							{
@@ -92,21 +91,18 @@ public partial class GameManager : Node3D
 					{
 						if (ConnectionUI._password == ConnectionUI._confirm_password)
 						{
-							GD.Print("0");
 							if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
 								ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
 								ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 							{
 								tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 								tw.Flush();
-								GD.Print("aaaaaaaa");
 								
 								string? line = tr.ReadLine();
 								if (line == "creation success")
 								{
 									tentative_connection = false;
 									string user_id = ConnectionUI._pseudo;
-									GD.Print("Leave");
 								}
 								else
 								{
@@ -119,40 +115,51 @@ public partial class GameManager : Node3D
 				
 				else
 				{
-					GD.Print("110");
 					ConnectionUI.in_connection = false;
-					state = 4;
-					GD.Print("10");
+					state = 1;
 				}
 			}
-			
 			if (state == 1)
+			{
+				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
+				Control LobbyMenu = LobbyScene.Instantiate<Control>();
+				AddChild(LobbyMenu);
+				state = 2;
+			}
+			
+			if (state == 2)
 			{
 				if (conn && conn2)
 				{
-					if (join == false)
+					if (LobbyManager.CreateButtonPressed == true)
 					{
-						string? requette = Console.ReadLine();	//requette client
-						tw.WriteLine(requette);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
+						LobbyManager.reset = true;
 						
-						try
+						string rep = tr.ReadLine();
+						if (rep.Substring(0, 7) == "newgame")
 						{
-							if (requette == "start" || requette.Substring(0, 8) == "joingame")	//si partie rejointe
-							{
-								join = true;
-							}
+							LobbyManager.IDJoinGame = rep.Substring(8);
 						}
-						catch
+					}
+					
+					else if (LobbyManager.JoinGamePressed == true)
+					{
+						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
+						LobbyManager.reset = true;
+						
+						string rep = tr.ReadLine();
+						if (rep.Substring(0) == "join")
 						{
-							GD.Print("erreur");
+							LobbyManager.ValidID = true;
 						}
 					}
 				}
-				
 				else
 				{
-					state = 2;
+					state = 10;
 				}
 			}
 			

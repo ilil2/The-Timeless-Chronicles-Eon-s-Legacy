@@ -7,10 +7,15 @@ public partial class CreateGameUI : Control
 	private Button _backButton;
 	private Button _startGameButton;
 	
+	public static Label IDGame;
+	
 	public override void _Ready()
 	{
 		_backButton = GetNode<Button>("BackButton");
 		_startGameButton = GetNode<Button>("StartGameButton");
+		LobbyManager.CreateButtonPressed = true;
+		
+		IDGame = GetNode<Label>("IDGameText");
 	}
 
 	public override void _Process(double delta)
@@ -18,6 +23,7 @@ public partial class CreateGameUI : Control
 		if (_backButton.ButtonPressed)
 		{
 			LobbyManager.LobbyUI = true;
+			LobbyManager.BackButtonPressed = true;
 			QueueFree();
 		}
 
@@ -25,5 +31,6 @@ public partial class CreateGameUI : Control
 		{
 			LobbyManager.StartGame = true;
 		}
+		IDGame.Text = LobbyManager.IDJoinGame;
 	}
 }
