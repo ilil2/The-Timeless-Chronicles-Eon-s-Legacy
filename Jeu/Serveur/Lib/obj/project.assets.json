@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/home/ilyann/.nuget/packages/": {}
+    "/Users/narth/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj",
+      "projectUniqueName": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj",
       "projectName": "Lib",
-      "projectPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj",
-      "packagesPath": "/home/ilyann/.nuget/packages/",
-      "outputPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/",
+      "projectPath": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj",
+      "packagesPath": "/Users/narth/.nuget/packages/",
+      "outputPath": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ilyann/.nuget/NuGet/NuGet.Config"
+        "/Users/narth/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/ilyann/.dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -17,13 +17,13 @@ public partial class LobbyUI : Control
 	{
 		if (_joinGameButton.ButtonPressed)
 		{
-			LobbyManager.JoinGameUI = true;
+			LobbyManager.JoinGameUI_ = true;
 			QueueFree();
 		}
 
 		if (_createGameButton.ButtonPressed)
 		{
-			LobbyManager.CreateGameUI = true;
+			LobbyManager.CreateGameUI_ = true;
 			QueueFree();
 		}
 	}

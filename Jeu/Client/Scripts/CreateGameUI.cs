@@ -8,6 +8,8 @@ public partial class CreateGameUI : Control
 	private Button _startGameButton;
 	
 	public static Label IDGame;
+
+	public static bool StartButtonVisible = true; 
 	
 	public override void _Ready()
 	{
@@ -20,9 +22,11 @@ public partial class CreateGameUI : Control
 
 	public override void _Process(double delta)
 	{
+		_startGameButton.Visible = StartButtonVisible;
+		
 		if (_backButton.ButtonPressed)
 		{
-			LobbyManager.LobbyUI = true;
+			LobbyManager.LobbyUI_ = true;
 			LobbyManager.BackButtonPressed = true;
 			QueueFree();
 		}

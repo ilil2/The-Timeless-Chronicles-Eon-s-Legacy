@@ -25,7 +25,7 @@ public partial class JoinGameUI : Control
 		if (_backButton.ButtonPressed)
 		{
 			LobbyManager.ValidID = false;
-			LobbyManager.LobbyUI = true;
+			LobbyManager.LobbyUI_ = true;
 			QueueFree();
 		}
 
@@ -36,6 +36,8 @@ public partial class JoinGameUI : Control
 			if (LobbyManager.ValidID)
 			{
 				LobbyManager.JoinGamePressed = false;
+				LobbyManager.JoinGameWithID = true;
+				QueueFree();
 			}
 		}
 		
