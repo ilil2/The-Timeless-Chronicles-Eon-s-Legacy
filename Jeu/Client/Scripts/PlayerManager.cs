@@ -50,7 +50,7 @@ public partial class PlayerManager : CharacterBody3D
 			_vertical_velocity = Vector3.Down * _gravity / 10;
 		}
 		
-		if (!GameManager._pausemode)
+		if (true)
 		{
 			if (Input.IsActionJustPressed("jump") && on_floor)
 			{
