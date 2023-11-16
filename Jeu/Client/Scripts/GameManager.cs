@@ -4,11 +4,21 @@ using System.IO;
 
 using System.Threading;
 
+using Lib;
+
 using System.Net;
 using System.Net.Sockets;
 
 public partial class GameManager : Node3D
 {
+	private Socket soc;
+	private IPEndPoint iep;
+	
+	private Thread th;
+	
+	private Control connectionMenu;
+	
+	private NetworkStream ns;
 	private TextReader tr;		//lecture requette serveur principal
 	private TextWriter tw;		//ecriture requette serveur principal
 	private TextReader tr2;		//lecture requette serveur secondaire
@@ -17,43 +27,132 @@ public partial class GameManager : Node3D
 	private int port_serv_jeu;	//port serveur secondaire
 	private bool conn2 = true;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
+	{
+		Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		IPEndPoint iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
+		soc.Connect(iep);				//conexion
+		
+		
+		NetworkStream ns = new NetworkStream(soc);
+		tw = new StreamWriter(ns);	//lecture requette serveur principal
+		tr = new StreamReader(ns);	//ecriture requette serveur principal
+		
+		Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+		th.Start();							//lancement thread
+		
+		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
+		Control connectionMenu = connectionUI.Instantiate<Control>();
+		AddChild(connectionMenu);
+	}
+	
+	private bool tentative_connection = true;
+	
+	private bool conn = true;					//connexion au serveur principal
+	private bool join = false;					//partie rejointe
+	
+	private int state = 0;
+	
+	//process
+	public override void _Process(double delta)
 	{
 		try		//voir si le serveur est en ligne
 		{
-			Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-			IPEndPoint iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
-			soc.Connect(iep);																			//conexion
-
-			NetworkStream ns = new NetworkStream(soc);
-			tw = new StreamWriter(ns);	//lecture requette serveur principal
-			tr = new StreamReader(ns);	//ecriture requette serveur principal
-
-			Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
-			th.Start();							//lancement thread
-			
-			bool conn = true;					//connexion au serveur principal
-			bool join = false;					//partie rejointe
-			while (conn && conn2)
+			if (state == 0)
 			{
-				if (join == false)
+				if (tentative_connection)
 				{
-					string? requette = Console.ReadLine();	//requette client
-					tw.WriteLine(requette);					//preparation d'envoi au serveur de "requette"
-					tw.Flush();								//envoie au serveur
-					
-					try
+					if (ConnectionUI.ConnectionButton.ButtonPressed)
 					{
-						if (requette == "start" || requette.Substring(0, 8) == "joingame")	//si partie rejointe
+						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							join = true;
+							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
+							
+							string? line = tr.ReadLine();
+							if (line == "connection success")
+							{
+								tentative_connection = false;
+								string user_id = ConnectionUI._pseudo;
+								GD.Print("Leave");
+							}
+							else
+							{
+								ConnectionUI.erreur = line;
+							}
+						}
+						else
+						{
+							ConnectionUI.erreur = "Pseudo ou mot de passe incorrect";
 						}
 					}
-					catch
+
+					if (ConnectionUI.InscriptionButton.ButtonPressed)
 					{
-						Console.Write("");
+						if (ConnectionUI._password == ConnectionUI._confirm_password)
+						{
+							GD.Print("0");
+							if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
+								ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+								ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
+							{
+								tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+								tw.Flush();
+								GD.Print("aaaaaaaa");
+								
+								string? line = tr.ReadLine();
+								if (line == "creation success")
+								{
+									tentative_connection = false;
+									string user_id = ConnectionUI._pseudo;
+									GD.Print("Leave");
+								}
+								else
+								{
+									ConnectionUI.erreur = line;
+								}
+							}
+						}
 					}
+				}
+				
+				else
+				{
+					GD.Print("110");
+					ConnectionUI.in_connection = false;
+					state = 4;
+					GD.Print("10");
+				}
+			}
+			
+			if (state == 1)
+			{
+				if (conn && conn2)
+				{
+					if (join == false)
+					{
+						string? requette = Console.ReadLine();	//requette client
+						tw.WriteLine(requette);					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
+						
+						try
+						{
+							if (requette == "start" || requette.Substring(0, 8) == "joingame")	//si partie rejointe
+							{
+								join = true;
+							}
+						}
+						catch
+						{
+							GD.Print("erreur");
+						}
+					}
+				}
+				
+				else
+				{
+					state = 2;
 				}
 			}
 			
@@ -63,7 +162,7 @@ public partial class GameManager : Node3D
 			tr.Close();					//fermeture recu requette du serveur principal
 			soc.Disconnect(false);		//deconnection du socket
 			
-			
+			/*
 			System.Threading.Thread.Sleep(2000);		//wait 2secondes
 			
 			Socket soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
@@ -76,10 +175,12 @@ public partial class GameManager : Node3D
 
 			Thread th2 = new Thread(Listen2);	//initialisation thread
 			th2.Start();						//debut du thread
+			*/
 		}
 		catch
 		{
-			Console.WriteLine("serveur hors ligne");	//si le serveur est hors ligne
+			//GD.Print("serveur hors ligne");	//si le serveur est hors ligne
+			int n = 0;
 		}
 	}
 	
