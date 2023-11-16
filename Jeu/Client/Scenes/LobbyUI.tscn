@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8p02dg25hb27"]
+
+[ext_resource type="Script" path="res://Scripts/LobbyUI.cs" id="1_tgnl3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j34mk"]
+font_size = 40
+
+[node name="LobbyUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tgnl3")
+
+[node name="LobbyMenuText" type="Label" parent="."]
+layout_mode = 2
+anchor_left = 0.368
+anchor_top = 0.173
+anchor_right = 0.632
+anchor_bottom = 0.318
+offset_left = 0.0639648
+offset_top = -0.103997
+offset_right = -0.0640335
+offset_bottom = -0.0640121
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lobby"
+label_settings = SubResource("LabelSettings_j34mk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreateGameButton" type="Button" parent="."]
+layout_mode = 2
+anchor_left = 0.389
+anchor_top = 0.395
+anchor_right = 0.611
+anchor_bottom = 0.481
+offset_left = -0.128033
+offset_top = 0.039993
+offset_right = 0.127998
+offset_bottom = 0.311977
+text = "Create Game"
+
+[node name="JoinGameButton" type="Button" parent="."]
+layout_mode = 2
+anchor_left = 0.389
+anchor_top = 0.58
+anchor_right = 0.611
+anchor_bottom = 0.667
+offset_left = -0.128033
+offset_top = 0.159972
+offset_right = 0.127998
+offset_bottom = -0.216036
+text = "Join Game"
