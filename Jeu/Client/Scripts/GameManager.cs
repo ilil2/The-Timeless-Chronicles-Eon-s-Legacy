@@ -64,8 +64,7 @@ public partial class GameManager : Node3D
 				{
 					if (ConnectionUI.ConnectionButton.ButtonPressed)
 					{
-						if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
-							ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
 							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
@@ -82,6 +81,10 @@ public partial class GameManager : Node3D
 							{
 								ConnectionUI.erreur = line;
 							}
+						}
+						else
+						{
+							ConnectionUI.erreur = "Pseudo ou mot de passe incorrect";
 						}
 					}
 

@@ -47,6 +47,8 @@ offset_top = -0.304009
 offset_right = -0.304039
 offset_bottom = 0.167998
 placeholder_text = "Password"
+secret = true
+shortcut_keys_enabled = false
 
 [node name="PasswordInscription" type="LineEdit" parent="."]
 layout_mode = 1
@@ -60,6 +62,8 @@ offset_top = -0.248023
 offset_right = 0.151985
 offset_bottom = -0.0160127
 placeholder_text = "Password"
+secret = true
+shortcut_keys_enabled = false
 
 [node name="PasswordConfirmInscription" type="LineEdit" parent="."]
 layout_mode = 1
@@ -73,18 +77,20 @@ offset_top = -0.0479994
 offset_right = -1.15193
 offset_bottom = -0.224023
 placeholder_text = "Password Confirm"
+secret = true
+shortcut_keys_enabled = false
 
 [node name="PseudoInscription" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.385
-anchor_top = 0.327
+anchor_top = 0.346
 anchor_right = 0.626
-anchor_bottom = 0.389
-offset_left = 0.479977
-offset_top = 1.10399
-offset_right = -0.151993
-offset_bottom = 0.927982
+anchor_bottom = 0.42
+offset_left = -1.51996
+offset_top = 7.79201
+offset_right = -2.15198
+offset_bottom = -0.160004
 placeholder_text = "Pseudo"
 
 [node name="Connection" type="Button" parent="."]

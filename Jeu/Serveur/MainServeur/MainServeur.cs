@@ -167,6 +167,7 @@ public class MainServeur
             catch
             {
                 Console.WriteLine("deconnecté pendant connexion");
+                break;
             }
         }
         
