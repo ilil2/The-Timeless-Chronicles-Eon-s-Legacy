@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c74mkq0ctpr4t"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/PlayerManager.cs" id="1_hbiel"]
+[ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/camera_player.tscn" id="2_2vibj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
+radius = 0.513457
+height = 1.99835
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_hbiel")
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)
+shape = SubResource("CapsuleShape3D_hlrpq")
+
+[node name="PlayerBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
+mesh = SubResource("CapsuleMesh_vyull")
+
+[node name="CameraPlayer" parent="." instance=ExtResource("2_2vibj")]
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
