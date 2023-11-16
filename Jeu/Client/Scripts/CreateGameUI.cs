@@ -35,6 +35,7 @@ public partial class CreateGameUI : Control
 		{
 			LobbyManager.StartGame = true;
 		}
-		IDGame.Text = LobbyManager.IDJoinGame;
+		
+		IDGame.Text = "Game ID: " + LobbyManager.IDConnectGame;
 	}
 }

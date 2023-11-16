@@ -26,6 +26,12 @@ public partial class GameManager : Node3D
 	
 	private int port_serv_jeu;	//port serveur secondaire
 	private bool conn2 = true;
+
+
+	public static string ConnectionError = "";
+	public static string IDGame = "";
+	public static bool LobbyReset = false;
+	public static bool ValidIDGame = false;
 	
 	public override void _Ready()
 	{
@@ -78,37 +84,37 @@ public partial class GameManager : Node3D
 							}
 							else
 							{
-								ConnectionUI.erreur = line;
+								ConnectionError = line;
 							}
 						}
 						else
 						{
-							ConnectionUI.erreur = "Pseudo ou mot de passe incorrect";
+							ConnectionError = "Pseudo ou mot de passe incorrect";
 						}
 					}
 
-					if (ConnectionUI.InscriptionButton.ButtonPressed)
+					else if (ConnectionUI.InscriptionButton.ButtonPressed)
 					{
-						if (ConnectionUI._password == ConnectionUI._confirm_password)
+						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+						    ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
-								ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
-								ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
-							{
-								tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
-								tw.Flush();
+							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
 								
-								string? line = tr.ReadLine();
-								if (line == "creation success")
-								{
-									tentative_connection = false;
-									string user_id = ConnectionUI._pseudo;
-								}
-								else
-								{
-									ConnectionUI.erreur = line;
-								}
+							string? line = tr.ReadLine();
+							if (line == "creation success")
+							{
+								tentative_connection = false;
+								string user_id = ConnectionUI._pseudo;
 							}
+							else
+							{
+								ConnectionError = line;
+							}
+						}
+						else
+						{
+							ConnectionError = "Pseudo ou mot de passe incorrect";
 						}
 					}
 				}
@@ -119,6 +125,7 @@ public partial class GameManager : Node3D
 					state = 1;
 				}
 			}
+
 			if (state == 1)
 			{
 				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
@@ -135,25 +142,26 @@ public partial class GameManager : Node3D
 					{
 						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
-						LobbyManager.reset = true;
+						LobbyReset = true;
 						
 						string rep = tr.ReadLine();
 						if (rep.Substring(0, 7) == "newgame")
 						{
-							LobbyManager.IDJoinGame = rep.Substring(8);
+							IDGame = rep.Substring(8);
 						}
 					}
 					
 					else if (LobbyManager.JoinGamePressed == true)
 					{
-						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine($"joingame {LobbyManager.IDJoinGame}");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
-						LobbyManager.reset = true;
+						LobbyReset = true;
 						
 						string rep = tr.ReadLine();
 						if (rep.Substring(0) == "join")
 						{
-							LobbyManager.ValidID = true;						}
+							ValidIDGame = true;
+						}
 					}
 				}
 				else

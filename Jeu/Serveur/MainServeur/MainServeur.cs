@@ -103,6 +103,7 @@ public class MainServeur
             {
                 line = tr.ReadLine();
                 Console.WriteLine(line);
+                bool error = false;
                 if (line.Substring(0, 4) == "conn")
                 {
                     bool connecte = false;
@@ -112,8 +113,7 @@ public class MainServeur
                     }
                     else
                     {
-                        tw.WriteLine("Pseudo ou mot de passe incorrect");
-                        tw.Flush();
+                        error = true;
                     }
 
                     if (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
@@ -123,8 +123,13 @@ public class MainServeur
                     }
                     else
                     {
+                        error = true;
+                    }
+
+                    if (error)
+                    {
                         tw.WriteLine("Pseudo ou mot de passe incorrect");
-                        tw.Flush();
+                        tw.Flush();   
                     }
 
                     if (connecte)
@@ -141,6 +146,7 @@ public class MainServeur
                     if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false)
                     {
                         new_id_csv = line.Substring(5, line.IndexOf(';') - 5);
+                        new_password_csv = line.Substring(line.IndexOf(';') + 1);
                         tw.WriteLine("creation success");
                         tw.Flush();
                         incorect_conn = false;
@@ -155,11 +161,9 @@ public class MainServeur
                     }
                     else
                     {
-                        tw.WriteLine("Pseudo ou mot de passe incorect");
+                        tw.WriteLine("Compte déjà existant");
                         tw.Flush();
                     }
-
-                    new_password_csv = line.Substring(line.IndexOf(';') + 1);
                 }
             }
             catch
