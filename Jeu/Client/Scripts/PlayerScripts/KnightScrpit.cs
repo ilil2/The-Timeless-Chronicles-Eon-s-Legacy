@@ -4,16 +4,21 @@ using System;
 public partial class KnightScrpit : CharacterBody3D
 {
 	//Variables des noeuds
-	Node3D h;
-	MeshInstance3D player_mesh;
-	Timer dash_timer;
+	private Node3D h;
+	private Camera3D Camera;
+	private MeshInstance3D player_mesh;
+	private Timer dash_timer;
 
 	//Variables des differentes forces
-	float _gravity = 9.8f;
-	float _jump_force = 9.0f;
-	float _walk_speed = 3.9f;
-	float _run_speed = 7.5f;
-	float _dash_power = 80.0f;
+	private float _gravity = 9.8f;
+	private float _jump_force = 9.0f;
+	private float _walk_speed = 3.9f;
+	private float _run_speed = 7.5f;
+	private float _dash_power = 80.0f;
+	
+	//Variables du Fov du joueur
+	private float _FovMax = 120;
+	private float _FovMin = 30;
 
 	//Variables des mouvements
 	private bool _is_walking;
@@ -31,11 +36,32 @@ public partial class KnightScrpit : CharacterBody3D
 	
 	public override void _Ready()
 	{
+		Camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		
 		//initialisation de la variable direction
 		h = GetNode<Node3D>("CameraPlayer/h");
 		_direction = Vector3.Back.Rotated(Vector3.Up, h.GlobalTransform.Basis.GetEuler().Y);
 	}
-	
+
+	public override void _Process(double delta)
+	{
+		if (Input.IsActionPressed("scroll_forward"))
+		{
+			if (Camera.Fov >= _FovMin)
+			{
+				Camera.Fov -= 1;
+			}
+		}
+
+		if (Input.IsActionPressed("scroll_backward"))
+		{
+			if (Camera.Fov <= _FovMax)
+			{
+				Camera.Fov  += 1;
+			}
+		}
+	}
+
 	private void sprint_and_roll(Timer DashTimer)
 	{
 		//Mouvement du dash
@@ -82,10 +108,10 @@ public partial class KnightScrpit : CharacterBody3D
 		}
 		
 		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && on_floor && !_is_rolling)
-		//{
-		//	 _vertical_velocity = Vector3.Up * _jump_force;
-		//}
+		if (Input.IsActionJustPressed("jump") && on_floor && !_is_rolling)
+		{
+			 _vertical_velocity = Vector3.Up * _jump_force;
+		}
 
 		//Mouvement du joueur
 		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") || Input.IsActionPressed("right"))

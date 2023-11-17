@@ -40,10 +40,10 @@ mesh = SubResource("PlaneMesh_gcc1s")
 shape = SubResource("ConcavePolygonShape3D_8xhyl")
 
 [node name="Room1" parent="." instance=ExtResource("2_vpi4y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3267, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.4043, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("5_byhs4")]
-transform = Transform3D(-0.998617, 0, -0.0525799, 0, 1, 0, 0.0525799, 0, -0.998617, 0, 0, 0)
+transform = Transform3D(-0.998617, 0, -0.0525799, 0, 1, 0, 0.0525799, 0, -0.998617, 0, 0.0558028, 0)
 
 [node name="Player2" parent="." instance=ExtResource("6_5jur7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.04353)

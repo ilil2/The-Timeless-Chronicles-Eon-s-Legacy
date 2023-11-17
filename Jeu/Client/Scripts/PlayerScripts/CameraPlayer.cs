@@ -6,23 +6,17 @@ public partial class CameraPlayer : Node3D
 	private float camrot_h;
 	private float camrot_v;
 	
-	[Export]
-	float cam_v_max = 75;
-	float cam_v_min = -55;
-	float joystick_sensitivity = 20; 
+	private float cam_v_max = 75;
+	private float cam_v_min = -55;
 	
 	private float h_sensitivity = 0.01f;
 	private float v_sensitivity = 0.01f;
-	private float h_acceleration = 10;
-	private float v_acceleration = 10;
-	private Vector2 joyview;
-	
-	PackedScene pauseUI;
-	Control pauseMenu;
+	private float h_acceleration = 5;
+	private float v_acceleration = 5;
 
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		//Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Input(InputEvent @event)
