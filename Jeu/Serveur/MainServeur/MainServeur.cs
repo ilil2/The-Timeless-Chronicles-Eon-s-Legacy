@@ -106,7 +106,6 @@ public class MainServeur
                 bool error = false;
                 if (line.Substring(0, 4) == "conn")
                 {
-                    bool connecte = false;
                     if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)))
                     {
                         user_id_csv = line.Substring(5, line.IndexOf(';') - 5);
@@ -116,10 +115,9 @@ public class MainServeur
                         error = true;
                     }
 
-                    if (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
+                    if (!error && user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
                     {
                         user_password_csv = line.Substring(line.IndexOf(';') + 1);
-                        connecte = true;
                     }
                     else
                     {
@@ -129,15 +127,14 @@ public class MainServeur
                     if (error)
                     {
                         tw.WriteLine("Pseudo ou mot de passe incorrect");
-                        tw.Flush();   
+                        tw.Flush();
                     }
-
-                    if (connecte)
+                    else
                     {
                         tw.WriteLine("connection success");
                         tw.Flush();
                         incorect_conn = false;
-                        Console.WriteLine("connetion effectuée");
+                        Console.WriteLine("connection effectuée");
                     }
                 }
                 else
@@ -165,12 +162,14 @@ public class MainServeur
                         tw.Flush();
                     }
                 }
+                tw.Flush();
             }
             catch
             {
                 Console.WriteLine("deconnecté pendant connexion");
                 incorect_conn = false;
             }
+            
         }
         
         

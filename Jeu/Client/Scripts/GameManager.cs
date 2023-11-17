@@ -27,11 +27,11 @@ public partial class GameManager : Node3D
 	private int port_serv_jeu;	//port serveur secondaire
 	private bool conn2 = true;
 
-
 	public static string ConnectionError = "";
 	public static string IDGame = "";
 	public static bool LobbyReset = false;
 	public static bool ValidIDGame = false;
+	private bool OnJoin = false;
 	
 	public override void _Ready()
 	{
@@ -43,9 +43,6 @@ public partial class GameManager : Node3D
 		NetworkStream ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
-		
-		Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
-		th.Start();							//lancement thread
 		
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
@@ -73,6 +70,7 @@ public partial class GameManager : Node3D
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 16 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
+							
 							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 							tw.Flush();
 							
@@ -86,6 +84,7 @@ public partial class GameManager : Node3D
 							{
 								ConnectionError = line;
 							}
+
 						}
 						else
 						{
@@ -98,12 +97,10 @@ public partial class GameManager : Node3D
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							GD.Print("1");
 							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 							tw.Flush();
-							GD.Print("2");
 							
-							string? line = tr.ReadLine();
+							string line = tr.ReadLine();
 							if (line == "creation success")
 							{
 								tentative_connection = false;
@@ -113,7 +110,7 @@ public partial class GameManager : Node3D
 							{
 								ConnectionError = "Pseudo deja existant";
 							}
-							GD.Print("3");
+							
 						}
 						else
 						{
@@ -124,7 +121,6 @@ public partial class GameManager : Node3D
 				
 				else
 				{
-					GD.Print("0");
 					ConnectionUI.in_connection = false;
 					state = 1;
 				}
@@ -142,7 +138,7 @@ public partial class GameManager : Node3D
 			{
 				if (conn && conn2)
 				{
-					if (LobbyManager.CreateButtonPressed == true)
+					if (LobbyManager.CreateButtonPressed)
 					{
 						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
@@ -155,7 +151,7 @@ public partial class GameManager : Node3D
 						}
 					}
 					
-					else if (LobbyManager.JoinGamePressed == true)
+					else if (LobbyManager.JoinGamePressed)
 					{
 						tw.WriteLine($"joingame {LobbyManager.IDJoinGame}");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
@@ -166,6 +162,15 @@ public partial class GameManager : Node3D
 						{
 							ValidIDGame = true;
 						}
+
+						OnJoin = true;
+						Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+						th.Start();							//lancement thread
+					}
+					else if (LobbyManager.BackButtonPressed && OnJoin)
+					{
+						th.Interrupt();
+						OnJoin = false;
 					}
 				}
 				else
@@ -173,8 +178,11 @@ public partial class GameManager : Node3D
 					state = 10;
 				}
 			}
-			
-			th.Interrupt();				//fermeture du thread listen
+
+			if (OnJoin)
+			{
+				th.Interrupt();				//fermeture du thread listen
+			}
 			ns.Close();
 			tw.Close();					//fermeture envoi requette au serveur principal
 			tr.Close();					//fermeture recu requette du serveur principal
@@ -202,12 +210,11 @@ public partial class GameManager : Node3D
 		}
 	}
 	
-	public void Listen()		//premier thread
+	private void Listen()		//premier thread
 	{
 		while (true)
 		{
 			string rep = tr.ReadLine();	//lecture de donnée du serveur
-			Console.WriteLine(rep);		//ecriture de la donnee
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
@@ -221,7 +228,7 @@ public partial class GameManager : Node3D
 		}
 	}
 
-	public void Listen2()		//deuxieme thread
+	private void Listen2()		//deuxieme thread
 	{
 		while (true)
 		{
