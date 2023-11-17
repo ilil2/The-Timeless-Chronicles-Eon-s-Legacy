@@ -27,19 +27,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/narth/.nuget/packages/": {}
+    "/home/ilyann/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/Serveur.csproj",
+      "projectUniqueName": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/Serveur.csproj",
       "projectName": "Serveur",
-      "projectPath": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/Serveur.csproj",
-      "packagesPath": "/Users/narth/.nuget/packages/",
-      "outputPath": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/",
+      "projectPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/Serveur.csproj",
+      "packagesPath": "/home/ilyann/.nuget/packages/",
+      "outputPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Serveur/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/narth/.nuget/NuGet/NuGet.Config"
+        "/home/ilyann/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -51,8 +51,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj": {
-              "projectPath": "/Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj"
+            "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj": {
+              "projectPath": "/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/Lib.csproj"
             }
           }
         }
@@ -82,7 +82,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/ilyann/.dotnet/sdk/7.0.403/RuntimeIdentifierGraph.json"
       }
     }
   }

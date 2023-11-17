@@ -96,11 +96,13 @@ public partial class GameManager : Node3D
 					else if (ConnectionUI.InscriptionButton.ButtonPressed)
 					{
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
-						    ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
+							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
+							GD.Print("1");
 							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 							tw.Flush();
-								
+							GD.Print("2");
+							
 							string? line = tr.ReadLine();
 							if (line == "creation success")
 							{
@@ -109,8 +111,9 @@ public partial class GameManager : Node3D
 							}
 							else
 							{
-								ConnectionError = line;
+								ConnectionError = "Pseudo deja existant";
 							}
+							GD.Print("3");
 						}
 						else
 						{
@@ -121,6 +124,7 @@ public partial class GameManager : Node3D
 				
 				else
 				{
+					GD.Print("0");
 					ConnectionUI.in_connection = false;
 					state = 1;
 				}
