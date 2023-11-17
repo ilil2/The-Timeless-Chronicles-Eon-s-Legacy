@@ -160,12 +160,17 @@ public partial class GameManager : Node3D
 						string rep = tr.ReadLine();
 						if (rep.Substring(0) == "join")
 						{
-							ValidIDGame = true;
+							ValidIDGame = true; 
+							
+							OnJoin = true;
+							Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+							th.Start();							//lancement thread
 						}
-
-						OnJoin = true;
-						Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
-						th.Start();							//lancement thread
+						else
+						{
+							LobbyManager.IDError = rep;
+						}
+						
 					}
 					else if (LobbyManager.BackButtonPressed && OnJoin)
 					{
@@ -175,6 +180,7 @@ public partial class GameManager : Node3D
 				}
 				else
 				{
+					LobbyManager.InRunning = false;
 					state = 10;
 				}
 			}
@@ -223,6 +229,19 @@ public partial class GameManager : Node3D
 					Console.WriteLine("connexion au serveur de jeu ...");
 					conn2 = false;											//deconnextion du serveur principal
 					break;
+				}
+				
+				else if (rep.Substring(0,10) == "listplayer")
+				{
+					string line = rep.Substring(10);
+					for (int i = 0; i < 4; i++)
+					{
+						if (line.Contains(';'))
+						{
+							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';'));
+							line = line.Substring(line.IndexOf(";"));
+						}
+					}
 				}
 			}
 		}
