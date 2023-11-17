@@ -186,7 +186,7 @@ public class MainServeur
             while (true)
             {
                 string requette = tr.ReadLine(); 
-                
+                Console.WriteLine(requette);
                 if (requette == "start" && master)
                 {
                     tw.WriteLine($"newserv:{ports[0]}");
@@ -217,10 +217,10 @@ public class MainServeur
                 {
                     cc.game_id = IDGames.LetterID();
                     id_games.Add(cc.game_id);
-                    
+
                     List<string> player_list = new List<string>() {cc.game_id , cc.id};
                     player_games.Add(player_list);
-                    cc.in_my_game.Add(cc.id);
+                    cc.in_my_game = new List<string>() {cc.id};
                     
                     master = true;
                     join = true;
@@ -248,7 +248,7 @@ public class MainServeur
                     }
                 }
                 tw.Flush();
-
+                
                 if (new_player)
                 {
                     if (cc.in_my_game.Count == 1)
@@ -267,7 +267,6 @@ public class MainServeur
                     {
                         tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
                     }
-                    tw.Flush();
                     new_player = false;
                 }
                 
@@ -282,6 +281,7 @@ public class MainServeur
                         }
                     }
                 }
+                tw.Flush();
             }
         }
         catch

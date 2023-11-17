@@ -148,6 +148,10 @@ public partial class GameManager : Node3D
 						if (rep.Substring(0, 7) == "newgame")
 						{
 							IDGame = rep.Substring(8);
+							OnJoin = true;
+							Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+							th.Start();							//lancement thread
+							LobbyReset = true;
 						}
 					}
 					
@@ -165,6 +169,7 @@ public partial class GameManager : Node3D
 							OnJoin = true;
 							Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
 							th.Start();							//lancement thread
+							LobbyReset = true;
 						}
 						else
 						{
@@ -176,6 +181,7 @@ public partial class GameManager : Node3D
 					{
 						th.Interrupt();
 						OnJoin = false;
+						LobbyReset = true;
 					}
 				}
 				else
