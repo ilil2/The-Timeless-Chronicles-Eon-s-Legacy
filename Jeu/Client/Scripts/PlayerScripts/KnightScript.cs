@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ScientistScript : CharacterBody3D
+public partial class KnightScript : CharacterBody3D
 {
 	//Variables des noeuds
 	private Node3D _h;
@@ -60,12 +60,12 @@ public partial class ScientistScript : CharacterBody3D
 			}
 		}
 	}
-
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		_h = GetNode<Node3D>("CameraPlayer/h");
 		_playerMesh = GetNode<MeshInstance3D>("PlayerBody");
-
+		
 		_movementSpeed = 0f;
 		_angularAcceleration = 10;
 		_acceleration = 15;
@@ -79,13 +79,13 @@ public partial class ScientistScript : CharacterBody3D
 		//{
 		//	_verticalVelocity = Vector3.Down * _gravity / 10;
 		//}
-
+		
 		//Calcul du saut
 		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
 		//{
 		//	 _verticalVelocity = Vector3.Up * _jumpForce;
 		//}
-
+		
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))
 		{
@@ -93,8 +93,7 @@ public partial class ScientistScript : CharacterBody3D
 		}
 
 		//Mouvement du joueur
-		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") ||
-		    Input.IsActionPressed("right"))
+		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") || Input.IsActionPressed("right"))
 		{
 			_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
 				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
@@ -103,7 +102,7 @@ public partial class ScientistScript : CharacterBody3D
 
 			//Changement de la vitesse du joueur si il sprint
 			if (Input.IsActionPressed("sprint") && _isWalking)
-			{
+			{ 
 				_movementSpeed = _runSpeed;
 				_isRunning = true;
 			}
@@ -118,31 +117,27 @@ public partial class ScientistScript : CharacterBody3D
 			_isWalking = false;
 			_isRunning = false;
 		}
-
+		
 
 		//Calcul de la rotation du joueur
-		_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X,
-			(float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y,
-				delta * _angularAcceleration), _playerMesh.Rotation.Z);
-
-
+		_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
+		
+		
 		if (_isRolling)
 		{
-			_horizontalVelocity =
-				_horizontalVelocity.Lerp(_direction.Normalized() * .01f, (float)(_acceleration * delta));
+			_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * .01f, (float)(_acceleration * delta));
 		}
 		else
 		{
-			_horizontalVelocity =
-				_horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
+			_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
 		}
-
+		
 		//Calcul du movement du joueur
 		Vector3 velocity = Velocity;
 		velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
 		velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
 		velocity.Y = _verticalVelocity.Y;
-
+		
 		//Application du mouvement au joueur
 		Velocity = velocity;
 		MoveAndSlide();

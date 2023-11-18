@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6uyq4x3bqt2n"]
+[gd_scene load_steps=5 format=3 uid="uid://coaqbqbd5v23m"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherArcherScrpit.cs" id="1_rw36k"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherArcherScript.cs" id="1_7erpk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
@@ -13,7 +13,7 @@ albedo_color = Color(0.266667, 0.67451, 0.258824, 1)
 material = SubResource("StandardMaterial3D_i8ryx")
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_rw36k")
+script = ExtResource("1_7erpk")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)

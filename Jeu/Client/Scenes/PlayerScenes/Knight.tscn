@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://c74mkq0ctpr4t"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/KnightScrpit.cs" id="1_fs85t"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/KnightScript.cs" id="1_fs85t"]
 [ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/CameraPlayer.tscn" id="2_2vibj"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457

@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://7buqngqxlh78"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/ArcherScrpit.cs" id="1_52yle"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/ArcherScript.cs" id="1_52yle"]
 [ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/CameraPlayer.tscn" id="2_nufjl"]
+
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457

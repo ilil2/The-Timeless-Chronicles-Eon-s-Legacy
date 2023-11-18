@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class OtherArcherScrpit : CharacterBody3D
+public partial class OtherArcherScript : CharacterBody3D
 {
     public Vector3 EntityPosition;
 

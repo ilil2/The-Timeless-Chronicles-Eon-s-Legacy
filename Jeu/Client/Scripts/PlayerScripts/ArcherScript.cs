@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ScientistScript : CharacterBody3D
+public partial class ArcherScript : CharacterBody3D
 {
 	//Variables des noeuds
 	private Node3D _h;

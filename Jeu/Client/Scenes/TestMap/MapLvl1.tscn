@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://byej16v8b2g0x" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="3_a1dq3"]
 [ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="4_irkkn"]
 [ext_resource type="PackedScene" uid="uid://c74mkq0ctpr4t" path="res://Scenes/PlayerScenes/Knight.tscn" id="5_byhs4"]
-[ext_resource type="PackedScene" uid="uid://c6uyq4x3bqt2n" path="res://Scenes/PlayerScenes/OtherArcher.tscn" id="6_5jur7"]
+[ext_resource type="PackedScene" uid="uid://coaqbqbd5v23m" path="res://Scenes/PlayerScenes/OtherArcher.tscn" id="6_5jur7"]
 [ext_resource type="PackedScene" uid="uid://c2vi2xy06n7vn" path="res://Scenes/PlayerScenes/OtherAssassin.tscn" id="7_6r8w6"]
 [ext_resource type="PackedScene" uid="uid://dqq8ehqq6q6fd" path="res://Scenes/PlayerScenes/OtherScientist.tscn" id="8_578gu"]
 
