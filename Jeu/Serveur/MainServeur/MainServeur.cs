@@ -220,7 +220,7 @@ public class MainServeur
 
                     List<string> player_list = new List<string>() {cc.game_id , cc.id};
                     player_games.Add(player_list);
-                    cc.in_my_game = new List<string>() {cc.id};
+                    cc.in_my_game = new List<string>() {cc.id,"","",""};
                     
                     master = true;
                     join = true;
@@ -237,6 +237,13 @@ public class MainServeur
                         cc.game_id = requette.Substring(9);
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
                         tw.WriteLine($"join");
+
+                        int index = ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id);
+                        List<string> player_list = player_games[index];
+                        player_games.RemoveAt(index);
+                        player_list.Add(cc.id);
+                        player_games.Add(player_list);
+                        cc.in_my_game = new List<string>() {cc.id,"","",""};
                         
                         join = true;
                         new_player = true;
@@ -260,27 +267,6 @@ public class MainServeur
                 
                 tw.Flush();
                 
-                if (new_player)
-                {
-                    if (cc.in_my_game.Count == 1)
-                    {
-                        tw.WriteLine($"listplayer:{cc.in_my_game[0]}");
-                    }
-                    else if (cc.in_my_game.Count == 2)
-                    {
-                        tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]}");
-                    }
-                    else if (cc.in_my_game.Count == 3)
-                    {
-                        tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]}");
-                    }
-                    else if (cc.in_my_game.Count == 4)
-                    {
-                        tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
-                    }
-                    new_player = false;
-                }
-                
                 if (!join && ListManupulation.ListofListContain(player_games,0,cc.game_id))
                 {
                     for (int i = 0; i < 4; i++)
@@ -291,6 +277,12 @@ public class MainServeur
                             new_player = true;
                         }
                     }
+                }
+                
+                if (new_player)
+                {
+                    tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
+                    new_player = false;
                 }
                 tw.Flush();
             }

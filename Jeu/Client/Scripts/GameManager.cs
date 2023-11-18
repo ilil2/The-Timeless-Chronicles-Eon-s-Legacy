@@ -246,7 +246,7 @@ public partial class GameManager : Node3D
 					{
 						if (line.Contains(';'))
 						{
-							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';'));
+							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';')-1);
 							line = line.Substring(line.IndexOf(";"));
 						}
 					}
