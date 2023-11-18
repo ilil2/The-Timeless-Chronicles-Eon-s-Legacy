@@ -47,7 +47,6 @@ public partial class LobbyManager : Control
 
 			MenuState = 0;
 			LobbyUI_ = false;
-			GameManager.LobbyReset = true;
 		}
 
 		if (JoinGameUI_)

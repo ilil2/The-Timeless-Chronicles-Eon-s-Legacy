@@ -247,6 +247,17 @@ public class MainServeur
                         tw.WriteLine("ID inconnu");
                     }
                 }
+                
+                else if (requette == "back")
+                {
+                    master = false;
+                    join = false;
+                    new_player = false;
+                    cc.game_id = "";
+                    cc.in_my_game = new List<string>();
+                    Console.WriteLine("back");
+                }
+                
                 tw.Flush();
                 
                 if (new_player)
