@@ -71,14 +71,14 @@ public partial class AssassinScript : CharacterBody3D
 		_acceleration = 15;
 
 		//Calcul de la gravité
-		//if (!IsOnFloor())
-		//{
-		//	_verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
-		//}
-		//else
-		//{
-		//	_verticalVelocity = Vector3.Down * _gravity / 10;
-		//}
+		if (!IsOnFloor())
+		{
+			_verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
+		}
+		else
+		{
+			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
+		}
 
 		//Calcul du saut
 		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
