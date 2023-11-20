@@ -220,7 +220,7 @@ public class MainServeur
 
                     List<string> player_list = new List<string>() {cc.game_id , cc.id};
                     player_games.Add(player_list);
-                    cc.in_my_game = new List<string>() {cc.id,"","",""};
+                    cc.in_my_game = new string[] {cc.id,"","",""};
                     
                     master = true;
                     join = true;
@@ -243,7 +243,7 @@ public class MainServeur
                         player_games.RemoveAt(index);
                         player_list.Add(cc.id);
                         player_games.Add(player_list);
-                        cc.in_my_game = new List<string>() {cc.id,"","",""};
+                        cc.in_my_game = new string[] {cc.id,"","",""};
                         
                         join = true;
                         new_player = true;
@@ -261,20 +261,26 @@ public class MainServeur
                     join = false;
                     new_player = false;
                     cc.game_id = "";
-                    cc.in_my_game = new List<string>();
+                    cc.in_my_game = new string[4];
                     Console.WriteLine("back");
                 }
                 
                 tw.Flush();
                 
-                if (!join && ListManupulation.ListofListContain(player_games,0,cc.game_id))
+                if (requette == "player") //!join && ListManupulation.ListofListContain(player_games,0,cc.game_id)
                 {
-                    for (int i = 0; i < 4; i++)
+                    Console.WriteLine("yessssss");
+                    for (int i = 0; i < 4; i++) 
                     {
-                        if (ListManupulation.ListofListExist(player_games,ListManupulation.ListofListIndexOf(player_games,0,cc.game_id),1) && cc.in_my_game[i] == player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i+1])
+                        Console.WriteLine("enter");
+                        if (ListManupulation.ListofListExist(player_games, ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id), i+1))
                         {
-                            cc.in_my_game[i] = player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i+1];
-                            new_player = true;
+                            if (cc.in_my_game[i] == player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1])
+                            {
+                                Console.WriteLine("yes"); 
+                                cc.in_my_game[i] = player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1];
+                                new_player = true;
+                            }
                         }
                     }
                 }
@@ -283,6 +289,7 @@ public class MainServeur
                 {
                     tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
                     new_player = false;
+                    Console.WriteLine("envoie player");
                 }
                 tw.Flush();
             }
@@ -338,7 +345,7 @@ public class MainServeur
         
         public string game_id { get; set; }        //id du serveur
         
-        public List<string> in_my_game { get; set; }
+        public string[] in_my_game { get; set; }
 
         public ClientCom(Socket s, string num,string game_id)     //initialisation de l'objet
         {

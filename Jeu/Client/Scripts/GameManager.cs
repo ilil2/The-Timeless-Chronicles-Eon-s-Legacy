@@ -33,6 +33,12 @@ public partial class GameManager : Node3D
 	public static bool ValidIDGame = false;
 	private bool OnJoin = false;
 	
+	private DateTime startTime = DateTime.Now;
+
+	private TimeSpan timerDuration = TimeSpan.FromSeconds(1);
+
+	private DateTime endTime = DateTime.Now;
+	
 	public override void _Ready()
 	{
 		Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
@@ -185,6 +191,15 @@ public partial class GameManager : Node3D
 						tw.WriteLine("back");
 						tw.Flush();
 					}
+					if (OnJoin && DateTime.Now > endTime)
+					{
+						GD.Print("Enter");
+						tw.WriteLine("player");
+						tw.Flush();
+						startTime = DateTime.Now;
+						GD.Print("Timer");
+					}
+					endTime = startTime.Add(timerDuration);
 				}
 				else
 				{
@@ -193,15 +208,18 @@ public partial class GameManager : Node3D
 				}
 			}
 
-			if (OnJoin)
+			if (state == 3)
 			{
-				th.Interrupt();				//fermeture du thread listen
+					if (OnJoin)
+				{
+					th.Interrupt();				//fermeture du thread listen
+				}
+				ns.Close();
+				tw.Close();					//fermeture envoi requette au serveur principal
+				tr.Close();					//fermeture recu requette du serveur principal
+				soc.Disconnect(false);		//deconnection du socket
+				
 			}
-			ns.Close();
-			tw.Close();					//fermeture envoi requette au serveur principal
-			tr.Close();					//fermeture recu requette du serveur principal
-			soc.Disconnect(false);		//deconnection du socket
-			
 			/*
 			System.Threading.Thread.Sleep(2000);		//wait 2secondes
 			
@@ -241,10 +259,12 @@ public partial class GameManager : Node3D
 				
 				else if (rep.Substring(0,10) == "listplayer")
 				{
+					GD.Print(rep);
 					string line = rep.Substring(10);
 					for (int i = 0; i < 4; i++)
 					{
-						if (line.Contains(';'))
+						GD.Print(i);
+						if (line.Contains(';') && line.Length > 1 && line[1] != ';')
 						{
 							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';')-1);
 							line = line.Substring(line.IndexOf(";"));
