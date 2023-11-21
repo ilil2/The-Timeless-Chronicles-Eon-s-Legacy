@@ -52,4 +52,16 @@ public class ListManupulation
             return false;
         }
     }
+
+    public static void PrintListOfList(List<List<string>> list)
+    {
+        foreach (var l in list)
+        {
+            foreach (var e in l)
+            {
+                Console.Write(e + " / ");
+            }
+            Console.WriteLine();
+        }
+    }
 }

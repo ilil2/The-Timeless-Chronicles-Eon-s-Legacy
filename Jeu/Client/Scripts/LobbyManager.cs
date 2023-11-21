@@ -78,6 +78,13 @@ public partial class LobbyManager : Control
 			MenuState = 2;
 			CreateGameUI.StartButtonVisible = false;
 			JoinGameWithID = false;
+			
+			JoinGamePressed = false;
+			CreateButtonPressed = false;
+			StartGame = false;
+
+			InRunning = true;
+			GameManager.LobbyReset = false;
 		}
 
 		if (!InRunning)
@@ -90,8 +97,6 @@ public partial class LobbyManager : Control
 			JoinGamePressed = false;
 			BackButtonPressed = false;
 			CreateButtonPressed = false;
-			IDJoinGame = "";
-			IDConnectGame = "";
 			StartGame = false;
 
 			InRunning = true;

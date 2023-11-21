@@ -172,8 +172,9 @@ public partial class GameManager : Node3D
 						{
 							ValidIDGame = true; 
 							
+							IDGame = LobbyManager.IDJoinGame;
 							OnJoin = true;
-							Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+							th = new Thread(Listen);		//initialisation thread pour la lecture de requette
 							th.Start();							//lancement thread
 							LobbyReset = true;
 						}
@@ -185,15 +186,16 @@ public partial class GameManager : Node3D
 					}
 					if (LobbyManager.BackButtonPressed && OnJoin)
 					{
+						GD.Print("back");
 						LobbyReset = true;
-						th.Interrupt();
 						OnJoin = false;
+						th.Interrupt();
 						tw.WriteLine("back");
 						tw.Flush();
 					}
+					
 					if (OnJoin && DateTime.Now > endTime)
 					{
-						GD.Print("Enter");
 						tw.WriteLine("player");
 						tw.Flush();
 						startTime = DateTime.Now;
@@ -263,7 +265,6 @@ public partial class GameManager : Node3D
 					string line = rep.Substring(10);
 					for (int i = 0; i < 4; i++)
 					{
-						GD.Print(i);
 						if (line.Contains(';') && line.Length > 1 && line[1] != ';')
 						{
 							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';')-1);
