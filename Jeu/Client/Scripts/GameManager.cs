@@ -262,15 +262,14 @@ public partial class GameManager : Node3D
 				else if (rep.Substring(0,10) == "listplayer")
 				{
 					GD.Print(rep);
-					string line = rep.Substring(10);
-					for (int i = 0; i < 4; i++)
-					{
-						if (line.Contains(';') && line.Length > 1 && line[1] != ';')
-						{
-							LobbyManager.NamePlayer[i] = line.Substring(1,line.IndexOf(';')-1);
-							line = line.Substring(line.IndexOf(";"));
-						}
-					}
+					string line = rep.Substring(11);
+					GD.Print(line);
+					string[] SplitPseudo = line.Split(';');
+					(LobbyManager.NamePlayer[0],LobbyManager.NamePlayer[1],LobbyManager.NamePlayer[2],LobbyManager.NamePlayer[3]) = (SplitPseudo[0],SplitPseudo[1],SplitPseudo[2],SplitPseudo[3]);
+					GD.Print(SplitPseudo[0]);
+					GD.Print(SplitPseudo[1]);
+					GD.Print(SplitPseudo[2]);
+					GD.Print(SplitPseudo[3]);
 				}
 			}
 		}
