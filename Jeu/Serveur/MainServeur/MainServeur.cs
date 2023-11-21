@@ -23,7 +23,7 @@ public class MainServeur
     private int nbr_joueur = 0;
     
     private List<string> id_games = new List<string> {};
-    private List<List<string>> player_games = new List<List<string>>();
+    private Dictionary<string,string[]> player_games = new Dictionary<string, string[]>();
     private string start_game = "aaa";
 
     private List<string> user_ids_csv = new List<string>();
@@ -218,9 +218,9 @@ public class MainServeur
                     cc.game_id = IDGames.LetterID();
                     id_games.Add(cc.game_id);
 
-                    List<string> player_list = new List<string>() {cc.game_id , cc.id};
-                    player_games.Add(player_list);
-                    cc.in_my_game = new string[] {cc.id,"","",""};
+                    string[] player_list = new string[] {cc.id,"","",""};
+                    player_games.Add(cc.game_id,player_list);
+                    cc.in_my_game = player_list;
                     
                     master = true;
                     join = true;
@@ -238,16 +238,23 @@ public class MainServeur
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
                         tw.WriteLine($"join");
 
-                        ListManupulation.PrintListOfList(player_games);
+                        //ListManupulation.PrintListOfList(player_games);
                         
-                        int index = ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id);
-                        List<string> player_list = player_games[index];
-                        player_games.Remove(player_list);
-                        player_list.Add(cc.id);
-                        player_games.Add(player_list);
+                        //int index = ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id);
+                        string[] player_list = player_games[cc.game_id];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (player_list[i] == "")
+                            {
+                                player_list[i] = cc.id;
+                                break;
+                            }
+                        }
+
+                        player_games[cc.game_id] = player_list;
                         cc.in_my_game = new string[4];
                         
-                        ListManupulation.PrintListOfList(player_games);
+                        //ListManupulation.PrintListOfList(player_games);
                         
                         join = true;
                         new_player = true;
@@ -272,18 +279,21 @@ public class MainServeur
                 
                 if (requette == "player") //!join && ListManupulation.ListofListContain(player_games,0,cc.game_id)
                 {
-                    for (int i = 0; i < 4; i++) 
+                    /*for (int i = 0; i < 4; i++)
                     {
-                        if (ListManupulation.ListofListExist(player_games, ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id), i + 1))
-                        { 
+                        /*if (ListManupulation.ListofListExist(player_games, ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id), i + 1))
+                        {
                             if (cc.in_my_game[i] == player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1])
                             {
                                 cc.in_my_game[i] = player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1];
-                                new_player = true; 
+                                new_player = true;
                                 Console.WriteLine(cc.in_my_game[i]);
                             }
                         }
-                    }
+                        
+                    }*/
+                    cc.in_my_game = player_games[cc.game_id];
+                    new_player = true;
                 }
                 
                 if (new_player)

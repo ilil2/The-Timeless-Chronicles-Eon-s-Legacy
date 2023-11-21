@@ -17,12 +17,8 @@ public partial class LobbyManager : Control
 	public static bool StartGame = false;
 	public static bool ValidID = false;
 	public static string IDError = "";
-	
-	public static string s1 = "";
-	public static string s2 = "";
-	public static string s3 = "";
-	public static string s4 = "";
-	public static List<string> NamePlayer = new List<string> {s1,s2,s3,s4};
+
+	public static string[] NamePlayer = new string[4];
 
 	public static bool InRunning = true;
 	public static bool JoinGameWithID = false;
