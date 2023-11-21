@@ -186,7 +186,6 @@ public class MainServeur
             while (true)
             {
                 string requette = tr.ReadLine(); 
-                Console.WriteLine($"{requette} : {cc.id}");
                 if (requette == "start" && master)
                 {
                     tw.WriteLine($"newserv:{ports[0]}");
@@ -268,6 +267,30 @@ public class MainServeur
                 
                 else if (requette == "back")
                 {
+                    string[] player_list = player_games[cc.game_id];
+                    if (player_list[0] == cc.id)
+                    {
+                        player_games.Remove(cc.id);
+                        tw.WriteLine("remove");
+                    }
+                    else
+                    {
+                        if (player_list[1] == cc.id)
+                        {
+                            player_list[1] = player_list[2];
+                            player_list[2] = player_list[3];
+
+                        }
+                        else if (player_list[2] == cc.id)
+                        {
+                            player_list[2] = player_list[3];
+                        }
+
+                        player_list[3] = "";
+                        player_games[cc.game_id] = player_list;
+                        Console.WriteLine(player_list[0] + " " + player_list[1]);
+                    }
+
                     master = false;
                     join = false;
                     new_player = false;
@@ -294,6 +317,10 @@ public class MainServeur
                     }*/
                     cc.in_my_game = player_games[cc.game_id];
                     new_player = true;
+                }
+                else
+                {
+                    Console.WriteLine($"{requette} : {cc.id}");
                 }
                 
                 if (new_player)

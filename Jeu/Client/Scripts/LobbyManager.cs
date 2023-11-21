@@ -22,6 +22,7 @@ public partial class LobbyManager : Control
 
 	public static bool InRunning = true;
 	public static bool JoinGameWithID = false;
+	public static bool kill = false;
 	
 	public override void _Ready()
 	{

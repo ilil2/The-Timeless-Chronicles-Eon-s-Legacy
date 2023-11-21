@@ -44,6 +44,13 @@ public partial class JoinGameUI : Control
 				QueueFree();
 			}
 		}
+		
+		if (LobbyManager.kill)
+		{
+			LobbyManager.kill = false;
+			QueueFree();
+		}
+		
 		_IDError.Text = LobbyManager.IDError;
 	}
 }

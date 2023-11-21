@@ -199,7 +199,6 @@ public partial class GameManager : Node3D
 						tw.WriteLine("player");
 						tw.Flush();
 						startTime = DateTime.Now;
-						GD.Print("Timer");
 					}
 					endTime = startTime.Add(timerDuration);
 				}
@@ -261,16 +260,14 @@ public partial class GameManager : Node3D
 				
 				else if (rep.Substring(0,10) == "listplayer")
 				{
-					GD.Print(rep);
 					string line = rep.Substring(11);
-					GD.Print(line);
 					string[] SplitPseudo = line.Split(';');
 					(LobbyManager.NamePlayer[0],LobbyManager.NamePlayer[1],LobbyManager.NamePlayer[2],LobbyManager.NamePlayer[3]) = (SplitPseudo[0],SplitPseudo[1],SplitPseudo[2],SplitPseudo[3]);
-					GD.Print(SplitPseudo[0]);
-					GD.Print(SplitPseudo[1]);
-					GD.Print(SplitPseudo[2]);
-					GD.Print(SplitPseudo[3]);
 				}
+			}
+			else if (rep == "remove")
+			{
+				LobbyManager.kill = true;
 			}
 		}
 	}
