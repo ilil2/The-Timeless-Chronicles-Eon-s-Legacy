@@ -1,0 +1,11 @@
+Model Information:
+* title:	Egyptian tomb asset pack
+* source:	https://sketchfab.com/3d-models/egyptian-tomb-asset-pack-00849e5ba3004841963146512c3a09a1
+* author:	dreadwolf_entertainment (https://sketchfab.com/dreadwolf_entertainment)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Egyptian tomb asset pack" (https://sketchfab.com/3d-models/egyptian-tomb-asset-pack-00849e5ba3004841963146512c3a09a1) by dreadwolf_entertainment (https://sketchfab.com/dreadwolf_entertainment) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
