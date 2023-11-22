@@ -326,11 +326,13 @@ public class MainServeur
                 {
                     tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
                     new_player = false;
+                    tw.Flush();
                 }
 
-                if (player_games.ContainsKey(cc.game_id))
+                if (player_games.ContainsKey(cc.game_id) == false)
                 {
                     tw.WriteLine("remove");
+                    tw.Flush();
                     
                     master = false;
                     join = false;
