@@ -271,7 +271,6 @@ public class MainServeur
                     if (player_list[0] == cc.id)
                     {
                         player_games.Remove(cc.id);
-                        tw.WriteLine("remove");
                     }
                     else
                     {
@@ -328,6 +327,18 @@ public class MainServeur
                     tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
                     new_player = false;
                 }
+
+                if (player_games.ContainsKey(cc.game_id))
+                {
+                    tw.WriteLine("remove");
+                    
+                    master = false;
+                    join = false;
+                    new_player = false;
+                    cc.game_id = "";
+                    cc.in_my_game = new string[4];
+                }
+                
                 tw.Flush();
             }
         }

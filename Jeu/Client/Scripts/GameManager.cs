@@ -267,6 +267,7 @@ public partial class GameManager : Node3D
 			}
 			else if (rep == "remove")
 			{
+				LobbyReset = true;
 				LobbyManager.kill = true;
 			}
 		}

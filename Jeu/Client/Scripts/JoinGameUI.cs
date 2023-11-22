@@ -48,6 +48,8 @@ public partial class JoinGameUI : Control
 		if (LobbyManager.kill)
 		{
 			LobbyManager.kill = false;
+			LobbyManager.ValidID = false;
+			LobbyManager.LobbyUI_ = true;
 			QueueFree();
 		}
 		
