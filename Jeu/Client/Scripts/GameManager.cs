@@ -26,6 +26,18 @@ public partial class GameManager : Node3D
 	
 	private int port_serv_jeu;	//port serveur secondaire
 	private bool conn2 = true;
+
+	public static string ConnectionError = "";
+	public static string IDGame = "";
+	public static bool LobbyReset = false;
+	public static bool ValidIDGame = false;
+	private bool OnJoin = false;
+	
+	private DateTime startTime = DateTime.Now;
+
+	private TimeSpan timerDuration = TimeSpan.FromSeconds(1);
+
+	private DateTime endTime = DateTime.Now;
 	
 	public override void _Ready()
 	{
@@ -37,9 +49,6 @@ public partial class GameManager : Node3D
 		NetworkStream ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
-		
-		Thread th = new Thread(Listen);		//initialisation thread pour la lecture de requette
-		th.Start();							//lancement thread
 		
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
@@ -67,6 +76,7 @@ public partial class GameManager : Node3D
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 16 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
+							
 							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 							tw.Flush();
 							
@@ -75,93 +85,142 @@ public partial class GameManager : Node3D
 							{
 								tentative_connection = false;
 								string user_id = ConnectionUI._pseudo;
-								GD.Print("Leave");
 							}
 							else
 							{
-								ConnectionUI.erreur = line;
+								ConnectionError = line;
 							}
+
 						}
 						else
 						{
-							ConnectionUI.erreur = "Pseudo ou mot de passe incorrect";
+							ConnectionError = "Pseudo ou mot de passe incorrect";
 						}
 					}
 
-					if (ConnectionUI.InscriptionButton.ButtonPressed)
+					else if (ConnectionUI.InscriptionButton.ButtonPressed)
 					{
-						if (ConnectionUI._password == ConnectionUI._confirm_password)
+						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							GD.Print("0");
-							if (ConnectionUI._pseudo != "" && ConnectionUI._password != "" &&
-								ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
-								ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
+							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
+							
+							string line = tr.ReadLine();
+							if (line == "creation success")
 							{
-								tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
-								tw.Flush();
-								GD.Print("aaaaaaaa");
-								
-								string? line = tr.ReadLine();
-								if (line == "creation success")
-								{
-									tentative_connection = false;
-									string user_id = ConnectionUI._pseudo;
-									GD.Print("Leave");
-								}
-								else
-								{
-									ConnectionUI.erreur = line;
-								}
+								tentative_connection = false;
+								string user_id = ConnectionUI._pseudo;
 							}
+							else
+							{
+								ConnectionError = "Pseudo deja existant";
+							}
+							
+						}
+						else
+						{
+							ConnectionError = "Pseudo ou mot de passe incorrect";
 						}
 					}
 				}
 				
 				else
 				{
-					GD.Print("110");
 					ConnectionUI.in_connection = false;
-					state = 4;
-					GD.Print("10");
+					state = 1;
 				}
 			}
-			
+
 			if (state == 1)
+			{
+				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
+				Control LobbyMenu = LobbyScene.Instantiate<Control>();
+				AddChild(LobbyMenu);
+				state = 2;
+			}
+			
+			if (state == 2)
 			{
 				if (conn && conn2)
 				{
-					if (join == false)
+					if (LobbyManager.CreateButtonPressed)
 					{
-						string? requette = Console.ReadLine();	//requette client
-						tw.WriteLine(requette);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
 						tw.Flush();								//envoie au serveur
+						LobbyReset = true;
 						
-						try
+						string rep = tr.ReadLine();
+						if (rep.Substring(0, 7) == "newgame")
 						{
-							if (requette == "start" || requette.Substring(0, 8) == "joingame")	//si partie rejointe
-							{
-								join = true;
-							}
-						}
-						catch
-						{
-							GD.Print("erreur");
+							IDGame = rep.Substring(8);
+							OnJoin = true;
+							th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+							th.Start();							//lancement thread
+							LobbyReset = true;
 						}
 					}
+					
+					else if (LobbyManager.JoinGamePressed)
+					{
+						tw.WriteLine($"joingame {LobbyManager.IDJoinGame}");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
+						LobbyReset = true;
+						
+						string rep = tr.ReadLine();
+						if (rep.Substring(0) == "join")
+						{
+							ValidIDGame = true; 
+							
+							IDGame = LobbyManager.IDJoinGame;
+							OnJoin = true;
+							th = new Thread(Listen);		//initialisation thread pour la lecture de requette
+							th.Start();							//lancement thread
+							LobbyReset = true;
+						}
+						else
+						{
+							LobbyManager.IDError = rep;
+						}
+						
+					}
+					if (LobbyManager.BackButtonPressed && OnJoin)
+					{
+						GD.Print("back");
+						LobbyReset = true;
+						OnJoin = false;
+						th.Interrupt();
+						tw.WriteLine("back");
+						tw.Flush();
+					}
+					
+					if (OnJoin && DateTime.Now > endTime)
+					{
+						tw.WriteLine("player");
+						tw.Flush();
+						startTime = DateTime.Now;
+					}
+					endTime = startTime.Add(timerDuration);
 				}
-				
 				else
 				{
-					state = 2;
+					LobbyManager.InRunning = false;
+					state = 10;
 				}
 			}
-			
-			th.Interrupt();				//fermeture du thread listen
-			ns.Close();
-			tw.Close();					//fermeture envoi requette au serveur principal
-			tr.Close();					//fermeture recu requette du serveur principal
-			soc.Disconnect(false);		//deconnection du socket
-			
+
+			if (state == 3)
+			{
+					if (OnJoin)
+				{
+					th.Interrupt();				//fermeture du thread listen
+				}
+				ns.Close();
+				tw.Close();					//fermeture envoi requette au serveur principal
+				tr.Close();					//fermeture recu requette du serveur principal
+				soc.Disconnect(false);		//deconnection du socket
+				
+			}
 			/*
 			System.Threading.Thread.Sleep(2000);		//wait 2secondes
 			
@@ -184,12 +243,11 @@ public partial class GameManager : Node3D
 		}
 	}
 	
-	public void Listen()		//premier thread
+	private void Listen()		//premier thread
 	{
 		while (true)
 		{
 			string rep = tr.ReadLine();	//lecture de donnée du serveur
-			Console.WriteLine(rep);		//ecriture de la donnee
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
@@ -199,11 +257,23 @@ public partial class GameManager : Node3D
 					conn2 = false;											//deconnextion du serveur principal
 					break;
 				}
+				
+				else if (rep.Substring(0,10) == "listplayer")
+				{
+					string line = rep.Substring(11);
+					string[] SplitPseudo = line.Split(';');
+					(LobbyManager.NamePlayer[0],LobbyManager.NamePlayer[1],LobbyManager.NamePlayer[2],LobbyManager.NamePlayer[3]) = (SplitPseudo[0],SplitPseudo[1],SplitPseudo[2],SplitPseudo[3]);
+				}
+			}
+			else if (rep == "remove")
+			{
+				LobbyReset = true;
+				LobbyManager.kill = true;
 			}
 		}
 	}
 
-	public void Listen2()		//deuxieme thread
+	private void Listen2()		//deuxieme thread
 	{
 		while (true)
 		{

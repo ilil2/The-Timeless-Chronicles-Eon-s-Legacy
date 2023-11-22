@@ -61,16 +61,18 @@ public partial class ConnectionUI : Control
 	
 	public override void _Process(double delta)
 	{
+		erreur = GameManager.ConnectionError;
+		
 		if (ConnectionButton.ButtonPressed)
 		{
 			Connection();
 		}
 		else if (InscriptionButton.ButtonPressed)
 		{
-			if (PasswordConnectionNode.Text == PasswordConfirmInscriptionNode.Text)
+			if (PasswordInscriptionNode.Text == PasswordConfirmInscriptionNode.Text)
 				Inscription();
 			else
-				erreur = "confirmation incorect";
+				GameManager.ConnectionError = "confirmation incorect";
 		}
 		if (in_connection == false)
 		{

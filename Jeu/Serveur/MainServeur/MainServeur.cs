@@ -23,6 +23,7 @@ public class MainServeur
     private int nbr_joueur = 0;
     
     private List<string> id_games = new List<string> {};
+    private Dictionary<string,string[]> player_games = new Dictionary<string, string[]>();
     private string start_game = "aaa";
 
     private List<string> user_ids_csv = new List<string>();
@@ -71,7 +72,7 @@ public class MainServeur
             Console.WriteLine("En attente ...");
             Socket s = soc.Accept();                        //acceptation des nouvelles connection
             ID++;
-            ClientCom clicom = new ClientCom(s, ID,"");        //creation de l'objet client
+            ClientCom clicom = new ClientCom(s, ID.ToString(),"");        //creation de l'objet client
             Thread th = new Thread(com);                    //mise en place de la connection
             th.Start(clicom); //demarage de la connection
             
@@ -103,45 +104,48 @@ public class MainServeur
             {
                 line = tr.ReadLine();
                 Console.WriteLine(line);
+                bool error = false;
                 if (line.Substring(0, 4) == "conn")
                 {
-                    bool connecte = false;
                     if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)))
                     {
                         user_id_csv = line.Substring(5, line.IndexOf(';') - 5);
                     }
                     else
                     {
-                        tw.WriteLine("Pseudo ou mot de passe incorrect");
-                        tw.Flush();
+                        error = true;
                     }
 
-                    if (user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
+                    if (!error && user_passwords_csv[user_ids_csv.IndexOf(user_id_csv)] == line.Substring(line.IndexOf(';') + 1))
                     {
                         user_password_csv = line.Substring(line.IndexOf(';') + 1);
-                        connecte = true;
                     }
                     else
                     {
+                        error = true;
+                    }
+
+                    if (error)
+                    {
                         tw.WriteLine("Pseudo ou mot de passe incorrect");
                         tw.Flush();
                     }
-
-                    if (connecte)
+                    else
                     {
+                        cc.id = user_id_csv;
                         tw.WriteLine("connection success");
                         tw.Flush();
                         incorect_conn = false;
-                        Console.WriteLine("connetion effectuée");
+                        Console.WriteLine("connection effectuée");
                     }
                 }
                 else
                 {
                     new_id_csv = "!";
-                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false &&
-                        StringManipulation.Contain(line.Substring(5, line.IndexOf(';') - 5), "!?./:;,") == false)
+                    if (user_ids_csv.Contains(line.Substring(5, line.IndexOf(';') - 5)) == false)
                     {
                         new_id_csv = line.Substring(5, line.IndexOf(';') - 5);
+                        new_password_csv = line.Substring(line.IndexOf(';') + 1);
                         tw.WriteLine("creation success");
                         tw.Flush();
                         incorect_conn = false;
@@ -150,24 +154,26 @@ public class MainServeur
                         StreamWriter sw_conn = new StreamWriter("comptes.csv", true);
                         sw_conn.WriteLine($"{new_id_csv};{new_password_csv}");
                         sw_conn.Close();
-            
+
+                        cc.id = new_id_csv;
+                        
                         user_ids_csv.Add(new_id_csv);
                         user_passwords_csv.Add(new_password_csv);
                     }
                     else
                     {
-                        tw.WriteLine("Pseudo ou mot de passe incorect");
+                        tw.WriteLine("Compte déjà existant");
                         tw.Flush();
                     }
-
-                    new_password_csv = line.Substring(line.IndexOf(';') + 1);
                 }
+                tw.Flush();
             }
             catch
             {
                 Console.WriteLine("deconnecté pendant connexion");
-                break;
+                incorect_conn = false;
             }
+            
         }
         
         
@@ -175,11 +181,11 @@ public class MainServeur
         {
             bool master = false;
             bool join = false;
+            bool new_player = false;
             nbr_joueur++;
             while (true)
             {
                 string requette = tr.ReadLine(); 
-                
                 if (requette == "start" && master)
                 {
                     tw.WriteLine($"newserv:{ports[0]}");
@@ -210,10 +216,17 @@ public class MainServeur
                 {
                     cc.game_id = IDGames.LetterID();
                     id_games.Add(cc.game_id);
+
+                    string[] player_list = new string[] {cc.id,"","",""};
+                    player_games.Add(cc.game_id,player_list);
+                    cc.in_my_game = player_list;
+                    
                     master = true;
+                    join = true;
+                    new_player = true;
+                    
                     Console.WriteLine($"nouvelle game : {cc.game_id} par : {cc.id}");
-                    tw.WriteLine($"l'ID de la game : {cc.game_id}");
-                    join = false;
+                    tw.WriteLine($"newgame:{cc.game_id}");
                 }
 
                 else if (requette.Contains(' '))
@@ -222,10 +235,112 @@ public class MainServeur
                     {
                         cc.game_id = requette.Substring(9);
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
-                        tw.WriteLine($"{cc.game_id} rejoint");
-                        join = false;
+                        tw.WriteLine($"join");
+
+                        //ListManupulation.PrintListOfList(player_games);
+                        
+                        //int index = ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id);
+                        string[] player_list = player_games[cc.game_id];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (player_list[i] == "")
+                            {
+                                player_list[i] = cc.id;
+                                break;
+                            }
+                        }
+
+                        player_games[cc.game_id] = player_list;
+                        cc.in_my_game = new string[4];
+                        
+                        //ListManupulation.PrintListOfList(player_games);
+                        
+                        join = true;
+                        new_player = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{cc.id} a tente de rejoindre : {requette.Substring(9)} mais elle n'existe pas");
+                        tw.WriteLine("ID inconnu");
                     }
                 }
+                
+                else if (requette == "back")
+                {
+                    string[] player_list = player_games[cc.game_id];
+                    if (player_list[0] == cc.id)
+                    {
+                        player_games.Remove(cc.id);
+                    }
+                    else
+                    {
+                        if (player_list[1] == cc.id)
+                        {
+                            player_list[1] = player_list[2];
+                            player_list[2] = player_list[3];
+
+                        }
+                        else if (player_list[2] == cc.id)
+                        {
+                            player_list[2] = player_list[3];
+                        }
+
+                        player_list[3] = "";
+                        player_games[cc.game_id] = player_list;
+                        Console.WriteLine(player_list[0] + " " + player_list[1]);
+                    }
+
+                    master = false;
+                    join = false;
+                    new_player = false;
+                    cc.game_id = "";
+                    cc.in_my_game = new string[4];
+                }
+                
+                tw.Flush();
+                
+                if (requette == "player") //!join && ListManupulation.ListofListContain(player_games,0,cc.game_id)
+                {
+                    /*for (int i = 0; i < 4; i++)
+                    {
+                        /*if (ListManupulation.ListofListExist(player_games, ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id), i + 1))
+                        {
+                            if (cc.in_my_game[i] == player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1])
+                            {
+                                cc.in_my_game[i] = player_games[ListManupulation.ListofListIndexOf(player_games, 0, cc.game_id)][i + 1];
+                                new_player = true;
+                                Console.WriteLine(cc.in_my_game[i]);
+                            }
+                        }
+                        
+                    }*/
+                    cc.in_my_game = player_games[cc.game_id];
+                    new_player = true;
+                }
+                else
+                {
+                    Console.WriteLine($"{requette} : {cc.id}");
+                }
+                
+                if (new_player)
+                {
+                    tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
+                    new_player = false;
+                    tw.Flush();
+                }
+
+                if (player_games.ContainsKey(cc.game_id) == false)
+                {
+                    tw.WriteLine("remove");
+                    tw.Flush();
+                    
+                    master = false;
+                    join = false;
+                    new_player = false;
+                    cc.game_id = "";
+                    cc.in_my_game = new string[4];
+                }
+                
                 tw.Flush();
             }
         }
@@ -276,11 +391,13 @@ public class MainServeur
     class ClientCom         //type de l'objet client
     {
         public Socket Socket { get; set; }      //socket de l'objet
-        public int id { get; set; }             //id de l'objet
+        public string id { get; set; }             //id de l'objet
         
         public string game_id { get; set; }        //id du serveur
+        
+        public string[] in_my_game { get; set; }
 
-        public ClientCom(Socket s, int num,string game_id)     //initialisation de l'objet
+        public ClientCom(Socket s, string num,string game_id)     //initialisation de l'objet
         {
             this.Socket = s;
             this.id = num;
