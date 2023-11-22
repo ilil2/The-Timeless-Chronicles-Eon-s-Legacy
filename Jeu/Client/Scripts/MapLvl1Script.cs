@@ -3,13 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-public partial class MapLvl1 : Node3D
+public partial class MapLvl1Script : Node3D
 {
-	private int _NbRoom = 200;
+	private int _NbRoom = 300;
 	private int _NbTypeRoom = 4;
 	private int _LenWall = 6;
 	private double _LenMin = 10;
+	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
 	private Dictionary<string,Node3D> Dico = new Dictionary<string,Node3D>();
+	
 	public override void _Ready()
 	{
 		for (int i = 1; i < _NbTypeRoom; i++)
@@ -32,21 +34,17 @@ public partial class MapLvl1 : Node3D
 
 	public double Distance(Node3D Room1, Node3D Room2)
 	{
-		return Math.Sqrt(Math.Pow(Room1.Position.X - Room2.Position.X, 2) -
+		return Math.Sqrt(Math.Pow(Room1.Position.X - Room2.Position.X, 2) +
 						 Math.Pow(Room1.Position.X - Room2.Position.X, 2));
 	}
 
 	public bool CheckPlace(Node3D ActualRoom, List<Node3D> RoomList)
 	{
-		if (RoomList.Count == 0)
-		{
-			return true;
-		}
 		for (int i = 0; i < RoomList.Count; i++)
 		{
 			Node3D TestedRoom = RoomList[i];
 			double dist = Distance(ActualRoom, TestedRoom);
-			if (dist<=_LenMin)
+			if (dist<=_LenMin || true)
 			{
 				Node3D TestedGrid = Dico[TestedRoom.SceneFilePath];
 				Node3D ActualGrid = Dico[ActualRoom.SceneFilePath];
@@ -85,52 +83,44 @@ public partial class MapLvl1 : Node3D
 			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{RandIntID}.tscn");
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = new Vector3(X * _LenWall, 0, Y * _LenWall);
-
-			if (CheckPlace(Room,RoomList))
-				{	
-					for (int j = i+1; j < RoomList.Count; j++)
+			bool p = CheckPlace(Room,RoomList);
+			GD.Print(p);
+			if (p)
+			{	
+				for (int j = 0; j < RoomList.Count; j++)
+				{
+					Node3D TestedRoom = RoomList[j];
+					double Dist = Distance(Room,TestedRoom);
+					//GD.Print(Dist);
+					if (Dist<_LenMin || true)
 					{
-						Node3D TestedRoom = RoomList[j];
-						double Dist = Distance(Room,TestedRoom);
-						if (Dist<_LenMin)
+						for (int k = 0; k < Room.GetChildCount(); k++)
 						{
-							for (int k = 0; k < Room.GetChildCount(); k++)
+							Node3D ActualChild = Room.GetChild<Node3D>(k);
+							for (int l = 0; l < TestedRoom.GetChildCount(); l++)
 							{
-								Node3D ActualChild = Room.GetChild<Node3D>(k);
-								for (int l = 0; l < TestedRoom.GetChildCount(); l++)
+								Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
+								bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+Room.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+Room.Position.Z)&&(TestedChild.Position.Y+TestedRoom.Position.Y == ActualChild.Position.Y+Room.Position.Y);
+								if (TestPos)
 								{
-									Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
-									bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+Room.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+Room.Position.Z);
-									if (TestPos)
+									if (l<TestedRoom.GetChildCount())
 									{
-										if (l<200)
-										{
-											ActualChild.QueueFree();
-											l = 200;
-											//if (RandInt==1)
-											//{
-											// 	Node3D Gate = AssetC.Instantiate<Node3D>();
-											//	Gate.Rotation = new Vector3(0,ActualChild.Rotation.Y,0);
-											//	Gate.Position = new Vector3(ActualChild.Position.X+ActualRoom.Position.X,ActualChild.Position.Y+ActualRoom.Position.Y,ActualChild.Position.Z+ActualRoom.Position.Z);
-											//	TestedChild.QueueFree();
-											//}
-										}
+										ActualChild.QueueFree();
+										l = TestedRoom.GetChildCount();
+										Node3D Gate = AssetC.Instantiate<Node3D>();
+										Gate.Rotation = new Vector3(0,ActualChild.Rotation.Y,0);
+										Gate.Position = new Vector3(ActualChild.Position.X+Room.Position.X,ActualChild.Position.Y+Room.Position.Y,ActualChild.Position.Z+Room.Position.Z);
+										TestedChild.QueueFree();
+										AddChild(Gate);
 									}
 								}
 							}
-				
 						}
 					}
-
-
-					RoomList.Add(Room);
-					AddChild(Room);
 				}
+				RoomList.Add(Room);
+				AddChild(Room);
+			}
 		}
-
-		
-
-
-
 	}
 }
