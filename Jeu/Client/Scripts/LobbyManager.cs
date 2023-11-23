@@ -64,6 +64,7 @@ public partial class LobbyManager : Control
 
 			MenuState = 2;
 			CreateGameUI_ = false;
+			CreateGameUI.StartButtonVisible = true;
 		}
 		
 		if(JoinGameWithID)

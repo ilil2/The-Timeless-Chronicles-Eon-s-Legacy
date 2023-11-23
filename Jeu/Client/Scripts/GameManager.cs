@@ -18,9 +18,9 @@ public partial class GameManager : Node3D
 	
 	private Control connectionMenu;
 	
-	private NetworkStream ns;
-	private TextReader tr;		//lecture requette serveur principal
-	private TextWriter tw;		//ecriture requette serveur principal
+	private static NetworkStream ns;
+	private static TextReader tr;		//lecture requette serveur principal
+	private static TextWriter tw;		//ecriture requette serveur principal
 	private TextReader tr2;		//lecture requette serveur secondaire
 	private TextWriter tw2;		//ecriture requette serveur secondaire
 	
@@ -34,19 +34,17 @@ public partial class GameManager : Node3D
 	private bool OnJoin = false;
 	
 	private DateTime startTime = DateTime.Now;
-
 	private TimeSpan timerDuration = TimeSpan.FromSeconds(1);
-
 	private DateTime endTime = DateTime.Now;
 	
 	public override void _Ready()
 	{
-		Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		IPEndPoint iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
-		NetworkStream ns = new NetworkStream(soc);
+		ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
 		
@@ -184,6 +182,14 @@ public partial class GameManager : Node3D
 						}
 						
 					}
+					else if (LobbyManager.StartGame)
+					{
+						LobbyReset = true;
+						tw.WriteLine("start");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur	
+						Thread.Sleep(2000);
+					}
+					
 					if (LobbyManager.BackButtonPressed && OnJoin)
 					{
 						GD.Print("back");
@@ -205,13 +211,13 @@ public partial class GameManager : Node3D
 				else
 				{
 					LobbyManager.InRunning = false;
-					state = 10;
+					state = 3;
 				}
 			}
 
 			if (state == 3)
 			{
-					if (OnJoin)
+				if (OnJoin)
 				{
 					th.Interrupt();				//fermeture du thread listen
 				}
@@ -219,7 +225,7 @@ public partial class GameManager : Node3D
 				tw.Close();					//fermeture envoi requette au serveur principal
 				tr.Close();					//fermeture recu requette du serveur principal
 				soc.Disconnect(false);		//deconnection du socket
-				
+				state = 4;
 			}
 			/*
 			System.Threading.Thread.Sleep(2000);		//wait 2secondes
@@ -236,10 +242,10 @@ public partial class GameManager : Node3D
 			th2.Start();						//debut du thread
 			*/
 		}
-		catch
+		catch (Exception e)
 		{
 			//GD.Print("serveur hors ligne");	//si le serveur est hors ligne
-			int n = 0;
+			GD.Print(e);
 		}
 	}
 	
@@ -247,7 +253,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string rep = tr.ReadLine();	//lecture de donnée du serveur
+			string? rep = tr.ReadLine();	//lecture de donnée du serveur
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv

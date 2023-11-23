@@ -26,3 +26,4 @@
 /Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/Debug/net7.0/Lib.pdb
 /Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/Debug/net7.0/Lib.genruntimeconfig.cache
 /Users/narth/Desktop/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/Debug/net7.0/ref/Lib.dll
+/home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/obj/Debug/net7.0/Lib.csproj.AssemblyReference.cache
