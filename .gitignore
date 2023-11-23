@@ -1,6 +1,8 @@
-.godot/
-.idea/
-obj/
-.DS_Store
+Jeu/Client/.godot/
+Jeu/Serveur/.idea/
+Jeu/Serveur/Serveur/obj/
+Jeu/Serveur/MainServeur/obj/
+Jeu/Serveur/Lib/obj/
+*.DS_Store
 *.csproj
 *.DotSetting.user
