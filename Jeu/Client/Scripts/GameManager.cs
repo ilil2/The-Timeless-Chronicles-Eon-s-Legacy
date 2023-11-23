@@ -18,9 +18,9 @@ public partial class GameManager : Node3D
 	
 	private Control connectionMenu;
 	
-	private NetworkStream ns;
-	private TextReader tr;		//lecture requette serveur principal
-	private TextWriter tw;		//ecriture requette serveur principal
+	private static NetworkStream ns;
+	private static TextReader tr;		//lecture requette serveur principal
+	private static TextWriter tw;		//ecriture requette serveur principal
 	private TextReader tr2;		//lecture requette serveur secondaire
 	private TextWriter tw2;		//ecriture requette serveur secondaire
 	
@@ -34,19 +34,17 @@ public partial class GameManager : Node3D
 	private bool OnJoin = false;
 	
 	private DateTime startTime = DateTime.Now;
-
 	private TimeSpan timerDuration = TimeSpan.FromSeconds(1);
-
 	private DateTime endTime = DateTime.Now;
 	
 	public override void _Ready()
 	{
-		Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		IPEndPoint iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
-		NetworkStream ns = new NetworkStream(soc);
+		ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
 		
@@ -61,6 +59,14 @@ public partial class GameManager : Node3D
 	private bool join = false;					//partie rejointe
 	
 	private int state = 0;
+	
+	private Socket soc2;
+	private IPEndPoint iep2;
+	
+	private NetworkStream ns2;
+	private Thread th2;
+	
+	private string user_id;
 	
 	//process
 	public override void _Process(double delta)
@@ -84,7 +90,7 @@ public partial class GameManager : Node3D
 							if (line == "connection success")
 							{
 								tentative_connection = false;
-								string user_id = ConnectionUI._pseudo;
+								user_id = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -110,7 +116,7 @@ public partial class GameManager : Node3D
 							if (line == "creation success")
 							{
 								tentative_connection = false;
-								string user_id = ConnectionUI._pseudo;
+								user_id = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -132,7 +138,7 @@ public partial class GameManager : Node3D
 				}
 			}
 
-			if (state == 1)
+			else if (state == 1)
 			{
 				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
 				Control LobbyMenu = LobbyScene.Instantiate<Control>();
@@ -140,7 +146,7 @@ public partial class GameManager : Node3D
 				state = 2;
 			}
 			
-			if (state == 2)
+			else if (state == 2)
 			{
 				if (conn && conn2)
 				{
@@ -184,6 +190,14 @@ public partial class GameManager : Node3D
 						}
 						
 					}
+					else if (LobbyManager.StartGame)
+					{
+						LobbyReset = true;
+						tw.WriteLine("start");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur	
+						Thread.Sleep(2000);
+					}
+					
 					if (LobbyManager.BackButtonPressed && OnJoin)
 					{
 						GD.Print("back");
@@ -205,13 +219,13 @@ public partial class GameManager : Node3D
 				else
 				{
 					LobbyManager.InRunning = false;
-					state = 10;
+					state = 3;
 				}
 			}
 
-			if (state == 3)
+			else if (state == 3)
 			{
-					if (OnJoin)
+				if (OnJoin)
 				{
 					th.Interrupt();				//fermeture du thread listen
 				}
@@ -219,27 +233,31 @@ public partial class GameManager : Node3D
 				tw.Close();					//fermeture envoi requette au serveur principal
 				tr.Close();					//fermeture recu requette du serveur principal
 				soc.Disconnect(false);		//deconnection du socket
+				state = 4;
 				
-			}
-			/*
-			System.Threading.Thread.Sleep(2000);		//wait 2secondes
+				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
+				iep2 = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port_serv_jeu);				//nouvelle ip
+				soc2.Connect(iep2);																			//connexion
 			
-			Socket soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-			IPEndPoint iep2 = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port_serv_jeu);				//nouvelle ip
-			soc2.Connect(iep2);																			//connexion
-			
-			NetworkStream ns2 = new NetworkStream(soc2);
-			tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
-			tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
+				ns2 = new NetworkStream(soc2);
+				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
+				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
 
-			Thread th2 = new Thread(Listen2);	//initialisation thread
-			th2.Start();						//debut du thread
-			*/
+				th2 = new Thread(Listen2);	//initialisation thread
+				th2.Start();						//debut du thread
+			}
+			
+			else if (state == 4)
+			{
+				tw2.WriteLine($"{user_id} : en ligne");
+				tw2.Flush();
+			}
+			
 		}
-		catch
+		catch (Exception e)
 		{
 			//GD.Print("serveur hors ligne");	//si le serveur est hors ligne
-			int n = 0;
+			GD.Print(e);
 		}
 	}
 	
@@ -247,7 +265,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string rep = tr.ReadLine();	//lecture de donnée du serveur
+			string? rep = tr.ReadLine();	//lecture de donnée du serveur
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv

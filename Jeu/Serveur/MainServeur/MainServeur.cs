@@ -188,15 +188,15 @@ public class MainServeur
                 string requette = tr.ReadLine(); 
                 if (requette == "start" && master)
                 {
-                    tw.WriteLine($"newserv:{ports[0]}");
+                    master = false;
                     
                     StreamWriter sw = new StreamWriter("port.txt"); 
-                    sw.Write(ports[0]);
-                    sw.Close();
-    
                     Process p1 = new Process();
                     p1.StartInfo.FileName = "bash";
                     p1.StartInfo.Arguments = "exec.sh";
+                    
+                    sw.Write(ports[0]);
+                    sw.Close();
                     p1.Start(); /* Cette instruction ouvre un invite de commande n°2 */
                     
                     Thread.Sleep(5000);
@@ -204,7 +204,6 @@ public class MainServeur
                     start_game = cc.game_id;
                     join = false;
                     id_games.Remove(start_game);
-                    tw.Flush();
                     
                     Thread.Sleep(2000);
 
@@ -322,13 +321,6 @@ public class MainServeur
                     Console.WriteLine($"{requette} : {cc.id}");
                 }
                 
-                if (new_player)
-                {
-                    tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
-                    new_player = false;
-                    tw.Flush();
-                }
-
                 if (player_games.ContainsKey(cc.game_id) == false)
                 {
                     tw.WriteLine("remove");
@@ -339,6 +331,13 @@ public class MainServeur
                     new_player = false;
                     cc.game_id = "";
                     cc.in_my_game = new string[4];
+                }
+                
+                if (new_player)
+                {
+                    tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
+                    new_player = false;
+                    tw.Flush();
                 }
                 
                 tw.Flush();

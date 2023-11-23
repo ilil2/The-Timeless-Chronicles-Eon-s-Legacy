@@ -38,7 +38,7 @@ public class Serveur
             Console.WriteLine("En attente ...");
             Socket s = soc.Accept();                        //acceptation des nouvelles connection
             ID++;
-            ClientCom clicom = new ClientCom(s, ID);        //creation de l'objet client
+            ClientCom clicom = new ClientCom(s);        //creation de l'objet client
             Thread th = new Thread(com);                    //mise en place de la connection
             th.Start(clicom);                               //demarage de la connection
         }
@@ -52,8 +52,8 @@ public class Serveur
         TextWriter tw = new StreamWriter(ns);               //chaine a envoyer
         
         Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
-        tw.WriteLine($"bien conecté a {cc.Socket.LocalEndPoint}");
-        tw.Flush();     //envoie des données
+
+        cc.id = tr.ReadLine();
         
         try
         {
@@ -84,12 +84,11 @@ public class Serveur
     class ClientCom         //type de l'objet client
     {
         public Socket Socket { get; set; }      //socket de l'objet
-        public int id { get; set; }             //id de l'objet
+        public string id { get; set; }             //id de l'objet
 
-        public ClientCom(Socket s, int num)     //initialisation de l'objet
+        public ClientCom(Socket s)     //initialisation de l'objet
         {
             this.Socket = s;
-            this.id = num;
         }
     }
 }
