@@ -60,6 +60,14 @@ public partial class GameManager : Node3D
 	
 	private int state = 0;
 	
+	private Socket soc2;
+	private IPEndPoint iep2;
+	
+	private NetworkStream ns2;
+	private Thread th2;
+	
+	private string user_id;
+	
 	//process
 	public override void _Process(double delta)
 	{
@@ -82,7 +90,7 @@ public partial class GameManager : Node3D
 							if (line == "connection success")
 							{
 								tentative_connection = false;
-								string user_id = ConnectionUI._pseudo;
+								user_id = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -108,7 +116,7 @@ public partial class GameManager : Node3D
 							if (line == "creation success")
 							{
 								tentative_connection = false;
-								string user_id = ConnectionUI._pseudo;
+								user_id = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -130,7 +138,7 @@ public partial class GameManager : Node3D
 				}
 			}
 
-			if (state == 1)
+			else if (state == 1)
 			{
 				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
 				Control LobbyMenu = LobbyScene.Instantiate<Control>();
@@ -138,7 +146,7 @@ public partial class GameManager : Node3D
 				state = 2;
 			}
 			
-			if (state == 2)
+			else if (state == 2)
 			{
 				if (conn && conn2)
 				{
@@ -215,7 +223,7 @@ public partial class GameManager : Node3D
 				}
 			}
 
-			if (state == 3)
+			else if (state == 3)
 			{
 				if (OnJoin)
 				{
@@ -226,21 +234,25 @@ public partial class GameManager : Node3D
 				tr.Close();					//fermeture recu requette du serveur principal
 				soc.Disconnect(false);		//deconnection du socket
 				state = 4;
-			}
-			/*
-			System.Threading.Thread.Sleep(2000);		//wait 2secondes
+				
+				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
+				iep2 = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port_serv_jeu);				//nouvelle ip
+				soc2.Connect(iep2);																			//connexion
 			
-			Socket soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-			IPEndPoint iep2 = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port_serv_jeu);				//nouvelle ip
-			soc2.Connect(iep2);																			//connexion
-			
-			NetworkStream ns2 = new NetworkStream(soc2);
-			tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
-			tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
+				ns2 = new NetworkStream(soc2);
+				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
+				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
 
-			Thread th2 = new Thread(Listen2);	//initialisation thread
-			th2.Start();						//debut du thread
-			*/
+				th2 = new Thread(Listen2);	//initialisation thread
+				th2.Start();						//debut du thread
+			}
+			
+			else if (state == 4)
+			{
+				tw2.WriteLine($"{user_id} : en ligne");
+				tw2.Flush();
+			}
+			
 		}
 		catch (Exception e)
 		{
