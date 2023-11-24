@@ -4,6 +4,8 @@ using System;
 public partial class OtherArcherScript : CharacterBody3D
 {
     public Vector3 EntityPosition;
+    
+    public static int ID;
 
     public override void _Ready()
     {
@@ -12,6 +14,7 @@ public partial class OtherArcherScript : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        Position = EntityPosition;
+        string[] Positions = GameManager.InfoAutreJoueur[$"co{ID}"].Split(";");
+        Position = new Vector3(Lib.Conversions.AtoF(Positions[0]), Lib.Conversions.AtoF(Positions[1]), Lib.Conversions.AtoF(Positions[2]));
     }
 }

@@ -32,6 +32,8 @@ public partial class KnightScript : CharacterBody3D
 	private float _movementSpeed;
 	private float _angularAcceleration;
 	private int _acceleration;
+
+	public static int ID;
 	
 	public override void _Ready()
 	{
@@ -59,6 +61,8 @@ public partial class KnightScript : CharacterBody3D
 				_camera.Fov  += 1;
 			}
 		}
+		
+		GameManager.InfoJoueur[$"co{ID}"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 	
 	public override void _PhysicsProcess(double delta)

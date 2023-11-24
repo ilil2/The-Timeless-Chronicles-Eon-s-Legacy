@@ -33,6 +33,8 @@ public partial class AssassinScript : CharacterBody3D
 	private float _angularAcceleration;
 	private int _acceleration;
 	
+	public static int ID;
+	
 	public override void _Ready()
 	{
 		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
@@ -59,6 +61,8 @@ public partial class AssassinScript : CharacterBody3D
 				_camera.Fov  += 1;
 			}
 		}
+		
+		GameManager.InfoJoueur[$"co{ID}"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 
 	public override void _PhysicsProcess(double delta)

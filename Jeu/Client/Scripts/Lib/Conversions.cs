@@ -25,4 +25,37 @@ public static class Conversions
 		res /= 10;
 		return res;
 	}
+	
+	public static float AtoF(string? s)
+	{
+		float res = 0;
+		bool compteur = true;
+		float count = 0;
+
+		foreach (var c in s)
+		{
+			if (char.IsNumber(c))
+			{
+				res += c - 48;
+				res *= 10;
+			}
+			else if (c == '.')
+			{
+				compteur = false;
+			}
+			else
+			{
+				throw new InvalidCastException("veuillez rentrer un nombre en base 10");
+			}
+
+			if (compteur)
+			{
+				count += 1;
+			}
+		}
+
+		res /= 10;
+		res /= count;
+		return res;
+	}
 }
