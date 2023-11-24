@@ -8,6 +8,7 @@ using Lib;
 
 using System.Net;
 using System.Net.Sockets;
+using Godot.Collections;
 
 public partial class GameManager : Node3D
 {
@@ -40,7 +41,7 @@ public partial class GameManager : Node3D
 	public override void _Ready()
 	{
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse("192.168.97.218"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
@@ -66,8 +67,10 @@ public partial class GameManager : Node3D
 	private NetworkStream ns2;
 	private Thread th2;
 	
-	private Dictionnary<string, string> InfoJoueur = new Dictionnary<string, string>;
-	private Dictionnary<int,string> InfoJoueurs = new Dictionnary<string, string>;
+	private Dictionary<string, string> InfoJoueur = new Dictionary<string, string>();
+	private Dictionary<string, string> InfoAutreJoueur = new Dictionary<string, string>();
+
+	private bool _loadMap = false;
 	
 	//process
 	public override void _Process(double delta)
@@ -91,7 +94,7 @@ public partial class GameManager : Node3D
 							if (line == "connection success")
 							{
 								tentative_connection = false;
-								InfoJoueur["user_id"] = ConnectionUI._pseudo;
+								InfoJoueur["pseudo"] = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -117,7 +120,7 @@ public partial class GameManager : Node3D
 							if (line == "creation success")
 							{
 								tentative_connection = false;
-								InfoJoueur["user_id"] = ConnectionUI._pseudo;
+								InfoJoueur["pseudo"] = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -237,14 +240,14 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("192.168.97.218"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
 				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
 				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
 				
-				tw2.WriteLine(InfoJoueur);
+				tw2.WriteLine(InfoJoueur["pseudo"]);
 				tw2.Flush();
 				
 				PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
@@ -257,8 +260,26 @@ public partial class GameManager : Node3D
 			
 			else if (state == 4)
 			{
-				tw2.WriteLine($"{user_id} : en ligne");
-				tw2.Flush();
+				if (ClassSelectUI.ClassChose != "")
+				{
+					InfoJoueur["class"] = ClassSelectUI.ClassChose;
+					ClassSelectUI.ClassChose = "";
+					tw2.WriteLine(InfoJoueur["class"]);
+					tw2.Flush();
+				}
+				else if (_loadMap)
+				{
+					PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/TestMap/MapLvl1.tscn");
+					Node3D Map = MapScene.Instantiate<Node3D>();
+					AddChild(Map);
+
+					_loadMap = false;
+					state = 5;
+				}
+			}
+			else if (state == 5)
+			{
+				
 			}
 			
 		}
@@ -304,9 +325,27 @@ public partial class GameManager : Node3D
 		while (true)
 		{
 			string rep = tr2.ReadLine();
-			if (rep == "ready")
+			if (rep.Substring(0,5) == "ready")
 			{
-				tr.ReadLine();
+				rep = rep.Substring(6);
+				string[] InfoReady = rep.Split("/");
+				for (int i = 1; i < Conversions.AtoI(InfoReady[0]) * 3 + 1; i += 3)
+				{
+					if (InfoReady[i] == "")
+					{
+						i -= 3;
+					}
+					else
+					{
+						InfoAutreJoueur[$"id{InfoReady[i]}"] = InfoReady[i];
+						InfoAutreJoueur[$"pseudo{InfoReady[i]}"] = InfoReady[i + 1];
+						InfoAutreJoueur[$"class{InfoReady[i]}"] = InfoReady[i + 2];
+						GD.Print($"{InfoReady[i]} {InfoReady[i + 1]} {InfoReady[i + 2]}");
+					}
+				}
+				
+				ClassSelectUI.Supr = true;
+				_loadMap = true;
 			}
 		}
 	}

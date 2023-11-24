@@ -4,6 +4,7 @@ using System;
 public partial class ClassSelectUI : Control
 {
 	public static string ClassChose = "";
+	public static bool Supr = false; 
 	
 	//Variables des buttons du menu
 	private Button _buttonArcher;
@@ -35,6 +36,11 @@ public partial class ClassSelectUI : Control
 
 	public override void _Process(double delta)
 	{
+		if (Supr)
+		{
+			QueueFree();
+		}
+		
 		if (_buttonArcher.ButtonPressed && !_isReady)
 		{
 			//Changement du nom de la classe choisi et masquage du bonton associé
