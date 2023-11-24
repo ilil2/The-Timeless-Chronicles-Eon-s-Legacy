@@ -60,9 +60,28 @@ public class Serveur
         cc.classe = tr.ReadLine();
         joueur_ready++;
 
+        info[cc.id] = $"{cc.id}/{cc.pseudo}/{cc.classe}";
+        
         while (joueur_ready < ID) {}
-        tw.WriteLine("ready");
+
+        switch (cc.id)
+        {
+            case 0:
+                tw.WriteLine($"ready:{ID-1}/{info[1]}/{info[2]}/{info[3]}");
+                break;
+            case 1:
+                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[2]}/{info[3]}");
+                break;
+            case 2:
+                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[1]}/{info[3]}");
+                break;
+            case 3:
+                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}");
+                break;
+        }
         tw.Flush();
+        
+        Console.WriteLine($"{cc.id} : ready");
         
         try
         {
@@ -84,7 +103,7 @@ public class Serveur
                 }
                 else if (requette.Substring(0,2) == "in")
                 {
-                    string line = requette.Substring(2);
+                    string line = requette.Substring(3);
                     string[] lines = line.Split('/');
                     string res = cc.id + "/";
                     
@@ -93,7 +112,16 @@ public class Serveur
                         if (donnee.Substring(0,2) == "co")
                         {
                             res += donnee;
+                            /*string don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                            don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                            don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                            */
                         }
+
+                        res += "/";
                     }
 
                     info[cc.id] = res;
@@ -128,6 +156,11 @@ public class Serveur
         catch
         {
             Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
+            joueur_ready -= 1;
+            if (joueur_ready == 0)
+            {
+                throw new Exception("fermeture du serveur");
+            }
         }
     }
 
