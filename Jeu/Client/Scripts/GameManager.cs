@@ -66,7 +66,8 @@ public partial class GameManager : Node3D
 	private NetworkStream ns2;
 	private Thread th2;
 	
-	private string user_id;
+	private Dictionnary<string, string> InfoJoueur = new Dictionnary<string, string>;
+	private Dictionnary<int,string> InfoJoueurs = new Dictionnary<string, string>;
 	
 	//process
 	public override void _Process(double delta)
@@ -90,7 +91,7 @@ public partial class GameManager : Node3D
 							if (line == "connection success")
 							{
 								tentative_connection = false;
-								user_id = ConnectionUI._pseudo;
+								InfoJoueur["user_id"] = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -116,7 +117,7 @@ public partial class GameManager : Node3D
 							if (line == "creation success")
 							{
 								tentative_connection = false;
-								user_id = ConnectionUI._pseudo;
+								InfoJoueur["user_id"] = ConnectionUI._pseudo;
 							}
 							else
 							{
@@ -242,6 +243,13 @@ public partial class GameManager : Node3D
 				ns2 = new NetworkStream(soc2);
 				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
 				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
+				
+				tw2.WriteLine(InfoJoueur);
+				tw2.Flush();
+				
+				PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
+				Control ClassSelect = ClassSelectUI.Instantiate<Control>();
+				AddChild(ClassSelect);
 
 				th2 = new Thread(Listen2);	//initialisation thread
 				th2.Start();						//debut du thread
@@ -296,7 +304,10 @@ public partial class GameManager : Node3D
 		while (true)
 		{
 			string rep = tr2.ReadLine();
-			Console.WriteLine(rep);
+			if (rep == "ready")
+			{
+				tr.ReadLine();
+			}
 		}
 	}
 }
