@@ -44,7 +44,7 @@ public partial class ClassSelectUI : Control
 		if (_buttonArcher.ButtonPressed && !_isReady)
 		{
 			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "archer";
+			_className = "Archer";
 			
 			_buttonArcher.Visible = false;
 			_buttonKnight.Visible = true;
@@ -54,7 +54,7 @@ public partial class ClassSelectUI : Control
 		else if (_buttonKnight.ButtonPressed && !_isReady)
 		{
 			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "knight";
+			_className = "Knight";
 			
 			_buttonArcher.Visible = true;
 			_buttonKnight.Visible = false;
@@ -64,7 +64,7 @@ public partial class ClassSelectUI : Control
 		else if (_buttonScientist.ButtonPressed && !_isReady)
 		{
 			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "scientist";
+			_className = "Scientist";
 			
 			_buttonArcher.Visible = true;
 			_buttonKnight.Visible = true;
@@ -74,7 +74,7 @@ public partial class ClassSelectUI : Control
 		else if (_buttonAssassin.ButtonPressed && !_isReady)
 		{
 			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "assassin";
+			_className = "Assassin";
 			
 			_buttonArcher.Visible = true;
 			_buttonKnight.Visible = true;
