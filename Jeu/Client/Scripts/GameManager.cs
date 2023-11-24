@@ -285,6 +285,7 @@ public partial class GameManager : Node3D
 				CharacterBody3D Joueur1 = SceneJoueur1.Instantiate<CharacterBody3D>();
 				AddChild(Joueur1);
 				KnightScript.ID = Conversions.AtoI(InfoJoueur["id"]);
+				InfoJoueur["co"] = "0;0;0";
 				
 				switch (_nbJoueur)
 				{
@@ -400,7 +401,7 @@ public partial class GameManager : Node3D
 			
 			else if (state == 6)
 			{
-				tw.WriteLine(InfoJoueur["co"]);
+				tw.WriteLine("co:" + InfoJoueur["co"]);
 				tw.Flush();
 			}
 			
