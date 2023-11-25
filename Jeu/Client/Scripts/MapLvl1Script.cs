@@ -2,13 +2,14 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 public partial class MapLvl1Script : Node3D
 {
-	private int _NbRoom = 100;
+	private int _NbRoom = 0;
 	private int _NbTypeRoom = 4;
 	private int _LenWall = 6;
-	private int _Radius = 300;
+	private int _Radius = 20;
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
 	private Dictionary<string,Node3D> DataGrid = new Dictionary<string,Node3D>();
 	private Dictionary<string,(int,int)> DataLen = new Dictionary<string,(int,int)>();
@@ -76,7 +77,7 @@ public partial class MapLvl1Script : Node3D
 		return (LenMin, LenMax);
 	}
 
-	public (bool,bool,bool) CheckPlace(Node3D ActualRoom, int PrevX, int PrevZ, List<Node3D> RoomList)
+	public bool CheckPlace(Node3D ActualRoom, int PrevX, int PrevZ, List<Node3D> RoomList)
 	{
 		bool TestX = true;
 		bool TestZ = true;
@@ -87,7 +88,7 @@ public partial class MapLvl1Script : Node3D
 			double dist = Distance(ActualRoom, TestedRoom);
 			(double LenMin, double LenMax) = LenRange(ActualRoom, TestedRoom);
 			//GD.Print(LenMax);
-			if (dist<=LenMax || true)
+			if (dist<=60)
 			{
 				Node3D TestedGrid = DataGrid[TestedRoom.SceneFilePath];
 				Node3D ActualGrid = DataGrid[ActualRoom.SceneFilePath];
@@ -98,33 +99,27 @@ public partial class MapLvl1Script : Node3D
 					for (int k = 0; k < TestedGrid.GetChildCount(); k++)
 					{
 						Node3D TestedTile = TestedGrid.GetChild<Node3D>(k);
-						
-						bool posX = (((ActualRoom.Position.X + ActualTile.Position.X + PrevX) == (TestedRoom.Position.X + TestedTile.Position.X)) &&
-							((ActualRoom.Position.Z + ActualTile.Position.Z) == (TestedRoom.Position.Z + TestedTile.Position.Z)));
-						if (posX)
-						{
-							TestX = false;
-						}
-						
-						bool posZ = (((ActualRoom.Position.X + ActualTile.Position.X) == (TestedRoom.Position.X + TestedTile.Position.X)) &&
-							((ActualRoom.Position.Z + ActualTile.Position.Z + PrevZ) == (TestedRoom.Position.Z + TestedTile.Position.Z)));
-						if (posZ)
-						{
-							TestZ = false;
-						}
-						
-						bool posXZ = (((ActualRoom.Position.X + ActualTile.Position.X + PrevX) == (TestedRoom.Position.X + TestedTile.Position.X)) &&
-							((ActualRoom.Position.Z + ActualTile.Position.Z + PrevZ) == (TestedRoom.Position.Z + TestedTile.Position.Z)));
-						if (posXZ)
+						bool pos = (ActualRoom.Position.X+ActualTile.Position.X+PrevX == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ == TestedRoom.Position.Z+TestedTile.Position.Z);
+						if (pos)
 						{
 							TestXZ = false;
 						}
+						bool pos2 = (ActualRoom.Position.X+ActualTile.Position.X+PrevX == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z == TestedRoom.Position.Z+TestedTile.Position.Z) || ActualRoom.Position.X+ActualTile.Position.X+PrevX==0;
+						if (pos2)
+						{
+							TestX = false;
+						}
+						bool pos3 = (ActualRoom.Position.X+ActualTile.Position.X == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ == TestedRoom.Position.Z+TestedTile.Position.Z) || ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ==0;
+						if (pos3)
+						{
+							TestZ = false;
+						}		
 					}
 				}
 
 			}
 		}
-		return (TestX,TestZ,TestXZ);
+		return (TestXZ);
 	}
 
 	public void CreateMap()
@@ -144,41 +139,33 @@ public partial class MapLvl1Script : Node3D
 
 		for (int i = 0; i < _NbRoom; i++)
 		{
-			double RandAngle = new Random().NextDouble()*2*Math.PI;
-			int X = (int)(_Radius * Math.Cos(RandAngle))/6;
-			int Y =(int)(_Radius * Math.Sin(RandAngle))/6;
-			int RandIntID = new Random().Next(1, 4);
-			//int X = (int)new Random().Next(-21,22);
-			//int Y = (int)new Random().Next(-21,22);
-		
+			//---------------------------------------------------------------------------------- code à modif
+			//HELP ME
+			int RandIntID = new Random().Next(1,4);
 			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{RandIntID}.tscn");
 			Node3D Room = R.Instantiate<Node3D>();
-			Room.Position = new Vector3(X * _LenWall, 0,Y * _LenWall);
-			
-			double PlusX = ((float)-Room.Position.X/(float)_Radius);
-			double PlusZ = ((float)-Room.Position.Z/(float)_Radius);
-			double NextX = 0;
-			double NextZ = 0;
-			
-			for (int ZZZ = 0; ZZZ < 60; ZZZ++)
-			{	
-				
-				(bool TestX, bool TestZ, bool TestXZ) = CheckPlace(Room,(int)(NextX+PlusX)*_LenWall,(int)(NextZ+PlusZ)*_LenWall,RoomList);
-				if (TestXZ)
-				{
-					NextX+=PlusX;
-					NextZ+=PlusZ;
-					
-				}
-				else
-				{
-					ZZZ=10000000;
-					GD.Print("EXIT");
-				}
-				
+			Room.Position = new Vector3(0, 0, 0);
+			double RandAngle = new Random().NextDouble()*Math.PI*2;
+			double pX = Math.Cos(RandAngle);
+			double pZ = Math.Sin(RandAngle);
+			double tX = 0;
+			double tZ = 0;
+			int NX = 0;
+			int NZ = 0;
+			while (!CheckPlace(Room,NX,NZ,RoomList))
+			{
+				tX+=pX;
+				tZ+=pZ;
+				NX = 6*(int)(tX);
+				NZ = 6*(int)(tZ);
 			}
-
-			Room.Position = new Vector3((X+(int)(NextX)) * _LenWall, 0,(Y+(int)(NextZ)) * _LenWall);	
+			tX+=pX;
+			tZ+=pZ;
+			NX = 6*(int)(tX);
+			NZ = 6*(int)(tZ);
+			Room.Position = new Vector3(NX, 0, NZ);
+			
+			//----------------------------------------------------------------------------------
 			for (int j = 1; j < RoomList.Count; j++)
 			{
 				Node3D TestedRoom = RoomList[j];

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="4_w7mfw"]
 [ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="5_j64yf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtrar"]
 albedo_texture = ExtResource("2_7sds7")
 roughness_texture = ExtResource("4_w7mfw")
 normal_enabled = true
@@ -14,25 +14,25 @@ normal_texture = ExtResource("3_nvv26")
 uv1_scale = Vector3(25, 25, 25)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gcc1s"]
-material = SubResource("StandardMaterial3D_7r16a")
+material = SubResource("StandardMaterial3D_xtrar")
 size = Vector2(306, 306)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vwr8a"]
 data = PackedVector3Array(153, 0, 153, -153, 0, 153, 153, 0, -153, -153, 0, 153, -153, 0, -153, 153, 0, -153)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lugpm"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j4xak"]
 load_path = "res://.godot/imported/daytime.png-d29902e6712cb80288c108c16e5c6627.s3tc.ctex"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sf4hg"]
-panorama = SubResource("CompressedTexture2D_lugpm")
+panorama = SubResource("CompressedTexture2D_j4xak")
 
-[sub_resource type="Sky" id="Sky_ioqg7"]
+[sub_resource type="Sky" id="Sky_tjy7e"]
 sky_material = SubResource("PanoramaSkyMaterial_sf4hg")
 
 [sub_resource type="Environment" id="Environment_nerhc"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = SubResource("Sky_ioqg7")
+sky = SubResource("Sky_tjy7e")
 ssao_enabled = true
 sdfgi_enabled = true
 adjustment_enabled = true
@@ -53,11 +53,12 @@ shape = SubResource("ConcavePolygonShape3D_vwr8a")
 
 [node name="DebugPack" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="DebugPack"]
-transform = Transform3D(0.707107, -0.5, 0.5, -2.98023e-08, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 128, 80, 128)
-
 [node name="Player" parent="DebugPack" instance=ExtResource("5_j64yf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 0, -20)
+
+[node name="Camera3D" type="Camera3D" parent="DebugPack"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 80, 0)
+fov = 117.9
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DebugPack"]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://c1t5wrycjrxw1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ot5b5"]
-size = Vector2(6, 6)
+size = Vector2(5, 5)
 
 [node name="Room1Grid" type="Node3D"]
 

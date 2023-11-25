@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bnnjgun6in20"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lagwq"]
-size = Vector2(6, 6)
+size = Vector2(5, 5)
 
 [node name="Room2Grid" type="Node3D"]
 
