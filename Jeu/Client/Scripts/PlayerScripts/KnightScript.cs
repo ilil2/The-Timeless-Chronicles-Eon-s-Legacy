@@ -1,8 +1,12 @@
 using Godot;
 using System;
 
+using JeuClient.Scripts.PlayerScripts;
+
 public partial class KnightScript : CharacterBody3D
 {
+	private ClassScript _characterClass;
+	
 	//Variables des noeuds
 	private Node3D _h;
 	private Camera3D _camera;
@@ -34,6 +38,11 @@ public partial class KnightScript : CharacterBody3D
 	private int _acceleration;
 
 	public static int ID;
+
+	public void InitClass(int id, int pseudo, string classe)
+	{
+		_characterClass = new ClassScript(id, pseudo, classe);
+	}
 	
 	public override void _Ready()
 	{
@@ -62,7 +71,7 @@ public partial class KnightScript : CharacterBody3D
 			}
 		}
 		
-		GameManager.InfoJoueur[$"co{ID}"] = $"{Position.X};{Position.Y};{Position.Z}";
+		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -83,12 +92,6 @@ public partial class KnightScript : CharacterBody3D
 		{
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
-		
-		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
-		//{
-		//	 _verticalVelocity = Vector3.Up * _jumpForce;
-		//}
 		
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))

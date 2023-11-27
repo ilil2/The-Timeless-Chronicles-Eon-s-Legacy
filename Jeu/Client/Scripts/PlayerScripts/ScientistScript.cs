@@ -62,7 +62,7 @@ public partial class ScientistScript : CharacterBody3D
 			}
 		}
         
-		GameManager.InfoJoueur[$"co{ID}"] = $"{Position.X};{Position.Y};{Position.Z}";
+		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 
 	public override void _PhysicsProcess(double delta)
