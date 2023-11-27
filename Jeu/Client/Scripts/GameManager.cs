@@ -452,6 +452,7 @@ public partial class GameManager : Node3D
 		while (true)
 		{
 			string rep = tr2.ReadLine();
+			GD.Print(rep);
 			if (rep.Substring(0,5) == "ready")
 			{
 				rep = rep.Substring(6);
@@ -520,8 +521,10 @@ public partial class GameManager : Node3D
 						break;
 				}
 				
+				GD.Print("avant");
 				ClassSelectUI.Supr = true;
 				_loadMap = true;
+				GD.Print("apres");
 			}
 			else if (rep.Substring(0,2) == "in")
 			{
