@@ -11,6 +11,10 @@ public partial class testphyScript : Node3D
 	private StaticBody3D MainRoom;
 	private bool _MapReady = false;
 	private Stopwatch stopwatch = new Stopwatch();
+	private float DistMax = 0;
+	private (float,float) CoMax;
+	private Node3D RoomMax;
+	private int A = 6;
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
 	public override void _Ready()
 	{
@@ -19,12 +23,13 @@ public partial class testphyScript : Node3D
 		MainRoom = new StaticBody3D();
 		CollisionShape3D MainRoomCollision = new CollisionShape3D();
 		BoxShape3D MainBoxShape = new BoxShape3D();
-		MainBoxShape.Size = new Vector3(7,14,7);
+		MainBoxShape.Size = new Vector3(7*A,14*A,7*A);
 		MainRoomCollision.Shape = MainBoxShape;
-		MainRoomCollision.Position = new Vector3(MainRoomCollision.Position.X,MainRoomCollision.Position.Y+7,MainRoomCollision.Position.Z);
+		MainRoomCollision.Position = new Vector3(MainRoomCollision.Position.X,MainRoomCollision.Position.Y+7*A,MainRoomCollision.Position.Z);
 		MainRoom.AddChild(MainRoomCollision);
 		AddChild(MainRoom);
-		for (int i = 0; i<150;i++)
+		int nb = 300;
+		for (int i = 0; i<nb;i++)
 		{
 			double T = 2*Math.PI*Rand.NextDouble();
 			double U = Rand.NextDouble() + Rand.NextDouble();
@@ -37,13 +42,17 @@ public partial class testphyScript : Node3D
 			{
 				r = U;
 			}
-			int X = (int)(5*r*Math.Cos(T));
-			int Z = (int)(9*r*Math.Sin(T));
+			int X = (int)(Math.Floor((10*A*r*Math.Cos(T)+6-1)/6f))*6;
+			int Z = (int)(Math.Floor((8*A*r*Math.Sin(T)+6-1)/6f))*6;
 			
-			int RandID = Rand.Next(1,11);
-			if (RandID<6)
+			int RandID = Rand.Next(1,10);
+			if (RandID<3)
 			{
 				RandID = 1;
+			}
+			else if (RandID<6)
+			{
+				RandID = 4;
 			}
 			else if (RandID<9)
 			{
@@ -56,6 +65,7 @@ public partial class testphyScript : Node3D
 			
 			RigidBody3D Room1 = new RigidBody3D();
 			Room1.LockRotation = true;
+			Room1.Mass = 1;
 			PhysicsBody3D Room = Room1;
 			Room.AxisLockLinearY = true;
 			
@@ -66,32 +76,36 @@ public partial class testphyScript : Node3D
 			
 			if (RandID == 1)
 			{
-				BoxShape.Size = new Vector3(3,14,3);
-				BoxM.Size = new Vector3(3,2,3);
+				BoxShape.Size = new Vector3(3*A,14*A,3*A);
+				BoxM.Size = new Vector3(3*A,2,3*A);
 			}
 			else if (RandID == 2)
 			{
-				BoxShape.Size = new Vector3(5,14,5);
-				BoxM.Size = new Vector3(5,2,5);
+				BoxShape.Size = new Vector3(5*A,14*A,5*A);
+				BoxM.Size = new Vector3(5*A,2,5*A);
 			}
 			else if (RandID == 3)
 			{
-				BoxShape.Size = new Vector3(7,14,7);
-				BoxM.Size = new Vector3(7,2,7);
+				BoxShape.Size = new Vector3(7*A,14*A,7*A);
+				BoxM.Size = new Vector3(7*A,2,7*A);
+			}
+			else if (RandID == 4)
+			{
+				BoxShape.Size = new Vector3(5*A,14*A,3*A);
+				BoxM.Size = new Vector3(5*A,2,3*A);
 			}
 			
 			RoomCollision.Shape = BoxShape;
-			RoomCollision.Position = new Vector3(RoomCollision.Position.X,RoomCollision.Position.Y+7,RoomCollision.Position.Z);
+			RoomCollision.Position = new Vector3(RoomCollision.Position.X,RoomCollision.Position.Y+7*A,RoomCollision.Position.Z);
 			RoomMesh.Mesh = BoxM;
 			RoomMesh.Position = new Vector3(RoomMesh.Position.X,RoomMesh.Position.Y+1,RoomMesh.Position.Z);
 			Room.AddChild(RoomCollision);
 			Room.AddChild(RoomMesh);
 			Room.Position = new Vector3(X,Room.Position.Y,Z);
+			//Room.Rotation = new Vector3(0,Rand.Next(0,4)*(float)(Math.PI/2f),0);
 			AddChild(Room);
 			RoomList.Add(Room1);
 			RoomIDList.Add(RandID);
-			
-			
 			
 		}
 	}
@@ -122,8 +136,16 @@ public partial class testphyScript : Node3D
 					int ID = RoomIDList[i];
 					PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{ID}.tscn");
 					Node3D Room = R.Instantiate<Node3D>();
-					Room.Position = new Vector3(X*6,0,Z*6);
+					Room.Position = new Vector3(X,0,Z);
+					//Room.Rotation = new Vector3(0,Room2.Rotation.Y,0);
 					Roundm(Room);
+					float Distd = (float)Distance(Room,MainRoom);
+					if (Distd>DistMax)
+					{
+						DistMax = Distd;
+						CoMax = (Room.Position.X,Room.Position.Z);
+						RoomMax = Room;
+					}
 					//PackedScene RG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{ID}Grid.tscn");
 					//Node3D RoomGrid = RG.Instantiate<Node3D>();
 					//RoomGrid.Position = new Vector3(X*6,0,Z*6);
@@ -197,6 +219,10 @@ public partial class testphyScript : Node3D
 				stopwatch.Stop();
 				GD.Print("Map Ready ! (100 Room)");
 				GD.Print($"Map fait en {stopwatch.Elapsed}");
+				CharacterBody3D Player = GetNode<CharacterBody3D >("Player");
+				Player.Position = new Vector3(RoomMax.Position.X,5,RoomMax.Position.Z);
+				//RoomMax.Position = new Vector3(RoomMax.Position.X,RoomMax.Position.Y+6,RoomMax.Position.Z);
+				
 			}
 			
 			
@@ -218,7 +244,7 @@ public partial class testphyScript : Node3D
 	
 	public void Roundm(Node3D Room)
 	{
-		Room.Position = new Vector3((float)Math.Floor(((Room.Position.X+6-1)/6))*6,Room.Position.Y,(float)Math.Floor(((Room.Position.Z+6-1)/6))*6);
+		Room.Position = new Vector3((float)Math.Floor(((Room.Position.X+6-1)/6f))*6,Room.Position.Y,(float)Math.Floor(((Room.Position.Z+6-1)/6f))*6);
 	}
 	
 	public double Distance(Node3D Room1, Node3D Room2)
