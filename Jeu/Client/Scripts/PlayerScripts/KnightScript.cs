@@ -18,10 +18,6 @@ public partial class KnightScript : CharacterBody3D
 	private float _walkSpeed = 3.9f;
 	private float _runSpeed = 7.5f;
 	private float _dashPower = 80.0f;
-	
-	//Variables du Fov du joueur
-	private float _fovMax = 120;
-	private float _fovMin = 30;
 
 	//Variables des mouvements
 	private bool _isWalking;
@@ -57,20 +53,14 @@ public partial class KnightScript : CharacterBody3D
 	{
 		if (Input.IsActionPressed("scroll_forward"))
 		{
-			if (_camera.Fov >= _fovMin)
-			{
-				_camera.Fov -= 1;
-			}
-		}
-
-		if (Input.IsActionPressed("scroll_backward"))
-		{
-			if (_camera.Fov <= _fovMax)
-			{
-				_camera.Fov  += 1;
-			}
+			_characterClass.Zoom(_camera);
 		}
 		
+		if (Input.IsActionPressed("scroll_backward"))
+		{
+			_characterClass.DeZoom(_camera);
+		}
+
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 	
@@ -86,17 +76,17 @@ public partial class KnightScript : CharacterBody3D
 		//Calcul de la gravité
 		if (!IsOnFloor())
 		{
-			_verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
+			_verticalVelocity += _characterClass.GeneralGravity(delta, _gravity);
 		}
 		else
 		{
-			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
+			_verticalVelocity = _characterClass.FloorGravity(delta, _gravity);
 		}
 		
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))
 		{
-			_horizontalVelocity = _direction * _dashPower;
+			_horizontalVelocity = _characterClass.Dash(_direction, _dashPower);
 		}
 
 		//Mouvement du joueur
@@ -106,9 +96,9 @@ public partial class KnightScript : CharacterBody3D
 				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
 			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
 			_isWalking = true;
-
+			
 			//Changement de la vitesse du joueur si il sprint
-			if (Input.IsActionPressed("sprint") && _isWalking)
+			if (Input.IsKeyPressed(Key.Shift) && _isWalking)
 			{ 
 				_movementSpeed = _runSpeed;
 				_isRunning = true;

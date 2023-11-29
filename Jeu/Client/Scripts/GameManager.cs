@@ -521,7 +521,7 @@ public partial class GameManager : Node3D
 						break;
 				}
 				
-				GD.Print("avant");
+				GD.Print(InfoJoueur["id"]);
 				ClassSelectUI.Supr = true;
 				_loadMap = true;
 				GD.Print("apres");
