@@ -7,13 +7,30 @@ namespace Lib;
 
 public class InputControl
 {
-    private Dictionary<string, Key> _dictInputControl = new Dictionary<string, Key>();
+    private Dictionary<string, Key> _dictInputControl = new Dictionary<string, Key>
+    {
+        {"forward", (Key)90},          // Z
+        {"backward", (Key)83},         // S
+        {"left", (Key)81},             // Q
+        {"right", (Key)68},            // D
+        {"sprint", (Key)4194325},      // Shift
+        {"dash", (Key)32},             // Space
+        {"capacity1", (Key)65},        // A
+        {"capacity2", (Key)69},        // E
+        {"capacity3", (Key)70},        // F
+        {"item1", (Key)49},            // 1
+        {"item2", (Key)50},            // 2
+        {"item3", (Key)51},            // 3
+        {"inventory", (Key)4194306},   // Tab
+        {"reload", (Key)82},           // R
+        {"tchat", (Key)84}             // T
+    };
+    
 
     public InputControl()
     {
-        StreamReader ControlFile = new StreamReader("../Save/Control.txt");
-        string? line;
-        while ((line = ControlFile.ReadLine()) != null)
+        string[] lines = File.ReadAllLines("Scripts/Save/Control.txt");
+        foreach (var line in lines)
         {
             int separator = line.IndexOf(";", StringComparison.Ordinal);
             string input = line.Substring(0, separator - 1);
@@ -21,7 +38,6 @@ public class InputControl
 
             _dictInputControl[input] = (Key) Conversions.AtoI(key);
         }
-        ControlFile.Close();
     }
 
     public void Save()
@@ -34,9 +50,8 @@ public class InputControl
 
         save = save.Substring(0, save.Length - 1);
         
-        StreamWriter ControlFile = new StreamWriter("../Save/Control.txt");
-        ControlFile.Write(save);
-        ControlFile.Close();
+        File.WriteAllText("Scripts/Save/Control.txt", save);
+        
     }
 
     public Dictionary<string, Key> GetAllControl()

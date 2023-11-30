@@ -10,9 +10,8 @@ public class Settings
 
     public Settings()
     {
-        StreamReader SettingsFile = new StreamReader("../Save/Settings.txt");
-        string? line;
-        while ((line = SettingsFile.ReadLine()) != null)
+        string[] lines = File.ReadAllLines("Scripts/Save/Settings.txt");
+        foreach (var line in lines)
         {
             int separator = line.IndexOf(";", StringComparison.Ordinal);
             string name = line.Substring(0, separator - 1);
@@ -20,7 +19,6 @@ public class Settings
 
             _dictSettings[name] = Conversions.AtoI(value);
         }
-        SettingsFile.Close();
     }
     
     public void Save()
@@ -33,8 +31,6 @@ public class Settings
 
         save = save.Substring(0, save.Length - 1);
         
-        StreamWriter SettingsFile = new StreamWriter("../Save/Settings.txt");
-        SettingsFile.Write(save);
-        SettingsFile.Close();
+        File.WriteAllText("Scripts/Save/Settings.txt", save);
     }
 }

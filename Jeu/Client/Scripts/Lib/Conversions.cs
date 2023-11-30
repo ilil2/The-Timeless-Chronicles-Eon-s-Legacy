@@ -58,4 +58,9 @@ public static class Conversions
 		res /= count;
 		return res;
 	}
+
+	public static int BtoI(bool b)
+	{
+		return b?1:0;
+	}
 }
