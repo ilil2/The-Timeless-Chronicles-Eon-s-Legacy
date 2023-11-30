@@ -59,10 +59,14 @@ public class Serveur
         cc.pseudo = tr.ReadLine();
         cc.classe = tr.ReadLine();
         joueur_ready++;
+        
+        Console.WriteLine($"{cc.pseudo} : ready");
 
         info[cc.id] = $"{cc.id}/{cc.pseudo}/{cc.classe}";
         
         while (joueur_ready < ID) {}
+        
+        Thread.Sleep(100);
 
         switch (cc.id)
         {
@@ -78,10 +82,11 @@ public class Serveur
             case 3:
                 tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}");
                 break;
+            default:
+                tw.WriteLine("marche po//////");
+                break;
         }
         tw.Flush();
-        
-        Console.WriteLine($"{cc.id} : ready");
         
         try
         {
@@ -89,6 +94,7 @@ public class Serveur
             while (connect)             //boucle de connection
             {
                 string requette = tr.ReadLine();        //recuperation de la chaine
+                Console.WriteLine(requette);
                 if (requette == "quit")
                 {
                     Console.WriteLine($"client {cc.id} s'est deconnecté");
@@ -105,42 +111,41 @@ public class Serveur
                 {
                     string line = requette.Substring(3);
                     string[] lines = line.Split('/');
-                    string res = cc.id + "/";
+                    string res = cc.id + "/" + line;
                     
-                    foreach (var donnee in lines)
+                    /*foreach (var donnee in lines)
                     {
                         if (donnee.Substring(0,2) == "co")
                         {
                             res += donnee;
-                            /*string don = donnee.Substring(3);
+                            string don = donnee.Substring(3);
                             res += don.Substring(0,don.IndexOf(";"));
                             don = donnee.Substring(3);
                             res += don.Substring(0,don.IndexOf(";"));
                             don = donnee.Substring(3);
                             res += don.Substring(0,don.IndexOf(";"));
-                            */
                         }
 
                         res += "/";
-                    }
+                    }*/
 
-                    info[cc.id] = res;
+                    info[cc.id] = res;  
 
-                    if (lines[0] == "false")
+                    if (lines[0] == "false" || true)
                     {
                         switch (cc.id)
                         {
                             case 0:
-                                tw.WriteLine(info[1] + ";" + info[2] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[1] + ";" + info[2] + ";" + info[3]);
                                 break;
                             case 1:
-                                tw.WriteLine(info[0] + ";" + info[2] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[0] + ";" + info[2] + ";" + info[3]);
                                 break;
                             case 2:
-                                tw.WriteLine(info[0] + ";" + info[1] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[0] + ";" + info[1] + ";" + info[3]);
                                 break;
                             case 3:
-                                tw.WriteLine(info[0] + ";" + info[1] + ";" + info[2]);
+                                tw.WriteLine("in:" + info[0] + ";" + info[1] + ";" + info[2]);
                                 break;
                         }
                         tw.Flush();

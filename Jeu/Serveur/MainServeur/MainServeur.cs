@@ -192,22 +192,24 @@ public class MainServeur
                     
                     StreamWriter sw = new StreamWriter("port.txt"); 
                     Process p1 = new Process();
-                    p1.StartInfo.FileName = "bash";
-                    p1.StartInfo.Arguments = "exec.sh";
+                    //p1.StartInfo.FileName = "bash";
+                    //p1.StartInfo.Arguments = "exec.sh";
+                    p1.StartInfo.FileName = "execwin.bat";
                     
                     sw.Write(ports[0]);
                     sw.Close();
                     p1.Start(); /* Cette instruction ouvre un invite de commande n°2 */
                     
-                    Thread.Sleep(5000);
+                    id_games.Remove(cc.game_id);
+                    
+                    Thread.Sleep(6000);
                     
                     start_game = cc.game_id;
                     join = false;
-                    id_games.Remove(start_game);
+                    ports.Remove(ports[0]);
                     
                     Thread.Sleep(2000);
 
-                    ports.Remove(ports[0]);
                     nbr_serveur++;
                     nbr_joueur = 0;
                 }
@@ -345,7 +347,7 @@ public class MainServeur
         }
         catch
         {
-            Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
+            Console.WriteLine($"client {cc.id} deconnecté");   //si le client s'est deconnecté de force
         }
     }
 
