@@ -84,12 +84,6 @@ public partial class AssassinScript : CharacterBody3D
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
 
-		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
-		//{
-		//	 _verticalVelocity = Vector3.Up * _jumpForce;
-		//}
-
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))
 		{

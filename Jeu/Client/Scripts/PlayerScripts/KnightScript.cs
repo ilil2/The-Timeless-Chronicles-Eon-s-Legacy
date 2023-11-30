@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using System.Security.AccessControl;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class KnightScript : CharacterBody3D
@@ -18,15 +18,10 @@ public partial class KnightScript : CharacterBody3D
 	private float _walkSpeed = 3.9f;
 	private float _runSpeed = 7.5f;
 	private float _dashPower = 80.0f;
-	
-	//Variables du Fov du joueur
-	private float _fovMax = 120;
-	private float _fovMin = 30;
 
 	//Variables des mouvements
 	private bool _isWalking;
 	private bool _isRunning;
-	private bool _isRolling;
 
 	//Variables de direction
 	private Vector3 _direction;
@@ -36,16 +31,10 @@ public partial class KnightScript : CharacterBody3D
 	private float _movementSpeed;
 	private float _angularAcceleration;
 	private int _acceleration;
-
-	public static int ID;
-
-	public void InitClass(int id, int pseudo, string classe)
-	{
-		_characterClass = new ClassScript(id, pseudo, classe);
-	}
 	
 	public override void _Ready()
 	{
+		_characterClass = new ClassScript(Lib.Conversions.AtoI(GameManager.InfoJoueur["id"]), GameManager.InfoJoueur["pseudo"], GameManager.InfoJoueur["class"]);
 		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		
 		//initialisation de la variable direction
@@ -53,24 +42,20 @@ public partial class KnightScript : CharacterBody3D
 		_direction = Vector3.Back.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y);
 	}
 
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.AsText() == "Mouse Wheel Down")
+		{
+			_characterClass.Zoom(_camera);
+		}
+		else if (@event.AsText() == "Mouse Wheel Up")
+		{
+			_characterClass.DeZoom(_camera);
+		}
+	}
+
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("scroll_forward"))
-		{
-			if (_camera.Fov >= _fovMin)
-			{
-				_camera.Fov -= 1;
-			}
-		}
-
-		if (Input.IsActionPressed("scroll_backward"))
-		{
-			if (_camera.Fov <= _fovMax)
-			{
-				_camera.Fov  += 1;
-			}
-		}
-		
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 	
@@ -94,21 +79,25 @@ public partial class KnightScript : CharacterBody3D
 		}
 		
 		//Mouvement du dash
-		if (Input.IsActionPressed("dash"))
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
 		{
-			_horizontalVelocity = _direction * _dashPower;
+			_horizontalVelocity = _characterClass.Dash(_direction, _dashPower);
 		}
 
+		(bool forward, bool backward, bool right, bool left) = (false,false,false,false);
+
 		//Mouvement du joueur
-		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") || Input.IsActionPressed("right"))
+		if ((forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"])) 
+		    || (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
+		    || (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
+		    || (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
 		{
-			_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
-				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
+			_direction = _characterClass.MoveDirection(forward, backward, right, left);
 			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
 			_isWalking = true;
-
+			
 			//Changement de la vitesse du joueur si il sprint
-			if (Input.IsActionPressed("sprint") && _isWalking)
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
 			{ 
 				_movementSpeed = _runSpeed;
 				_isRunning = true;
@@ -129,15 +118,7 @@ public partial class KnightScript : CharacterBody3D
 		//Calcul de la rotation du joueur
 		_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
 		
-		
-		if (_isRolling)
-		{
-			_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * .01f, (float)(_acceleration * delta));
-		}
-		else
-		{
-			_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
-		}
+		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
 		
 		//Calcul du movement du joueur
 		Vector3 velocity = Velocity;

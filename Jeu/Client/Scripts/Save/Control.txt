@@ -1,0 +1,15 @@
+forward;90
+backward;83
+left;81
+right;68
+sprint;4194325
+dash;32
+capacity1;65
+capacity2;69
+capacity3;70
+item1;49
+item2;50
+item3;51
+inventory;4194306
+reload;82
+tchat;84
