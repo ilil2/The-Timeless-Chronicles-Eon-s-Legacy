@@ -21,20 +21,10 @@ public class ClassScript
         this.classe = classe;
     }
 
-    public Vector3 Gravity(double delta, float gravity, bool floor)
+    public Vector3 MoveDirection(bool forward, bool backward, bool right, bool left)
     {
-        if (floor)
-        {
-            return Vector3.Down * gravity / 10 * (float)delta;
-        }
-        return Vector3.Down * gravity * 2 * (float)delta;
-    }
-
-    public Vector3 MoveDirection(bool forward, bool backward, bool right, bool left, Node3D h)
-    {
-        Vector3 direction = new Vector3(Conversions.BtoI(right) - Conversions.BtoI(left), 0,
+        Vector3 direction = new Vector3(Conversions.BtoI(left) - Conversions.BtoI(right), 0,
             Conversions.BtoI(forward) - Conversions.BtoI(backward));
-        direction = direction.Rotated(Vector3.Up, h.GlobalTransform.Basis.GetEuler().Y).Normalized();
         return direction;
     }
 
@@ -42,8 +32,6 @@ public class ClassScript
     {
         return direction * dashPower;
     }
-    
-    
 
     public void Zoom(Camera3D camera)
     {

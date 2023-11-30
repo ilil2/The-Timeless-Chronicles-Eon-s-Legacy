@@ -449,7 +449,7 @@ public partial class GameManager : Node3D
 			
 			else if (state == 6)
 			{
-				tw2.WriteLine("co:" + InfoJoueur["co"]);
+				tw2.WriteLine("in:co:" + InfoJoueur["co"]);
 				tw2.Flush();
 			}
 			
@@ -568,7 +568,6 @@ public partial class GameManager : Node3D
 				GD.Print(InfoJoueur["id"]);
 				ClassSelectUI.Supr = true;
 				_loadMap = true;
-				GD.Print("apres");
 			}
 			else if (rep.Substring(0,2) == "in")
 			{

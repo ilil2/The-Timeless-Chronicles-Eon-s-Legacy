@@ -6,7 +6,10 @@ namespace Lib;
 
 public class Settings
 {
-    private Dictionary<string, int> _dictSettings = new Dictionary<string, int>();
+    private Dictionary<string, int> _dictSettings = new Dictionary<string, int>
+    {
+        
+    };
 
     public Settings()
     {

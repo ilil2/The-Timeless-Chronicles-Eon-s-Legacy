@@ -69,7 +69,14 @@ public partial class KnightScript : CharacterBody3D
 		_acceleration = 15;
 
 		//Calcul de la gravité
-		_verticalVelocity += _characterClass.Gravity(delta, _gravity, IsOnFloor());
+		if (!IsOnFloor())
+		{
+			_verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
+		}
+		else
+		{
+			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
+		}
 		
 		//Mouvement du dash
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
@@ -82,10 +89,11 @@ public partial class KnightScript : CharacterBody3D
 		//Mouvement du joueur
 		if ((forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"])) 
 		    || (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
-		    || (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])
-		    || (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))))
+		    || (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
+		    || (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
 		{
-			_direction = _characterClass.MoveDirection(forward, backward, right, left, _h);
+			_direction = _characterClass.MoveDirection(forward, backward, right, left);
+			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
 			_isWalking = true;
 			
 			//Changement de la vitesse du joueur si il sprint
