@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://bet3y562qhwrw"]
 
 [ext_resource type="Texture2D" uid="uid://bamogby5ofx5p" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_color_1k.jpg" id="1_5yh4b"]
-[ext_resource type="Script" path="res://Scenes/TestMap/testphyScript.cs" id="1_rxxs2"]
+[ext_resource type="Script" path="res://Scenes/TestMap/testphyScript2.cs" id="1_hq0s0"]
 [ext_resource type="Texture2D" uid="uid://byej16v8b2g0x" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="2_vp7ls"]
 [ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="3_e4y7o"]
 [ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="4_25m0o"]
@@ -102,18 +102,17 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qvrok")
 
 [node name="testphy" type="Node3D"]
-script = ExtResource("1_rxxs2")
-
-[node name="Haut" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 257, 0)
-fov = 103.2
-
-[node name="Cote" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.353553, 0.612373, -2.98023e-08, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 151, 80, 152)
+script = ExtResource("1_hq0s0")
 
 [node name="Player" parent="." instance=ExtResource("4_25m0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 94, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 200, -21)
 slide_on_ceiling = false
+
+[node name="Cote" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612373, -2.98023e-08, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 160.35, 99.2968, 161.35)
+
+[node name="Haut" type="Camera3D" parent="."]
+transform = Transform3D(1, 1.77635e-15, -2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 600, 0)
 
 [node name="DebugPack" type="Node3D" parent="."]
 

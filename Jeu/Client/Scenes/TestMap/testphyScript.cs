@@ -65,7 +65,7 @@ public partial class testphyScript : Node3D
 			
 			RigidBody3D Room1 = new RigidBody3D();
 			Room1.LockRotation = true;
-			Room1.Mass = 1;
+			Room1.Mass = i;
 			PhysicsBody3D Room = Room1;
 			Room.AxisLockLinearY = true;
 			
@@ -224,6 +224,7 @@ public partial class testphyScript : Node3D
 				//RoomMax.Position = new Vector3(RoomMax.Position.X,RoomMax.Position.Y+6,RoomMax.Position.Z);
 				
 			}
+			
 			
 			
 		}
