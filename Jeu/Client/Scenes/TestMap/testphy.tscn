@@ -7,25 +7,25 @@
 [ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="4_25m0o"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_V2_L3.123cedbb80cc-eec4-4899-a587-d46dd8eff3b9/10085_egypt_sphinx_iterations-2.obj" id="5_d4cnf"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lugpm"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yea0i"]
 load_path = "res://.godot/imported/daytime.png-d29902e6712cb80288c108c16e5c6627.s3tc.ctex"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_e24fc"]
-panorama = SubResource("CompressedTexture2D_lugpm")
+panorama = SubResource("CompressedTexture2D_yea0i")
 
-[sub_resource type="Sky" id="Sky_ioqg7"]
+[sub_resource type="Sky" id="Sky_b2jh2"]
 sky_material = SubResource("PanoramaSkyMaterial_e24fc")
 
 [sub_resource type="Environment" id="Environment_4g8v3"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = SubResource("Sky_ioqg7")
+sky = SubResource("Sky_b2jh2")
 ssao_enabled = true
 sdfgi_enabled = true
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ga2u0"]
 albedo_texture = ExtResource("1_5yh4b")
 roughness_texture = ExtResource("3_e4y7o")
 normal_enabled = true
@@ -33,7 +33,7 @@ normal_texture = ExtResource("2_vp7ls")
 uv1_scale = Vector3(250, 250, 250)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yywdh"]
-material = SubResource("StandardMaterial3D_7r16a")
+material = SubResource("StandardMaterial3D_ga2u0")
 size = Vector2(3000, 3060)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qx83f"]
@@ -51,7 +51,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0.748379, 0.679976, 0.583831, 1)
 emission_enabled = true
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_qvrok"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tp728"]
 _surfaces = [{
 "aabb": AABB(-110.058, -1.38297, -110.058, 220.117, 97.2192, 220.117),
 "format": 4097,
@@ -99,20 +99,10 @@ _surfaces = [{
 "vertex_data": PackedByteArray(255, 5, 2, 56, 220, 66, 10, 67, 189, 55, 134, 182, 149, 197, 104, 186, 101, 186, 54, 157, 116, 65, 9, 66, 6, 196, 194, 66, 115, 65, 9, 66, 149, 197, 104, 186, 101, 186, 54, 157, 160, 96, 9, 66, 114, 177, 194, 66, 161, 96, 9, 194, 149, 197, 104, 186, 101, 186, 54, 157, 160, 96, 9, 66, 114, 177, 194, 66, 161, 96, 9, 194, 149, 197, 255, 255, 187, 255, 17, 192, 128, 162, 9, 194, 49, 138, 194, 66, 141, 162, 9, 194, 149, 197, 255, 255, 187, 255, 17, 192, 255, 5, 2, 56, 220, 66, 10, 67, 189, 55, 134, 182, 149, 197, 255, 255, 187, 255, 17, 192, 176, 130, 9, 194, 32, 157, 194, 66, 191, 130, 9, 66, 255, 127, 104, 186, 218, 255, 32, 192, 116, 65, 9, 66, 6, 196, 194, 66, 115, 65, 9, 66, 255, 127, 104, 186, 218, 255, 32, 192, 255, 5, 2, 56, 220, 66, 10, 67, 189, 55, 134, 182, 255, 127, 104, 186, 218, 255, 32, 192, 128, 162, 9, 194, 49, 138, 194, 66, 141, 162, 9, 194, 105, 58, 104, 186, 109, 186, 204, 226, 176, 130, 9, 194, 32, 157, 194, 66, 191, 130, 9, 66, 105, 58, 104, 186, 109, 186, 204, 226, 255, 5, 2, 56, 220, 66, 10, 67, 189, 55, 134, 182, 105, 58, 104, 186, 109, 186, 204, 226, 20, 146, 5, 66, 36, 172, 191, 66, 19, 146, 5, 66, 45, 208, 61, 80, 208, 19, 220, 133, 68, 177, 5, 66, 145, 153, 191, 66, 65, 177, 5, 194, 45, 208, 61, 80, 197, 114, 244, 180, 160, 96, 9, 66, 114, 177, 194, 66, 161, 96, 9, 194, 45, 208, 61, 80, 83, 114, 148, 180, 116, 65, 9, 66, 6, 196, 194, 66, 115, 65, 9, 66, 45, 208, 61, 80, 99, 19, 188, 133, 68, 177, 5, 66, 145, 153, 191, 66, 65, 177, 5, 194, 67, 208, 33, 0, 186, 255, 17, 192, 32, 243, 5, 194, 82, 114, 191, 66, 37, 243, 5, 194, 67, 208, 33, 0, 187, 255, 17, 192, 128, 162, 9, 194, 49, 138, 194, 66, 141, 162, 9, 194, 67, 208, 33, 0, 187, 255, 17, 192, 160, 96, 9, 66, 114, 177, 194, 66, 161, 96, 9, 194, 67, 208, 33, 0, 186, 255, 17, 192, 88, 211, 5, 194, 64, 133, 191, 66, 91, 211, 5, 66, 32, 128, 67, 80, 218, 255, 32, 192, 20, 146, 5, 66, 36, 172, 191, 66, 19, 146, 5, 66, 32, 128, 67, 80, 218, 255, 33, 192, 116, 65, 9, 66, 6, 196, 194, 66, 115, 65, 9, 66, 32, 128, 67, 80, 218, 255, 33, 192, 176, 130, 9, 194, 32, 157, 194, 66, 191, 130, 9, 66, 32, 128, 67, 80, 218, 255, 32, 192, 32, 243, 5, 194, 82, 114, 191, 66, 37, 243, 5, 194, 210, 47, 61, 80, 14, 22, 99, 249, 88, 211, 5, 194, 64, 133, 191, 66, 91, 211, 5, 66, 210, 47, 61, 80, 73, 116, 228, 201, 176, 130, 9, 194, 32, 157, 194, 66, 191, 130, 9, 66, 210, 47, 61, 80, 137, 116, 174, 201, 128, 162, 9, 194, 49, 138, 194, 66, 141, 162, 9, 194, 210, 47, 61, 80, 205, 22, 43, 249)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_qvrok")
+shadow_mesh = SubResource("ArrayMesh_tp728")
 
 [node name="testphy" type="Node3D"]
 script = ExtResource("1_hq0s0")
-
-[node name="Player" parent="." instance=ExtResource("4_25m0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 200, -21)
-slide_on_ceiling = false
-
-[node name="Cote" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.353553, 0.612373, -2.98023e-08, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 160.35, 99.2968, 161.35)
-
-[node name="Haut" type="Camera3D" parent="."]
-transform = Transform3D(1, 1.77635e-15, -2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 600, 0)
 
 [node name="DebugPack" type="Node3D" parent="."]
 
@@ -122,6 +112,16 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="DebugPack"]
 environment = SubResource("Environment_4g8v3")
+
+[node name="Player" parent="DebugPack" instance=ExtResource("4_25m0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 200, -21)
+slide_on_ceiling = false
+
+[node name="Cote" type="Camera3D" parent="DebugPack"]
+transform = Transform3D(0.707107, -0.353553, 0.612373, -2.98023e-08, 0.866026, 0.499999, -0.707107, -0.353553, 0.612373, 160.35, 99.2968, 161.35)
+
+[node name="Haut" type="Camera3D" parent="DebugPack"]
+transform = Transform3D(1, 1.77635e-15, -2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 600, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -0.00010472, 0, 0.00010472, 1, 0, 0, 0, 1, 0, 0, 0)

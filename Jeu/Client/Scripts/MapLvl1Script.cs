@@ -2,230 +2,248 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
+using System.IO;
 
-public partial class MapLvl1Script : Node3D
+public partial class MapLvl1Script : Node
 {
-	private int _NbRoom = 0;
-	private int _NbTypeRoom = 4;
-	private int _LenWall = 6;
-	private int _Radius = 20;
+	private Stopwatch stopwatch = new Stopwatch();
+	private Random Rand = new Random();
+	private bool MapReady = false;
+	private int NbRoom = 200;
+	private int LenWall = 6;
+	private StaticBody3D MainRoom;
+	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
+	private List<Node3D> RoomList = new List<Node3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
-	private Dictionary<string,Node3D> DataGrid = new Dictionary<string,Node3D>();
-	private Dictionary<string,(int,int)> DataLen = new Dictionary<string,(int,int)>();
+	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
+	{
+		{1,(3,3)},
+		{2,(5,5)},
+		{3,(7,7)},
+		{4,(5,3)}
+	};
+	private Dictionary<(int,int),int> LenToId = new Dictionary<(int,int),int>()
+	{
+		{(3,3),1},
+		{(5,5),2},
+		{(7,7),3},
+		{(5,3),4}
+	};
 	
 	public override void _Ready()
 	{
-		PackedScene MG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room3Grid.tscn");
-		Node3D MGrid = MG.Instantiate<Node3D>();
-		DataGrid[$"res://Scenes/MapScenes/RoomScenes/RoomMain.tscn"] = MGrid;
-		DataLen[$"res://Scenes/MapScenes/RoomScenes/RoomMain.tscn"] = (7, 7);
-		
-		PackedScene MGG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room3Grid.tscn");
-		Node3D MGridG = MGG.Instantiate<Node3D>();
-		DataGrid[$"res://Scenes/MapScenes/RoomScenes/RoomMainGate.tscn"] = MGridG;
-		DataLen[$"res://Scenes/MapScenes/RoomScenes/RoomMainGate.tscn"] = (7, 7);
-		
-		for (int i = 1; i < _NbTypeRoom; i++)
-		{
-			PackedScene TG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{i}Grid.tscn");
-			Node3D Grid = TG.Instantiate<Node3D>();
-			DataGrid[$"res://Scenes/MapScenes/RoomScenes/Room{i}.tscn"] = Grid;
-			int len = -1;
-			switch (i)
-			{
-				case 1 :
-					len = 3;
-					break;
-				case 2:
-					len = 5;
-					break;
-				case 3:
-					len = 7;
-					break;
-			}
-			DataLen[$"res://Scenes/MapScenes/RoomScenes/Room{i}.tscn"] = (len, len);
-		}
-		
-		Stopwatch stopwatch = new Stopwatch();
 		stopwatch.Start();
-		CreateMap();
+		MainRoom = InitMainRoom();
+		CreatePseudoMap();
 		stopwatch.Stop();
-		GD.Print($"Map créer en {stopwatch.Elapsed}");
+		GD.Print($"{NbRoom} Room");
+		GD.Print($"Map crée en {stopwatch.Elapsed}");
 	}
 	
 	public override void _Process(double delta)
 	{
+		if (!MapReady)
+		{
+			if (CheckSleep())
+			{
+				CreateMainRoom();
+				CreateMap();
+				OpenRoom();
+				MapReady = true;
+			}
+		}
+		
 	}
 
-	public double Distance(Node3D Room1, Node3D Room2)
+	public bool MapIsReady()
+	{
+		return MapReady;
+	}
+
+	private StaticBody3D InitMainRoom()
+	{
+		StaticBody3D MainRoom = new StaticBody3D();
+		CollisionShape3D MainRoomCollision = new CollisionShape3D();
+		BoxShape3D MainBoxShape = new BoxShape3D();
+		MainBoxShape.Size = new Vector3(7*LenWall,14*LenWall,7*LenWall);
+		MainRoomCollision.Shape = MainBoxShape;
+		MainRoomCollision.Position = new Vector3(0,7*LenWall,0);
+		MainRoom.AddChild(MainRoomCollision);
+		
+		//MeshInstance3D MainRoomMesh = new MeshInstance3D();
+		//BoxMesh MainRoomM = new BoxMesh();
+		//MainRoomM.Size = new Vector3(7*LenWall,14*LenWall,7*LenWall);
+		//MainRoomMesh.Mesh = MainRoomM;
+		//MainRoomMesh.Position = new Vector3(0,9*LenWall,0);
+		//MainRoom.AddChild(MainRoomMesh);
+		
+		AddChild(MainRoom);
+		
+		return MainRoom;
+	}
+
+	private void CreatePseudoMap()
+	{
+		for (int i = 0; i < NbRoom; i++)
+		{
+			double t = 2 * Math.PI * Rand.NextDouble();
+			double u = Rand.NextDouble() + Rand.NextDouble();
+			double r = 0;
+			if (u > 1) r = 2 - u;
+			else r = u;
+			double x = (NbRoom / 10) * r * Math.Cos(t);
+			double z = (NbRoom / 10) * r * Math.Sin(t);
+
+			int ID = Rand.Next(1, 4);
+			(int h, int w) = IdToLen[ID];
+			
+			RigidBody3D PRoom = new RigidBody3D();
+			PRoom.LockRotation = true;
+			PhysicsBody3D Room = PRoom;
+			Room.AxisLockLinearY = true;
+			
+			CollisionShape3D RoomCollision = new CollisionShape3D();
+			BoxShape3D BoxShape = new BoxShape3D();
+			MeshInstance3D RoomMesh = new MeshInstance3D();
+			BoxMesh BoxM = new BoxMesh();
+			BoxShape.Size = new Vector3(h * LenWall, 14 * LenWall, w * LenWall);
+			BoxM.Size = new Vector3(h * LenWall, LenWall, w * LenWall);
+			
+			RoomCollision.Shape = BoxShape;
+			RoomCollision.Position = new Vector3(0,7*LenWall,0);
+			RoomMesh.Mesh = BoxM;
+			RoomMesh.Position = new Vector3(0,LenWall/2,0);
+			RoomMesh.Name = "Mesh";
+			Room.AddChild(RoomCollision);
+			Room.AddChild(RoomMesh);
+			Room.Position = Roundm((float)x*LenWall,(float)z*LenWall,LenWall);
+			AddChild(Room);
+			PseudoRoomList.Add(Room);
+
+		}
+	}
+
+	private void CreateMap()
+	{
+		for (int i = 0; i < PseudoRoomList.Count; i++)
+		{
+			RigidBody3D PseudoRoom = (RigidBody3D)PseudoRoomList[i];
+			MeshInstance3D MeshRoom = PseudoRoom.GetNode<MeshInstance3D>("Mesh");
+			BoxMesh BoxM = (BoxMesh)MeshRoom.Mesh;
+			(int h, int w) = ((int)BoxM.Size.X/LenWall,(int)BoxM.Size.Z/LenWall);
+			int ID = LenToId[(h,w)];
+			float X = PseudoRoom.Position.X;
+			float Z = PseudoRoom.Position.Z;
+			PseudoRoom.QueueFree();
+			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{ID}.tscn");
+			Node3D Room = R.Instantiate<Node3D>();
+			Room.Position = Roundm(X, Z, LenWall);
+			AddChild(Room);
+			RoomList.Add(Room);
+
+		}
+	}
+
+	private void CreateMainRoom()
+	{
+		MainRoom.QueueFree();
+		PackedScene MR = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/RoomMain.tscn");
+		Node3D MRoom = MR.Instantiate<Node3D>();
+		AddChild(MRoom);
+		RoomList.Add(MRoom);
+		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/RoomMainGate.tscn");
+		Node3D MRoomGate = MRG.Instantiate<Node3D>();
+		RoomList.Add(MRoomGate);
+		AddChild(MRoomGate);
+		
+	}
+
+	private bool CheckSleep()
+	{
+		for (int i = 0; i<PseudoRoomList.Count;i++)
+		{
+			if (((RigidBody3D)PseudoRoomList[i]).Sleeping == false)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private Vector3 Roundm(float x, float z, int LenTile)
+	{
+		int NewX = (int)(Math.Floor((x+LenTile-1)/(float)(LenTile))*LenTile);
+		int NewZ = (int)(Math.Floor((z+LenTile-1)/(float)(LenTile))*LenTile);
+		return new Vector3(NewX,0,NewZ);
+	}
+
+	private double Distance(Node3D Room1, Node3D Room2)
 	{
 		return Math.Sqrt(Math.Pow(Room1.Position.X - Room2.Position.X, 2) +
 						 Math.Pow(Room1.Position.Z - Room2.Position.Z, 2));
 	}
 
-	public (double, double) LenRange(Node3D Room1, Node3D Room2)
+	private void OpenRoom()
 	{
-		(int h1,int w1) = DataLen[Room1.SceneFilePath];
-		(int h2,int w2) = DataLen[Room2.SceneFilePath];
-		h1*=_LenWall;
-		h2*=_LenWall;
-		w1*=_LenWall;
-		w2*=_LenWall;
-		double LenMin = h1 / 2 + h2 / 2 - 1;
-		double LenMax = Math.Sqrt(Math.Pow(h1 / 2 + h2 / 2 - 1, 2) + Math.Pow(h1 / 2 + h2 / 2 - 1, 2));
-		return (LenMin, LenMax);
-	}
-
-	public bool CheckPlace(Node3D ActualRoom, int PrevX, int PrevZ, List<Node3D> RoomList)
-	{
-		bool TestX = true;
-		bool TestZ = true;
-		bool TestXZ = true;
-		for (int i = 0; i < RoomList.Count; i++)
+		for (int i = 0; i < RoomList.Count-1; i++)
 		{
-			Node3D TestedRoom = RoomList[i];
-			double dist = Distance(ActualRoom, TestedRoom);
-			(double LenMin, double LenMax) = LenRange(ActualRoom, TestedRoom);
-			//GD.Print(LenMax);
-			if (dist<=60)
-			{
-				Node3D TestedGrid = DataGrid[TestedRoom.SceneFilePath];
-				Node3D ActualGrid = DataGrid[ActualRoom.SceneFilePath];
-				for (int j = 0; j < ActualGrid.GetChildCount(); j++)
-				{
-					Node3D ActualTile = ActualGrid.GetChild<Node3D>(j);
-
-					for (int k = 0; k < TestedGrid.GetChildCount(); k++)
-					{
-						Node3D TestedTile = TestedGrid.GetChild<Node3D>(k);
-						bool pos = (ActualRoom.Position.X+ActualTile.Position.X+PrevX == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ == TestedRoom.Position.Z+TestedTile.Position.Z);
-						if (pos)
-						{
-							TestXZ = false;
-						}
-						bool pos2 = (ActualRoom.Position.X+ActualTile.Position.X+PrevX == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z == TestedRoom.Position.Z+TestedTile.Position.Z) || ActualRoom.Position.X+ActualTile.Position.X+PrevX==0;
-						if (pos2)
-						{
-							TestX = false;
-						}
-						bool pos3 = (ActualRoom.Position.X+ActualTile.Position.X == TestedRoom.Position.X+TestedTile.Position.X) && (ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ == TestedRoom.Position.Z+TestedTile.Position.Z) || ActualRoom.Position.Z+ActualTile.Position.Z+PrevZ==0;
-						if (pos3)
-						{
-							TestZ = false;
-						}		
-					}
-				}
-
-			}
-		}
-		return (TestXZ);
-	}
-
-	public void CreateMap()
-	{
-		List<Node3D> RoomList = new List<Node3D>();
-		
-		PackedScene MR = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/RoomMain.tscn");
-		Node3D MRoom = MR.Instantiate<Node3D>();
-		RoomList.Add(MRoom);
-		AddChild(MRoom);
-		
-		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/RoomMainGate.tscn");
-		Node3D MRoomG = MRG.Instantiate<Node3D>();
-		RoomList.Add(MRoomG);
-		AddChild(MRoomG);
-		
-
-		for (int i = 0; i < _NbRoom; i++)
-		{
-			//---------------------------------------------------------------------------------- code à modif
-			//HELP ME
-			int RandIntID = new Random().Next(1,4);
-			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{RandIntID}.tscn");
-			Node3D Room = R.Instantiate<Node3D>();
-			Room.Position = new Vector3(0, 0, 0);
-			double RandAngle = new Random().NextDouble()*Math.PI*2;
-			double pX = Math.Cos(RandAngle);
-			double pZ = Math.Sin(RandAngle);
-			double tX = 0;
-			double tZ = 0;
-			int NX = 0;
-			int NZ = 0;
-			while (!CheckPlace(Room,NX,NZ,RoomList))
-			{
-				tX+=pX;
-				tZ+=pZ;
-				NX = 6*(int)(tX);
-				NZ = 6*(int)(tZ);
-			}
-			tX+=pX;
-			tZ+=pZ;
-			NX = 6*(int)(tX);
-			NZ = 6*(int)(tZ);
-			Room.Position = new Vector3(NX, 0, NZ);
-			
-			//----------------------------------------------------------------------------------
-			for (int j = 1; j < RoomList.Count; j++)
+			Node3D ActualRoom = RoomList[i];
+			for (int j = i+1; j < RoomList.Count; j++)
 			{
 				Node3D TestedRoom = RoomList[j];
-				double Dist = Distance(Room,TestedRoom);
-				(double LenMin, double LenMax) = LenRange(Room, TestedRoom);
-				//GD.Print(Dist);
-				if (Dist<LenMax && Dist>LenMin)
+				double dist = Distance(ActualRoom, TestedRoom);
+				
+				if (dist<100)
 				{
-					bool doorplace = false;
-					Node3D LastActualChild = Room.GetChild<Node3D>(0);
-					Node3D LastTestedChild = TestedRoom.GetChild<Node3D>(0);
-					for (int k = 0; k < Room.GetChildCount(); k++)
+					int NbWall = 0;
+					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
 					{
-						Node3D ActualChild = Room.GetChild<Node3D>(k);
+						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
 						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
-							bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+Room.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+Room.Position.Z)&&(TestedChild.Position.Y+TestedRoom.Position.Y == ActualChild.Position.Y+Room.Position.Y);
+							bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
 							if (TestPos)
 							{
 								if (l<TestedRoom.GetChildCount())
 								{
-									LastActualChild = ActualChild;
-									LastTestedChild = TestedChild;
-										
-										
-									ActualChild.QueueFree();
+									NbWall+=1;
 									l = TestedRoom.GetChildCount();
-									if (doorplace==false)
-									{
-										int RandInt = new Random().Next(0, 2);
-										if (RandInt==0)
-										{
-											doorplace = true;
-											Node3D Gate = AssetC.Instantiate<Node3D>();
-											Gate.Rotation = new Vector3(0,ActualChild.Rotation.Y,0);
-											Gate.Position = new Vector3(ActualChild.Position.X+Room.Position.X,ActualChild.Position.Y+Room.Position.Y,ActualChild.Position.Z+Room.Position.Z);
-											TestedChild.QueueFree();
-											AddChild(Gate);
-										}
-									}									
 								}
 							}
 						}
-					} 
-					bool Test = (LastTestedChild.Position.X+TestedRoom.Position.X == LastActualChild.Position.X+Room.Position.X)&&(LastTestedChild.Position.Z+TestedRoom.Position.Z == LastActualChild.Position.Z+Room.Position.Z)&&(LastTestedChild.Position.Y+TestedRoom.Position.Y == LastActualChild.Position.Y+Room.Position.Y);
-					if (doorplace==false && Test)
+					}
+					int RandWall = Rand.Next(0,NbWall);
+					int index = 0;
+					if (i==0) index = NbWall + 1;
+					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
 					{
-						Node3D LGate = AssetC.Instantiate<Node3D>();
-						LGate.Rotation = new Vector3(0,LastActualChild.Rotation.Y,0);
-						LGate.Position = new Vector3(LastActualChild.Position.X+Room.Position.X,LastActualChild.Position.Y+Room.Position.Y,LastActualChild.Position.Z+Room.Position.Z);
-						LastTestedChild.QueueFree();
-						AddChild(LGate);
+						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
+						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
+						{
+							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
+							bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
+							if (TestPos)
+							{
+								if (l<TestedRoom.GetChildCount())
+								{
+									ActualChild.QueueFree();
+									if (index == RandWall)
+									{
+										Node3D Gate = AssetC.Instantiate<Node3D>();
+										Gate.Rotation = new Vector3(0,ActualChild.Rotation.Y,0);
+										Gate.Position = new Vector3(ActualChild.Position.X+ActualRoom.Position.X,ActualChild.Position.Y+ActualRoom.Position.Y,ActualChild.Position.Z+ActualRoom.Position.Z);
+										AddChild(Gate);
+										TestedChild.QueueFree();
+									}
+									index+=1;
+									l = TestedRoom.GetChildCount();
+								}
+							}
+						}
 					}
 				}
 			}
-			RoomList.Add(Room);
-			AddChild(Room);
-
 		}
-		GD.Print(RoomList.Count);
 	}
 }
