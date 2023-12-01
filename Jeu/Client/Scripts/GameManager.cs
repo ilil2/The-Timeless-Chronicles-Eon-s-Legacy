@@ -304,6 +304,7 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 						}
 						else
@@ -312,7 +313,7 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							OtherArcherScript.ID = Conversions.AtoI(InfoAutreJoueur["id1"]);
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 						}
 						break;
@@ -323,12 +324,14 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
 						}
 						else if (InfoJoueur["id"] == "2")
@@ -337,12 +340,14 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 						}
 						else
@@ -351,12 +356,14 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
 						}
 						break;
@@ -367,18 +374,21 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
+							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
 						}
 						else if (InfoJoueur["id"] == "2")
@@ -387,18 +397,21 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
+							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
 						}
 						else if (InfoJoueur["id"] == "3")
@@ -407,18 +420,21 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
+							SetIDtoClass(Joueur4, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
 						}
 						else
@@ -427,18 +443,21 @@ public partial class GameManager : Node3D
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
+							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
+							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
+							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
 						}
 						break;
@@ -458,6 +477,25 @@ public partial class GameManager : Node3D
 		{
 			//GD.Print("serveur hors ligne");	//si le serveur est hors ligne
 			GD.Print(e);
+		}
+	}
+
+	private void SetIDtoClass(CharacterBody3D player, string id, string classe)
+	{
+		switch (classe)
+		{
+			case "Archer":
+				((OtherArcherScript)player).SetID(Conversions.AtoI(id));
+				break;
+			case "Knight":
+				((OtherKnightScript)player).SetID(Conversions.AtoI(id));
+				break;
+			case "Scientist":
+				((OtherScientistScript)player).SetID(Conversions.AtoI(id));
+				break;
+			case "Assassin":
+				((OtherAssassinScript)player).SetID(Conversions.AtoI(id));
+				break;
 		}
 	}
 	
