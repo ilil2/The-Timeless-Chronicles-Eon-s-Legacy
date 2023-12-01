@@ -37,7 +37,7 @@ public static class Conversions
 			s = s.Substring(1);
 		}
 
-		res = fLoat.Parse(s,"fr-FR");
+		res = float.Parse(s);
 		
 		return nega?-res:res;
 	}
@@ -47,7 +47,7 @@ public static class Conversions
 		return b?1:0;
 	}
 	
-	public static float Pow(int n,int b)
+	public static float Pow(float n,int b)
 	{
 		if (b == 0)
 		{
