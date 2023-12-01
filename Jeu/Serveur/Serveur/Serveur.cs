@@ -31,7 +31,7 @@ public class Serveur
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
         soc.Bind(iep); //connection depuis n'importe ou
         
-        soc.Listen(4); //mise en ecoute du serveur
+        soc.Listen(5); //mise en ecoute du serveur
 
         Console.WriteLine("Serveur en marche");
 
@@ -87,6 +87,10 @@ public class Serveur
                 break;
         }
         tw.Flush();
+
+        Thread.Sleep(100);
+        
+        info = new[] { "-1/co:1;0;1", "-1/co:-1;0;1", "-1/co:1;0;-1", "-1/co:-1;0;1" };
         
         try
         {
@@ -94,7 +98,7 @@ public class Serveur
             while (connect)             //boucle de connection
             {
                 string requette = tr.ReadLine();        //recuperation de la chaine
-                Console.WriteLine(requette);
+                //Console.WriteLine($"{cc.pseudo} : {requette}");
                 if (requette == "quit")
                 {
                     Console.WriteLine($"client {cc.id} s'est deconnecté");
@@ -136,16 +140,20 @@ public class Serveur
                         switch (cc.id)
                         {
                             case 0:
-                                tw.WriteLine("in:" + info[1] + ";" + info[2] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
+                                //Console.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
                                 break;
                             case 1:
-                                tw.WriteLine("in:" + info[0] + ";" + info[2] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
+                                //Console.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
                                 break;
                             case 2:
-                                tw.WriteLine("in:" + info[0] + ";" + info[1] + ";" + info[3]);
+                                tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
+                                //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
                                 break;
                             case 3:
-                                tw.WriteLine("in:" + info[0] + ";" + info[1] + ";" + info[2]);
+                                tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
+                                //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
                                 break;
                         }
                         tw.Flush();
@@ -158,8 +166,10 @@ public class Serveur
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
+            //Console.WriteLine(e);
+            //throw new Exception();
             Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
             joueur_ready -= 1;
             if (joueur_ready == 0)
