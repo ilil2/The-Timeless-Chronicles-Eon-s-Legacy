@@ -250,7 +250,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186	"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
@@ -615,7 +615,7 @@ public partial class GameManager : Node3D
 				{
 					string[] CoordInfo = SplitInfo[i].Split('/');
 					CoordInfo[1] = CoordInfo[1].Substring(3);
-					InfoAutreJoueur[$"id{CoordInfo[0]}"] = CoordInfo[1];
+					InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
 				}
 			}
 		}

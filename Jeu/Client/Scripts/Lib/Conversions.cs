@@ -31,6 +31,13 @@ public static class Conversions
 		float res = 0;
 		bool compteur = true;
 		float count = 0;
+		bool nega = false;
+		
+		if (s[0] == '-')
+		{
+			nega = true;
+			s = s.Substring(1);
+		}
 
 		foreach (var c in s)
 		{
@@ -55,8 +62,8 @@ public static class Conversions
 		}
 
 		res /= 10;
-		res /= count;
-		return res;
+		res /= s.Length + count - 1;
+		return nega?-res:res;
 	}
 
 	public static int BtoI(bool b)
