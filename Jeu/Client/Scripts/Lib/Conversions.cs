@@ -29,8 +29,6 @@ public static class Conversions
 	public static float AtoF(string? s)
 	{
 		float res = 0;
-		bool compteur = true;
-		int count = 0;
 		bool nega = false;
 		
 		if (s[0] == '-')
@@ -39,30 +37,8 @@ public static class Conversions
 			s = s.Substring(1);
 		}
 
-		foreach (var c in s)
-		{
-			if (char.IsNumber(c))
-			{
-				res += c - 48;
-				res *= 10;
-			}
-			else if (c == ',')
-			{
-				compteur = false;
-			}
-			else
-			{
-				throw new InvalidCastException("veuillez rentrer un nombre en base 10");
-			}
-
-			if (compteur)
-			{
-				count += 1;
-			}
-		}
-
-		res /= 10f;
-		res /= Pow(10,count);
+		res = fLoat.Parse(s,"fr-FR");
+		
 		return nega?-res:res;
 	}
 
