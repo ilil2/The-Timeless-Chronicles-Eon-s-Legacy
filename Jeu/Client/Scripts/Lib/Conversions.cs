@@ -30,7 +30,7 @@ public static class Conversions
 	{
 		float res = 0;
 		bool compteur = true;
-		float count = 0;
+		int count = 0;
 		bool nega = false;
 		
 		if (s[0] == '-')
@@ -61,13 +61,22 @@ public static class Conversions
 			}
 		}
 
-		res /= 10;
-		res /= s.Length + count - 1;
+		res /= 10f;
+		res /= Pow(10,count);
 		return nega?-res:res;
 	}
 
 	public static int BtoI(bool b)
 	{
 		return b?1:0;
+	}
+	
+	public static float Pow(int n,int b)
+	{
+		if (b == 0)
+		{
+			return 1;
+		}
+		return n * Pow(n,b-1);
 	}
 }
