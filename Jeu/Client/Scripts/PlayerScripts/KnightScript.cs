@@ -40,6 +40,8 @@ public partial class KnightScript : CharacterBody3D
 		//initialisation de la variable direction
 		_h = GetNode<Node3D>("CameraPlayer/h");
 		_direction = Vector3.Back.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y);
+		
+		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
 	}
 
 	public override void _Input(InputEvent @event)
@@ -88,9 +90,9 @@ public partial class KnightScript : CharacterBody3D
 
 		//Mouvement du joueur
 		if ((forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"])) 
-		    || (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
-		    || (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
-		    || (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
+			|| (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
+			|| (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
+			|| (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
 		{
 			_direction = _characterClass.MoveDirection(forward, backward, right, left);
 			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();

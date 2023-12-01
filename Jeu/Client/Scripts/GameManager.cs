@@ -610,31 +610,12 @@ public partial class GameManager : Node3D
 			else if (rep.Substring(0,2) == "in")
 			{
 				string line = rep.Substring(3);
-				string[] SplitInfo = line.Split('/');
-				SplitInfo[0] = SplitInfo[0].Substring(3);
-				string[] CoordInfo = SplitInfo[0].Split(';');
-				switch (InfoJoueur["id"])
+				string[] SplitInfo = line.Split('|');
+				for (int i = 0; i < 3; i++)
 				{
-					case "0":
-						InfoAutreJoueur["co1"] = CoordInfo[0];
-						InfoAutreJoueur["co2"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "1":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co2"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "2":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co1"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "3":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co1"] = CoordInfo[1];
-						InfoAutreJoueur["co2"] = CoordInfo[2];
-						break;
+					string[] CoordInfo = SplitInfo[i].Split('/');
+					CoordInfo[1] = CoordInfo[1].Substring(3);
+					InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
 				}
 			}
 		}
