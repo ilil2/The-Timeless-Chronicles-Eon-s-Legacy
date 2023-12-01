@@ -39,7 +39,7 @@ public static class Conversions
 				res += c - 48;
 				res *= 10;
 			}
-			else if (c == '.')
+			else if (c == ',')
 			{
 				compteur = false;
 			}

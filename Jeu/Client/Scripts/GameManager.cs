@@ -45,7 +45,7 @@ public partial class GameManager : Node3D
 		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse("192.168.1.218"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
@@ -250,7 +250,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("192.168.1.218"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
@@ -612,7 +612,7 @@ public partial class GameManager : Node3D
 				string line = rep.Substring(3);
 				string[] SplitInfo = line.Split('/');
 				SplitInfo[0] = SplitInfo[0].Substring(3);
-				string[] CoordInfo = SplitInfo[0].Split(';');
+				string[] CoordInfo = SplitInfo[0].Split('|');
 				switch (InfoJoueur["id"])
 				{
 					case "0":
