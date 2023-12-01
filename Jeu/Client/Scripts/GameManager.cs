@@ -45,7 +45,7 @@ public partial class GameManager : Node3D
 		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("192.168.1.218"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
@@ -250,7 +250,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("192.168.1.218"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186	"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
@@ -610,31 +610,12 @@ public partial class GameManager : Node3D
 			else if (rep.Substring(0,2) == "in")
 			{
 				string line = rep.Substring(3);
-				string[] SplitInfo = line.Split('/');
-				SplitInfo[0] = SplitInfo[0].Substring(3);
-				string[] CoordInfo = SplitInfo[0].Split('|');
-				switch (InfoJoueur["id"])
+				string[] SplitInfo = line.Split('|');
+				for (int i = 0; i < 3; i++)
 				{
-					case "0":
-						InfoAutreJoueur["co1"] = CoordInfo[0];
-						InfoAutreJoueur["co2"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "1":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co2"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "2":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co1"] = CoordInfo[1];
-						InfoAutreJoueur["co3"] = CoordInfo[2];
-						break;
-					case "3":
-						InfoAutreJoueur["co0"] = CoordInfo[0];
-						InfoAutreJoueur["co1"] = CoordInfo[1];
-						InfoAutreJoueur["co2"] = CoordInfo[2];
-						break;
+					string[] CoordInfo = SplitInfo[i].Split('/');
+					CoordInfo[1] = CoordInfo[1].Substring(3);
+					InfoAutreJoueur[$"id{CoordInfo[0]}"] = CoordInfo[1];
 				}
 			}
 		}
