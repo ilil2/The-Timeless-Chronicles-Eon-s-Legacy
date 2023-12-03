@@ -4,6 +4,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
+
+/*
+To Do List du code:
+- La rotation des salles -OK
+- La séparation des types dans les scenes Room -PB
+- Récup coo de la salle la plus loin -OK
+- Ajout du dernier type de salle
+- Corrigé les % et la génération
+- Déco des salles
+- SpawnPoint des mobs
+*/
+
 public partial class MapLvl1Script : Node
 {
 	private Stopwatch stopwatch = new Stopwatch();
@@ -15,6 +27,9 @@ public partial class MapLvl1Script : Node
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
+	private float SpawnX;
+	private float SpawnZ;
+	private double MaxSpawnDist = 0;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -50,6 +65,7 @@ public partial class MapLvl1Script : Node
 				CreateMap();
 				OpenRoom();
 				MapReady = true;
+				GD.Print($"{SpawnX} {SpawnZ}");
 			}
 		}
 		
@@ -58,6 +74,11 @@ public partial class MapLvl1Script : Node
 	public bool MapIsReady()
 	{
 		return MapReady;
+	}
+	
+	public (int,int) GetSpawnLocation()
+	{
+		return ((int)SpawnX,(int)SpawnZ);
 	}
 
 	private StaticBody3D InitMainRoom()
@@ -96,6 +117,7 @@ public partial class MapLvl1Script : Node
 
 			int ID = Rand.Next(1, 4);
 			(int h, int w) = IdToLen[ID];
+			float Angle = 90*Rand.Next(0,4);
 			
 			RigidBody3D PRoom = new RigidBody3D();
 			PRoom.LockRotation = true;
@@ -117,6 +139,7 @@ public partial class MapLvl1Script : Node
 			Room.AddChild(RoomCollision);
 			Room.AddChild(RoomMesh);
 			Room.Position = Roundm((float)x*LenWall,(float)z*LenWall,LenWall);
+			Room.RotationDegrees = new Vector3(0,Angle,0);
 			AddChild(Room);
 			PseudoRoomList.Add(Room);
 
@@ -134,10 +157,13 @@ public partial class MapLvl1Script : Node
 			int ID = LenToId[(h,w)];
 			float X = PseudoRoom.Position.X;
 			float Z = PseudoRoom.Position.Z;
+			float A = PseudoRoom.RotationDegrees.Y;
 			PseudoRoom.QueueFree();
 			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/RoomScenes/Room{ID}.tscn");
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = Roundm(X, Z, LenWall);
+			Vector3 rotationY = new Vector3(0, 1, 0);
+			Room.RotationDegrees = new Vector3(0,A,0);
 			AddChild(Room);
 			RoomList.Add(Room);
 
@@ -195,54 +221,47 @@ public partial class MapLvl1Script : Node
 				
 				if (dist<100)
 				{
-					int NbWall = 0;
+					List<Node3D> OverlapWallList = new List<Node3D>();
 					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
 					{
 						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
 						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
-							bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
+							bool TestPos = (int)ActualChild.GlobalTransform.Origin.X==(int)TestedChild.GlobalTransform.Origin.X && (int)ActualChild.GlobalTransform.Origin.Z==(int)TestedChild.GlobalTransform.Origin.Z;//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
 							if (TestPos)
 							{
 								if (l<TestedRoom.GetChildCount())
 								{
-									NbWall+=1;
+									TestedChild.QueueFree();
+									OverlapWallList.Add(ActualChild);
 									l = TestedRoom.GetChildCount();
 								}
 							}
 						}
 					}
-					int RandWall = Rand.Next(0,NbWall);
-					int index = 0;
-					if (i==0) index = NbWall + 1;
-					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
+					int RandWall = Rand.Next(0,OverlapWallList.Count);
+					for (int k = 0; k < OverlapWallList.Count; k++)
 					{
-						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
-						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
+						if (i==0) k = OverlapWallList.Count+1;
+						if (k == RandWall)
 						{
-							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
-							bool TestPos = (TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
-							if (TestPos)
-							{
-								if (l<TestedRoom.GetChildCount())
-								{
-									ActualChild.QueueFree();
-									if (index == RandWall)
-									{
-										Node3D Gate = AssetC.Instantiate<Node3D>();
-										Gate.Rotation = new Vector3(0,ActualChild.Rotation.Y,0);
-										Gate.Position = new Vector3(ActualChild.Position.X+ActualRoom.Position.X,ActualChild.Position.Y+ActualRoom.Position.Y,ActualChild.Position.Z+ActualRoom.Position.Z);
-										AddChild(Gate);
-										TestedChild.QueueFree();
-									}
-									index+=1;
-									l = TestedRoom.GetChildCount();
-								}
-							}
+							Node3D Child = OverlapWallList[k];
+							Node3D Gate = AssetC.Instantiate<Node3D>();
+							Gate.Rotation = Child.Rotation+ActualRoom.Rotation;
+							Gate.Position = Child.GlobalTransform.Origin;
+							AddChild(Gate);
+							Child.QueueFree();
 						}
 					}
 				}
+			}
+			double DistToMain = Distance(ActualRoom,MainRoom);
+			if (MaxSpawnDist<DistToMain)
+			{
+				MaxSpawnDist = DistToMain;
+				SpawnX = ActualRoom.Position.X;
+				SpawnZ = ActualRoom.Position.Z;
 			}
 		}
 	}

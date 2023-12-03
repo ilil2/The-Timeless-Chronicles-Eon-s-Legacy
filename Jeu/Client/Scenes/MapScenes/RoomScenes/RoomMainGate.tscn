@@ -46,8 +46,12 @@ data = PackedVector3Array(2.7, 1.8, 0.5, 2.7656, 1.8, 0.5, 2.7656, 2, 0.5, 2.765
 
 [node name="RoomMainGate" type="Node3D"]
 
+[node name="Misc" type="Node3D" parent="."]
+
+[node name="Spawn" type="Node3D" parent="."]
+
 [node name="Wall_mesh_heiroglyphics14" type="Node3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 21, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 21, -1.5, 0)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Wall_mesh_heiroglyphics14"]
@@ -61,7 +65,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_jpxp4")
 
 [node name="Wall_mesh_heiroglyphics21" type="Node3D" parent="."]
-transform = Transform3D(-3.27835e-07, 0, 1.5, 0, 1.5, 0, -1.5, 0, -3.27835e-07, 0, 0, -21)
+transform = Transform3D(-3.27835e-07, 0, 1.5, 0, 1.5, 0, -1.5, 0, -3.27835e-07, 0, -1.5, -21)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Wall_mesh_heiroglyphics21"]
@@ -75,7 +79,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_jpxp4")
 
 [node name="Wall_mesh_heiroglyphics30" type="Node3D" parent="."]
-transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -21, 0, 0)
+transform = Transform3D(-1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, -1.5, -21, -1.5, 0)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Wall_mesh_heiroglyphics30"]
@@ -89,7 +93,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_jpxp4")
 
 [node name="Wall_mesh_heiroglyphics26" type="Node3D" parent="."]
-transform = Transform3D(1.96701e-07, 0, -1.5, 0, 1.5, 0, 1.5, 0, 1.96701e-07, 0, 0, 21)
+transform = Transform3D(1.96701e-07, 0, -1.5, 0, 1.5, 0, 1.5, 0, 1.96701e-07, 0, -1.5, 21)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Wall_mesh_heiroglyphics26"]
