@@ -129,16 +129,16 @@ mesh = ExtResource("6_q1wb8")
 
 [node name="DebugPack" type="Node3D" parent="."]
 
-[node name="Haut" type="Camera3D" parent="DebugPack"]
-transform = Transform3D(1, 1.77635e-15, -2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 600, 0)
-fov = 47.8
-
 [node name="Player" parent="DebugPack" instance=ExtResource("5_j64yf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0)
 slide_on_ceiling = false
 
+[node name="Haut" type="Camera3D" parent="DebugPack"]
+transform = Transform3D(1, 1.77635e-15, -2.98023e-08, 2.98023e-08, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 600, 0)
+fov = 47.8
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DebugPack"]
-transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
+transform = Transform3D(-0.505626, -0.496029, 0.705902, 0.125941, 0.766998, 0.629169, -0.853511, 0.407026, -0.325343, -167.575, 487.618, 340.428)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="DebugPack"]

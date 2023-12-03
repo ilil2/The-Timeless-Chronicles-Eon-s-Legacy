@@ -10,8 +10,8 @@ To Do List du code:
 - La rotation des salles -OK
 - La séparation des types dans les scenes Room -PB
 - Récup coo de la salle la plus loin -OK
-- Ajout du dernier type de salle
-- Corrigé les % et la génération
+- Ajout du dernier type de salle -OK
+- Corrigé les % et la génération -OK
 - Déco des salles
 - SpawnPoint des mobs
 */
@@ -33,16 +33,18 @@ public partial class MapLvl1Script : Node
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
-		{2,(5,5)},
-		{3,(7,7)},
-		{4,(5,3)}
+		{2,(5,3)},
+		{3,(5,5)},
+		{4,(7,5)},
+		{5,(7,7)}
 	};
 	private Dictionary<(int,int),int> LenToId = new Dictionary<(int,int),int>()
 	{
 		{(3,3),1},
-		{(5,5),2},
-		{(7,7),3},
-		{(5,3),4}
+		{(5,3),2},
+		{(5,5),3},
+		{(7,5),4},
+		{(7,7),5}
 	};
 	
 	public override void _Ready()
@@ -115,7 +117,13 @@ public partial class MapLvl1Script : Node
 			double x = (NbRoom / 10) * r * Math.Cos(t);
 			double z = (NbRoom / 10) * r * Math.Sin(t);
 
-			int ID = Rand.Next(1, 4);
+			int ID;// = Rand.Next(1, 6);
+			int RandInt = Rand.Next(1,101);
+			if (RandInt<=35) ID = 1;
+			else if (RandInt<=60) ID = 2;
+			else if (RandInt<=80) ID = 3;
+			else if (RandInt<=95) ID = 4;
+			else ID = 5;
 			(int h, int w) = IdToLen[ID];
 			float Angle = 90*Rand.Next(0,4);
 			
@@ -222,10 +230,10 @@ public partial class MapLvl1Script : Node
 				if (dist<100)
 				{
 					List<Node3D> OverlapWallList = new List<Node3D>();
-					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
+					for (int k = 2; k < ActualRoom.GetChildCount(); k++)
 					{
 						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
-						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
+						for (int l = 2; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
 							bool TestPos = (int)ActualChild.GlobalTransform.Origin.X==(int)TestedChild.GlobalTransform.Origin.X && (int)ActualChild.GlobalTransform.Origin.Z==(int)TestedChild.GlobalTransform.Origin.Z;//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
