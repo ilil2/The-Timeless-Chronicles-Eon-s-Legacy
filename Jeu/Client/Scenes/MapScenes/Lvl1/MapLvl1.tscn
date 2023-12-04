@@ -107,3 +107,7 @@ skeleton = NodePath("")
 [node name="Sphynx" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(0.01, -0.0173205, -8.74252e-10, 4.37126e-10, -7.57154e-10, 0.02, -0.0173205, -0.01, 3.3094e-17, -694.36, 8.48621e-06, 194.16)
 mesh = ExtResource("5_cdk6f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.505626, -0.496029, 0.705902, 0.125941, 0.766998, 0.629169, -0.853511, 0.407026, -0.325343, -167.575, 487.618, 340.428)
+shadow_enabled = true

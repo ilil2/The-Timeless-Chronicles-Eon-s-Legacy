@@ -16,19 +16,19 @@ To Do List du code:
 - Optimiser le jeu
 */
 
-public partial class MapLvl1Script : Node
+public partial class MapLvl1Script : Node3D
 {
 	private Stopwatch stopwatch = new Stopwatch();
-	private Random Rand = new Random();
-	private bool MapReady = false;
+	private Random Rand = new Random(42);
+	private static bool MapReady = false;
 	private int NbRoom = 300;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
-	private float SpawnX;
-	private float SpawnZ;
+	private static float SpawnX;
+	private static float SpawnZ;
 	private double MaxSpawnDist = 0;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
@@ -69,9 +69,6 @@ public partial class MapLvl1Script : Node
 				OpenRoom();
 				
 				MapReady = true;
-				GD.Print($"SpawnPoint Player X:{SpawnX} Z:{SpawnZ}");
-				CharacterBody3D Player = GetNode<CharacterBody3D>("DebugPack/Player");
-				Player.Position = new Vector3(SpawnX,2,SpawnZ);
 			}
 		}
 		

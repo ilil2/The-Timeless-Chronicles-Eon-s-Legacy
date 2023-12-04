@@ -83,19 +83,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tp728")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lugpm"]
-load_path = "res://.godot/imported/daytime.png-d29902e6712cb80288c108c16e5c6627.s3tc.ctex"
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u0dx5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_oeb4q"]
-panorama = SubResource("CompressedTexture2D_lugpm")
+panorama = SubResource("CompressedTexture2D_u0dx5")
 
-[sub_resource type="Sky" id="Sky_ioqg7"]
+[sub_resource type="Sky" id="Sky_u1hwc"]
 sky_material = SubResource("PanoramaSkyMaterial_oeb4q")
 
 [sub_resource type="Environment" id="Environment_sigm7"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = SubResource("Sky_ioqg7")
+sky = SubResource("Sky_u1hwc")
 ssao_enabled = true
 sdfgi_enabled = true
 adjustment_enabled = true
