@@ -172,6 +172,7 @@ public class Serveur
             //throw new Exception();
             Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
             joueur_ready -= 1;
+            info[cc.id] = $"{cc.id}/deco";
             if (joueur_ready == 0)
             {
                 throw new Exception("fermeture du serveur");
