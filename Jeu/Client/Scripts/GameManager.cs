@@ -8,7 +8,6 @@ using Lib;
 
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Godot.Collections;
 
 public partial class GameManager : Node3D
@@ -43,6 +42,27 @@ public partial class GameManager : Node3D
 	
 	private Node3D Map;
 	
+	public override void _Ready()
+	{
+		InputManger = new InputControl();
+		
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		iep = new IPEndPoint(IPAddress.Parse("192.168.29.218"), 9191);						//adresse + port du serveur principal
+		soc.Connect(iep);				//conexion
+		
+		
+		ns = new NetworkStream(soc);
+		tw = new StreamWriter(ns);	//lecture requette serveur principal
+		tr = new StreamReader(ns);	//ecriture requette serveur principal
+		
+		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
+		Control connectionMenu = connectionUI.Instantiate<Control>();
+		AddChild(connectionMenu);
+		
+		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
+		Map = MapScene.Instantiate<Node3D>();
+	}
+	
 	private bool tentative_connection = true;
 	
 	private bool conn = true;					//connexion au serveur principal
@@ -67,27 +87,6 @@ public partial class GameManager : Node3D
 	private CharacterBody3D Joueur3;
 	private CharacterBody3D Joueur4;
 	
-	//Ready
-	public override void _Ready()
-	{
-		InputManger = new InputControl();
-		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
-		soc.Connect(iep);				//conexion
-		
-		ns = new NetworkStream(soc);
-		tw = new StreamWriter(ns);	//lecture requette serveur principal
-		tr = new StreamReader(ns);	//ecriture requette serveur principal
-		
-		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
-		Control connectionMenu = connectionUI.Instantiate<Control>();
-		AddChild(connectionMenu);
-		
-		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
-		Map = MapScene.Instantiate<Node3D>();
-	}
-	
 	//process
 	public override void _Process(double delta)
 	{
@@ -103,9 +102,10 @@ public partial class GameManager : Node3D
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
 							
-							Send($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}",soc);
+							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
 							
-							string? line = Receive(soc);
+							string? line = tr.ReadLine();
 							if (line == "connection success")
 							{
 								tentative_connection = false;
@@ -128,9 +128,10 @@ public partial class GameManager : Node3D
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							Send($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}",soc);
+							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
 							
-							string line = Receive(soc);
+							string line = tr.ReadLine();
 							if (line == "creation success")
 							{
 								tentative_connection = false;
@@ -170,10 +171,11 @@ public partial class GameManager : Node3D
 				{
 					if (LobbyManager.CreateButtonPressed)
 					{
-						Send("newgame",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
 						LobbyReset = true;
 						
-						string rep = Receive(soc);
+						string rep = tr.ReadLine();
 						if (rep.Substring(0, 7) == "newgame")
 						{
 							IDGame = rep.Substring(8);
@@ -186,10 +188,11 @@ public partial class GameManager : Node3D
 					
 					else if (LobbyManager.JoinGamePressed)
 					{
-						Send($"joingame {LobbyManager.IDJoinGame}",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine($"joingame {LobbyManager.IDJoinGame}");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
 						LobbyReset = true;
 						
-						string rep = Receive(soc);
+						string rep = tr.ReadLine();
 						if (rep.Substring(0) == "join")
 						{
 							ValidIDGame = true; 
@@ -209,7 +212,8 @@ public partial class GameManager : Node3D
 					else if (LobbyManager.StartGame)
 					{
 						LobbyReset = true;
-						Send("start",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("start");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur	
 						Thread.Sleep(2000);
 					}
 					
@@ -219,12 +223,14 @@ public partial class GameManager : Node3D
 						LobbyReset = true;
 						OnJoin = false;
 						th.Interrupt();
-						Send("back",soc);
+						tw.WriteLine("back");
+						tw.Flush();
 					}
 					
 					if (OnJoin && DateTime.Now > endTime)
 					{
-						Send("player",soc);
+						tw.WriteLine("player");
+						tw.Flush();
 						startTime = DateTime.Now;
 					}
 					endTime = startTime.Add(timerDuration);
@@ -249,14 +255,15 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("192.168.29.218"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
 				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
 				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
 				
-				Send(InfoJoueur["pseudo"],soc2);
+				tw2.WriteLine(InfoJoueur["pseudo"]);
+				tw2.Flush();
 				
 				PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
 				Control ClassSelect = ClassSelectUI.Instantiate<Control>();
@@ -272,7 +279,8 @@ public partial class GameManager : Node3D
 				{
 					InfoJoueur["class"] = ClassSelectUI.ClassChose;
 					ClassSelectUI.ClassChose = "";
-					Send(InfoJoueur["class"],soc2);
+					tw2.WriteLine(InfoJoueur["class"]);
+					tw2.Flush();
 				}
 				else if (_loadMap)
 				{
@@ -470,7 +478,8 @@ public partial class GameManager : Node3D
 			
 			else if (state == 6)
 			{
-				Send("in:co:" + InfoJoueur["co"],soc2);
+				tw2.WriteLine("in:co:" + InfoJoueur["co"]);
+				tw2.Flush();
 			}
 			
 		}
@@ -500,25 +509,11 @@ public partial class GameManager : Node3D
 		}
 	}
 	
-	private void Send(string s, Socket socket)
-	{
-		byte[] data = Encoding.UTF8.GetBytes(s);
-		socket.Send(data, 0, data.Length, SocketFlags.None);
-	}
-
-	private string Receive(Socket socket, int i = 1024)
-	{
-		byte[] buffer = new byte[i];
-		int bytesRead = socket.Receive(buffer);
-		string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-		return receivedData;
-	}
-	
 	private void Listen()		//premier thread
 	{
 		while (true)
 		{
-			string? rep = Receive(soc);	//lecture de donnée du serveur
+			string? rep = tr.ReadLine();	//lecture de donnée du serveur
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
@@ -548,7 +543,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string rep = Receive(soc2);
+			string rep = tr2.ReadLine();
 			if (rep.Substring(0,5) == "ready")
 			{
 				rep = rep.Substring(6);
