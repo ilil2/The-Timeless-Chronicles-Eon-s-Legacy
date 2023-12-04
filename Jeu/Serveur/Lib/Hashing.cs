@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -17,5 +18,33 @@ public class Hashing
         }
 
         return sb.ToString();
+    }
+    
+    public static byte[] CompressString(string input)
+    {
+        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+
+        using (MemoryStream outputStream = new MemoryStream())
+        {
+            using (GZipStream gzipStream = new GZipStream(outputStream, CompressionMode.Compress, true))
+            {
+                gzipStream.Write(inputBytes, 0, inputBytes.Length);
+            }
+
+            byte[] compressedBytes = outputStream.ToArray();
+            return compressedBytes;
+        }
+    }
+    
+    public static string DecompressString(byte[] input)
+    {
+        using (MemoryStream inputStream = new MemoryStream(input))
+        using (GZipStream gzipStream = new GZipStream(inputStream, CompressionMode.Decompress))
+        using (MemoryStream outputStream = new MemoryStream())
+        {
+            gzipStream.CopyTo(outputStream);
+            byte[] decompressedBytes = outputStream.ToArray();
+            return Encoding.UTF8.GetString(decompressedBytes);
+        }
     }
 }
