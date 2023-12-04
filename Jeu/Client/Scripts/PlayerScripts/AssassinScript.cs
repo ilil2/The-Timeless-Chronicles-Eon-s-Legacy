@@ -33,6 +33,8 @@ public partial class AssassinScript : CharacterBody3D
 	private float _angularAcceleration;
 	private int _acceleration;
 	
+	public static int ID;
+	
 	public override void _Ready()
 	{
 		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
@@ -59,6 +61,8 @@ public partial class AssassinScript : CharacterBody3D
 				_camera.Fov  += 1;
 			}
 		}
+		
+		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -79,12 +83,6 @@ public partial class AssassinScript : CharacterBody3D
 		{
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
-
-		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
-		//{
-		//	 _verticalVelocity = Vector3.Up * _jumpForce;
-		//}
 
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))

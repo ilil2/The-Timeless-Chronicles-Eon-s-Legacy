@@ -25,4 +25,34 @@ public static class Conversions
 		res /= 10;
 		return res;
 	}
+	
+	public static float AtoF(string? s)
+	{
+		float res = 0;
+		bool nega = false;
+		
+		if (s[0] == '-')
+		{
+			nega = true;
+			s = s.Substring(1);
+		}
+
+		res = float.Parse(s);
+		
+		return nega?-res:res;
+	}
+
+	public static int BtoI(bool b)
+	{
+		return b?1:0;
+	}
+	
+	public static float Pow(float n,int b)
+	{
+		if (b == 0)
+		{
+			return 1;
+		}
+		return n * Pow(n,b-1);
+	}
 }

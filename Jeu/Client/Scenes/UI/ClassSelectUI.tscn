@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2nshsm3c0cuc"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ClassSelectUI.cs" id="1_aqayr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ad70f"]
+font_size = 27
+font_color = Color(1, 1, 0.847059, 1)
+
+[node name="ClassSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqayr")
+
+[node name="AssassinButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.764
+anchor_top = 0.593
+anchor_right = 0.944
+anchor_bottom = 0.691
+offset_left = -0.128067
+offset_top = -0.264035
+offset_right = 0.511925
+offset_bottom = 0.231971
+text = "Assassin"
+
+[node name="KnightButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.292
+anchor_top = 0.593
+anchor_right = 0.472
+anchor_bottom = 0.691
+offset_left = -0.384029
+offset_top = -0.264035
+offset_right = 0.255962
+offset_bottom = 0.231971
+text = "Knight"
+
+[node name="ArcherButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.593
+anchor_right = 0.236
+anchor_bottom = 0.691
+offset_left = -0.512002
+offset_top = -0.264035
+offset_right = 0.127981
+offset_bottom = 0.231971
+text = "Archer"
+
+[node name="ReadyButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41
+anchor_top = 0.79
+anchor_right = 0.59
+anchor_bottom = 0.889
+offset_left = -0.32003
+offset_top = 0.0799861
+offset_right = 0.319962
+offset_bottom = -0.0720377
+text = "Ready"
+
+[node name="ScientistButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.593
+anchor_right = 0.708
+anchor_bottom = 0.691
+offset_left = -0.255997
+offset_top = -0.264035
+offset_right = 0.383995
+offset_bottom = 0.231971
+text = "Scientist"
+
+[node name="ImgAssassin" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.764
+anchor_top = 0.099
+anchor_right = 0.944
+anchor_bottom = 0.556
+offset_left = -0.128067
+offset_top = -0.152004
+offset_right = 0.511925
+offset_bottom = -0.288035
+
+[node name="ImgScientist" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.099
+anchor_right = 0.708
+anchor_bottom = 0.556
+offset_left = -0.255997
+offset_top = -0.152004
+offset_right = 0.383995
+offset_bottom = -0.288035
+
+[node name="ImgKnight" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.292
+anchor_top = 0.099
+anchor_right = 0.472
+anchor_bottom = 0.556
+offset_left = -0.384029
+offset_top = -0.152004
+offset_right = 0.255962
+offset_bottom = -0.288035
+
+[node name="ImgArcher" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.099
+anchor_right = 0.236
+anchor_bottom = 0.556
+offset_left = -0.512002
+offset_top = -0.152004
+offset_right = 0.127981
+offset_bottom = -0.288035
+
+[node name="EnAttente" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.79
+anchor_right = 0.687
+anchor_bottom = 0.889
+offset_left = 0.575993
+offset_top = 0.0799861
+offset_right = 0.575958
+offset_bottom = -0.0720377
+text = "En attente des autres joueurs..."
+label_settings = SubResource("LabelSettings_ad70f")
+horizontal_alignment = 1
+vertical_alignment = 1

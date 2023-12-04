@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/AssassinScript.cs" id="1_gfwtm"]
 [ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/CameraPlayer.tscn" id="2_y3081"]
 
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
 height = 1.99835
