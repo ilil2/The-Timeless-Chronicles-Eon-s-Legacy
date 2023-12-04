@@ -29,7 +29,7 @@ public class MainServeur
     private List<string> user_ids_csv = new List<string>();
     private List<string> user_passwords_csv = new List<string>();
 
-    private void CSV()
+    public void CSV()
     {
         StreamReader sr = new StreamReader("comptes.csv");
 
@@ -49,22 +49,6 @@ public class MainServeur
         }
         
         sr.Close();
-    }
-    
-    private void Send(string s,object o)
-    {
-        ClientCom client = (ClientCom)o;
-        byte[] data = Encoding.UTF8.GetBytes(s);
-        client.Socket.Send(data, 0, data.Length, SocketFlags.None);
-    }
-
-    private string Receive(object o,int i = 1024)
-    {
-        ClientCom client = (ClientCom)o;
-        byte[] buffer = new byte[i];
-        int bytesRead = client.Socket.Receive(buffer);
-        string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-        return receivedData;
     }
     
     public void MainProgram()
@@ -97,7 +81,7 @@ public class MainServeur
         }
     }
     
-    private void com(object o) //fonction qui gere un client unique
+    public void com(object o) //fonction qui gere un client unique
     {
         ClientCom cc = (ClientCom)o;                        //creation de l'objet client
         NetworkStream ns = new NetworkStream(cc.Socket);    //debut de la connection
@@ -118,7 +102,7 @@ public class MainServeur
         {
             try
             {
-                line = Receive(cc);
+                line = tr.ReadLine();
                 Console.WriteLine(line);
                 bool error = false;
                 if (line.Substring(0, 4) == "conn")
@@ -143,12 +127,14 @@ public class MainServeur
 
                     if (error)
                     {
-                        Send("Pseudo ou mot de passe incorrect",cc);
+                        tw.WriteLine("Pseudo ou mot de passe incorrect");
+                        tw.Flush();
                     }
                     else
                     {
                         cc.id = user_id_csv;
-                        Send("connection success",cc);
+                        tw.WriteLine("connection success");
+                        tw.Flush();
                         incorect_conn = false;
                         Console.WriteLine("connection effectuée");
                     }
@@ -160,7 +146,8 @@ public class MainServeur
                     {
                         new_id_csv = line.Substring(5, line.IndexOf(';') - 5);
                         new_password_csv = line.Substring(line.IndexOf(';') + 1);
-                        Send("creation success",cc);
+                        tw.WriteLine("creation success");
+                        tw.Flush();
                         incorect_conn = false;
                         Console.WriteLine("creation effectuée");
                         
@@ -175,9 +162,11 @@ public class MainServeur
                     }
                     else
                     {
-                        Send("Compte déjà existant",cc);
+                        tw.WriteLine("Compte déjà existant");
+                        tw.Flush();
                     }
                 }
+                tw.Flush();
             }
             catch
             {
@@ -196,12 +185,7 @@ public class MainServeur
             nbr_joueur++;
             while (true)
             {
-                string requette = Receive(cc);
-                if (requette == "")
-                {
-                    throw new Exception("deconnexion");
-                }
-                
+                string requette = tr.ReadLine(); 
                 if (requette == "start" && master)
                 {
                     master = false;
@@ -243,7 +227,7 @@ public class MainServeur
                     new_player = true;
                     
                     Console.WriteLine($"nouvelle game : {cc.game_id} par : {cc.id}");
-                    Send($"newgame:{cc.game_id}",cc);
+                    tw.WriteLine($"newgame:{cc.game_id}");
                 }
 
                 else if (requette.Contains(' '))
@@ -252,7 +236,7 @@ public class MainServeur
                     {
                         cc.game_id = requette.Substring(9);
                         Console.WriteLine($"{cc.id} a rejoint : {cc.game_id}");
-                        Send($"join",cc);
+                        tw.WriteLine($"join");
 
                         //ListManupulation.PrintListOfList(player_games);
                         
@@ -278,7 +262,7 @@ public class MainServeur
                     else
                     {
                         Console.WriteLine($"{cc.id} a tente de rejoindre : {requette.Substring(9)} mais elle n'existe pas");
-                        Send("ID inconnu",cc);
+                        tw.WriteLine("ID inconnu");
                     }
                 }
                 
@@ -314,6 +298,8 @@ public class MainServeur
                     cc.in_my_game = new string[4];
                 }
                 
+                tw.Flush();
+                
                 if (requette == "player") //!join && ListManupulation.ListofListContain(player_games,0,cc.game_id)
                 {
                     /*for (int i = 0; i < 4; i++)
@@ -339,7 +325,8 @@ public class MainServeur
                 
                 if (player_games.ContainsKey(cc.game_id) == false)
                 {
-                    Send("wrong ID",cc);
+                    tw.WriteLine("remove");
+                    tw.Flush();
                     
                     master = false;
                     join = false;
@@ -350,9 +337,12 @@ public class MainServeur
                 
                 if (new_player)
                 {
-                    Send($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}",cc);
+                    tw.WriteLine($"listplayer:{cc.in_my_game[0]};{cc.in_my_game[1]};{cc.in_my_game[2]};{cc.in_my_game[3]}");
                     new_player = false;
+                    tw.Flush();
                 }
+                
+                tw.Flush();
             }
         }
         catch
@@ -371,8 +361,11 @@ public class MainServeur
         {
             if (cc.game_id == start_game)
             {
-                Send($"newserv:{ports[0]}",cc);
+                tw.WriteLine($"newserv:{ports[0]}");
+                    
                 Thread.Sleep(3000);
+                    
+                tw.Flush();
                 break;
             }
         }
