@@ -2,6 +2,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace Serveur;
 
@@ -22,7 +24,21 @@ public class Serveur
         }
     }*/
 
-    
+    private void Send(string s,object o)
+    {
+        ClientCom client = (ClientCom)o;
+        byte[] data = Encoding.UTF8.GetBytes(s);
+        client.Socket.Send(data, 0, data.Length, SocketFlags.None);
+    }
+
+    private string Receive(object o,int i = 1024)
+    {
+        ClientCom client = (ClientCom)o;
+        byte[] buffer = new byte[i];
+        int bytesRead = client.Socket.Receive(buffer);
+        string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+        return receivedData;
+    }
 
     public void MainProgram(int n)
     {
@@ -31,7 +47,7 @@ public class Serveur
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
         soc.Bind(iep); //connection depuis n'importe ou
         
-        soc.Listen(4); //mise en ecoute du serveur
+        soc.Listen(); //mise en ecoute du serveur
 
         Console.WriteLine("Serveur en marche");
 
@@ -44,10 +60,15 @@ public class Serveur
             ID++;
             Thread th = new Thread(com);                    //mise en place de la connection
             th.Start(clicom);                               //demarage de la connection
+
+            if (ID == 4)
+            {
+                inline = false;
+            }
         }
     }
     
-    public void com(object o) //fonction qui gere un client unique
+    private void com(object o) //fonction qui gere un client unique
     {
         ClientCom cc = (ClientCom)o;                        //creation de l'objet client
         NetworkStream ns = new NetworkStream(cc.Socket);    //debut de la connection
@@ -56,8 +77,8 @@ public class Serveur
         
         Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
 
-        cc.pseudo = tr.ReadLine();
-        cc.classe = tr.ReadLine();
+        cc.pseudo = Receive(cc);
+        cc.classe = Receive(cc);
         joueur_ready++;
         
         Console.WriteLine($"{cc.pseudo} : ready");
@@ -71,22 +92,21 @@ public class Serveur
         switch (cc.id)
         {
             case 0:
-                tw.WriteLine($"ready:{ID-1}/{info[1]}/{info[2]}/{info[3]}");
+                Send($"ready:{ID-1}/{info[1]}/{info[2]}/{info[3]}",cc);
                 break;
             case 1:
-                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[2]}/{info[3]}");
+                Send($"ready:{ID-1}/{info[0]}/{info[2]}/{info[3]}",cc);
                 break;
             case 2:
-                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[1]}/{info[3]}");
+                Send($"ready:{ID-1}/{info[0]}/{info[1]}/{info[3]}",cc);
                 break;
             case 3:
-                tw.WriteLine($"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}");
+                Send($"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}",cc);
                 break;
             default:
-                tw.WriteLine("marche po//////");
+                Send("marche po//////",cc);
                 break;
         }
-        tw.Flush();
 
         Thread.Sleep(100);
         
@@ -97,7 +117,7 @@ public class Serveur
             bool connect = true;        //varriable pour la deconnection du client
             while (connect)             //boucle de connection
             {
-                string requette = tr.ReadLine();        //recuperation de la chaine
+                string requette = Receive(cc);        //recuperation de la chaine
                 //Console.WriteLine($"{cc.pseudo} : {requette}");
                 if (requette == "quit")
                 {
@@ -140,23 +160,22 @@ public class Serveur
                         switch (cc.id)
                         {
                             case 0:
-                                tw.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
+                                Send("in:" + info[1] + "|" + info[2] + "|" + info[3],cc);
                                 //Console.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
                                 break;
                             case 1:
-                                tw.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
+                                Send("in:" + info[0] + "|" + info[2] + "|" + info[3],cc);
                                 //Console.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
                                 break;
                             case 2:
-                                tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
+                                Send("in:" + info[0] + "|" + info[1] + "|" + info[3],cc);
                                 //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
                                 break;
                             case 3:
-                                tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
+                                Send("in:" + info[0] + "|" + info[1] + "|" + info[2],cc);
                                 //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
                                 break;
                         }
-                        tw.Flush();
                     }
                     else
                     {
@@ -166,7 +185,7 @@ public class Serveur
                 }
             }
         }
-        catch (Exception e)
+        catch
         {
             //Console.WriteLine(e);
             //throw new Exception();
