@@ -622,8 +622,15 @@ public partial class GameManager : Node3D
 				for (int i = 0; i < 3; i++)
 				{
 					string[] CoordInfo = SplitInfo[i].Split('/');
-					CoordInfo[1] = CoordInfo[1].Substring(3);
-					InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+					if (CoordInfo[1] != "deco")
+					{
+						CoordInfo[1] = CoordInfo[1].Substring(3);
+						InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+					}
+					else
+					{
+						InfoAutreJoueur[$"co{CoordInfo[0]}"] = "0;-3;0";
+					}
 				}
 			}
 		}
