@@ -7,7 +7,7 @@ public partial class OtherArcherScript : CharacterBody3D
 
     private Label3D _pseudo;
     
-    private int ID;
+    private int _ID;
 
     public override void _Ready()
     {
@@ -21,11 +21,12 @@ public partial class OtherArcherScript : CharacterBody3D
         string[] PlayerPositions = GameManager.InfoJoueur["co"].Split(";");
         Vector3 PlayerCoord = new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2]));
         _pseudo.LookAt(PlayerCoord, Vector3.Up);
+        Rotation = new Vector3(0, Rotation.Y, 0);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        string[] Positions = GameManager.InfoAutreJoueur[$"co{ID}"].Split(";");
+        string[] Positions = GameManager.InfoAutreJoueur[$"co{_ID}"].Split(";");
         Vector3 PositionA = new Vector3(Lib.Conversions.AtoF(Positions[0]), Lib.Conversions.AtoF(Positions[1]), Lib.Conversions.AtoF(Positions[2]));
 
         Position = PositionA;
@@ -33,7 +34,7 @@ public partial class OtherArcherScript : CharacterBody3D
 
     private void SetPseudo()
     {
-        string PseudoName = GameManager.InfoAutreJoueur[$"pseudo{ID}"];
+        string PseudoName = GameManager.InfoAutreJoueur[$"pseudo{_ID}"];
         switch (PseudoName)
         {
             case "OttoLeBG":
@@ -41,7 +42,6 @@ public partial class OtherArcherScript : CharacterBody3D
             case "ilyann":
             case "Narth":
                 _pseudo.Modulate = new Color(224,195,13);
-                GD.Print("Modulate");
                 break;
             default:
                 _pseudo.Modulate = new Color(255,255,255);
@@ -53,11 +53,11 @@ public partial class OtherArcherScript : CharacterBody3D
 
     public void SetID(int id)
     {
-        ID = id;
+        _ID = id;
     }
     
     public int GetID()
     {
-        return ID;
+        return _ID;
     }
 }
