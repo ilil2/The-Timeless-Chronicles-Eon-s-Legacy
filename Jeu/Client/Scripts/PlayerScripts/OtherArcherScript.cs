@@ -41,6 +41,7 @@ public partial class OtherArcherScript : CharacterBody3D
             case "ilyann":
             case "Narth":
                 _pseudo.Modulate = new Color(224,195,13);
+                GD.Print("Modulate");
                 break;
             default:
                 _pseudo.Modulate = new Color(255,255,255);

@@ -166,7 +166,7 @@ public partial class ArcherScript : CharacterBody3D
 	{
 		_isShooting = true;
 		
-		PackedScene ArrowScene = GD.Load<PackedScene>("res://Scenes/fleche.tscn");
+		PackedScene ArrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
 		RigidBody3D Arrow = ArrowScene.Instantiate<RigidBody3D>();
 
 		double rotationY = playerMesh.Rotation.Y;
