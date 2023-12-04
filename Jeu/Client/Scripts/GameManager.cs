@@ -40,12 +40,14 @@ public partial class GameManager : Node3D
 
 	public static InputControl InputManger;
 	
+	private Node3D Map;
+	
 	public override void _Ready()
 	{
 		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse("192.168.29.218"), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		
@@ -56,6 +58,9 @@ public partial class GameManager : Node3D
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
+		
+		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
+		Map = MapScene.Instantiate<Node3D>();
 	}
 	
 	private bool tentative_connection = true;
@@ -250,7 +255,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse("192.168.29.218"), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
@@ -279,20 +284,25 @@ public partial class GameManager : Node3D
 				}
 				else if (_loadMap)
 				{
-					PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/TestMap/MapLvl1.tscn");
-					Node3D Map = MapScene.Instantiate<Node3D>();
 					AddChild(Map);
-
+					
 					_loadMap = false;
+				}
+				else if (((MapLvl1Script)Map).MapIsReady())
+				{
 					state = 5;
 				}
 			}
 			else if (state == 5)
 			{
+				(int x, int z) = ((MapLvl1Script)Map).GetSpawnLocation();
+				Random rand = new Random();
+				
 				PackedScene SceneJoueur1 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/{InfoJoueur["class"]}.tscn");
 				Joueur1 = SceneJoueur1.Instantiate<CharacterBody3D>();
 				AddChild(Joueur1);
 				Joueur1.Name = "Joueur1";
+				Joueur1.Position = new Vector3(x + rand.Next(-6,6),0,z + rand.Next(-6,6));
 				InfoJoueur["co"] = "0;0;0";
 				
 				switch (_nbJoueur)
