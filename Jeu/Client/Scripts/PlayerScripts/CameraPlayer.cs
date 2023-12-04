@@ -16,7 +16,7 @@ public partial class CameraPlayer : Node3D
 
 	public override void _Ready()
 	{
-		//Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Input(InputEvent @event)

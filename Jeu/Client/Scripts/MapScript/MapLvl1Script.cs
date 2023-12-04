@@ -21,7 +21,7 @@ public partial class MapLvl1Script : Node3D
 	private Stopwatch stopwatch = new Stopwatch();
 	private Random Rand = new Random(42);
 	private static bool MapReady = false;
-	private int NbRoom = 300;
+	private int NbRoom = 100;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
