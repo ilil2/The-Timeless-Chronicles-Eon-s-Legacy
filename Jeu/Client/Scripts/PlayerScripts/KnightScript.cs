@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Security.AccessControl;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class KnightScript : CharacterBody3D
@@ -86,21 +85,18 @@ public partial class KnightScript : CharacterBody3D
 			_horizontalVelocity = _characterClass.Dash(_direction, _dashPower);
 		}
 
-		(bool forward, bool backward, bool right, bool left) = (false,false,false,false);
-
 		//Mouvement du joueur
-		if ((forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"])) 
-			|| (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
-			|| (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
-			|| (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
+		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
 		{
-			_direction = _characterClass.MoveDirection(forward, backward, right, left);
+			_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
+				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
 			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
 			_isWalking = true;
-			
+
 			//Changement de la vitesse du joueur si il sprint
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
-			{ 
+			{
 				_movementSpeed = _runSpeed;
 				_isRunning = true;
 			}

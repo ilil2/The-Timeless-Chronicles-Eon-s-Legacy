@@ -3,6 +3,7 @@ using System;
 
 public partial class ScientistScript : CharacterBody3D
 {
+	
 	//Variables des noeuds
 	private Node3D _h;
 	private Camera3D _camera;
@@ -84,12 +85,6 @@ public partial class ScientistScript : CharacterBody3D
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
 
-		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
-		//{
-		//	 _verticalVelocity = Vector3.Up * _jumpForce;
-		//}
-
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))
 		{
@@ -97,8 +92,8 @@ public partial class ScientistScript : CharacterBody3D
 		}
 
 		//Mouvement du joueur
-		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") ||
-		    Input.IsActionPressed("right"))
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
+		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
 		{
 			_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
 				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
@@ -106,7 +101,7 @@ public partial class ScientistScript : CharacterBody3D
 			_isWalking = true;
 
 			//Changement de la vitesse du joueur si il sprint
-			if (Input.IsActionPressed("sprint") && _isWalking)
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
 			{
 				_movementSpeed = _runSpeed;
 				_isRunning = true;

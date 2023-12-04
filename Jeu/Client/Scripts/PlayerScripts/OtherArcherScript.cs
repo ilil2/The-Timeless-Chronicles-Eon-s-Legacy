@@ -19,9 +19,8 @@ public partial class OtherArcherScript : CharacterBody3D
     public override void _Process(double delta)
     {
         string[] PlayerPositions = GameManager.InfoJoueur["co"].Split(";");
-        Vector3 PlayerCoord = new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2]));
-        _pseudo.LookAt(PlayerCoord, Vector3.Up);
-        Rotation = new Vector3(0, Rotation.Y, 0);
+        _pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2])), Vector3.Up);
+        _pseudo.Rotation = new Vector3(0, _pseudo.Rotation.Y + (float)Math.PI, 0);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -41,10 +40,10 @@ public partial class OtherArcherScript : CharacterBody3D
             case "Darkrentin":
             case "ilyann":
             case "Narth":
-                _pseudo.Modulate = new Color(224,195,13);
+                _pseudo.Modulate = new Color(0.99f,0.82f,0.11f);
                 break;
             default:
-                _pseudo.Modulate = new Color(255,255,255);
+                _pseudo.Modulate = new Color(1,1,1);
                 break;
         }
 
