@@ -31,7 +31,7 @@ public class Serveur
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), n);
         soc.Bind(iep); //connection depuis n'importe ou
         
-        soc.Listen(5); //mise en ecoute du serveur
+        soc.Listen(4); //mise en ecoute du serveur
 
         Console.WriteLine("Serveur en marche");
 
