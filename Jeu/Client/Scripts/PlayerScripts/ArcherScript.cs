@@ -15,6 +15,10 @@ public partial class ArcherScript : CharacterBody3D
 	private float _runSpeed = 7.5f;
 	private float _dashPower = 80.0f;
 	
+	//Varibale du tir
+	private int _shootTimer = 1;
+	private bool _isShooting;
+	
 	//Variables du Fov du joueur
 	private float _fovMax = 120;
 	private float _fovMin = 30;
@@ -73,6 +77,18 @@ public partial class ArcherScript : CharacterBody3D
 		_movementSpeed = 0f;
 		_angularAcceleration = 10;
 		_acceleration = 15;
+		
+		//Shoot Process
+		if (_shootTimer % 60 == 0)
+		{
+			_isShooting = false;
+		}
+		_shootTimer += 1;
+
+		if (Input.IsKeyPressed(Key.L) && !_isShooting)
+		{
+			ShootArrow(_playerMesh);
+		}
 
 		//Calcul de la gravité
 		if (!IsOnFloor())
@@ -83,12 +99,6 @@ public partial class ArcherScript : CharacterBody3D
 		{
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
-
-		//Calcul du saut
-		//if (Input.IsActionJustPressed("jump") && IsOnFloor() && !_isRolling)
-		//{
-		//	 _verticalVelocity = Vector3.Up * _jumpForce;
-		//}
 
 		//Mouvement du dash
 		if (Input.IsActionPressed("dash"))
@@ -150,5 +160,20 @@ public partial class ArcherScript : CharacterBody3D
 		//Application du mouvement au joueur
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	private void ShootArrow(MeshInstance3D playerMesh)
+	{
+		_isShooting = true;
+		
+		PackedScene ArrowScene = GD.Load<PackedScene>("res://Scenes/fleche.tscn");
+		RigidBody3D Arrow = ArrowScene.Instantiate<RigidBody3D>();
+
+		double rotationY = playerMesh.Rotation.Y;
+			
+		Arrow.Position = new Vector3(Position.X + (float)Math.Sin(rotationY)*2, Position.Y + 2, Position.Z + (float)Math.Cos(rotationY)*2);
+		Arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), 2, (float)(Math.Cos(rotationY)*10)) * 2;
+		Arrow.Rotation = new Vector3(Arrow.Rotation.X, playerMesh.Rotation.Y + (float)Math.PI / 2f, Arrow.Rotation.Z);
+		GetTree().Root.AddChild(Arrow);
 	}
 }

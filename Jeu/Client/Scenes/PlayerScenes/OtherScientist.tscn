@@ -22,3 +22,6 @@ shape = SubResource("CapsuleShape3D_hlrpq")
 [node name="PlayerBody" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
 mesh = SubResource("CapsuleMesh_vyull")
+
+[node name="LabelPseudo" type="Label3D" parent="."]
+transform = Transform3D(0.799918, 0, 0.0114629, 0, 0.8, 0, -0.0114629, 0, 0.799918, -0.000106931, 1.94748, -0.00391802)
