@@ -7,8 +7,8 @@ namespace Serveur;
 
 public class Serveur
 {
-    private int ID = 0;
-    private int joueur_ready = 0;
+    private int ID;
+    private int joueur_ready;
 
     private string[] info = new string[4];
 
@@ -47,7 +47,7 @@ public class Serveur
         }
     }
     
-    public void com(object o) //fonction qui gere un client unique
+    private void com(object o) //fonction qui gere un client unique
     {
         ClientCom cc = (ClientCom)o;                        //creation de l'objet client
         NetworkStream ns = new NetworkStream(cc.Socket);    //debut de la connection
@@ -166,7 +166,7 @@ public class Serveur
                 }
             }
         }
-        catch (Exception e)
+        catch
         {
             //Console.WriteLine(e);
             //throw new Exception();
@@ -177,22 +177,6 @@ public class Serveur
             {
                 throw new Exception("fermeture du serveur");
             }
-        }
-    }
-
-    class ClientCom         //type de l'objet client
-    {
-        public Socket Socket { get; set; }      //socket de l'objet
-        public int id { get; set; }             //id de l'objet
-        
-        public string pseudo { get; set; }
-        
-        public string classe { get; set; }
-
-        public ClientCom(Socket s, int id)     //initialisation de l'objet
-        {
-            this.Socket = s;
-            this.id = id;
         }
     }
 }

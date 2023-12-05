@@ -17,7 +17,7 @@ namespace Serveur;
 public class MainServeur
 {
     private int ID = 0;
-    private List<int> ports_total = new List<int>() {4242,4002};
+    private List<int> ports_total = new List<int>() {4242,4002}; //,1919,6969,1984
     private List<int> ports = new List<int>() {4242,4002};
     private int nbr_serveur = 0;
     private int nbr_joueur = 0;
@@ -29,7 +29,7 @@ public class MainServeur
     private List<string> user_ids_csv = new List<string>();
     private List<string> user_passwords_csv = new List<string>();
 
-    public void CSV()
+    private void CSV()
     {
         StreamReader sr = new StreamReader("comptes.csv");
 
@@ -81,7 +81,7 @@ public class MainServeur
         }
     }
     
-    public void com(object o) //fonction qui gere un client unique
+    private void com(object o) //fonction qui gere un client unique
     {
         ClientCom cc = (ClientCom)o;                        //creation de l'objet client
         NetworkStream ns = new NetworkStream(cc.Socket);    //debut de la connection
@@ -381,7 +381,7 @@ public class MainServeur
                 TcpConnectionInformation[] tcpConnInfoArray = ipGlobalProperties.GetActiveTcpConnections();
  
                 foreach (TcpConnectionInformation tcp in tcpConnInfoArray) 
-                    if (tcp.LocalEndPoint.Port == portNumber || ports.Contains(portNumber) == false)
+                    if (tcp.LocalEndPoint.Port == portNumber && ports.Contains(portNumber) == false)
                         ports.Add(portNumber);
             }
             Thread.Sleep(60000);
