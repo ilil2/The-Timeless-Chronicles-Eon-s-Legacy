@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Serveur;
 
-class ClientCom         //type de l'objet client
+public class ClientCom         //type de l'objet client
 {
     public Socket Socket { get; }      //socket de l'objet
     public int id { get; }             //id de l'objet
@@ -13,10 +13,19 @@ class ClientCom         //type de l'objet client
     public string pseudo { get; set; }
         
     public string classe { get; set; }
+    
+    public IPAddress IP { get; set; }
+    
+    public EndPoint Rep { get; set; }
+    
+    public string requette { get; set; }
 
-    public ClientCom(Socket s, int id)     //initialisation de l'objet
+    public ClientCom(Socket soc,IPAddress ip, EndPoint rep ,int id, string s)     //initialisation de l'objet
     {
-        this.Socket = s;
+        this.Socket = soc;
         this.id = id;
+        this.IP = ip;
+        this.Rep = rep;
+        this.requette = s;
     }
 }
