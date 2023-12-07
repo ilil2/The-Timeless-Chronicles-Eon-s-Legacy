@@ -71,27 +71,6 @@ public partial class MapLvl1Script : Node3D
 				MapReady = true;
 			}
 		}
-		else
-		{
-			CharacterBody3D player = GetNode<CharacterBody3D>("Player");
-			Node3D P = new Node3D();
-			P.Position = player.Position;
-			for (int i = 0; i<RoomList.Count;i++)
-			{
-				Node3D Room = RoomList[i];
-				double dist = Distance(Room,P);
-				if (dist<50)
-				{
-					Room.Visible = true;
-				}
-				else
-				{
-					Room.Visible = true;
-				}
-			}
-			P.QueueFree();
-		}
-		
 	}
 
 	public bool MapIsReady()

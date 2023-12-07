@@ -66,6 +66,14 @@ public partial class GameManager : Node3D
 	private CharacterBody3D Joueur2;
 	private CharacterBody3D Joueur3;
 	private CharacterBody3D Joueur4;
+
+	private static string GetIp()
+	{
+		StreamReader sr = new StreamReader("res://Scripts/Save/IP.txt");
+		string res = sr.ReadLine();
+		sr.Close();
+		return res;
+	}
 	
 	//Ready
 	public override void _Ready()
@@ -73,7 +81,7 @@ public partial class GameManager : Node3D
 		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse(GetIp()), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
 		ns = new NetworkStream(soc);
@@ -249,7 +257,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse(GetIp()), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
