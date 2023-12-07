@@ -12,7 +12,7 @@ To Do List du code:
 - Ajout du dernier type de salle -OK
 - Corrigé les % et la génération -OK
 - Déco des salles
-- SpawnPoint des mobs
+- SpawnPoint des mobs 
 - Optimiser le jeu
 */
 
@@ -21,7 +21,7 @@ public partial class MapLvl1Script : Node3D
 	private Stopwatch stopwatch = new Stopwatch();
 	private Random Rand = new Random(42);
 	private static bool MapReady = false;
-	private int NbRoom = 100;
+	private int NbRoom =250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
@@ -70,6 +70,26 @@ public partial class MapLvl1Script : Node3D
 				
 				MapReady = true;
 			}
+		}
+		else
+		{
+			CharacterBody3D player = GetNode<CharacterBody3D>("Player");
+			Node3D P = new Node3D();
+			P.Position = player.Position;
+			for (int i = 0; i<RoomList.Count;i++)
+			{
+				Node3D Room = RoomList[i];
+				double dist = Distance(Room,P);
+				if (dist<50)
+				{
+					Room.Visible = true;
+				}
+				else
+				{
+					Room.Visible = true;
+				}
+			}
+			P.QueueFree();
 		}
 		
 	}

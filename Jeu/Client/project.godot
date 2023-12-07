@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="JeuClient"
-run/main_scene="res://Scenes/main_scene.tscn"
+run/main_scene="res://Ressources/Map/Global/tree/Models/Tree Type7 03.dae"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="JeuClient"
+
+[filesystem]
+
+import/fbx/enabled=false
 
 [input]
 
