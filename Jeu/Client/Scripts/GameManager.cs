@@ -69,7 +69,7 @@ public partial class GameManager : Node3D
 
 	private static string GetIp()
 	{
-		StreamReader sr = new StreamReader("res://Scripts/Save/IP.txt");
+		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
 		string res = sr.ReadLine();
 		sr.Close();
 		return res;
