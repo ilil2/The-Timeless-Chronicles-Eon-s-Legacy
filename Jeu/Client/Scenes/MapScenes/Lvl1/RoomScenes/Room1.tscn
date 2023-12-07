@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://b7unor7dmtl84"]
 
-[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Scenes/TestMap/Ressources/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_f57rv"]
+[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_f57rv"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="2_agus0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj2se"]
