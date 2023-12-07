@@ -1,16 +1,23 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=15 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
-[ext_resource type="Texture2D" uid="uid://bamogby5ofx5p" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_inw37"]
-[ext_resource type="Texture2D" uid="uid://byej16v8b2g0x" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="3_niv27"]
-[ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Scenes/TestMap/Ressources/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="4_selmf"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_V2_L3.123cedbb80cc-eec4-4899-a587-d46dd8eff3b9/10085_egypt_sphinx_iterations-2.obj" id="5_cdk6f"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tdgrf"]
+load_path = "res://.godot/imported/ground_0024_color_1k.jpg-9a3aa2a44d4f41b4337d8073fe98228f.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wdhnp"]
+load_path = "res://.godot/imported/ground_0024_normal_opengl_1k.png-fe364d96b50d5520ced73da23cab45d1.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ju3n5"]
+load_path = "res://.godot/imported/ground_0024_roughness_1k.jpg-b097b39188c228cabbd30e14cb76bd10.s3tc.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
-albedo_texture = ExtResource("2_inw37")
-roughness_texture = ExtResource("4_selmf")
+albedo_texture = SubResource("CompressedTexture2D_tdgrf")
+roughness_texture = SubResource("CompressedTexture2D_ju3n5")
 normal_enabled = true
-normal_texture = ExtResource("3_niv27")
+normal_texture = SubResource("CompressedTexture2D_wdhnp")
 uv1_scale = Vector3(250, 250, 250)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c21b3"]
@@ -82,6 +89,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qvrok")
 
+[sub_resource type="Environment" id="Environment_vrgge"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("7_qkggk")
+ssao_enabled = true
+sdfgi_enabled = true
+adjustment_enabled = true
+adjustment_saturation = 1.15
+
 [node name="MapLvl1" type="Node3D"]
 script = ExtResource("1_faj1b")
 
@@ -109,5 +125,8 @@ transform = Transform3D(0.01, -0.0173205, -8.74252e-10, 4.37126e-10, -7.57154e-1
 mesh = ExtResource("5_cdk6f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.505626, -0.496029, 0.705902, 0.125941, 0.766998, 0.629169, -0.853511, 0.407026, -0.325343, -167.575, 487.618, 340.428)
+transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vrgge")
