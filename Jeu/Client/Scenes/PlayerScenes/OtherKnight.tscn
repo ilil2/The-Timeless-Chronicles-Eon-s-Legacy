@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfmssflkha13f"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherKnightScript.cs" id="1_u6xls"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherClassScript.cs" id="1_42k1x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
@@ -13,7 +13,7 @@ albedo_color = Color(0.305882, 0.305882, 0.305882, 1)
 material = SubResource("StandardMaterial3D_q3mgw")
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_u6xls")
+script = ExtResource("1_42k1x")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)
