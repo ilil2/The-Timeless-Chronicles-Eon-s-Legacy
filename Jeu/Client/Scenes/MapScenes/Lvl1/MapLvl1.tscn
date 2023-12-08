@@ -1,26 +1,29 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=18 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
+[ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_6qus8"]
+[ext_resource type="Texture2D" uid="uid://mfnhwhs5tuba" path="res://Ressources/Map/Egypt1/Ground/ground_0024_ao_1k.jpg" id="3_3gmg0"]
+[ext_resource type="Texture2D" uid="uid://b3f7hokp7wylx" path="res://Ressources/Map/Egypt1/Ground/ground_0024_height_1k.png" id="3_apswm"]
+[ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="4_k4x7e"]
+[ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_1dydr"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_V2_L3.123cedbb80cc-eec4-4899-a587-d46dd8eff3b9/10085_egypt_sphinx_iterations-2.obj" id="5_cdk6f"]
+[ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="6_0a10j"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tdgrf"]
-load_path = "res://.godot/imported/ground_0024_color_1k.jpg-9a3aa2a44d4f41b4337d8073fe98228f.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wdhnp"]
-load_path = "res://.godot/imported/ground_0024_normal_opengl_1k.png-fe364d96b50d5520ced73da23cab45d1.s3tc.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ju3n5"]
-load_path = "res://.godot/imported/ground_0024_roughness_1k.jpg-b097b39188c228cabbd30e14cb76bd10.s3tc.ctex"
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
-albedo_texture = SubResource("CompressedTexture2D_tdgrf")
-roughness_texture = SubResource("CompressedTexture2D_ju3n5")
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_6qus8")
+roughness_texture = ExtResource("5_1dydr")
 normal_enabled = true
-normal_texture = SubResource("CompressedTexture2D_wdhnp")
+normal_texture = ExtResource("4_k4x7e")
+ao_enabled = true
+ao_texture = ExtResource("3_3gmg0")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_apswm")
 uv1_scale = Vector3(250, 250, 250)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c21b3"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_7r16a")
 size = Vector2(3000, 3060)
 
@@ -95,6 +98,14 @@ background_color = Color(0.647059, 0.909804, 0.917647, 1)
 sky = ExtResource("7_qkggk")
 ssao_enabled = true
 sdfgi_enabled = true
+glow_enabled = true
+fog_density = 0.3015
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.878431, 0.803922, 0.662745, 1)
+volumetric_fog_emission = Color(0.623529, 0.505882, 0.223529, 1)
+volumetric_fog_sky_affect = 0.97
+volumetric_fog_temporal_reprojection_amount = 0.99
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
@@ -124,9 +135,15 @@ skeleton = NodePath("")
 transform = Transform3D(0.01, -0.0173205, -8.74252e-10, 4.37126e-10, -7.57154e-10, 0.02, -0.0173205, -0.01, 3.3094e-17, -694.36, 8.48621e-06, 194.16)
 mesh = ExtResource("5_cdk6f")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vrgge")
+
+[node name="Player" parent="." instance=ExtResource("6_0a10j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 263, 0)

@@ -19,7 +19,8 @@ To Do List du code:
 public partial class MapLvl1Script : Node3D
 {
 	private Stopwatch stopwatch = new Stopwatch();
-	private Random Rand = new Random(42);
+	private Stopwatch fogwatch = new Stopwatch();
+	private Random Rand = new Random();
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
@@ -30,6 +31,9 @@ public partial class MapLvl1Script : Node3D
 	private static float SpawnX;
 	private static float SpawnZ;
 	private double MaxSpawnDist = 0;
+	private int FogState = 0;
+	private int StartTime = 0;
+	private int Duration = 0;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -52,10 +56,7 @@ public partial class MapLvl1Script : Node3D
 		stopwatch.Start();
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
-		stopwatch.Stop();
 		
-		GD.Print($"{NbRoom} Room");
-		GD.Print($"Map crée en {stopwatch.Elapsed}");
 	}
 	
 	public override void _Process(double delta)
@@ -69,27 +70,22 @@ public partial class MapLvl1Script : Node3D
 				OpenRoom();
 				
 				MapReady = true;
+				stopwatch.Stop();
+		
+				GD.Print($"{NbRoom} Room");
+				GD.Print($"Map crée en {stopwatch.Elapsed}");
+				fogwatch.Start();
+				Duration = Rand.Next(12,26);
+				GD.Print($"Fog Start in {Duration}");
+				
 			}
 		}
 		else
 		{
-			CharacterBody3D player = GetNode<CharacterBody3D>("Player");
-			Node3D P = new Node3D();
-			P.Position = player.Position;
-			for (int i = 0; i<RoomList.Count;i++)
-			{
-				Node3D Room = RoomList[i];
-				double dist = Distance(Room,P);
-				if (dist<50)
-				{
-					Room.Visible = true;
-				}
-				else
-				{
-					Room.Visible = true;
-				}
-			}
-			P.QueueFree();
+			CreateFog();
+			DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
+			const double time = 0.0001;
+			Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
 		}
 		
 	}
@@ -104,6 +100,61 @@ public partial class MapLvl1Script : Node3D
 		return ((int)SpawnX,(int)SpawnZ);
 	}
 
+	private void CreateFog()
+	{
+		//ElapsedMilliseconds
+		WorldEnvironment world = GetNode<WorldEnvironment>("World");
+		var env = world.Environment;
+		//GD.Print($"{Duration} {StartTime} {(int)fogwatch.Elapsed.TotalSeconds}");
+		if (FogState==0)
+		{
+			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)
+			{
+					FogState=1;
+					GD.Print("Starting Fog....");
+			}
+		}
+		else if (FogState==1)
+		{
+			if (env.VolumetricFogDensity<0.05)
+			{
+				env.VolumetricFogDensity=(float)(env.VolumetricFogDensity+0.0001);
+			}
+			else
+			{
+				env.VolumetricFogDensity=(float)0.1;
+				FogState=2;
+				Duration = Rand.Next(12,26);
+				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
+				GD.Print($"Fog Start! End in {Duration} seconde");
+			}
+		}
+		else if (FogState==2)
+		{
+			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)
+			{
+					FogState=3;
+					GD.Print("Ending Fog...");
+			}
+		}
+		else if (FogState==3)
+		{
+			if (env.VolumetricFogDensity>0)
+			{
+				env.VolumetricFogDensity=(float)(env.VolumetricFogDensity-0.0001);
+			}
+			else
+			{
+				env.VolumetricFogDensity=(float)0;
+				FogState=0;
+				Duration = Rand.Next(12,26);
+				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
+				GD.Print($"Fog End! Next Fog in {Duration} seconde");
+				
+			}
+		}
+	}
+	
 	private StaticBody3D InitMainRoom()
 	{
 		StaticBody3D MainRoom = new StaticBody3D();
@@ -250,10 +301,10 @@ public partial class MapLvl1Script : Node3D
 				if (dist<100)
 				{
 					List<Node3D> OverlapWallList = new List<Node3D>();
-					for (int k = 2; k < ActualRoom.GetChildCount(); k++)
+					for (int k = 1; k < ActualRoom.GetChildCount(); k++)
 					{
 						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
-						for (int l = 2; l < TestedRoom.GetChildCount(); l++)
+						for (int l = 1; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
 							bool TestPos = (int)ActualChild.GlobalTransform.Origin.X==(int)TestedChild.GlobalTransform.Origin.X && (int)ActualChild.GlobalTransform.Origin.Z==(int)TestedChild.GlobalTransform.Origin.Z;//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
