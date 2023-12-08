@@ -34,6 +34,7 @@ public partial class MapLvl1Script : Node3D
 	private int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
+	private Camera3D camera;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -77,6 +78,7 @@ public partial class MapLvl1Script : Node3D
 				fogwatch.Start();
 				Duration = Rand.Next(12,26);
 				GD.Print($"Fog Start in {Duration}");
+				camera = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
 				
 			}
 		}
@@ -84,8 +86,26 @@ public partial class MapLvl1Script : Node3D
 		{
 			CreateFog();
 			DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
+		
+			var pp = GetNode<CharacterBody3D>("Player");
+			Node3D p = new Node3D();
+			p.Position = pp.Position;
 			const double time = 0.0001;
 			Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
+			for (int i = 0; i<RoomList.Count;i++)
+			{
+				Node3D Room = RoomList[i];
+				if (!IsNodeVisible(Room) && Distance(Room,p)>50)
+				{
+					Room.Visible = false;
+				}
+				else
+				{
+					Room.Visible = true;
+				}
+				
+			}
+			
 		}
 		
 	}
@@ -98,6 +118,15 @@ public partial class MapLvl1Script : Node3D
 	public (int,int) GetSpawnLocation()
 	{
 		return ((int)SpawnX,(int)SpawnZ);
+	}
+	private bool IsNodeVisible(Node3D node)
+	{
+		// Obtenez la position du nœud par rapport à la caméra
+		Vector3 cameraPosition = camera.GlobalTransform.Origin;
+		Vector3 nodePosition = node.GlobalTransform.Origin;
+
+		// Utilisez is_position_behind pour déterminer si le nœud est derrière la caméra
+		return !camera.IsPositionBehind(nodePosition);
 	}
 
 	private void CreateFog()
