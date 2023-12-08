@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byej16v8b2g0x"
+uid="uid://dlt0yt1g46kvm"
 path.s3tc="res://.godot/imported/ground_0024_normal_opengl_1k.png-6c264c3013b5f57c6580e5f42d26d52e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -24,8 +24,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
