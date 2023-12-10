@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=17 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_6qus8"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="4_k4x7e"]
 [ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_1dydr"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_V2_L3.123cedbb80cc-eec4-4899-a587-d46dd8eff3b9/10085_egypt_sphinx_iterations-2.obj" id="5_cdk6f"]
-[ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="6_0a10j"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
@@ -141,9 +140,3 @@ shadow_enabled = true
 
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vrgge")
-
-[node name="Player" parent="." instance=ExtResource("6_0a10j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0)
-
-[node name="Cam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 192.2, 328.937)

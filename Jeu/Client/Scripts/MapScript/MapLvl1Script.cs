@@ -34,7 +34,6 @@ public partial class MapLvl1Script : Node3D
 	private int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
-	private Camera3D camera;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -76,36 +75,25 @@ public partial class MapLvl1Script : Node3D
 				GD.Print($"{NbRoom} Room");
 				GD.Print($"Map crée en {stopwatch.Elapsed}");
 				fogwatch.Start();
-				Duration = Rand.Next(12,26);
+				Duration = Rand.Next(120,260);
+				//Label FogText = GetNode<Label>("Player/FogState");
 				GD.Print($"Fog Start in {Duration}");
-				camera = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+				//FogText.Text = $"Fog Start in {Duration}";
 				
 			}
 		}
 		else
 		{
 			CreateFog();
+			//sun
 			DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
-		
-			var pp = GetNode<CharacterBody3D>("Player");
-			Node3D p = new Node3D();
-			p.Position = pp.Position;
-			const double time = 0.0001;
+			const double time = 0.00001;
 			Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
-			for (int i = 0; i<RoomList.Count;i++)
-			{
-				Node3D Room = RoomList[i];
-				if (!IsNodeVisible(Room) && Distance(Room,p)>50)
-				{
-					Room.Visible = false;
-				}
-				else
-				{
-					Room.Visible = true;
-				}
-				
-			}
+			//----
+			//Label Text = GetNode<Label>("Player/Label");
+			//Text.Text = $"FPS: {(int)(1/delta)}";
 			
+			//RenderDist();
 		}
 		
 	}
@@ -119,21 +107,45 @@ public partial class MapLvl1Script : Node3D
 	{
 		return ((int)SpawnX,(int)SpawnZ);
 	}
-	private bool IsNodeVisible(Node3D node)
+	private bool IsNodeVisible(Node3D node, Camera3D camera)
 	{
-		// Obtenez la position du nœud par rapport à la caméra
+		// Not Use !
 		Vector3 cameraPosition = camera.GlobalTransform.Origin;
 		Vector3 nodePosition = node.GlobalTransform.Origin;
 
-		// Utilisez is_position_behind pour déterminer si le nœud est derrière la caméra
 		return !camera.IsPositionBehind(nodePosition);
 	}
-
+	private void RenderDist()
+	{
+		Camera3D cam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
+		for (int i = 0; i<RoomList.Count; i++)
+		{
+			Node3D Room = RoomList[i];
+			if (!IsNodeVisible(Room,cam) && Distance(Room,(Node3D)Player)>30)
+			{
+				Room.Visible = false;
+			}
+			else
+			{
+				if (Distance(Room,(Node3D)Player)>100)
+				{
+					Room.GetNode<Node3D>("Misc").Visible = false;
+				}
+				else
+				{
+					Room.GetNode<Node3D>("Misc").Visible = true;
+				}
+				Room.Visible = true;
+			}
+		}
+	}
 	private void CreateFog()
 	{
 		//ElapsedMilliseconds
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		var env = world.Environment;
+		//Label FogText = GetNode<Label>("Player/FogState");
 		//GD.Print($"{Duration} {StartTime} {(int)fogwatch.Elapsed.TotalSeconds}");
 		if (FogState==0)
 		{
@@ -141,6 +153,7 @@ public partial class MapLvl1Script : Node3D
 			{
 					FogState=1;
 					GD.Print("Starting Fog....");
+					//FogText.Text = "Starting Fog....";
 			}
 		}
 		else if (FogState==1)
@@ -153,9 +166,10 @@ public partial class MapLvl1Script : Node3D
 			{
 				env.VolumetricFogDensity=(float)0.1;
 				FogState=2;
-				Duration = Rand.Next(12,26);
+				Duration = Rand.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog Start! End in {Duration} seconde");
+				//FogText.Text = $"Fog Start! End in {Duration} seconde";
 			}
 		}
 		else if (FogState==2)
@@ -164,6 +178,7 @@ public partial class MapLvl1Script : Node3D
 			{
 					FogState=3;
 					GD.Print("Ending Fog...");
+					//FogText.Text = "Ending Fog...";
 			}
 		}
 		else if (FogState==3)
@@ -176,9 +191,10 @@ public partial class MapLvl1Script : Node3D
 			{
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
-				Duration = Rand.Next(12,26);
+				Duration = Rand.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog End! Next Fog in {Duration} seconde");
+				//FogText.Text = $"Fog End! Next Fog in {Duration} seconde";
 				
 			}
 		}
@@ -341,7 +357,7 @@ public partial class MapLvl1Script : Node3D
 							{
 								if (l<TestedRoom.GetChildCount())
 								{
-									//TestedRoom.RemoveChild(TestedChild);
+									TestedRoom.RemoveChild(TestedChild);
 									TestedChild.QueueFree();
 									OverlapWallList.Add(ActualChild);
 									l = TestedRoom.GetChildCount();
@@ -361,7 +377,7 @@ public partial class MapLvl1Script : Node3D
 							Gate.Rotation = Child.Rotation+ActualRoom.Rotation;
 							Gate.Position = Child.GlobalTransform.Origin;
 							AddChild(Gate);
-							//ActualRoom.RemoveChild(Child);
+							ActualRoom.RemoveChild(Child);
 							Child.QueueFree();
 						}
 					}
