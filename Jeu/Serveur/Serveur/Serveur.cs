@@ -41,21 +41,18 @@ public class Serveur
     private static (EndPoint,IPAddress,string) Receive(Socket soc)
     {
         byte[] buffer = new byte[1024];
-        IPAddress ip = IPAddress.Any;
-        EndPoint remoteEndPoint = new IPEndPoint(ip, 0); // Stockera l'adresse du client qui envoie le message
+        EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0); // Stockera l'adresse du client qui envoie le message
         
         // Recevoir des données
         int bytesRead = soc.ReceiveFrom(buffer, ref remoteEndPoint);
+        
+        IPEndPoint clientIPEndPoint = (IPEndPoint)remoteEndPoint;
+        IPAddress clientIPAddress = clientIPEndPoint.Address;
 
         // Convertir les données en chaîne
         string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
 
-        if (receivedData == "connection")
-        {
-            return (remoteEndPoint,ip,receivedData);
-        }
-
-        throw new SocketException(42);
+        return (remoteEndPoint,clientIPAddress,receivedData);
     }
 
     private static void Send(string message, ClientCom cc)
@@ -71,7 +68,7 @@ public class Serveur
         switch (clients.Count)
         {
             case 1:
-                return clients[1];
+                return clients[0];
             case 2:
                 if (clients[0].IP.Equals(ip))
                 {
@@ -124,13 +121,14 @@ public class Serveur
         bool inline = true; //variable pour pouvoir desactiver le serveur
         while (inline)
         {
-            Console.WriteLine("En attente ...");
+            //Console.WriteLine("En attente ...");
             //Socket s = soc.Accept();                        //acceptation des nouvelles connection
 
             (EndPoint rep, IPAddress ip,string s) = Receive(soc);
             if (!ListOfObjectContainIP(clients,ip) && clients.Count < 4)
             {
                 ClientCom clicom = new ClientCom(soc,ip,rep,ID,s);         //creation de l'objet client
+                clients.Add(clicom);
                 ID++;
                 Thread th = new Thread(com);                    //mise en place de la connection
                 th.Start(clicom);                               //demarage de la connection
@@ -150,18 +148,18 @@ public class Serveur
         //TextReader tr = new StreamReader(ns);               //chaine recue
         //TextWriter tw = new StreamWriter(ns);               //chaine a envoyer
         
-        Console.WriteLine($"nouveau client : {cc.id} ip : {cc.Socket.RemoteEndPoint}");
+        Console.WriteLine($"nouveau client : {cc.id} ip : {cc.IP.Address}");
 
-        if (cc.requette != "")
-        {
-            cc.pseudo = cc.requette;
-            cc.requette = "";
-        }
-        if (cc.requette != "")
-        {
-            cc.classe = cc.requette;
-            cc.requette = "";
-        }
+        while (cc.requette == "") {}
+        cc.pseudo = cc.requette; 
+        Console.WriteLine(cc.requette);
+        cc.requette = "";
+        
+        while (cc.requette == "") {}
+        cc.classe = cc.requette;
+        Console.WriteLine(cc.requette);
+        cc.requette = "";
+        
         joueur_ready++;
         
         Console.WriteLine($"{cc.pseudo} : ready");
@@ -208,12 +206,12 @@ public class Serveur
                     cc.Socket.Disconnect(false);                //deconnection du client
                     connect = false;                                      //arret de la boucle
                 }
-                else if (requette.Substring(0,4) == "chat")
+                else if (requette.Length > 3 && requette.Substring(0,4) == "chat")
                 {
                     Console.WriteLine($"{cc.id} : {requette}"); //affichage de la requete recue
                     Send($"vous : {requette}",cc);
                 }
-                else if (requette.Substring(0,2) == "in")
+                else if (requette.Length > 1 && requette.Substring(0,2) == "in")
                 {
                     string line = requette.Substring(3);
                     string[] lines = line.Split('/');
@@ -266,10 +264,10 @@ public class Serveur
                 }
             }
         }
-        catch
+        catch (Exception e)
         {
-            //Console.WriteLine(e);
-            //throw new Exception();
+            Console.WriteLine(e);
+            throw new Exception();
             Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
             joueur_ready -= 1;
             info[cc.id] = $"{cc.id}/deco";
