@@ -91,10 +91,9 @@ public partial class GameManager : Node3D
 
 		if (remoteEndPoint.Equals(new IPEndPoint(_ipAddress,port)))
 		{
-			GD.Print("bon");
 			return receivedData;
 		}
-		GD.Print("Erreur");
+		
 		throw new ArgumentException("tentative de connexion externe");
 	}
 	
