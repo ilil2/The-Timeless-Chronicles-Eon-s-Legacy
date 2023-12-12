@@ -7,7 +7,7 @@ public partial class OtherKnightScript : CharacterBody3D
 
     private Label3D _pseudo;
     
-    private int _ID;
+    private int ID;
 
     public override void _Ready()
     {
@@ -19,13 +19,13 @@ public partial class OtherKnightScript : CharacterBody3D
     public override void _Process(double delta)
     {
         string[] PlayerPositions = GameManager.InfoJoueur["co"].Split(";");
-        _pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2])), Vector3.Up);
-        _pseudo.Rotation = new Vector3(0, _pseudo.Rotation.Y + (float)Math.PI, 0);
+        Vector3 PlayerCoord = new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2]));
+        _pseudo.LookAt(PlayerCoord, Vector3.Up);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        string[] Positions = GameManager.InfoAutreJoueur[$"co{_ID}"].Split(";");
+        string[] Positions = GameManager.InfoAutreJoueur[$"co{ID}"].Split(";");
         Vector3 PositionA = new Vector3(Lib.Conversions.AtoF(Positions[0]), Lib.Conversions.AtoF(Positions[1]), Lib.Conversions.AtoF(Positions[2]));
 
         Position = PositionA;
@@ -33,17 +33,17 @@ public partial class OtherKnightScript : CharacterBody3D
 
     private void SetPseudo()
     {
-        string PseudoName = GameManager.InfoAutreJoueur[$"pseudo{_ID}"];
+        string PseudoName = GameManager.InfoAutreJoueur[$"pseudo{ID}"];
         switch (PseudoName)
         {
             case "OttoLeBG":
             case "Darkrentin":
             case "ilyann":
             case "Narth":
-                _pseudo.Modulate = new Color(0.99f,0.82f,0.11f);
+                _pseudo.Modulate = new Color(224,195,13);
                 break;
             default:
-                _pseudo.Modulate = new Color(1,1,1);
+                _pseudo.Modulate = new Color(255,255,255);
                 break;
         }
 
@@ -52,11 +52,11 @@ public partial class OtherKnightScript : CharacterBody3D
 
     public void SetID(int id)
     {
-        _ID = id;
+        ID = id;
     }
     
     public int GetID()
     {
-        return _ID;
+        return ID;
     }
 }
