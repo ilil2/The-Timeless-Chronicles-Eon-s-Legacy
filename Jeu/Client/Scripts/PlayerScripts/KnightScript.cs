@@ -114,9 +114,7 @@ public partial class KnightScript : CharacterBody3D
 		
 
 		//Calcul de la rotation du joueur
-		//_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
-		_playerMesh.LookAt(_camera.GlobalPosition, Vector3.Up);
-		_playerMesh.Rotation = new Vector3(0, _playerMesh.Rotation.Y + (float)Math.PI, 0);
+		_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
 		
 		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
 		
