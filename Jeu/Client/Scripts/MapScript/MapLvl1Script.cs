@@ -35,6 +35,9 @@ public partial class MapLvl1Script : Node3D
 	private int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
+	private bool SpecMode = false;
+	private int FrameCount = 0;
+	private int StartInput = 0;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -61,6 +64,7 @@ public partial class MapLvl1Script : Node3D
 	
 	public override void _Process(double delta)
 	{
+		FrameCount+=1;
 		if (!MapReady)
 		{
 			if (CheckSleep())
@@ -85,6 +89,7 @@ public partial class MapLvl1Script : Node3D
 			//Process
 			CreateFog();
 			DayCycle();	
+			DebugMode(delta);
 			//RenderDist();
 		}
 		
@@ -98,6 +103,56 @@ public partial class MapLvl1Script : Node3D
 	public (int,int) GetSpawnLocation()
 	{
 		return ((int)SpawnX,(int)SpawnZ);
+	}
+	
+	private void DebugMode(double delta)
+	{
+		Camera3D PlayerCam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
+		WorldEnvironment world = GetNode<WorldEnvironment>("World");
+		Godot.Environment env = world.Environment;
+		if (!SpecMode)
+		{
+			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			{
+				StartInput=FrameCount;
+				PackedScene SpecCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn");
+				Camera3D Cam = SpecCam.Instantiate<Camera3D>();
+				Cam.Name = "SpecCam";
+				Cam.Position = PlayerCam.Position + new Vector3(0,2,0) + Player.Position;
+				Cam.Rotation = PlayerCam.Rotation;
+				Label FPS = new Label();
+				FPS.Name = "FPS";
+				FPS.Text = "FPS:";
+				Cam.AddChild(FPS);
+				AddChild(Cam);
+				PlayerCam.Current = false;
+				Cam.Current = true;
+				SpecMode = true;
+				env.VolumetricFogEnabled = false;
+				GD.Print("True");
+			}
+			
+		}
+		else
+		{
+			Label Fps = GetNode<Label>("SpecCam/FPS");
+			Fps.Text = $"FPS: {(int)(1/delta)}";
+			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			{
+				StartInput=FrameCount;
+				Camera3D Cam = GetNode<Camera3D>("SpecCam");
+				RemoveChild(Cam);
+				Cam.QueueFree();
+				PlayerCam.Current = true;
+				Cam.Current = false;
+				SpecMode = false;
+				GD.Print("False");
+				env.VolumetricFogEnabled = true;
+			}
+			
+			
+		}
 	}
 	
 	private void CreateMob(){}
