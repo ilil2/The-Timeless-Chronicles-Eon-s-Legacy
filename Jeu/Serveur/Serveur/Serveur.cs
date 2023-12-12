@@ -124,19 +124,26 @@ public class Serveur
             //Console.WriteLine("En attente ...");
             //Socket s = soc.Accept();                        //acceptation des nouvelles connection
 
-            (EndPoint rep, IPAddress ip,string s) = Receive(soc);
-            if (!ListOfObjectContainIP(clients,ip) && clients.Count < 4)
+            try
             {
-                ClientCom clicom = new ClientCom(soc,ip,rep,ID,s);         //creation de l'objet client
-                clients.Add(clicom);
-                ID++;
-                Thread th = new Thread(com);                    //mise en place de la connection
-                th.Start(clicom);                               //demarage de la connection
+                (EndPoint rep, IPAddress ip, string s) = Receive(soc);
+                if (!ListOfObjectContainIP(clients, ip) && clients.Count < 4)
+                {
+                    ClientCom clicom = new ClientCom(soc, ip, rep, ID, s); //creation de l'objet client
+                    clients.Add(clicom);
+                    ID++;
+                    Thread th = new Thread(com); //mise en place de la connection
+                    th.Start(clicom); //demarage de la connection
+                }
+                else if (ListOfObjectContainIP(clients, ip))
+                {
+                    ClientCom client = Client(clients, ip);
+                    client.requette = s;
+                }
             }
-            else if (ListOfObjectContainIP(clients,ip))
+            catch
             {
-                ClientCom client = Client(clients,ip);
-                client.requette = s;
+                Console.WriteLine("Erreur Main Program");
             }
         }
     }
@@ -264,10 +271,10 @@ public class Serveur
                 }
             }
         }
-        catch (Exception e)
+        catch
         {
-            Console.WriteLine(e);
-            throw new Exception();
+            //Console.WriteLine(e);
+            //throw new Exception();
             Console.WriteLine($"client {cc.id} deconnecté de force");   //si le client s'est deconnecté de force
             joueur_ready -= 1;
             info[cc.id] = $"{cc.id}/deco";
