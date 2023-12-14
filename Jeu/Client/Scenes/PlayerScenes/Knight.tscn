@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c74mkq0ctpr4t"]
+[gd_scene load_steps=11 format=3 uid="uid://c74mkq0ctpr4t"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/KnightScript.cs" id="1_fs85t"]
 [ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/CameraPlayer.tscn" id="2_2vibj"]
+[ext_resource type="PackedScene" uid="uid://comlo11fkxutm" path="res://Scenes/PlayerScenes/Sword.tscn" id="3_v4hy8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
@@ -13,6 +14,96 @@ albedo_color = Color(0.25098, 0.25098, 0.25098, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_cilqf"]
 material = SubResource("StandardMaterial3D_am70b")
 
+[sub_resource type="Animation" id="Animation_3akec"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.469885, -0.211305, 0.419711)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mwpb3"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 1, 0.5),
+"update": 0,
+"values": [Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.145591, 0.50258), Vector3(-0.469885, -0.211305, 0.419711)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 1, 0.5),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.22691, 0.202406, 7.47227e-18), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x6w5t"]
+resource_name = "run"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.210636, 0.419711), Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.215697, 0.419711)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.20813, 0, 0), Vector3(0, 0, 0), Vector3(-0.244084, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oxrb2"]
+_data = {
+"RESET": SubResource("Animation_3akec"),
+"hit": SubResource("Animation_mwpb3"),
+"run": SubResource("Animation_x6w5t")
+}
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_fs85t")
 
@@ -23,6 +114,14 @@ shape = SubResource("CapsuleShape3D_hlrpq")
 [node name="PlayerBody" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 1.52175, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
 mesh = SubResource("BoxMesh_cilqf")
+
+[node name="Sword" parent="PlayerBody" instance=ExtResource("3_v4hy8")]
+transform = Transform3D(1.24999, 0, 0, 0, 0.705596, 0, 0, 0, 1.2233, -0.469885, -0.211305, 0.419711)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBody/Sword"]
+libraries = {
+"": SubResource("AnimationLibrary_oxrb2")
+}
 
 [node name="CameraPlayer" parent="." instance=ExtResource("2_2vibj")]
 

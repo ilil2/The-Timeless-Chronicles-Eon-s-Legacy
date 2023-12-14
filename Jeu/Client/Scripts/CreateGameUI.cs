@@ -25,6 +25,7 @@ public partial class CreateGameUI : Control
 		
 		IDGame = GetNode<Label>("IDGameText");
 		
+		
 		NamePlayer1 = GetNode<Label>("Player1Text");
 		NamePlayer2 = GetNode<Label>("Player2Text");
 		NamePlayer3 = GetNode<Label>("Player3Text");
