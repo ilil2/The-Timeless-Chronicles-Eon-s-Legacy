@@ -279,6 +279,7 @@ public partial class MapLvl1Script : Node3D
 			double z = ((NbRoom / 10)+0) * r * Math.Sin(t);
 
 			int ID;// = Rand.Next(1, 6);
+			int SubID;
 			int RandInt = Rand.Next(1,101);
 			if (RandInt<=35) ID = 1;
 			else if (RandInt<=60) ID = 2;
@@ -331,7 +332,13 @@ public partial class MapLvl1Script : Node3D
 			float A = PseudoRoom.RotationDegrees.Y;
 			
 			PseudoRoom.QueueFree();
-			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/Room{ID}.tscn");
+			int SubID = 0;
+			if (ID == 1) SubID = Rand.Next(1,5);
+			if (ID == 2) SubID = Rand.Next(1,4);
+			if (ID == 3) SubID = Rand.Next(1,4);
+			if (ID == 4) SubID = Rand.Next(1,4);
+			if (ID == 5) SubID = 1;
+			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/Room{ID}_{SubID}.tscn");
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = Roundm(X, Z, LenWall);
 			Room.RotationDegrees = new Vector3(0,A,0);
@@ -384,19 +391,19 @@ public partial class MapLvl1Script : Node3D
 	{
 		for (int i = 0; i < RoomList.Count-1; i++)
 		{
-			Node3D ActualRoom = RoomList[i];
+			Node3D ActualRoom = RoomList[i].GetNode<Node3D>("Wall");
 			for (int j = i+1; j < RoomList.Count; j++)
 			{
-				Node3D TestedRoom = RoomList[j];
+				Node3D TestedRoom = RoomList[j].GetNode<Node3D>("Wall");
 				double dist = Distance(ActualRoom, TestedRoom);
 				
 				if (dist<100)
 				{
 					List<Node3D> OverlapWallList = new List<Node3D>();
-					for (int k = 1; k < ActualRoom.GetChildCount(); k++)
+					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
 					{
 						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
-						for (int l = 1; l < TestedRoom.GetChildCount(); l++)
+						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
 							bool TestPos = Math.Round(ActualChild.GlobalTransform.Origin.X)==Math.Round(TestedChild.GlobalTransform.Origin.X) && Math.Round(ActualChild.GlobalTransform.Origin.Z)==Math.Round(TestedChild.GlobalTransform.Origin.Z);//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
@@ -408,7 +415,6 @@ public partial class MapLvl1Script : Node3D
 								l = TestedRoom.GetChildCount();
 							}
 						}
-						
 					}
 					int RandWall = Rand.Next(0,OverlapWallList.Count);
 					for (int k = 0; k < OverlapWallList.Count; k++)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=20 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_6qus8"]
@@ -6,8 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b3f7hokp7wylx" path="res://Ressources/Map/Egypt1/Ground/ground_0024_height_1k.png" id="3_apswm"]
 [ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="4_k4x7e"]
 [ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_1dydr"]
-[ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_V2_L3.123cedbb80cc-eec4-4899-a587-d46dd8eff3b9/10085_egypt_sphinx_iterations-2.obj" id="5_cdk6f"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
+[ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt1/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="7_qvf21"]
+[ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_iterations-2.obj" id="7_xvs25"]
 [ext_resource type="PackedScene" uid="uid://7buqngqxlh78" path="res://Scenes/PlayerScenes/Archer.tscn" id="9_x88yj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
@@ -92,6 +93,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qvrok")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4im4m"]
+albedo_texture = ExtResource("7_qvf21")
+
 [sub_resource type="Environment" id="Environment_vrgge"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
@@ -133,7 +137,8 @@ skeleton = NodePath("")
 
 [node name="Sphynx" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(0.01, -0.0173205, -8.74252e-10, 4.37126e-10, -7.57154e-10, 0.02, -0.0173205, -0.01, 3.3094e-17, -694.36, 8.48621e-06, 194.16)
-mesh = ExtResource("5_cdk6f")
+material_override = SubResource("StandardMaterial3D_4im4m")
+mesh = ExtResource("7_xvs25")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
