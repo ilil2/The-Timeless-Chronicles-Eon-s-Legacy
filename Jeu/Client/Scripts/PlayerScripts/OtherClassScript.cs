@@ -18,26 +18,27 @@ public partial class OtherClassScript : CharacterBody3D
 	public override void _Ready()
 	{
 		EntityPosition = Position;
-		_pseudo = GetNode<Label3D>("LabelPseudo");
-		SetPseudo();
+		//_pseudo = GetNode<Label3D>("LabelPseudo");
+		//SetPseudo();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		string[] PlayerPositions = GameManager.InfoJoueur["co"].Split(";");
-		_pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2])), Vector3.Up);
-		_pseudo.Rotation = new Vector3(0, _pseudo.Rotation.Y + (float)Math.PI, 0);
+		string[] playerPositions = GameManager.InfoJoueur["co"].Split(";");
+		//_pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(playerPositions[0]), Lib.Conversions.AtoF(playerPositions[1]), Lib.Conversions.AtoF(playerPositions[2])), Vector3.Up);
+		//_pseudo.Rotation = new Vector3(0, _pseudo.Rotation.Y + (float)Math.PI, 0);
+		GD.Print(id);
 		
-		string[] Positions = GameManager.InfoAutreJoueur[$"co{id}"].Split(";");
-		Vector3 PositionA = new Vector3(Lib.Conversions.AtoF(Positions[0]), Lib.Conversions.AtoF(Positions[1]), Lib.Conversions.AtoF(Positions[2]));
+		string[] positions = GameManager.InfoAutreJoueur[$"co{id}"].Split(";");
+		Vector3 positionA = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
 
-		Position = PositionA;
+		Position = positionA;
 	}
 	
 	private void SetPseudo()
 	{
-		string PseudoName = GameManager.InfoAutreJoueur[$"pseudo{id}"];
-		switch (PseudoName)
+		string pseudoName = GameManager.InfoAutreJoueur[$"pseudo{id}"];
+		switch (pseudoName)
 		{
 			case "OttoLeBG":
 			case "Darkrentin":
@@ -50,6 +51,6 @@ public partial class OtherClassScript : CharacterBody3D
 				break;
 		}
 
-		_pseudo.Text = PseudoName;
+		_pseudo.Text = pseudoName;
 	}
 }

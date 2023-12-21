@@ -100,7 +100,7 @@ public partial class KnightScript : CharacterBody3D
 
 			//Mouvement du joueur
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
-			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
+				Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
 			{
 				_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
 					Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
