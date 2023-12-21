@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3cwxwlys0y1l"]
+
+[ext_resource type="Script" path="res://Scripts/NavMeshScript.cs" id="1_n1v7s"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_0txv1"]
+
+[node name="NavMesh" type="NavigationRegion3D"]
+navigation_mesh = SubResource("NavigationMesh_0txv1")
+script = ExtResource("1_n1v7s")

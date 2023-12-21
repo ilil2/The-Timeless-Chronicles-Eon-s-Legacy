@@ -21,12 +21,14 @@ public partial class MapLvl1Script : Node3D
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
 	private Random Rand = new Random();
+	private Random FogRand = new Random();
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
+	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
 	private static float SpawnX;
 	private static float SpawnZ;
@@ -34,6 +36,10 @@ public partial class MapLvl1Script : Node3D
 	private int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
+	private bool SpecMode = false;
+	private int FrameCount = 0;
+	private int StartInput = 0;
+	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -55,49 +61,60 @@ public partial class MapLvl1Script : Node3D
 	{
 		stopwatch.Start();
 		MainRoom = InitMainRoom();
-		CreatePseudoMap();
-		
+		CreatePseudoMap();	
 	}
 	
 	public override void _Process(double delta)
 	{
+		FrameCount+=1;
 		if (!MapReady)
 		{
 			if (CheckSleep())
 			{
+				AddChild(NavMesh);
 				CreateMainRoom();
 				CreateMap();
 				OpenRoom();
+				((NavMeshScript)NavMesh).CreateNavMesh();
+				CreateMob();
+				
 				
 				MapReady = true;
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
 				GD.Print($"Map crée en {stopwatch.Elapsed}");
-				fogwatch.Start();
-				Duration = Rand.Next(120,260);
-				//Label FogText = GetNode<Label>("Player/FogState");
-				GD.Print($"Fog Start in {Duration}");
-				//FogText.Text = $"Fog Start in {Duration}";
 				
+				Duration = FogRand.Next(120,260);
+				fogwatch.Start();
+				GD.Print($"Fog Start in {Duration}");	
 			}
 		}
 		else
 		{
+			//Process
 			CreateFog();
-			//sun
-			DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
-			const double time = 0.00001;
-			Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
-			//----
-			//Label Text = GetNode<Label>("Player/Label");
-			//Text.Text = $"FPS: {(int)(1/delta)}";
-			
+			DayCycle();	
+			DebugMode(delta);
+			Node3D Player = GetNode<Node3D>("Player");
+			for(int i = 0; i<MobList.Count; i++)
+			{
+				Node3D Mob = MobList[i];
+				double dist = Distance(Mob,Player);
+				if (dist<20)
+				{
+					((MobScript)Mob).Sleep = false;
+				}
+				else
+				{
+					((MobScript)Mob).Sleep = true;
+				}
+			}
 			//RenderDist();
 		}
 		
 	}
-
+	
 	public bool MapIsReady()
 	{
 		return MapReady;
@@ -107,6 +124,89 @@ public partial class MapLvl1Script : Node3D
 	{
 		return ((int)SpawnX,(int)SpawnZ);
 	}
+	
+	private void DebugMode(double delta)
+	{
+		Camera3D PlayerCam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+		// a enlever si no compil
+		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
+		//--
+		WorldEnvironment world = GetNode<WorldEnvironment>("World");
+		Godot.Environment env = world.Environment;
+		if (!SpecMode)
+		{
+			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			{
+				StartInput=FrameCount;
+				PackedScene SpecCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn");
+				Camera3D Cam = SpecCam.Instantiate<Camera3D>();
+				Cam.Name = "SpecCam";
+				Cam.Position = PlayerCam.Position + new Vector3(0,2,0) + Player.Position;
+				Cam.Rotation = PlayerCam.Rotation;
+				Label FPS = new Label();
+				FPS.Name = "FPS";
+				FPS.Text = "FPS:";
+				Cam.AddChild(FPS);
+				AddChild(Cam);
+				PlayerCam.Current = false;
+				Cam.Current = true;
+				SpecMode = true;
+				
+				env.VolumetricFogEnabled = false;
+				GD.Print("True");
+			}
+			
+		}
+		else
+		{
+			Label Fps = GetNode<Label>("SpecCam/FPS");
+			Fps.Text = $"FPS: {(int)(1/delta)}";
+			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			{
+				StartInput=FrameCount;
+				Camera3D Cam = GetNode<Camera3D>("SpecCam");
+				RemoveChild(Cam);
+				Cam.QueueFree();
+				PlayerCam.Current = true;
+				Cam.Current = false;
+				SpecMode = false;
+				
+				GD.Print("False");
+				env.VolumetricFogEnabled = true;
+			}
+			
+			
+		}
+	}
+	
+	private void CreateMob()
+	{
+		for(int i = 0; i<RoomList.Count; i++)
+		{
+			Node3D Room = RoomList[i].GetNode<Node3D>("Spawn");
+			for(int j = 0; j<Room.GetChildCount(); j++)
+			{
+				Node3D SpawnPoint = Room.GetChild<Node3D>(j);
+				if(Rand.Next(1,4)==1)
+				{
+					PackedScene M = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn");
+					CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
+					Mob.Position = SpawnPoint.GlobalTransform.Origin;
+					MobList.Add(Mob);
+					AddChild(Mob);
+				}
+			}
+			
+		}
+	}
+	
+	private void DayCycle()
+	{
+		DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
+		const double time = 0.00001;
+		Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
+	}
+	
 	private bool IsNodeVisible(Node3D node, Camera3D camera)
 	{
 		// Not Use !
@@ -115,6 +215,7 @@ public partial class MapLvl1Script : Node3D
 
 		return !camera.IsPositionBehind(nodePosition);
 	}
+	
 	private void RenderDist()
 	{
 		Camera3D cam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
@@ -140,20 +241,17 @@ public partial class MapLvl1Script : Node3D
 			}
 		}
 	}
+	
 	private void CreateFog()
 	{
-		//ElapsedMilliseconds
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
-		var env = world.Environment;
-		//Label FogText = GetNode<Label>("Player/FogState");
-		//GD.Print($"{Duration} {StartTime} {(int)fogwatch.Elapsed.TotalSeconds}");
+		Godot.Environment env = world.Environment;
 		if (FogState==0)
 		{
 			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)
 			{
 					FogState=1;
 					GD.Print("Starting Fog....");
-					//FogText.Text = "Starting Fog....";
 			}
 		}
 		else if (FogState==1)
@@ -166,10 +264,9 @@ public partial class MapLvl1Script : Node3D
 			{
 				env.VolumetricFogDensity=(float)0.1;
 				FogState=2;
-				Duration = Rand.Next(120,260);
+				Duration = FogRand.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog Start! End in {Duration} seconde");
-				//FogText.Text = $"Fog Start! End in {Duration} seconde";
 			}
 		}
 		else if (FogState==2)
@@ -178,7 +275,6 @@ public partial class MapLvl1Script : Node3D
 			{
 					FogState=3;
 					GD.Print("Ending Fog...");
-					//FogText.Text = "Ending Fog...";
 			}
 		}
 		else if (FogState==3)
@@ -191,11 +287,9 @@ public partial class MapLvl1Script : Node3D
 			{
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
-				Duration = Rand.Next(120,260);
+				Duration = FogRand.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
-				GD.Print($"Fog End! Next Fog in {Duration} seconde");
-				//FogText.Text = $"Fog End! Next Fog in {Duration} seconde";
-				
+				GD.Print($"Fog End! Next Fog in {Duration} seconde");		
 			}
 		}
 	}
@@ -228,6 +322,7 @@ public partial class MapLvl1Script : Node3D
 			double z = ((NbRoom / 10)+0) * r * Math.Sin(t);
 
 			int ID;// = Rand.Next(1, 6);
+			int SubID;
 			int RandInt = Rand.Next(1,101);
 			if (RandInt<=35) ID = 1;
 			else if (RandInt<=60) ID = 2;
@@ -280,14 +375,18 @@ public partial class MapLvl1Script : Node3D
 			float A = PseudoRoom.RotationDegrees.Y;
 			
 			PseudoRoom.QueueFree();
-			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/Room{ID}.tscn");
+			int SubID = 0;
+			if (ID == 1) SubID = Rand.Next(1,5);
+			if (ID == 2) SubID = Rand.Next(1,4);
+			if (ID == 3) SubID = Rand.Next(1,4);
+			if (ID == 4) SubID = Rand.Next(1,4);
+			if (ID == 5) SubID = 1;
+			PackedScene R = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/Room{ID}_{SubID}.tscn");
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = Roundm(X, Z, LenWall);
-			Vector3 rotationY = new Vector3(0, 1, 0);
 			Room.RotationDegrees = new Vector3(0,A,0);
-			AddChild(Room);
+			NavMesh.AddChild(Room);
 			RoomList.Add(Room);
-
 		}
 	}
 
@@ -297,14 +396,13 @@ public partial class MapLvl1Script : Node3D
 		
 		PackedScene MR = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMain.tscn");
 		Node3D MRoom = MR.Instantiate<Node3D>();
-		AddChild(MRoom);
+		NavMesh.AddChild(MRoom);
 		RoomList.Add(MRoom);
 		
 		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMainGate.tscn");
 		Node3D MRoomGate = MRG.Instantiate<Node3D>();
 		RoomList.Add(MRoomGate);
-		AddChild(MRoomGate);
-		
+		NavMesh.AddChild(MRoomGate);		
 	}
 
 	private bool CheckSleep()
@@ -336,35 +434,30 @@ public partial class MapLvl1Script : Node3D
 	{
 		for (int i = 0; i < RoomList.Count-1; i++)
 		{
-			Node3D ActualRoom = RoomList[i];
-			int find = ActualRoom.GetChildCount();
+			Node3D ActualRoom = RoomList[i].GetNode<Node3D>("Wall");
 			for (int j = i+1; j < RoomList.Count; j++)
 			{
-				Node3D TestedRoom = RoomList[j];
+				Node3D TestedRoom = RoomList[j].GetNode<Node3D>("Wall");
 				double dist = Distance(ActualRoom, TestedRoom);
 				
 				if (dist<100)
 				{
 					List<Node3D> OverlapWallList = new List<Node3D>();
-					for (int k = 1; k < ActualRoom.GetChildCount(); k++)
+					for (int k = 0; k < ActualRoom.GetChildCount(); k++)
 					{
 						Node3D ActualChild = ActualRoom.GetChild<Node3D>(k);
-						for (int l = 1; l < TestedRoom.GetChildCount(); l++)
+						for (int l = 0; l < TestedRoom.GetChildCount(); l++)
 						{
 							Node3D TestedChild = TestedRoom.GetChild<Node3D>(l);
-							bool TestPos = (int)ActualChild.GlobalTransform.Origin.X==(int)TestedChild.GlobalTransform.Origin.X && (int)ActualChild.GlobalTransform.Origin.Z==(int)TestedChild.GlobalTransform.Origin.Z;//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
+							bool TestPos = Math.Round(ActualChild.GlobalTransform.Origin.X)==Math.Round(TestedChild.GlobalTransform.Origin.X) && Math.Round(ActualChild.GlobalTransform.Origin.Z)==Math.Round(TestedChild.GlobalTransform.Origin.Z);//(TestedChild.Position.X+TestedRoom.Position.X == ActualChild.Position.X+ActualRoom.Position.X)&&(TestedChild.Position.Z+TestedRoom.Position.Z == ActualChild.Position.Z+ActualRoom.Position.Z);
 							if (TestPos)
 							{
-								if (l<TestedRoom.GetChildCount())
-								{
-									TestedRoom.RemoveChild(TestedChild);
-									TestedChild.QueueFree();
-									OverlapWallList.Add(ActualChild);
-									l = TestedRoom.GetChildCount();
-								}
+								TestedRoom.RemoveChild(TestedChild);
+								TestedChild.QueueFree();
+								OverlapWallList.Add(ActualChild);
+								l = TestedRoom.GetChildCount();
 							}
 						}
-						
 					}
 					int RandWall = Rand.Next(0,OverlapWallList.Count);
 					for (int k = 0; k < OverlapWallList.Count; k++)
@@ -374,9 +467,9 @@ public partial class MapLvl1Script : Node3D
 						{
 							Node3D Child = OverlapWallList[k];
 							Node3D Gate = AssetC.Instantiate<Node3D>();
-							Gate.Rotation = Child.Rotation+ActualRoom.Rotation;
-							Gate.Position = Child.GlobalTransform.Origin;
-							AddChild(Gate);
+							Gate.Rotation = Child.Rotation;
+							Gate.Position = Child.Position;
+							ActualRoom.AddChild(Gate);
 							ActualRoom.RemoveChild(Child);
 							Child.QueueFree();
 						}
@@ -389,16 +482,6 @@ public partial class MapLvl1Script : Node3D
 				MaxSpawnDist = DistToMain;
 				SpawnX = ActualRoom.Position.X;
 				SpawnZ = ActualRoom.Position.Z;
-			}
-			if (ActualRoom.GetChildCount()==find && false)
-			{
-				GD.Print("/!\\ Room Non Connectée !");
-				MeshInstance3D M = new MeshInstance3D();
-				BoxMesh B = new BoxMesh();
-				B.Size = new Vector3(10,50,10);
-				M.Mesh = B;
-				M.Position = new Vector3(ActualRoom.Position.X,35,ActualRoom.Position.Z);
-				AddChild(M);
 			}
 		}
 	}

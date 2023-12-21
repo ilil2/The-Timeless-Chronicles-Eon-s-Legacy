@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvm8uefdo7jku"]
+
+[ext_resource type="Script" path="res://Scenes/Debug/SpecCam.cs" id="1_bsgi7"]
+
+[node name="SpecCam" type="Camera3D"]
+script = ExtResource("1_bsgi7")
