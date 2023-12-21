@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bj8rilpef5eb"]
+[gd_scene load_steps=37 format=3 uid="uid://bj8rilpef5eb"]
 
 [ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt1/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="1_bdecf"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="2_osxtw"]
@@ -300,6 +300,9 @@ shadow_mesh = SubResource("ArrayMesh_6g88w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_egfoo"]
 size = Vector3(0.328, 2, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ajbmg"]
+size = Vector3(42, 0.1, 30)
 
 [node name="Room4" type="Node3D"]
 
@@ -846,3 +849,8 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/Wall_mesh_heiroglyphics24/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_egfoo")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+mesh = SubResource("BoxMesh_ajbmg")

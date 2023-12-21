@@ -28,6 +28,7 @@ public partial class MapLvl1Script : Node3D
 	private StaticBody3D MainRoom;
 	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
+	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
 	private static float SpawnX;
 	private static float SpawnZ;
@@ -38,6 +39,7 @@ public partial class MapLvl1Script : Node3D
 	private bool SpecMode = false;
 	private int FrameCount = 0;
 	private int StartInput = 0;
+	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -69,9 +71,13 @@ public partial class MapLvl1Script : Node3D
 		{
 			if (CheckSleep())
 			{
+				AddChild(NavMesh);
 				CreateMainRoom();
 				CreateMap();
 				OpenRoom();
+				((NavMeshScript)NavMesh).CreateNavMesh();
+				CreateMob();
+				
 				
 				MapReady = true;
 				stopwatch.Stop();
@@ -90,6 +96,20 @@ public partial class MapLvl1Script : Node3D
 			CreateFog();
 			DayCycle();	
 			DebugMode(delta);
+			Node3D Player = GetNode<Node3D>("Player");
+			for(int i = 0; i<MobList.Count; i++)
+			{
+				Node3D Mob = MobList[i];
+				double dist = Distance(Mob,Player);
+				if (dist<20)
+				{
+					((MobScript)Mob).Sleep = false;
+				}
+				else
+				{
+					((MobScript)Mob).Sleep = true;
+				}
+			}
 			//RenderDist();
 		}
 		
@@ -108,7 +128,9 @@ public partial class MapLvl1Script : Node3D
 	private void DebugMode(double delta)
 	{
 		Camera3D PlayerCam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+		// a enlever si no compil
 		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
+		//--
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		Godot.Environment env = world.Environment;
 		if (!SpecMode)
@@ -129,6 +151,7 @@ public partial class MapLvl1Script : Node3D
 				PlayerCam.Current = false;
 				Cam.Current = true;
 				SpecMode = true;
+				
 				env.VolumetricFogEnabled = false;
 				GD.Print("True");
 			}
@@ -147,6 +170,7 @@ public partial class MapLvl1Script : Node3D
 				PlayerCam.Current = true;
 				Cam.Current = false;
 				SpecMode = false;
+				
 				GD.Print("False");
 				env.VolumetricFogEnabled = true;
 			}
@@ -155,7 +179,26 @@ public partial class MapLvl1Script : Node3D
 		}
 	}
 	
-	private void CreateMob(){}
+	private void CreateMob()
+	{
+		for(int i = 0; i<RoomList.Count; i++)
+		{
+			Node3D Room = RoomList[i].GetNode<Node3D>("Spawn");
+			for(int j = 0; j<Room.GetChildCount(); j++)
+			{
+				Node3D SpawnPoint = Room.GetChild<Node3D>(j);
+				if(Rand.Next(1,4)==1)
+				{
+					PackedScene M = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn");
+					CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
+					Mob.Position = SpawnPoint.GlobalTransform.Origin;
+					MobList.Add(Mob);
+					AddChild(Mob);
+				}
+			}
+			
+		}
+	}
 	
 	private void DayCycle()
 	{
@@ -342,7 +385,7 @@ public partial class MapLvl1Script : Node3D
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = Roundm(X, Z, LenWall);
 			Room.RotationDegrees = new Vector3(0,A,0);
-			AddChild(Room);
+			NavMesh.AddChild(Room);
 			RoomList.Add(Room);
 		}
 	}
@@ -353,13 +396,13 @@ public partial class MapLvl1Script : Node3D
 		
 		PackedScene MR = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMain.tscn");
 		Node3D MRoom = MR.Instantiate<Node3D>();
-		AddChild(MRoom);
+		NavMesh.AddChild(MRoom);
 		RoomList.Add(MRoom);
 		
 		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMainGate.tscn");
 		Node3D MRoomGate = MRG.Instantiate<Node3D>();
 		RoomList.Add(MRoomGate);
-		AddChild(MRoomGate);		
+		NavMesh.AddChild(MRoomGate);		
 	}
 
 	private bool CheckSleep()
