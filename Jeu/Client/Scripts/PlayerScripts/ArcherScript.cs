@@ -108,7 +108,7 @@ public partial class ArcherScript : CharacterBody3D
 
 		//Mouvement du joueur
 		if (Input.IsActionPressed("forward") || Input.IsActionPressed("backward") || Input.IsActionPressed("left") ||
-			Input.IsActionPressed("right"))
+		    Input.IsActionPressed("right"))
 		{
 			_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
 				Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
