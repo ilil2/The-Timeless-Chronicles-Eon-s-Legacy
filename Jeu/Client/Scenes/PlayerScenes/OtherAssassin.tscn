@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2vi2xy06n7vn"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherAssassinScript.cs" id="1_evs3v"]
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherClassScript.cs" id="1_b6wfa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
@@ -13,7 +13,7 @@ albedo_color = Color(0.992157, 0.180392, 0.176471, 1)
 material = SubResource("StandardMaterial3D_pppuw")
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_evs3v")
+script = ExtResource("1_b6wfa")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)
@@ -24,4 +24,5 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324,
 mesh = SubResource("CapsuleMesh_vyull")
 
 [node name="LabelPseudo" type="Label3D" parent="."]
-transform = Transform3D(0.799918, 0, 0.0114629, 0, 0.8, 0, -0.0114629, 0, 0.799918, -0.000106931, 1.94748, -0.00391802)
+transform = Transform3D(-0.8, 2.7903e-16, 6.99382e-08, 2.7903e-16, 0.8, -2.7903e-16, -6.99382e-08, -2.79029e-16, -0.8, -0.000106931, 1.94748, -0.00391802)
+pixel_size = 0.01

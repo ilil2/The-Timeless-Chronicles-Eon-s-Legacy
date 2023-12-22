@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Security.AccessControl;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class KnightScript : CharacterBody3D
@@ -11,6 +10,9 @@ public partial class KnightScript : CharacterBody3D
 	private Node3D _h;
 	private Camera3D _camera;
 	private MeshInstance3D _playerMesh;
+	
+	//Variable des animations
+	private AnimationPlayer _animationPlayer;
 
 	//Variables des differentes forces
 	private float _gravity = 9.8f;
@@ -42,6 +44,8 @@ public partial class KnightScript : CharacterBody3D
 		_direction = Vector3.Back.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y);
 		
 		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
+
+		_animationPlayer = GetNode<AnimationPlayer>("PlayerBody/Sword/AnimationPlayer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -80,56 +84,74 @@ public partial class KnightScript : CharacterBody3D
 			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
 		}
 		
-		//Mouvement du dash
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
+		if (_camera.Current)
 		{
-			_horizontalVelocity = _characterClass.Dash(_direction, _dashPower);
-		}
+			//Attaque du joueur
+			if (Input.IsMouseButtonPressed(MouseButton.Left) && _animationPlayer.CurrentAnimation != "run")
+			{
+				_animationPlayer.Play("hit");
+			}
+		
+			//Mouvement du dash
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
+			{
+				_horizontalVelocity = _characterClass.Dash(_direction, _dashPower);
+			}
 
-		(bool forward, bool backward, bool right, bool left) = (false,false,false,false);
+			//Mouvement du joueur
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
+				Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
+			{
+				_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
+					Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
+				_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
+				_isWalking = true;
 
-		//Mouvement du joueur
-		if ((forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"])) 
-			|| (backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"])) 
-			|| (left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"])) 
-			|| (right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"])))
-		{
-			_direction = _characterClass.MoveDirection(forward, backward, right, left);
-			_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
-			_isWalking = true;
-			
-			//Changement de la vitesse du joueur si il sprint
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
-			{ 
-				_movementSpeed = _runSpeed;
-				_isRunning = true;
+				//Changement de la vitesse du joueur si il sprint
+				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
+				{
+					_movementSpeed = _runSpeed;
+					_isRunning = true;
+				}
+				else
+				{
+					_movementSpeed = _walkSpeed;
+					_isRunning = false;
+				}
 			}
 			else
 			{
-				_movementSpeed = _walkSpeed;
+				_isWalking = false;
 				_isRunning = false;
 			}
-		}
-		else
-		{
-			_isWalking = false;
-			_isRunning = false;
-		}
 		
 
-		//Calcul de la rotation du joueur
-		_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
+			//Calcul de la rotation du joueur
+			//_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
+			_playerMesh.LookAt(_camera.GlobalPosition, Vector3.Up);
+			_playerMesh.Rotation = new Vector3(0, _playerMesh.Rotation.Y + (float)Math.PI, 0);
 		
-		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
+			_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
 		
-		//Calcul du movement du joueur
-		Vector3 velocity = Velocity;
-		velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
-		velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
-		velocity.Y = _verticalVelocity.Y;
+			//Calcul du movement du joueur
+			Vector3 velocity = Velocity;
+			velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
+			velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
+			velocity.Y = _verticalVelocity.Y;
 		
-		//Application du mouvement au joueur
-		Velocity = velocity;
-		MoveAndSlide();
+			//Application du mouvement au joueur
+			Velocity = velocity;
+			MoveAndSlide();
+		
+			//Animation du joueur
+			if (_isRunning)
+			{
+				_animationPlayer.Play("run");
+			}
+			else if (_animationPlayer.CurrentAnimation == "run")
+			{
+				_animationPlayer.Stop();
+			}
+		}
 	}
 }

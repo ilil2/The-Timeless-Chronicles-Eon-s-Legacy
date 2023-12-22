@@ -8,8 +8,8 @@ using Lib;
 
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using Godot.Collections;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class GameManager : Node3D
 {
@@ -66,15 +66,25 @@ public partial class GameManager : Node3D
 	private CharacterBody3D Joueur2;
 	private CharacterBody3D Joueur3;
 	private CharacterBody3D Joueur4;
+
+	private string IP;
+	private static string GetIp()
+	{
+		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
+		string res = sr.ReadLine();
+		sr.Close();
+		return res;
+	}
 	
-	//Ready
 	public override void _Ready()
 	{
+		IP = GetIp();
 		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.137.186"), 9191);						//adresse + port du serveur principal
+		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
+		
 		
 		ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
@@ -103,9 +113,10 @@ public partial class GameManager : Node3D
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
 							
-							Send($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}",soc);
+							tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
 							
-							string? line = Receive(soc);
+							string? line = tr.ReadLine();
 							if (line == "connection success")
 							{
 								tentative_connection = false;
@@ -128,9 +139,10 @@ public partial class GameManager : Node3D
 						if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
 							ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 						{
-							Send($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}",soc);
+							tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
+							tw.Flush();
 							
-							string line = Receive(soc);
+							string line = tr.ReadLine();
 							if (line == "creation success")
 							{
 								tentative_connection = false;
@@ -170,10 +182,11 @@ public partial class GameManager : Node3D
 				{
 					if (LobbyManager.CreateButtonPressed)
 					{
-						Send("newgame",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("newgame");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
 						LobbyReset = true;
 						
-						string rep = Receive(soc);
+						string rep = tr.ReadLine();
 						if (rep.Substring(0, 7) == "newgame")
 						{
 							IDGame = rep.Substring(8);
@@ -186,10 +199,11 @@ public partial class GameManager : Node3D
 					
 					else if (LobbyManager.JoinGamePressed)
 					{
-						Send($"joingame {LobbyManager.IDJoinGame}",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine($"joingame {LobbyManager.IDJoinGame}");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur
 						LobbyReset = true;
 						
-						string rep = Receive(soc);
+						string rep = tr.ReadLine();
 						if (rep.Substring(0) == "join")
 						{
 							ValidIDGame = true; 
@@ -209,7 +223,8 @@ public partial class GameManager : Node3D
 					else if (LobbyManager.StartGame)
 					{
 						LobbyReset = true;
-						Send("start",soc);					//preparation d'envoi au serveur de "requette"
+						tw.WriteLine("start");					//preparation d'envoi au serveur de "requette"
+						tw.Flush();								//envoie au serveur	
 						Thread.Sleep(2000);
 					}
 					
@@ -219,12 +234,14 @@ public partial class GameManager : Node3D
 						LobbyReset = true;
 						OnJoin = false;
 						th.Interrupt();
-						Send("back",soc);
+						tw.WriteLine("back");
+						tw.Flush();
 					}
 					
 					if (OnJoin && DateTime.Now > endTime)
 					{
-						Send("player",soc);
+						tw.WriteLine("player");
+						tw.Flush();
 						startTime = DateTime.Now;
 					}
 					endTime = startTime.Add(timerDuration);
@@ -249,14 +266,15 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.137.186"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
 				tw2 = new StreamWriter(ns2);					//lecture serveur secondaire
 				tr2 = new StreamReader(ns2);					//ecriture serveur secondaire
 				
-				Send(InfoJoueur["pseudo"],soc2);
+				tw2.WriteLine(InfoJoueur["pseudo"]);
+				tw2.Flush();
 				
 				PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
 				Control ClassSelect = ClassSelectUI.Instantiate<Control>();
@@ -272,7 +290,8 @@ public partial class GameManager : Node3D
 				{
 					InfoJoueur["class"] = ClassSelectUI.ClassChose;
 					ClassSelectUI.ClassChose = "";
-					Send(InfoJoueur["class"],soc2);
+					tw2.WriteLine(InfoJoueur["class"]);
+					tw2.Flush();
 				}
 				else if (_loadMap)
 				{
@@ -292,10 +311,10 @@ public partial class GameManager : Node3D
 				
 				PackedScene SceneJoueur1 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/{InfoJoueur["class"]}.tscn");
 				Joueur1 = SceneJoueur1.Instantiate<CharacterBody3D>();
-				AddChild(Joueur1);
 				Joueur1.Name = "Joueur1";
 				Joueur1.Position = new Vector3(x + rand.Next(-6,6),0,z + rand.Next(-6,6));
 				InfoJoueur["co"] = "0;0;0";
+				AddChild(Joueur1);
 				
 				switch (_nbJoueur)
 				{
@@ -304,19 +323,21 @@ public partial class GameManager : Node3D
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							((OtherClassScript)Joueur2).SetID(0);
+							((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
+							AddChild(Joueur2);
 						}
 						else
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							((OtherClassScript)Joueur2).SetID(1);
+							((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class1"]);
+							AddChild(Joueur2);
 						}
 						break;
 					case 3:
@@ -324,49 +345,43 @@ public partial class GameManager : Node3D
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
+							AddChild(Joueur3);
 						}
 						else if (InfoJoueur["id"] == "2")
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							AddChild(Joueur3);
 						}
 						else
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
+							AddChild(Joueur3);
 						}
 						break;
 					case 4:
@@ -374,103 +389,92 @@ public partial class GameManager : Node3D
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
+							AddChild(Joueur3);
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
-							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
-							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
+							AddChild(Joueur4);
 						}
 						else if (InfoJoueur["id"] == "2")
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn"); 
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							AddChild(Joueur3);
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
-							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
-							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
+							AddChild(Joueur4);
 						}
 						else if (InfoJoueur["id"] == "3")
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class0"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id0"], InfoAutreJoueur["class0"]);
 							InfoAutreJoueur["co0"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							AddChild(Joueur3);
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
-							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
-							SetIDtoClass(Joueur4, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
+							AddChild(Joueur4);
 						}
 						else
 						{
 							PackedScene SceneJoueur2 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class1"]}.tscn");
 							Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
-							AddChild(Joueur2);
 							Joueur2.Name = "Joueur2";
-							SetIDtoClass(Joueur2, InfoAutreJoueur["id1"], InfoAutreJoueur["class1"]);
 							InfoAutreJoueur["co1"] = "0;0;0";
+							AddChild(Joueur2);
 							
 							PackedScene SceneJoueur3 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class2"]}.tscn");
 							Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
-							AddChild(Joueur3);
 							Joueur3.Name = "Joueur3";
-							SetIDtoClass(Joueur3, InfoAutreJoueur["id2"], InfoAutreJoueur["class2"]);
 							InfoAutreJoueur["co2"] = "0;0;0";
+							AddChild(Joueur3);
 							
 							PackedScene SceneJoueur4 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/Other{InfoAutreJoueur["class3"]}.tscn");
 							Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
-							AddChild(Joueur4);
 							Joueur4.Name = "Joueur4";
-							SetIDtoClass(Joueur4, InfoAutreJoueur["id3"], InfoAutreJoueur["class3"]);
 							InfoAutreJoueur["co3"] = "0;0;0";
+							AddChild(Joueur4);
 						}
 						break;
 				}
-
+				
 				state = 6;
 			}
 			
 			else if (state == 6)
 			{
-				Send("in:co:" + InfoJoueur["co"],soc2);
+				tw2.WriteLine("in:co:" + InfoJoueur["co"]);
+				tw2.Flush();
 			}
 			
 		}
@@ -480,45 +484,12 @@ public partial class GameManager : Node3D
 			GD.Print(e);
 		}
 	}
-
-	private void SetIDtoClass(CharacterBody3D player, string id, string classe)
-	{
-		switch (classe)
-		{
-			case "Archer":
-				((OtherArcherScript)player).SetID(Conversions.AtoI(id));
-				break;
-			case "Knight":
-				((OtherKnightScript)player).SetID(Conversions.AtoI(id));
-				break;
-			case "Scientist":
-				((OtherScientistScript)player).SetID(Conversions.AtoI(id));
-				break;
-			case "Assassin":
-				((OtherAssassinScript)player).SetID(Conversions.AtoI(id));
-				break;
-		}
-	}
-	
-	private void Send(string s, Socket socket)
-	{
-		byte[] data = Encoding.UTF8.GetBytes(s);
-		socket.Send(data, 0, data.Length, SocketFlags.None);
-	}
-
-	private string Receive(Socket socket, int i = 1024)
-	{
-		byte[] buffer = new byte[i];
-		int bytesRead = socket.Receive(buffer);
-		string receivedData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-		return receivedData;
-	}
 	
 	private void Listen()		//premier thread
 	{
 		while (true)
 		{
-			string? rep = Receive(soc);	//lecture de donnée du serveur
+			string? rep = tr.ReadLine();	//lecture de donnée du serveur
 			if (rep.Contains(":"))
 			{
 				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
@@ -548,7 +519,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string rep = Receive(soc2);
+			string rep = tr2.ReadLine();
 			if (rep.Substring(0,5) == "ready")
 			{
 				rep = rep.Substring(6);
@@ -627,8 +598,15 @@ public partial class GameManager : Node3D
 				for (int i = 0; i < 3; i++)
 				{
 					string[] CoordInfo = SplitInfo[i].Split('/');
-					CoordInfo[1] = CoordInfo[1].Substring(3);
-					InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+					if (CoordInfo[1] != "deco")
+					{
+						CoordInfo[1] = CoordInfo[1].Substring(3);
+						InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+					}
+					else
+					{
+						InfoAutreJoueur[$"co{CoordInfo[0]}"] = "0;-3;0";
+					}
 				}
 			}
 		}
