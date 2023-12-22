@@ -511,6 +511,7 @@ public partial class GameManager : Node3D
 			{
 				tw2.WriteLine("in:co:" + InfoJoueur["co"]);
 				tw2.Flush();
+				((MapLvl1Script)Map).DebugMode(delta, Joueur1);
 			}
 			
 		}

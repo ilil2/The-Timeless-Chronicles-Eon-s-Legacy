@@ -20,8 +20,8 @@ public partial class MapLvl1Script : Node3D
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random();
-	private Random FogRand = new Random();
+	private Random Rand = new Random(42);
+	private Random FogRand = new Random(42);
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
@@ -94,8 +94,7 @@ public partial class MapLvl1Script : Node3D
 		{
 			//Process
 			CreateFog();
-			DayCycle();	
-			DebugMode(delta);
+			DayCycle();
 			
 			//RenderDist();
 		}
@@ -112,11 +111,10 @@ public partial class MapLvl1Script : Node3D
 		return ((int)SpawnX,(int)SpawnZ);
 	}
 	
-	private void DebugMode(double delta)
+	public void DebugMode(double delta, CharacterBody3D Player)
 	{
-		Camera3D PlayerCam = GetNode<Camera3D>("Joueur1/CameraPlayer/h/v/Camera3D");
+		Camera3D PlayerCam = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		// a enlever si no compil
-		CharacterBody3D Player = GetNode<CharacterBody3D>("Joueur1");
 		//--
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		Godot.Environment env = world.Environment;
