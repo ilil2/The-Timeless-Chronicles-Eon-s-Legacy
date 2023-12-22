@@ -11,6 +11,7 @@ public class Serveur
     private int joueur_ready;
 
     private string[] info = new string[4];
+    private string[] chat = {"","","",""};
 
     /*public class Prog
     {
@@ -107,9 +108,14 @@ public class Serveur
                 }
                 else if (requette.Substring(0,4) == "chat")
                 {
-                    Console.WriteLine($"{cc.id} : {requette}"); //affichage de la requete recue
-                    tw.WriteLine($"vous : {requette}");
-                    tw.Flush(); //envoi de la reponse
+                    requette = requette.Substring(5);
+                    
+                    chat[0] = $"{cc.pseudo}: {requette}";
+                    chat[1] = $"{cc.pseudo}: {requette}";
+                    chat[2] = $"{cc.pseudo}: {requette}";
+                    chat[3] = $"{cc.pseudo}: {requette}";
+                    
+                    Console.WriteLine(chat);
                 }
                 else if (requette.Substring(0,2) == "in")
                 {
@@ -163,6 +169,13 @@ public class Serveur
                         tw.WriteLine(info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3]);
                         tw.Flush();
                     }
+                }
+
+                if (chat[cc.id] != "")
+                {
+                    tw.WriteLine("chat:"+chat[cc.id]);
+                    tw.Flush();
+                    chat[cc.id] = "";
                 }
             }
         }

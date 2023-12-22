@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Lib
-build_property.ProjectDir = /home/ilyann/Documents/git/The-Timeless-Chronicles-Eon-s-Legacy/Jeu/Serveur/Lib/
+build_property.ProjectDir = C:\Users\ilyan\Documents\TTC-Serveur\Jeu\Serveur\Lib\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
