@@ -67,6 +67,8 @@ public partial class GameManager : Node3D
 	private CharacterBody3D Joueur3;
 	private CharacterBody3D Joueur4;
 
+	private Control _chat;
+
 	private string IP;
 	private static string GetIp()
 	{
@@ -96,6 +98,9 @@ public partial class GameManager : Node3D
 		
 		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
 		Map = MapScene.Instantiate<Node3D>();
+		
+		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");
+		_chat = ChatSceneUI.Instantiate<Control>();
 	}
 	
 	//process
@@ -504,6 +509,8 @@ public partial class GameManager : Node3D
 						break;
 				}
 				
+				AddChild(_chat);
+				
 				state = 6;
 			}
 			
@@ -512,6 +519,12 @@ public partial class GameManager : Node3D
 				tw2.WriteLine("in:co:" + InfoJoueur["co"]);
 				tw2.Flush();
 				((MapLvl1Script)Map).DebugMode(delta, Joueur1);
+				if (((ChatUI)_chat).Inputtext != "")
+				{
+					tw2.WriteLine("chat:" + ((ChatUI)_chat).Inputtext);
+					tw2.Flush();
+					((ChatUI)_chat).Inputtext = "";
+				}
 			}
 			
 		}
@@ -557,7 +570,7 @@ public partial class GameManager : Node3D
 		while (true)
 		{
 			string rep = tr2.ReadLine();
-			if (rep.Substring(0,5) == "ready")
+			if (rep.Length > 5 && rep.Substring(0,5) == "ready")
 			{
 				rep = rep.Substring(6);
 				string[] InfoReady = rep.Split("/");
@@ -628,7 +641,7 @@ public partial class GameManager : Node3D
 				ClassSelectUI.Supr = true;
 				_loadMap = true;
 			}
-			else if (rep.Substring(0,2) == "in")
+			else if (rep.Length > 2 && rep.Substring(0,2) == "in")
 			{
 				string line = rep.Substring(3);
 				string[] SplitInfo = line.Split('|');
@@ -645,6 +658,16 @@ public partial class GameManager : Node3D
 						InfoAutreJoueur[$"co{CoordInfo[0]}"] = "0;-3;0";
 					}
 				}
+			}
+			
+			else if (rep.Length > 4 && rep.Substring(0,4) == "chat")
+			{
+				rep = rep.Substring(5);
+				if (rep.Length > InfoJoueur["pseudo"].Length && rep.Substring(0,InfoJoueur["pseudo"].Length) == InfoJoueur["pseudo"])
+				{
+					rep = "vous" + rep.Substring(InfoJoueur["pseudo"].Length);
+				}
+				((ChatUI)_chat).Outputaddtext = rep;
 			}
 		}
 	}
