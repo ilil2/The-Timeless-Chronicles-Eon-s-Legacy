@@ -75,8 +75,8 @@ public partial class MapLvl1Script : Node3D
 				CreateMainRoom();
 				CreateMap();
 				OpenRoom();
-				((NavMeshScript)NavMesh).CreateNavMesh();
-				CreateMob();
+				//((NavMeshScript)NavMesh).CreateNavMesh();
+				//CreateMob();
 				
 				
 				MapReady = true;
@@ -96,20 +96,7 @@ public partial class MapLvl1Script : Node3D
 			CreateFog();
 			DayCycle();	
 			DebugMode(delta);
-			Node3D Player = GetNode<Node3D>("Player");
-			for(int i = 0; i<MobList.Count; i++)
-			{
-				Node3D Mob = MobList[i];
-				double dist = Distance(Mob,Player);
-				if (dist<20)
-				{
-					((MobScript)Mob).Sleep = false;
-				}
-				else
-				{
-					((MobScript)Mob).Sleep = true;
-				}
-			}
+			
 			//RenderDist();
 		}
 		
@@ -127,9 +114,9 @@ public partial class MapLvl1Script : Node3D
 	
 	private void DebugMode(double delta)
 	{
-		Camera3D PlayerCam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
+		Camera3D PlayerCam = GetNode<Camera3D>("Joueur1/CameraPlayer/h/v/Camera3D");
 		// a enlever si no compil
-		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
+		CharacterBody3D Player = GetNode<CharacterBody3D>("Joueur1");
 		//--
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		Godot.Environment env = world.Environment;
