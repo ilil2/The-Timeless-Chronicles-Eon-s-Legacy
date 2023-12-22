@@ -43,27 +43,6 @@ public partial class GameManager : Node3D
 	
 	private Node3D Map;
 	
-	public override void _Ready()
-	{
-		InputManger = new InputControl();
-		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
-		iep = new IPEndPoint(IPAddress.Parse("10.3.136.101"), 9191);						//adresse + port du serveur principal
-		soc.Connect(iep);				//conexion
-		
-		
-		ns = new NetworkStream(soc);
-		tw = new StreamWriter(ns);	//lecture requette serveur principal
-		tr = new StreamReader(ns);	//ecriture requette serveur principal
-		
-		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
-		Control connectionMenu = connectionUI.Instantiate<Control>();
-		AddChild(connectionMenu);
-		
-		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
-		Map = MapScene.Instantiate<Node3D>();
-	}
-	
 	private bool tentative_connection = true;
 	
 	private bool conn = true;					//connexion au serveur principal
@@ -87,6 +66,37 @@ public partial class GameManager : Node3D
 	private CharacterBody3D Joueur2;
 	private CharacterBody3D Joueur3;
 	private CharacterBody3D Joueur4;
+
+	private string IP;
+	private static string GetIp()
+	{
+		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
+		string res = sr.ReadLine();
+		sr.Close();
+		return res;
+	}
+	
+	public override void _Ready()
+	{
+		IP = GetIp();
+		InputManger = new InputControl();
+		
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
+		soc.Connect(iep);				//conexion
+		
+		
+		ns = new NetworkStream(soc);
+		tw = new StreamWriter(ns);	//lecture requette serveur principal
+		tr = new StreamReader(ns);	//ecriture requette serveur principal
+		
+		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
+		Control connectionMenu = connectionUI.Instantiate<Control>();
+		AddChild(connectionMenu);
+		
+		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
+		Map = MapScene.Instantiate<Node3D>();
+	}
 	
 	//process
 	public override void _Process(double delta)
@@ -256,7 +266,7 @@ public partial class GameManager : Node3D
 				state = 4;
 				
 				soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
-				iep2 = new IPEndPoint(IPAddress.Parse("10.3.136.101"), port_serv_jeu);				//nouvelle ip
+				iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);				//nouvelle ip
 				soc2.Connect(iep2);																			//connexion
 			
 				ns2 = new NetworkStream(soc2);
