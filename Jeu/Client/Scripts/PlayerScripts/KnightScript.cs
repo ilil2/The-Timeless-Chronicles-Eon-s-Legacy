@@ -25,6 +25,7 @@ public partial class KnightScript : ClassScript
     public override void _Process(double delta)
     {
         SendPosition();
+        Pause();
     }
 
     public override void _PhysicsProcess(double delta)

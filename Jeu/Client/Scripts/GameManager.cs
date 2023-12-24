@@ -60,6 +60,8 @@ public partial class GameManager : Node3D
 	public static Dictionary<string, string> InfoAutreJoueur = new Dictionary<string, string>();
 
 	private bool _loadMap = false;
+	
+	public static bool _pausemode = false;
 
 	private int _nbJoueur = 0;
 	private CharacterBody3D Joueur1;

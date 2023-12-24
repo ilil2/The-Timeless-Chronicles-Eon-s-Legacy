@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0tqtc6qy0o1t"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseMenuUI.cs" id="1_vc0bv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dtv2i"]
+font_size = 25
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7aqcr"]
+font_size = 40
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vc0bv")
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417
+anchor_top = 0.481
+anchor_right = 0.583
+anchor_bottom = 0.568
+offset_left = -0.384033
+offset_top = 0.311981
+offset_right = 0.383972
+offset_bottom = -0.0640259
+
+[node name="SettingsButtonText" type="Label" parent="SettingsButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.987
+offset_top = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 0.00166321
+grow_horizontal = 2
+grow_vertical = 2
+text = "Paramètre"
+label_settings = SubResource("LabelSettings_dtv2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417
+anchor_top = 0.358
+anchor_right = 0.583
+anchor_bottom = 0.444
+offset_left = -0.384033
+offset_top = 0.0159912
+offset_right = 0.383972
+offset_bottom = 0.287964
+
+[node name="ResumeButtonText" type="Label" parent="ResumeButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.987
+offset_top = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 0.00166321
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reprendre"
+label_settings = SubResource("LabelSettings_dtv2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeaveButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417
+anchor_top = 0.605
+anchor_right = 0.583
+anchor_bottom = 0.691
+offset_left = -0.384033
+offset_top = -0.0400085
+offset_right = 0.383972
+offset_bottom = 0.231964
+
+[node name="LeaveButtonText" type="Label" parent="LeaveButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.987
+offset_top = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 0.00166321
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quitter"
+label_settings = SubResource("LabelSettings_dtv2i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenuText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.389
+anchor_top = 0.222
+anchor_right = 0.611
+anchor_bottom = 0.312
+offset_left = -0.128021
+offset_top = 0.143982
+offset_right = 0.127991
+offset_bottom = -0.17601
+text = "Pause Menu"
+label_settings = SubResource("LabelSettings_7aqcr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="resized" from="." to="." method="OnResize"]

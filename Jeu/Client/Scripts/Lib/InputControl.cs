@@ -9,21 +9,22 @@ public class InputControl
 {
     private Dictionary<string, Key> _dictInputControl = new Dictionary<string, Key>
     {
-        {"forward", (Key)90},          // Z
-        {"backward", (Key)83},         // S
-        {"left", (Key)81},             // Q
-        {"right", (Key)68},            // D
-        {"sprint", (Key)4194325},      // Shift
-        {"dash", (Key)32},             // Space
-        {"capacity1", (Key)65},        // A
-        {"capacity2", (Key)69},        // E
-        {"capacity3", (Key)70},        // F
-        {"item1", (Key)49},            // 1
-        {"item2", (Key)50},            // 2
-        {"item3", (Key)51},            // 3
-        {"inventory", (Key)4194306},   // Tab
-        {"reload", (Key)82},           // R
-        {"tchat", (Key)84}             // T
+        {"forward", Key.Z},
+        {"backward", Key.S},
+        {"left", Key.Q},
+        {"right", Key.D},
+        {"sprint", Key.Shift},
+        {"dash", Key.Space},
+        {"capacity1", Key.A},
+        {"capacity2", Key.E},
+        {"capacity3", Key.F},
+        {"item1", Key.Key1},
+        {"item2", Key.Key2},
+        {"item3", Key.Key3},
+        {"inventory", Key.Tab},
+        {"reload", Key.R},
+        {"tchat", Key.T},
+        {"pause", Key.Escape}
     };
     
 

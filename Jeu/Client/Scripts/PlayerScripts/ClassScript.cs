@@ -40,6 +40,8 @@ public partial class ClassScript : CharacterBody3D
     protected float _angularAcceleration = 10;
     protected int _acceleration = 15;
     
+    private int pauseTimer;
+    
     protected void InitPlayer()
 	{
 		//Initialisation des variables du joueur
@@ -79,6 +81,26 @@ public partial class ClassScript : CharacterBody3D
 		//Envoie de la position du joueur au serveur
 	    GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 	}
+
+    protected void Pause()
+    {
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["pause"]) && !GameManager._pausemode && pauseTimer > 20)
+	    {
+		    pauseTimer = 0;
+		    GameManager._pausemode = true;
+		    Input.MouseMode = Input.MouseModeEnum.Visible;
+		    PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuUI.tscn");
+		    Control pauseMenu = pauseUI.Instantiate<Control>();
+		    AddChild(pauseMenu);
+	    }
+	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["pause"]) && GameManager._pausemode && pauseTimer > 20)
+	    { 
+		    pauseTimer = 0;
+		    GameManager._pausemode = false;
+	    }
+	    
+	    pauseTimer += 1;
+    }
 
     protected void PhysicsReset()
     {
