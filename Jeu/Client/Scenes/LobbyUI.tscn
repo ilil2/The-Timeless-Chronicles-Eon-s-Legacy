@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8p02dg25hb27"]
+[gd_scene load_steps=4 format=3 uid="uid://c8p02dg25hb27"]
 
 [ext_resource type="Script" path="res://Scripts/LobbyUI.cs" id="1_tgnl3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j34mk"]
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_8v2b2"]
+font_size = 25
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [node name="LobbyUI" type="Control"]
 layout_mode = 3
@@ -20,10 +24,10 @@ anchor_left = 0.368
 anchor_top = 0.173
 anchor_right = 0.632
 anchor_bottom = 0.318
-offset_left = 0.0639648
-offset_top = -0.103997
-offset_right = -0.0640335
-offset_bottom = -0.0640121
+offset_left = 0.0639954
+offset_top = -0.103996
+offset_right = -0.0640259
+offset_bottom = 1.936
 grow_horizontal = 2
 grow_vertical = 2
 text = "Lobby"
@@ -41,7 +45,22 @@ offset_left = -0.128033
 offset_top = 0.039993
 offset_right = 0.127998
 offset_bottom = 0.311977
+
+[node name="CreateButtonText" type="Label" parent="CreateGameButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.039
+anchor_right = 1.0
+anchor_bottom = 0.973
+offset_top = 2.46514
+offset_right = 6.10352e-05
+offset_bottom = 2.49861
+grow_horizontal = 2
+grow_vertical = 2
 text = "Create Game"
+label_settings = SubResource("LabelSettings_8v2b2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="JoinGameButton" type="Button" parent="."]
 layout_mode = 2
@@ -53,4 +72,21 @@ offset_left = -0.128033
 offset_top = 0.159972
 offset_right = 0.127998
 offset_bottom = -0.216036
+
+[node name="JoinButtonText" type="Label" parent="JoinGameButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.039
+anchor_right = 1.0
+anchor_bottom = 0.973
+offset_top = 2.46514
+offset_right = 6.10352e-05
+offset_bottom = 2.49861
+grow_horizontal = 2
+grow_vertical = 2
 text = "Join Game"
+label_settings = SubResource("LabelSettings_8v2b2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="resized" from="." to="." method="OnResize"]

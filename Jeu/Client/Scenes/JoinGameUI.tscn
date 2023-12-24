@@ -1,6 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsj6avqrdhr22"]
+[gd_scene load_steps=10 format=3 uid="uid://dsj6avqrdhr22"]
 
 [ext_resource type="Script" path="res://Scripts/JoinGameUI.cs" id="1_guudr"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_h0cs1"]
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_5w7gt"]
+events = [SubResource("InputEventKey_h0cs1")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmhpq"]
+font_size = 20
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_pj17l"]
+pressed = true
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_kdm0b"]
+events = [SubResource("InputEventKey_pj17l")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0pfou"]
+font_size = 40
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ffel6"]
 font_size = 40
@@ -27,32 +49,62 @@ offset_left = -0.512002
 offset_top = -0.152004
 offset_right = -0.384012
 offset_bottom = 0.319993
+shortcut = SubResource("Shortcut_5w7gt")
+
+[node name="BackButtonText" type="Label" parent="BackButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.987
+offset_top = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 0.00166321
+grow_horizontal = 2
+grow_vertical = 2
 text = "<= Back"
+label_settings = SubResource("LabelSettings_rmhpq")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="JoinButton" type="Button" parent="."]
 layout_mode = 2
 anchor_left = 0.632
-anchor_top = 0.432
+anchor_top = 0.469
 anchor_right = 0.701
-anchor_bottom = 0.556
-offset_left = -0.0640335
-offset_top = 0.0639927
-offset_right = 0.44796
-offset_bottom = -0.288035
+anchor_bottom = 0.593
+offset_left = -0.0640259
+offset_top = 0.0879822
+offset_right = 0.447937
+offset_bottom = -0.264069
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_kdm0b")
+
+[node name="JoinButtonText" type="Label" parent="JoinButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.987
+offset_top = 1.0
+offset_right = 1.52588e-05
+offset_bottom = 0.00166321
 grow_horizontal = 2
 grow_vertical = 2
 text = ">"
+label_settings = SubResource("LabelSettings_0pfou")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="JoinGameIDLine" type="LineEdit" parent="."]
 layout_mode = 2
 anchor_left = 0.333
-anchor_top = 0.432
+anchor_top = 0.469
 anchor_right = 0.611
-anchor_bottom = 0.556
-offset_left = 0.383995
-offset_top = 0.0639927
-offset_right = 0.127998
-offset_bottom = -0.288035
+anchor_bottom = 0.593
+offset_left = 0.384003
+offset_top = 0.0879822
+offset_right = 0.127991
+offset_bottom = -0.264069
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "ID of the Game"
@@ -61,13 +113,13 @@ alignment = 1
 [node name="JoinTextMenu" type="Label" parent="."]
 layout_mode = 2
 anchor_left = 0.389
-anchor_top = 0.099
+anchor_top = 0.173
 anchor_right = 0.611
-anchor_bottom = 0.198
-offset_left = -0.128033
-offset_top = -0.152004
-offset_right = 0.127998
-offset_bottom = -0.304009
+anchor_bottom = 0.272
+offset_left = -0.128021
+offset_top = -0.104004
+offset_right = 0.127991
+offset_bottom = -0.256012
 grow_horizontal = 2
 grow_vertical = 2
 text = "Join Game"
@@ -87,3 +139,5 @@ offset_top = -0.264035
 offset_right = 0.44796
 offset_bottom = 0.0559864
 label_settings = SubResource("LabelSettings_tb80a")
+
+[connection signal="resized" from="." to="." method="OnResize"]

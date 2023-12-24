@@ -16,6 +16,16 @@ public partial class ClassSelectUI : Control
 	//Variable du texte d'attente
 	private Label _waitingText;
 	
+	private Label _readyButtonText;
+	private Label _archerButtonText;
+	private Label _knightButtonText;
+	private Label _scientistButtonText;
+	private Label _assassinButtonText;
+	
+	private float _screenDefalutWidth = 1152;
+	private float _waitingTextDefaultSize = 27;
+	private float _buttonDefaultSize = 20;
+	
 	private string _className = "";
 	private bool _isReady = false;
 	
@@ -27,13 +37,28 @@ public partial class ClassSelectUI : Control
 		_buttonScientist = GetNode<Button>("ScientistButton");
 		_buttonAssassin = GetNode<Button>("AssassinButton");
 		_buttonReady = GetNode<Button>("ReadyButton");
-		
-		//Recuperation du texte d'attente
-		_waitingText = GetNode<Label>("EnAttente");
 
 		_waitingText.Visible = false;
 	}
-
+	
+	public void OnResize()
+	{
+		_readyButtonText = GetNode<Label>("ReadyButton/ReadyButtonText");
+		_waitingText = GetNode<Label>("EnAttente");
+		_archerButtonText = GetNode<Label>("ArcherButton/ArcherButtonText");
+		_knightButtonText = GetNode<Label>("KnightButton/KnightButtonText");
+		_assassinButtonText	= GetNode<Label>("AssassinButton/AssassinButtonText");
+		_scientistButtonText = GetNode<Label>("ScientistButton/ScientistButtonText");
+		
+		_readyButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_waitingText.LabelSettings.FontSize = (int)(_waitingTextDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_archerButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_knightButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_assassinButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_scientistButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		
+	}
+	
 	public override void _Process(double delta)
 	{
 		if (Supr)

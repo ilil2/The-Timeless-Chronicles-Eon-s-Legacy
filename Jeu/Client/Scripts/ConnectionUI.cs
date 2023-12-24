@@ -3,21 +3,30 @@ using System;
 
 public partial class ConnectionUI : Control
 {
-	private LineEdit PseudoConnectionNode;
-	private LineEdit PasswordConnectionNode;
-	private LineEdit PseudoInscriptionNode;
-	private LineEdit PasswordInscriptionNode;
-	private LineEdit PasswordConfirmInscriptionNode;
+	private LineEdit _pseudoConnectionNode;
+	private LineEdit _passwordConnectionNode;
+	private LineEdit _pseudoInscriptionNode;
+	private LineEdit _passwordInscriptionNode;
+	private LineEdit _passwordConfirmInscriptionNode;
 	
 	public static Button ConnectionButton;
 	public static Button InscriptionButton;
-	private Button NoCompteButton;
-	private Button DejaCompteButton;
+	private Button _noCompteButton;
+	private Button _dejaCompteButton;
 	
-	private Label ConnectionError;
-	private Label InscriptionError;
+	private Label _connectionError;
+	private Label _inscriptionError;
+	private Label _menuName;
+	private Label _noCompteButtonText;
+	private Label _dejaCompteButtonText;
+	private Label _connectionButtonText;
+	private Label _inscriptionButtonText;
 	
-	private Label MenuName;
+	private float _screenDefalutWidth = 1152;
+	private float _titleDefaultSize = 40;
+	private float _buttonDefaultSize = 20;
+	private float _transparentButtonDefaultSize = 16;
+	private float _errorDefaultSize = 16;
 	
 	public static string _pseudo = "";
 	public static string _password = "";
@@ -30,33 +39,45 @@ public partial class ConnectionUI : Control
 	{
 		//Recuperation des differents elements du menu
 		//Input
-		PseudoConnectionNode = GetNode<LineEdit>("PseudoConnection");
-		PasswordConnectionNode = GetNode<LineEdit>("PasswordConnection");
-		PseudoInscriptionNode = GetNode<LineEdit>("PseudoInscription");
-		PasswordInscriptionNode = GetNode<LineEdit>("PasswordInscription");
-		PasswordConfirmInscriptionNode = GetNode<LineEdit>("PasswordConfirmInscription");
+		_pseudoConnectionNode = GetNode<LineEdit>("PseudoConnection");
+		_passwordConnectionNode = GetNode<LineEdit>("PasswordConnection");
+		_pseudoInscriptionNode = GetNode<LineEdit>("PseudoInscription");
+		_passwordInscriptionNode = GetNode<LineEdit>("PasswordInscription");
+		_passwordConfirmInscriptionNode = GetNode<LineEdit>("PasswordConfirmInscription");
 		
 		//Boutons
 		ConnectionButton = GetNode<Button>("Connection");
 		InscriptionButton = GetNode<Button>("Inscription");
-		NoCompteButton = GetNode<Button>("NoCompte");
-		DejaCompteButton = GetNode<Button>("DejaCompte");
-		
-		//Error
-		ConnectionError = GetNode<Label>("ConnectionError");
-		InscriptionError = GetNode<Label>("InscriptionError");
-		
-		//Titre
-		MenuName = GetNode<Label>("MenuName");
+		_noCompteButton = GetNode<Button>("NoCompte");
+		_dejaCompteButton = GetNode<Button>("DejaCompte");
 		
 		InscriptionButton.Visible = false;
-		DejaCompteButton.Visible = false;
+		_dejaCompteButton.Visible = false;
 		
-		InscriptionError.Visible = false;
+		_inscriptionError.Visible = false;
 
-		PseudoInscriptionNode.Visible = false;
-		PasswordInscriptionNode.Visible = false;
-		PasswordConfirmInscriptionNode.Visible = false;
+		_pseudoInscriptionNode.Visible = false;
+		_passwordInscriptionNode.Visible = false;
+		_passwordConfirmInscriptionNode.Visible = false;
+	}
+	
+	public void OnResize()
+	{
+		_menuName = GetNode<Label>("MenuName");
+		_connectionError = GetNode<Label>("ConnectionError");
+		_inscriptionError = GetNode<Label>("InscriptionError");
+		_dejaCompteButtonText = GetNode<Label>("DejaCompte/DejaCompteButtonText");
+		_noCompteButtonText = GetNode<Label>("NoCompte/NoCompteButtonText");
+		_connectionButtonText = GetNode<Label>("Connection/ConnectionButtonText");
+		_inscriptionButtonText = GetNode<Label>("Inscription/InscriptionButtonText");
+		
+		_menuName.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_connectionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_inscriptionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_dejaCompteButtonText.LabelSettings.FontSize = (int)(_transparentButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_noCompteButtonText.LabelSettings.FontSize = (int)(_transparentButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_connectionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_inscriptionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 	
 	public override void _Process(double delta)
@@ -69,7 +90,7 @@ public partial class ConnectionUI : Control
 		}
 		else if (InscriptionButton.ButtonPressed)
 		{
-			if (PasswordInscriptionNode.Text == PasswordConfirmInscriptionNode.Text)
+			if (_passwordInscriptionNode.Text == _passwordConfirmInscriptionNode.Text)
 				Inscription();
 			else
 				GameManager.ConnectionError = "confirmation incorect";
@@ -78,56 +99,56 @@ public partial class ConnectionUI : Control
 		{
 			QueueFree();
 		}
-		ConnectionError.Text = erreur;
-		InscriptionError.Text = erreur;
+		_connectionError.Text = erreur;
+		_inscriptionError.Text = erreur;
 	}
 
 	public void Connection()
 	{
-		_pseudo = PseudoConnectionNode.Text;
-		_password = PasswordConnectionNode.Text;
+		_pseudo = _pseudoConnectionNode.Text;
+		_password = _passwordConnectionNode.Text;
 	}
 	
 	public void Inscription()
 	{
-		_pseudo = PseudoInscriptionNode.Text;
-		_password = PasswordInscriptionNode.Text;
-		_confirm_password = PasswordConfirmInscriptionNode.Text;
+		_pseudo = _pseudoInscriptionNode.Text;
+		_password = _passwordInscriptionNode.Text;
+		_confirm_password = _passwordConfirmInscriptionNode.Text;
 	}
 	
 	public void NoCompte()
 	{
-		MenuName.Text = "Inscription";
-		ConnectionError.Visible = false;
-		InscriptionError.Visible = true;
+		_menuName.Text = "Inscription";
+		_connectionError.Visible = false;
+		_inscriptionError.Visible = true;
 		
 		ConnectionButton.Visible = false;
 		InscriptionButton.Visible = true;
-		NoCompteButton.Visible = false;
-		DejaCompteButton.Visible = true;
+		_noCompteButton.Visible = false;
+		_dejaCompteButton.Visible = true;
 
-		PseudoConnectionNode.Visible = false;
-		PasswordConnectionNode.Visible = false;
-		PseudoInscriptionNode.Visible = true;
-		PasswordInscriptionNode.Visible = true;
-		PasswordConfirmInscriptionNode.Visible = true;
+		_pseudoConnectionNode.Visible = false;
+		_passwordConnectionNode.Visible = false;
+		_pseudoInscriptionNode.Visible = true;
+		_passwordInscriptionNode.Visible = true;
+		_passwordConfirmInscriptionNode.Visible = true;
 	}
 	
 	public void DejaCompte()
 	{
-		MenuName.Text = "Connection";
-		InscriptionError.Visible = false;
-		ConnectionError.Visible = true;
+		_menuName.Text = "Connection";
+		_inscriptionError.Visible = false;
+		_connectionError.Visible = true;
 		
 		ConnectionButton.Visible = true;
 		InscriptionButton.Visible = false;
-		NoCompteButton.Visible = true;
-		DejaCompteButton.Visible = false;
+		_noCompteButton.Visible = true;
+		_dejaCompteButton.Visible = false;
 		
-		PseudoConnectionNode.Visible = true;
-		PasswordConnectionNode.Visible = true;
-		PseudoInscriptionNode.Visible = false;
-		PasswordInscriptionNode.Visible = false;
-		PasswordConfirmInscriptionNode.Visible = false;
+		_pseudoConnectionNode.Visible = true;
+		_passwordConnectionNode.Visible = true;
+		_pseudoInscriptionNode.Visible = false;
+		_passwordInscriptionNode.Visible = false;
+		_passwordConfirmInscriptionNode.Visible = false;
 	}
 }

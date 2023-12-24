@@ -1,13 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://bukpc7fa40grn"]
+[gd_scene load_steps=12 format=3 uid="uid://bukpc7fa40grn"]
 
 [ext_resource type="Script" path="res://Scripts/ConnectionUI.cs" id="1_pn4u0"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_3jpwc"]
+pressed = true
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_mo20d"]
+events = [SubResource("InputEventKey_3jpwc")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5516u"]
+font_size = 20
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_fu2le"]
+pressed = true
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_wniwu"]
+events = [SubResource("InputEventKey_fu2le")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q76ao"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ai3o8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jctv"]
 font_size = 20
 font_color = Color(0.678431, 0.141176, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yb5ta"]
-font_size = 34
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_71d1n"]
 font_size = 20
@@ -25,27 +47,26 @@ script = ExtResource("1_pn4u0")
 [node name="PseudoConnection" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.385
-anchor_top = 0.327
-anchor_right = 0.626
-anchor_bottom = 0.389
-offset_left = 0.479946
-offset_top = 0.103986
-offset_right = -0.152054
-offset_bottom = -0.0720184
+anchor_left = 0.382
+anchor_top = 0.333
+anchor_right = 0.625
+anchor_bottom = 0.395
+offset_left = -0.0640259
+offset_top = 0.216003
+offset_bottom = 0.0399933
 placeholder_text = "Pseudo"
 
 [node name="PasswordConnection" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.384
-anchor_top = 0.448
-anchor_right = 0.627
-anchor_bottom = 0.509
-offset_left = -0.368004
-offset_top = -0.304009
-offset_right = -0.304039
-offset_bottom = 0.167998
+anchor_left = 0.382
+anchor_top = 0.457
+anchor_right = 0.625
+anchor_bottom = 0.519
+offset_left = -0.0639954
+offset_top = -0.135986
+offset_right = 6.10352e-05
+offset_bottom = -0.312012
 placeholder_text = "Password"
 secret = true
 shortcut_keys_enabled = false
@@ -53,14 +74,13 @@ shortcut_keys_enabled = false
 [node name="PasswordInscription" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.384
-anchor_top = 0.451
-anchor_right = 0.624
-anchor_bottom = 0.517
-offset_left = -2.368
-offset_top = -0.248023
-offset_right = 0.151985
-offset_bottom = -0.0160127
+anchor_left = 0.382
+anchor_top = 0.432
+anchor_right = 0.625
+anchor_bottom = 0.494
+offset_left = -0.0640259
+offset_top = 0.0639954
+offset_bottom = -0.112
 placeholder_text = "Password"
 secret = true
 shortcut_keys_enabled = false
@@ -68,14 +88,13 @@ shortcut_keys_enabled = false
 [node name="PasswordConfirmInscription" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.385
-anchor_top = 0.551
-anchor_right = 0.626
-anchor_bottom = 0.613
-offset_left = -0.519962
-offset_top = -0.0479994
-offset_right = -1.15193
-offset_bottom = -0.224023
+anchor_left = 0.382
+anchor_top = 0.531
+anchor_right = 0.625
+anchor_bottom = 0.593
+offset_left = -0.0640259
+offset_top = -0.0880127
+offset_bottom = -0.264038
 placeholder_text = "Password Confirm"
 secret = true
 shortcut_keys_enabled = false
@@ -83,89 +102,136 @@ shortcut_keys_enabled = false
 [node name="PseudoInscription" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.385
-anchor_top = 0.346
-anchor_right = 0.626
-anchor_bottom = 0.42
-offset_left = -1.51996
-offset_top = 7.79201
-offset_right = -2.15198
-offset_bottom = -0.160004
+anchor_left = 0.382
+anchor_top = 0.333
+anchor_right = 0.625
+anchor_bottom = 0.395
+offset_left = -0.0640259
+offset_top = 0.216003
+offset_bottom = 0.0399933
 placeholder_text = "Pseudo"
 
 [node name="Connection" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.38
-anchor_top = 0.591
-anchor_right = 0.494
-anchor_bottom = 0.668
-offset_left = 0.239971
-offset_top = 0.0319867
-offset_right = -0.0880203
-offset_bottom = 0.135972
+anchor_left = 0.382
+anchor_top = 0.593
+anchor_right = 0.493
+anchor_bottom = 0.667
+offset_left = -0.0640259
+offset_top = -0.264038
+offset_right = 0.0639648
+offset_bottom = 0.783966
 grow_horizontal = 2
 grow_vertical = 0
+shortcut = SubResource("Shortcut_mo20d")
+
+[node name="ConnectionButtonText" type="Label" parent="Connection"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.039
+anchor_right = 1.0
+anchor_bottom = 0.973
+offset_top = 2.46514
+offset_right = 6.10352e-05
+offset_bottom = 2.49861
+grow_horizontal = 2
+grow_vertical = 2
 text = "Connection"
+label_settings = SubResource("LabelSettings_5516u")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Inscription" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.381
-anchor_top = 0.645
+anchor_left = 0.382
+anchor_top = 0.642
 anchor_right = 0.494
-anchor_bottom = 0.722
-offset_left = -0.912014
-offset_top = 0.0399737
-offset_right = -0.0880203
-offset_bottom = 0.14396
+anchor_bottom = 0.716
+offset_left = -0.0640259
+offset_top = -0.0160217
+offset_right = -0.0880127
+offset_bottom = 0.0319824
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_wniwu")
+
+[node name="InscriptionButtonText" type="Label" parent="Inscription"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Inscription"
+label_settings = SubResource("LabelSettings_5516u")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NoCompte" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.503
+anchor_left = 0.5
 anchor_top = 0.593
 anchor_right = 0.626
 anchor_bottom = 0.667
-offset_left = 0.543976
-offset_top = -0.264035
-offset_right = -0.152054
-offset_bottom = -0.216036
+offset_top = -0.264038
+offset_right = -0.151978
+offset_bottom = -0.216003
 grow_horizontal = 2
 grow_vertical = 0
-text = "Pas de compte ?"
 flat = true
+
+[node name="NoCompteButtonText" type="Label" parent="NoCompte"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pas de compte ?"
+label_settings = SubResource("LabelSettings_q76ao")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DejaCompte" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.505
-anchor_top = 0.65
-anchor_right = 0.628
-anchor_bottom = 0.724
-offset_left = 0.240005
-offset_top = -0.200023
-offset_right = 0.543976
-offset_bottom = -0.152024
+anchor_top = 0.642
+anchor_right = 0.632
+anchor_bottom = 0.716
+offset_left = 0.23999
+offset_top = -0.0160217
+offset_right = -0.0640259
+offset_bottom = 0.0319824
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="DejaCompteButtonText" type="Label" parent="DejaCompte"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Déjà un compte ?"
-flat = true
+label_settings = SubResource("LabelSettings_ai3o8")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InscriptionError" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.386
-anchor_top = 0.716
-anchor_right = 0.627
-anchor_bottom = 0.759
-offset_left = 1.328
-offset_top = 0.0319824
-offset_right = -0.304077
-offset_bottom = 0.167969
+anchor_left = 0.382
+anchor_top = 0.728
+anchor_right = 0.625
+anchor_bottom = 0.772
+offset_left = -0.0640259
+offset_top = 0.255981
+offset_bottom = -0.256012
 label_settings = SubResource("LabelSettings_7jctv")
 horizontal_alignment = 1
 
@@ -201,5 +267,6 @@ offset_bottom = -4.98403
 label_settings = SubResource("LabelSettings_71d1n")
 horizontal_alignment = 1
 
+[connection signal="resized" from="." to="." method="OnResize"]
 [connection signal="pressed" from="NoCompte" to="." method="NoCompte"]
 [connection signal="pressed" from="DejaCompte" to="." method="DejaCompte"]
