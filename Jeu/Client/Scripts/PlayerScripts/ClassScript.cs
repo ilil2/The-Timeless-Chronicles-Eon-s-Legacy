@@ -1,51 +1,167 @@
+using System;
 using Godot;
 using Lib;
 
 namespace JeuClient.Scripts.PlayerScripts;
 
-public class ClassScript
+public partial class ClassScript : CharacterBody3D
 {
-    //Variables du Fov du joueur
-    private float _fovMax = 75;
+	//Variable de base du joueur
+    protected int _id;
+    protected string _pseudo;
+    protected string _classe;
+    
+    //Variable des objets
+    protected Node3D _cameraH;
+    protected Camera3D _camera;
+    protected MeshInstance3D _playerMesh;
+    protected AnimationPlayer _animationPlayer;
+    
+    //Variable de camera
+    private float _fovMax = 80;
     private float _fovMin = 40;
     
-    // Variables d'une classe
-    public int id { get; set; }
-    public string pseudo { get; set; }
-    public string classe { get; set; }
+    //Variable de mouvement
+    protected float _gravity = 9.8f;
+    protected float _walkSpeed = 4.2f;
+    protected float _runSpeed = 7.5f;
+    protected float _dashPower = 80.0f;
+    protected bool _canDash = true;
+    protected int dashTimer;
 
-    public ClassScript(int id, string pseudo, string classe)
-    {
-        this.id = id;
-        this.pseudo = pseudo;
-        this.classe = classe;
-    }
+    protected bool _isWalking;
+    protected bool _isRunning;
+    
+    protected Vector3 _direction;
+    protected Vector3 _horizontalVelocity;
+    protected Vector3 _movement;
+    protected Vector3 _verticalVelocity;
+    protected float _movementSpeed;
+    protected float _angularAcceleration = 10;
+    protected int _acceleration = 15;
+    
+    protected void InitPlayer()
+	{
+		//Initialisation des variables du joueur
+		_id = Conversions.AtoI(GameManager.InfoJoueur["id"]);
+		_pseudo = GameManager.InfoJoueur["pseudo"];
+		_classe = GameManager.InfoJoueur["class"];
+        
+		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		_cameraH = GetNode<Node3D>("CameraPlayer/h");
+		_direction = Vector3.Back.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y);
+		
+		_playerMesh = GetNode<MeshInstance3D>("PlayerBody");
+        
+		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
+	}
 
-    public Vector3 MoveDirection(bool forward, bool backward, bool right, bool left)
+    protected void Zoom(InputEvent @event)
     {
-        Vector3 direction = new Vector3(Conversions.BtoI(left) - Conversions.BtoI(right), 0,
-            Conversions.BtoI(forward) - Conversions.BtoI(backward));
-        return direction;
-    }
-
-    public Vector3 Dash(Vector3 direction, float dashPower)
-    {
-        return direction * dashPower;
-    }
-
-    public void Zoom(Camera3D camera)
-    {
-        if (camera.Fov >= _fovMin)
-        {
-            camera.Fov -= 2;
-        }
+	    if (@event.AsText() == "Mouse Wheel Down")
+	    {
+		    if (_camera.Fov <= _fovMax)
+		    {
+			    _camera.Fov  += 2;
+		    }
+	    }
+	    else if (@event.AsText() == "Mouse Wheel Up")
+	    {
+		    if (_camera.Fov >= _fovMin)
+		    {
+			    _camera.Fov -= 2;
+		    }
+	    }
     }
     
-    public void DeZoom(Camera3D camera)
+    protected void SendPosition()
+	{
+		//Envoie de la position du joueur au serveur
+	    GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
+	}
+
+    protected void PhysicsReset()
     {
-        if (camera.Fov <= _fovMax)
-        {
-            camera.Fov  += 2;
-        }
+	    //Reset du mouvement du joueur
+	    _movementSpeed = 0f;
+    }
+    
+    protected void Gravity(double delta)
+	{
+	    if (!IsOnFloor())
+	    {
+		    _verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
+	    }
+	    else
+	    {
+		    _verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
+	    }
+	}
+
+    protected void Dash()
+    {
+	    if (_canDash)
+	    {
+		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
+		    {
+			    _horizontalVelocity = _direction * _dashPower;
+			    _canDash = false;
+		    }
+	    }
+	    else
+	    {
+		    dashTimer += 1;
+		    if (dashTimer % 20 == 0)
+		    {
+			    _canDash = true;
+			    dashTimer = 0;
+		    }
+	    }
+    }
+
+    protected void Move(double delta)
+    {
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
+	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
+	    {
+		    _direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
+			    Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
+		    _direction = _direction.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y).Normalized();
+		    _isWalking = true;
+
+		    //Changement de la vitesse du joueur si il sprint
+		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
+		    {
+			    _movementSpeed = _runSpeed;
+			    _isRunning = true;
+		    }
+		    else
+		    {
+			    _movementSpeed = _walkSpeed;
+			    _isRunning = false;
+		    }
+	    }
+	    else
+	    {
+		    _isWalking = false;
+		    _isRunning = false;
+	    }
+	    
+	    //Calcul de la rotation du joueur
+	    _playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
+	    //_playerMesh.LookAt(_camera.GlobalPosition, Vector3.Up);
+	    //_playerMesh.Rotation = new Vector3(0, _playerMesh.Rotation.Y + (float)Math.PI, 0);
+		
+	    _horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
+		
+	    //Calcul du movement du joueur
+	    Vector3 velocity = Velocity;
+	    velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
+	    velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
+	    velocity.Y = _verticalVelocity.Y;
+		
+	    //Application du mouvement au joueur
+	    Velocity = velocity;
+	    MoveAndSlide();
     }
 }
