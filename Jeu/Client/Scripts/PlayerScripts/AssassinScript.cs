@@ -15,7 +15,10 @@ public partial class AssassinScript : ClassScript
 
     public override void _Input(InputEvent @event)
     {
-        Zoom(@event);
+        if (_camera.Current && !GameManager._pausemode)
+        {
+            Zoom(@event);
+        }
     }
 
     public override void _Process(double delta)
