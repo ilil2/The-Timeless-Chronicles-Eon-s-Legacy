@@ -29,7 +29,7 @@ public partial class AssassinScript : ClassScript
         PhysicsReset();
         Gravity(delta);
 
-        if (_camera.Current)
+        if (_camera.Current && !GameManager._pausemode)
         {
             Dash();
             Move(delta);

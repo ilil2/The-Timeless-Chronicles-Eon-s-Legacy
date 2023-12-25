@@ -38,22 +38,20 @@ public partial class PauseMenuUI : Control
     
     public override void _Process(double delta)
     {
-        if (!GameManager._pausemode)
+        if (!PauseMenuManager.MainMenu)
         {
-            Input.MouseMode = Input.MouseModeEnum.Captured;
             QueueFree();
         }
         
         if (_resumeButton.ButtonPressed)
         {
-            Input.MouseMode = Input.MouseModeEnum.Captured;
-            GameManager._pausemode = false;
-            QueueFree();
+            PauseMenuManager.PauseMenu = false;
         }
 
         if (_settingsButton.ButtonPressed)
         {
-            // TODO: Envoi vers le menu des parametres
+            PauseMenuManager.SettingsMenu = true;
+            PauseMenuManager.MainMenu = false;
         }
 
         if (_leaveButton.ButtonPressed)

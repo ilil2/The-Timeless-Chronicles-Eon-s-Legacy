@@ -25,6 +25,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pcuhq")
 
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.31802, 0.31802, 0.31802, 0.784314)
+
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -69,3 +75,5 @@ text = "Options"
 label_settings = SubResource("LabelSettings_3j2fx")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="resized" from="." to="." method="OnResize"]

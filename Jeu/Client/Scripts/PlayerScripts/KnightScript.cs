@@ -33,7 +33,7 @@ public partial class KnightScript : ClassScript
         PhysicsReset();
         Gravity(delta);
 
-        if (_camera.Current)
+        if (_camera.Current && !GameManager._pausemode)
         {
             Dash();
             Move(delta);

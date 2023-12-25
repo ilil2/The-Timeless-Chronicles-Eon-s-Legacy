@@ -89,12 +89,12 @@ public partial class ClassScript : CharacterBody3D
 		    pauseTimer = 0;
 		    GameManager._pausemode = true;
 		    Input.MouseMode = Input.MouseModeEnum.Visible;
-		    PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuUI.tscn");
+		    PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
 		    Control pauseMenu = pauseUI.Instantiate<Control>();
 		    AddChild(pauseMenu);
 	    }
 	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["pause"]) && GameManager._pausemode && pauseTimer > 20)
-	    { 
+	    {
 		    pauseTimer = 0;
 		    GameManager._pausemode = false;
 	    }
