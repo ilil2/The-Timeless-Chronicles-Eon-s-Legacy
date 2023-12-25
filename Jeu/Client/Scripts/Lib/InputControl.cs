@@ -40,12 +40,12 @@ public class InputControl
         }
     }
 
-    public void Save()
+    public void SaveControl()
     {
         string save = "";
         for (int i = 0; i < _listInputControl.Count; i++)
         {
-            save += $"{_listInputControl[i].Item1};{_listInputControl[i].Item2}\n";
+            save += $"{_listInputControl[i].Item1};{_listInputControl[i].Item2.GetHashCode()}\n";
         }
 
         save = save.Substring(0, save.Length - 1);

@@ -74,15 +74,63 @@ anchors_preset = -1
 anchor_left = 0.083
 anchor_top = 0.333
 anchor_right = 0.917
-anchor_bottom = 0.951
+anchor_bottom = 0.84
 offset_left = 0.383995
 offset_top = 0.216003
 offset_right = -0.384033
-offset_bottom = -0.248047
-theme_override_font_sizes/font_size = 36
+offset_bottom = -0.320007
+theme_override_font_sizes/font_size = 30
 select_mode = 1
 allow_reselect = true
 allow_search = false
+
+[node name="ResetInputButton" type="Button" parent="InputSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.583
+anchor_top = 0.889
+anchor_right = 0.722
+anchor_bottom = 0.951
+offset_left = 0.383972
+offset_top = -0.0720215
+offset_right = 0.25592
+offset_bottom = -0.248047
+
+[node name="ResetInputText" type="Label" parent="InputSettings/ResetInputButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveInputButton" type="Button" parent="InputSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.778
+anchor_top = 0.889
+anchor_right = 0.917
+anchor_bottom = 0.951
+offset_left = -0.256042
+offset_top = -0.0720215
+offset_right = -0.384033
+offset_bottom = -0.248047
+
+[node name="SaveInputText" type="Label" parent="InputSettings/SaveInputButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GameSettingsButton" type="Button" parent="."]
 layout_mode = 1
@@ -101,6 +149,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Game"
 label_settings = SubResource("LabelSettings_myc0n")
 horizontal_alignment = 1
