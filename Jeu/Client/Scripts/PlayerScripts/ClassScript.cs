@@ -84,7 +84,7 @@ public partial class ClassScript : CharacterBody3D
 
     protected void Pause()
     {
-	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["pause"]) && !GameManager._pausemode && pauseTimer > 20)
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && !GameManager._pausemode && pauseTimer > 20)
 	    {
 		    pauseTimer = 0;
 		    GameManager._pausemode = true;
@@ -93,7 +93,7 @@ public partial class ClassScript : CharacterBody3D
 		    Control pauseMenu = pauseUI.Instantiate<Control>();
 		    AddChild(pauseMenu);
 	    }
-	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["pause"]) && GameManager._pausemode && pauseTimer > 20)
+	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && GameManager._pausemode && pauseTimer > 20)
 	    {
 		    pauseTimer = 0;
 		    GameManager._pausemode = false;
@@ -124,7 +124,7 @@ public partial class ClassScript : CharacterBody3D
     {
 	    if (_canDash)
 	    {
-		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["dash"]))
+		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
 		    {
 			    _horizontalVelocity = _direction * _dashPower;
 			    _canDash = false;
@@ -143,16 +143,16 @@ public partial class ClassScript : CharacterBody3D
 
     protected void Move(double delta)
     {
-	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
-	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 	    {
-		    _direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
-			    Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
+		    _direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
+			    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
 		    _direction = _direction.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y).Normalized();
 		    _isWalking = true;
 
 		    //Changement de la vitesse du joueur si il sprint
-		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
+		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && _isWalking)
 		    {
 			    _movementSpeed = _runSpeed;
 			    _isRunning = true;
