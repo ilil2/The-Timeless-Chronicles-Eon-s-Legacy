@@ -54,7 +54,9 @@ anchor_bottom = 0.395
 offset_left = -0.0640259
 offset_top = 0.216003
 offset_bottom = 0.0399933
+theme_override_font_sizes/font_size = 20
 placeholder_text = "Pseudo"
+max_length = 16
 
 [node name="PasswordConnection" type="LineEdit" parent="."]
 layout_mode = 1
@@ -67,7 +69,9 @@ offset_left = -0.0639954
 offset_top = -0.135986
 offset_right = 6.10352e-05
 offset_bottom = -0.312012
+theme_override_font_sizes/font_size = 20
 placeholder_text = "Password"
+max_length = 32
 secret = true
 shortcut_keys_enabled = false
 
@@ -81,7 +85,9 @@ anchor_bottom = 0.494
 offset_left = -0.0640259
 offset_top = 0.0639954
 offset_bottom = -0.112
+theme_override_font_sizes/font_size = 20
 placeholder_text = "Password"
+max_length = 32
 secret = true
 shortcut_keys_enabled = false
 
@@ -95,11 +101,14 @@ anchor_bottom = 0.593
 offset_left = -0.0640259
 offset_top = -0.0880127
 offset_bottom = -0.264038
+theme_override_font_sizes/font_size = 20
 placeholder_text = "Password Confirm"
+max_length = 32
 secret = true
 shortcut_keys_enabled = false
 
 [node name="PseudoInscription" type="LineEdit" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.382
@@ -109,7 +118,9 @@ anchor_bottom = 0.395
 offset_left = -0.0640259
 offset_top = 0.216003
 offset_bottom = 0.0399933
+theme_override_font_sizes/font_size = 20
 placeholder_text = "Pseudo"
+max_length = 16
 
 [node name="Connection" type="Button" parent="."]
 layout_mode = 1

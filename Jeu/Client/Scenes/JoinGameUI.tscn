@@ -107,8 +107,10 @@ offset_right = 0.127991
 offset_bottom = -0.264069
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 placeholder_text = "ID of the Game"
 alignment = 1
+max_length = 6
 
 [node name="JoinTextMenu" type="Label" parent="."]
 layout_mode = 2
