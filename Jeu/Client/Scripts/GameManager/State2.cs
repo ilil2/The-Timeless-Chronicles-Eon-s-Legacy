@@ -2,14 +2,9 @@ using System;
 using System.Threading;
 using Godot;
 
-public class State2 : GameManager
+public partial class State2 : GameManager
 {
-	public State2()
-	{
-		State();
-	}
-	
-    public void State()
+    public static void State()
     {
         if (conn && conn2)
         {

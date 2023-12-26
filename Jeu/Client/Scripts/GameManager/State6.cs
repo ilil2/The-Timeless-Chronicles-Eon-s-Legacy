@@ -1,11 +1,6 @@
-public class State6 : GameManager
+public partial class State6 : GameManager
 {
-    public State6(double delta)
-    {
-        State(delta);
-    }
-
-    public void State(double delta)
+    public static void State(double delta)
     {
         tw2.WriteLine("in:co:" + InfoJoueur["co"]);
         tw2.Flush();

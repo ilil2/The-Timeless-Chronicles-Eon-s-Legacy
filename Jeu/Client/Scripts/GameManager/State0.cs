@@ -1,13 +1,8 @@
 using Lib;
 
-public class State0 : GameManager
+public partial class State0 : GameManager
 {
-	public State0()
-	{
-		State();
-	}
-	
-    public void State()
+    public static void State()
     {
         if (tentative_connection)
         {

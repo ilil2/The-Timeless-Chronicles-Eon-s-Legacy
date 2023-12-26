@@ -4,14 +4,9 @@ using System.IO;
 using Godot;
 using System.Threading;
 
-public class State3 : GameManager
+public partial class State3 : GameManager
 {
-    public State3()
-    {
-        State();
-    }
-
-    public void State()
+    public static void State()
     {
         if (OnJoin)
         {
@@ -33,10 +28,6 @@ public class State3 : GameManager
 				
         tw2.WriteLine(InfoJoueur["pseudo"]);
         tw2.Flush();
-				
-        PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
-        Control ClassSelect = ClassSelectUI.Instantiate<Control>();
-        AddChild(ClassSelect);
 
         th2 = new Thread(Listen2);	//initialisation thread
         th2.Start();						//debut du thread

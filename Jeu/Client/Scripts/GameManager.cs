@@ -13,63 +13,63 @@ using JeuClient.Scripts.PlayerScripts;
 
 public partial class GameManager : Node3D
 {
-	protected Socket soc;
+	protected static Socket soc;
 	private IPEndPoint iep;
 	
-	protected Thread th;
+	protected static Thread th;
 	
 	private Control connectionMenu;
 	
 	protected static NetworkStream ns;
 	protected static TextReader tr;		//lecture requette serveur principal
 	protected static TextWriter tw;		//ecriture requette serveur principal
-	protected TextReader tr2;		//lecture requette serveur secondaire
-	protected TextWriter tw2;		//ecriture requette serveur secondaire
+	protected static TextReader tr2;		//lecture requette serveur secondaire
+	protected static TextWriter tw2;		//ecriture requette serveur secondaire
 	
-	protected int port_serv_jeu;	//port serveur secondaire
-	protected bool conn2 = true;
+	protected static int port_serv_jeu;	//port serveur secondaire
+	protected static bool conn2 = true;
 
 	public static string ConnectionError = "";
 	public static string IDGame = "";
 	public static bool LobbyReset = false;
 	public static bool ValidIDGame = false;
-	protected bool OnJoin = false;
+	protected static bool OnJoin = false;
 	
-	protected DateTime startTime = DateTime.Now;
-	protected TimeSpan timerDuration = TimeSpan.FromSeconds(1);
-	protected DateTime endTime = DateTime.Now;
+	protected static DateTime startTime = DateTime.Now;
+	protected static TimeSpan timerDuration = TimeSpan.FromSeconds(1);
+	protected static DateTime endTime = DateTime.Now;
 
 	public static InputControl InputManger;
 	
-	protected Node3D Map;
+	protected static Node3D Map;
 	
-	protected bool tentative_connection = true;
+	protected static bool tentative_connection = true;
 	
-	protected bool conn = true;					//connexion au serveur principal
+	protected static bool conn = true;					//connexion au serveur principal
 	private bool join = false;					//partie rejointe
 	
-	protected int state = 0;
+	protected static int state = 0;
 	
-	protected Socket soc2;
-	protected IPEndPoint iep2;
+	protected static Socket soc2;
+	protected static IPEndPoint iep2;
 	
-	protected NetworkStream ns2;
-	protected Thread th2;
+	protected static NetworkStream ns2;
+	protected static Thread th2;
 	
 	public static Dictionary<string, string> InfoJoueur = new Dictionary<string, string>();
 	public static Dictionary<string, string> InfoAutreJoueur = new Dictionary<string, string>();
 
-	protected bool _loadMap = false;
+	protected static bool _loadMap = false;
 
-	protected int _nbJoueur = 0;
-	protected CharacterBody3D Joueur1;
-	protected CharacterBody3D Joueur2;
-	protected CharacterBody3D Joueur3;
-	protected CharacterBody3D Joueur4;
+	protected static int _nbJoueur = 0;
+	protected static CharacterBody3D Joueur1;
+	protected static CharacterBody3D Joueur2;
+	protected static CharacterBody3D Joueur3;
+	protected static CharacterBody3D Joueur4;
 
-	protected Control _chat;
+	protected static Control _chat;
 
-	protected string IP;
+	protected static string IP;
 	private static string GetIp()
 	{
 		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
@@ -111,6 +111,11 @@ public partial class GameManager : Node3D
 
 		throw new ArgumentException("Erreur de choix du serveur de reception");
 	}
+
+	protected void Add(Node o)
+	{
+		AddChild(o);
+	}
 	
 	public override void _Ready()
 	{
@@ -144,36 +149,67 @@ public partial class GameManager : Node3D
 		{
 			if (state == 0)
 			{
-				var s = new State0();
+				State0.State();
 			}
 
 			else if (state == 1)
 			{
-				var s = new State1();
+				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
+				Control LobbyMenu = LobbyScene.Instantiate<Control>();
+				AddChild(LobbyMenu);
+				State1.State();
 			}
 			
 			else if (state == 2)
 			{
-				var s = new State2();
+				State2.State();
 			}
 
 			else if (state == 3)
 			{
-				var s = new State3();
+				State3.State();
+				PackedScene ClassSelectUI = GD.Load<PackedScene>("res://Scenes/UI/ClassSelectUI.tscn");
+				Control ClassSelect = ClassSelectUI.Instantiate<Control>();
+				AddChild(ClassSelect);
 			}
 			
 			else if (state == 4)
 			{
-				var s = new State4();
+				State4.State();
+				
+				if (_loadMap)
+				{
+					AddChild(Map);
+					
+					_loadMap = false;
+				}
 			}
 			else if (state == 5)
 			{
-				var s = new State5();
+				State5.State();
+				
+				AddChild(Joueur1);
+				switch (_nbJoueur)
+				{
+					case 1:
+						AddChild(Joueur2);
+						break;
+					case 2:
+						AddChild(Joueur2);
+						AddChild(Joueur3);
+						break;
+					case 3:
+						AddChild(Joueur2);
+						AddChild(Joueur3);
+						AddChild(Joueur4);
+						break;
+				}
+				AddChild(_chat);
 			}
 			
 			else if (state == 6)
 			{
-				var s = new State6(delta);
+				State6.State(delta);
 			}
 			
 		}
@@ -184,7 +220,7 @@ public partial class GameManager : Node3D
 		}
 	}
 	
-	protected void Listen()		//premier thread
+	protected static void Listen()		//premier thread
 	{
 		while (true)
 		{
@@ -214,7 +250,7 @@ public partial class GameManager : Node3D
 		}
 	}
 
-	protected void Listen2()		//deuxieme thread
+	protected static void Listen2()		//deuxieme thread
 	{
 		while (true)
 		{
