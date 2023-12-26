@@ -137,6 +137,8 @@ public partial class GameManager : Node3D
 		
 		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
 		Map = MapScene.Instantiate<Node3D>();
+		AddChild(Map);
+		Map.Visible = false;
 		
 		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");
 		_chat = ChatSceneUI.Instantiate<Control>();
@@ -176,13 +178,6 @@ public partial class GameManager : Node3D
 			else if (state == 4)
 			{
 				State4.State();
-				
-				if (_loadMap)
-				{
-					AddChild(Map);
-					
-					_loadMap = false;
-				}
 			}
 			else if (state == 5)
 			{
