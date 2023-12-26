@@ -7,8 +7,9 @@ public partial class ArcherScript : ClassScript
 	//Varibale du tir
 	private int _shootTimer;
 	private float _shootPower = 1;
-	private bool _isShooting;
 	private bool _isAiming;
+	
+	public static bool IsShooting;
 	
 	public override void _Ready()
 	{
@@ -48,30 +49,36 @@ public partial class ArcherScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootTimer > 30 && _shootPower <= 3)
 		{
-			_isShooting = true;
+			IsShooting = true;
 			_isAiming = true;
 			_shootPower += 0.015f;
+			_cameraV.SpringLength = 0;
+			
+			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/UI/ViewFinder.tscn");
+			Control crossHair = crossHairScene.Instantiate<Control>();
+			AddChild(crossHair);
 		}
-		else if (_isShooting || _shootPower > 3)
+		else if (IsShooting || _shootPower > 3)
 		{
 			_isAiming = false;
 			_shootTimer = 0;
 		}
 		
-		if (!_isAiming && _isShooting)
+		if (!_isAiming && IsShooting)
 		{
-			PackedScene ArrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
-			RigidBody3D Arrow = ArrowScene.Instantiate<RigidBody3D>();
+			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
+			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
 
 			double rotationY = playerMesh.Rotation.Y;
 				
-			Arrow.Position = new Vector3(Position.X + (float)Math.Sin(rotationY)*2, Position.Y + 2, Position.Z + (float)Math.Cos(rotationY)*2);
-			Arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), 2, (float)(Math.Cos(rotationY)*10)) * _shootPower;
-			Arrow.Rotation = new Vector3(Arrow.Rotation.X, playerMesh.Rotation.Y + (float)Math.PI / 2f, Arrow.Rotation.Z);
-			GetTree().Root.AddChild(Arrow);
+			arrow.Position = new Vector3(Position.X + (float)Math.Sin(rotationY)*2, Position.Y + 2, Position.Z + (float)Math.Cos(rotationY)*2);
+			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), 2, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+			arrow.Rotation = new Vector3(arrow.Rotation.X, playerMesh.Rotation.Y + (float)Math.PI / 2f, arrow.Rotation.Z);
+			GetTree().Root.AddChild(arrow);
 			
-			_isShooting = false;
+			IsShooting = false;
 			_shootPower = 1;
+			_cameraV.SpringLength = -4;
 		}
 	}
 }
