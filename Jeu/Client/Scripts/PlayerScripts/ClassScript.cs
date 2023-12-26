@@ -13,6 +13,7 @@ public partial class ClassScript : CharacterBody3D
     
     //Variable des objets
     protected Node3D _cameraH;
+    protected SpringArm3D _cameraV;
     protected Camera3D _camera;
     protected MeshInstance3D _playerMesh;
     protected AnimationPlayer _animationPlayer;
@@ -50,6 +51,7 @@ public partial class ClassScript : CharacterBody3D
 		_classe = GameManager.InfoJoueur["class"];
         
 		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		_cameraV = GetNode<SpringArm3D>("CameraPlayer/h/v");
 		_cameraH = GetNode<Node3D>("CameraPlayer/h");
 		_direction = Vector3.Back.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y);
 		

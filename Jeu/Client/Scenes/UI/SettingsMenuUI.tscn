@@ -47,18 +47,24 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AudioSettings" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VideoSettings" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="InputSettings" type="Control" parent="."]
 layout_mode = 1
@@ -173,6 +179,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Audio"
 label_settings = SubResource("LabelSettings_myc0n")
 horizontal_alignment = 1
@@ -195,6 +203,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Video"
 label_settings = SubResource("LabelSettings_myc0n")
 horizontal_alignment = 1
@@ -217,6 +227,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Input"
 label_settings = SubResource("LabelSettings_q46pn")
 horizontal_alignment = 1

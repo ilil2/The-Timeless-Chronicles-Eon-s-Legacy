@@ -18,17 +18,17 @@ public partial class OtherClassScript : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		string[] PlayerPositions = GameManager.InfoJoueur["co"].Split(";");
-		Pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(PlayerPositions[0]), Lib.Conversions.AtoF(PlayerPositions[1]), Lib.Conversions.AtoF(PlayerPositions[2])), Vector3.Up);
+		string[] playerPositions = GameManager.InfoJoueur["co"].Split(";");
+		Pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(playerPositions[0]), Lib.Conversions.AtoF(playerPositions[1]), Lib.Conversions.AtoF(playerPositions[2])), Vector3.Up);
 		Pseudo.Rotation = new Vector3(0, Pseudo.Rotation.Y + (float)Math.PI, 0);
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		string[] Positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
-		Vector3 PositionA = new Vector3(Lib.Conversions.AtoF(Positions[0]), Lib.Conversions.AtoF(Positions[1]), Lib.Conversions.AtoF(Positions[2]));
+		string[] positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
+		Vector3 position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
 
-		Position = PositionA;
+		Position = position;
 	}
 	
 	private void SetPseudo()
