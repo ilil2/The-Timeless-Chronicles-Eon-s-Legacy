@@ -224,29 +224,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string? rep = tr.ReadLine();	//lecture de donnée du serveur
-			if (rep.Contains(":"))
-			{
-				if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
-				{
-					port_serv_jeu = Lib.Conversions.AtoI(rep.Substring(8)); //recuperation du nouveau port
-					Console.WriteLine("connexion au serveur de jeu ...");
-					conn2 = false;											//deconnextion du serveur principal
-					break;
-				}
-				
-				else if (rep.Substring(0,10) == "listplayer")
-				{
-					string line = rep.Substring(11);
-					string[] SplitPseudo = line.Split(';');
-					(LobbyManager.NamePlayer[0],LobbyManager.NamePlayer[1],LobbyManager.NamePlayer[2],LobbyManager.NamePlayer[3]) = (SplitPseudo[0],SplitPseudo[1],SplitPseudo[2],SplitPseudo[3]);
-				}
-			}
-			else if (rep == "remove")
-			{
-				LobbyReset = true;
-				LobbyManager.kill = true;
-			}
+			Listen1.Listen();
 		}
 	}
 
@@ -254,106 +232,7 @@ public partial class GameManager : Node3D
 	{
 		while (true)
 		{
-			string rep = tr2.ReadLine();
-			if (rep.Length > 5 && rep.Substring(0,5) == "ready")
-			{
-				rep = rep.Substring(6);
-				string[] InfoReady = rep.Split("/");
-				for (int i = 1; i < Conversions.AtoI(InfoReady[0]) * 3 + 1; i += 3)
-				{
-					if (InfoReady[i] == "")
-					{
-						i -= 3;
-					}
-					else
-					{
-						InfoAutreJoueur[$"id{InfoReady[i]}"] = InfoReady[i];
-						InfoAutreJoueur[$"pseudo{InfoReady[i]}"] = InfoReady[i + 1];
-						InfoAutreJoueur[$"class{InfoReady[i]}"] = InfoReady[i + 2];
-					}
-				}
-				_nbJoueur = Conversions.AtoI(InfoReady[0]) + 1;
-
-				switch (_nbJoueur)
-				{
-					case 1:
-						InfoJoueur["id"] = "0";
-						break;
-					case 2:
-						if (!InfoAutreJoueur.ContainsKey("id0"))
-						{
-							InfoJoueur["id"] = "0";
-						}
-						else
-						{
-							InfoJoueur["id"] = "1";
-						}
-						break;
-					case 3:
-						if (!InfoAutreJoueur.ContainsKey("id0"))
-						{
-							InfoJoueur["id"] = "0";
-						}
-						else if (!InfoAutreJoueur.ContainsKey("id1"))
-						{
-							InfoJoueur["id"] = "1";
-						}
-						else
-						{
-							InfoJoueur["id"] = "2";
-						}
-						break;
-					case 4:
-						if (!InfoAutreJoueur.ContainsKey("id0"))
-						{
-							InfoJoueur["id"] = "0";
-						}
-						else if (!InfoAutreJoueur.ContainsKey("id1"))
-						{
-							InfoJoueur["id"] = "1";
-						}
-						else if (!InfoAutreJoueur.ContainsKey("id2"))
-						{
-							InfoJoueur["id"] = "2";
-						}
-						else
-						{
-							InfoJoueur["id"] = "3";
-						}
-						break;
-				}
-				
-				ClassSelectUI.Supr = true;
-				_loadMap = true;
-			}
-			else if (rep.Length > 2 && rep.Substring(0,2) == "in")
-			{
-				string line = rep.Substring(3);
-				string[] SplitInfo = line.Split('|');
-				for (int i = 0; i < 3; i++)
-				{
-					string[] CoordInfo = SplitInfo[i].Split('/');
-					if (CoordInfo[1] != "deco")
-					{
-						CoordInfo[1] = CoordInfo[1].Substring(3);
-						InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
-					}
-					else
-					{
-						InfoAutreJoueur[$"co{CoordInfo[0]}"] = "0;-3;0";
-					}
-				}
-			}
-			
-			else if (rep.Length > 4 && rep.Substring(0,4) == "chat")
-			{
-				rep = rep.Substring(5);
-				if (rep.Length > InfoJoueur["pseudo"].Length && rep.Substring(0,InfoJoueur["pseudo"].Length) == InfoJoueur["pseudo"])
-				{
-					rep = "vous" + rep.Substring(InfoJoueur["pseudo"].Length);
-				}
-				((ChatUI)_chat).Outputaddtext = rep;
-			}
+			global::Listen2.Listen();
 		}
 	}
 }
