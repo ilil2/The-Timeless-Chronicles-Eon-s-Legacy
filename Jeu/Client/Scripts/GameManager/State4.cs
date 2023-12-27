@@ -24,11 +24,9 @@ public partial class State4 : GameManager
             tw2.Flush();
             MapOnLoad = false;
             ((ProgressBarMapLvl1)ProgressBar).Load = 2500;
-            GD.Print("la");
         }
         else if (StartMap)
         {
-            GD.Print("0");
             ProgressBar.QueueFree();
             Map.Visible = true;
             state = 5;

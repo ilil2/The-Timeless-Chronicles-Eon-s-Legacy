@@ -93,7 +93,7 @@ public partial class MapLvl1Script : Node3D
 				GD.Print($"Fog Start in {Duration}");	
 			}
 		}
-		else
+		else if (GameManager.StartMap)
 		{
 			//Process
 			CreateFog();

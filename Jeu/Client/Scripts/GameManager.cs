@@ -72,7 +72,7 @@ public partial class GameManager : Node3D
 
 	protected static string IP;
 	protected static bool MapOnLoad = false;
-	protected static bool StartMap = false;
+	public static bool StartMap = false;
 	
 	private static string GetIp()
 	{
