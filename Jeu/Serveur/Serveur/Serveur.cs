@@ -88,7 +88,26 @@ public class Serveur
         }
         tw.Flush();
 
+        joueur_ready = 0;
+
         Thread.Sleep(100);
+        
+        string ready;
+        do
+        {
+            ready = tr.ReadLine();
+        } while (ready != "load");
+
+        joueur_ready ++;
+
+        Console.WriteLine("ici");
+        while (joueur_ready < ID){}
+        Console.WriteLine("la");
+        
+        Thread.Sleep(100);
+        
+        tw.WriteLine("start");
+        tw.Flush();
         
         info = new[] { "-1/co:1;0;1", "-1/co:-1;0;1", "-1/co:1;0;-1", "-1/co:-1;0;1" };
         
