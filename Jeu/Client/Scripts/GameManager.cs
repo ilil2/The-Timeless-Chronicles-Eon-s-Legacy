@@ -42,6 +42,7 @@ public partial class GameManager : Node3D
 	public static InputControl InputManger;
 	
 	protected static Node3D Map;
+	protected static Control ProgressBar;
 	
 	protected static bool tentative_connection = true;
 	
@@ -70,6 +71,7 @@ public partial class GameManager : Node3D
 	protected static Control _chat;
 
 	protected static string IP;
+	protected static bool MapOnLoad = false;
 	private static string GetIp()
 	{
 		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
@@ -137,11 +139,12 @@ public partial class GameManager : Node3D
 		
 		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
 		Map = MapScene.Instantiate<Node3D>();
-		AddChild(Map);
-		Map.Visible = false;
 		
 		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");
 		_chat = ChatSceneUI.Instantiate<Control>();
+		
+		PackedScene ProgressBarMap = GD.Load<PackedScene>("res://Scenes/UI/ProgressBarMapLvl1.tscn");
+		ProgressBar = ProgressBarMap.Instantiate<Control>();
 	}
 	
 	//process
@@ -178,6 +181,15 @@ public partial class GameManager : Node3D
 			else if (state == 4)
 			{
 				State4.State();
+				
+				if (_loadMap)
+				{
+					AddChild(ProgressBar);
+					AddChild(Map);
+					
+					MapOnLoad = true;
+					_loadMap = false;
+				}
 			}
 			else if (state == 5)
 			{

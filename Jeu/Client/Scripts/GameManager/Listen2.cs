@@ -1,6 +1,6 @@
 using Lib;
 
-public class Listen2 : GameManager
+public partial class Listen2 : GameManager
 {
     public static void Listen()
     {

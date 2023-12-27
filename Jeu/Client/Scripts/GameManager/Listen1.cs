@@ -1,6 +1,6 @@
 using System;
 
-public class Listen1 : GameManager
+public partial class Listen1 : GameManager
 {
     public static void Listen()
     {
