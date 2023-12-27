@@ -104,5 +104,10 @@ public partial class Listen2 : GameManager
 				}
 				((ChatUI)_chat).Outputaddtext = rep;
 			}
+			
+			else if (rep.Length > 4 && rep.Substring(0,5) == "start")
+			{
+				StartMap = true;
+			}
     }
 }

@@ -72,6 +72,8 @@ public partial class GameManager : Node3D
 
 	protected static string IP;
 	protected static bool MapOnLoad = false;
+	protected static bool StartMap = false;
+	
 	private static string GetIp()
 	{
 		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
