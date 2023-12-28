@@ -17,8 +17,8 @@ namespace Serveur;
 public class MainServeur
 {
     private int ID = 0;
-    private List<int> ports_total = new List<int>() {4242,4002}; //,1919,6969,1984
-    private List<int> ports = new List<int>() {4242,4002};
+    private List<int> ports_total = new List<int>() {4242,4002,1919,6969,1984};
+    private List<int> ports = new List<int>() {4242,4002,1919,6969,1984};
     private int nbr_serveur = 0;
     private int nbr_joueur = 0;
     
