@@ -202,13 +202,12 @@ public class MainServeur
                     
                     id_games.Remove(cc.game_id);
                     
-                    Thread.Sleep(6000);
-                    
                     start_game = cc.game_id;
                     join = false;
-                    ports.Remove(ports[0]);
                     
-                    Thread.Sleep(2000);
+                    Thread.Sleep(100);
+                    
+                    ports.Remove(ports[0]);
 
                     nbr_serveur++;
                     nbr_joueur = 0;
@@ -377,13 +376,22 @@ public class MainServeur
         {
             foreach (var portNumber in ports_total)
             {
-                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
-                TcpConnectionInformation[] tcpConnInfoArray = ipGlobalProperties.GetActiveTcpConnections();
- 
-                foreach (TcpConnectionInformation tcp in tcpConnInfoArray) 
-                    if (tcp.LocalEndPoint.Port == portNumber && ports.Contains(portNumber) == false)
+                TcpListener tcpListener = null;
+
+                try
+                {
+                    tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), portNumber);
+                    tcpListener.Start();
+                    if (!ports.Contains(portNumber))
+                    {
                         ports.Add(portNumber);
-            }
+                    }
+                }
+                finally
+                {
+                    tcpListener?.Stop();
+                }
+            }   
             Thread.Sleep(60000);
         }
         
