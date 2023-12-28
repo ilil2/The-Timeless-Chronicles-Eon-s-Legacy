@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
-[ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_6qus8"]
-[ext_resource type="Texture2D" uid="uid://mfnhwhs5tuba" path="res://Ressources/Map/Egypt1/Ground/ground_0024_ao_1k.jpg" id="3_3gmg0"]
-[ext_resource type="Texture2D" uid="uid://b3f7hokp7wylx" path="res://Ressources/Map/Egypt1/Ground/ground_0024_height_1k.png" id="3_apswm"]
-[ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="4_k4x7e"]
-[ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_1dydr"]
-[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
+[ext_resource type="Texture2D" uid="uid://bamogby5ofx5p" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="2_6qus8"]
+[ext_resource type="Texture2D" uid="uid://blnaoxmiupv5n" path="res://Ressources/Map/Egypt1/Ground/ground_0024_ao_1k.jpg" id="3_3gmg0"]
+[ext_resource type="Texture2D" uid="uid://br8yhfea1dx11" path="res://Ressources/Map/Egypt1/Ground/ground_0024_height_1k.png" id="3_apswm"]
+[ext_resource type="Texture2D" uid="uid://byej16v8b2g0x" path="res://Ressources/Map/Egypt1/Ground/ground_0024_normal_opengl_1k.png" id="4_k4x7e"]
+[ext_resource type="Texture2D" uid="uid://bl875jxy7ksb1" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_1dydr"]
+[ext_resource type="Sky" path="res://Ressources/Map/Egypt1/SkyBox.res" id="7_qkggk"]
 [ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt1/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="7_qvf21"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt1/sphynx/10085_egypt_sphinx_iterations-2.obj" id="7_xvs25"]
 

@@ -56,12 +56,15 @@ public partial class MapLvl1Script : Node3D
 		{(7,5),4},
 		{(7,7),5}
 	};
+
+	public int step;
 	
 	public override void _Ready()
 	{
+		step = 0;
 		stopwatch.Start();
 		MainRoom = InitMainRoom();
-		CreatePseudoMap();	
+		CreatePseudoMap();
 	}
 	
 	public override void _Process(double delta)
@@ -90,7 +93,7 @@ public partial class MapLvl1Script : Node3D
 				GD.Print($"Fog Start in {Duration}");	
 			}
 		}
-		else
+		else if (GameManager.StartMap)
 		{
 			//Process
 			CreateFog();
@@ -317,6 +320,7 @@ public partial class MapLvl1Script : Node3D
 			(int h, int w) = IdToLen[ID];
 			float Angle = 90*Rand.Next(0,4);
 			
+			
 			RigidBody3D PRoom = new RigidBody3D();
 			PRoom.LockRotation = true;
 			PhysicsBody3D Room = PRoom;
@@ -372,6 +376,8 @@ public partial class MapLvl1Script : Node3D
 			Room.RotationDegrees = new Vector3(0,A,0);
 			NavMesh.AddChild(Room);
 			RoomList.Add(Room);
+			
+			step += 3;
 		}
 	}
 
@@ -387,13 +393,14 @@ public partial class MapLvl1Script : Node3D
 		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMainGate.tscn");
 		Node3D MRoomGate = MRG.Instantiate<Node3D>();
 		RoomList.Add(MRoomGate);
-		NavMesh.AddChild(MRoomGate);		
+		NavMesh.AddChild(MRoomGate);
 	}
 
 	private bool CheckSleep()
 	{
 		for (int i = 0; i<PseudoRoomList.Count;i++)
 		{
+			step += 2;
 			if (((RigidBody3D)PseudoRoomList[i]).Sleeping == false)
 			{
 				return false;
@@ -457,6 +464,7 @@ public partial class MapLvl1Script : Node3D
 							ActualRoom.AddChild(Gate);
 							ActualRoom.RemoveChild(Child);
 							Child.QueueFree();
+							step += 1;
 						}
 					}
 				}
