@@ -6,21 +6,41 @@ public partial class JoinGameUI : Control
 	
 	//Variables des boutons
 	private Button _backButton;
-	private Button _JoinGameButton;
+	private Button _joinGameButton;
 	
 	//Variable de la zone de texte
-	private LineEdit _GameID;
+	private LineEdit _gameID;
 	
 	//variable des label
-	private Label _IDError;
+	private Label _title;
+	private Label _idError;
+	private Label _backButtonText;
+	private Label _joinButtonText;
+	
+	private float _screenDefalutWidth = 1152;
+	private float _titleDefaultSize = 40;
+	private float _buttonDefaultSize = 20;
+	private float _errorDefaultSize = 16;
 	
 	public override void _Ready()
 	{
 		//Recuperation des elements du menu
 		_backButton = GetNode<Button>("BackButton");
-		_JoinGameButton = GetNode<Button>("JoinButton");
-		_GameID = GetNode<LineEdit>("JoinGameIDLine");
-		_IDError = GetNode<Label>("IDErrorText");
+		_joinGameButton = GetNode<Button>("JoinButton");
+		_gameID = GetNode<LineEdit>("JoinGameIDLine");
+	}
+	
+	public void OnResize()
+	{
+		_title = GetNode<Label>("JoinTextMenu");
+		_idError = GetNode<Label>("IDErrorText");
+		_backButtonText = GetNode<Label>("BackButton/BackButtonText");
+		_joinButtonText = GetNode<Label>("JoinButton/JoinButtonText");
+		
+		_title.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_backButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_joinButtonText.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_idError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 
 	public override void _Process(double delta)
@@ -33,9 +53,9 @@ public partial class JoinGameUI : Control
 			QueueFree();
 		}
 
-		if (_JoinGameButton.ButtonPressed)
+		if (_joinGameButton.ButtonPressed)
 		{
-			LobbyManager.IDJoinGame = _GameID.Text;
+			LobbyManager.IDJoinGame = _gameID.Text;
 			LobbyManager.JoinGamePressed = true;
 			if (LobbyManager.ValidID)
 			{
@@ -53,6 +73,6 @@ public partial class JoinGameUI : Control
 			QueueFree();
 		}
 		
-		_IDError.Text = LobbyManager.IDError;
+		_idError.Text = LobbyManager.IDError;
 	}
 }

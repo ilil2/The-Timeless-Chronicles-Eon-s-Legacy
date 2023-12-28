@@ -13,3 +13,4 @@ item3;51
 inventory;4194306
 reload;82
 tchat;84
+pause;4194305

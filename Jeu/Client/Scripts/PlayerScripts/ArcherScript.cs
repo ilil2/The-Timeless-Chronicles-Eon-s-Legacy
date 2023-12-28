@@ -1,182 +1,84 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
-public partial class ArcherScript : CharacterBody3D
+public partial class ArcherScript : ClassScript
 {
-	//Variables des noeuds
-	private Node3D _h;
-	private Camera3D _camera;
-	private MeshInstance3D _playerMesh;
-
-	//Variables des differentes forces
-	private float _gravity = 9.8f;
-	private float _jumpForce = 9.0f;
-	private float _walkSpeed = 3.9f;
-	private float _runSpeed = 7.5f;
-	private float _dashPower = 80.0f;
-	
 	//Varibale du tir
-	private int _shootTimer = 1;
-	private bool _isShooting;
+	private int _shootTimer;
+	private float _shootPower = 1;
+	private bool _isAiming;
 	
-	//Variables du Fov du joueur
-	private float _fovMax = 120;
-	private float _fovMin = 30;
-
-	//Variables des mouvements
-	private bool _isWalking;
-	private bool _isRunning;
-	private bool _isRolling;
-
-	//Variables de direction
-	private Vector3 _direction;
-	private Vector3 _horizontalVelocity;
-	private Vector3 _movement;
-	private Vector3 _verticalVelocity;
-	private float _movementSpeed;
-	private float _angularAcceleration;
-	private int _acceleration;
-	
-	public static int ID;
+	public static bool IsShooting;
 	
 	public override void _Ready()
 	{
-		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
-		
-		//initialisation de la variable direction
-		_h = GetNode<Node3D>("CameraPlayer/h");
-		_direction = Vector3.Back.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y);
+		InitPlayer();
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (_camera.Current && !GameManager._pausemode)
+		{
+			Zoom(@event);
+		}
 	}
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("scroll_forward"))
-		{
-			if (_camera.Fov >= _fovMin)
-			{
-				_camera.Fov -= 1;
-			}
-		}
-
-		if (Input.IsActionPressed("scroll_backward"))
-		{
-			if (_camera.Fov <= _fovMax)
-			{
-				_camera.Fov  += 1;
-			}
-		}
-		
-		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
+		SendPosition();
+		Pause();
 	}
-
+	
 	public override void _PhysicsProcess(double delta)
 	{
-		_h = GetNode<Node3D>("CameraPlayer/h");
-		_playerMesh = GetNode<MeshInstance3D>("PlayerBody");
+		PhysicsReset();
+		Gravity(delta);
 
-		_movementSpeed = 0f;
-		_angularAcceleration = 10;
-		_acceleration = 15;
-
-		//Calcul de la gravité
-		if (!IsOnFloor())
+		if (_camera.Current && !GameManager._pausemode)
 		{
-			_verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
-		}
-		else
-		{
-			_verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
-		}
-
-		if (_camera.Current)
-		{
-			//Shoot Process
-			if (_shootTimer % 60 == 0)
-			{
-				_isShooting = false;
-			}
-			_shootTimer += 1;
-
-			if (Input.IsKeyPressed(Key.L) && !_isShooting)
-			{
-				ShootArrow(_playerMesh);
-			}
-		
-			//Mouvement du dash
-			if (Input.IsActionPressed("dash"))
-			{
-				_horizontalVelocity = _direction * _dashPower;
-			}
-
-			//Mouvement du joueur
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["forward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["backward"]) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["left"]) ||
-			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["right"]))
-			{
-				_direction = new Vector3(Input.GetActionStrength("left") - Input.GetActionStrength("right"), 0,
-					Input.GetActionStrength("forward") - Input.GetActionStrength("backward"));
-				_direction = _direction.Rotated(Vector3.Up, _h.GlobalTransform.Basis.GetEuler().Y).Normalized();
-				_isWalking = true;
-
-				//Changement de la vitesse du joueur si il sprint
-				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()["sprint"]) && _isWalking)
-				{
-					_movementSpeed = _runSpeed;
-					_isRunning = true;
-				}
-				else
-				{
-					_movementSpeed = _walkSpeed;
-					_isRunning = false;
-				}
-			}
-			else
-			{
-				_isWalking = false;
-				_isRunning = false;
-			}
-
-
-			//Calcul de la rotation du joueur
-			_playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X,
-				(float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y,
-					delta * _angularAcceleration), _playerMesh.Rotation.Z);
-
-
-			if (_isRolling)
-			{
-				_horizontalVelocity =
-					_horizontalVelocity.Lerp(_direction.Normalized() * .01f, (float)(_acceleration * delta));
-			}
-			else
-			{
-				_horizontalVelocity =
-					_horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
-			}
-
-			//Calcul du movement du joueur
-			Vector3 velocity = Velocity;
-			velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
-			velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
-			velocity.Y = _verticalVelocity.Y;
-
-			//Application du mouvement au joueur
-			Velocity = velocity;
-			MoveAndSlide();
+			Dash();
+			Move(delta);
+			ShootArrow(_playerMesh);
 		}
 	}
-
+	
 	private void ShootArrow(MeshInstance3D playerMesh)
 	{
-		_isShooting = true;
+		_shootTimer += 1;
 		
-		PackedScene ArrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
-		RigidBody3D Arrow = ArrowScene.Instantiate<RigidBody3D>();
-
-		double rotationY = playerMesh.Rotation.Y;
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootTimer > 30 && _shootPower <= 3)
+		{
+			IsShooting = true;
+			_isAiming = true;
+			_shootPower += 0.015f;
+			_cameraV.SpringLength = 0;
 			
-		Arrow.Position = new Vector3(Position.X + (float)Math.Sin(rotationY)*2, Position.Y + 2, Position.Z + (float)Math.Cos(rotationY)*2);
-		Arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), 2, (float)(Math.Cos(rotationY)*10)) * 2;
-		Arrow.Rotation = new Vector3(Arrow.Rotation.X, playerMesh.Rotation.Y + (float)Math.PI / 2f, Arrow.Rotation.Z);
-		GetTree().Root.AddChild(Arrow);
+			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/UI/ViewFinder.tscn");
+			Control crossHair = crossHairScene.Instantiate<Control>();
+			AddChild(crossHair);
+		}
+		else if (IsShooting || _shootPower > 3)
+		{
+			_isAiming = false;
+			_shootTimer = 0;
+		}
+		
+		if (!_isAiming && IsShooting)
+		{
+			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
+			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
+
+			double rotationY = playerMesh.Rotation.Y;
+				
+			arrow.Position = new Vector3(Position.X + (float)Math.Sin(rotationY)*2, Position.Y + 2, Position.Z + (float)Math.Cos(rotationY)*2);
+			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), 2, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+			arrow.Rotation = new Vector3(arrow.Rotation.X, playerMesh.Rotation.Y + (float)Math.PI / 2f, arrow.Rotation.Z);
+			GetTree().Root.AddChild(arrow);
+			
+			IsShooting = false;
+			_shootPower = 1;
+			_cameraV.SpringLength = -4;
+		}
 	}
 }

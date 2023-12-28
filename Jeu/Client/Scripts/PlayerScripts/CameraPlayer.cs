@@ -3,6 +3,8 @@ using System;
 
 public partial class CameraPlayer : Node3D
 {
+	private Camera3D _camera;
+	
 	private float camrot_h;
 	private float camrot_v;
 	
@@ -17,24 +19,31 @@ public partial class CameraPlayer : Node3D
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		_camera = GetNode<Camera3D>("h/v/Camera3D");
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventMouseMotion eventMouseMotion)
+		if (_camera.Current && !GameManager._pausemode)
 		{
-			camrot_h += -eventMouseMotion.Relative.X * h_sensitivity;
-			camrot_v += eventMouseMotion.Relative.Y * v_sensitivity;
+			if (@event is InputEventMouseMotion eventMouseMotion)
+			{
+				camrot_h += -eventMouseMotion.Relative.X * h_sensitivity;
+				camrot_v += eventMouseMotion.Relative.Y * v_sensitivity;
+			}
 		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		camrot_v = Mathf.Clamp(camrot_v, Mathf.DegToRad(cam_v_min), Mathf.DegToRad(cam_v_max));
-		Node3D h = GetNode<Node3D>("h");
-		SpringArm3D v = GetNode<SpringArm3D>("h/v");
+		if (_camera.Current && !GameManager._pausemode)
+		{
+			camrot_v = Mathf.Clamp(camrot_v, Mathf.DegToRad(cam_v_min), Mathf.DegToRad(cam_v_max));
+			Node3D h = GetNode<Node3D>("h");
+			SpringArm3D v = GetNode<SpringArm3D>("h/v");
 		
-		h.Rotation = new Vector3(h.Rotation.X, (float)Mathf.Lerp(h.Rotation.Y, camrot_h, delta * h_acceleration), h.Rotation.Z);
-		v.Rotation = new Vector3((float)Mathf.Lerp(v.Rotation.X, camrot_v, delta * v_acceleration), v.Rotation.Y, v.Rotation.Z);
+			h.Rotation = new Vector3(h.Rotation.X, (float)Mathf.Lerp(h.Rotation.Y, camrot_h, delta * h_acceleration), h.Rotation.Z);
+			v.Rotation = new Vector3((float)Mathf.Lerp(v.Rotation.X, camrot_v, delta * v_acceleration), v.Rotation.Y, v.Rotation.Z);
+		}
 	}
 }
