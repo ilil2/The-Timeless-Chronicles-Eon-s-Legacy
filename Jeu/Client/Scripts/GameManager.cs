@@ -75,6 +75,7 @@ public partial class GameManager : Node3D
 	public static bool StartMap = false;
 	
 	public static bool _pausemode = false;
+	protected static bool thread;
 	
 	private static string GetIp()
 	{
@@ -236,6 +237,10 @@ public partial class GameManager : Node3D
 		while (true)
 		{
 			Listen1.Listen();
+			if (!thread)
+			{
+				break;
+			}
 		}
 	}
 

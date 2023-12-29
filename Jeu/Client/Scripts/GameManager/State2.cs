@@ -19,6 +19,7 @@ public partial class State2 : GameManager
 		        {
 			        IDGame = rep.Substring(8);
 			        OnJoin = true;
+			        thread = true;
 			        th = new Thread(Listen);		//initialisation thread pour la lecture de requette
 			        th.Start();							//lancement thread
 			        LobbyReset = true;
@@ -38,6 +39,7 @@ public partial class State2 : GameManager
         							
 			        IDGame = LobbyManager.IDJoinGame;
 			        OnJoin = true;
+			        thread = true;
 			        th = new Thread(Listen);		//initialisation thread pour la lecture de requette
 			        th.Start();							//lancement thread
 			        LobbyReset = true;
@@ -61,7 +63,8 @@ public partial class State2 : GameManager
 		        GD.Print("back");
 		        LobbyReset = true;
 		        OnJoin = false;
-		        th.Interrupt();
+		        thread = false;
+		        //th.Interrupt();
 		        tw.WriteLine("back");
 		        tw.Flush();
 	        }
