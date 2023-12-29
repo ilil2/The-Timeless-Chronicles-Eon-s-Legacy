@@ -6,6 +6,7 @@ public partial class ChatUI : Control
 	private Label _output;
 	private LineEdit _input;
 	private ColorRect _colorRect;
+	private Control _chat;
 
 	private string _outputtext;
 	public string Outputaddtext;
@@ -13,23 +14,43 @@ public partial class ChatUI : Control
 
 	private bool _onchat;
 	
-	// Called when the node enters the scene tree for the first time.
+	private float _screenDefalutWidth = 1152;
+	private float _chatDefaultSize = 20;
+	
 	public override void _Ready()
 	{
-		_output = GetNode<Label>("Output");
-		_input = GetNode<LineEdit>("Input");
-		_colorRect = GetNode<ColorRect>("ColorRect");
+		_input = GetNode<LineEdit>("Chat/Input");
+		_colorRect = GetNode<ColorRect>("Chat/ColorRect");
+		_chat = GetNode<Control>("Chat");
 
 		Outputaddtext = "";
 		_colorRect.Color = new Color(0,0,0,0.6f);
 		_onchat = false;
 	}
+	
+	public void OnResize()
+	{
+		_output = GetNode<Label>("Chat/Output");
+		
+		_output.LabelSettings.FontSize = (int)(_chatDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (GameManager._pausemode)
+		{
+			_onchat = false;
+			_input.ReleaseFocus();
+			
+			Visible = false;
+		}
+		else
+		{
+			Visible = true;
+		}
+
 		_output.Text = _outputtext;
-		
+			
 		if (Outputaddtext != "")
 		{
 			_outputtext += Outputaddtext + "\n";
@@ -42,7 +63,7 @@ public partial class ChatUI : Control
 			if (Input.IsKeyPressed(Key.Enter))
 			{
 				Inputtext = _input.Text;
-				_input.Text = "";
+				_input.Text = ""; 
 				_onchat = false;
 				_input.ReleaseFocus();
 			}

@@ -1,41 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://bju77edkhhxto"]
+[gd_scene load_steps=3 format=3 uid="uid://bju77edkhhxto"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ChatUI.cs" id="1_14cyn"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_ku82n"]
+font_size = 18
+
 [node name="ChatUI" type="Control"]
 layout_mode = 3
-anchor_right = 0.222
-anchor_bottom = 0.395
-offset_right = 0.255981
-offset_bottom = 0.0399933
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_14cyn")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Chat" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchor_right = 0.333
+anchor_bottom = 0.395
+offset_right = 0.384003
+offset_bottom = 1.03999
+
+[node name="ColorRect" type="ColorRect" parent="Chat"]
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.588235)
 
-[node name="Output" type="Label" parent="."]
+[node name="Output" type="Label" parent="Chat"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.812
-offset_bottom = 0.127991
+anchor_bottom = 0.809
+offset_bottom = 1.08698
+label_settings = SubResource("LabelSettings_ku82n")
 autowrap_mode = 1
 
-[node name="Input" type="LineEdit" parent="."]
+[node name="Input" type="LineEdit" parent="Chat"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.812
+anchor_top = 0.809
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.127991
-offset_bottom = -1.0
+offset_top = 0.0869904
+offset_bottom = -1.99998
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+
+[connection signal="resized" from="." to="." method="OnResize"]

@@ -41,6 +41,10 @@ public partial class ArcherScript : ClassScript
 			Move(delta);
 			ShootArrow(_playerMesh);
 		}
+		else
+		{
+			_shootTimer = 0;
+		}
 	}
 	
 	private void ShootArrow(MeshInstance3D playerMesh)
