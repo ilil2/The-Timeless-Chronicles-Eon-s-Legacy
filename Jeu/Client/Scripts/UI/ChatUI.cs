@@ -12,7 +12,7 @@ public partial class ChatUI : Control
 	public string Outputaddtext;
 	public string Inputtext;
 
-	public bool _onchat;
+	private bool _onchat;
 	
 	private float _screenDefalutWidth = 1152;
 	private float _chatDefaultSize = 20;
@@ -84,5 +84,10 @@ public partial class ChatUI : Control
 				_input.GrabFocus();
 			}
 		}
+	}
+	
+	public bool IsOnChat()
+	{
+		return _onchat;
 	}
 }

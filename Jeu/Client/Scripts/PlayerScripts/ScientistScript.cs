@@ -28,9 +28,8 @@ public partial class ScientistScript : ClassScript
         PhysicsReset();
         Gravity(delta);
 
-        if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat)._onchat)
+        if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
         {
-            Dash();
             Move(delta);
         }
     }
