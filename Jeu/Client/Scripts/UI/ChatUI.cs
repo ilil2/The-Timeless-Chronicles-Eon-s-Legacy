@@ -15,7 +15,7 @@ public partial class ChatUI : Control
 	private bool _onchat;
 	
 	private float _screenDefalutWidth = 1152;
-	private float _chatDefaultSize = 20;
+	private float _chatDefaultSize = 18;
 	
 	public override void _Ready()
 	{

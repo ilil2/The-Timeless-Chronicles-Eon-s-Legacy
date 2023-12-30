@@ -128,8 +128,11 @@ public partial class ClassScript : CharacterBody3D
 	    {
 		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
 		    {
-			    _direction = new Vector3(0, 0, 1);
-			    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
+			    if (!_isWalking)
+			    {
+				    _direction = new Vector3(0, 0, 1);
+				    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
+			    }
 			    
 			    _horizontalVelocity = _direction * _dashPower;
 			    _canDash = false;

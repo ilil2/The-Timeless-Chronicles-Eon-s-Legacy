@@ -16,10 +16,10 @@ script = ExtResource("1_14cyn")
 
 [node name="Chat" type="Control" parent="."]
 layout_mode = 1
-anchor_right = 0.333
-anchor_bottom = 0.395
-offset_right = 0.384003
-offset_bottom = 1.03999
+anchor_right = 0.278
+anchor_bottom = 0.296
+offset_right = -0.256042
+offset_bottom = 0.192001
 
 [node name="ColorRect" type="ColorRect" parent="Chat"]
 layout_mode = 1
@@ -49,6 +49,6 @@ offset_top = 0.0869904
 offset_bottom = -1.99998
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
 
 [connection signal="resized" from="." to="." method="OnResize"]
