@@ -14,7 +14,7 @@ public partial class KnightScript : ClassScript
         _runSpeed = 6.8f;
         _dashPower = 70.0f;
         
-        _animationPlayer = GetNode<AnimationPlayer>("PlayerBody/Sword/AnimationPlayer");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     }
 
     public override void _Input(InputEvent @event)

@@ -26,7 +26,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.469885, -0.211305, 0.419711)]
+"values": [Vector3(-0.641, -0.211, -0.542)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -53,7 +53,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.5, 1, 0.5),
 "update": 0,
-"values": [Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.145591, 0.50258), Vector3(-0.469885, -0.211305, 0.419711)]
+"values": [Vector3(0.641, -0.211, -0.542), Vector3(0.641, -0.210999, -0.621212), Vector3(0.641, -0.211, -0.542)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -65,7 +65,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(0.5, 1, 0.5),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(1.22691, 0.202406, 7.47227e-18), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-1.02554, 0.136298, 0.294881), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_x6w5t"]
@@ -82,7 +82,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.210636, 0.419711), Vector3(-0.469885, -0.211305, 0.419711), Vector3(-0.469885, -0.215697, 0.419711)]
+"values": [Vector3(0.641335, -0.211304, -0.542354), Vector3(0.641335, -0.211304, -0.613935), Vector3(0.641, -0.211, -0.542), Vector3(0.641167, -0.211152, -0.342094)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -94,7 +94,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.20813, 0, 0), Vector3(0, 0, 0), Vector3(-0.244084, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(-0.535798, 0, 0), Vector3(0, 0, 0), Vector3(0.255586, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oxrb2"]
@@ -116,15 +116,16 @@ transform = Transform3D(0.8, 0, 0, 0, 1.52175, 0, 0, 0, 0.8, -0.000106931, 0.816
 mesh = SubResource("BoxMesh_cilqf")
 
 [node name="Sword" parent="PlayerBody" instance=ExtResource("3_v4hy8")]
-transform = Transform3D(1.24999, 0, 0, 0, 0.705596, 0, 0, 0, 1.2233, -0.469885, -0.211305, 0.419711)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerBody/Sword"]
-libraries = {
-"": SubResource("AnimationLibrary_oxrb2")
-}
+transform = Transform3D(1.24998, 0, 0, 0, 0.705595, 0, 0, 0, 1.22329, 0.641, -0.211, -0.542)
 
 [node name="CameraPlayer" parent="." instance=ExtResource("2_2vibj")]
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerBody/Sword")
+libraries = {
+"": SubResource("AnimationLibrary_oxrb2")
+}
