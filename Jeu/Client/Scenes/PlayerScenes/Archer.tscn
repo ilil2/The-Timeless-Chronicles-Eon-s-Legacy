@@ -88,5 +88,3 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_8tlyc")
 }
-
-[editable path="CameraPlayer"]
