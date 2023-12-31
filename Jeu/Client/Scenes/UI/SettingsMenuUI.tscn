@@ -58,6 +58,7 @@ grow_vertical = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.862745)
 
 [node name="GameSettings" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -264,7 +265,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AudioSettings" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -321,7 +321,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VideoSettings" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,7 +377,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InputSettings" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -541,7 +539,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Input"
+text = "Controls"
 label_settings = SubResource("LabelSettings_q46pn")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -586,7 +584,7 @@ offset_right = 0.127991
 offset_bottom = -0.304001
 grow_horizontal = 2
 grow_vertical = 2
-text = "Options"
+text = "Settings"
 label_settings = SubResource("LabelSettings_3j2fx")
 horizontal_alignment = 1
 vertical_alignment = 1

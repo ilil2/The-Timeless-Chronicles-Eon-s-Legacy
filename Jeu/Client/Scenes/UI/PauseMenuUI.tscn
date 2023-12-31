@@ -34,6 +34,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.470588)
 
 [node name="SettingsButton" type="Button" parent="."]
@@ -138,6 +140,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ConfirmLeaveBackground" type="ColorRect" parent="ConfirmLeave"]
 layout_mode = 1
@@ -166,6 +170,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Leave"
 label_settings = SubResource("LabelSettings_d7qa3")
 horizontal_alignment = 1
@@ -188,6 +194,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Cancel"
 label_settings = SubResource("LabelSettings_x7826")
 horizontal_alignment = 1
