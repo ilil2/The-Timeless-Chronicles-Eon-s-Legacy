@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0tqtc6qy0o1t"]
+[gd_scene load_steps=7 format=3 uid="uid://c0tqtc6qy0o1t"]
 
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenuUI.cs" id="1_vc0bv"]
 
@@ -9,6 +9,17 @@ font_color = Color(0.611765, 0.611765, 0.611765, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_7aqcr"]
 font_size = 40
 
+[sub_resource type="LabelSettings" id="LabelSettings_d7qa3"]
+font_size = 30
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x7826"]
+font_size = 30
+font_color = Color(0.611765, 0.611765, 0.611765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_46htk"]
+font_size = 30
+
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +28,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vc0bv")
+
+[node name="PauseMenuBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.25098, 0.25098, 0.25098, 0.470588)
 
 [node name="SettingsButton" type="Button" parent="."]
 layout_mode = 1
@@ -40,7 +58,7 @@ offset_right = 1.52588e-05
 offset_bottom = 0.00166321
 grow_horizontal = 2
 grow_vertical = 2
-text = "Paramètre"
+text = "Settings"
 label_settings = SubResource("LabelSettings_dtv2i")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -67,7 +85,7 @@ offset_right = 1.52588e-05
 offset_bottom = 0.00166321
 grow_horizontal = 2
 grow_vertical = 2
-text = "Reprendre"
+text = "Resume"
 label_settings = SubResource("LabelSettings_dtv2i")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -94,7 +112,7 @@ offset_right = 1.52588e-05
 offset_bottom = 0.00166321
 grow_horizontal = 2
 grow_vertical = 2
-text = "Quitter"
+text = "Leave"
 label_settings = SubResource("LabelSettings_dtv2i")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -112,6 +130,82 @@ offset_right = 0.127991
 offset_bottom = -0.17601
 text = "Pause Menu"
 label_settings = SubResource("LabelSettings_7aqcr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmLeave" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ConfirmLeaveBackground" type="ColorRect" parent="ConfirmLeave"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.395
+anchor_right = 1.0
+anchor_bottom = 0.654
+offset_top = 0.0399933
+offset_bottom = 0.207977
+color = Color(0.25098, 0.25098, 0.25098, 0.784314)
+
+[node name="ConfirmLeaveButton" type="Button" parent="ConfirmLeave"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34
+anchor_top = 0.543
+anchor_right = 0.465
+anchor_bottom = 0.617
+offset_left = 0.320007
+offset_top = 0.135986
+offset_right = 0.319946
+offset_bottom = 0.18396
+
+[node name="ConfirmLeaveText" type="Label" parent="ConfirmLeave/ConfirmLeaveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Leave"
+label_settings = SubResource("LabelSettings_d7qa3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CancelLeaveButton" type="Button" parent="ConfirmLeave"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.535
+anchor_top = 0.543
+anchor_right = 0.66
+anchor_bottom = 0.617
+offset_left = -0.320007
+offset_top = 0.135986
+offset_right = -0.320007
+offset_bottom = 0.18396
+
+[node name="CancelLeaveText" type="Label" parent="ConfirmLeave/CancelLeaveButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Cancel"
+label_settings = SubResource("LabelSettings_x7826")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmLeaveTitle" type="Label" parent="ConfirmLeave"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.222
+anchor_top = 0.432
+anchor_right = 0.778
+anchor_bottom = 0.5
+offset_left = 0.255981
+offset_top = 0.0639954
+offset_right = -0.256042
+offset_bottom = -6.0
+text = "Are you sure you want to leave the game ?"
+label_settings = SubResource("LabelSettings_46htk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
