@@ -82,6 +82,7 @@ public partial class ClassScript : CharacterBody3D
 	{
 		//Envoie de la position du joueur au serveur
 	    GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
+	    GameManager.InfoJoueur["orientation"] = $"{Rotation.X};{Rotation.Y};{Rotation.Z}";
 	}
 
     protected void Pause()
