@@ -115,7 +115,7 @@ public class Serveur
         tw.WriteLine("start");
         tw.Flush();
         
-        info = new[] { "-1/co:1;0;1", "-1/co:-1;0;1", "-1/co:1;0;-1", "-1/co:-1;0;1" };
+        info = new[] { "-1/co:1;0;1/0;0;0", "-1/co:-1;0;1/0;0;0", "-1/co:1;0;-1/0;0;0", "-1/co:-1;0;1/0;0;0" };
         
         try
         {
