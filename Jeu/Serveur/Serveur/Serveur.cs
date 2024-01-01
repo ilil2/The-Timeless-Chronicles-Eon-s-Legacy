@@ -14,6 +14,8 @@ public class Serveur
     private string[] chat = {"","","",""};
     private string[][] oneshot = {new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}};
 
+    private bool _authorizeconnection = true;
+
     /*public class Prog
     {
         public int n { get; set; }
@@ -38,7 +40,7 @@ public class Serveur
         Console.WriteLine("Serveur en marche");
 
         bool inline = true; //variable pour pouvoir desactiver le serveur
-        while (inline)
+        while (_authorizeconnection && ID < 4)
         {
             Console.WriteLine("En attente ...");
             Socket s = soc.Accept();                        //acceptation des nouvelles connection
@@ -69,6 +71,8 @@ public class Serveur
         while (joueur_ready < ID) {}
         
         Thread.Sleep(100);
+
+        _authorizeconnection = false;
 
         switch (cc.id)
         {
