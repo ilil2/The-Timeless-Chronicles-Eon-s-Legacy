@@ -43,6 +43,16 @@ public partial class ClassScript : CharacterBody3D
     
     private int pauseTimer;
     
+    public SpringArm3D GetCameraVect()
+    {
+	    return _cameraV;
+    }
+    
+    public Node3D GetCameraH()
+	{
+	    return _cameraH;
+	}
+    
     protected void InitPlayer()
 	{
 		//Initialisation des variables du joueur

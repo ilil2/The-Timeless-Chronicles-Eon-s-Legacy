@@ -83,7 +83,7 @@ public partial class ArcherScript : ClassScript
 			double rotationY = _cameraH.Rotation.Y;
 			
 			arrow.Position = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
-			arrow.Rotation = new Vector3(arrow.Rotation.X, _cameraH.Rotation.Y + (float)Math.PI / 2f, _cameraV.Rotation.X);
+			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), _cameraV.Rotation.X);
 			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(_cameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
 			GetTree().Root.AddChild(arrow);
 			
