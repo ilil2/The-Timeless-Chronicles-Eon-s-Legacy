@@ -10,7 +10,7 @@ public partial class ChatUI : Control
 
 	private string _outputtext;
 	public string Outputaddtext;
-	public string Inputtext;
+	public string Inputtext = "";
 
 	private bool _onchat;
 	

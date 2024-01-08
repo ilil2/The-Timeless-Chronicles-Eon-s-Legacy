@@ -6,7 +6,7 @@ public partial class ArcherScript : ClassScript
 {
 	//Varibale du tir
 	private int _shootTimer;
-	private float _shootPower = 1;
+	private float _shootPower = 0.25f;
 	private bool _isAiming;
 	private bool _shootAnimation;
 	

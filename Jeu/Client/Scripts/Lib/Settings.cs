@@ -10,7 +10,7 @@ public class Settings
     {
         {"language", 0},
         {"mouseSensibility", 10},
-        {"chatSize", 1}
+        {"chatSize", 1},
     };
 
     public Settings()
