@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using Environment = Godot.Environment;
 
 /*
 To Do List du code:
@@ -96,8 +97,7 @@ public partial class MapLvl1Script : Node3D
 		else if (GameManager.StartMap)
 		{
 			//Process
-			if (GameManager.Fog)
-				CreateFog();
+			CreateFog();
 			DayCycle();
 			
 			//RenderDist();
@@ -235,6 +235,12 @@ public partial class MapLvl1Script : Node3D
 	{
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		Godot.Environment env = world.Environment;
+
+		if (GameManager.Fog)
+			env.VolumetricFogEnabled = true;
+		else
+			env.VolumetricFogEnabled = false;
+		
 		if (FogState==0)
 		{
 			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)

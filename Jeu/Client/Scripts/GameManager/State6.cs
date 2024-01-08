@@ -28,7 +28,7 @@ public partial class State6 : GameManager
                         {
                             DebugMode = DebugMode;
                         }
-                        else if (commandchat == "help")
+                        else if (commandchat.Length > 3 && commandchat.Substring(0,4) == "help")
                         {
                             if (commandchat.Length == 4)
                             {
@@ -51,20 +51,24 @@ public partial class State6 : GameManager
                                 }
                             }
                         }
-                        else if (commandchat.Length >= 15 && commandchat.Substring(0, 7) == "setrule")
+                        else if (commandchat.Length >= 8 && commandchat.Substring(0, 7) == "setrule")
                         {
-                            commandchat.Substring(8);
-
-                            if (commandchat.Substring(0,3) == "fog")
+                            commandchat = commandchat.Substring(8);
+                            GD.Print(commandchat);
+                            if (commandchat.Length >= 4 && commandchat.Substring(0,3) == "fog")
                             {
                                 commandchat = commandchat.Substring(4);
-                                if (commandchat.Substring(0,3) == "off")
+                                if (commandchat == "off")
                                 {
                                     Fog = false;
                                 }
-                                else if (commandchat.Substring(0,2) == "on")
+                                else if (commandchat == "on")
                                 {
                                     Fog = true;
+                                }
+                                else
+                                {
+                                    ((ChatUI)_chat).Outputaddtext = "setrule fog : incorrect";
                                 }
                             }
                             if (commandchat.Substring(0,2) == "ia")
