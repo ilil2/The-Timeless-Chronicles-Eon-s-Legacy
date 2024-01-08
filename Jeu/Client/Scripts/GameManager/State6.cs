@@ -60,11 +60,11 @@ public partial class State6 : GameManager
                                 commandchat = commandchat.Substring(4);
                                 if (commandchat.Substring(0,3) == "off")
                                 {
-                                    DebugMode = DebugMode;
+                                    Fog = false;
                                 }
                                 else if (commandchat.Substring(0,2) == "on")
                                 {
-                                    DebugMode = DebugMode;
+                                    Fog = true;
                                 }
                             }
                             if (commandchat.Substring(0,2) == "ia")

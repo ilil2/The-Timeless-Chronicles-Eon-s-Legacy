@@ -81,6 +81,7 @@ public partial class GameManager : Node3D
 
 	protected static bool Cheat = false;
 	public static bool DebugMode = false;
+	public static bool Fog = true;
 	
 	private static string GetIp()
 	{

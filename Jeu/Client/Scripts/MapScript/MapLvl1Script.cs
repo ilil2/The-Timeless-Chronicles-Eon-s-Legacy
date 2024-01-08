@@ -96,7 +96,8 @@ public partial class MapLvl1Script : Node3D
 		else if (GameManager.StartMap)
 		{
 			//Process
-			CreateFog();
+			if (GameManager.Fog)
+				CreateFog();
 			DayCycle();
 			
 			//RenderDist();
