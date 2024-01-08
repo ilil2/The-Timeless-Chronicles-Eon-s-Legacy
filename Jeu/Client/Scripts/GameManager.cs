@@ -137,7 +137,7 @@ public partial class GameManager : Node3D
 		LanguageManager = new LanguageControl();
 		SettingsManager = new Settings();
 		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
@@ -242,12 +242,15 @@ public partial class GameManager : Node3D
 	
 	protected static void Listen()		//premier thread
 	{
-		while (true)
+		while (thread)
 		{
-			Listen1.Listen();
-			if (!thread)
+			try
 			{
-				break;
+				Listen1.Listen();
+			}
+			catch
+			{
+				thread = false;
 			}
 		}
 	}

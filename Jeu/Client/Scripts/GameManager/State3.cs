@@ -22,8 +22,9 @@ public partial class State3 : GameManager
             tr.Close();					//fermeture recu requette du serveur principal
             soc.Disconnect(false);		//deconnection du socket
             state = 4;
-				
+
             soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//nouveau socket
+            soc2.ReceiveTimeout = 60000;
             iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);				//nouvelle ip
             soc2.Connect(iep2);																			//connexion
 			
