@@ -40,6 +40,8 @@ public partial class GameManager : Node3D
 	protected static DateTime endTime = DateTime.Now;
 
 	public static InputControl InputManger;
+	public static LanguageControl LanguageManager;
+	public static Settings SettingsManager;
 	
 	protected static Node3D Map;
 	protected static Control ProgressBar;
@@ -63,10 +65,10 @@ public partial class GameManager : Node3D
 	protected static bool _loadMap = false;
 
 	protected static int _nbJoueur = 0;
-	protected static CharacterBody3D Joueur1;
-	protected static CharacterBody3D Joueur2;
-	protected static CharacterBody3D Joueur3;
-	protected static CharacterBody3D Joueur4;
+	public static CharacterBody3D Joueur1;
+	public static CharacterBody3D Joueur2;
+	public static CharacterBody3D Joueur3;
+	public static CharacterBody3D Joueur4;
 
 	public static Control _chat;
 
@@ -128,6 +130,8 @@ public partial class GameManager : Node3D
 	{
 		IP = GetIp();
 		InputManger = new InputControl();
+		LanguageManager = new LanguageControl();
+		SettingsManager = new Settings();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socket
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
@@ -138,7 +142,7 @@ public partial class GameManager : Node3D
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
 		
-		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/ConnectionUI.tscn");
+		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/UI/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
 		
@@ -164,7 +168,7 @@ public partial class GameManager : Node3D
 
 			else if (state == 1)
 			{
-				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyManager.tscn");
+				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyManager.tscn");
 				Control LobbyMenu = LobbyScene.Instantiate<Control>();
 				AddChild(LobbyMenu);
 				State1.State();

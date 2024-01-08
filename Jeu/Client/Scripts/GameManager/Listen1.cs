@@ -5,7 +5,7 @@ public partial class Listen1 : GameManager
     public static void Listen()
     {
         string? rep = tr.ReadLine();	//lecture de donnée du serveur
-        if (rep.Contains(":"))
+        if (rep != null && rep.Contains(":"))
         {
             if (rep.Substring(0, 7) == "newserv")	//si la requette commence par newserv
             {

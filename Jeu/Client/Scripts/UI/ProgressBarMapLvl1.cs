@@ -7,22 +7,35 @@ public partial class ProgressBarMapLvl1 : Control
 	private ProgressBar _progressBar;
 	private Label _label;
 	
-	// Called when the node enters the scene tree for the first time.
+	private float _screenDefalutWidth = 1152;
+	private float _textDefaultSize = 30;
+	
 	public override void _Ready()
 	{
 		_progressBar = GetNode<ProgressBar>("ProgressBar");
+	}
+	
+	public void OnResize()
+	{
 		_label = GetNode<Label>("wait");
-		_label.Text = "";
+        
+		_label.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		_progressBar.Value = Load/1.5f;
 		if (Load == 2500)
 		{
-			_progressBar.ShowPercentage = false;
 			_label.Text = "En attente des autres joueurs";
+		}
+		else if (Load >= 150)
+		{
+			_label.Text = "Chargement de la map : 100%";
+		}
+		else
+		{
+			_label.Text = "Chargement de la map : " + (int)_progressBar.Value + "%";
 		}
 	}
 }

@@ -15,6 +15,7 @@ public partial class State3 : GameManager
             if (OnJoin)
             {
                 th.Interrupt();				//fermeture du thread listen
+                thread = false;
             }
             ns.Close();
             tw.Close();					//fermeture envoi requette au serveur principal

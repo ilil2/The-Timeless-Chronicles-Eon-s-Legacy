@@ -65,7 +65,7 @@ public partial class ArcherScript : ClassScript
 			_isAiming = true;
 			_shootPower += 0.015f;
 			
-			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/UI/ViewFinder.tscn");
+			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/HUD/ViewFinder.tscn");
 			Control crossHair = crossHairScene.Instantiate<Control>();
 			AddChild(crossHair);
 		}

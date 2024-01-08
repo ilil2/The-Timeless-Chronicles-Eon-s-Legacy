@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bukpc7fa40grn"]
 
-[ext_resource type="Script" path="res://Scripts/ConnectionUI.cs" id="1_pn4u0"]
+[ext_resource type="Script" path="res://Scripts/UI/ConnectionUI.cs" id="1_u3ff4"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_3jpwc"]
 pressed = true
@@ -42,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_pn4u0")
+script = ExtResource("1_u3ff4")
 
 [node name="PseudoConnection" type="LineEdit" parent="."]
 layout_mode = 1

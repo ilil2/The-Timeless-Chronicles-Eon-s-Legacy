@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8p02dg25hb27"]
 
-[ext_resource type="Script" path="res://Scripts/LobbyUI.cs" id="1_tgnl3"]
+[ext_resource type="Script" path="res://Scripts/UI/LobbyUI.cs" id="1_w6pp2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j34mk"]
 font_size = 40
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tgnl3")
+script = ExtResource("1_w6pp2")
 
 [node name="LobbyMenuText" type="Label" parent="."]
 layout_mode = 2

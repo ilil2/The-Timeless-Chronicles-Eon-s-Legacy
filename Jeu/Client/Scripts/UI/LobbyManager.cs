@@ -26,7 +26,7 @@ public partial class LobbyManager : Control
 	
 	public override void _Ready()
 	{
-		PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyUI.tscn");
+		PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyUI.tscn");
 		Control LobbyMenu = LobbyScene.Instantiate<Control>();
 		AddChild(LobbyMenu);
 	}
@@ -38,7 +38,7 @@ public partial class LobbyManager : Control
 		
 		if (LobbyUI_)
 		{
-			PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/LobbyUI.tscn");
+			PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyUI.tscn");
 			Control LobbyMenu = LobbyScene.Instantiate<Control>();
 			AddChild(LobbyMenu);
 
@@ -48,7 +48,7 @@ public partial class LobbyManager : Control
 
 		if (JoinGameUI_)
 		{
-			PackedScene JoinGameScene = GD.Load<PackedScene>("res://Scenes/JoinGameUI.tscn");
+			PackedScene JoinGameScene = GD.Load<PackedScene>("res://Scenes/UI/JoinGameUI.tscn");
 			Control JoinGameMenu = JoinGameScene.Instantiate<Control>();
 			AddChild(JoinGameMenu);
 
@@ -58,7 +58,7 @@ public partial class LobbyManager : Control
 
 		if (CreateGameUI_)
 		{
-			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/CreateGameUI.tscn");
+			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/UI/CreateGameUI.tscn");
 			Control CreateGameMenu = CreateGameScene.Instantiate<Control>();
 			AddChild(CreateGameMenu);
 
@@ -69,7 +69,7 @@ public partial class LobbyManager : Control
 		
 		if(JoinGameWithID)
 		{
-			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/CreateGameUI.tscn");
+			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/UI/CreateGameUI.tscn");
 			Control CreateGameMenu = CreateGameScene.Instantiate<Control>();
 			AddChild(CreateGameMenu);
 

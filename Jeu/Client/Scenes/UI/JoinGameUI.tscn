@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsj6avqrdhr22"]
 
-[ext_resource type="Script" path="res://Scripts/JoinGameUI.cs" id="1_guudr"]
+[ext_resource type="Script" path="res://Scripts/UI/JoinGameUI.cs" id="1_qj3v0"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_h0cs1"]
 pressed = true
@@ -37,7 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_guudr")
+script = ExtResource("1_qj3v0")
 
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 2

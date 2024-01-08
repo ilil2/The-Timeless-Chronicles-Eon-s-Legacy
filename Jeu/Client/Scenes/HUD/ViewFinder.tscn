@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm1oyrv3c86qn"]
 
-[ext_resource type="Script" path="res://Scripts/UI/ViewFinder.cs" id="1_v5l8w"]
+[ext_resource type="Script" path="res://Scripts/HUD/ViewFinder.cs" id="1_w1y1s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aghp3"]
 font_size = 35
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v5l8w")
+script = ExtResource("1_w1y1s")
 
 [node name="CrossHair" type="Label" parent="."]
 layout_mode = 1
