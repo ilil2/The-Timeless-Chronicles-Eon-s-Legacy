@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/ChatUI.cs" id="1_14cyn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ku82n"]
-font_size = 18
+font_size = 12
 
 [node name="ChatUI" type="Control"]
 layout_mode = 3
