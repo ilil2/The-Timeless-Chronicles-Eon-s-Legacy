@@ -28,7 +28,11 @@ public partial class OtherClassScript : CharacterBody3D
 		string[] positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
 		Vector3 position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
 
+		string[] orientations = GameManager.InfoAutreJoueur[$"orientation{Id}"].Split(";");
+		Vector3 orientation = new Vector3(Lib.Conversions.AtoF(orientations[0]), Lib.Conversions.AtoF(orientations[1]), Lib.Conversions.AtoF(orientations[2]));
+		
 		Position = position;
+		Rotation = orientation;
 	}
 	
 	private void SetPseudo()

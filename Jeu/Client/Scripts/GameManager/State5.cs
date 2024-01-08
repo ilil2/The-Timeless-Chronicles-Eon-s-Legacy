@@ -13,6 +13,7 @@ public partial class State5 : GameManager
 	    Joueur1.Name = "Joueur1"; 
 	    Joueur1.Position = new Vector3(x + rand.Next(-6,6),0,z + rand.Next(-6,6)); 
 	    InfoJoueur["co"] = "0;0;0";
+	    InfoJoueur["orientation"] = "0;0;0";
 				
 	    switch (_nbJoueur)
 	    {
@@ -23,6 +24,7 @@ public partial class State5 : GameManager
 					Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 					Joueur2.Name = "Joueur2";
 					InfoAutreJoueur["co0"] = "0;0;0";
+					InfoAutreJoueur["orientation0"] = "0;0;0";
 					((OtherClassScript)Joueur2).SetID(0);
 					((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 				}
@@ -32,6 +34,7 @@ public partial class State5 : GameManager
 					Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 					Joueur2.Name = "Joueur2";
 					InfoAutreJoueur["co1"] = "0;0;0";
+					InfoAutreJoueur["orientation1"] = "0;0;0";
 					((OtherClassScript)Joueur2).SetID(1);
 					((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class1"]);
 				}
@@ -43,6 +46,7 @@ public partial class State5 : GameManager
 					Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 					Joueur2.Name = "Joueur2";
 					InfoAutreJoueur["co0"] = "0;0;0";
+					InfoAutreJoueur["orientation0"] = "0;0;0";
 					((OtherClassScript)Joueur2).SetID(0);
 					((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 							
@@ -50,6 +54,7 @@ public partial class State5 : GameManager
 					Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 					Joueur3.Name = "Joueur3";
 					InfoAutreJoueur["co2"] = "0;0;0";
+					InfoAutreJoueur["orientation2"] = "0;0;0";
 					((OtherClassScript)Joueur3).SetID(2);
 					((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class2"]);
 				}
@@ -59,6 +64,7 @@ public partial class State5 : GameManager
 					Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 					Joueur2.Name = "Joueur2";
 					InfoAutreJoueur["co0"] = "0;0;0";
+					InfoAutreJoueur["orientation0"] = "0;0;0";
 					((OtherClassScript)Joueur2).SetID(0);
 					((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 							
@@ -66,6 +72,7 @@ public partial class State5 : GameManager
 					Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 					Joueur3.Name = "Joueur3";
 					InfoAutreJoueur["co1"] = "0;0;0";
+					InfoAutreJoueur["orientation1"] = "0;0;0";
 					((OtherClassScript)Joueur3).SetID(1);
 					((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class1"]);
 				}
@@ -75,6 +82,7 @@ public partial class State5 : GameManager
 					Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 					Joueur2.Name = "Joueur2";
 					InfoAutreJoueur["co1"] = "0;0;0";
+					InfoAutreJoueur["orientation1"] = "0;0;0";
 					((OtherClassScript)Joueur2).SetID(1);
 					((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class1"]);
 							
@@ -82,6 +90,7 @@ public partial class State5 : GameManager
 					Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 					Joueur3.Name = "Joueur3";
 					InfoAutreJoueur["co2"] = "0;0;0";
+					InfoAutreJoueur["orientation2"] = "0;0;0";
 					((OtherClassScript)Joueur3).SetID(2);
 					((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class2"]);
 				}
@@ -93,6 +102,7 @@ public partial class State5 : GameManager
 				    Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 				    Joueur2.Name = "Joueur2";
 				    InfoAutreJoueur["co0"] = "0;0;0";
+				    InfoAutreJoueur["orientation0"] = "0;0;0";
 				    ((OtherClassScript)Joueur2).SetID(0);
 				    ((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 							
@@ -100,6 +110,7 @@ public partial class State5 : GameManager
 				    Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 				    Joueur3.Name = "Joueur3";
 				    InfoAutreJoueur["co2"] = "0;0;0";
+				    InfoAutreJoueur["orientation1"] = "0;0;0";
 				    ((OtherClassScript)Joueur3).SetID(2);
 				    ((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class2"]);
 							
@@ -107,6 +118,7 @@ public partial class State5 : GameManager
 				    Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 				    Joueur4.Name = "Joueur4";
 				    InfoAutreJoueur["co3"] = "0;0;0";
+				    InfoAutreJoueur["orientation3"] = "0;0;0";
 				    ((OtherClassScript)Joueur4).SetID(3);
 				    ((OtherClassScript)Joueur4).SetClasse(InfoAutreJoueur["class3"]);
 			    }
@@ -116,6 +128,7 @@ public partial class State5 : GameManager
 				    Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 				    Joueur2.Name = "Joueur2";
 				    InfoAutreJoueur["co0"] = "0;0;0";
+				    InfoAutreJoueur["orientation0"] = "0;0;0";
 				    ((OtherClassScript)Joueur2).SetID(0);
 				    ((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 							
@@ -123,6 +136,7 @@ public partial class State5 : GameManager
 				    Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 				    Joueur3.Name = "Joueur3";
 				    InfoAutreJoueur["co1"] = "0;0;0";
+				    InfoAutreJoueur["orientation1"] = "0;0;0";
 				    ((OtherClassScript)Joueur3).SetID(1);
 				    ((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class1"]);
 							
@@ -130,6 +144,7 @@ public partial class State5 : GameManager
 				    Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 				    Joueur4.Name = "Joueur4";
 				    InfoAutreJoueur["co3"] = "0;0;0";
+				    InfoAutreJoueur["orientation3"] = "0;0;0";
 				    ((OtherClassScript)Joueur4).SetID(3);
 				    ((OtherClassScript)Joueur4).SetClasse(InfoAutreJoueur["class3"]);
 			    }
@@ -139,6 +154,7 @@ public partial class State5 : GameManager
 				    Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 				    Joueur2.Name = "Joueur2";
 				    InfoAutreJoueur["co0"] = "0;0;0";
+				    InfoAutreJoueur["orientation0"] = "0;0;0";
 				    ((OtherClassScript)Joueur2).SetID(0);
 				    ((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class0"]);
 							
@@ -146,6 +162,7 @@ public partial class State5 : GameManager
 				    Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 				    Joueur3.Name = "Joueur3";
 				    InfoAutreJoueur["co1"] = "0;0;0";
+				    InfoAutreJoueur["orientation1"] = "0;0;0";
 				    ((OtherClassScript)Joueur3).SetID(1);
 				    ((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class1"]);
 							
@@ -153,6 +170,7 @@ public partial class State5 : GameManager
 				    Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 				    Joueur4.Name = "Joueur4";
 				    InfoAutreJoueur["co2"] = "0;0;0";
+				    InfoAutreJoueur["orientation2"] = "0;0;0";
 				    ((OtherClassScript)Joueur4).SetID(2);
 				    ((OtherClassScript)Joueur4).SetClasse(InfoAutreJoueur["class2"]);
 			    }
@@ -162,6 +180,7 @@ public partial class State5 : GameManager
 				    Joueur2 = SceneJoueur2.Instantiate<CharacterBody3D>();
 				    Joueur2.Name = "Joueur2";
 				    InfoAutreJoueur["co1"] = "0;0;0";
+				    InfoAutreJoueur["orientation1"] = "0;0;0";
 				    ((OtherClassScript)Joueur2).SetID(1);
 				    ((OtherClassScript)Joueur2).SetClasse(InfoAutreJoueur["class1"]);
 							
@@ -169,6 +188,7 @@ public partial class State5 : GameManager
 				    Joueur3 = SceneJoueur3.Instantiate<CharacterBody3D>();
 				    Joueur3.Name = "Joueur3";
 				    InfoAutreJoueur["co2"] = "0;0;0";
+				    InfoAutreJoueur["orientation2"] = "0;0;0";
 				    ((OtherClassScript)Joueur3).SetID(2);
 				    ((OtherClassScript)Joueur3).SetClasse(InfoAutreJoueur["class2"]);
 							
@@ -176,6 +196,7 @@ public partial class State5 : GameManager
 				    Joueur4 = SceneJoueur4.Instantiate<CharacterBody3D>();
 				    Joueur4.Name = "Joueur4";
 				    InfoAutreJoueur["co3"] = "0;0;0";
+				    InfoAutreJoueur["orientation3"] = "0;0;0";
 				    ((OtherClassScript)Joueur4).SetID(3);
 				    ((OtherClassScript)Joueur4).SetClasse(InfoAutreJoueur["class3"]);
 			    }

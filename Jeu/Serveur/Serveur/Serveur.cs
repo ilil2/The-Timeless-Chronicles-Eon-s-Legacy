@@ -12,6 +12,9 @@ public class Serveur
 
     private string[] info = new string[4];
     private string[] chat = {"","","",""};
+    private string[][] oneshot = {new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}};
+
+    private bool _authorizeconnection = true;
 
     /*public class Prog
     {
@@ -37,7 +40,7 @@ public class Serveur
         Console.WriteLine("Serveur en marche");
 
         bool inline = true; //variable pour pouvoir desactiver le serveur
-        while (inline)
+        while (_authorizeconnection && ID < 4)
         {
             Console.WriteLine("En attente ...");
             Socket s = soc.Accept();                        //acceptation des nouvelles connection
@@ -68,6 +71,8 @@ public class Serveur
         while (joueur_ready < ID) {}
         
         Thread.Sleep(100);
+
+        _authorizeconnection = false;
 
         switch (cc.id)
         {
@@ -110,7 +115,7 @@ public class Serveur
         tw.WriteLine("start");
         tw.Flush();
         
-        info = new[] { "-1/co:1;0;1", "-1/co:-1;0;1", "-1/co:1;0;-1", "-1/co:-1;0;1" };
+        info = new[] { "-1/co:1;0;1/0;0;0", "-1/co:-1;0;1/0;0;0", "-1/co:1;0;-1/0;0;0", "-1/co:-1;0;1/0;0;0" };
         
         try
         {
@@ -160,7 +165,7 @@ public class Serveur
 
                     info[cc.id] = res;  
 
-                    if (lines[0] == "false" || true)
+                    /*if (lines[0] == "false" || true)
                     {
                         switch (cc.id)
                         {
@@ -188,13 +193,62 @@ public class Serveur
                         tw.WriteLine(info[0] + ";" + info[1] + ";" + info[2] + ";" + info[3]);
                         tw.Flush();
                     }
+                    */
                 }
 
+                switch (cc.id)
+                {
+                    case 0:
+                        tw.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
+                        //Console.WriteLine("in:" + info[1] + "|" + info[2] + "|" + info[3]);
+                        break;
+                    case 1:
+                        tw.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
+                        //Console.WriteLine("in:" + info[0] + "|" + info[2] + "|" + info[3]);
+                        break;
+                    case 2:
+                        tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
+                        //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[3]);
+                        break;
+                    case 3:
+                        tw.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
+                        //Console.WriteLine("in:" + info[0] + "|" + info[1] + "|" + info[2]);
+                        break;
+                }
+                tw.Flush();
+                
                 if (chat[cc.id] != "")
                 {
                     tw.WriteLine("chat:"+chat[cc.id]);
                     tw.Flush();
                     chat[cc.id] = "";
+                }
+
+                string one;
+                
+                if ((one = oneshot[cc.id][0]) != "")
+                {
+                    tw.WriteLine("on:" + cc.id + one);
+                    tw.Flush();
+                    oneshot[cc.id][0] = "";
+                }
+                if ((one = oneshot[cc.id][1]) != "")
+                {
+                    tw.WriteLine("on:" + cc.id + one);
+                    tw.Flush();
+                    oneshot[cc.id][1] = "";
+                }
+                if ((one = oneshot[cc.id][2]) != "")
+                {
+                    tw.WriteLine("on:" + cc.id + one);
+                    tw.Flush();
+                    oneshot[cc.id][2] = "";
+                }
+                if ((one = oneshot[cc.id][3]) != "")
+                {
+                    tw.WriteLine("on:" + cc.id + one);
+                    tw.Flush();
+                    oneshot[cc.id][3] = "";
                 }
             }
         }
