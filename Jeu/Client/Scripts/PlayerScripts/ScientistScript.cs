@@ -28,10 +28,26 @@ public partial class ScientistScript : ClassScript
         PhysicsReset();
         Gravity(delta);
 
-        if (_camera.Current && !GameManager._pausemode)
+        if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
         {
-            Dash();
             Move(delta);
+            ShootLaser();
+        }
+    }
+    
+    private void ShootLaser()
+    {
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
+        {
+            PackedScene laserScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Laser.tscn");
+            Node3D laser = laserScene.Instantiate<Node3D>();
+            
+            double rotationY = _cameraH.Rotation.Y;
+            
+            laser.GlobalPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
+            laser.Rotation = new Vector3(laser.Rotation.X, (float)rotationY, _cameraV.Rotation.X);
+            
+            GetTree().Root.AddChild(laser);
         }
     }
 }

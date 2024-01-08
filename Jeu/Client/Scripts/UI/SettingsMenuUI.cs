@@ -18,20 +18,42 @@ public partial class SettingsMenuUI : Control
     //Game
     private Control _gameSettings;
     private Button _gameSettingsButton;
+    private OptionButton _languageChooseButton;
+    private ScrollBar _mouseSensibilityBar;
+    private CheckButton _fullScreenButton;
+    private CheckButton _enableChatButton;
+    private OptionButton _chatSizeButton;
+    private Button _resetGameSettingsButton;
+    private Button _saveGameSettingsButton;
     
     private Label _gameSettingsText;
+    private Label _languageChooseText;
+    private Label _mouseSensibilityText;
+    private Label _fullScreenText;
+    private Label _enableChatText;
+    private Label _chatSizeText;
+    private Label _resetGameSettingsText;
+    private Label _saveGameSettingsText;
     
     //Audio
     private Control _audioSettings;
     private Button _audioSettingsButton;
+    private Button _resetAudioSettingsButton;
+    private Button _saveAudioSettingsButton;
     
     private Label _audioSettingsText;
+    private Label _resetAudioSettingsText;
+    private Label _saveAudioSettingsText;
     
     //Video
     private Control _videoSettings;
     private Button _videoSettingsButton;
+    private Button _resetVideoSettingsButton;
+    private Button _saveVideoSettingsButton;
     
     private Label _videoSettingsText;
+    private Label _resetVideoSettingsText;
+    private Label _saveVideoSettingsText;
     
     //Input
     private Control _inputSettings;
@@ -49,14 +71,25 @@ public partial class SettingsMenuUI : Control
         //Game
         _gameSettings = GetNode<Control>("GameSettings");
         _gameSettingsButton = GetNode<Button>("GameSettingsButton");
+        _languageChooseButton = GetNode<OptionButton>("GameSettings/LanguageChooseButton");
+        _mouseSensibilityBar = GetNode<ScrollBar>("GameSettings/MouseSensibilityBar");
+        _fullScreenButton = GetNode<CheckButton>("GameSettings/FullScreenButton");
+        _enableChatButton = GetNode<CheckButton>("GameSettings/EnableChatButton");
+        _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
+        _resetGameSettingsButton = GetNode<Button>("GameSettings/ResetGameSettingsButton");
+        _saveGameSettingsButton = GetNode<Button>("GameSettings/SaveGameSettingsButton");
         
         //Audio
         _audioSettings = GetNode<Control>("AudioSettings");
         _audioSettingsButton = GetNode<Button>("AudioSettingsButton");
+        _resetAudioSettingsButton = GetNode<Button>("AudioSettings/ResetAudioSettingsButton");
+        _saveAudioSettingsButton = GetNode<Button>("AudioSettings/SaveAudioSettingsButton");
         
         //Video
         _videoSettings = GetNode<Control>("VideoSettings");
         _videoSettingsButton = GetNode<Button>("VideoSettingsButton");
+        _resetVideoSettingsButton = GetNode<Button>("VideoSettings/ResetVideoSettingsButton");
+        _saveVideoSettingsButton = GetNode<Button>("VideoSettings/SaveVideoSettingsButton");
         
         //Input
         _inputSettings = GetNode<Control>("InputSettings");
@@ -90,18 +123,40 @@ public partial class SettingsMenuUI : Control
         
         //Game
         _gameSettingsText = GetNode<Label>("GameSettingsButton/GameSettingsText");
+        _languageChooseText = GetNode<Label>("GameSettings/LanguageChooseText");
+        _mouseSensibilityText = GetNode<Label>("GameSettings/MouseSensibilityText");
+        _fullScreenText = GetNode<Label>("GameSettings/FullScreenText");
+        _enableChatText = GetNode<Label>("GameSettings/EnableChatText");
+        _chatSizeText = GetNode<Label>("GameSettings/ChatSizeText");
+        _resetGameSettingsText = GetNode<Label>("GameSettings/ResetGameSettingsButton/ResetGameSettingsText");
+        _saveGameSettingsText = GetNode<Label>("GameSettings/SaveGameSettingsButton/SaveGameSettingsText");
         
         _gameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _languageChooseText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _mouseSensibilityText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _fullScreenText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _enableChatText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _chatSizeText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _resetGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _saveGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         
         //Audio
         _audioSettingsText = GetNode<Label>("AudioSettingsButton/AudioSettingsText");
+        _resetAudioSettingsText = GetNode<Label>("AudioSettings/ResetAudioSettingsButton/ResetAudioSettingsText");
+        _saveAudioSettingsText = GetNode<Label>("AudioSettings/SaveAudioSettingsButton/SaveAudioSettingsText");
         
         _audioSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _resetAudioSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _saveAudioSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         
         //Video
         _videoSettingsText = GetNode<Label>("VideoSettingsButton/VideoSettingsText");
+        _resetVideoSettingsText = GetNode<Label>("VideoSettings/ResetVideoSettingsButton/ResetVideoSettingsText");
+        _saveVideoSettingsText = GetNode<Label>("VideoSettings/SaveVideoSettingsButton/SaveVideoSettingsText");
         
         _videoSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _resetVideoSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _saveVideoSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         
         //Input
         _inputSettingsText = GetNode<Label>("InputSettingsButton/InputSettingsText");

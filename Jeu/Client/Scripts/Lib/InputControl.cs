@@ -7,29 +7,30 @@ namespace Lib;
 
 public class InputControl
 {
-    private List<(string, Key)> _listInputControl = new()
-    {
-        ("forward", Key.Z),         // 0
-        ("backward", Key.S),        // 1
-        ("left", Key.Q),            // 2
-        ("right", Key.D),           // 3
-        ("sprint", Key.Shift),      // 4
-        ("dash", Key.Space),        // 5
-        ("capacity1", Key.A),       // 6
-        ("capacity2", Key.E),       // 7
-        ("capacity3", Key.F),       // 8
-        ("item1", Key.Key1),        // 9
-        ("item2", Key.Key2),        // 10
-        ("item3", Key.Key3),        // 11
-        ("inventory", Key.Tab),     // 12
-        ("reload", Key.R),          // 13
-        ("tchat", Key.T),           // 14
-        ("pause", Key.Escape)       // 15
-    };
+    private List<(string, Key)> _listInputControl;
     
-
     public InputControl()
     {
+        _listInputControl = new List<(string, Key)>
+        {
+            ("Forward", Key.Z),         // 0
+            ("Backward", Key.S),        // 1
+            ("Left", Key.Q),            // 2
+            ("Right", Key.D),           // 3
+            ("Sprint", Key.Shift),      // 4
+            ("Dash", Key.Space),        // 5
+            ("Capacity 1", Key.A),      // 6
+            ("Capacity 2", Key.E),      // 7
+            ("Capacity 3", Key.F),      // 8
+            ("Item 1", Key.Key1),       // 9
+            ("Item 2", Key.Key2),       // 10
+            ("Item 3", Key.Key3),       // 11
+            ("Inventory", Key.Tab),     // 12
+            ("Reload", Key.R),          // 13
+            ("Chat", Key.T),            // 14
+            ("Pause", Key.Escape)       // 15
+        };
+        
         string[] lines = File.ReadAllLines("Scripts/Save/Control.txt");
         int index = 0;
         foreach (var line in lines)
@@ -70,22 +71,22 @@ public class InputControl
     {
         _listInputControl = new()
         {
-            ("forward", Key.Z),         // 0
-            ("backward", Key.S),        // 1
-            ("left", Key.Q),            // 2
-            ("right", Key.D),           // 3
-            ("sprint", Key.Shift),      // 4
-            ("dash", Key.Space),        // 5
-            ("capacity1", Key.A),       // 6
-            ("capacity2", Key.E),       // 7
-            ("capacity3", Key.F),       // 8
-            ("item1", Key.Key1),        // 9
-            ("item2", Key.Key2),        // 10
-            ("item3", Key.Key3),        // 11
-            ("inventory", Key.Tab),     // 12
-            ("reload", Key.R),          // 13
-            ("tchat", Key.T),           // 14
-            ("pause", Key.Escape)       // 15
+            ("Forward", Key.Z),         // 0
+            ("Backward", Key.S),        // 1
+            ("Left", Key.Q),            // 2
+            ("Right", Key.D),           // 3
+            ("Sprint", Key.Shift),      // 4
+            ("Dash", Key.Space),        // 5
+            ("Capacity 1", Key.A),      // 6
+            ("Capacity 2", Key.E),      // 7
+            ("Capacity 3", Key.F),      // 8
+            ("Item 1", Key.Key1),       // 9
+            ("Item 2", Key.Key2),       // 10
+            ("Item 3", Key.Key3),       // 11
+            ("Inventory", Key.Tab),     // 12
+            ("Reload", Key.R),          // 13
+            ("Chat", Key.T),            // 14
+            ("Pause", Key.Escape)       // 15
         };
     }
     

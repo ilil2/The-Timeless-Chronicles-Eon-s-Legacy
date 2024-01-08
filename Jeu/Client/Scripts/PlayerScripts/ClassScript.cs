@@ -43,6 +43,16 @@ public partial class ClassScript : CharacterBody3D
     
     private int pauseTimer;
     
+    public SpringArm3D GetCameraVect()
+    {
+	    return _cameraV;
+    }
+    
+    public Node3D GetCameraH()
+	{
+	    return _cameraH;
+	}
+    
     protected void InitPlayer()
 	{
 		//Initialisation des variables du joueur
@@ -122,12 +132,18 @@ public partial class ClassScript : CharacterBody3D
 	    }
 	}
 
-    protected void Dash()
+    private void Dash()
     {
 	    if (_canDash)
 	    {
 		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
 		    {
+			    if (!_isWalking)
+			    {
+				    _direction = new Vector3(0, 0, 1);
+				    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
+			    }
+			    
 			    _horizontalVelocity = _direction * _dashPower;
 			    _canDash = false;
 		    }
@@ -150,7 +166,7 @@ public partial class ClassScript : CharacterBody3D
 	    {
 		    _direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
 			    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
-		    _direction = _direction.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y).Normalized();
+		    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
 		    _isWalking = true;
 
 		    //Changement de la vitesse du joueur si il sprint
@@ -172,12 +188,12 @@ public partial class ClassScript : CharacterBody3D
 	    }
 	    
 	    //Calcul de la rotation du joueur
-	    _playerMesh.Rotation = new Vector3(_playerMesh.Rotation.X, (float)Mathf.Lerp(_playerMesh.Rotation.Y, Mathf.Atan2(_direction.X, _direction.Z) - Rotation.Y, delta * _angularAcceleration), _playerMesh.Rotation.Z);
-	    //_playerMesh.LookAt(_camera.GlobalPosition, Vector3.Up);
-	    //_playerMesh.Rotation = new Vector3(0, _playerMesh.Rotation.Y + (float)Math.PI, 0);
+	    _playerMesh.Rotation = new Vector3(0, _cameraH.Rotation.Y + (float) Math.PI, 0);
 		
 	    _horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
-		
+	    
+	    Dash();
+	    
 	    //Calcul du movement du joueur
 	    Vector3 velocity = Velocity;
 	    velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;

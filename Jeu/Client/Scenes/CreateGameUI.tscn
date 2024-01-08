@@ -132,7 +132,7 @@ offset_right = 0.511963
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Player 1:"
+text = "Player 1: ..."
 label_settings = SubResource("LabelSettings_korgq")
 vertical_alignment = 1
 
@@ -148,7 +148,7 @@ offset_right = 0.511841
 offset_bottom = -0.599976
 grow_horizontal = 2
 grow_vertical = 2
-text = "Player 2:"
+text = "Player 2: ..."
 label_settings = SubResource("LabelSettings_korgq")
 vertical_alignment = 1
 
@@ -163,7 +163,7 @@ offset_right = 0.511841
 offset_bottom = -0.592041
 grow_horizontal = 2
 grow_vertical = 2
-text = "Player 3:"
+text = "Player 3: ..."
 label_settings = SubResource("LabelSettings_korgq")
 vertical_alignment = 1
 
@@ -177,7 +177,7 @@ offset_left = 0.191986
 offset_top = -3.05176e-05
 offset_right = 0.511963
 offset_bottom = -3.05176e-05
-text = "Player 4:"
+text = "Player 4: ..."
 label_settings = SubResource("LabelSettings_korgq")
 vertical_alignment = 1
 

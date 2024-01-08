@@ -11,8 +11,8 @@ public partial class CameraPlayer : Node3D
 	private float cam_v_max = 75;
 	private float cam_v_min = -55;
 	
-	private float h_sensitivity = 0.01f;
-	private float v_sensitivity = 0.01f;
+	private float h_sensitivity = 10;
+	private float v_sensitivity = 10;
 	private float h_acceleration = 5;
 	private float v_acceleration = 5;
 
@@ -28,8 +28,8 @@ public partial class CameraPlayer : Node3D
 		{
 			if (@event is InputEventMouseMotion eventMouseMotion)
 			{
-				camrot_h += -eventMouseMotion.Relative.X * h_sensitivity;
-				camrot_v += eventMouseMotion.Relative.Y * v_sensitivity;
+				camrot_h += -eventMouseMotion.Relative.X * h_sensitivity / 1000;
+				camrot_v += eventMouseMotion.Relative.Y * v_sensitivity / 1000;
 			}
 		}
 	}

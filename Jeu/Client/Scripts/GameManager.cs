@@ -68,7 +68,7 @@ public partial class GameManager : Node3D
 	protected static CharacterBody3D Joueur3;
 	protected static CharacterBody3D Joueur4;
 
-	protected static Control _chat;
+	public static Control _chat;
 
 	protected static string IP;
 	protected static bool MapOnLoad = false;

@@ -8,7 +8,9 @@ public class Settings
 {
     private Dictionary<string, int> _dictSettings = new Dictionary<string, int>
     {
-        
+        {"language", 0},
+        {"mouseSensibility", 10},
+        {"chatSize", 1}
     };
 
     public Settings()

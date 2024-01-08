@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ycviqyfxkr55"]
+
+[ext_resource type="Script" path="res://Scripts/EntityScripts/Laser.cs" id="1_qy3ms"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8yh3h"]
+
+[node name="Laser" type="Node3D"]
+script = ExtResource("1_qy3ms")
+
+[node name="LaserRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 4.13265e-07, 0, 1, 0, -4.13265e-07, 0, 1, 0, 0, 0)
+target_position = Vector3(0, 0, 100)
+
+[node name="LaserMesh" type="MeshInstance3D" parent="LaserRay"]
+transform = Transform3D(0.5, -3.17856e-08, -2.65673e-10, -1.94289e-16, 0.00417899, -0.499983, 3.17867e-08, 0.499983, 0.00417899, 1.51817e-09, 0, -0.00636764)
+mesh = SubResource("CylinderMesh_8yh3h")
+skeleton = NodePath("")

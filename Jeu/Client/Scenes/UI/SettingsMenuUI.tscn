@@ -1,6 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg3y20bi1p3mh"]
+[gd_scene load_steps=13 format=3 uid="uid://bg3y20bi1p3mh"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SettingsMenuUI.cs" id="1_pcuhq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a5cwm"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_gkl8n"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_un81t"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_sqgv6"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_53v7n"]
+font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_myc0n"]
 font_size = 25
@@ -43,12 +58,211 @@ grow_vertical = 2
 color = Color(0.25098, 0.25098, 0.25098, 0.862745)
 
 [node name="GameSettings" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LanguageChooseText" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09
+anchor_top = 0.358
+anchor_right = 0.205
+anchor_bottom = 0.417
+offset_left = 0.31987
+offset_top = 0.0159912
+offset_right = -0.16008
+offset_bottom = -0.216003
+text = "Language :"
+label_settings = SubResource("LabelSettings_a5cwm")
+vertical_alignment = 1
+
+[node name="LanguageChooseButton" type="OptionButton" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.37
+anchor_right = 0.472
+anchor_bottom = 0.42
+offset_left = 0.384003
+offset_top = 0.23999
+offset_right = 0.255981
+offset_bottom = -0.160004
+item_count = 2
+selected = 0
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Français"
+popup/item_1/id = 1
+
+[node name="MouseSensibilityText" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09
+anchor_top = 0.494
+anchor_right = 0.285
+anchor_bottom = 0.556
+offset_left = 0.31987
+offset_top = -0.112
+offset_right = -0.320068
+offset_bottom = -2.28802
+text = "Mouse Sensibility :"
+label_settings = SubResource("LabelSettings_gkl8n")
+vertical_alignment = 1
+
+[node name="MouseSensibilityBar" type="HScrollBar" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.506
+anchor_right = 0.472
+anchor_bottom = 0.556
+offset_left = 0.384003
+offset_top = 0.111969
+offset_right = 0.255981
+offset_bottom = -0.288025
+min_value = 1.0
+max_value = 30.0
+value = 10.0
+
+[node name="FullScreenText" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09
+anchor_top = 0.63
+anchor_right = 0.215
+anchor_bottom = 0.688
+offset_left = 0.319992
+offset_top = -0.240021
+offset_right = 1.31999
+offset_bottom = 0.175995
+text = "Full Screen :"
+label_settings = SubResource("LabelSettings_un81t")
+
+[node name="FullScreenButton" type="CheckButton" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.642
+anchor_right = 0.413
+anchor_bottom = 0.679
+offset_left = -3.05176e-05
+offset_top = -0.0160217
+offset_right = 0.223969
+offset_bottom = 0.00799561
+
+[node name="EnableChatText" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.556
+anchor_top = 0.358
+anchor_right = 0.694
+anchor_bottom = 0.417
+offset_left = -0.512085
+offset_top = 0.0159912
+offset_right = 0.511963
+offset_bottom = -0.216003
+text = "Enable Chat :"
+label_settings = SubResource("LabelSettings_sqgv6")
+
+[node name="EnableChatButton" type="CheckButton" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.799
+anchor_top = 0.37
+anchor_right = 0.837
+anchor_bottom = 0.407
+offset_left = -0.447998
+offset_top = 0.23999
+offset_right = -0.223999
+offset_bottom = 0.264008
+button_pressed = true
+
+[node name="ChatSizeText" type="Label" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.556
+anchor_top = 0.494
+anchor_right = 0.664
+anchor_bottom = 0.552
+offset_left = -0.512085
+offset_top = -0.112
+offset_right = 0.0718994
+offset_bottom = 0.303955
+text = "Chat Size :"
+label_settings = SubResource("LabelSettings_53v7n")
+
+[node name="ChatSizeButton" type="OptionButton" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.494
+anchor_right = 0.889
+anchor_bottom = 0.542
+offset_left = -6.10352e-05
+offset_top = -0.112
+offset_right = -0.128052
+offset_bottom = -0.216034
+item_count = 3
+selected = 1
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Large"
+popup/item_2/id = 2
+
+[node name="ResetGameSettingsButton" type="Button" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.583
+anchor_top = 0.889
+anchor_right = 0.722
+anchor_bottom = 0.951
+offset_left = 0.383972
+offset_top = -0.0720215
+offset_right = 0.25592
+offset_bottom = -0.248047
+
+[node name="ResetGameSettingsText" type="Label" parent="GameSettings/ResetGameSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveGameSettingsButton" type="Button" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.778
+anchor_top = 0.889
+anchor_right = 0.917
+anchor_bottom = 0.951
+offset_left = -0.256042
+offset_top = -0.0720215
+offset_right = -0.384033
+offset_bottom = -0.248047
+
+[node name="SaveGameSettingsText" type="Label" parent="GameSettings/SaveGameSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AudioSettings" type="Control" parent="."]
 layout_mode = 1
@@ -58,6 +272,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ResetAudioSettingsButton" type="Button" parent="AudioSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.583
+anchor_top = 0.889
+anchor_right = 0.722
+anchor_bottom = 0.951
+offset_left = 0.383972
+offset_top = -0.0720215
+offset_right = 0.25592
+offset_bottom = -0.248047
+
+[node name="ResetAudioSettingsText" type="Label" parent="AudioSettings/ResetAudioSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveAudioSettingsButton" type="Button" parent="AudioSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.778
+anchor_top = 0.889
+anchor_right = 0.917
+anchor_bottom = 0.951
+offset_left = -0.256042
+offset_top = -0.0720215
+offset_right = -0.384033
+offset_bottom = -0.248047
+
+[node name="SaveAudioSettingsText" type="Label" parent="AudioSettings/SaveAudioSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="VideoSettings" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -65,6 +327,54 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ResetVideoSettingsButton" type="Button" parent="VideoSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.583
+anchor_top = 0.889
+anchor_right = 0.722
+anchor_bottom = 0.951
+offset_left = 0.383972
+offset_top = -0.0720215
+offset_right = 0.25592
+offset_bottom = -0.248047
+
+[node name="ResetVideoSettingsText" type="Label" parent="VideoSettings/ResetVideoSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reset"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveVideoSettingsButton" type="Button" parent="VideoSettings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.778
+anchor_top = 0.889
+anchor_right = 0.917
+anchor_bottom = 0.951
+offset_left = -0.256042
+offset_top = -0.0720215
+offset_right = -0.384033
+offset_bottom = -0.248047
+
+[node name="SaveVideoSettingsText" type="Label" parent="VideoSettings/SaveVideoSettingsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Save"
+label_settings = SubResource("LabelSettings_myc0n")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InputSettings" type="Control" parent="."]
 layout_mode = 1
@@ -229,7 +539,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Input"
+text = "Controls"
 label_settings = SubResource("LabelSettings_q46pn")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -274,7 +584,7 @@ offset_right = 0.127991
 offset_bottom = -0.304001
 grow_horizontal = 2
 grow_vertical = 2
-text = "Options"
+text = "Settings"
 label_settings = SubResource("LabelSettings_3j2fx")
 horizontal_alignment = 1
 vertical_alignment = 1

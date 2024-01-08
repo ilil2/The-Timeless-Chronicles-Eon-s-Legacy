@@ -1,16 +1,16 @@
-forward;90
-backward;83
-left;81
-right;68
-sprint;4194325
-dash;32
-capacity1;65
-capacity2;69
-capacity3;70
-item1;49
-item2;50
-item3;51
-inventory;4194306
-reload;82
-tchat;84
-pause;4194305
+Forward;90
+Backward;83
+Left;81
+Right;68
+Sprint;4194325
+Dash;32
+Capacity 1;65
+Capacity 2;69
+Capacity 3;70
+Item 1;49
+Item 2;50
+Item 3;51
+Inventory;4194306
+Reload;82
+Chat;84
+Pause;4194305

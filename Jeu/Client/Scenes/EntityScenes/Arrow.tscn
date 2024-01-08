@@ -30,4 +30,5 @@ shape = SubResource("CapsuleShape3D_xfd1b")
 wait_time = 15.0
 autostart = true
 
+[connection signal="body_entered" from="." to="." method="OnCollision"]
 [connection signal="timeout" from="Timer" to="." method="Dispawn"]
