@@ -11,25 +11,7 @@ public class InputControl
     
     public InputControl()
     {
-        _listInputControl = new List<(string, Key)>
-        {
-            ("Forward", Key.Z),         // 0
-            ("Backward", Key.S),        // 1
-            ("Left", Key.Q),            // 2
-            ("Right", Key.D),           // 3
-            ("Sprint", Key.Shift),      // 4
-            ("Dash", Key.Space),        // 5
-            ("Capacity 1", Key.A),      // 6
-            ("Capacity 2", Key.E),      // 7
-            ("Capacity 3", Key.F),      // 8
-            ("Item 1", Key.Key1),       // 9
-            ("Item 2", Key.Key2),       // 10
-            ("Item 3", Key.Key3),       // 11
-            ("Inventory", Key.Tab),     // 12
-            ("Reload", Key.R),          // 13
-            ("Chat", Key.T),            // 14
-            ("Pause", Key.Escape)       // 15
-        };
+        ResetControl();
         
         string[] lines = File.ReadAllLines("Scripts/Save/Control.txt");
         int index = 0;
