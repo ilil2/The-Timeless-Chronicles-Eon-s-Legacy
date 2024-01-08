@@ -32,7 +32,7 @@ public partial class State6 : GameManager
                         {
                             if (commandchat.Length == 4)
                             {
-                                ((ChatUI)_chat).Outputaddtext = "effectuez \"/help <numero de page>\" pour charger une page ou \"/help <commande>\" pour de l'aide sur une commande précise";
+                                ((ChatUI)_chat).Outputaddtext = "Effectuez \"/help <numero de page>\" pour charger une page ou \"/help <commande>\" pour de l'aide sur une commande précise";
                             }
                             else
                             {
@@ -47,7 +47,7 @@ public partial class State6 : GameManager
                                 }
                                 else
                                 {
-                                    ((ChatUI)_chat).Outputaddtext = "effectuez \"/help <numero de page>\" pour charger une page ou \"/help <commande>\" pour de l'aide sur une commande précise";
+                                    ((ChatUI)_chat).Outputaddtext = "Effectuez \"/help <numero de page>\" pour charger une page ou \"/help <commande>\" pour de l'aide sur une commande précise";
                                 }
                             }
                         }
@@ -65,10 +65,6 @@ public partial class State6 : GameManager
                                 else if (commandchat == "on")
                                 {
                                     Fog = true;
-                                }
-                                else
-                                {
-                                    ((ChatUI)_chat).Outputaddtext = "setrule fog : incorrect";
                                 }
                             }
                             if (commandchat.Substring(0,2) == "ia")
