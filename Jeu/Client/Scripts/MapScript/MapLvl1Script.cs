@@ -123,7 +123,7 @@ public partial class MapLvl1Script : Node3D
 		Godot.Environment env = world.Environment;
 		if (!SpecMode)
 		{
-			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			if (GameManager.DebugMode && FrameCount-StartInput>20)
 			{
 				StartInput=FrameCount;
 				PackedScene SpecCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn");
@@ -149,7 +149,7 @@ public partial class MapLvl1Script : Node3D
 		{
 			Label Fps = GetNode<Label>("SpecCam/FPS");
 			Fps.Text = $"FPS: {(int)(1/delta)}";
-			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>20)
+			if (!GameManager.DebugMode && FrameCount-StartInput>20)
 			{
 				StartInput=FrameCount;
 				Camera3D Cam = GetNode<Camera3D>("SpecCam");

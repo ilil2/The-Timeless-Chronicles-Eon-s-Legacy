@@ -78,6 +78,9 @@ public partial class GameManager : Node3D
 	
 	public static bool _pausemode = false;
 	protected static bool thread;
+
+	protected static bool Cheat = false;
+	public static bool DebugMode = false;
 	
 	private static string GetIp()
 	{
