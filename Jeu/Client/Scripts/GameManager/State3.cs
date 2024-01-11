@@ -51,11 +51,12 @@ public partial class State3 : GameManager
             tcpListener.Start();
             b = true;
         }
-        finally
+        catch
         {
-            tcpListener?.Stop();
+            b = false;
         }
-
+        
+        tcpListener?.Stop();
         return b;
     }
 }
