@@ -118,10 +118,10 @@ offset_left = 0.384003
 offset_top = 0.111969
 offset_right = 0.255981
 offset_bottom = -0.288025
-min_value = 5.0
-max_value = 30.0
+min_value = 1.0
+max_value = 31.0
 step = 1.0
-value = 5.0
+value = 1.0
 
 [node name="FullScreenText" type="Label" parent="GameSettings"]
 layout_mode = 1

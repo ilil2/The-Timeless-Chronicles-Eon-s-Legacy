@@ -15,6 +15,7 @@ public partial class ClassScript : CharacterBody3D
     protected Node3D _cameraH;
     protected SpringArm3D _cameraV;
     protected Camera3D _camera;
+    protected Node3D _cameraPlayer;
     protected MeshInstance3D _playerMesh;
     protected AnimationPlayer _animationPlayer;
     
@@ -60,6 +61,7 @@ public partial class ClassScript : CharacterBody3D
 		_pseudo = GameManager.InfoJoueur["pseudo"];
 		_classe = GameManager.InfoJoueur["class"];
         
+		_cameraPlayer = GetNode<Node3D>("CameraPlayer");
 		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		_cameraV = GetNode<SpringArm3D>("CameraPlayer/h/v");
 		_cameraH = GetNode<Node3D>("CameraPlayer/h");
@@ -205,4 +207,9 @@ public partial class ClassScript : CharacterBody3D
 	    Velocity = velocity;
 	    MoveAndSlide();
     }
+    
+    public Node3D GetCamera()
+	{
+	    return _cameraPlayer;
+	}
 }

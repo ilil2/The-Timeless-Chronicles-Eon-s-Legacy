@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class SettingsMenuUI : Control
 {
@@ -251,9 +252,17 @@ public partial class SettingsMenuUI : Control
         }
         else if (_saveGameSettingsButton.ButtonPressed)
         {
+            
+            //Mouse Sensibility
+            GameManager.SettingsManager.GetAllSettings()["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
+            ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
+            
+            //Language
             GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
             _language = GameManager.SettingsManager.GetAllSettings()["language"];
             _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+            
+            //Save
             GameManager.SettingsManager.SaveSettings();
         }
         
