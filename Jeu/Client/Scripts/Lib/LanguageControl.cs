@@ -386,6 +386,100 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
+            {"languageName", "Breizhek"},
+            
+            //Connection Menu
+            {"connectionMenuTitle", "Kenstabl"},
+            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPasswordText", "Ger-tremen"},
+            {"connectionMenuConnectionButton", "Kenstabl"},
+            {"connectionMenuNoAccountButton", "N'eo ket gant ur c'hemennadenn ?"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "En em enskrivañ"},
+            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPasswordText", "Ger-tremen"},
+            {"inscriptionMenuPasswordConfirmText", "Kadarnaat ar ger-tremen"},
+            {"inscriptionMenuInscriptionButton", "En em enskrivañ"},
+            {"inscriptionMenuAlreadyAccountButton", "Ur c'hemennadenn zo ganeoc'h ?"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "Lobby"},
+            {"lobbyMenuCreateGame", "Krouiñ ur gemennadenn"},
+            {"lobbyMenuJoinGame", "Ouzhpennañ ur gemennadenn"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "Krouiñ ur gemennadenn"},
+            {"createGameMenuBackButton", "<= Distreiñ"},
+            {"createGameMenuStartGame", "Kregiñ ar gemennadenn"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "Ouzhpennañ ur gemennadenn"},
+            {"joinGameMenuBackButton", "<= Distreiñ"},
+            {"joinGameMenuGameID", "ID ar gemennadenn"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "Sagittaire"},
+            {"selectClassMenuKnightClass", "Kavaler"},
+            {"selectClassMenuScientistClass", "Skiantour"},
+            {"selectClassMenuAssassinClass", "Lec'helour"},
+            {"selectClassMenuReadyButton", "Gwir"},
+            {"selectClassMenuWaitingText", "Ouzhpennet gant ar c'hemmennadennoù all..."},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "Meneger"},
+            {"pauseMenuResumeButton", "Adkregiñ"},
+            {"pauseMenuSettingsButton", "Arventennoù"},
+            {"pauseMenuLeaveButton", "Distroiñ"},
+            {"pauseMenuConfirmLeaveTitle", "Ha c'hoant hoc'h eus distreiñ ar gemennadenn ?"},
+            {"pauseMenuConfirmLeaveButton", "Distroiñ"},
+            {"pauseMenuCancelLeaveButton", "Nullañ"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "Arventennoù"},
+            {"settingsMenuBackButton", "<= Distreiñ"},
+            {"settingsMenuResetButton", "Adsevel"},
+            {"settingsMenuSaveButton", "Enrollañ"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "Gemennadenn"},
+            {"settingsMenuGameLanguage", "Yezhioù :"},
+            {"settingsMenuGameMouseSensibility", "Sensibilite ar rodell :"},
+            {"settingsMenuGameFullScreen", "Plein skramm :"},
+            {"settingsMenuGameEnableChat", "Gweredekaat ar c'hat :"},
+            {"settingsMenuGameChatSize", "Ment ar c'hat :"},
+            {"settingsMenuGameChatSizeSmall", "Berr"},
+            {"settingsMenuGameChatSizeMedium", "Medi"},
+            {"settingsMenuGameChatSizeLarge", "Hir"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "Sonerezh"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "Skeudenn"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "Kontrollerezhioù"},
+            {"settingsMenuControlsMoveForward", "Aheñvel"},
+            {"settingsMenuControlsMoveBackward", "Distreiñ"},
+            {"settingsMenuControlsMoveLeft", "Kleiz"},
+            {"settingsMenuControlsMoveRight", "Dehou"},
+            {"settingsMenuControlsSprint", "Sprint"},
+            {"settingsMenuControlsDash", "Dash"},
+            {"settingsMenuControlsCapacity1", "Kapac'h 1"},
+            {"settingsMenuControlsCapacity2", "Kapac'h 2"},
+            {"settingsMenuControlsCapacity3", "Kapac'h 3"},
+            {"settingsMenuControlsItem1", "Danvez 1"},
+            {"settingsMenuControlsItem2", "Danvez 2"},
+            {"settingsMenuControlsItem3", "Danvez 3"},
+            {"settingsMenuControlsInventory", "Inventori"},
+            {"settingsMenuControlsReload", "Adsevel"},
+            {"settingsMenuControlsChat", "C'hat"},
+            {"settingsMenuControlsPause", "Meneger"},
+        },
+        
+        new Dictionary<string, string>
+        {
             {"languageName", "Duetsch"},
             
             //Connection Menu
@@ -574,6 +668,100 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
+            {"languageName", "Esperanto"}, 
+            
+            //Connection Menu
+            {"connectionMenuTitle", "Konekto"},
+            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPasswordText", "Pasvorto"},
+            {"connectionMenuConnectionButton", "Konekto"},
+            {"connectionMenuNoAccountButton", "Ĉu vi ne havas konton?"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "Inskribo"},
+            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPasswordText", "Pasvorto"},
+            {"inscriptionMenuPasswordConfirmText", "Konfirmu pasvorton"},
+            {"inscriptionMenuInscriptionButton", "Inskribo"},
+            {"inscriptionMenuAlreadyAccountButton", "Ĉu vi jam havas konton?"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "Ludejo"},
+            {"lobbyMenuCreateGame", "Krei ludon"},
+            {"lobbyMenuJoinGame", "Aliĝi al ludo"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "Krei ludon"},
+            {"createGameMenuBackButton", "<= Reen"},
+            {"createGameMenuStartGame", "Komenci la ludon"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "Aliĝi al ludo"},
+            {"joinGameMenuBackButton", "<= Reen"},
+            {"joinGameMenuGameID", "Ludo-ID"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "Arĉisto"},
+            {"selectClassMenuKnightClass", "Kavaliro"},
+            {"selectClassMenuScientistClass", "Sciencisto"},
+            {"selectClassMenuAssassinClass", "Murdisto"},
+            {"selectClassMenuReadyButton", "Preparita"},
+            {"selectClassMenuWaitingText", "Atendante la aliajn ludantojn..."},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "Paŭzo Menuo"},
+            {"pauseMenuResumeButton", "Daŭrigi"},
+            {"pauseMenuSettingsButton", "Agordoj"},
+            {"pauseMenuLeaveButton", "Forlasi"},
+            {"pauseMenuConfirmLeaveTitle", "Ĉu vi certas, ke vi volas forlasi la ludon?"},
+            {"pauseMenuConfirmLeaveButton", "Forlasi"},
+            {"pauseMenuCancelLeaveButton", "Nuligi"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "Agordoj"},
+            {"settingsMenuBackButton", "<= Reen"},
+            {"settingsMenuResetButton", "Rekomenci"},
+            {"settingsMenuSaveButton", "Konservi"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "Ludo"},
+            {"settingsMenuGameLanguage", "Lingvo :"},
+            {"settingsMenuGameMouseSensibility", "Musmovo :"},
+            {"settingsMenuGameFullScreen", "Plena ekrano :"},
+            {"settingsMenuGameEnableChat", "Aktivigi babilejon :"},
+            {"settingsMenuGameChatSize", "Babileja grandeco :"},
+            {"settingsMenuGameChatSizeSmall", "Malgranda"},
+            {"settingsMenuGameChatSizeMedium", "Meza"},
+            {"settingsMenuGameChatSizeLarge", "Granda"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "Aŭdo"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "Video"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "Regado"},
+            {"settingsMenuControlsMoveForward", "Antaŭen"},
+            {"settingsMenuControlsMoveBackward", "Malantaŭen"},
+            {"settingsMenuControlsMoveLeft", "Maldekstren"},
+            {"settingsMenuControlsMoveRight", "Dekstren"},
+            {"settingsMenuControlsSprint", "Sprinto"},
+            {"settingsMenuControlsDash", "Dasko"},
+            {"settingsMenuControlsCapacity1", "Kapablo 1"},
+            {"settingsMenuControlsCapacity2", "Kapablo 2"},
+            {"settingsMenuControlsCapacity3", "Kapablo 3"},
+            {"settingsMenuControlsItem1", "Elemento 1"},
+            {"settingsMenuControlsItem2", "Elemento 2"},
+            {"settingsMenuControlsItem3", "Elemento 3"},
+            {"settingsMenuControlsInventory", "Enportaĵo"},
+            {"settingsMenuControlsReload", "Reŝarĝi"},
+            {"settingsMenuControlsChat", "Babilejo"},
+            {"settingsMenuControlsPause", "Paŭzo"},
+        },
+        
+        new Dictionary<string, string>
+        {
             {"languageName", "Latinus"},
             
             //Connection Menu
@@ -664,6 +852,194 @@ public class LanguageControl
             {"settingsMenuControlsReload", "Reload"},
             {"settingsMenuControlsChat", "Chat"},
             {"settingsMenuControlsPause", "Pause"},
+        },
+        
+        new Dictionary<string, string>
+        {
+            {"languageName", "Zulu"},
+            
+            //Connection Menu
+            {"connectionMenuTitle", "Ukuxhumana"},
+            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPasswordText", "Iphasiwedi"},
+            {"connectionMenuConnectionButton", "Ukuxhumana"},
+            {"connectionMenuNoAccountButton", "Awunayo i-akhawunti?"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "Ukubhalisa"},
+            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPasswordText", "Iphasiwedi"},
+            {"inscriptionMenuPasswordConfirmText", "Yaqinisa iphasiwedi"},
+            {"inscriptionMenuInscriptionButton", "Ukubhalisa"},
+            {"inscriptionMenuAlreadyAccountButton", "Unayo i-akhawunti?"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "Lobby"},
+            {"lobbyMenuCreateGame", "Yakha umdlalo"},
+            {"lobbyMenuJoinGame", "Ukungena umdlalo"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "Yakha umdlalo"},
+            {"createGameMenuBackButton", "<= Emuva"},
+            {"createGameMenuStartGame", "Qala umdlalo"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "Ukungena umdlalo"},
+            {"joinGameMenuBackButton", "<= Emuva"},
+            {"joinGameMenuGameID", "ID umdlalo"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "Umshayeli"},
+            {"selectClassMenuKnightClass", "Umkhonto"},
+            {"selectClassMenuScientistClass", "Umfundi"},
+            {"selectClassMenuAssassinClass", "Ukubulala"},
+            {"selectClassMenuReadyButton", "Kuyaqhubeka"},
+            {"selectClassMenuWaitingText", "Ukungathintana kwezinye izinhlangano..."},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "I-Menyu yokuqeda"},
+            {"pauseMenuResumeButton", "Qhubeka"},
+            {"pauseMenuSettingsButton", "Izilungiselelo"},
+            {"pauseMenuLeaveButton", "Phuma"},
+            {"pauseMenuConfirmLeaveTitle", "Uyakholwa ukuthi ufuna ukuphumela umdlalo?"},
+            {"pauseMenuConfirmLeaveButton", "Phuma"},
+            {"pauseMenuCancelLeaveButton", "Khansela"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "Izilungiselelo"},
+            {"settingsMenuBackButton", "<= Emuva"},
+            {"settingsMenuResetButton", "Qalisa"},
+            {"settingsMenuSaveButton", "Londoloza"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "Umdlalo"},
+            {"settingsMenuGameLanguage", "Ulimi :"},
+            {"settingsMenuGameMouseSensibility", "Ukuzwa kwe-mouse :"},
+            {"settingsMenuGameFullScreen", "I-Fullscreen :"},
+            {"settingsMenuGameEnableChat", "Vumela i-chat :"},
+            {"settingsMenuGameChatSize", "Usayizi lwe-chat :"},
+            {"settingsMenuGameChatSizeSmall", "Okuncane"},
+            {"settingsMenuGameChatSizeMedium", "Okwesibili"},
+            {"settingsMenuGameChatSizeLarge", "Okukhulu"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "I-Audio"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "I-Video"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "Izilawuli"},
+            {"settingsMenuControlsMoveForward", "Phambili"},
+            {"settingsMenuControlsMoveBackward", "Emuva"},
+            {"settingsMenuControlsMoveLeft", "Kwesokudla"},
+            {"settingsMenuControlsMoveRight", "Kwesokunxele"},
+            {"settingsMenuControlsSprint", "Sprint"},
+            {"settingsMenuControlsDash", "Dash"},
+            {"settingsMenuControlsCapacity1", "Ukusebenza 1"},
+            {"settingsMenuControlsCapacity2", "Ukusebenza 2"},
+            {"settingsMenuControlsCapacity3", "Ukusebenza 3"},
+            {"settingsMenuControlsItem1", "Ithuluzi 1"},
+            {"settingsMenuControlsItem2", "Ithuluzi 2"},
+            {"settingsMenuControlsItem3", "Ithuluzi 3"},
+            {"settingsMenuControlsInventory", "I-inventory"},
+            {"settingsMenuControlsReload", "Qalisa"},
+            {"settingsMenuControlsChat", "I-chat"},
+            {"settingsMenuControlsPause", "I-Pause"},
+        },
+        
+        new Dictionary<string, string>
+        {
+            {"languageName", "عرب"},
+            
+            //Connection Menu
+            {"connectionMenuTitle", "توصيل"},
+            {"connectionMenuPseudoText", "المستعار"},
+            {"connectionMenuPasswordText", "كلمة السر"},
+            {"connectionMenuConnectionButton", "توصيل"},
+            {"connectionMenuNoAccountButton", "لا يوجد لديك حساب؟"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "التسجيل"},
+            {"inscriptionMenuPseudoText", "المستعار"},
+            {"inscriptionMenuPasswordText", "كلمة السر"},
+            {"inscriptionMenuPasswordConfirmText", "تأكيد كلمة المرور"},
+            {"inscriptionMenuInscriptionButton", "التسجيل"},
+            {"inscriptionMenuAlreadyAccountButton", "هل لديك حساب بالفعل؟"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "الردهة"},
+            {"lobbyMenuCreateGame", "إنشاء لعبة"},
+            {"lobbyMenuJoinGame", "الانضمام إلى اللعبة"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "إنشاء لعبة"},
+            {"createGameMenuBackButton", "<= العودة"},
+            {"createGameMenuStartGame", "بدء اللعبة"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "الانضمام إلى اللعبة"},
+            {"joinGameMenuBackButton", "<= العودة"},
+            {"joinGameMenuGameID", "معرف اللعبة"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "رامي"},
+            {"selectClassMenuKnightClass", "فارس"},
+            {"selectClassMenuScientistClass", "عالم"},
+            {"selectClassMenuAssassinClass", "القاتل"},
+            {"selectClassMenuReadyButton", "جاهز"},
+            {"selectClassMenuWaitingText", "في انتظار اللاعبين الآخرين..."},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "قائمة الإيقاف المؤقت"},
+            {"pauseMenuResumeButton", "استئنف"},
+            {"pauseMenuSettingsButton", "الإعدادات"},
+            {"pauseMenuLeaveButton", "غادر"},
+            {"pauseMenuConfirmLeaveTitle", "هل أنت متأكد من أنك تريد مغادرة اللعبة؟"},
+            {"pauseMenuConfirmLeaveButton", "غادر"},
+            {"pauseMenuCancelLeaveButton", "إلغاء"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "الإعدادات"},
+            {"settingsMenuBackButton", "<= العودة"},
+            {"settingsMenuResetButton", "إعادة تعيين"},
+            {"settingsMenuSaveButton", "حفظ"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "لعبة"},
+            {"settingsMenuGameLanguage", "لغة :"},
+            {"settingsMenuGameMouseSensibility", "حساسية الماوس :"},
+            {"settingsMenuGameFullScreen", "ملء الشاشة :"},
+            {"settingsMenuGameEnableChat", "تمكين الدردشة :"},
+            {"settingsMenuGameChatSize", "حجم الدردشة :"},
+            {"settingsMenuGameChatSizeSmall", "صغير"},
+            {"settingsMenuGameChatSizeMedium", "متوسط"},
+            {"settingsMenuGameChatSizeLarge", "كبير"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "صوت"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "فيديو"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "التحكم"},
+            {"settingsMenuControlsMoveForward", "إلى الأمام"},
+            {"settingsMenuControlsMoveBackward", "إلى الوراء"},
+            {"settingsMenuControlsMoveLeft", "يسار"},
+            {"settingsMenuControlsMoveRight", "حق"},
+            {"settingsMenuControlsSprint", "ركض"},
+            {"settingsMenuControlsDash", "اندفاع"},
+            {"settingsMenuControlsCapacity1", "القدرة 1"},
+            {"settingsMenuControlsCapacity2", "القدرة 2"},
+            {"settingsMenuControlsCapacity3", "القدرة 3"},
+            {"settingsMenuControlsItem1", "البند 1"},
+            {"settingsMenuControlsItem2", "البند 2"},
+            {"settingsMenuControlsItem3", "البند 3"},
+            {"settingsMenuControlsInventory", "المخزون"},
+            {"settingsMenuControlsReload", "إعادة تحميل"},
+            {"settingsMenuControlsChat", "دردشة"},
+            {"settingsMenuControlsPause", "إيقاف مؤقت"},
         },
         
         new Dictionary<string, string>
