@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class SettingsMenuUI : Control
 {
@@ -66,8 +67,18 @@ public partial class SettingsMenuUI : Control
     private Label _resetInputText;
     private Label _saveInputText;
     
+    //Language
+    private List<Dictionary<string, string>> _allLanguages;
+    private int _language;
+    private Dictionary<string, string> _languageDict;
+    
     public override void _Ready()
     {
+        //Language
+        _allLanguages = GameManager.LanguageManager.GetAllLanguages();
+        _language = GameManager.SettingsManager.GetAllSettings()["language"];
+        _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+        
         //Game
         _gameSettings = GetNode<Control>("GameSettings");
         _gameSettingsButton = GetNode<Button>("GameSettingsButton");
@@ -78,6 +89,14 @@ public partial class SettingsMenuUI : Control
         _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
         _resetGameSettingsButton = GetNode<Button>("GameSettings/ResetGameSettingsButton");
         _saveGameSettingsButton = GetNode<Button>("GameSettings/SaveGameSettingsButton");
+
+        foreach (var language in _allLanguages)
+        {
+            _languageChooseButton.AddItem(language["languageName"]);
+        }
+        _languageChooseButton.Selected = _language;
+        
+        _mouseSensibilityBar.Value = GameManager.SettingsManager.GetAllSettings()["mouseSensibility"];
         
         //Audio
         _audioSettings = GetNode<Control>("AudioSettings");
@@ -98,13 +117,13 @@ public partial class SettingsMenuUI : Control
         _resetInputButton = GetNode<Button>("InputSettings/ResetInputButton");
         _saveInputButton = GetNode<Button>("InputSettings/SaveInputButton");
         
-        //General
-        _backButton = GetNode<Button>("BackButton");
-
         foreach (var (key, value) in GameManager.InputManger.GetAllControl())
         {
             _inputList.AddItem($"{key.ToUpper()} : {value}");
         }
+        
+        //General
+        _backButton = GetNode<Button>("BackButton");
         
         _gameSettings.Visible = true;
         _audioSettings.Visible = false;
@@ -227,6 +246,16 @@ public partial class SettingsMenuUI : Control
         }
         
         //Game
+        if (_resetGameSettingsButton.ButtonPressed)
+        {
+        }
+        else if (_saveGameSettingsButton.ButtonPressed)
+        {
+            GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
+            _language = GameManager.SettingsManager.GetAllSettings()["language"];
+            _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+            GameManager.SettingsManager.SaveSettings();
+        }
         
         //Audio
         

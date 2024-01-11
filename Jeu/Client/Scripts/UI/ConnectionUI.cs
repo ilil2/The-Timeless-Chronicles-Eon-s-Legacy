@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ConnectionUI : Control
 {
@@ -34,6 +35,10 @@ public partial class ConnectionUI : Control
 	
 	public static bool in_connection = true;
 	public static string erreur = "";
+	
+	//Language
+	private int _language;
+	private Dictionary<string, string> _languageDict;
 
 	public override void _Ready()
 	{
@@ -59,6 +64,28 @@ public partial class ConnectionUI : Control
 		_pseudoInscriptionNode.Visible = false;
 		_passwordInscriptionNode.Visible = false;
 		_passwordConfirmInscriptionNode.Visible = false;
+		
+		//Language
+		_language = GameManager.SettingsManager.GetAllSettings()["language"];
+		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+		Transition();
+	}
+	
+	private void Transition()
+	{
+		//Connection
+		_menuName.Text = _languageDict["connectionMenuTitle"];
+		_pseudoConnectionNode.PlaceholderText = _languageDict["connectionMenuPseudoText"];
+		_passwordConnectionNode.PlaceholderText = _languageDict["connectionMenuPasswordText"];
+		_connectionButtonText.Text = _languageDict["connectionMenuConnectionButton"];
+		_noCompteButtonText.Text = _languageDict["connectionMenuNoAccountButton"];
+		
+		//Inscription
+		_pseudoInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPseudoText"];
+		_passwordInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPasswordText"];
+		_passwordConfirmInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPasswordConfirmText"];
+		_inscriptionButtonText.Text = _languageDict["inscriptionMenuInscriptionButton"];
+		_dejaCompteButtonText.Text = _languageDict["inscriptionMenuAlreadyAccountButton"];
 	}
 	
 	public void OnResize()
@@ -118,7 +145,7 @@ public partial class ConnectionUI : Control
 	
 	public void NoCompte()
 	{
-		_menuName.Text = "Inscription";
+		_menuName.Text = _languageDict["inscriptionMenuTitle"];
 		_connectionError.Visible = false;
 		_inscriptionError.Visible = true;
 		
@@ -136,7 +163,7 @@ public partial class ConnectionUI : Control
 	
 	public void DejaCompte()
 	{
-		_menuName.Text = "Connection";
+		_menuName.Text = _languageDict["connectionMenuTitle"];
 		_inscriptionError.Visible = false;
 		_connectionError.Visible = true;
 		

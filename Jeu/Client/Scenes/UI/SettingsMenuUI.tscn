@@ -91,12 +91,6 @@ offset_left = 0.384003
 offset_top = 0.23999
 offset_right = 0.255981
 offset_bottom = -0.160004
-item_count = 2
-selected = 0
-popup/item_0/text = "English"
-popup/item_0/id = 0
-popup/item_1/text = "Français"
-popup/item_1/id = 1
 
 [node name="MouseSensibilityText" type="Label" parent="GameSettings"]
 layout_mode = 1
@@ -127,7 +121,7 @@ offset_bottom = -0.288025
 min_value = 5.0
 max_value = 30.0
 step = 1.0
-value = 10.0
+value = 5.0
 
 [node name="FullScreenText" type="Label" parent="GameSettings"]
 layout_mode = 1

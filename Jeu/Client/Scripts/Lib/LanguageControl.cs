@@ -98,8 +98,6 @@ public class LanguageControl
             {"settingsMenuControlsReload", "Reload"},
             {"settingsMenuControlsChat", "Chat"},
             {"settingsMenuControlsPause", "Pause"},
-            
-            
         },
         
         new Dictionary<string, string>
@@ -1329,5 +1327,10 @@ public class LanguageControl
     public Dictionary<string, string> GetLanguage(int index)
     {
         return _listLanguage[index];
+    }
+    
+    public List<Dictionary<string, string>> GetAllLanguages()
+    {
+        return _listLanguage;
     }
 }
