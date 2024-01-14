@@ -4,18 +4,15 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_dtv2i"]
 font_size = 25
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7aqcr"]
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_d7qa3"]
 font_size = 30
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x7826"]
 font_size = 30
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_46htk"]
 font_size = 30

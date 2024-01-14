@@ -33,7 +33,12 @@ public class LanguageControl
             //Create Game Menu
             {"createGameMenuTitle", "Create Game"},
             {"createGameMenuBackButton", "<= Back"},
-            {"createGameMenuStartGame", "Password"},
+            {"createGameMenuStartGame", "Start Game"},
+            {"createGameMenuID", "Game ID: "},
+            {"createGameMenuPlayer1", "Player 1: "},
+            {"createGameMenuPlayer2", "Player 2: "},
+            {"createGameMenuPlayer3", "Player 3: "},
+            {"createGameMenuPlayer4", "Player 4: "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Join Game"},
@@ -127,7 +132,12 @@ public class LanguageControl
             //Create Game Menu
             {"createGameMenuTitle", "4372656174652047616d65"},
             {"createGameMenuBackButton", "<3d204261636b"},
-            {"createGameMenuStartGame", "50617373776f7264"},
+            {"createGameMenuStartGame", "53746172742047616d65"},
+            {"createGameMenuID", "4944206f66207468652047616d65"},
+            {"createGameMenuPlayer1", "506c6179657220313a"},
+            {"createGameMenuPlayer2", "506c6179657220323a"},
+            {"createGameMenuPlayer3", "506c6179657220333a"},
+            {"createGameMenuPlayer4", "506c6179657220343a"},
             
             //Join Game Menu
             {"joinGameMenuTitle", "4a6f696e2047616d65"},
@@ -222,6 +232,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Créer une partie"},
             {"createGameMenuBackButton", "<= Retour"},
             {"createGameMenuStartGame", "Démarrer la partie"},
+            {"createGameMenuID", "ID de la partie : "},
+            {"createGameMenuPlayer1", "Joueur 1 : "},
+            {"createGameMenuPlayer2", "Joueur 2 : "},
+            {"createGameMenuPlayer3", "Joueur 3 : "},
+            {"createGameMenuPlayer4", "Joueur 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Rejoindre une partie"},
@@ -316,6 +331,11 @@ public class LanguageControl
             {"createGameMenuTitle", "43726565652047616d65"},
             {"createGameMenuBackButton", "<3d204261636b"},
             {"createGameMenuStartGame", "506173736572"},
+            {"createGameMenuID", "4944206465206c612047616d65"},
+            {"createGameMenuPlayer1", "4a6f756561757220313a"},
+            {"createGameMenuPlayer2", "4a6f756561757220323a"},
+            {"createGameMenuPlayer3", "4a6f756561757220333a"},
+            {"createGameMenuPlayer4", "4a6f756561757220343a"},
             
             //Join Game Menu
             {"joinGameMenuTitle", "52656a6f696e6472652047616d65"},
@@ -410,6 +430,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Krouiñ ur gemennadenn"},
             {"createGameMenuBackButton", "<= Distreiñ"},
             {"createGameMenuStartGame", "Kregiñ ar gemennadenn"},
+            {"createGameMenuID", "ID ar gemennadenn : "},
+            {"createGameMenuPlayer1", "Mestr 1 : "},
+            {"createGameMenuPlayer2", "Mestr 2 : "},
+            {"createGameMenuPlayer3", "Mestr 3 : "},
+            {"createGameMenuPlayer4", "Mestr 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ouzhpennañ ur gemennadenn"},
@@ -504,6 +529,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Spiel erstellen"},
             {"createGameMenuBackButton", "<= Zurück"},
             {"createGameMenuStartGame", "Spiel starten"},
+            {"createGameMenuID", "Spiel-ID : "},
+            {"createGameMenuPlayer1", "Spieler 1 : "},
+            {"createGameMenuPlayer2", "Spieler 2 : "},
+            {"createGameMenuPlayer3", "Spieler 3 : "},
+            {"createGameMenuPlayer4", "Spieler 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Spiel beitreten"},
@@ -598,6 +628,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Crear juego"},
             {"createGameMenuBackButton", "<= Regreso"},
             {"createGameMenuStartGame", "Comenzar el juego"},
+            {"createGameMenuID", "ID del juego : "},
+            {"createGameMenuPlayer1", "Jugador 1 : "},
+            {"createGameMenuPlayer2", "Jugador 2 : "},
+            {"createGameMenuPlayer3", "Jugador 3 : "},
+            {"createGameMenuPlayer4", "Jugador 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Unirse al juego"},
@@ -692,6 +727,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Krei ludon"},
             {"createGameMenuBackButton", "<= Reen"},
             {"createGameMenuStartGame", "Komenci la ludon"},
+            {"createGameMenuID", "Ludo-ID : "},
+            {"createGameMenuPlayer1", "Ludanto 1 : "},
+            {"createGameMenuPlayer2", "Ludanto 2 : "},
+            {"createGameMenuPlayer3", "Ludanto 3 : "},
+            {"createGameMenuPlayer4", "Ludanto 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Aliĝi al ludo"},
@@ -786,6 +826,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Ludum creare"},
             {"createGameMenuBackButton", "<= Retro"},
             {"createGameMenuStartGame", "Ludum incipere"},
+            {"createGameMenuID", "Ludum ID : "},
+            {"createGameMenuPlayer1", "Ludens 1 : "},
+            {"createGameMenuPlayer2", "Ludens 2 : "},
+            {"createGameMenuPlayer3", "Ludens 3 : "},
+            {"createGameMenuPlayer4", "Ludens 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ludum iungere"},
@@ -880,6 +925,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Yakha umdlalo"},
             {"createGameMenuBackButton", "<= Emuva"},
             {"createGameMenuStartGame", "Qala umdlalo"},
+            {"createGameMenuID", "ID umdlalo : "},
+            {"createGameMenuPlayer1", "Umshayeli 1 : "},
+            {"createGameMenuPlayer2", "Umshayeli 2 : "},
+            {"createGameMenuPlayer3", "Umshayeli 3 : "},
+            {"createGameMenuPlayer4", "Umshayeli 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ukungena umdlalo"},
@@ -974,6 +1024,11 @@ public class LanguageControl
             {"createGameMenuTitle", "إنشاء لعبة"},
             {"createGameMenuBackButton", "<= العودة"},
             {"createGameMenuStartGame", "بدء اللعبة"},
+            {"createGameMenuID", "معرف اللعبة : "},
+            {"createGameMenuPlayer1", "اللاعب 1 : "},
+            {"createGameMenuPlayer2", "اللاعب 2 : "},
+            {"createGameMenuPlayer3", "اللاعب 3 : "},
+            {"createGameMenuPlayer4", "اللاعب 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "الانضمام إلى اللعبة"},
@@ -1068,6 +1123,11 @@ public class LanguageControl
             {"createGameMenuTitle", "创建游戏"},
             {"createGameMenuBackButton", "<= 返回"},
             {"createGameMenuStartGame", "开始游戏"},
+            {"createGameMenuID", "游戏ID : "},
+            {"createGameMenuPlayer1", "玩家 1 : "},
+            {"createGameMenuPlayer2", "玩家 2 : "},
+            {"createGameMenuPlayer3", "玩家 3 : "},
+            {"createGameMenuPlayer4", "玩家 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "加入游戏"},
@@ -1162,6 +1222,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Δημιουργία παιχνιδιού"},
             {"createGameMenuBackButton", "<= Πίσω"},
             {"createGameMenuStartGame", "Ξεκινήστε το παιχνίδι"},
+            {"createGameMenuID", "Αναγνωριστικό παιχνιδιού : "},
+            {"createGameMenuPlayer1", "Παίκτης 1 : "},
+            {"createGameMenuPlayer2", "Παίκτης 2 : "},
+            {"createGameMenuPlayer3", "Παίκτης 3 : "},
+            {"createGameMenuPlayer4", "Παίκτης 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ενταχθείτε στο παιχνίδι"},
@@ -1257,6 +1322,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Создать игру"},
             {"createGameMenuBackButton", "<= Назад"},
             {"createGameMenuStartGame", "Начать игру"},
+            {"createGameMenuID", "Идентификатор игры : "},
+            {"createGameMenuPlayer1", "Игрок 1 : "},
+            {"createGameMenuPlayer2", "Игрок 2 : "},
+            {"createGameMenuPlayer3", "Игрок 3 : "},
+            {"createGameMenuPlayer4", "Игрок 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Присоединиться к игре"},

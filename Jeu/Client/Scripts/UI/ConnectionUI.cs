@@ -68,10 +68,10 @@ public partial class ConnectionUI : Control
 		//Language
 		_language = GameManager.SettingsManager.GetAllSettings()["language"];
 		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
-		Transition();
+		Translation();
 	}
 	
-	private void Transition()
+	private void Translation()
 	{
 		//Connection
 		_menuName.Text = _languageDict["connectionMenuTitle"];

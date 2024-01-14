@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class PauseMenuUI : Control
 {
@@ -35,6 +36,22 @@ public partial class PauseMenuUI : Control
         _leaveCancelButton = GetNode<Button>("ConfirmLeave/CancelLeaveButton");
         
         _leaveConfirm.Visible = false;
+        
+        Translation();
+    }
+    
+    private void Translation()
+    {
+        int language = GameManager.SettingsManager.GetAllSettings()["language"];
+        Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+        
+        _title.Text = languageDict["pauseMenuTitle"];
+        _resumeButtonText.Text = languageDict["pauseMenuResumeButton"];
+        _settingsButtonText.Text = languageDict["pauseMenuSettingsButton"];
+        _leaveButtonText.Text = languageDict["pauseMenuLeaveButton"];
+        _leaveConfirmTitle.Text = languageDict["pauseMenuConfirmLeaveTitle"];
+        _leaveConfirmButtonText.Text = languageDict["pauseMenuConfirmLeaveButton"];
+        _leaveCancelButtonText.Text = languageDict["pauseMenuCancelLeaveButton"];
     }
     
     public void OnResize()

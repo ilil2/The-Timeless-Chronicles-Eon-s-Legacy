@@ -48,27 +48,38 @@ public class InputControl
             _listInputControl[input] = (_listInputControl[input].Item1, key);
         }
     }
+    
+    public void SetControlName(int input, string name)
+    {
+        if (_listInputControl.Count > input)
+        {
+            _listInputControl[input] = (name, _listInputControl[input].Item2);
+        }
+    }
 
     public void ResetControl()
     {
+        int language = GameManager.SettingsManager.GetAllSettings()["language"];
+        Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+        
         _listInputControl = new()
         {
-            ("Forward", Key.Z),         // 0
-            ("Backward", Key.S),        // 1
-            ("Left", Key.Q),            // 2
-            ("Right", Key.D),           // 3
-            ("Sprint", Key.Shift),      // 4
-            ("Dash", Key.Space),        // 5
-            ("Capacity 1", Key.A),      // 6
-            ("Capacity 2", Key.E),      // 7
-            ("Capacity 3", Key.F),      // 8
-            ("Item 1", Key.Key1),       // 9
-            ("Item 2", Key.Key2),       // 10
-            ("Item 3", Key.Key3),       // 11
-            ("Inventory", Key.Tab),     // 12
-            ("Reload", Key.R),          // 13
-            ("Chat", Key.T),            // 14
-            ("Pause", Key.Escape)       // 15
+            (languageDict["settingsMenuControlsMoveForward"], Key.Z),         // 0
+            (languageDict["settingsMenuControlsMoveBackward"], Key.S),        // 1
+            (languageDict["settingsMenuControlsMoveLeft"], Key.Q),            // 2
+            (languageDict["settingsMenuControlsMoveRight"], Key.D),           // 3
+            (languageDict["settingsMenuControlsSprint"], Key.Shift),          // 4
+            (languageDict["settingsMenuControlsDash"], Key.Space),            // 5
+            (languageDict["settingsMenuControlsCapacity1"], Key.A),           // 6
+            (languageDict["settingsMenuControlsCapacity2"], Key.E),           // 7
+            (languageDict["settingsMenuControlsCapacity3"], Key.F),           // 8
+            (languageDict["settingsMenuControlsItem1"], Key.Key1),            // 9
+            (languageDict["settingsMenuControlsItem2"], Key.Key2),            // 10
+            (languageDict["settingsMenuControlsItem3"], Key.Key3),            // 11
+            (languageDict["settingsMenuControlsInventory"], Key.Tab),         // 12
+            (languageDict["settingsMenuControlsReload"], Key.R),              // 13
+            (languageDict["settingsMenuControlsChat"], Key.T),                // 14
+            (languageDict["settingsMenuControlsPause"], Key.Escape)           // 15
         };
     }
     

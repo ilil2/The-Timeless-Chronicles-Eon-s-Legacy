@@ -80,6 +80,8 @@ public partial class SettingsMenuUI : Control
         _language = GameManager.SettingsManager.GetAllSettings()["language"];
         _languageDict = GameManager.LanguageManager.GetLanguage(_language);
         
+        Translation();
+        
         //Game
         _gameSettings = GetNode<Control>("GameSettings");
         _gameSettingsButton = GetNode<Button>("GameSettingsButton");
@@ -130,6 +132,62 @@ public partial class SettingsMenuUI : Control
         _audioSettings.Visible = false;
         _videoSettings.Visible = false;
         _inputSettings.Visible = false;
+    }
+    
+    private void Translation()
+    {
+        //Settings Menu
+        _title.Text = _languageDict["settingsMenuTitle"];
+        _backButtonText.Text = _languageDict["settingsMenuBackButton"];
+        
+        //Settings Menu - Game
+        _gameSettingsText.Text = _languageDict["settingsMenuGameButton"];
+        _resetGameSettingsText.Text = _languageDict["settingsMenuResetButton"];
+        _saveGameSettingsText.Text = _languageDict["settingsMenuSaveButton"];
+        
+        _languageChooseText.Text = _languageDict["settingsMenuGameLanguage"];
+        _mouseSensibilityText.Text = _languageDict["settingsMenuGameMouseSensibility"];
+        _fullScreenText.Text = _languageDict["settingsMenuGameFullScreen"];
+        _enableChatText.Text = _languageDict["settingsMenuGameEnableChat"];
+        _chatSizeText.Text = _languageDict["settingsMenuGameChatSize"];
+        //_chatSizeButton.SetItemText(0, _languageDict["settingsMenuGameChatSizeSmall"]);
+        //_chatSizeButton.SetItemText(1, _languageDict["settingsMenuGameChatSizeMedium"]);
+        //_chatSizeButton.SetItemText(2, _languageDict["settingsMenuGameChatSizeLarge"]);
+        
+        //Settings Menu - Audio
+        _audioSettingsText.Text = _languageDict["settingsMenuAudioButton"];
+        _resetAudioSettingsText.Text = _languageDict["settingsMenuResetButton"];
+        _saveAudioSettingsText.Text = _languageDict["settingsMenuSaveButton"];
+        
+        
+        //Settings Menu - Video
+        _videoSettingsText.Text = _languageDict["settingsMenuVideoButton"];
+        _resetVideoSettingsText.Text = _languageDict["settingsMenuResetButton"];
+        _saveVideoSettingsText.Text = _languageDict["settingsMenuSaveButton"];
+        
+        
+        //Settings Menu - Controls
+        _inputSettingsText.Text = _languageDict["settingsMenuControlsButton"];
+        _resetInputText.Text = _languageDict["settingsMenuResetButton"];
+        _saveInputText.Text = _languageDict["settingsMenuSaveButton"];
+        
+        GameManager.InputManger.SetControlName(0, _languageDict["settingsMenuControlsMoveForward"]);
+        GameManager.InputManger.SetControlName(1, _languageDict["settingsMenuControlsMoveBackward"]);
+        GameManager.InputManger.SetControlName(2, _languageDict["settingsMenuControlsMoveLeft"]);
+        GameManager.InputManger.SetControlName(3, _languageDict["settingsMenuControlsMoveRight"]);
+        GameManager.InputManger.SetControlName(4, _languageDict["settingsMenuControlsSprint"]);
+        GameManager.InputManger.SetControlName(5, _languageDict["settingsMenuControlsDash"]);
+        GameManager.InputManger.SetControlName(6, _languageDict["settingsMenuControlsCapacity1"]);
+        GameManager.InputManger.SetControlName(7, _languageDict["settingsMenuControlsCapacity2"]);
+        GameManager.InputManger.SetControlName(8, _languageDict["settingsMenuControlsCapacity3"]);
+        GameManager.InputManger.SetControlName(9, _languageDict["settingsMenuControlsItem1"]);
+        GameManager.InputManger.SetControlName(10, _languageDict["settingsMenuControlsItem2"]);
+        GameManager.InputManger.SetControlName(11, _languageDict["settingsMenuControlsItem3"]);
+        GameManager.InputManger.SetControlName(12, _languageDict["settingsMenuControlsInventory"]);
+        GameManager.InputManger.SetControlName(13, _languageDict["settingsMenuControlsReload"]);
+        GameManager.InputManger.SetControlName(14, _languageDict["settingsMenuControlsChat"]);
+        GameManager.InputManger.SetControlName(15, _languageDict["settingsMenuControlsPause"]);
+        
     }
     
     public void OnResize()
@@ -252,18 +310,47 @@ public partial class SettingsMenuUI : Control
         }
         else if (_saveGameSettingsButton.ButtonPressed)
         {
-            
-            //Mouse Sensibility
-            GameManager.SettingsManager.GetAllSettings()["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
-            ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
-            
-            //Language
-            GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
-            _language = GameManager.SettingsManager.GetAllSettings()["language"];
-            _languageDict = GameManager.LanguageManager.GetLanguage(_language);
-            
-            //Save
-            GameManager.SettingsManager.SaveSettings();
+            if ((int)_mouseSensibilityBar.Value != GameManager.SettingsManager.GetAllSettings()["mouseSensibility"])
+            {
+                //Mouse Sensibility
+                GameManager.SettingsManager.GetAllSettings()["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
+                ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
+                
+                if (_languageChooseButton.Selected != GameManager.SettingsManager.GetAllSettings()["language"])
+                {
+                    //Language
+                    GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
+                    _language = GameManager.SettingsManager.GetAllSettings()["language"];
+                    _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+                    Translation();
+                    
+                    _inputList.Clear();
+                    foreach (var (key, value) in GameManager.InputManger.GetAllControl())
+                    {
+                        _inputList.AddItem($"{key.ToUpper()} : {value}");
+                    }
+                }
+                
+                //Save
+                GameManager.SettingsManager.SaveSettings();
+            }
+            else if (_languageChooseButton.Selected != GameManager.SettingsManager.GetAllSettings()["language"])
+            {
+                //Language
+                GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
+                _language = GameManager.SettingsManager.GetAllSettings()["language"];
+                _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+                Translation();
+                
+                _inputList.Clear();
+                foreach (var (key, value) in GameManager.InputManger.GetAllControl())
+                {
+                    _inputList.AddItem($"{key.ToUpper()} : {value}");
+                }
+                
+                //Save
+                GameManager.SettingsManager.SaveSettings();
+            }
         }
         
         //Audio

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ClassSelectUI : Control
 {
@@ -39,6 +40,21 @@ public partial class ClassSelectUI : Control
 		_buttonReady = GetNode<Button>("ReadyButton");
 
 		_waitingText.Visible = false;
+
+		Translation();
+	}
+	
+	private void Translation()
+	{
+		int language = GameManager.SettingsManager.GetAllSettings()["language"];
+		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+		
+		_readyButtonText.Text = languageDict["selectClassMenuReadyButton"];
+		_waitingText.Text = languageDict["selectClassMenuWaitingText"];
+		_archerButtonText.Text = languageDict["selectClassMenuArcherClass"];
+		_knightButtonText.Text = languageDict["selectClassMenuKnightClass"];
+		_assassinButtonText.Text = languageDict["selectClassMenuAssassinClass"];
+		_scientistButtonText.Text = languageDict["selectClassMenuScientistClass"];
 	}
 	
 	public void OnResize()

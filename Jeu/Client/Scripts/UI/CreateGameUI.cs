@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class CreateGameUI : Control
 {
@@ -23,12 +24,27 @@ public partial class CreateGameUI : Control
 	private float _textDefaultSize = 25;
 	private float _buttonDefaultSize = 20;
 	
+	//Language
+	private int _language;
+	private Dictionary<string, string> _languageDict;
 	
 	public override void _Ready()
 	{
 		_backButton = GetNode<Button>("BackButton");
 		_startGameButton = GetNode<Button>("StartGameButton");
 		LobbyManager.CreateButtonPressed = true;
+		
+		//Language
+		_language = GameManager.SettingsManager.GetAllSettings()["language"];
+		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+		Translation();
+	}
+	
+	private void Translation()
+	{
+		_title.Text = _languageDict["createGameMenuTitle"];
+		_backButtonText.Text = _languageDict["createGameMenuBackButton"];
+		_startButtonText.Text = _languageDict["createGameMenuStartGame"];
 	}
 	
 	public void OnResize()
@@ -68,10 +84,10 @@ public partial class CreateGameUI : Control
 			LobbyManager.StartGame = true;
 		}
 		
-		_idGame.Text = "Game ID: " + LobbyManager.IDConnectGame;
-		_namePlayer1.Text = "Player 1: " + LobbyManager.NamePlayer[0];
-		_namePlayer2.Text = "Player 2: " + LobbyManager.NamePlayer[1];
-		_namePlayer3.Text = "Player 3: " + LobbyManager.NamePlayer[2];
-		_namePlayer4.Text = "Player 4: " + LobbyManager.NamePlayer[3];
+		_idGame.Text = _languageDict["createGameMenuID"] + LobbyManager.IDConnectGame;
+		_namePlayer1.Text = _languageDict["createGameMenuPlayer1"] + LobbyManager.NamePlayer[0];
+		_namePlayer2.Text = _languageDict["createGameMenuPlayer2"] + LobbyManager.NamePlayer[1];
+		_namePlayer3.Text = _languageDict["createGameMenuPlayer3"] + LobbyManager.NamePlayer[2];
+		_namePlayer4.Text = _languageDict["createGameMenuPlayer4"] + LobbyManager.NamePlayer[3];
 	}
 }
