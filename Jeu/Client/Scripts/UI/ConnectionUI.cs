@@ -14,6 +14,7 @@ public partial class ConnectionUI : Control
 	public static Button InscriptionButton;
 	private Button _noCompteButton;
 	private Button _dejaCompteButton;
+	private OptionButton _languageChooseButton;
 	
 	private Label _connectionError;
 	private Label _inscriptionError;
@@ -24,7 +25,7 @@ public partial class ConnectionUI : Control
 	private Label _inscriptionButtonText;
 	
 	private float _screenDefalutWidth = 1152;
-	private float _titleDefaultSize = 40;
+	private float _titleDefaultSize = 45;
 	private float _buttonDefaultSize = 20;
 	private float _transparentButtonDefaultSize = 16;
 	private float _errorDefaultSize = 16;
@@ -37,6 +38,7 @@ public partial class ConnectionUI : Control
 	public static string erreur = "";
 	
 	//Language
+	private List<Dictionary<string, string>> _allLanguages;
 	private int _language;
 	private Dictionary<string, string> _languageDict;
 
@@ -55,6 +57,7 @@ public partial class ConnectionUI : Control
 		InscriptionButton = GetNode<Button>("Inscription");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
+		_languageChooseButton = GetNode<OptionButton>("LanguageChooseButton");
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -68,7 +71,14 @@ public partial class ConnectionUI : Control
 		//Language
 		_language = GameManager.SettingsManager.GetAllSettings()["language"];
 		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+		_allLanguages = GameManager.LanguageManager.GetAllLanguages();
 		Translation();
+		
+		foreach (var language in _allLanguages)
+		{
+			_languageChooseButton.AddItem(language["languageName"]);
+		}
+		_languageChooseButton.Selected = _language;
 	}
 	
 	private void Translation()
@@ -90,6 +100,7 @@ public partial class ConnectionUI : Control
 	
 	public void OnResize()
 	{
+		//Label
 		_menuName = GetNode<Label>("MenuName");
 		_connectionError = GetNode<Label>("ConnectionError");
 		_inscriptionError = GetNode<Label>("InscriptionError");
@@ -109,6 +120,13 @@ public partial class ConnectionUI : Control
 	
 	public override void _Process(double delta)
 	{
+		if (_languageChooseButton.Selected != _language)
+		{
+			_language = _languageChooseButton.Selected;
+			_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+			Translation();
+		}
+		
 		erreur = GameManager.ConnectionError;
 		
 		if (ConnectionButton.ButtonPressed)

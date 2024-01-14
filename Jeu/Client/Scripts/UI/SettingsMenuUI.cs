@@ -307,20 +307,25 @@ public partial class SettingsMenuUI : Control
         //Game
         if (_resetGameSettingsButton.ButtonPressed)
         {
+            GameManager.SettingsManager.ResetSettings();
+            Dictionary<string, int> Settings = GameManager.SettingsManager.GetAllSettings();
+            _languageChooseButton.Selected = Settings["language"];
+            _mouseSensibilityBar.Value = Settings["mouseSensibility"];
         }
         else if (_saveGameSettingsButton.ButtonPressed)
         {
-            if ((int)_mouseSensibilityBar.Value != GameManager.SettingsManager.GetAllSettings()["mouseSensibility"])
+            Dictionary<string, int> Settings = GameManager.SettingsManager.GetAllSettings();
+            if ((int)_mouseSensibilityBar.Value != Settings["mouseSensibility"])
             {
                 //Mouse Sensibility
-                GameManager.SettingsManager.GetAllSettings()["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
+                Settings["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
                 ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
                 
-                if (_languageChooseButton.Selected != GameManager.SettingsManager.GetAllSettings()["language"])
+                if (_languageChooseButton.Selected != Settings["language"])
                 {
                     //Language
-                    GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
-                    _language = GameManager.SettingsManager.GetAllSettings()["language"];
+                    Settings["language"] = _languageChooseButton.Selected;
+                    _language = Settings["language"];
                     _languageDict = GameManager.LanguageManager.GetLanguage(_language);
                     Translation();
                     
@@ -334,11 +339,11 @@ public partial class SettingsMenuUI : Control
                 //Save
                 GameManager.SettingsManager.SaveSettings();
             }
-            else if (_languageChooseButton.Selected != GameManager.SettingsManager.GetAllSettings()["language"])
+            else if (_languageChooseButton.Selected != Settings["language"])
             {
                 //Language
-                GameManager.SettingsManager.GetAllSettings()["language"] = _languageChooseButton.Selected;
-                _language = GameManager.SettingsManager.GetAllSettings()["language"];
+                Settings["language"] = _languageChooseButton.Selected;
+                _language = Settings["language"];
                 _languageDict = GameManager.LanguageManager.GetLanguage(_language);
                 Translation();
                 
