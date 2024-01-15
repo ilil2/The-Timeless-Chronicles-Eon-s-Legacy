@@ -44,8 +44,8 @@ public partial class ScientistScript : ClassScript
             
             double rotationY = _cameraH.Rotation.Y;
             
-            laser.GlobalPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
-            laser.Rotation = new Vector3(laser.Rotation.X, (float)rotationY, _cameraV.Rotation.X);
+            laser.GlobalPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY), Position.Y + 1, Position.Z + (float)Math.Cos(rotationY));
+            laser.Rotation = new Vector3(_cameraV.Rotation.X, (float)rotationY, _cameraV.Rotation.X);
             
             GetTree().Root.AddChild(laser);
         }

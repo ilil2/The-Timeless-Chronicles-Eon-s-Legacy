@@ -5,6 +5,7 @@ public partial class Laser : Node3D
 {
     private RayCast3D _laserRay;
     private MeshInstance3D _laserMesh;
+    private StaticBody3D _rangeMax;
     
     private Vector3 _startPoint;
     
@@ -14,6 +15,7 @@ public partial class Laser : Node3D
     {
         _laserRay = GetNode<RayCast3D>("LaserRay");
         _laserMesh = GetNode<MeshInstance3D>("LaserRay/LaserMesh");
+        _rangeMax = GetNode<StaticBody3D>("Range");
         
         _startPoint = GlobalPosition;
     }
@@ -27,11 +29,12 @@ public partial class Laser : Node3D
         
             _laserMesh.GlobalPosition = middle;
             _laserMesh.Scale = new Vector3(1f, _startPoint.DistanceTo(middle), 1f);
-            Visible = true;
+            
+            _rangeMax.Visible = false;
         }
         else
         {
-            Visible = false;
+            _rangeMax.Visible = true;
         }
         
         _laserTimer += 1;
