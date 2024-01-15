@@ -38,6 +38,14 @@ public class Settings
         File.WriteAllText("Scripts/Save/Settings.txt", save);
     }
     
+    public void SetSetting(string name, int value)
+    {
+        if (_dictSettings.ContainsKey(name))
+        {
+            _dictSettings[name] = value;
+        }
+    }
+    
     public Dictionary<string, int> GetAllSettings()
     {
         return _dictSettings;
