@@ -10,7 +10,7 @@ public class Serveur
     private int ID;
     private int joueur_ready;
 
-    private string[] info = new string[4];
+    protected static string[] info = new string[4];
     private string[] chat = {"","","",""};
     private string[][] oneshot = {new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}};
 
@@ -228,6 +228,8 @@ public class Serveur
                 {
                     
                 }
+                
+                Thread inter = new Thread(() => Interpolation.Inter(info[cc.id],cc.id,tw));
 
                 switch (cc.id)
                 {
