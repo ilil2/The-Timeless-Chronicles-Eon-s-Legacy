@@ -110,5 +110,13 @@ public partial class Listen2 : GameManager
 	    {
 		    StartMap = true;
 	    }
+	    
+	    else if (rep.Length > 2 && rep.Substring(0,2) == "on")
+	    {
+		    rep = rep.Substring(3);
+		    int id = Conversions.AtoI(rep.Split('|')[0]);
+		    
+		    InfoAutreJoueur[$"attack{id}"] = rep.Split('|')[1];
+	    }
     }
 }
