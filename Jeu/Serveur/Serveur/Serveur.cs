@@ -195,6 +195,39 @@ public class Serveur
                     }
                     */
                 }
+                
+                if (requette.Substring(0,2) == "on")
+                {
+                    string line = requette.Substring(3);
+                    //string[] lines = line.Split('/');
+                    string res = line;
+                    
+                    /*foreach (var donnee in lines)
+                    {
+                        if (donnee.Substring(0,2) == "co")
+                        {
+                            res += donnee;
+                            string don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                            don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                            don = donnee.Substring(3);
+                            res += don.Substring(0,don.IndexOf(";"));
+                        }
+
+                        res += "/";
+                    }*/
+
+                    oneshot[0][cc.id] = res;
+                    oneshot[1][cc.id] = res;
+                    oneshot[2][cc.id] = res;
+                    oneshot[3][cc.id] = res;
+                    oneshot[cc.id][cc.id] = "";
+
+                }
+                {
+                    
+                }
 
                 switch (cc.id)
                 {
@@ -228,25 +261,25 @@ public class Serveur
                 
                 if ((one = oneshot[cc.id][0]) != "")
                 {
-                    tw.WriteLine("on:" + cc.id + one);
+                    tw.WriteLine("on:" + 0 + "|" + one);
                     tw.Flush();
                     oneshot[cc.id][0] = "";
                 }
                 if ((one = oneshot[cc.id][1]) != "")
                 {
-                    tw.WriteLine("on:" + cc.id + one);
+                    tw.WriteLine("on:" + 1 + "|" + one);
                     tw.Flush();
                     oneshot[cc.id][1] = "";
                 }
                 if ((one = oneshot[cc.id][2]) != "")
                 {
-                    tw.WriteLine("on:" + cc.id + one);
+                    tw.WriteLine("on:" + 2 + "|" + one);
                     tw.Flush();
                     oneshot[cc.id][2] = "";
                 }
                 if ((one = oneshot[cc.id][3]) != "")
                 {
-                    tw.WriteLine("on:" + cc.id + one);
+                    tw.WriteLine("on:" + 3 + "|" + one);
                     tw.Flush();
                     oneshot[cc.id][3] = "";
                 }
