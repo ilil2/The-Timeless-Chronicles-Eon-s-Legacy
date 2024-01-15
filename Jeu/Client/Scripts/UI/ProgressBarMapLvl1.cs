@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ProgressBarMapLvl1 : Control
 {
@@ -10,9 +11,16 @@ public partial class ProgressBarMapLvl1 : Control
 	private float _screenDefalutWidth = 1152;
 	private float _textDefaultSize = 30;
 	
+	//Language
+	private int _language;
+	private Dictionary<string, string> _languageDict;
+	
 	public override void _Ready()
 	{
 		_progressBar = GetNode<ProgressBar>("ProgressBar");
+		
+		_language = GameManager.SettingsManager.GetAllSettings()["language"];
+		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
 	}
 	
 	public void OnResize()
@@ -27,15 +35,15 @@ public partial class ProgressBarMapLvl1 : Control
 		_progressBar.Value = Load/1.5f;
 		if (Load == 2500)
 		{
-			_label.Text = "En attente des autres joueurs";
+			_label.Text = _languageDict["gameLoadingMapWaitingText"];
 		}
 		else if (Load >= 150)
 		{
-			_label.Text = "Chargement de la map : 100%";
+			_label.Text = _languageDict["gameLoadingMapText"] + "100%";
 		}
 		else
 		{
-			_label.Text = "Chargement de la map : " + (int)_progressBar.Value + "%";
+			_label.Text = _languageDict["gameLoadingMapText"] + (int)_progressBar.Value + "%";
 		}
 	}
 }

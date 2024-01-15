@@ -53,6 +53,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "Ready"},
             {"selectClassMenuWaitingText", "Waiting for the other players..."},
             
+            //Map loading
+            {"gameLoadingMapText", "Loading the map : "},
+            {"gameLoadingMapWaitingText", "Waiting for the other players"},
+            
             //Pause Menu
             {"pauseMenuTitle", "Pause Menu"},
             {"pauseMenuResumeButton", "Resume"},
@@ -151,6 +155,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "417373617373696e"},
             {"selectClassMenuReadyButton", "5265616479"},
             {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
+            
+            //Map loading
+            {"gameLoadingMapText", "4c6f6164696e6720746865206d6170203a"},
+            {"gameLoadingMapWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273"},
             
             //Pause Menu
             {"pauseMenuTitle", "5061757365204d656e75"},
@@ -251,6 +259,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "Prêt"},
             {"selectClassMenuWaitingText", "En attente des autres joueurs..."},
             
+            //Map loading
+            {"gameLoadingMapText", "Chargement de la map : "},
+            {"gameLoadingMapWaitingText", "En attente des autres joueurs"},
+            
             //Pause Menu
             {"pauseMenuTitle", "Menu Pause"},
             {"pauseMenuResumeButton", "Reprendre"},
@@ -349,6 +361,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "Lec'helour"},
             {"selectClassMenuReadyButton", "Gwir"},
             {"selectClassMenuWaitingText", "Ouzhpennet gant ar c'hemmennadennoù all..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "Ouzhpennañ ar c'hartenn : "},
+            {"gameLoadingMapWaitingText", "Ouzhpennet gant ar c'hemmennadennoù all"},
             
             //Pause Menu
             {"pauseMenuTitle", "Meneger"},
@@ -449,6 +465,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "Bereit"},
             {"selectClassMenuWaitingText", "Warten auf die anderen Spieler..."},
             
+            //Map loading
+            {"gameLoadingMapText", "Laden der Karte : "},
+            {"gameLoadingMapWaitingText", "Warten auf die anderen Spieler"},
+            
             //Pause Menu
             {"pauseMenuTitle", "Pause Menü"},
             {"pauseMenuResumeButton", "Fortsetzen"},
@@ -547,6 +567,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "Asesino"},
             {"selectClassMenuReadyButton", "Listo"},
             {"selectClassMenuWaitingText", "Esperando a los otros jugadores..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "Cargando el mapa : "},
+            {"gameLoadingMapWaitingText", "Esperando a los otros jugadores"},
             
             //Pause Menu
             {"pauseMenuTitle", "Menú de pausa"},
@@ -647,6 +671,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "Preparita"},
             {"selectClassMenuWaitingText", "Atendante la aliajn ludantojn..."},
             
+            //Map loading
+            {"gameLoadingMapText", "Ŝarĝante la mapon : "},
+            {"gameLoadingMapWaitingText", "Atendante la aliajn ludantojn"},
+            
             //Pause Menu
             {"pauseMenuTitle", "Paŭzo Menuo"},
             {"pauseMenuResumeButton", "Daŭrigi"},
@@ -745,6 +773,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "Occisor"},
             {"selectClassMenuReadyButton", "Paratus"},
             {"selectClassMenuWaitingText", "Expectans alii ludum..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "Ludum onerans : "},
+            {"gameLoadingMapWaitingText", "Expectans alii ludum"},
             
             //Pause Menu
             {"pauseMenuTitle", "Pause Menü"},
@@ -845,6 +877,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "Kuyaqhubeka"},
             {"selectClassMenuWaitingText", "Ukungathintana kwezinye izinhlangano..."},
             
+            //Map loading
+            {"gameLoadingMapText", "Ukungena umdlalo : "},
+            {"gameLoadingMapWaitingText", "Ukungathintana kwezinye izinhlangano"},
+            
             //Pause Menu
             {"pauseMenuTitle", "I-Menyu yokuqeda"},
             {"pauseMenuResumeButton", "Qhubeka"},
@@ -943,6 +979,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "القاتل"},
             {"selectClassMenuReadyButton", "جاهز"},
             {"selectClassMenuWaitingText", "في انتظار اللاعبين الآخرين..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "تحميل الخريطة : "},
+            {"gameLoadingMapWaitingText", "في انتظار اللاعبين الآخرين"},
             
             //Pause Menu
             {"pauseMenuTitle", "قائمة الإيقاف المؤقت"},
@@ -1043,6 +1083,10 @@ public class LanguageControl
             {"selectClassMenuReadyButton", "准备好了"},
             {"selectClassMenuWaitingText", "等待其他玩家..."},
             
+            //Map loading
+            {"gameLoadingMapText", "加载地图 : "},
+            {"gameLoadingMapWaitingText", "等待其他玩家"},
+            
             //Pause Menu
             {"pauseMenuTitle", "暂停菜单"},
             {"pauseMenuResumeButton", "恢复"},
@@ -1141,6 +1185,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "Δολοφόνος"},
             {"selectClassMenuReadyButton", "Δάνειο"},
             {"selectClassMenuWaitingText", "Περιμένοντας τους άλλους παίκτες..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "Φόρτωση χάρτη : "},
+            {"gameLoadingMapWaitingText", "Περιμένοντας τους άλλους παίκτες"},
             
             //Pause Menu
             {"pauseMenuTitle", "Μενού παύσης"},
@@ -1241,6 +1289,10 @@ public class LanguageControl
             {"selectClassMenuAssassinClass", "Убийца"},
             {"selectClassMenuReadyButton", "Готов"},
             {"selectClassMenuWaitingText", "Ожидание других игроков..."},
+            
+            //Map loading
+            {"gameLoadingMapText", "Загрузка карты : "},
+            {"gameLoadingMapWaitingText", "Ожидание других игроков"},
             
             //Pause Menu
             {"pauseMenuTitle", "Меню паузы"},
