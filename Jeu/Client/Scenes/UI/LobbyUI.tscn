@@ -7,7 +7,6 @@ font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_8v2b2"]
 font_size = 25
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [node name="LobbyUI" type="Control"]
 layout_mode = 3

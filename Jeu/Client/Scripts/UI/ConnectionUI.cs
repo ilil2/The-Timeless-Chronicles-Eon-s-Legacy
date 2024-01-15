@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class ConnectionUI : Control
 {
@@ -13,6 +14,7 @@ public partial class ConnectionUI : Control
 	public static Button InscriptionButton;
 	private Button _noCompteButton;
 	private Button _dejaCompteButton;
+	private OptionButton _languageChooseButton;
 	
 	private Label _connectionError;
 	private Label _inscriptionError;
@@ -23,7 +25,7 @@ public partial class ConnectionUI : Control
 	private Label _inscriptionButtonText;
 	
 	private float _screenDefalutWidth = 1152;
-	private float _titleDefaultSize = 40;
+	private float _titleDefaultSize = 45;
 	private float _buttonDefaultSize = 20;
 	private float _transparentButtonDefaultSize = 16;
 	private float _errorDefaultSize = 16;
@@ -34,6 +36,11 @@ public partial class ConnectionUI : Control
 	
 	public static bool in_connection = true;
 	public static string erreur = "";
+	
+	//Language
+	private List<Dictionary<string, string>> _allLanguages;
+	private int _language;
+	private Dictionary<string, string> _languageDict;
 
 	public override void _Ready()
 	{
@@ -50,6 +57,7 @@ public partial class ConnectionUI : Control
 		InscriptionButton = GetNode<Button>("Inscription");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
+		_languageChooseButton = GetNode<OptionButton>("LanguageChooseButton");
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -59,10 +67,40 @@ public partial class ConnectionUI : Control
 		_pseudoInscriptionNode.Visible = false;
 		_passwordInscriptionNode.Visible = false;
 		_passwordConfirmInscriptionNode.Visible = false;
+		
+		//Language
+		_language = GameManager.SettingsManager.GetAllSettings()["language"];
+		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+		_allLanguages = GameManager.LanguageManager.GetAllLanguages();
+		Translation();
+		
+		foreach (var language in _allLanguages)
+		{
+			_languageChooseButton.AddItem(language["languageName"]);
+		}
+		_languageChooseButton.Selected = _language;
+	}
+	
+	private void Translation()
+	{
+		//Connection
+		_menuName.Text = _languageDict["connectionMenuTitle"];
+		_pseudoConnectionNode.PlaceholderText = _languageDict["connectionMenuPseudoText"];
+		_passwordConnectionNode.PlaceholderText = _languageDict["connectionMenuPasswordText"];
+		_connectionButtonText.Text = _languageDict["connectionMenuConnectionButton"];
+		_noCompteButtonText.Text = _languageDict["connectionMenuNoAccountButton"];
+		
+		//Inscription
+		_pseudoInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPseudoText"];
+		_passwordInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPasswordText"];
+		_passwordConfirmInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPasswordConfirmText"];
+		_inscriptionButtonText.Text = _languageDict["inscriptionMenuInscriptionButton"];
+		_dejaCompteButtonText.Text = _languageDict["inscriptionMenuAlreadyAccountButton"];
 	}
 	
 	public void OnResize()
 	{
+		//Label
 		_menuName = GetNode<Label>("MenuName");
 		_connectionError = GetNode<Label>("ConnectionError");
 		_inscriptionError = GetNode<Label>("InscriptionError");
@@ -82,6 +120,14 @@ public partial class ConnectionUI : Control
 	
 	public override void _Process(double delta)
 	{
+		if (_languageChooseButton.Selected != _language)
+		{
+			_language = _languageChooseButton.Selected;
+			_languageDict = GameManager.LanguageManager.GetLanguage(_language);
+			Translation();
+			GameManager.SettingsManager.SetSetting("language", _language);
+		}
+		
 		erreur = GameManager.ConnectionError;
 		
 		if (ConnectionButton.ButtonPressed)
@@ -118,7 +164,7 @@ public partial class ConnectionUI : Control
 	
 	public void NoCompte()
 	{
-		_menuName.Text = "Inscription";
+		_menuName.Text = _languageDict["inscriptionMenuTitle"];
 		_connectionError.Visible = false;
 		_inscriptionError.Visible = true;
 		
@@ -136,7 +182,7 @@ public partial class ConnectionUI : Control
 	
 	public void DejaCompte()
 	{
-		_menuName.Text = "Connection";
+		_menuName.Text = _languageDict["connectionMenuTitle"];
 		_inscriptionError.Visible = false;
 		_connectionError.Visible = true;
 		

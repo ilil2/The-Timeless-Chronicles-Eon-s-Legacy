@@ -133,9 +133,9 @@ public partial class GameManager : Node3D
 	public override void _Ready()
 	{
 		IP = GetIp();
-		InputManger = new InputControl();
 		LanguageManager = new LanguageControl();
 		SettingsManager = new Settings();
+		InputManger = new InputControl();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal

@@ -33,7 +33,12 @@ public class LanguageControl
             //Create Game Menu
             {"createGameMenuTitle", "Create Game"},
             {"createGameMenuBackButton", "<= Back"},
-            {"createGameMenuStartGame", "Password"},
+            {"createGameMenuStartGame", "Start Game"},
+            {"createGameMenuID", "Game ID: "},
+            {"createGameMenuPlayer1", "Player 1: "},
+            {"createGameMenuPlayer2", "Player 2: "},
+            {"createGameMenuPlayer3", "Player 3: "},
+            {"createGameMenuPlayer4", "Player 4: "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Join Game"},
@@ -98,8 +103,6 @@ public class LanguageControl
             {"settingsMenuControlsReload", "Reload"},
             {"settingsMenuControlsChat", "Chat"},
             {"settingsMenuControlsPause", "Pause"},
-            
-            
         },
         
         new Dictionary<string, string>
@@ -129,7 +132,12 @@ public class LanguageControl
             //Create Game Menu
             {"createGameMenuTitle", "4372656174652047616d65"},
             {"createGameMenuBackButton", "<3d204261636b"},
-            {"createGameMenuStartGame", "50617373776f7264"},
+            {"createGameMenuStartGame", "53746172742047616d65"},
+            {"createGameMenuID", "4944206f66207468652047616d65"},
+            {"createGameMenuPlayer1", "506c6179657220313a"},
+            {"createGameMenuPlayer2", "506c6179657220323a"},
+            {"createGameMenuPlayer3", "506c6179657220333a"},
+            {"createGameMenuPlayer4", "506c6179657220343a"},
             
             //Join Game Menu
             {"joinGameMenuTitle", "4a6f696e2047616d65"},
@@ -224,6 +232,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Créer une partie"},
             {"createGameMenuBackButton", "<= Retour"},
             {"createGameMenuStartGame", "Démarrer la partie"},
+            {"createGameMenuID", "ID de la partie : "},
+            {"createGameMenuPlayer1", "Joueur 1 : "},
+            {"createGameMenuPlayer2", "Joueur 2 : "},
+            {"createGameMenuPlayer3", "Joueur 3 : "},
+            {"createGameMenuPlayer4", "Joueur 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Rejoindre une partie"},
@@ -292,101 +305,7 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
-            {"languageName", "Français (Hexadécimal)"},
-            
-            //Connection Menu
-            {"connectionMenuTitle", "436f6e6e6578696f6e"},
-            {"connectionMenuPseudoText", "50736575646f"},
-            {"connectionMenuPasswordText", "4d6f7420646520706173736520"},
-            {"connectionMenuConnectionButton", "436f6e6e6578696f6e"},
-            {"connectionMenuNoAccountButton", "50617320646520636f6d707465203f"},
-            
-            //Inscription Menu
-            {"inscriptionMenuTitle", "496e736372697074696f6e"},
-            {"inscriptionMenuPseudoText", "50736575646f"},
-            {"inscriptionMenuPasswordText", "4d6f7420646520706173736520"},
-            {"inscriptionMenuPasswordConfirmText", "436f6e6669726d6572206c6520706173736520"},
-            {"inscriptionMenuInscriptionButton", "496e736372697074696f6e"},
-            {"inscriptionMenuAlreadyAccountButton", "446576657a20616e20636f6d707465203f"},
-            
-            //Lobby Menu
-            {"lobbyMenuTitle", "4c6f626279"},
-            {"lobbyMenuCreateGame", "43726565652047616d65"},
-            {"lobbyMenuJoinGame", "52656a6f696e6472652047616d65"},
-            
-            //Create Game Menu
-            {"createGameMenuTitle", "43726565652047616d65"},
-            {"createGameMenuBackButton", "<3d204261636b"},
-            {"createGameMenuStartGame", "506173736572"},
-            
-            //Join Game Menu
-            {"joinGameMenuTitle", "52656a6f696e6472652047616d65"},
-            {"joinGameMenuBackButton", "<3d204261636b"},
-            {"joinGameMenuGameID", "4944206465206c612047616d65"},
-            
-            //Select Class Menu
-            {"selectClassMenuArcherClass", "417263686572"},
-            {"selectClassMenuKnightClass", "43686576616c696572"},
-            {"selectClassMenuScientistClass", "536369656e7469737465"},
-            {"selectClassMenuAssassinClass", "417373617373696e"},
-            {"selectClassMenuReadyButton", "507265747"},
-            {"selectClassMenuWaitingText", "457320617474656e7465206465206c657320617574726573206a6f7565757273202e2e2e"},
-            
-            //Pause Menu
-            {"pauseMenuTitle", "4d656e75205061757365"},
-            {"pauseMenuResumeButton", "526573756d6572"},
-            {"pauseMenuSettingsButton", "506172616d6574726573"},
-            {"pauseMenuLeaveButton", "5169756974746572"},
-            {"pauseMenuConfirmLeaveTitle", "43eates-vous s3r de vouloir quitter le jeu ?"},
-            {"pauseMenuConfirmLeaveButton", "5169756974746572"},
-            {"pauseMenuCancelLeaveButton", "416e6e756c6572"},
-            
-            //Settings Menu
-            {"settingsMenuTitle", "506172616d6574726573"},
-            {"settingsMenuBackButton", "<3d204261636b"},
-            {"settingsMenuResetButton", "5265736574"},
-            {"settingsMenuSaveButton", "53617665"},
-            
-            //Settings Menu - Game
-            {"settingsMenuGameButton", "4a6575"},
-            {"settingsMenuGameLanguage", "4c616e67756167653a"},
-            {"settingsMenuGameMouseSensibility", "53656e736962696c697465206465206c6120736f75726973"},
-            {"settingsMenuGameFullScreen", "46756c6c2053637265656e3a"},
-            {"settingsMenuGameEnableChat", "4163746976657220636861743a"},
-            {"settingsMenuGameChatSize", "5461696c6c6520647520636861743a"},
-            {"settingsMenuGameChatSizeSmall", "5065746974"},
-            {"settingsMenuGameChatSizeMedium", "4d6f79656e"},
-            {"settingsMenuGameChatSizeLarge", "47616e6420656e636f7265"},
-            
-            //Settings Menu - Audio
-            {"settingsMenuAudioButton", "417564696f"},
-            
-            //Settings Menu - Video
-            {"settingsMenuVideoButton", "566964656f"},
-            
-            //Settings Menu - Controls
-            {"settingsMenuControlsButton", "436f6e74726f6c6573"},
-            {"settingsMenuControlsMoveForward", "416176616e636572"},
-            {"settingsMenuControlsMoveBackward", "526563756c6572"},
-            {"settingsMenuControlsMoveLeft", "476163686572"},
-            {"settingsMenuControlsMoveRight", "44656d696e"},
-            {"settingsMenuControlsSprint", "53637265656e"},
-            {"settingsMenuControlsDash", "4461736820"},
-            {"settingsMenuControlsCapacity1", "43617061636974652031"},
-            {"settingsMenuControlsCapacity2", "43617061636974652032"},
-            {"settingsMenuControlsCapacity3", "43617061636974652033"},
-            {"settingsMenuControlsItem1", "4f626a65742031"},
-            {"settingsMenuControlsItem2", "4f626a65742032"},
-            {"settingsMenuControlsItem3", "4f626a65742033"},
-            {"settingsMenuControlsInventory", "496e76656e746f697265"},
-            {"settingsMenuControlsReload", "52656c6f6164"},
-            {"settingsMenuControlsChat", "5463686174"},
-            {"settingsMenuControlsPause", "5061757365"},
-        },
-        
-        new Dictionary<string, string>
-        {
-            {"languageName", "Breizhek"},
+            {"languageName", "Breizhek (Beta)"},
             
             //Connection Menu
             {"connectionMenuTitle", "Kenstabl"},
@@ -412,6 +331,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Krouiñ ur gemennadenn"},
             {"createGameMenuBackButton", "<= Distreiñ"},
             {"createGameMenuStartGame", "Kregiñ ar gemennadenn"},
+            {"createGameMenuID", "ID ar gemennadenn : "},
+            {"createGameMenuPlayer1", "Mestr 1 : "},
+            {"createGameMenuPlayer2", "Mestr 2 : "},
+            {"createGameMenuPlayer3", "Mestr 3 : "},
+            {"createGameMenuPlayer4", "Mestr 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ouzhpennañ ur gemennadenn"},
@@ -506,6 +430,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Spiel erstellen"},
             {"createGameMenuBackButton", "<= Zurück"},
             {"createGameMenuStartGame", "Spiel starten"},
+            {"createGameMenuID", "Spiel-ID : "},
+            {"createGameMenuPlayer1", "Spieler 1 : "},
+            {"createGameMenuPlayer2", "Spieler 2 : "},
+            {"createGameMenuPlayer3", "Spieler 3 : "},
+            {"createGameMenuPlayer4", "Spieler 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Spiel beitreten"},
@@ -600,6 +529,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Crear juego"},
             {"createGameMenuBackButton", "<= Regreso"},
             {"createGameMenuStartGame", "Comenzar el juego"},
+            {"createGameMenuID", "ID del juego : "},
+            {"createGameMenuPlayer1", "Jugador 1 : "},
+            {"createGameMenuPlayer2", "Jugador 2 : "},
+            {"createGameMenuPlayer3", "Jugador 3 : "},
+            {"createGameMenuPlayer4", "Jugador 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Unirse al juego"},
@@ -694,6 +628,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Krei ludon"},
             {"createGameMenuBackButton", "<= Reen"},
             {"createGameMenuStartGame", "Komenci la ludon"},
+            {"createGameMenuID", "Ludo-ID : "},
+            {"createGameMenuPlayer1", "Ludanto 1 : "},
+            {"createGameMenuPlayer2", "Ludanto 2 : "},
+            {"createGameMenuPlayer3", "Ludanto 3 : "},
+            {"createGameMenuPlayer4", "Ludanto 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Aliĝi al ludo"},
@@ -788,6 +727,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Ludum creare"},
             {"createGameMenuBackButton", "<= Retro"},
             {"createGameMenuStartGame", "Ludum incipere"},
+            {"createGameMenuID", "Ludum ID : "},
+            {"createGameMenuPlayer1", "Ludens 1 : "},
+            {"createGameMenuPlayer2", "Ludens 2 : "},
+            {"createGameMenuPlayer3", "Ludens 3 : "},
+            {"createGameMenuPlayer4", "Ludens 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ludum iungere"},
@@ -882,6 +826,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Yakha umdlalo"},
             {"createGameMenuBackButton", "<= Emuva"},
             {"createGameMenuStartGame", "Qala umdlalo"},
+            {"createGameMenuID", "ID umdlalo : "},
+            {"createGameMenuPlayer1", "Umshayeli 1 : "},
+            {"createGameMenuPlayer2", "Umshayeli 2 : "},
+            {"createGameMenuPlayer3", "Umshayeli 3 : "},
+            {"createGameMenuPlayer4", "Umshayeli 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ukungena umdlalo"},
@@ -976,6 +925,11 @@ public class LanguageControl
             {"createGameMenuTitle", "إنشاء لعبة"},
             {"createGameMenuBackButton", "<= العودة"},
             {"createGameMenuStartGame", "بدء اللعبة"},
+            {"createGameMenuID", "معرف اللعبة : "},
+            {"createGameMenuPlayer1", "اللاعب 1 : "},
+            {"createGameMenuPlayer2", "اللاعب 2 : "},
+            {"createGameMenuPlayer3", "اللاعب 3 : "},
+            {"createGameMenuPlayer4", "اللاعب 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "الانضمام إلى اللعبة"},
@@ -1070,6 +1024,11 @@ public class LanguageControl
             {"createGameMenuTitle", "创建游戏"},
             {"createGameMenuBackButton", "<= 返回"},
             {"createGameMenuStartGame", "开始游戏"},
+            {"createGameMenuID", "游戏ID : "},
+            {"createGameMenuPlayer1", "玩家 1 : "},
+            {"createGameMenuPlayer2", "玩家 2 : "},
+            {"createGameMenuPlayer3", "玩家 3 : "},
+            {"createGameMenuPlayer4", "玩家 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "加入游戏"},
@@ -1164,6 +1123,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Δημιουργία παιχνιδιού"},
             {"createGameMenuBackButton", "<= Πίσω"},
             {"createGameMenuStartGame", "Ξεκινήστε το παιχνίδι"},
+            {"createGameMenuID", "Αναγνωριστικό παιχνιδιού : "},
+            {"createGameMenuPlayer1", "Παίκτης 1 : "},
+            {"createGameMenuPlayer2", "Παίκτης 2 : "},
+            {"createGameMenuPlayer3", "Παίκτης 3 : "},
+            {"createGameMenuPlayer4", "Παίκτης 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Ενταχθείτε στο παιχνίδι"},
@@ -1259,6 +1223,11 @@ public class LanguageControl
             {"createGameMenuTitle", "Создать игру"},
             {"createGameMenuBackButton", "<= Назад"},
             {"createGameMenuStartGame", "Начать игру"},
+            {"createGameMenuID", "Идентификатор игры : "},
+            {"createGameMenuPlayer1", "Игрок 1 : "},
+            {"createGameMenuPlayer2", "Игрок 2 : "},
+            {"createGameMenuPlayer3", "Игрок 3 : "},
+            {"createGameMenuPlayer4", "Игрок 4 : "},
             
             //Join Game Menu
             {"joinGameMenuTitle", "Присоединиться к игре"},
@@ -1329,5 +1298,10 @@ public class LanguageControl
     public Dictionary<string, string> GetLanguage(int index)
     {
         return _listLanguage[index];
+    }
+    
+    public List<Dictionary<string, string>> GetAllLanguages()
+    {
+        return _listLanguage;
     }
 }

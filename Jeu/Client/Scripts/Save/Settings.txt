@@ -1,0 +1,3 @@
+language;4
+mouseSensibility;10
+chatSize;1

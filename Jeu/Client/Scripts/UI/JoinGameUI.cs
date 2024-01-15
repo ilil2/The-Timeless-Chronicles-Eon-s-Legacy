@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class JoinGameUI : Control
 {
@@ -28,6 +29,17 @@ public partial class JoinGameUI : Control
 		_backButton = GetNode<Button>("BackButton");
 		_joinGameButton = GetNode<Button>("JoinButton");
 		_gameID = GetNode<LineEdit>("JoinGameIDLine");
+		Translation();
+	}
+	
+	private void Translation()
+	{
+		int language = GameManager.SettingsManager.GetAllSettings()["language"];
+		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+		
+		_title.Text = languageDict["joinGameMenuTitle"];
+		_backButtonText.Text = languageDict["joinGameMenuBackButton"];
+		_gameID.PlaceholderText = languageDict["joinGameMenuGameID"];
 	}
 	
 	public void OnResize()

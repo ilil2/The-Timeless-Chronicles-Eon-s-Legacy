@@ -4,7 +4,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_1kjyb"]
 font_size = 25
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_8pn74"]
 pressed = true
@@ -15,7 +14,6 @@ events = [SubResource("InputEventKey_8pn74")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5a531"]
 font_size = 20
-font_color = Color(0.611765, 0.611765, 0.611765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8q2ae"]
 font_size = 40

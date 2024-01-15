@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class LobbyUI : Control
 {
@@ -19,8 +20,20 @@ public partial class LobbyUI : Control
 	{
 		_joinGameButton = GetNode<Button>("JoinGameButton");
 		_createGameButton = GetNode<Button>("CreateGameButton");
+		
+		Translation();
 	}
-	
+
+	private void Translation()
+	{
+		int language = GameManager.SettingsManager.GetAllSettings()["language"];
+		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+		
+		_title.Text = languageDict["lobbyMenuTitle"];
+		_createButtonText.Text = languageDict["lobbyMenuCreateGame"];
+		_joinButtonText.Text = languageDict["lobbyMenuJoinGame"];
+	}
+
 	public void OnResize()
 	{
 		_title = GetNode<Label>("LobbyMenuText");

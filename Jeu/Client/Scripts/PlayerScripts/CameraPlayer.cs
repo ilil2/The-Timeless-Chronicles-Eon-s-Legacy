@@ -46,4 +46,10 @@ public partial class CameraPlayer : Node3D
 			v.Rotation = new Vector3((float)Mathf.Lerp(v.Rotation.X, camrot_v, delta * v_acceleration), v.Rotation.Y, v.Rotation.Z);
 		}
 	}
+	
+	public void ChangeSensibility(int sensibility)
+	{
+		h_sensitivity = sensibility;
+		v_sensitivity = sensibility;
+	}
 }
