@@ -20,7 +20,7 @@ public partial class Laser : Node3D
         _startPoint = GlobalPosition;
     }
     
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (_laserRay.IsColliding())
         {

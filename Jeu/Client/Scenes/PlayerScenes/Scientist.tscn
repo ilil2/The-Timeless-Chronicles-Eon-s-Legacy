@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cydw18mhrukxk"]
+[gd_scene load_steps=10 format=3 uid="uid://cydw18mhrukxk"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/ScientistScript.cs" id="1_p56ch"]
 [ext_resource type="PackedScene" uid="uid://bsepe6lwfpypt" path="res://Scenes/PlayerScenes/CameraPlayer.tscn" id="2_gvybc"]
@@ -12,6 +12,60 @@ albedo_color = Color(0.192157, 0.541176, 0.937255, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
 material = SubResource("StandardMaterial3D_6qy7b")
+
+[sub_resource type="Animation" id="Animation_lkhga"]
+resource_name = "LaserShootView"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPlayer/h/v:spring_length")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 0.574),
+"update": 0,
+"values": [-4.0, -0.1]
+}
+
+[sub_resource type="Animation" id="Animation_ynlv6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPlayer/h/v:spring_length")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-4.0]
+}
+
+[sub_resource type="Animation" id="Animation_lssta"]
+resource_name = "LaserShootViewReset"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CameraPlayer/h/v:spring_length")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [-0.1, -4.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5m5b0"]
+_data = {
+"LaserShootView": SubResource("Animation_lkhga"),
+"LaserShootViewReset": SubResource("Animation_lssta"),
+"RESET": SubResource("Animation_ynlv6")
+}
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_p56ch")
@@ -31,3 +85,6 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5m5b0")
+}
