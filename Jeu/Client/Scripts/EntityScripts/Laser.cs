@@ -8,6 +8,8 @@ public partial class Laser : Node3D
     private StaticBody3D _rangeMax;
     
     private Vector3 _startPoint;
+
+    private float _laserSize = 0.8f;
     
     private int _laserTimer;
     
@@ -28,7 +30,7 @@ public partial class Laser : Node3D
             Vector3 middle = new Vector3((_startPoint.X + stopPoint.X) / 2, (_startPoint.Y + stopPoint.Y) / 2, (_startPoint.Z + stopPoint.Z) / 2);
         
             _laserMesh.GlobalPosition = middle;
-            _laserMesh.Scale = new Vector3(1f, _startPoint.DistanceTo(middle), 1f);
+            _laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
             
             _rangeMax.Visible = false;
         }

@@ -69,6 +69,7 @@ public partial class ScientistScript : ClassScript
         {
             _shootTimer = 0;
             _isShooting = false;
+            GameManager.LockCamera = false;
         }
         
         if (_isShooting)
@@ -89,7 +90,7 @@ public partial class ScientistScript : ClassScript
             Control crossHair = crossHairScene.Instantiate<Control>();
             AddChild(crossHair);
         }
-        else if (IsAiming /*&& !_isShooting*/)
+        else if (IsAiming && !_isShooting)
         {
             IsAiming = false;
             _animationPlayer.Play("LaserShootViewReset");
@@ -103,13 +104,14 @@ public partial class ScientistScript : ClassScript
             Node3D laser = laserScene.Instantiate<Node3D>();
             
             double rotationY = _cameraH.Rotation.Y;
-            
-            laser.GlobalPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY), Position.Y + 1, Position.Z + (float)Math.Cos(rotationY));
+            Vector3 laserPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY), Position.Y + 1.2f, Position.Z + (float)Math.Cos(rotationY));
+            laser.GlobalPosition = new Vector3((laserPosition.X + GlobalPosition.X) / 2, laserPosition.Y, (laserPosition.Z + GlobalPosition.Z) / 2);
             laser.Rotation = new Vector3(_cameraV.Rotation.X + 0.15f, (float)rotationY, _cameraV.Rotation.X + 0.15f);
             
             GetTree().Root.AddChild(laser);
             
             _shootCooldown = 0;
+            GameManager.LockCamera = true;
         }
     }
 }
