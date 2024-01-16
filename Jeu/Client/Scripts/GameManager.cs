@@ -23,8 +23,6 @@ public partial class GameManager : Node3D
 	protected static NetworkStream ns;
 	protected static TextReader tr;		//lecture requette serveur principal
 	protected static TextWriter tw;		//ecriture requette serveur principal
-	protected static TextReader tr2;		//lecture requette serveur secondaire
-	protected static TextWriter tw2;		//ecriture requette serveur secondaire
 	
 	protected static int port_serv_jeu;	//port serveur secondaire
 	protected static bool conn2 = true;
@@ -56,7 +54,6 @@ public partial class GameManager : Node3D
 	protected static Socket soc2;
 	protected static IPEndPoint iep2;
 	
-	protected static NetworkStream ns2;
 	protected static Thread th2;
 	
 	public static Dictionary<string, string> InfoJoueur = new Dictionary<string, string>();
@@ -91,45 +88,6 @@ public partial class GameManager : Node3D
 		sr.Close();
 		return res;
 	}
-
-	public void Send(int serveur,string s)
-	{
-
-		if (serveur == 0)
-		{
-			tw.WriteLine(s);
-			tw.Flush();
-		}
-		else if (serveur == 1)
-		{
-			tw2.WriteLine(s);
-			tw2.Flush();
-		}
-		else
-		{
-			throw new ArgumentException("Erreur de choix du serveur d'envoi");
-		}
-	}
-
-	public string Receive(int serveur)
-	{
-		if (serveur == 0)
-		{
-			return tr.ReadLine();
-		}
-
-		if (serveur == 1)
-		{
-			return tr2.ReadLine();
-		}
-
-		throw new ArgumentException("Erreur de choix du serveur de reception");
-	}
-
-	protected void Add(Node o)
-	{
-		AddChild(o);
-	}
 	
 	public override void _Ready()
 	{
@@ -138,7 +96,7 @@ public partial class GameManager : Node3D
 		SettingsManager = new Settings();
 		InputManger = new InputControl();
 		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		

@@ -1,10 +1,11 @@
 using Lib;
+using Serveur;
 
 public partial class Listen2 : GameManager
 {
     public static void Listen()
     {
-        string rep = tr2.ReadLine();
+        string rep = UDP.Receive(soc2);
 	    if (rep.Length > 5 && rep.Substring(0,5) == "ready")
 	    {
 		    rep = rep.Substring(6);

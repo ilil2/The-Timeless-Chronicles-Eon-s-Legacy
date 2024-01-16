@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using Serveur;
 
 public partial class State4 : GameManager
 {
@@ -14,14 +15,12 @@ public partial class State4 : GameManager
         {
             InfoJoueur["class"] = ClassSelectUI.ClassChose;
             ClassSelectUI.ClassChose = "";
-            tw2.WriteLine(InfoJoueur["class"]);
-            tw2.Flush();
+            UDP.Send(soc2,InfoJoueur["class"],iep2);
         }
         else if (((MapLvl1Script)Map).MapIsReady() && !StartMap)
         {
             Map.Visible = false;
-            tw2.WriteLine("load");
-            tw2.Flush();
+            UDP.Send(soc2,"load",iep2);
             MapOnLoad = false;
             ((ProgressBarMapLvl1)ProgressBar).Load = 2500;
         }
