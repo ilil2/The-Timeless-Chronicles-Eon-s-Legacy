@@ -10,8 +10,6 @@ public partial class Laser : Node3D
     private Vector3 _startPoint;
 
     private float _laserSize = 0.8f;
-    
-    private int _laserTimer;
 
     private int _laserId = -1;
     
@@ -40,9 +38,6 @@ public partial class Laser : Node3D
         {
             _rangeMax.Visible = true;
         }
-        
-        _laserTimer += 1;
-
 
         if (_laserId != -1)
         {
