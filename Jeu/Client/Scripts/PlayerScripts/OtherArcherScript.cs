@@ -20,7 +20,7 @@ public partial class OtherArcherScript : OtherClassScript
             string[] arrowInfo = GameManager.InfoAutreJoueur[$"attack{Id}"].Split(";");
             
             arrow.Position = new Vector3(arrowInfo[0].ToFloat(), arrowInfo[1].ToFloat(), arrowInfo[2].ToFloat());
-            arrow.RotationDegrees = new Vector3(arrowInfo[3].ToFloat(), arrowInfo[4].ToFloat(), arrowInfo[5].ToFloat());
+            arrow.Rotation = new Vector3(arrowInfo[3].ToFloat(), arrowInfo[4].ToFloat(), arrowInfo[5].ToFloat());
             arrow.LinearVelocity = new Vector3(arrowInfo[6].ToFloat(), arrowInfo[7].ToFloat(), arrowInfo[8].ToFloat());
             GetTree().Root.AddChild(arrow);
             

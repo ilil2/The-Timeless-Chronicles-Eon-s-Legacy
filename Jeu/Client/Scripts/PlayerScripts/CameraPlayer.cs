@@ -24,7 +24,7 @@ public partial class CameraPlayer : Node3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (_camera.Current && !GameManager._pausemode)
+		if (_camera.Current && !GameManager._pausemode && !GameManager.LockCamera)
 		{
 			if (@event is InputEventMouseMotion eventMouseMotion)
 			{
@@ -36,7 +36,7 @@ public partial class CameraPlayer : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_camera.Current && !GameManager._pausemode)
+		if (_camera.Current && !GameManager._pausemode && !GameManager.LockCamera)
 		{
 			camrot_v = Mathf.Clamp(camrot_v, Mathf.DegToRad(cam_v_min), Mathf.DegToRad(cam_v_max));
 			Node3D h = GetNode<Node3D>("h");

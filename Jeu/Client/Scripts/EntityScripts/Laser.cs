@@ -5,8 +5,11 @@ public partial class Laser : Node3D
 {
     private RayCast3D _laserRay;
     private MeshInstance3D _laserMesh;
+    private StaticBody3D _rangeMax;
     
     private Vector3 _startPoint;
+
+    private float _laserSize = 0.8f;
     
     private int _laserTimer;
     
@@ -14,11 +17,12 @@ public partial class Laser : Node3D
     {
         _laserRay = GetNode<RayCast3D>("LaserRay");
         _laserMesh = GetNode<MeshInstance3D>("LaserRay/LaserMesh");
+        _rangeMax = GetNode<StaticBody3D>("Range");
         
         _startPoint = GlobalPosition;
     }
     
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (_laserRay.IsColliding())
         {
@@ -26,12 +30,13 @@ public partial class Laser : Node3D
             Vector3 middle = new Vector3((_startPoint.X + stopPoint.X) / 2, (_startPoint.Y + stopPoint.Y) / 2, (_startPoint.Z + stopPoint.Z) / 2);
         
             _laserMesh.GlobalPosition = middle;
-            _laserMesh.Scale = new Vector3(1f, _startPoint.DistanceTo(middle), 1f);
-            Visible = true;
+            _laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
+            
+            _rangeMax.Visible = false;
         }
         else
         {
-            Visible = false;
+            _rangeMax.Visible = true;
         }
         
         _laserTimer += 1;

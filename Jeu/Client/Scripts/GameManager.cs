@@ -76,6 +76,7 @@ public partial class GameManager : Node3D
 	protected static bool MapOnLoad = false;
 	public static bool StartMap = false;
 	
+	public static bool LockCamera = false;
 	public static bool _pausemode = false;
 	protected static bool thread;
 

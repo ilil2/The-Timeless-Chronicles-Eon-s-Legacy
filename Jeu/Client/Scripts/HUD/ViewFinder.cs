@@ -17,7 +17,7 @@ public partial class ViewFinder : Control
 
     public override void _Process(double delta)
     {
-        if (!ArcherScript.IsShooting)
+        if (!ArcherScript.IsShooting && !ScientistScript.IsAiming)
         {
             QueueFree();
         }

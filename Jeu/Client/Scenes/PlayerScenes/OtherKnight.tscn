@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfmssflkha13f"]
+[gd_scene load_steps=10 format=3 uid="uid://bfmssflkha13f"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/OtherKnightScript.cs" id="1_ffs4h"]
+[ext_resource type="PackedScene" uid="uid://comlo11fkxutm" path="res://Scenes/PlayerScenes/Sword.tscn" id="2_6od87"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hlrpq"]
 radius = 0.513457
@@ -11,6 +12,96 @@ albedo_color = Color(0.305882, 0.305882, 0.305882, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
 material = SubResource("StandardMaterial3D_q3mgw")
+
+[sub_resource type="Animation" id="Animation_3akec"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.641, -0.211, -0.542)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mwpb3"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 1, 0.5),
+"update": 0,
+"values": [Vector3(0.641, -0.211, -0.542), Vector3(0.641, -0.210999, -0.621212), Vector3(0.641, -0.211, -0.542)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(0.5, 1, 0.5),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.02554, 0.136298, 0.294881), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x6w5t"]
+resource_name = "run"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.641335, -0.211304, -0.542354), Vector3(0.641335, -0.211304, -0.613935), Vector3(0.641, -0.211, -0.542), Vector3(0.641167, -0.211152, -0.342094)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.535798, 0, 0), Vector3(0, 0, 0), Vector3(0.255586, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oxrb2"]
+_data = {
+"RESET": SubResource("Animation_3akec"),
+"hit": SubResource("Animation_mwpb3"),
+"run": SubResource("Animation_x6w5t")
+}
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ffs4h")
@@ -23,6 +114,15 @@ shape = SubResource("CapsuleShape3D_hlrpq")
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
 mesh = SubResource("CapsuleMesh_vyull")
 
+[node name="Sword" parent="PlayerBody" instance=ExtResource("2_6od87")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0.641, -0.211, -0.542)
+
 [node name="LabelPseudo" type="Label3D" parent="."]
 transform = Transform3D(-0.8, 2.7903e-16, 6.99382e-08, 2.7903e-16, 0.8, -2.7903e-16, -6.99382e-08, -2.79029e-16, -0.8, -0.000106931, 1.94748, -0.00391802)
 pixel_size = 0.01
+
+[node name="AnimationOtherPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PlayerBody/Sword")
+libraries = {
+"": SubResource("AnimationLibrary_oxrb2")
+}
