@@ -126,6 +126,7 @@ public partial class ConnectionUI : Control
 			_languageDict = GameManager.LanguageManager.GetLanguage(_language);
 			Translation();
 			GameManager.SettingsManager.SetSetting("language", _language);
+			GameManager.SettingsManager.SaveSettings();
 		}
 		
 		erreur = GameManager.ConnectionError;
