@@ -107,7 +107,7 @@ public partial class ScientistScript : ClassScript
             Vector3 laserPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY), Position.Y + 1.2f, Position.Z + (float)Math.Cos(rotationY));
             laser.GlobalPosition = new Vector3((laserPosition.X + GlobalPosition.X) / 2, laserPosition.Y, (laserPosition.Z + GlobalPosition.Z) / 2);
             laser.Rotation = new Vector3(_cameraV.Rotation.X + 0.15f, (float)rotationY, _cameraV.Rotation.X + 0.15f);
-            
+            GameManager.InfoJoueur["attack"] = $"{laser.Position.X};{laser.Position.Y};{laser.Position.Z};{laser.Rotation.X};{laser.Rotation.Y};{laser.Rotation.Z}";
             GetTree().Root.AddChild(laser);
             
             _shootCooldown = 0;
