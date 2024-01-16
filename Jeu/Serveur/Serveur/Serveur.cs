@@ -39,7 +39,6 @@ public class Serveur
 
         Console.WriteLine("Serveur en marche");
 
-        bool inline = true; //variable pour pouvoir desactiver le serveur
         while (_authorizeconnection && ID < 4)
         {
             Console.WriteLine("En attente ...");
@@ -124,24 +123,8 @@ public class Serveur
             {
                 string requette = tr.ReadLine();        //recuperation de la chaine
                 //Console.WriteLine($"{cc.pseudo} : {requette}");
-                if (requette == "quit")
-                {
-                    Console.WriteLine($"client {cc.id} s'est deconnecté");
-                    cc.Socket.Disconnect(false);                //deconnection du client
-                    connect = false;                                      //arret de la boucle
-                }
-                else if (requette.Substring(0,4) == "chat")
-                {
-                    requette = requette.Substring(5);
-                    
-                    chat[0] = $"{cc.pseudo}: {requette}";
-                    chat[1] = $"{cc.pseudo}: {requette}";
-                    chat[2] = $"{cc.pseudo}: {requette}";
-                    chat[3] = $"{cc.pseudo}: {requette}";
-                    
-                    Console.WriteLine(chat);
-                }
-                else if (requette.Substring(0,2) == "in")
+                
+                if (requette.Substring(0,2) == "in")
                 {
                     string line = requette.Substring(3);
                     string[] lines = line.Split('/');
@@ -195,8 +178,19 @@ public class Serveur
                     }
                     */
                 }
+                else if (requette.Substring(0,4) == "chat")
+                {
+                    requette = requette.Substring(5);
+                    
+                    chat[0] = $"{cc.pseudo}: {requette}";
+                    chat[1] = $"{cc.pseudo}: {requette}";
+                    chat[2] = $"{cc.pseudo}: {requette}";
+                    chat[3] = $"{cc.pseudo}: {requette}";
+                    
+                    Console.WriteLine(chat);
+                }
                 
-                if (requette.Substring(0,2) == "on")
+                else if (requette.Substring(0,2) == "on")
                 {
                     string line = requette.Substring(3);
                     //string[] lines = line.Split('/');
@@ -225,8 +219,11 @@ public class Serveur
                     oneshot[cc.id][cc.id] = "";
 
                 }
+                else if (requette == "quit")
                 {
-                    
+                    Console.WriteLine($"client {cc.id} s'est deconnecté");
+                    cc.Socket.Disconnect(false);                //deconnection du client
+                    connect = false;                                      //arret de la boucle
                 }
                 
                 Thread inter = new Thread(() => Interpolation.Inter(info[cc.id],cc.id,tw));

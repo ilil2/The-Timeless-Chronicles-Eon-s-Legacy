@@ -19,8 +19,6 @@ public class MainServeur
     private int ID = 0;
     private List<int> ports_total = new List<int>() {4242,4002,1919,6969,1984};
     private List<int> ports = new List<int>() {4242,4002,1919,6969,1984};
-    private int nbr_serveur = 0;
-    private int nbr_joueur = 0;
     
     private List<string> id_games = new List<string> {};
     private Dictionary<string,string[]> player_games = new Dictionary<string, string[]>();
@@ -182,7 +180,6 @@ public class MainServeur
             bool master = false;
             bool join = false;
             bool new_player = false;
-            nbr_joueur++;
             while (true)
             {
                 string requette = tr.ReadLine(); 
@@ -208,9 +205,6 @@ public class MainServeur
                     Thread.Sleep(100);
                     
                     ports.Remove(ports[0]);
-
-                    nbr_serveur++;
-                    nbr_joueur = 0;
                 }
                 else if (requette == "newgame" && join == false)
                 {
