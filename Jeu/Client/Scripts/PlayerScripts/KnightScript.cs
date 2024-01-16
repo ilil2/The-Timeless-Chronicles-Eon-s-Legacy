@@ -58,6 +58,7 @@ public partial class KnightScript : ClassScript
         if (Input.IsMouseButtonPressed(MouseButton.Left) && _animationPlayer.CurrentAnimation != "run")
         {
             _animationPlayer.Play("hit");
+            GameManager.InfoJoueur["attack"] = "hit";
         }
     }
 }

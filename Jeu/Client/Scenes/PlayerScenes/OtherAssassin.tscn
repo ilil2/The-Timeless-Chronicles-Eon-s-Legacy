@@ -26,3 +26,5 @@ mesh = SubResource("CapsuleMesh_vyull")
 [node name="LabelPseudo" type="Label3D" parent="."]
 transform = Transform3D(-0.8, 2.7903e-16, 6.99382e-08, 2.7903e-16, 0.8, -2.7903e-16, -6.99382e-08, -2.79029e-16, -0.8, -0.000106931, 1.94748, -0.00391802)
 pixel_size = 0.01
+
+[node name="AnimationOtherPlayer" type="AnimationPlayer" parent="."]

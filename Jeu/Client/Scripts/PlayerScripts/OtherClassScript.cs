@@ -5,6 +5,8 @@ public partial class OtherClassScript : CharacterBody3D
 {
 	public Vector3 EntityPosition;
 	protected Label3D Pseudo;
+	
+	protected AnimationPlayer AnimationOtherPlayer;
 
 	protected int Id;
 	protected string Classe;
@@ -26,17 +28,13 @@ public partial class OtherClassScript : CharacterBody3D
 	protected void SetPosition()
 	{
 		string[] positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
-		Vector3 position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
-
-		Position = position;
+		Position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
 	}
 	
 	protected void SetRotation()
 	{
 		string[] orientations = GameManager.InfoAutreJoueur[$"orientation{Id}"].Split(";");
-		Vector3 orientation = new Vector3(Lib.Conversions.AtoF(orientations[0]), Lib.Conversions.AtoF(orientations[1]), Lib.Conversions.AtoF(orientations[2]));
-		
-		Rotation = orientation;
+		Rotation = new Vector3(Lib.Conversions.AtoF(orientations[0]), Lib.Conversions.AtoF(orientations[1]), Lib.Conversions.AtoF(orientations[2]));
 	}
 	
 	private void SetPseudo()
