@@ -36,6 +36,7 @@ public partial class Listen2 : GameManager
 	    }
 	    else if (rep.Length > 2 && rep.Substring(0,2) == "in")
 	    {
+		    Console.WriteLine(rep);
 		    string line = rep.Substring(3);
 		    string[] SplitInfo = line.Split('|');
 		    for (int i = 0; i < 4; i++)
@@ -43,10 +44,12 @@ public partial class Listen2 : GameManager
 			    string[] CoordInfo = SplitInfo[i].Split('/');
 			    if (CoordInfo[1] != "deco")
 			    {
-				    CoordInfo[1] = CoordInfo[1].Substring(3);
-				    InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
-				    if (CoordInfo.Length > 2)
-						InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
+				    if (CoordInfo[0] != InfoJoueur["id"])
+				    {
+					    CoordInfo[1] = CoordInfo[1].Substring(3);
+					    InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+					    InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
+				    }
 			    }
 			    else
 			    {
