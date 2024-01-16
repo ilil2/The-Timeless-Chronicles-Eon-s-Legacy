@@ -5,13 +5,11 @@ using JeuClient.Scripts.PlayerScripts;
 public partial class ScientistScript : ClassScript
 {
     //Varibale du tir
-    private int _shootTimer;
     private int _shootCooldown;
     private bool _isShooting;
     private bool _shootAnimation;
     
-    private int _shootCooldownValue = 10;
-    private int _shootTimerValue = 500;
+    private int _shootCooldownValue = 100;
     
     
     public static bool IsAiming;
@@ -65,18 +63,6 @@ public partial class ScientistScript : ClassScript
     {
         _shootCooldown += 1;
         
-        if (_shootTimer >= _shootTimerValue)
-        {
-            _shootTimer = 0;
-            _isShooting = false;
-            GameManager.LockCamera = false;
-        }
-        
-        if (_isShooting)
-        {
-            _shootTimer += 1;
-        }
-        
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
             if (!_shootAnimation)
@@ -95,6 +81,7 @@ public partial class ScientistScript : ClassScript
             IsAiming = false;
             _animationPlayer.Play("LaserShootViewReset");
             _shootAnimation = false;
+            
         }
         
         if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting)
@@ -112,6 +99,13 @@ public partial class ScientistScript : ClassScript
             
             _shootCooldown = 0;
             GameManager.LockCamera = true;
+        }
+        
+        if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
+        {
+            GameManager.InfoJoueur["attack"] = "stop";
+            _isShooting = false;
+            GameManager.LockCamera = false;
         }
     }
 }
