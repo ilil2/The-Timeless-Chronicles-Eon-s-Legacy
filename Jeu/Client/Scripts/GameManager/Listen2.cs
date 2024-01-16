@@ -16,6 +16,11 @@ public partial class Listen2 : GameManager
 			    {
 				    i -= 3;
 			    }
+			    else if (InfoReady[i] == InfoJoueur["id"])
+			    {
+				    InfoJoueur["pseudo"] = InfoReady[i + 1];
+				    InfoJoueur["class"] = InfoReady[i + 2];
+			    }
 			    else
 			    {
 				    InfoAutreJoueur[$"id{InfoReady[i]}"] = InfoReady[i];
@@ -24,55 +29,6 @@ public partial class Listen2 : GameManager
 			    }
 		    }
 		    _nbJoueur = Conversions.AtoI(InfoReady[0]) + 1;
-
-		    switch (_nbJoueur)
-		    {
-			    case 1:
-				    InfoJoueur["id"] = "0";
-				    break;
-			    case 2:
-				    if (!InfoAutreJoueur.ContainsKey("id0"))
-				    {
-					    InfoJoueur["id"] = "0";
-				    }
-				    else
-				    {
-					    InfoJoueur["id"] = "1";
-				    }
-				    break;
-			    case 3:
-				    if (!InfoAutreJoueur.ContainsKey("id0"))
-				    {
-					    InfoJoueur["id"] = "0";
-				    }
-				    else if (!InfoAutreJoueur.ContainsKey("id1"))
-				    {
-					    InfoJoueur["id"] = "1";
-				    }
-				    else
-				    {
-					    InfoJoueur["id"] = "2";
-				    }
-				    break;
-			    case 4:
-				    if (!InfoAutreJoueur.ContainsKey("id0"))
-				    {
-					    InfoJoueur["id"] = "0";
-				    }
-				    else if (!InfoAutreJoueur.ContainsKey("id1"))
-				    {
-					    InfoJoueur["id"] = "1";
-				    }
-				    else if (!InfoAutreJoueur.ContainsKey("id2"))
-				    {
-					    InfoJoueur["id"] = "2";
-				    }
-				    else
-				    {
-					    InfoJoueur["id"] = "3";
-				    }
-				    break;
-		    }
 				
 		    ClassSelectUI.Supr = true;
 		    _loadMap = true;
@@ -88,7 +44,8 @@ public partial class Listen2 : GameManager
 			    {
 				    CoordInfo[1] = CoordInfo[1].Substring(3);
 				    InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
-				    InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
+				    if (CoordInfo.Length > 2)
+						InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
 			    }
 			    else
 			    {

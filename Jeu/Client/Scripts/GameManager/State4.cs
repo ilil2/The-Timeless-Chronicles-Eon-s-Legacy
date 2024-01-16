@@ -15,7 +15,7 @@ public partial class State4 : GameManager
         {
             InfoJoueur["class"] = ClassSelectUI.ClassChose;
             ClassSelectUI.ClassChose = "";
-            UDP.Send(soc2,InfoJoueur["class"],iep2);
+            UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["class"]}",iep2);
         }
         else if (((MapLvl1Script)Map).MapIsReady() && !StartMap)
         {

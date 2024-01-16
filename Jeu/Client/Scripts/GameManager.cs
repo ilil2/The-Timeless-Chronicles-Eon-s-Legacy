@@ -96,7 +96,7 @@ public partial class GameManager : Node3D
 		SettingsManager = new Settings();
 		InputManger = new InputControl();
 		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);	//creation du socke
+		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		

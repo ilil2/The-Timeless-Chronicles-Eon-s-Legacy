@@ -5,7 +5,7 @@ public partial class State6 : GameManager
 {
     public static void State(double delta)
     { 
-        UDP.Send(soc2,"in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
+        UDP.Send(soc2,InfoJoueur["id"] + "-" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
         ((MapLvl1Script)Map).DebugMode(delta, Joueur1);
 
         if (!_pausemode)
@@ -19,7 +19,7 @@ public partial class State6 : GameManager
         
         if (InfoJoueur["attack"] != "")
         {
-            UDP.Send(soc2,"on:" + InfoJoueur["attack"],iep2);
+            UDP.Send(soc2,InfoJoueur["id"] + "-" + "on:" + InfoJoueur["attack"],iep2);
             InfoJoueur["attack"] = "";
         }
     }
@@ -110,7 +110,7 @@ public partial class State6 : GameManager
             }
             else
             {
-                UDP.Send(soc2,"chat:" + ((ChatUI)_chat).Inputtext,iep2);
+                UDP.Send(soc2,InfoJoueur["id"] + "-" + "chat:" + ((ChatUI)_chat).Inputtext,iep2);
             }
             ((ChatUI)_chat).Inputtext = "";
         }

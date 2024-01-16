@@ -24,8 +24,10 @@ public partial class State3 : GameManager
         soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);    //nouveau socket
         soc2.ReceiveTimeout = 60000;
         iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);                //nouvelle ip
-            
-        UDP.Send(soc2,InfoJoueur["pseudo"],iep2);    //envoie du pseudo au serveur secondaire
+        
+        UDP.Send(soc2,"connect",iep2);    //envoie requette de connection au serveur secondaire
+        InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
+        UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["pseudo"]}",iep2);    //envoie du pseudo au serveur secondaire
         
 
         th2 = new Thread(Listen2);    //initialisation thread
