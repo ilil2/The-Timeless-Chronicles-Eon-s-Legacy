@@ -1,3 +1,4 @@
+using System;
 using Lib;
 using Serveur;
 
@@ -10,7 +11,7 @@ public partial class Listen2 : GameManager
 	    {
 		    rep = rep.Substring(6);
 		    string[] InfoReady = rep.Split("/");
-		    for (int i = 1; i < Conversions.AtoI(InfoReady[0]) * 3 + 1; i += 3)
+		    for (int i = 1; i < Conversions.AtoI(InfoReady[0]) * 3 + 4; i += 3)
 		    {
 			    if (InfoReady[i] == "")
 			    {
@@ -37,7 +38,7 @@ public partial class Listen2 : GameManager
 	    {
 		    string line = rep.Substring(3);
 		    string[] SplitInfo = line.Split('|');
-		    for (int i = 0; i < 3; i++)
+		    for (int i = 0; i < 4; i++)
 		    {
 			    string[] CoordInfo = SplitInfo[i].Split('/');
 			    if (CoordInfo[1] != "deco")
