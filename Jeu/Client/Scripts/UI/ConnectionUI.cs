@@ -109,6 +109,7 @@ public partial class ConnectionUI : Control
 		_connectionButtonText = GetNode<Label>("Connection/ConnectionButtonText");
 		_inscriptionButtonText = GetNode<Label>("Inscription/InscriptionButtonText");
 		
+		//Label Size
 		_menuName.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_connectionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_inscriptionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));

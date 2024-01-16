@@ -14,6 +14,7 @@ public partial class SettingsMenuUI : Control
     private float _screenDefalutWidth = 1152;
     private float _titleDefaultSize = 40;
     private float _buttonDefaultSize = 25;
+    private float _textDefaultSize = 20;
     
     private bool _isChangingInput;
     
@@ -22,8 +23,10 @@ public partial class SettingsMenuUI : Control
     private Button _gameSettingsButton;
     private OptionButton _languageChooseButton;
     private ScrollBar _mouseSensibilityBar;
-    private CheckButton _fullScreenButton;
-    private CheckButton _enableChatButton;
+    private Button _fullScreenOnButton;
+    private Button _fullScreenOffButton;
+    private Button _enableChatOnButton;
+    private Button _enableChatOffButton;
     private OptionButton _chatSizeButton;
     private Button _resetGameSettingsButton;
     private Button _saveGameSettingsButton;
@@ -32,10 +35,17 @@ public partial class SettingsMenuUI : Control
     private Label _languageChooseText;
     private Label _mouseSensibilityText;
     private Label _fullScreenText;
+    private Label _fullScreenOnText;
+    private Label _fullScreenOffText;
     private Label _enableChatText;
+    private Label _enableChatOnText;
+    private Label _enableChatOffText;
     private Label _chatSizeText;
     private Label _resetGameSettingsText;
     private Label _saveGameSettingsText;
+    
+    private bool _isFullScreen = false;
+    private bool _isChatEnable = true;
     
     //Audio
     private Control _audioSettings;
@@ -87,8 +97,10 @@ public partial class SettingsMenuUI : Control
         _gameSettingsButton = GetNode<Button>("GameSettingsButton");
         _languageChooseButton = GetNode<OptionButton>("GameSettings/LanguageChooseButton");
         _mouseSensibilityBar = GetNode<ScrollBar>("GameSettings/MouseSensibilityBar");
-        _fullScreenButton = GetNode<CheckButton>("GameSettings/FullScreenButton");
-        _enableChatButton = GetNode<CheckButton>("GameSettings/EnableChatButton");
+        _fullScreenOnButton = GetNode<Button>("GameSettings/FullScreenOnButton");
+        _fullScreenOffButton = GetNode<Button>("GameSettings/FullScreenOffButton");
+        _enableChatOnButton = GetNode<Button>("GameSettings/EnableChatOnButton");
+        _enableChatOffButton = GetNode<Button>("GameSettings/EnableChatOffButton");
         _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
         _resetGameSettingsButton = GetNode<Button>("GameSettings/ResetGameSettingsButton");
         _saveGameSettingsButton = GetNode<Button>("GameSettings/SaveGameSettingsButton");
@@ -204,7 +216,11 @@ public partial class SettingsMenuUI : Control
         _languageChooseText = GetNode<Label>("GameSettings/LanguageChooseText");
         _mouseSensibilityText = GetNode<Label>("GameSettings/MouseSensibilityText");
         _fullScreenText = GetNode<Label>("GameSettings/FullScreenText");
+        _fullScreenOnText = GetNode<Label>("GameSettings/FullScreenOnButton/FullScreenOnText");
+        _fullScreenOffText = GetNode<Label>("GameSettings/FullScreenOffButton/FullScreenOffText");
         _enableChatText = GetNode<Label>("GameSettings/EnableChatText");
+        _enableChatOnText = GetNode<Label>("GameSettings/EnableChatOnButton/EnableChatOnText");
+        _enableChatOffText = GetNode<Label>("GameSettings/EnableChatOffButton/EnableChatOffText");
         _chatSizeText = GetNode<Label>("GameSettings/ChatSizeText");
         _resetGameSettingsText = GetNode<Label>("GameSettings/ResetGameSettingsButton/ResetGameSettingsText");
         _saveGameSettingsText = GetNode<Label>("GameSettings/SaveGameSettingsButton/SaveGameSettingsText");
@@ -213,7 +229,11 @@ public partial class SettingsMenuUI : Control
         _languageChooseText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _mouseSensibilityText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _fullScreenText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _fullScreenOnText.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _fullScreenOffText.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _enableChatText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _enableChatOnText.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+        _enableChatOffText.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _chatSizeText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _resetGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _saveGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
@@ -356,6 +376,42 @@ public partial class SettingsMenuUI : Control
                 //Save
                 GameManager.SettingsManager.SaveSettings();
             }
+        }
+        else if (_enableChatOffButton.ButtonPressed && _isChatEnable)
+        {
+            _enableChatOnText.LabelSettings.FontColor = new Color(109, 109, 109, 1);
+            _enableChatOffText.LabelSettings.FontColor = new Color(0, 0, 0, 1);
+            
+            _isChatEnable = false;
+            
+            GameManager.SettingsManager.SetSetting("enableChat", 0);
+        }
+        else if (_enableChatOnButton.ButtonPressed && !_isChatEnable)
+        {
+            _enableChatOffText.LabelSettings.FontColor = new Color(109, 109, 109, 1);
+            _enableChatOnText.LabelSettings.FontColor = new Color(0, 0, 0, 1);
+            
+            _isChatEnable = true;
+            
+            GameManager.SettingsManager.SetSetting("enableChat", 1);
+        }
+        else if (_fullScreenOffButton.ButtonPressed && _isFullScreen)
+        {
+            _fullScreenOnText.LabelSettings.FontColor = new Color(109, 109, 109, 1);
+            _fullScreenOffText.LabelSettings.FontColor = new Color(0, 0, 0, 1);
+            
+            _isFullScreen = false;
+            
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+        }
+        else if (_fullScreenOnButton.ButtonPressed && !_isFullScreen)
+        {
+            _fullScreenOffText.LabelSettings.FontColor = new Color(109, 109, 109, 1);
+            _fullScreenOnText.LabelSettings.FontColor = new Color(0, 0, 0, 1);
+            
+            _isFullScreen = true;
+            
+            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
         }
         
         //Audio

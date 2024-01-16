@@ -8,7 +8,7 @@ public partial class State6 : GameManager
         tw2.Flush();
         ((MapLvl1Script)Map).DebugMode(delta, Joueur1);
 
-        if (!_pausemode)
+        if (!_pausemode && Lib.Conversions.ItoB(SettingsManager.GetAllSettings()["enableChat"]))
         {
             Chat();
         }

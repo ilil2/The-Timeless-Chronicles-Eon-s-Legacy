@@ -111,109 +111,6 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
-            {"languageName", "English (Hexadecimal)"},
-            
-            //Connection Menu
-            {"connectionMenuTitle", "436f6e6e656374696f6e"},
-            {"connectionMenuPseudoText", "50736575646f"},
-            {"connectionMenuPasswordText", "50617373776f7264"},
-            {"connectionMenuConnectionButton", "436f6e6e656374696f6e"},
-            {"connectionMenuNoAccountButton", "4e6f206163636f756e74203f"},
-            
-            //Inscription Menu
-            {"inscriptionMenuTitle", "496e736372697074696f6e"},
-            {"inscriptionMenuPseudoText", "50736575646f"},
-            {"inscriptionMenuPasswordText", "50617373776f7264"},
-            {"inscriptionMenuPasswordConfirmText", "436f6e6669726d65722070617373776f7264"},
-            {"inscriptionMenuInscriptionButton", "496e736372697074696f6e"},
-            {"inscriptionMenuAlreadyAccountButton", "416c7265616479206163636f756e74203f"},
-            
-            //Lobby Menu
-            {"lobbyMenuTitle", "4c6f626279"},
-            {"lobbyMenuCreateGame", "4372656174652047616d65"},
-            {"lobbyMenuJoinGame", "4a6f696e2047616d65"},
-            
-            //Create Game Menu
-            {"createGameMenuTitle", "4372656174652047616d65"},
-            {"createGameMenuBackButton", "<3d204261636b"},
-            {"createGameMenuStartGame", "53746172742047616d65"},
-            {"createGameMenuID", "4944206f66207468652047616d65"},
-            {"createGameMenuPlayer1", "506c6179657220313a"},
-            {"createGameMenuPlayer2", "506c6179657220323a"},
-            {"createGameMenuPlayer3", "506c6179657220333a"},
-            {"createGameMenuPlayer4", "506c6179657220343a"},
-            
-            //Join Game Menu
-            {"joinGameMenuTitle", "4a6f696e2047616d65"},
-            {"joinGameMenuBackButton", "<3d204261636b"},
-            {"joinGameMenuGameID", "4944206f66207468652047616d65"},
-            
-            //Select Class Menu
-            {"selectClassMenuArcherClass", "417263686572"},
-            {"selectClassMenuKnightClass", "4b6e69676874"},
-            {"selectClassMenuScientistClass", "536369656e74697374"},
-            {"selectClassMenuAssassinClass", "417373617373696e"},
-            {"selectClassMenuReadyButton", "5265616479"},
-            {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
-            
-            //Map loading
-            {"gameLoadingMapText", "4c6f6164696e6720746865206d6170203a"},
-            {"gameLoadingMapWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273"},
-            
-            //Pause Menu
-            {"pauseMenuTitle", "5061757365204d656e75"},
-            {"pauseMenuResumeButton", "526573756d65"},
-            {"pauseMenuSettingsButton", "53657474696e6773"},
-            {"pauseMenuLeaveButton", "4c65617665"},
-            {"pauseMenuConfirmLeaveTitle", "41726520796f75207375726520796f752077616e7420746f206c65617665207468652067616d653f"},
-            {"pauseMenuConfirmLeaveButton", "4c65617665"},
-            {"pauseMenuCancelLeaveButton", "43616e63656c"},
-            
-            //Settings Menu
-            {"settingsMenuTitle", "53657474696e6773"},
-            {"settingsMenuBackButton", "<3d204261636b"},
-            {"settingsMenuResetButton", "5265736574"},
-            {"settingsMenuSaveButton", "53617665"},
-            
-            //Settings Menu - Game
-            {"settingsMenuGameButton", "47616d65"},
-            {"settingsMenuGameLanguage", "4c616e67756167653a"},
-            {"settingsMenuGameMouseSensibility", "4d6f7573652053656e736962696c6974793a"},
-            {"settingsMenuGameFullScreen", "46756c6c2053637265656e3a"},
-            {"settingsMenuGameEnableChat", "456e61626c6520436861743a"},
-            {"settingsMenuGameChatSize", "436861742053697a653a"},
-            {"settingsMenuGameChatSizeSmall", "536d616c6c"},
-            {"settingsMenuGameChatSizeMedium", "4d656469756d"},
-            {"settingsMenuGameChatSizeLarge", "4c61726765"},
-            
-            //Settings Menu - Audio
-            {"settingsMenuAudioButton", "417564696f"},
-            
-            //Settings Menu - Video
-            {"settingsMenuVideoButton", "566964656f"},
-            
-            //Settings Menu - Controls
-            {"settingsMenuControlsButton", "436f6e74726f6c73"},
-            {"settingsMenuControlsMoveForward", "4d6f766520466f7277617264"},
-            {"settingsMenuControlsMoveBackward", "4d6f7665204261636b77617264"},
-            {"settingsMenuControlsMoveLeft", "4d6f7665204c656674"},
-            {"settingsMenuControlsMoveRight", "4d6f7665205269676874"},
-            {"settingsMenuControlsSprint", "53637265656e"},
-            {"settingsMenuControlsDash", "4461736820"},
-            {"settingsMenuControlsCapacity1", "43617061636974792031"},
-            {"settingsMenuControlsCapacity2", "43617061636974792032"},
-            {"settingsMenuControlsCapacity3", "43617061636974792033"},
-            {"settingsMenuControlsItem1", "4974656d2031"},
-            {"settingsMenuControlsItem2", "4974656d2032"},
-            {"settingsMenuControlsItem3", "4974656d2033"},
-            {"settingsMenuControlsInventory", "496e76656e746f7279"},
-            {"settingsMenuControlsReload", "52656c6f6164"},
-            {"settingsMenuControlsChat", "43686174"},
-            {"settingsMenuControlsPause", "5061757365"},
-        },
-        
-        new Dictionary<string, string>
-        {
             {"languageName", "Français"},
             
             //Connection Menu
@@ -1345,6 +1242,109 @@ public class LanguageControl
             {"settingsMenuControlsChat", "Чат"},
             {"settingsMenuControlsPause", "Пауза"},
         },
+        
+        new Dictionary<string, string>
+        {
+            {"languageName", "Hexadecimal"},
+            
+            //Connection Menu
+            {"connectionMenuTitle", "436f6e6e656374696f6e"},
+            {"connectionMenuPseudoText", "50736575646f"},
+            {"connectionMenuPasswordText", "50617373776f7264"},
+            {"connectionMenuConnectionButton", "436f6e6e656374696f6e"},
+            {"connectionMenuNoAccountButton", "4e6f206163636f756e74203f"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "496e736372697074696f6e"},
+            {"inscriptionMenuPseudoText", "50736575646f"},
+            {"inscriptionMenuPasswordText", "50617373776f7264"},
+            {"inscriptionMenuPasswordConfirmText", "436f6e6669726d65722070617373776f7264"},
+            {"inscriptionMenuInscriptionButton", "496e736372697074696f6e"},
+            {"inscriptionMenuAlreadyAccountButton", "416c7265616479206163636f756e74203f"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "4c6f626279"},
+            {"lobbyMenuCreateGame", "4372656174652047616d65"},
+            {"lobbyMenuJoinGame", "4a6f696e2047616d65"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "4372656174652047616d65"},
+            {"createGameMenuBackButton", "<3d204261636b"},
+            {"createGameMenuStartGame", "53746172742047616d65"},
+            {"createGameMenuID", "4944206f66207468652047616d65"},
+            {"createGameMenuPlayer1", "506c6179657220313a"},
+            {"createGameMenuPlayer2", "506c6179657220323a"},
+            {"createGameMenuPlayer3", "506c6179657220333a"},
+            {"createGameMenuPlayer4", "506c6179657220343a"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "4a6f696e2047616d65"},
+            {"joinGameMenuBackButton", "<3d204261636b"},
+            {"joinGameMenuGameID", "4944206f66207468652047616d65"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "417263686572"},
+            {"selectClassMenuKnightClass", "4b6e69676874"},
+            {"selectClassMenuScientistClass", "536369656e74697374"},
+            {"selectClassMenuAssassinClass", "417373617373696e"},
+            {"selectClassMenuReadyButton", "5265616479"},
+            {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
+            
+            //Map loading
+            {"gameLoadingMapText", "4c6f6164696e6720746865206d6170203a"},
+            {"gameLoadingMapWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273"},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "5061757365204d656e75"},
+            {"pauseMenuResumeButton", "526573756d65"},
+            {"pauseMenuSettingsButton", "53657474696e6773"},
+            {"pauseMenuLeaveButton", "4c65617665"},
+            {"pauseMenuConfirmLeaveTitle", "41726520796f75207375726520796f752077616e7420746f206c65617665207468652067616d653f"},
+            {"pauseMenuConfirmLeaveButton", "4c65617665"},
+            {"pauseMenuCancelLeaveButton", "43616e63656c"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "53657474696e6773"},
+            {"settingsMenuBackButton", "<3d204261636b"},
+            {"settingsMenuResetButton", "5265736574"},
+            {"settingsMenuSaveButton", "53617665"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "47616d65"},
+            {"settingsMenuGameLanguage", "4c616e67756167653a"},
+            {"settingsMenuGameMouseSensibility", "4d6f7573652053656e736962696c6974793a"},
+            {"settingsMenuGameFullScreen", "46756c6c2053637265656e3a"},
+            {"settingsMenuGameEnableChat", "456e61626c6520436861743a"},
+            {"settingsMenuGameChatSize", "436861742053697a653a"},
+            {"settingsMenuGameChatSizeSmall", "536d616c6c"},
+            {"settingsMenuGameChatSizeMedium", "4d656469756d"},
+            {"settingsMenuGameChatSizeLarge", "4c61726765"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "417564696f"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "566964656f"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "436f6e74726f6c73"},
+            {"settingsMenuControlsMoveForward", "4d6f766520466f7277617264"},
+            {"settingsMenuControlsMoveBackward", "4d6f7665204261636b77617264"},
+            {"settingsMenuControlsMoveLeft", "4d6f7665204c656674"},
+            {"settingsMenuControlsMoveRight", "4d6f7665205269676874"},
+            {"settingsMenuControlsSprint", "53637265656e"},
+            {"settingsMenuControlsDash", "4461736820"},
+            {"settingsMenuControlsCapacity1", "43617061636974792031"},
+            {"settingsMenuControlsCapacity2", "43617061636974792032"},
+            {"settingsMenuControlsCapacity3", "43617061636974792033"},
+            {"settingsMenuControlsItem1", "4974656d2031"},
+            {"settingsMenuControlsItem2", "4974656d2032"},
+            {"settingsMenuControlsItem3", "4974656d2033"},
+            {"settingsMenuControlsInventory", "496e76656e746f7279"},
+            {"settingsMenuControlsReload", "52656c6f6164"},
+            {"settingsMenuControlsChat", "43686174"},
+            {"settingsMenuControlsPause", "5061757365"},
+        }
     };
     
     public Dictionary<string, string> GetLanguage(int index)

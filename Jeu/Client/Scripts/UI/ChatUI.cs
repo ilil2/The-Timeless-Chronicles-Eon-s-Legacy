@@ -41,12 +41,6 @@ public partial class ChatUI : Control
 		{
 			_onchat = false;
 			_input.ReleaseFocus();
-			
-			Visible = false;
-		}
-		else
-		{
-			Visible = true;
 		}
 
 		_output.Text = _outputtext;
