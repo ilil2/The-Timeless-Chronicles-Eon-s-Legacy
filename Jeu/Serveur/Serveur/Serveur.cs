@@ -7,8 +7,8 @@ namespace Serveur;
 
 public class Serveur
 {
-    private int ID;
-    private int joueur_ready;
+    private int ID = 0;
+    private int joueur_ready = 0;
 
     protected static string[] info = new string[4];
     private string[] chat = {"","","",""};
@@ -31,9 +31,8 @@ public class Serveur
         
         Console.WriteLine("Serveur en marche");
 
-        while (joueur_ready < ID)
+        while (joueur_ready < ID || clients[0] == null)
         {
-            Console.WriteLine("En attente ...");
             (string s,EndPoint ep) = UDP.FirstReceive(soc);
             if (s == "connect" && ID < 4)
             {
@@ -41,14 +40,16 @@ public class Serveur
                 clients[ID] = clicom;
                 
                 UDP.Send(soc, ID.ToString(), ep);        //envoie de l'ID au client
-                
+                Console.WriteLine("Client connecté : " + ID);
                 ID++;
             }
             else
             {
                 string[] s2 = s.Split("/");
+                Console.WriteLine(s2[1]);
                 if (s2[1] == "Archer" || s2[1] == "Scientist" || s2[1] == "Knight" || s2[1] == "Assassin")
                 {
+                    Console.WriteLine("Client prêt : " + s2[1]);
                     clients[Lib.Conversion.AtoI(s2[0])].classe = s2[1];
                     info[Lib.Conversion.AtoI(s2[0])] = $"{Lib.Conversion.AtoI(s2[0])}/{clients[Lib.Conversion.AtoI(s2[0])].pseudo}/{s2[1]}";
                     joueur_ready++;
@@ -59,20 +60,37 @@ public class Serveur
                 }
             }
         }
-        
-        Thread.Sleep(100);
-        
+
+        Console.WriteLine("Tout les joueurs sont prêts");
         for (int i = 0; i < ID; i++)
         {
-            UDP.Send(soc, GetInfo(), clients[i].ep);
+            UDP.Send(soc, $"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}/{info[3]}", clients[i].ep);
         }
         
         info = new[] { "-1/co:1;0;1/0;0;0", "-1/co:-1;0;1/0;0;0", "-1/co:1;0;-1/0;0;0", "-1/co:-1;0;1/0;0;0" };
         
+        joueur_ready = 0;
+
+        while (joueur_ready < ID)
+        {
+            string s = UDP.Receive(soc);
+            if (s == "load")
+            {
+                joueur_ready++;
+            }
+        }
+        
+        Console.WriteLine("Tout les joueurs sont chargés");
+        
+        for (int i = 0; i < ID; i++)
+        {
+            UDP.Send(soc, "start", clients[i].ep);
+        }
+        
         while (true)
         {
             string s = UDP.Receive(soc);
-            string[] s2 = s.Split("/");
+            string[] s2 = s.Split("-");
             int id = Lib.Conversion.AtoI(s2[0]);
 
             /*if (s2[1].Substring(0, 4) == "tcp:")
