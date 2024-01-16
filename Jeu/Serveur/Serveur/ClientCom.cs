@@ -14,9 +14,12 @@ class ClientCom         //type de l'objet client
         
     public string classe { get; set; }
 
-    public ClientCom(Socket s, int id)     //initialisation de l'objet
+    public EndPoint ep { get; set; }
+    
+    public ClientCom(Socket s, int id,EndPoint ep)     //initialisation de l'objet
     {
         this.Socket = s;
         this.id = id;
+        this.ep = ep;
     }
 }
