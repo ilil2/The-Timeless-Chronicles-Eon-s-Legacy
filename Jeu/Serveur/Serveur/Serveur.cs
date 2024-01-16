@@ -90,7 +90,7 @@ public class Serveur
         while (true)
         {
             string s = UDP.Receive(soc);
-            string[] s2 = s.Split("-");
+            string[] s2 = s.Split("_");
             int id = Lib.Conversion.AtoI(s2[0]);
 
             /*if (s2[1].Substring(0, 4) == "tcp:")

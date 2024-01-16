@@ -24,7 +24,7 @@ public class UDP
     
     public static (string,EndPoint) FirstReceive(Socket soc)
     {
-        byte[] receive = new byte[1024];
+        byte[] receive = new byte[8096];
         EndPoint remoteEp = new IPEndPoint(IPAddress.Any, 0);
         int receivedBytes = soc.ReceiveFrom(receive, ref remoteEp);
 
