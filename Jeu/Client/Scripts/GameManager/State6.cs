@@ -110,7 +110,7 @@ public partial class State6 : GameManager
             }
             else
             {
-                UDP.Send(soc2,InfoJoueur["id"] + "_z" + "chat:" + ((ChatUI)_chat).Inputtext,iep2);
+                UDP.Send(soc2,InfoJoueur["id"] + "_" + "chat:" + ((ChatUI)_chat).Inputtext,iep2);
             }
             ((ChatUI)_chat).Inputtext = "";
         }
