@@ -342,47 +342,31 @@ public partial class SettingsMenuUI : Control
         else if (_saveGameSettingsButton.ButtonPressed)
         {
             Dictionary<string, int> Settings = GameManager.SettingsManager.GetAllSettings();
-            if ((int)_mouseSensibilityBar.Value != Settings["mouseSensibility"])
-            {
-                //Mouse Sensibility
-                Settings["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
-                ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
+            
+            //Mouse Sensibility
+            Settings["mouseSensibility"] = (int)_mouseSensibilityBar.Value;
+            ((CameraPlayer)((ClassScript)GameManager.Joueur1).GetCamera()).ChangeSensibility((int)_mouseSensibilityBar.Value);
+            
+            //Chat Size
+            Settings["chatSize"] = _chatSizeButton.Selected;
                 
-                if (_languageChooseButton.Selected != Settings["language"])
-                {
-                    //Language
-                    Settings["language"] = _languageChooseButton.Selected;
-                    _language = Settings["language"];
-                    _languageDict = GameManager.LanguageManager.GetLanguage(_language);
-                    Translation();
-                    
-                    _inputList.Clear();
-                    foreach (var (key, value) in GameManager.InputManger.GetAllControl())
-                    {
-                        _inputList.AddItem($"{key.ToUpper()} : {value}");
-                    }
-                }
-                
-                //Save
-                GameManager.SettingsManager.SaveSettings();
-            }
-            else if (_languageChooseButton.Selected != Settings["language"])
+            if (_languageChooseButton.Selected != Settings["language"])
             {
                 //Language
                 Settings["language"] = _languageChooseButton.Selected;
                 _language = Settings["language"];
                 _languageDict = GameManager.LanguageManager.GetLanguage(_language);
                 Translation();
-                
+                    
                 _inputList.Clear();
                 foreach (var (key, value) in GameManager.InputManger.GetAllControl())
                 {
                     _inputList.AddItem($"{key.ToUpper()} : {value}");
                 }
-                
-                //Save
-                GameManager.SettingsManager.SaveSettings();
             }
+                
+            //Save
+            GameManager.SettingsManager.SaveSettings();
         }
         else if (_enableChatOffButton.ButtonPressed && _isChatEnable)
         {
