@@ -7,20 +7,24 @@ namespace Serveur;
 
 public class Serveur
 {
-    private int ID = 0;
+    private static int ID = 0;
     private int joueur_ready = 0;
 
     protected static string[] info = new string[4];
-    private string[] chat = {"","","",""};
-    private string[][] oneshot = {new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}, new string[] {"","","",""}};
-    
     private static ClientCom[] clients = new ClientCom[4];
 
     public static string GetInfo()
     {
         return $"in:{info[0]}|{info[1]}|{info[2]}|{info[3]}";
     }
-    
+
+    public static void SendAll(Socket soc, string s)
+    {
+        for (int i = 0; i < ID; i++)
+        {
+            UDP.Send(soc, s, clients[i].ep);
+        }
+    }
 
     public void MainProgram(int n)
     {
@@ -107,57 +111,18 @@ public class Serveur
             {
                 s = s.Substring(5);
                     
-                chat[0] = $"{clients[id].pseudo}: {s}";
-                chat[1] = $"{clients[id].pseudo}: {s}";
-                chat[2] = $"{clients[id].pseudo}: {s}";
-                chat[3] = $"{clients[id].pseudo}: {s}";
+                SendAll(soc,$"{clients[id].pseudo}: {s}");
                     
-                Console.WriteLine(chat);
+                Console.WriteLine($"{clients[id].pseudo}: {s}");
             }
             else if (s.Substring(0,2) == "on")
             { 
                 string res = s.Substring(3);;
 
-                oneshot[0][id] = res;
-                oneshot[1][id] = res;
-                oneshot[2][id] = res;
-                oneshot[3][id] = res;
-                oneshot[id][id] = "";
-            }
-
-            for (int i = 0; i < ID; i++)
-            {
-                UDP.Send(soc,GetInfo(),clients[i].ep);
+                SendAll(soc, "on:" + res);
             }
             
-            if (chat[id] != "")
-            {
-                UDP.Send(soc,"chat:"+chat[id],clients[id].ep);
-                chat[id] = "";
-            }
-            
-            string one;
-                
-            if ((one = oneshot[id][0]) != "")
-            {
-                UDP.Send(soc,"on:" + 0 + "|" + one,clients[id].ep);
-                oneshot[id][0] = "";
-            }
-            if ((one = oneshot[id][1]) != "")
-            {
-                UDP.Send(soc,"on:" + 1 + "|" + one,clients[id].ep);
-                oneshot[id][1] = "";
-            }
-            if ((one = oneshot[id][2]) != "")
-            {
-                UDP.Send(soc,"on:" + 2 + "|" + one,clients[id].ep);
-                oneshot[id][2] = "";
-            }
-            if ((one = oneshot[id][3]) != "")
-            {
-                UDP.Send(soc,"on:" + 3 + "|" + one,clients[id].ep);
-                oneshot[id][3] = "";
-            }
+            SendAll(soc,GetInfo());
         }
     }
 }
