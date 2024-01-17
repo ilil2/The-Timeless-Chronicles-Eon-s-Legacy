@@ -8,7 +8,7 @@ public class FastConnection
 {
     private List<string> _listConnection;
     
-    FastConnection()
+    public FastConnection()
     {
         _listConnection = new List<string>();
         
@@ -37,10 +37,15 @@ public class FastConnection
     
     public (string, string) GetLastConnection()
     {
-        if (_listConnection.Count > 2)
+        if (_listConnection.Count >= 2)
         {
             return (_listConnection[0], _listConnection[1]);
         }
         return ("", "");
+    }
+    
+    public void SetConnection(string pseudo, string password)
+    {
+        _listConnection = new List<string> {pseudo, password};
     }
 }

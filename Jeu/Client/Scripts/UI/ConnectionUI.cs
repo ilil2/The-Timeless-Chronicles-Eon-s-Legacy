@@ -12,7 +12,7 @@ public partial class ConnectionUI : Control
 	
 	public static Button ConnectionButton;
 	public static Button InscriptionButton;
-	public static Button _fastConnectionButton;
+	public static Button FastConnectionButton;
 	private Button _noCompteButton;
 	private Button _dejaCompteButton;
 	private OptionButton _languageChooseButton;
@@ -51,9 +51,9 @@ public partial class ConnectionUI : Control
 		//Boutons
 		ConnectionButton = GetNode<Button>("Connection");
 		InscriptionButton = GetNode<Button>("Inscription");
+		FastConnectionButton = GetNode<Button>("FastConnectionButton");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
-		_fastConnectionButton = GetNode<Button>("FastConnectionButton");
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -149,34 +149,43 @@ public partial class ConnectionUI : Control
 		
 		if (ConnectionButton.ButtonPressed)
 		{
-			Connection();
+			_pseudo = _pseudoConnectionNode.Text;
+			_password = _passwordConnectionNode.Text;
 		}
 		else if (InscriptionButton.ButtonPressed)
 		{
 			if (_passwordInscriptionNode.Text == _passwordConfirmInscriptionNode.Text)
-				Inscription();
+			{
+				
+				_pseudo = _pseudoInscriptionNode.Text;
+				_password = _passwordInscriptionNode.Text;
+				_confirm_password = _passwordConfirmInscriptionNode.Text;
+			}
 			else
-				GameManager.ConnectionError = "confirmation incorect";
+			{
+				GameManager.ConnectionError = "Confirmation incorrecte";
+			}
 		}
+		else if (FastConnectionButton.ButtonPressed)
+		{
+			(string pseudo, string password) = GameManager.FastConnectionManager.GetLastConnection();
+			if (pseudo != "" && password != "")
+			{
+				_pseudo = pseudo;
+				_password = password;
+			}
+			else
+			{
+				GameManager.ConnectionError = "Aucune connexion rapide enregistrée";
+			}
+		}
+		
 		if (in_connection == false)
 		{
 			QueueFree();
 		}
 		_connectionError.Text = erreur;
 		_inscriptionError.Text = erreur;
-	}
-
-	public void Connection()
-	{
-		_pseudo = _pseudoConnectionNode.Text;
-		_password = _passwordConnectionNode.Text;
-	}
-	
-	public void Inscription()
-	{
-		_pseudo = _pseudoInscriptionNode.Text;
-		_password = _passwordInscriptionNode.Text;
-		_confirm_password = _passwordConfirmInscriptionNode.Text;
 	}
 	
 	public void NoCompte()
