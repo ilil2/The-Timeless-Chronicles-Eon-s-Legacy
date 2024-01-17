@@ -39,10 +39,12 @@ public partial class ConnectionUI : Control
 	public static bool in_connection = true;
 	public static string erreur = "";
 	
+	private static int _errorNumber = -1;
+	
 	//Language
 	private List<Dictionary<string, string>> _allLanguages;
 	private int _language;
-	private Dictionary<string, string> _languageDict;
+	private static Dictionary<string, string> _languageDict;
 
 	public override void _Ready()
 	{
@@ -94,6 +96,32 @@ public partial class ConnectionUI : Control
 		_inscriptionButtonText.Text = _languageDict["inscriptionMenuInscriptionButton"];
 		_dejaCompteButtonText.Text = _languageDict["inscriptionMenuAlreadyAccountButton"];
 	}
+
+	public static void ErrorTranslation(int errorNumber)
+	{
+		_errorNumber = errorNumber;
+		switch (errorNumber)
+		{
+			case 0:
+				erreur = _languageDict["connectionMenuErrorUsernameOrPasswordText"];
+				break;
+			case 1:
+				erreur = _languageDict["connectionMenuErrorFastConnectionText"];
+				break;
+			case 2:
+				erreur = _languageDict["connectionMenuErrorNoFastConnectionText"];
+				break;
+			case 3:
+				erreur = _languageDict["inscriptionMenuErrorIncorrectConfirmText"];
+				break;
+			case 4:
+				erreur = _languageDict["inscriptionMenuErrorAlreadyExistText"];
+				break;
+			default:
+				erreur = "";
+				break;
+		}
+	}
 	
 	public void OnResize()
 	{
@@ -141,11 +169,10 @@ public partial class ConnectionUI : Control
 			_language = _languageChooseButton.Selected;
 			_languageDict = GameManager.LanguageManager.GetLanguage(_language);
 			Translation();
+			ErrorTranslation(_errorNumber);
 			GameManager.SettingsManager.SetSetting("language", _language);
 			GameManager.SettingsManager.SaveSettings();
 		}
-		
-		erreur = GameManager.ConnectionError;
 		
 		if (ConnectionButton.ButtonPressed)
 		{
@@ -163,7 +190,7 @@ public partial class ConnectionUI : Control
 			}
 			else
 			{
-				GameManager.ConnectionError = "Confirmation incorrecte";
+				ErrorTranslation(3);
 			}
 		}
 		else if (FastConnectionButton.ButtonPressed)
@@ -176,7 +203,7 @@ public partial class ConnectionUI : Control
 			}
 			else
 			{
-				GameManager.ConnectionError = "Aucune connexion rapide enregistrée";
+				ErrorTranslation(2);
 			}
 		}
 		

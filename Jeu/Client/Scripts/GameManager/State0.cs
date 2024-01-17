@@ -25,13 +25,13 @@ public partial class State0 : GameManager
 			        }
 			        else
 			        {
-				        ConnectionError = "Pseudo ou mot de passe incorrect";
+				        ConnectionUI.ErrorTranslation(0);
 			        }
         
 		        }
 		        else
 		        {
-			        ConnectionError = "Pseudo ou mot de passe incorrect";
+			        ConnectionUI.ErrorTranslation(0);
 		        }
 	        }
         
@@ -51,13 +51,13 @@ public partial class State0 : GameManager
 			        }
 			        else
 			        {
-				        ConnectionError = "Pseudo deja existant";
+				        ConnectionUI.ErrorTranslation(4);
 			        }
         							
 		        }
 		        else
 		        {
-			        ConnectionError = "Pseudo ou mot de passe incorrect";
+			        ConnectionUI.ErrorTranslation(0);
 		        }
 	        }
 	        
@@ -74,7 +74,7 @@ public partial class State0 : GameManager
 		        }
 		        else
 		        {
-			        ConnectionError = "Erreur dans la connexion rapide";
+			        ConnectionUI.ErrorTranslation(1);
 		        }
 	        }
         }

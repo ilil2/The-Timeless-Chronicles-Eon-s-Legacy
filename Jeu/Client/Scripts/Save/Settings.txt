@@ -1,4 +1,4 @@
-language;1
-mouseSensibility;6
+language;0
+mouseSensibility;10
 enableChat;1
 chatSize;1
