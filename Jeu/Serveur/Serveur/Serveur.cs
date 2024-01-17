@@ -25,6 +25,14 @@ public class Serveur
             UDP.Send(soc, s, clients[i].ep);
         }
     }
+    
+    public static void TCPAllSend(Socket soc, string s)
+    {
+        for (int i = 0; i < ID; i++)
+        {
+            UDP.TCPSend(soc, s, clients[i].ep);
+        }
+    }
 
     public void MainProgram(int n)
     {
@@ -66,10 +74,8 @@ public class Serveur
         }
 
         Console.WriteLine("Tout les joueurs sont prêts");
-        for (int i = 0; i < ID; i++)
-        {
-            UDP.Send(soc, $"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}/{info[3]}", clients[i].ep);
-        }
+        
+        SendAll(soc, $"ready:{ID-1}/{info[0]}/{info[1]}/{info[2]}/{info[3]}");
         
         info = new[] { "-1/co:1;0;1/0;0;0", "-1/co:-1;0;1/0;0;0", "-1/co:1;0;-1/0;0;0", "-1/co:-1;0;1/0;0;0" };
         
@@ -86,10 +92,7 @@ public class Serveur
         
         Console.WriteLine("Tout les joueurs sont chargés");
         
-        for (int i = 0; i < ID; i++)
-        {
-            UDP.Send(soc, "start", clients[i].ep);
-        }
+        SendAll(soc, "start");
         
         while (true)
         {
@@ -107,19 +110,16 @@ public class Serveur
             {
                 info[id] = s2[0] + "/" + s2[1].Substring(3);
             }
-            else if (s.Substring(0,4) == "chat")
+            else if (s2[1].Substring(0,2) == "on")
             {
-                s = s.Substring(5);
-                    
-                SendAll(soc,$"{clients[id].pseudo}: {s}");
-                    
-                Console.WriteLine($"{clients[id].pseudo}: {s}");
+                SendAll(soc, $"on:{s2[0]}|{s2[1].Substring(3)}");
             }
-            else if (s.Substring(0,2) == "on")
-            { 
-                string res = s.Substring(3);;
-
-                SendAll(soc, "on:" + res);
+            else if (s2[1].Substring(0,4) == "chat")
+            {
+                s2[1] = s2[1].Substring(5);
+                SendAll(soc,$"chat:{clients[id].pseudo}: {s2[1]}");
+                    
+                Console.WriteLine($"chat:{clients[id].pseudo}: {s2[1]}");
             }
             
             SendAll(soc,GetInfo());
