@@ -1,10 +1,7 @@
-using System;
 using System.Net.Sockets;
 using System.Net;
-using System.IO;
-using System.Net.NetworkInformation;
-using Godot;
 using System.Threading;
+using Lib;
 
 public partial class State3 : GameManager
 {
@@ -20,17 +17,14 @@ public partial class State3 : GameManager
         tr.Close();                    //fermeture recu requette du serveur principal
         soc.Disconnect(false);        //deconnection du socket
 
-        soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);    //nouveau socket
+        soc2 = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);    //nouveau socket
         soc2.ReceiveTimeout = 60000;
         iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);                //nouvelle ip
-        soc2.Connect(iep2);                                                                            //connexion
-            
-        ns2 = new NetworkStream(soc2);
-        tw2 = new StreamWriter(ns2);                    //lecture serveur secondaire
-        tr2 = new StreamReader(ns2);                    //ecriture serveur secondaire
-                
-        tw2.WriteLine(InfoJoueur["pseudo"]);
-        tw2.Flush();
+        
+        UDP.Send(soc2,"connect",iep2);    //envoie requette de connection au serveur secondaire
+        InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
+        UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["pseudo"]}",iep2);    //envoie du pseudo au serveur secondaire
+        
 
         th2 = new Thread(Listen2);    //initialisation thread
         th2.Start();                        //debut du thread

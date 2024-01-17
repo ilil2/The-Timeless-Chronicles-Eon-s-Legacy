@@ -28,6 +28,10 @@ public static class Conversions
 	
 	public static float AtoF(string? s)
 	{
+		if (s == null || s == "")
+		{
+			return 0f;
+		}
 		float res = 0;
 		bool nega = false;
 		
