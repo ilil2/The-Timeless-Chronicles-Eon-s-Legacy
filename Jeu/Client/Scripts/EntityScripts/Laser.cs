@@ -10,8 +10,8 @@ public partial class Laser : Node3D
     private Vector3 _startPoint;
 
     private float _laserSize = 0.8f;
-    
-    private int _laserTimer;
+
+    private int _laserId = -1;
     
     public override void _Ready()
     {
@@ -38,12 +38,25 @@ public partial class Laser : Node3D
         {
             _rangeMax.Visible = true;
         }
-        
-        _laserTimer += 1;
 
-        if (_laserTimer >= 500)
+        if (_laserId != -1)
         {
-            QueueFree();
+            if (GameManager.InfoAutreJoueur[$"attack{_laserId}"] == "stop")
+            {
+                QueueFree();
+            }
         }
+        else
+        {
+            if (GameManager.InfoJoueur["attack"] == "stop")
+            {
+                QueueFree();
+            }
+        }
+    }
+    
+    public void SetLaserID(int id)
+    {
+        _laserId = id;
     }
 }

@@ -1,3 +1,4 @@
+using Godot;
 using Lib;
 
 public partial class State0 : GameManager
@@ -11,7 +12,6 @@ public partial class State0 : GameManager
 		        if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 16 &&
 		            ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 		        {
-        							
 			        tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 			        tw.Flush();
         							
@@ -20,22 +20,24 @@ public partial class State0 : GameManager
 			        {
 				        tentative_connection = false;
 				        InfoJoueur["pseudo"] = ConnectionUI._pseudo;
+				        FastConnectionManager.SetConnection(ConnectionUI._pseudo, Hashing.ToSHA256(ConnectionUI._password));
+				        FastConnectionManager.SaveConnection();
 			        }
 			        else
 			        {
-				        ConnectionError = line;
+				        ConnectionUI.ErrorTranslation(0);
 			        }
         
 		        }
 		        else
 		        {
-			        ConnectionError = "Pseudo ou mot de passe incorrect";
+			        ConnectionUI.ErrorTranslation(0);
 		        }
 	        }
         
 	        else if (ConnectionUI.InscriptionButton.ButtonPressed)
 	        {
-		        if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 32 &&
+		        if (ConnectionUI._pseudo.Length >= 4 && ConnectionUI._pseudo.Length <= 16 &&
 		            ConnectionUI._password.Length >= 8 && ConnectionUI._password.Length <= 32)
 		        {
 			        tw.WriteLine($"insc:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
@@ -49,13 +51,30 @@ public partial class State0 : GameManager
 			        }
 			        else
 			        {
-				        ConnectionError = "Pseudo deja existant";
+				        ConnectionUI.ErrorTranslation(4);
 			        }
         							
 		        }
 		        else
 		        {
-			        ConnectionError = "Pseudo ou mot de passe incorrect";
+			        ConnectionUI.ErrorTranslation(0);
+		        }
+	        }
+	        
+	        else if (ConnectionUI.FastConnectionButton.ButtonPressed)
+	        {
+		        tw.WriteLine($"conn:{ConnectionUI._pseudo};{ConnectionUI._password}");
+		        tw.Flush();
+		        
+		        string? line = tr.ReadLine();
+		        if (line == "connection success")
+		        {
+			        tentative_connection = false;
+			        InfoJoueur["pseudo"] = ConnectionUI._pseudo;
+		        }
+		        else
+		        {
+			        ConnectionUI.ErrorTranslation(1);
 		        }
 	        }
         }

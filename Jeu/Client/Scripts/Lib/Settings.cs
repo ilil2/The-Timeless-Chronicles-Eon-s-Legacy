@@ -57,6 +57,7 @@ public class Settings
         {
             {"language", 0},
             {"mouseSensibility", 10},
+            {"enableChat", 1},
             {"chatSize", 1},
         };
     }

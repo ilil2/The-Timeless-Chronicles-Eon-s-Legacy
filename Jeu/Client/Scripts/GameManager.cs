@@ -27,7 +27,6 @@ public partial class GameManager : Node3D
 	protected static int port_serv_jeu;	//port serveur secondaire
 	protected static bool conn2 = true;
 
-	public static string ConnectionError = "";
 	public static string IDGame = "";
 	public static bool LobbyReset = false;
 	public static bool ValidIDGame = false;
@@ -40,6 +39,7 @@ public partial class GameManager : Node3D
 	public static InputControl InputManger;
 	public static LanguageControl LanguageManager;
 	public static Settings SettingsManager;
+	public static FastConnection FastConnectionManager;
 	
 	protected static Node3D Map;
 	protected static Control ProgressBar;
@@ -95,6 +95,7 @@ public partial class GameManager : Node3D
 		LanguageManager = new LanguageControl();
 		SettingsManager = new Settings();
 		InputManger = new InputControl();
+		FastConnectionManager = new FastConnection();
 		
 		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal

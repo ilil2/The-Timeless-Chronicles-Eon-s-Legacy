@@ -8,9 +8,9 @@ public partial class AssassinScript : ClassScript
     {
         InitPlayer();
         
-        _walkSpeed = 4.6f;
-        _runSpeed = 7.9f;
-        _dashPower = 100.0f;
+        _walkSpeed = 5f;
+        _runSpeed = 8f;
+        _dashPower = 120.0f;
     }
 
     public override void _Input(InputEvent @event)

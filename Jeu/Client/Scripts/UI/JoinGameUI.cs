@@ -20,6 +20,7 @@ public partial class JoinGameUI : Control
 	
 	private float _screenDefalutWidth = 1152;
 	private float _titleDefaultSize = 40;
+	private float _lineEditDefaultSize = 30;
 	private float _buttonDefaultSize = 20;
 	private float _errorDefaultSize = 16;
 	
@@ -28,7 +29,6 @@ public partial class JoinGameUI : Control
 		//Recuperation des elements du menu
 		_backButton = GetNode<Button>("BackButton");
 		_joinGameButton = GetNode<Button>("JoinButton");
-		_gameID = GetNode<LineEdit>("JoinGameIDLine");
 		Translation();
 	}
 	
@@ -44,11 +44,13 @@ public partial class JoinGameUI : Control
 	
 	public void OnResize()
 	{
+		_gameID = GetNode<LineEdit>("JoinGameIDLine");
 		_title = GetNode<Label>("JoinTextMenu");
 		_idError = GetNode<Label>("IDErrorText");
 		_backButtonText = GetNode<Label>("BackButton/BackButtonText");
 		_joinButtonText = GetNode<Label>("JoinButton/JoinButtonText");
 		
+		_gameID.AddThemeFontSizeOverride("font_size", (int)(_lineEditDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
 		_title.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_backButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_joinButtonText.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));

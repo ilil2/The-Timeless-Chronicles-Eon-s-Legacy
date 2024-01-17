@@ -51,6 +51,11 @@ public static class Conversions
 		return b?1:0;
 	}
 	
+	public static bool ItoB(int i)
+	{
+		return i == 1;
+	}
+	
 	public static float Pow(float n,int b)
 	{
 		if (b == 0)

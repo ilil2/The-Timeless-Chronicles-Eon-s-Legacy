@@ -53,7 +53,7 @@ public partial class ArcherScript : ClassScript
 	{
 		_shootTimer += 1;
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootTimer > 30 && _shootPower <= 3)
+		if (Input.IsMouseButtonPressed(MouseButton.Right) && _shootTimer > 30)
 		{
 			if (!_shootAnimation)
 			{
@@ -63,13 +63,17 @@ public partial class ArcherScript : ClassScript
 			
 			IsShooting = true;
 			_isAiming = true;
-			_shootPower += 0.015f;
+			
+			if (_shootPower <= 3)
+			{
+				_shootPower += 0.015f;
+			}
 			
 			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/HUD/ViewFinder.tscn");
 			Control crossHair = crossHairScene.Instantiate<Control>();
 			AddChild(crossHair);
 		}
-		else if (IsShooting || _shootPower > 3)
+		else if (IsShooting)
 		{
 			_isAiming = false;
 			_shootTimer = 0;
@@ -81,10 +85,12 @@ public partial class ArcherScript : ClassScript
 			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
 
 			double rotationY = _cameraH.Rotation.Y;
+			Vector3 arrowPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
 			
-			arrow.Position = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
+			arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y, (arrowPosition.Z + GlobalPosition.Z) / 2);
 			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), _cameraV.Rotation.X);
 			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(_cameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+			
 			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
 			

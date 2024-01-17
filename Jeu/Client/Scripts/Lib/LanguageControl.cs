@@ -16,6 +16,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Password"},
             {"connectionMenuConnectionButton", "Connection"},
             {"connectionMenuNoAccountButton", "No account ?"},
+            {"connectionMenuFastConnectionButton", "Fast Connection"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Incorrect username or password"},
+            {"connectionMenuErrorFastConnectionText", "Error in fast connection"},
+            {"connectionMenuErrorNoFastConnectionText", "No fast connections registered"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -24,6 +28,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Confirm password"},
             {"inscriptionMenuInscriptionButton", "Inscription"},
             {"inscriptionMenuAlreadyAccountButton", "Already have an account ?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Incorrect confirmation password"},
+            {"inscriptionMenuErrorAlreadyExistText", "Username already exist"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -111,109 +117,6 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
-            {"languageName", "English (Hexadecimal)"},
-            
-            //Connection Menu
-            {"connectionMenuTitle", "436f6e6e656374696f6e"},
-            {"connectionMenuPseudoText", "50736575646f"},
-            {"connectionMenuPasswordText", "50617373776f7264"},
-            {"connectionMenuConnectionButton", "436f6e6e656374696f6e"},
-            {"connectionMenuNoAccountButton", "4e6f206163636f756e74203f"},
-            
-            //Inscription Menu
-            {"inscriptionMenuTitle", "496e736372697074696f6e"},
-            {"inscriptionMenuPseudoText", "50736575646f"},
-            {"inscriptionMenuPasswordText", "50617373776f7264"},
-            {"inscriptionMenuPasswordConfirmText", "436f6e6669726d65722070617373776f7264"},
-            {"inscriptionMenuInscriptionButton", "496e736372697074696f6e"},
-            {"inscriptionMenuAlreadyAccountButton", "416c7265616479206163636f756e74203f"},
-            
-            //Lobby Menu
-            {"lobbyMenuTitle", "4c6f626279"},
-            {"lobbyMenuCreateGame", "4372656174652047616d65"},
-            {"lobbyMenuJoinGame", "4a6f696e2047616d65"},
-            
-            //Create Game Menu
-            {"createGameMenuTitle", "4372656174652047616d65"},
-            {"createGameMenuBackButton", "<3d204261636b"},
-            {"createGameMenuStartGame", "53746172742047616d65"},
-            {"createGameMenuID", "4944206f66207468652047616d65"},
-            {"createGameMenuPlayer1", "506c6179657220313a"},
-            {"createGameMenuPlayer2", "506c6179657220323a"},
-            {"createGameMenuPlayer3", "506c6179657220333a"},
-            {"createGameMenuPlayer4", "506c6179657220343a"},
-            
-            //Join Game Menu
-            {"joinGameMenuTitle", "4a6f696e2047616d65"},
-            {"joinGameMenuBackButton", "<3d204261636b"},
-            {"joinGameMenuGameID", "4944206f66207468652047616d65"},
-            
-            //Select Class Menu
-            {"selectClassMenuArcherClass", "417263686572"},
-            {"selectClassMenuKnightClass", "4b6e69676874"},
-            {"selectClassMenuScientistClass", "536369656e74697374"},
-            {"selectClassMenuAssassinClass", "417373617373696e"},
-            {"selectClassMenuReadyButton", "5265616479"},
-            {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
-            
-            //Map loading
-            {"gameLoadingMapText", "4c6f6164696e6720746865206d6170203a"},
-            {"gameLoadingMapWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273"},
-            
-            //Pause Menu
-            {"pauseMenuTitle", "5061757365204d656e75"},
-            {"pauseMenuResumeButton", "526573756d65"},
-            {"pauseMenuSettingsButton", "53657474696e6773"},
-            {"pauseMenuLeaveButton", "4c65617665"},
-            {"pauseMenuConfirmLeaveTitle", "41726520796f75207375726520796f752077616e7420746f206c65617665207468652067616d653f"},
-            {"pauseMenuConfirmLeaveButton", "4c65617665"},
-            {"pauseMenuCancelLeaveButton", "43616e63656c"},
-            
-            //Settings Menu
-            {"settingsMenuTitle", "53657474696e6773"},
-            {"settingsMenuBackButton", "<3d204261636b"},
-            {"settingsMenuResetButton", "5265736574"},
-            {"settingsMenuSaveButton", "53617665"},
-            
-            //Settings Menu - Game
-            {"settingsMenuGameButton", "47616d65"},
-            {"settingsMenuGameLanguage", "4c616e67756167653a"},
-            {"settingsMenuGameMouseSensibility", "4d6f7573652053656e736962696c6974793a"},
-            {"settingsMenuGameFullScreen", "46756c6c2053637265656e3a"},
-            {"settingsMenuGameEnableChat", "456e61626c6520436861743a"},
-            {"settingsMenuGameChatSize", "436861742053697a653a"},
-            {"settingsMenuGameChatSizeSmall", "536d616c6c"},
-            {"settingsMenuGameChatSizeMedium", "4d656469756d"},
-            {"settingsMenuGameChatSizeLarge", "4c61726765"},
-            
-            //Settings Menu - Audio
-            {"settingsMenuAudioButton", "417564696f"},
-            
-            //Settings Menu - Video
-            {"settingsMenuVideoButton", "566964656f"},
-            
-            //Settings Menu - Controls
-            {"settingsMenuControlsButton", "436f6e74726f6c73"},
-            {"settingsMenuControlsMoveForward", "4d6f766520466f7277617264"},
-            {"settingsMenuControlsMoveBackward", "4d6f7665204261636b77617264"},
-            {"settingsMenuControlsMoveLeft", "4d6f7665204c656674"},
-            {"settingsMenuControlsMoveRight", "4d6f7665205269676874"},
-            {"settingsMenuControlsSprint", "53637265656e"},
-            {"settingsMenuControlsDash", "4461736820"},
-            {"settingsMenuControlsCapacity1", "43617061636974792031"},
-            {"settingsMenuControlsCapacity2", "43617061636974792032"},
-            {"settingsMenuControlsCapacity3", "43617061636974792033"},
-            {"settingsMenuControlsItem1", "4974656d2031"},
-            {"settingsMenuControlsItem2", "4974656d2032"},
-            {"settingsMenuControlsItem3", "4974656d2033"},
-            {"settingsMenuControlsInventory", "496e76656e746f7279"},
-            {"settingsMenuControlsReload", "52656c6f6164"},
-            {"settingsMenuControlsChat", "43686174"},
-            {"settingsMenuControlsPause", "5061757365"},
-        },
-        
-        new Dictionary<string, string>
-        {
             {"languageName", "Français"},
             
             //Connection Menu
@@ -222,6 +125,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Mot de passe"},
             {"connectionMenuConnectionButton", "Connexion"},
             {"connectionMenuNoAccountButton", "Pas de compte ?"},
+            {"connectionMenuFastConnectionButton", "Connexion Rapide"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo ou mot de passe incorrect"},
+            {"connectionMenuErrorFastConnectionText", "Erreur dans la connexion rapide"},
+            {"connectionMenuErrorNoFastConnectionText", "Aucune connexion rapide enregistrée"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -230,6 +137,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Confirmer le mot de passe"},
             {"inscriptionMenuInscriptionButton", "Inscription"},
             {"inscriptionMenuAlreadyAccountButton", "Déjà un compte ?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Confirmation du mot de passe incorrect"},
+            {"inscriptionMenuErrorAlreadyExistText", "Pseudo déjà existant"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -325,6 +234,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Ger-tremen"},
             {"connectionMenuConnectionButton", "Kenstabl"},
             {"connectionMenuNoAccountButton", "N'eo ket gant ur c'hemennadenn ?"},
+            {"connectionMenuFastConnectionButton", "Kenstabl Gwisk"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo pe ger-tremen fall"},
+            {"connectionMenuErrorFastConnectionText", "Fazi e kenstabl gwisk"},
+            {"connectionMenuErrorNoFastConnectionText", "N'eo ket kenstabl gwisk en em enrollaet"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "En em enskrivañ"},
@@ -333,6 +246,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Kadarnaat ar ger-tremen"},
             {"inscriptionMenuInscriptionButton", "En em enskrivañ"},
             {"inscriptionMenuAlreadyAccountButton", "Ur c'hemennadenn zo ganeoc'h ?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Kadarnaat ar ger-tremen fall"},
+            {"inscriptionMenuErrorAlreadyExistText", "Pseudo dija enrollaet"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -428,6 +343,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Passwort"},
             {"connectionMenuConnectionButton", "Verbindung"},
             {"connectionMenuNoAccountButton", "Kein Konto?"},
+            {"connectionMenuFastConnectionButton", "Schnelle Verbindung"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Falscher Benutzername oder falsches Passwort"},
+            {"connectionMenuErrorFastConnectionText", "Fehler bei der schnellen Verbindung"},
+            {"connectionMenuErrorNoFastConnectionText", "Keine schnellen Verbindungen registriert"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Einschreibung"},
@@ -436,6 +355,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Passwort bestätigen"},
             {"inscriptionMenuInscriptionButton", "Einschreibung"},
             {"inscriptionMenuAlreadyAccountButton", "Bereits ein Konto?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Falsches Bestätigungspasswort"},
+            {"inscriptionMenuErrorAlreadyExistText", "Benutzername existiert bereits"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -531,6 +452,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Contraseña"},
             {"connectionMenuConnectionButton", "Conexión"},
             {"connectionMenuNoAccountButton", "¿No tienes una cuenta?"},
+            {"connectionMenuFastConnectionButton", "Conexión Rápida"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Nombre de usuario o contraseña incorrectos"},
+            {"connectionMenuErrorFastConnectionText", "Error en la conexión rápida"},
+            {"connectionMenuErrorNoFastConnectionText", "No hay conexiones rápidas registradas"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscripción"},
@@ -539,6 +464,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Confirmar contraseña"},
             {"inscriptionMenuInscriptionButton", "Inscripción"},
             {"inscriptionMenuAlreadyAccountButton", "¿Ya tienes una cuenta?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Contraseña de confirmación incorrecta"},
+            {"inscriptionMenuErrorAlreadyExistText", "Nombre de usuario ya existente"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -634,6 +561,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Pasvorto"},
             {"connectionMenuConnectionButton", "Konekto"},
             {"connectionMenuNoAccountButton", "Ĉu vi ne havas konton?"},
+            {"connectionMenuFastConnectionButton", "Rapida Konekto"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Malĝusta uzantnomo aŭ pasvorto"},
+            {"connectionMenuErrorFastConnectionText", "Eraro en rapida konekto"},
+            {"connectionMenuErrorNoFastConnectionText", "Neniu rapida konekto registrita"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inskribo"},
@@ -642,6 +573,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Konfirmu pasvorton"},
             {"inscriptionMenuInscriptionButton", "Inskribo"},
             {"inscriptionMenuAlreadyAccountButton", "Ĉu vi jam havas konton?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Malĝusta konfirmo de pasvorto"},
+            {"inscriptionMenuErrorAlreadyExistText", "Uzantnomo jam ekzistas"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Ludejo"},
@@ -737,6 +670,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Password"},
             {"connectionMenuConnectionButton", "Connexio"},
             {"connectionMenuNoAccountButton", "Non habes rationem?"},
+            {"connectionMenuFastConnectionButton", "Connexio celeriter"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo vel password falsum"},
+            {"connectionMenuErrorFastConnectionText", "Error in connexione celeriter"},
+            {"connectionMenuErrorNoFastConnectionText", "Nulla connexio celeriter registrata"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscriptio"},
@@ -745,6 +682,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Password confirmare"},
             {"inscriptionMenuInscriptionButton", "Inscriptio"},
             {"inscriptionMenuAlreadyAccountButton", "Habes rationem?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Password confirmare falsum"},
+            {"inscriptionMenuErrorAlreadyExistText", "Pseudo iam existit"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -840,6 +779,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Iphasiwedi"},
             {"connectionMenuConnectionButton", "Ukuxhumana"},
             {"connectionMenuNoAccountButton", "Awunayo i-akhawunti?"},
+            {"connectionMenuFastConnectionButton", "Ukuxhumana okukhulu"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo noma iphasiwedi elingenayo"},
+            {"connectionMenuErrorFastConnectionText", "Iphutha ekuxhumaneni okukhulu"},
+            {"connectionMenuErrorNoFastConnectionText", "Awukho ukuxhumana okukhulu okuqashisayo"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Ukubhalisa"},
@@ -848,6 +791,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Yaqinisa iphasiwedi"},
             {"inscriptionMenuInscriptionButton", "Ukubhalisa"},
             {"inscriptionMenuAlreadyAccountButton", "Unayo i-akhawunti?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Yaqinisa iphasiwedi elingenayo"},
+            {"inscriptionMenuErrorAlreadyExistText", "Pseudo elingenayo"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -943,6 +888,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "كلمة السر"},
             {"connectionMenuConnectionButton", "توصيل"},
             {"connectionMenuNoAccountButton", "لا يوجد لديك حساب؟"},
+            {"connectionMenuFastConnectionButton", "توصيل سريع"},
+            {"connectionMenuErrorUsernameOrPasswordText", "اسم المستخدم أو كلمة المرور غير صحيحة"},
+            {"connectionMenuErrorFastConnectionText", "خطأ في التوصيل السريع"},
+            {"connectionMenuErrorNoFastConnectionText", "لا توجد اتصالات سريعة مسجلة"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "التسجيل"},
@@ -951,6 +900,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "تأكيد كلمة المرور"},
             {"inscriptionMenuInscriptionButton", "التسجيل"},
             {"inscriptionMenuAlreadyAccountButton", "هل لديك حساب بالفعل؟"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "تأكيد كلمة المرور غير صحيح"},
+            {"inscriptionMenuErrorAlreadyExistText", "اسم المستخدم موجود بالفعل"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "الردهة"},
@@ -1046,6 +997,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "密码"},
             {"connectionMenuConnectionButton", "连接"},
             {"connectionMenuNoAccountButton", "没有帐户？"},
+            {"connectionMenuFastConnectionButton", "快速连接"},
+            {"connectionMenuErrorUsernameOrPasswordText", "用户名或密码不正确"},
+            {"connectionMenuErrorFastConnectionText", "快速连接错误"},
+            {"connectionMenuErrorNoFastConnectionText", "没有注册快速连接"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "注册"},
@@ -1054,6 +1009,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "确认密码"},
             {"inscriptionMenuInscriptionButton", "注册"},
             {"inscriptionMenuAlreadyAccountButton", "已经有一个帐户？"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "密码确认不正确"},
+            {"inscriptionMenuErrorAlreadyExistText", "用户名已经存在"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "大厅"},
@@ -1149,6 +1106,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Κωδικός πρόσβασης"},
             {"connectionMenuConnectionButton", "Σύνδεση"},
             {"connectionMenuNoAccountButton", "Δεν έχετε λογαριασμό;"},
+            {"connectionMenuFastConnectionButton", "Γρήγορη σύνδεση"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Λανθασμένο ψευδώνυμο ή κωδικός πρόσβασης"},
+            {"connectionMenuErrorFastConnectionText", "Σφάλμα στη γρήγορη σύνδεση"},
+            {"connectionMenuErrorNoFastConnectionText", "Δεν υπάρχει καταχωρημένη γρήγορη σύνδεση"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Εγγραφή"},
@@ -1157,6 +1118,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Επιβεβαίωση κωδικού πρόσβασης"},
             {"inscriptionMenuInscriptionButton", "Εγγραφή"},
             {"inscriptionMenuAlreadyAccountButton", "Έχετε ήδη ένα λογαριασμό;"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Λανθασμένη επιβεβαίωση κωδικού πρόσβασης"},
+            {"inscriptionMenuErrorAlreadyExistText", "Το ψευδώνυμο υπάρχει ήδη"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Σαλόνι"},
@@ -1253,6 +1216,10 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Пароль"},
             {"connectionMenuConnectionButton", "Соединение"},
             {"connectionMenuNoAccountButton", "Нет учетной записи?"},
+            {"connectionMenuFastConnectionButton", "Быстрое соединение"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Неверное имя пользователя или пароль"},
+            {"connectionMenuErrorFastConnectionText", "Ошибка быстрого подключения"},
+            {"connectionMenuErrorNoFastConnectionText", "Нет зарегистрированных быстрых подключений"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Регистрация"},
@@ -1261,6 +1228,8 @@ public class LanguageControl
             {"inscriptionMenuPasswordConfirmText", "Подтвердите пароль"},
             {"inscriptionMenuInscriptionButton", "Регистрация"},
             {"inscriptionMenuAlreadyAccountButton", "Уже есть аккаунт?"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "Неверное подтверждение пароля"},
+            {"inscriptionMenuErrorAlreadyExistText", "Имя пользователя уже существует"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Лобби"},
@@ -1345,6 +1314,115 @@ public class LanguageControl
             {"settingsMenuControlsChat", "Чат"},
             {"settingsMenuControlsPause", "Пауза"},
         },
+        
+        new Dictionary<string, string>
+        {
+            {"languageName", "Hexadecimal"},
+            
+            //Connection Menu
+            {"connectionMenuTitle", "436f6e6e656374696f6e"},
+            {"connectionMenuPseudoText", "50736575646f"},
+            {"connectionMenuPasswordText", "50617373776f7264"},
+            {"connectionMenuConnectionButton", "436f6e6e656374696f6e"},
+            {"connectionMenuNoAccountButton", "4e6f206163636f756e74203f"},
+            {"connectionMenuFastConnectionButton", "4661737420636f6e6e656374696f6e"},
+            {"connectionMenuErrorUsernameOrPasswordText", "556e636f727265637420757365726e616d65206f722070617373776f7264"},
+            {"connectionMenuErrorFastConnectionText", "4661737420636f6e6e656374696f6e206572726f72"},
+            {"connectionMenuErrorNoFastConnectionText", "4e6f206661737420636f6e6e656374696f6e207265636f726465642e"},
+            
+            //Inscription Menu
+            {"inscriptionMenuTitle", "496e736372697074696f6e"},
+            {"inscriptionMenuPseudoText", "50736575646f"},
+            {"inscriptionMenuPasswordText", "50617373776f7264"},
+            {"inscriptionMenuPasswordConfirmText", "436f6e6669726d65722070617373776f7264"},
+            {"inscriptionMenuInscriptionButton", "496e736372697074696f6e"},
+            {"inscriptionMenuAlreadyAccountButton", "416c7265616479206163636f756e74203f"},
+            {"inscriptionMenuErrorIncorrectConfirmText", "496e636f727265637420636f6e6669726d6174696f6e"},
+            {"inscriptionMenuErrorAlreadyExistText", "55736572206e616d65206c65737473206d756c7469706c65206578697374"},
+            
+            //Lobby Menu
+            {"lobbyMenuTitle", "4c6f626279"},
+            {"lobbyMenuCreateGame", "4372656174652047616d65"},
+            {"lobbyMenuJoinGame", "4a6f696e2047616d65"},
+            
+            //Create Game Menu
+            {"createGameMenuTitle", "4372656174652047616d65"},
+            {"createGameMenuBackButton", "<3d204261636b"},
+            {"createGameMenuStartGame", "53746172742047616d65"},
+            {"createGameMenuID", "4944206f66207468652047616d65"},
+            {"createGameMenuPlayer1", "506c6179657220313a"},
+            {"createGameMenuPlayer2", "506c6179657220323a"},
+            {"createGameMenuPlayer3", "506c6179657220333a"},
+            {"createGameMenuPlayer4", "506c6179657220343a"},
+            
+            //Join Game Menu
+            {"joinGameMenuTitle", "4a6f696e2047616d65"},
+            {"joinGameMenuBackButton", "<3d204261636b"},
+            {"joinGameMenuGameID", "4944206f66207468652047616d65"},
+            
+            //Select Class Menu
+            {"selectClassMenuArcherClass", "417263686572"},
+            {"selectClassMenuKnightClass", "4b6e69676874"},
+            {"selectClassMenuScientistClass", "536369656e74697374"},
+            {"selectClassMenuAssassinClass", "417373617373696e"},
+            {"selectClassMenuReadyButton", "5265616479"},
+            {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
+            
+            //Map loading
+            {"gameLoadingMapText", "4c6f6164696e6720746865206d6170203a"},
+            {"gameLoadingMapWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273"},
+            
+            //Pause Menu
+            {"pauseMenuTitle", "5061757365204d656e75"},
+            {"pauseMenuResumeButton", "526573756d65"},
+            {"pauseMenuSettingsButton", "53657474696e6773"},
+            {"pauseMenuLeaveButton", "4c65617665"},
+            {"pauseMenuConfirmLeaveTitle", "41726520796f75207375726520796f752077616e7420746f206c65617665207468652067616d653f"},
+            {"pauseMenuConfirmLeaveButton", "4c65617665"},
+            {"pauseMenuCancelLeaveButton", "43616e63656c"},
+            
+            //Settings Menu
+            {"settingsMenuTitle", "53657474696e6773"},
+            {"settingsMenuBackButton", "<3d204261636b"},
+            {"settingsMenuResetButton", "5265736574"},
+            {"settingsMenuSaveButton", "53617665"},
+            
+            //Settings Menu - Game
+            {"settingsMenuGameButton", "47616d65"},
+            {"settingsMenuGameLanguage", "4c616e67756167653a"},
+            {"settingsMenuGameMouseSensibility", "4d6f7573652053656e736962696c6974793a"},
+            {"settingsMenuGameFullScreen", "46756c6c2053637265656e3a"},
+            {"settingsMenuGameEnableChat", "456e61626c6520436861743a"},
+            {"settingsMenuGameChatSize", "436861742053697a653a"},
+            {"settingsMenuGameChatSizeSmall", "536d616c6c"},
+            {"settingsMenuGameChatSizeMedium", "4d656469756d"},
+            {"settingsMenuGameChatSizeLarge", "4c61726765"},
+            
+            //Settings Menu - Audio
+            {"settingsMenuAudioButton", "417564696f"},
+            
+            //Settings Menu - Video
+            {"settingsMenuVideoButton", "566964656f"},
+            
+            //Settings Menu - Controls
+            {"settingsMenuControlsButton", "436f6e74726f6c73"},
+            {"settingsMenuControlsMoveForward", "4d6f766520466f7277617264"},
+            {"settingsMenuControlsMoveBackward", "4d6f7665204261636b77617264"},
+            {"settingsMenuControlsMoveLeft", "4d6f7665204c656674"},
+            {"settingsMenuControlsMoveRight", "4d6f7665205269676874"},
+            {"settingsMenuControlsSprint", "53637265656e"},
+            {"settingsMenuControlsDash", "4461736820"},
+            {"settingsMenuControlsCapacity1", "43617061636974792031"},
+            {"settingsMenuControlsCapacity2", "43617061636974792032"},
+            {"settingsMenuControlsCapacity3", "43617061636974792033"},
+            {"settingsMenuControlsItem1", "4974656d2031"},
+            {"settingsMenuControlsItem2", "4974656d2032"},
+            {"settingsMenuControlsItem3", "4974656d2033"},
+            {"settingsMenuControlsInventory", "496e76656e746f7279"},
+            {"settingsMenuControlsReload", "52656c6f6164"},
+            {"settingsMenuControlsChat", "43686174"},
+            {"settingsMenuControlsPause", "5061757365"},
+        }
     };
     
     public Dictionary<string, string> GetLanguage(int index)
