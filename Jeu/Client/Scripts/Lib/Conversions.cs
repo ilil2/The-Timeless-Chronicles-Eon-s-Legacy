@@ -32,9 +32,6 @@ public static class Conversions
 		{
 			return 0f;
 		}
-		{
-			return 0f;
-		}
 		float res = 0;
 		bool nega = false;
 		

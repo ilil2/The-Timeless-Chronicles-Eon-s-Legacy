@@ -36,7 +36,6 @@ public partial class Listen2 : GameManager
 	    }
 	    else if (rep.Length > 2 && rep.Substring(0,2) == "in")
 	    {
-		    Console.WriteLine(rep);
 		    string line = rep.Substring(3);
 		    string[] SplitInfo = line.Split('|');
 		    for (int i = 0; i < 4; i++)
