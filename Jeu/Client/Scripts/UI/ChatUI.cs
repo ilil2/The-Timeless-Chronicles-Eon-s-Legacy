@@ -16,10 +16,10 @@ public partial class ChatUI : Control
 	
 	private float _screenDefalutWidth = 1152;
 	private float _chatDefaultSize = 12;
+	private float _chatInputDefaultSize = 15;
 	
 	public override void _Ready()
 	{
-		_input = GetNode<LineEdit>("Chat/Input");
 		_colorRect = GetNode<ColorRect>("Chat/ColorRect");
 		_chat = GetNode<Control>("Chat");
 
@@ -30,8 +30,10 @@ public partial class ChatUI : Control
 	
 	public void OnResize()
 	{
+		_input = GetNode<LineEdit>("Chat/Input");
 		_output = GetNode<Label>("Chat/Output");
 		
+		_input.AddThemeFontSizeOverride("font_size", (int)(_chatInputDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
 		_output.LabelSettings.FontSize = (int)(_chatDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 

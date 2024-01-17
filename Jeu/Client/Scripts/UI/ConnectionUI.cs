@@ -12,6 +12,7 @@ public partial class ConnectionUI : Control
 	
 	public static Button ConnectionButton;
 	public static Button InscriptionButton;
+	public static Button _fastConnectionButton;
 	private Button _noCompteButton;
 	private Button _dejaCompteButton;
 	private OptionButton _languageChooseButton;
@@ -23,6 +24,7 @@ public partial class ConnectionUI : Control
 	private Label _dejaCompteButtonText;
 	private Label _connectionButtonText;
 	private Label _inscriptionButtonText;
+	private Label _fastConnectionButtonText;
 	
 	private float _screenDefalutWidth = 1152;
 	private float _titleDefaultSize = 45;
@@ -45,19 +47,13 @@ public partial class ConnectionUI : Control
 	public override void _Ready()
 	{
 		//Recuperation des differents elements du menu
-		//Input
-		_pseudoConnectionNode = GetNode<LineEdit>("PseudoConnection");
-		_passwordConnectionNode = GetNode<LineEdit>("PasswordConnection");
-		_pseudoInscriptionNode = GetNode<LineEdit>("PseudoInscription");
-		_passwordInscriptionNode = GetNode<LineEdit>("PasswordInscription");
-		_passwordConfirmInscriptionNode = GetNode<LineEdit>("PasswordConfirmInscription");
 		
 		//Boutons
 		ConnectionButton = GetNode<Button>("Connection");
 		InscriptionButton = GetNode<Button>("Inscription");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
-		_languageChooseButton = GetNode<OptionButton>("LanguageChooseButton");
+		_fastConnectionButton = GetNode<Button>("FastConnectionButton");
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -89,6 +85,7 @@ public partial class ConnectionUI : Control
 		_passwordConnectionNode.PlaceholderText = _languageDict["connectionMenuPasswordText"];
 		_connectionButtonText.Text = _languageDict["connectionMenuConnectionButton"];
 		_noCompteButtonText.Text = _languageDict["connectionMenuNoAccountButton"];
+		_fastConnectionButtonText.Text = _languageDict["connectionMenuFastConnectionButton"];
 		
 		//Inscription
 		_pseudoInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPseudoText"];
@@ -100,6 +97,14 @@ public partial class ConnectionUI : Control
 	
 	public void OnResize()
 	{
+		//Input
+		_pseudoConnectionNode = GetNode<LineEdit>("PseudoConnection");
+		_passwordConnectionNode = GetNode<LineEdit>("PasswordConnection");
+		_pseudoInscriptionNode = GetNode<LineEdit>("PseudoInscription");
+		_passwordInscriptionNode = GetNode<LineEdit>("PasswordInscription");
+		_passwordConfirmInscriptionNode = GetNode<LineEdit>("PasswordConfirmInscription");
+		_languageChooseButton = GetNode<OptionButton>("LanguageChooseButton");
+		
 		//Label
 		_menuName = GetNode<Label>("MenuName");
 		_connectionError = GetNode<Label>("ConnectionError");
@@ -108,6 +113,15 @@ public partial class ConnectionUI : Control
 		_noCompteButtonText = GetNode<Label>("NoCompte/NoCompteButtonText");
 		_connectionButtonText = GetNode<Label>("Connection/ConnectionButtonText");
 		_inscriptionButtonText = GetNode<Label>("Inscription/InscriptionButtonText");
+		_fastConnectionButtonText = GetNode<Label>("FastConnectionButton/FastConnectionText");
+		
+		//Line Edit Size
+		_pseudoConnectionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+		_passwordConnectionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+		_pseudoInscriptionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+		_passwordInscriptionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+		_passwordConfirmInscriptionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+		_languageChooseButton.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
 		
 		//Label Size
 		_menuName.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
@@ -117,6 +131,7 @@ public partial class ConnectionUI : Control
 		_noCompteButtonText.LabelSettings.FontSize = (int)(_transparentButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_connectionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_inscriptionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_fastConnectionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 	
 	public override void _Process(double delta)

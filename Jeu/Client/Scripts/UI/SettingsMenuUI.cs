@@ -95,13 +95,11 @@ public partial class SettingsMenuUI : Control
         //Game
         _gameSettings = GetNode<Control>("GameSettings");
         _gameSettingsButton = GetNode<Button>("GameSettingsButton");
-        _languageChooseButton = GetNode<OptionButton>("GameSettings/LanguageChooseButton");
         _mouseSensibilityBar = GetNode<ScrollBar>("GameSettings/MouseSensibilityBar");
         _fullScreenOnButton = GetNode<Button>("GameSettings/FullScreenOnButton");
         _fullScreenOffButton = GetNode<Button>("GameSettings/FullScreenOffButton");
         _enableChatOnButton = GetNode<Button>("GameSettings/EnableChatOnButton");
         _enableChatOffButton = GetNode<Button>("GameSettings/EnableChatOffButton");
-        _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
         _resetGameSettingsButton = GetNode<Button>("GameSettings/ResetGameSettingsButton");
         _saveGameSettingsButton = GetNode<Button>("GameSettings/SaveGameSettingsButton");
 
@@ -128,7 +126,6 @@ public partial class SettingsMenuUI : Control
         //Input
         _inputSettings = GetNode<Control>("InputSettings");
         _inputSettingsButton = GetNode<Button>("InputSettingsButton");
-        _inputList = GetNode<ItemList>("InputSettings/InputList");
         _resetInputButton = GetNode<Button>("InputSettings/ResetInputButton");
         _saveInputButton = GetNode<Button>("InputSettings/SaveInputButton");
         
@@ -212,6 +209,9 @@ public partial class SettingsMenuUI : Control
         _backButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         
         //Game
+        _languageChooseButton = GetNode<OptionButton>("GameSettings/LanguageChooseButton");
+        _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
+        
         _gameSettingsText = GetNode<Label>("GameSettingsButton/GameSettingsText");
         _languageChooseText = GetNode<Label>("GameSettings/LanguageChooseText");
         _mouseSensibilityText = GetNode<Label>("GameSettings/MouseSensibilityText");
@@ -224,6 +224,9 @@ public partial class SettingsMenuUI : Control
         _chatSizeText = GetNode<Label>("GameSettings/ChatSizeText");
         _resetGameSettingsText = GetNode<Label>("GameSettings/ResetGameSettingsButton/ResetGameSettingsText");
         _saveGameSettingsText = GetNode<Label>("GameSettings/SaveGameSettingsButton/SaveGameSettingsText");
+        
+        _languageChooseButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
+        _chatSizeButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         
         _gameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _languageChooseText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
@@ -257,9 +260,13 @@ public partial class SettingsMenuUI : Control
         _saveVideoSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         
         //Input
+        _inputList = GetNode<ItemList>("InputSettings/InputList");
+        
         _inputSettingsText = GetNode<Label>("InputSettingsButton/InputSettingsText");
         _resetInputText = GetNode<Label>("InputSettings/ResetInputButton/ResetInputText");
         _saveInputText = GetNode<Label>("InputSettings/SaveInputButton/SaveInputText");
+        
+        _inputList.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         
         _inputSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _resetInputText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));

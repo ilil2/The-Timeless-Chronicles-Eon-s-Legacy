@@ -1,6 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bukpc7fa40grn"]
+[gd_scene load_steps=14 format=3 uid="uid://bukpc7fa40grn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ConnectionUI.cs" id="1_u3ff4"]
+
+[sub_resource type="Theme" id="Theme_wjygb"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_3jpwc"]
 pressed = true
@@ -33,6 +35,9 @@ font_size = 45
 [sub_resource type="LabelSettings" id="LabelSettings_71d1n"]
 font_size = 20
 font_color = Color(0.678431, 0.141176, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gnhab"]
+font_size = 20
 
 [node name="ConnectionUI" type="Control"]
 layout_mode = 3
@@ -120,6 +125,7 @@ offset_left = 0.12796
 offset_top = 0.23999
 offset_right = -0.128052
 offset_bottom = 0.287964
+theme = SubResource("Theme_wjygb")
 theme_override_font_sizes/font_size = 20
 placeholder_text = "Pseudo"
 max_length = 16
@@ -296,7 +302,31 @@ offset_left = -0.256001
 offset_top = -0.176003
 offset_right = 0.384003
 offset_bottom = 0.295998
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 20
+
+[node name="FastConnectionButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.792
+anchor_top = 0.062
+anchor_right = 0.972
+anchor_bottom = 0.123
+offset_left = -0.384064
+offset_top = -0.176002
+offset_right = 0.255928
+offset_bottom = 0.295998
+
+[node name="FastConnectionText" type="Label" parent="FastConnectionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fast connection"
+label_settings = SubResource("LabelSettings_gnhab")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="resized" from="." to="." method="OnResize"]
 [connection signal="pressed" from="NoCompte" to="." method="NoCompte"]

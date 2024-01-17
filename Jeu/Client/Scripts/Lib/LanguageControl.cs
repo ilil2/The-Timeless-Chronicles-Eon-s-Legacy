@@ -16,6 +16,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Password"},
             {"connectionMenuConnectionButton", "Connection"},
             {"connectionMenuNoAccountButton", "No account ?"},
+            {"connectionMenuFastConnectionButton", "Fast Connection"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -119,6 +120,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Mot de passe"},
             {"connectionMenuConnectionButton", "Connexion"},
             {"connectionMenuNoAccountButton", "Pas de compte ?"},
+            {"connectionMenuFastConnectionButton", "Connexion Rapide"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -222,6 +224,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Ger-tremen"},
             {"connectionMenuConnectionButton", "Kenstabl"},
             {"connectionMenuNoAccountButton", "N'eo ket gant ur c'hemennadenn ?"},
+            {"connectionMenuFastConnectionButton", "Kenstabl Gwisk"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "En em enskrivañ"},
@@ -325,6 +328,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Passwort"},
             {"connectionMenuConnectionButton", "Verbindung"},
             {"connectionMenuNoAccountButton", "Kein Konto?"},
+            {"connectionMenuFastConnectionButton", "Schnelle Verbindung"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Einschreibung"},
@@ -428,6 +432,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Contraseña"},
             {"connectionMenuConnectionButton", "Conexión"},
             {"connectionMenuNoAccountButton", "¿No tienes una cuenta?"},
+            {"connectionMenuFastConnectionButton", "Conexión Rápida"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscripción"},
@@ -531,6 +536,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Pasvorto"},
             {"connectionMenuConnectionButton", "Konekto"},
             {"connectionMenuNoAccountButton", "Ĉu vi ne havas konton?"},
+            {"connectionMenuFastConnectionButton", "Rapida Konekto"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inskribo"},
@@ -634,6 +640,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Password"},
             {"connectionMenuConnectionButton", "Connexio"},
             {"connectionMenuNoAccountButton", "Non habes rationem?"},
+            {"connectionMenuFastConnectionButton", "Connexio celeriter"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscriptio"},
@@ -737,6 +744,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Iphasiwedi"},
             {"connectionMenuConnectionButton", "Ukuxhumana"},
             {"connectionMenuNoAccountButton", "Awunayo i-akhawunti?"},
+            {"connectionMenuFastConnectionButton", "Ukuxhumana okukhulu"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Ukubhalisa"},
@@ -840,6 +848,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "كلمة السر"},
             {"connectionMenuConnectionButton", "توصيل"},
             {"connectionMenuNoAccountButton", "لا يوجد لديك حساب؟"},
+            {"connectionMenuFastConnectionButton", "توصيل سريع"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "التسجيل"},
@@ -943,6 +952,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "密码"},
             {"connectionMenuConnectionButton", "连接"},
             {"connectionMenuNoAccountButton", "没有帐户？"},
+            {"connectionMenuFastConnectionButton", "快速连接"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "注册"},
@@ -1046,6 +1056,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Κωδικός πρόσβασης"},
             {"connectionMenuConnectionButton", "Σύνδεση"},
             {"connectionMenuNoAccountButton", "Δεν έχετε λογαριασμό;"},
+            {"connectionMenuFastConnectionButton", "Γρήγορη σύνδεση"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Εγγραφή"},
@@ -1150,6 +1161,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "Пароль"},
             {"connectionMenuConnectionButton", "Соединение"},
             {"connectionMenuNoAccountButton", "Нет учетной записи?"},
+            {"connectionMenuFastConnectionButton", "Быстрое соединение"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Регистрация"},
@@ -1253,6 +1265,7 @@ public class LanguageControl
             {"connectionMenuPasswordText", "50617373776f7264"},
             {"connectionMenuConnectionButton", "436f6e6e656374696f6e"},
             {"connectionMenuNoAccountButton", "4e6f206163636f756e74203f"},
+            {"connectionMenuFastConnectionButton", "4661737420636f6e6e656374696f6e"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "496e736372697074696f6e"},
