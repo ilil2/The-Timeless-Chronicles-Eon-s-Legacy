@@ -34,12 +34,17 @@ public partial class ConnectionUI : Control
 	private ColorRect _fastConnectionWarningBackground;
 	
 	private float _screenDefalutWidth = 1152;
+	private float _screenDefalutHight = 648;
 	private float _titleDefaultSize = 45;
 	private float _buttonDefaultSize = 20;
 	private float _transparentButtonDefaultSize = 16;
 	private float _errorDefaultSize = 16;
 	private float _saveDefaultSize = 14;
 	private float _warningDefaultSize = 10;
+	private float _checkBoxDefaultSize = 1.5f;
+	
+	private float _checkBoxXPosition = 424;
+	private float _checkBoxYPosition = 400;
 	
 	public static string _pseudo = "";
 	public static string _password = "";
@@ -66,12 +71,14 @@ public partial class ConnectionUI : Control
 		ConnectionButton = GetNode<Button>("Connection");
 		InscriptionButton = GetNode<Button>("Inscription");
 		FastConnectionButton = GetNode<Button>("FastConnectionButton");
-		FastConnectionSaveButton = GetNode<CheckBox>("FastConnectionSaveButton");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
 		_fastConnectionWarningButton = GetNode<Button>("FastConnectionWarningButton");
 		
 		_fastConnectionWarningBackground = GetNode<ColorRect>("FastConnectionWarningBackground");
+		
+		FastConnectionSaveButton.Size = new Vector2(24, 24);
+		FastConnectionSaveButton.Position = new Vector2(_checkBoxXPosition, _checkBoxYPosition);
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -166,6 +173,8 @@ public partial class ConnectionUI : Control
 		_fastConnectionSaveText = GetNode<Label>("FastConnectionSaveText");
 		_fastConnectionWarningButtonText = GetNode<Label>("FastConnectionWarningButton/FastConnectionWarningText");
 		
+		//Button
+		FastConnectionSaveButton = GetNode<CheckBox>("FastConnectionSaveButton");
 		
 		//Line Edit Size
 		_pseudoConnectionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
@@ -187,6 +196,11 @@ public partial class ConnectionUI : Control
 		_fastConnectionWarningText.LabelSettings.FontSize = (int)(_warningDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_fastConnectionSaveText.LabelSettings.FontSize = (int)(_saveDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_fastConnectionWarningButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		
+		//Button Size
+		FastConnectionSaveButton.Scale = new Vector2(_checkBoxDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkBoxDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		FastConnectionSaveButton.Position = new Vector2(_checkBoxXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkBoxYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
+		FastConnectionSaveButton.Size = new Vector2(24, 24);
 	}
 
 	public override void _PhysicsProcess(double delta)
