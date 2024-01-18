@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using Lib;
 
 namespace Serveur;
 
@@ -96,33 +97,51 @@ public class Serveur
         
         while (true)
         {
-            string s = UDP.Receive(soc);
-            string[] s2 = s.Split("_");
-            int id = Lib.Conversion.AtoI(s2[0]);
+            try
+            {
+                string s = UDP.Receive(soc);
+                string[] s2 = s.Split("_");
+                int id = Conversion.AtoI(s2[0]);
 
-            /*if (s2[1].Substring(0, 4) == "tcp:")
+                /*if (s2[1].Substring(0, 4) == "tcp:")
             {
                 s2[1] = s2[1].Substring(4);
                 UDP.Send(soc, "re:" + s2[1], clients[Lib.Conversion.AtoI(s2[0])].ep);
             }*/
-            
-            if (s2[1].Substring(0, 2) == "in")
-            {
-                info[id] = s2[0] + "/" + s2[1].Substring(3);
+
+                if (s2[1].Substring(0, 2) == "in")
+                {
+                    info[id] = s2[0] + "/" + s2[1].Substring(3);
+                }
+                else if (s2[1].Substring(0, 2) == "on")
+                {
+                    SendAll(soc, $"on:{s2[0]}|{s2[1].Substring(3)}");
+                }
+                else if (s2[1].Substring(0, 4) == "chat")
+                {
+                    s2[1] = s2[1].Substring(5);
+                    SendAll(soc, $"chat:{clients[id].pseudo}: {s2[1]}");
+
+                    Console.WriteLine($"chat:{clients[id].pseudo}: {s2[1]}");
+                }
+                else if (s2[1] == "deco")
+                {
+                    Console.WriteLine("deco");
+                    info[id] = s2[0] + "/deco";
+                }
+                else
+                {
+                    Console.WriteLine(s);
+                }
+
+                Console.WriteLine(s);
+
+                SendAll(soc, GetInfo());
             }
-            else if (s2[1].Substring(0,2) == "on")
+            catch 
             {
-                SendAll(soc, $"on:{s2[0]}|{s2[1].Substring(3)}");
+                Console.WriteLine("erreur");
             }
-            else if (s2[1].Substring(0,4) == "chat")
-            {
-                s2[1] = s2[1].Substring(5);
-                SendAll(soc,$"chat:{clients[id].pseudo}: {s2[1]}");
-                    
-                Console.WriteLine($"chat:{clients[id].pseudo}: {s2[1]}");
-            }
-            
-            SendAll(soc,GetInfo());
         }
     }
 }
