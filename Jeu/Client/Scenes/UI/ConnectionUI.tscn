@@ -360,11 +360,11 @@ scale = Vector2(1.5, 1.5)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.403
-anchor_top = 0.617
+anchor_top = 0.628
 anchor_right = 0.639
 anchor_bottom = 0.667
 offset_left = -0.256042
-offset_top = 0.18396
+offset_top = 0.0559998
 offset_right = -0.128052
 offset_bottom = -0.216034
 text = "Save username and password locally."
@@ -406,7 +406,7 @@ offset_left = 0.383995
 offset_top = -0.112
 offset_right = 0.255981
 offset_bottom = -0.240021
-color = Color(0.145098, 0.145098, 0.145098, 0.572549)
+color = Color(0.145098, 0.145098, 0.145098, 0.756863)
 
 [node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningBackground"]
 layout_mode = 1

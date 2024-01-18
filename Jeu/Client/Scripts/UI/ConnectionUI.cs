@@ -45,6 +45,7 @@ public partial class ConnectionUI : Control
 	
 	private float _checkBoxXPosition = 424;
 	private float _checkBoxYPosition = 400;
+	private float _checkBoxSize = 24;
 	
 	public static string _pseudo = "";
 	public static string _password = "";
@@ -77,7 +78,7 @@ public partial class ConnectionUI : Control
 		
 		_fastConnectionWarningBackground = GetNode<ColorRect>("FastConnectionWarningBackground");
 		
-		FastConnectionSaveButton.Size = new Vector2(24, 24);
+		FastConnectionSaveButton.Size = new Vector2(_checkBoxSize, _checkBoxSize);
 		FastConnectionSaveButton.Position = new Vector2(_checkBoxXPosition, _checkBoxYPosition);
 		
 		InscriptionButton.Visible = false;
@@ -200,7 +201,7 @@ public partial class ConnectionUI : Control
 		//Button Size
 		FastConnectionSaveButton.Scale = new Vector2(_checkBoxDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkBoxDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		FastConnectionSaveButton.Position = new Vector2(_checkBoxXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkBoxYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
-		FastConnectionSaveButton.Size = new Vector2(24, 24);
+		FastConnectionSaveButton.Size = new Vector2(_checkBoxSize, _checkBoxSize);
 	}
 
 	public override void _PhysicsProcess(double delta)
