@@ -80,6 +80,7 @@ public partial class GameManager : Node3D
 	protected static bool Cheat = false;
 	public static bool DebugMode = false;
 	public static bool Fog = true;
+	protected static bool Quit = false; 
 	
 	private static string GetIp()
 	{
@@ -88,9 +89,35 @@ public partial class GameManager : Node3D
 		sr.Close();
 		return res;
 	}
+
+	
+	public override void _Notification(int what)
+	{
+		if (what == NotificationWMCloseRequest)
+		{
+			OnQuit();
+			GetTree().Quit(); // default behavior
+		}
+	}
+	
+	private void OnQuit()
+	{
+		Quit = true;
+		try
+		{
+			UDP.Send(soc2, $"{InfoJoueur["id"]}_deco", iep2);
+		}
+		catch
+		{
+			GD.Print("deco");
+		}
+		Console.WriteLine("quit");
+	}
 	
 	public override void _Ready()
 	{
+		//GetTree().Connect("window_close_request", new Callable(this, nameof(OnQuit)));
+		
 		IP = GetIp();
 		LanguageManager = new LanguageControl();
 		SettingsManager = new Settings();

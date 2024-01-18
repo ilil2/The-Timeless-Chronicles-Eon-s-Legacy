@@ -4,8 +4,9 @@ using Lib;
 public partial class State6 : GameManager
 {
     public static void State(double delta)
-    { 
-        UDP.Send(soc2,InfoJoueur["id"] + "_" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
+    {
+        if (!Quit)
+            UDP.Send(soc2,InfoJoueur["id"] + "_" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
         ((MapLvl1Script)Map).DebugMode(delta, Joueur1);
 
         if (!_pausemode && Lib.Conversions.ItoB(SettingsManager.GetAllSettings()["enableChat"]))
