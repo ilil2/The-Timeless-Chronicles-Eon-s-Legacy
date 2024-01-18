@@ -20,6 +20,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Incorrect username or password"},
             {"connectionMenuErrorFastConnectionText", "Error in fast connection"},
             {"connectionMenuErrorNoFastConnectionText", "No fast connections registered"},
+            {"connectionMenuFastConnectionSaveButton", "Save username and password locally."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Warning :\nSaving your username and password locally makes it easier to log in, but may entail security risks. If your device is compromised, your information could be accessible."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -129,6 +131,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Pseudo ou mot de passe incorrect"},
             {"connectionMenuErrorFastConnectionText", "Erreur dans la connexion rapide"},
             {"connectionMenuErrorNoFastConnectionText", "Aucune connexion rapide enregistrée"},
+            {"connectionMenuFastConnectionSaveButton", "Enregistrer le pseudo et le mot de passe localement."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Attention :\nEnregistrer votre pseudo et votre mot de passe localement facilite la connexion, mais peut comporter des risques de sécurité. Si votre appareil est compromis, vos informations pourraient être accessibles."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
@@ -238,6 +242,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Pseudo pe ger-tremen fall"},
             {"connectionMenuErrorFastConnectionText", "Fazi e kenstabl gwisk"},
             {"connectionMenuErrorNoFastConnectionText", "N'eo ket kenstabl gwisk en em enrollaet"},
+            {"connectionMenuFastConnectionSaveButton", "Enrolliñ ar pseudo ha ger-tremen war ar c'hard."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Diwallit :\nEnrolliñ ho pseudo ha ho ger-tremen war ar c'hard a vefe graet gantoc'h evit enrolliñ, met a c'hall bezañ ur raktres sekurite. Ma'z eo ho meziant kaset, e c'hallfe bezañ posupl da dremen ho titouroù."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "En em enskrivañ"},
@@ -347,6 +353,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Falscher Benutzername oder falsches Passwort"},
             {"connectionMenuErrorFastConnectionText", "Fehler bei der schnellen Verbindung"},
             {"connectionMenuErrorNoFastConnectionText", "Keine schnellen Verbindungen registriert"},
+            {"connectionMenuFastConnectionSaveButton", "Speichern Sie den Benutzernamen und das Passwort lokal."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Warnung :\nDas Speichern Ihres Benutzernamens und Passworts lokal erleichtert das Einloggen, kann aber Sicherheitsrisiken mit sich bringen. Wenn Ihr Gerät kompromittiert ist, können Ihre Informationen zugänglich sein."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Einschreibung"},
@@ -456,6 +464,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Nombre de usuario o contraseña incorrectos"},
             {"connectionMenuErrorFastConnectionText", "Error en la conexión rápida"},
             {"connectionMenuErrorNoFastConnectionText", "No hay conexiones rápidas registradas"},
+            {"connectionMenuFastConnectionSaveButton", "Guardar el nombre de usuario y la contraseña localmente."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Advertencia :\nGuardar su nombre de usuario y contraseña localmente facilita el inicio de sesión, pero puede conllevar riesgos de seguridad. Si su dispositivo está comprometido, su información podría ser accesible."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscripción"},
@@ -565,6 +575,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Malĝusta uzantnomo aŭ pasvorto"},
             {"connectionMenuErrorFastConnectionText", "Eraro en rapida konekto"},
             {"connectionMenuErrorNoFastConnectionText", "Neniu rapida konekto registrita"},
+            {"connectionMenuFastConnectionSaveButton", "Konservu la uzantnomon kaj la pasvorton lokale."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Averto :\nKonservi vian uzantnomon kaj pasvorton lokale faciligas ensaluton, sed povas impliki sekurecajn riskojn. Se via aparato estas kompromitita, via informo povus esti alirebla."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inskribo"},
@@ -674,6 +686,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Pseudo vel password falsum"},
             {"connectionMenuErrorFastConnectionText", "Error in connexione celeriter"},
             {"connectionMenuErrorNoFastConnectionText", "Nulla connexio celeriter registrata"},
+            {"connectionMenuFastConnectionSaveButton", "Serva pseudo et password localiter."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Cave :\nServare pseudo et password localiter facilius est in ingressu, sed potest periculum securitatis habere. Si instrumentum tuum compromissum est, tuae informationes possunt esse accessibiles."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscriptio"},
@@ -783,6 +797,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Pseudo noma iphasiwedi elingenayo"},
             {"connectionMenuErrorFastConnectionText", "Iphutha ekuxhumaneni okukhulu"},
             {"connectionMenuErrorNoFastConnectionText", "Awukho ukuxhumana okukhulu okuqashisayo"},
+            {"connectionMenuFastConnectionSaveButton", "Londoloza i-pseudo noma iphasiwedi ekhaya."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Iseluleko :\nUkuphathwa kwe-pseudo noma iphasiwedi ekhaya kuyafaka kahle ukuxhumana, kodwa kungaba nezimvo zokuphepha. Uma isayithi sakho sibuyekezwe, izifundo zakho zingakwazi ukufinyelela."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Ukubhalisa"},
@@ -880,115 +896,6 @@ public class LanguageControl
         
         new Dictionary<string, string>
         {
-            {"languageName", "عرب"},
-            
-            //Connection Menu
-            {"connectionMenuTitle", "توصيل"},
-            {"connectionMenuPseudoText", "المستعار"},
-            {"connectionMenuPasswordText", "كلمة السر"},
-            {"connectionMenuConnectionButton", "توصيل"},
-            {"connectionMenuNoAccountButton", "لا يوجد لديك حساب؟"},
-            {"connectionMenuFastConnectionButton", "توصيل سريع"},
-            {"connectionMenuErrorUsernameOrPasswordText", "اسم المستخدم أو كلمة المرور غير صحيحة"},
-            {"connectionMenuErrorFastConnectionText", "خطأ في التوصيل السريع"},
-            {"connectionMenuErrorNoFastConnectionText", "لا توجد اتصالات سريعة مسجلة"},
-            
-            //Inscription Menu
-            {"inscriptionMenuTitle", "التسجيل"},
-            {"inscriptionMenuPseudoText", "المستعار"},
-            {"inscriptionMenuPasswordText", "كلمة السر"},
-            {"inscriptionMenuPasswordConfirmText", "تأكيد كلمة المرور"},
-            {"inscriptionMenuInscriptionButton", "التسجيل"},
-            {"inscriptionMenuAlreadyAccountButton", "هل لديك حساب بالفعل؟"},
-            {"inscriptionMenuErrorIncorrectConfirmText", "تأكيد كلمة المرور غير صحيح"},
-            {"inscriptionMenuErrorAlreadyExistText", "اسم المستخدم موجود بالفعل"},
-            
-            //Lobby Menu
-            {"lobbyMenuTitle", "الردهة"},
-            {"lobbyMenuCreateGame", "إنشاء لعبة"},
-            {"lobbyMenuJoinGame", "الانضمام إلى اللعبة"},
-            
-            //Create Game Menu
-            {"createGameMenuTitle", "إنشاء لعبة"},
-            {"createGameMenuBackButton", "<= العودة"},
-            {"createGameMenuStartGame", "بدء اللعبة"},
-            {"createGameMenuID", "معرف اللعبة : "},
-            {"createGameMenuPlayer1", "اللاعب 1 : "},
-            {"createGameMenuPlayer2", "اللاعب 2 : "},
-            {"createGameMenuPlayer3", "اللاعب 3 : "},
-            {"createGameMenuPlayer4", "اللاعب 4 : "},
-            
-            //Join Game Menu
-            {"joinGameMenuTitle", "الانضمام إلى اللعبة"},
-            {"joinGameMenuBackButton", "<= العودة"},
-            {"joinGameMenuGameID", "معرف اللعبة"},
-            
-            //Select Class Menu
-            {"selectClassMenuArcherClass", "رامي"},
-            {"selectClassMenuKnightClass", "فارس"},
-            {"selectClassMenuScientistClass", "عالم"},
-            {"selectClassMenuAssassinClass", "القاتل"},
-            {"selectClassMenuReadyButton", "جاهز"},
-            {"selectClassMenuWaitingText", "في انتظار اللاعبين الآخرين..."},
-            
-            //Map loading
-            {"gameLoadingMapText", "تحميل الخريطة : "},
-            {"gameLoadingMapWaitingText", "في انتظار اللاعبين الآخرين"},
-            
-            //Pause Menu
-            {"pauseMenuTitle", "قائمة الإيقاف المؤقت"},
-            {"pauseMenuResumeButton", "استئنف"},
-            {"pauseMenuSettingsButton", "الإعدادات"},
-            {"pauseMenuLeaveButton", "غادر"},
-            {"pauseMenuConfirmLeaveTitle", "هل أنت متأكد من أنك تريد مغادرة اللعبة؟"},
-            {"pauseMenuConfirmLeaveButton", "غادر"},
-            {"pauseMenuCancelLeaveButton", "إلغاء"},
-            
-            //Settings Menu
-            {"settingsMenuTitle", "الإعدادات"},
-            {"settingsMenuBackButton", "<= العودة"},
-            {"settingsMenuResetButton", "إعادة تعيين"},
-            {"settingsMenuSaveButton", "حفظ"},
-            
-            //Settings Menu - Game
-            {"settingsMenuGameButton", "لعبة"},
-            {"settingsMenuGameLanguage", "لغة :"},
-            {"settingsMenuGameMouseSensibility", "حساسية الماوس :"},
-            {"settingsMenuGameFullScreen", "ملء الشاشة :"},
-            {"settingsMenuGameEnableChat", "تمكين الدردشة :"},
-            {"settingsMenuGameChatSize", "حجم الدردشة :"},
-            {"settingsMenuGameChatSizeSmall", "صغير"},
-            {"settingsMenuGameChatSizeMedium", "متوسط"},
-            {"settingsMenuGameChatSizeLarge", "كبير"},
-            
-            //Settings Menu - Audio
-            {"settingsMenuAudioButton", "صوت"},
-            
-            //Settings Menu - Video
-            {"settingsMenuVideoButton", "فيديو"},
-            
-            //Settings Menu - Controls
-            {"settingsMenuControlsButton", "التحكم"},
-            {"settingsMenuControlsMoveForward", "إلى الأمام"},
-            {"settingsMenuControlsMoveBackward", "إلى الوراء"},
-            {"settingsMenuControlsMoveLeft", "يسار"},
-            {"settingsMenuControlsMoveRight", "حق"},
-            {"settingsMenuControlsSprint", "ركض"},
-            {"settingsMenuControlsDash", "اندفاع"},
-            {"settingsMenuControlsCapacity1", "القدرة 1"},
-            {"settingsMenuControlsCapacity2", "القدرة 2"},
-            {"settingsMenuControlsCapacity3", "القدرة 3"},
-            {"settingsMenuControlsItem1", "البند 1"},
-            {"settingsMenuControlsItem2", "البند 2"},
-            {"settingsMenuControlsItem3", "البند 3"},
-            {"settingsMenuControlsInventory", "المخزون"},
-            {"settingsMenuControlsReload", "إعادة تحميل"},
-            {"settingsMenuControlsChat", "دردشة"},
-            {"settingsMenuControlsPause", "إيقاف مؤقت"},
-        },
-        
-        new Dictionary<string, string>
-        {
             {"languageName", "中文"},
             
             //Connection Menu
@@ -1001,6 +908,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "用户名或密码不正确"},
             {"connectionMenuErrorFastConnectionText", "快速连接错误"},
             {"connectionMenuErrorNoFastConnectionText", "没有注册快速连接"},
+            {"connectionMenuFastConnectionSaveButton", "本地保存用户名和密码。"},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ 警告 :\n本地保存用户名和密码可以方便登录，但可能存在安全风险。如果您的设备被入侵，您的信息可能会被访问。"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "注册"},
@@ -1110,6 +1019,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Λανθασμένο ψευδώνυμο ή κωδικός πρόσβασης"},
             {"connectionMenuErrorFastConnectionText", "Σφάλμα στη γρήγορη σύνδεση"},
             {"connectionMenuErrorNoFastConnectionText", "Δεν υπάρχει καταχωρημένη γρήγορη σύνδεση"},
+            {"connectionMenuFastConnectionSaveButton", "Αποθήκευση του ψευδώνυμου και του κωδικού πρόσβασης τοπικά."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Προειδοποίηση :\nΗ αποθήκευση του ψευδώνυμου και του κωδικού πρόσβασης τοπικά διευκολύνει τη σύνδεση, αλλά μπορεί να συνεπάγεται κινδύνους ασφαλείας. Εάν το σύστημά σας έχει παραβιαστεί, οι πληροφορίες σας μπορεί να είναι προσβάσιμες."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Εγγραφή"},
@@ -1220,6 +1131,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "Неверное имя пользователя или пароль"},
             {"connectionMenuErrorFastConnectionText", "Ошибка быстрого подключения"},
             {"connectionMenuErrorNoFastConnectionText", "Нет зарегистрированных быстрых подключений"},
+            {"connectionMenuFastConnectionSaveButton", "Сохранить локально псевдоним и пароль."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Предупреждение :\nСохранение локально псевдонима и пароля упрощает подключение, но может представлять угрозу безопасности. Если ваше устройство скомпрометировано, ваши данные могут быть доступны."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Регистрация"},
@@ -1329,6 +1242,8 @@ public class LanguageControl
             {"connectionMenuErrorUsernameOrPasswordText", "556e636f727265637420757365726e616d65206f722070617373776f7264"},
             {"connectionMenuErrorFastConnectionText", "4661737420636f6e6e656374696f6e206572726f72"},
             {"connectionMenuErrorNoFastConnectionText", "4e6f206661737420636f6e6e656374696f6e207265636f726465642e"},
+            {"connectionMenuFastConnectionSaveButton", "5361766520757365726e616d6520616e642070617373776f7264206c6f63616c6c792e"},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\5761726e696e673a0a536176696e6720757365726e616d6520616e642070617373776f7264206c6f63616c6c792063616e206d616b652069742065617369657220746f20636f6e6e6563742c20627574206d61792070726573656e742072657370656374732073656375726974792e20496620796f757220646576696365206973206368726f6d652c20796f75722064617461206d61792062652061736365737369626c652e"},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "496e736372697074696f6e"},
@@ -1427,6 +1342,10 @@ public class LanguageControl
     
     public Dictionary<string, string> GetLanguage(int index)
     {
+        if (index < 0 || index >= _listLanguage.Count)
+        {
+            return _listLanguage[0];
+        }
         return _listLanguage[index];
     }
     

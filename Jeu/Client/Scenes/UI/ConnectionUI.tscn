@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bukpc7fa40grn"]
+[gd_scene load_steps=17 format=3 uid="uid://bukpc7fa40grn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ConnectionUI.cs" id="1_u3ff4"]
 
@@ -38,6 +38,19 @@ font_color = Color(0.678431, 0.141176, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gnhab"]
 font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0gts"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_rr8lj"]
+font_size = 20
+font_color = Color(0.729412, 0.168627, 0.0941176, 1)
+outline_size = 2
+outline_color = Color(0.729412, 0.168627, 0.0941176, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_opm2v"]
+font_size = 10
+font_color = Color(0.729412, 0.168627, 0.0941176, 1)
 
 [node name="ConnectionUI" type="Control"]
 layout_mode = 3
@@ -81,6 +94,7 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PasswordInscription" type="LineEdit" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -98,6 +112,7 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PasswordConfirmInscription" type="LineEdit" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -115,6 +130,7 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PseudoInscription" type="LineEdit" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -134,13 +150,13 @@ max_length = 16
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.368
-anchor_top = 0.654
+anchor_top = 0.691
 anchor_right = 0.486
-anchor_bottom = 0.728
+anchor_bottom = 0.765
 offset_left = 0.0639648
-offset_top = 0.207977
+offset_top = 0.231995
 offset_right = 0.127991
-offset_bottom = 1.25598
+offset_bottom = 1.28
 grow_horizontal = 2
 grow_vertical = 0
 shortcut = SubResource("Shortcut_mo20d")
@@ -162,6 +178,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Inscription" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -191,14 +208,14 @@ vertical_alignment = 1
 [node name="NoCompte" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.507
-anchor_top = 0.654
-anchor_right = 0.639
-anchor_bottom = 0.724
-offset_left = -0.0640259
-offset_top = 0.207977
-offset_right = -0.128052
-offset_bottom = -0.152039
+anchor_left = 0.514
+anchor_top = 0.691
+anchor_right = 0.646
+anchor_bottom = 0.761
+offset_left = -0.127991
+offset_top = 0.231964
+offset_right = -0.192017
+offset_bottom = -0.128021
 grow_horizontal = 2
 grow_vertical = 0
 flat = true
@@ -206,11 +223,8 @@ flat = true
 [node name="NoCompteButtonText" type="Label" parent="NoCompte"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.053
-anchor_right = 1.053
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.0560007
-offset_right = -0.056015
 grow_horizontal = 2
 grow_vertical = 2
 text = "Pas de compte ?"
@@ -219,6 +233,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DejaCompte" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.514
@@ -281,13 +296,13 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.333
-anchor_top = 0.747
+anchor_top = 0.784
 anchor_right = 0.667
-anchor_bottom = 0.79
+anchor_bottom = 0.827
 offset_left = 0.384003
-offset_top = -0.0560303
+offset_top = -0.0319824
 offset_right = -0.384033
-offset_bottom = 0.0799866
+offset_bottom = 0.104065
 label_settings = SubResource("LabelSettings_71d1n")
 horizontal_alignment = 1
 
@@ -327,6 +342,83 @@ text = "Fast connection"
 label_settings = SubResource("LabelSettings_gnhab")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="FastConnectionSaveButton" type="CheckBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.368
+anchor_top = 0.617
+anchor_right = 0.399
+anchor_bottom = 0.673
+offset_left = 0.0639648
+offset_top = 0.18396
+offset_right = -11.648
+offset_bottom = -12.104
+scale = Vector2(1.5, 1.5)
+
+[node name="FastConnectionSaveText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.396
+anchor_top = 0.617
+anchor_right = 0.705
+anchor_bottom = 0.667
+offset_left = -0.192017
+offset_top = 0.18396
+offset_right = -0.160034
+offset_bottom = -0.216034
+text = "Save username and password locally."
+label_settings = SubResource("LabelSettings_t0gts")
+vertical_alignment = 1
+
+[node name="FastConnectionWarningButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.346
+anchor_top = 0.622
+anchor_right = 0.367
+anchor_bottom = 0.67
+offset_left = 0.40799
+offset_top = -0.0560303
+offset_right = 0.215973
+offset_bottom = -0.160004
+
+[node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "!"
+label_settings = SubResource("LabelSettings_rr8lj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FastConnectionWarningBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076
+anchor_top = 0.531
+anchor_right = 0.34
+anchor_bottom = 0.667
+offset_left = 0.447998
+offset_top = -0.0880127
+offset_right = 0.320007
+offset_bottom = -0.216034
+color = Color(0.145098, 0.145098, 0.145098, 0.572549)
+
+[node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningBackground"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_right = 0.975
+anchor_bottom = 1.0
+text = "/!\\ Warning : 
+Saving your username and password locally makes it easier to log in, but may entail security risks. If your device is compromised, your information could be accessible. "
+label_settings = SubResource("LabelSettings_opm2v")
+vertical_alignment = 1
+autowrap_mode = 3
 
 [connection signal="resized" from="." to="." method="OnResize"]
 [connection signal="pressed" from="NoCompte" to="." method="NoCompte"]

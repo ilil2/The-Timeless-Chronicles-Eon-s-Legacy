@@ -13,9 +13,11 @@ public partial class ConnectionUI : Control
 	public static Button ConnectionButton;
 	public static Button InscriptionButton;
 	public static Button FastConnectionButton;
+	public static CheckBox FastConnectionSaveButton;
 	private Button _noCompteButton;
 	private Button _dejaCompteButton;
 	private OptionButton _languageChooseButton;
+	private Button _fastConnectionWarningButton;
 	
 	private Label _connectionError;
 	private Label _inscriptionError;
@@ -25,12 +27,19 @@ public partial class ConnectionUI : Control
 	private Label _connectionButtonText;
 	private Label _inscriptionButtonText;
 	private Label _fastConnectionButtonText;
+	private Label _fastConnectionWarningText;
+	private Label _fastConnectionSaveText;
+	private Label _fastConnectionWarningButtonText;
+
+	private ColorRect _fastConnectionWarningBackground;
 	
 	private float _screenDefalutWidth = 1152;
 	private float _titleDefaultSize = 45;
 	private float _buttonDefaultSize = 20;
 	private float _transparentButtonDefaultSize = 16;
 	private float _errorDefaultSize = 16;
+	private float _saveDefaultSize = 14;
+	private float _warningDefaultSize = 10;
 	
 	public static string _pseudo = "";
 	public static string _password = "";
@@ -38,6 +47,9 @@ public partial class ConnectionUI : Control
 	
 	public static bool in_connection = true;
 	public static string erreur = "";
+	
+	private bool _fastConnectionWarning = false;
+	private int _fastConnectionWarningTimer = 0;
 	
 	private static int _errorNumber = -1;
 	
@@ -54,8 +66,12 @@ public partial class ConnectionUI : Control
 		ConnectionButton = GetNode<Button>("Connection");
 		InscriptionButton = GetNode<Button>("Inscription");
 		FastConnectionButton = GetNode<Button>("FastConnectionButton");
+		FastConnectionSaveButton = GetNode<CheckBox>("FastConnectionSaveButton");
 		_noCompteButton = GetNode<Button>("NoCompte");
 		_dejaCompteButton = GetNode<Button>("DejaCompte");
+		_fastConnectionWarningButton = GetNode<Button>("FastConnectionWarningButton");
+		
+		_fastConnectionWarningBackground = GetNode<ColorRect>("FastConnectionWarningBackground");
 		
 		InscriptionButton.Visible = false;
 		_dejaCompteButton.Visible = false;
@@ -65,6 +81,8 @@ public partial class ConnectionUI : Control
 		_pseudoInscriptionNode.Visible = false;
 		_passwordInscriptionNode.Visible = false;
 		_passwordConfirmInscriptionNode.Visible = false;
+		
+		_fastConnectionWarningBackground.Visible = false;
 		
 		//Language
 		_language = GameManager.SettingsManager.GetAllSettings()["language"];
@@ -88,6 +106,8 @@ public partial class ConnectionUI : Control
 		_connectionButtonText.Text = _languageDict["connectionMenuConnectionButton"];
 		_noCompteButtonText.Text = _languageDict["connectionMenuNoAccountButton"];
 		_fastConnectionButtonText.Text = _languageDict["connectionMenuFastConnectionButton"];
+		_fastConnectionWarningText.Text = _languageDict["connectionMenuFastConnectionSaveWarningText"];
+		_fastConnectionSaveText.Text = _languageDict["connectionMenuFastConnectionSaveButton"];
 		
 		//Inscription
 		_pseudoInscriptionNode.PlaceholderText = _languageDict["inscriptionMenuPseudoText"];
@@ -142,6 +162,10 @@ public partial class ConnectionUI : Control
 		_connectionButtonText = GetNode<Label>("Connection/ConnectionButtonText");
 		_inscriptionButtonText = GetNode<Label>("Inscription/InscriptionButtonText");
 		_fastConnectionButtonText = GetNode<Label>("FastConnectionButton/FastConnectionText");
+		_fastConnectionWarningText = GetNode<Label>("FastConnectionWarningBackground/FastConnectionWarningText");
+		_fastConnectionSaveText = GetNode<Label>("FastConnectionSaveText");
+		_fastConnectionWarningButtonText = GetNode<Label>("FastConnectionWarningButton/FastConnectionWarningText");
+		
 		
 		//Line Edit Size
 		_pseudoConnectionNode.AddThemeFontSizeOverride("font_size", (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
@@ -160,9 +184,12 @@ public partial class ConnectionUI : Control
 		_connectionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_inscriptionError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_fastConnectionButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_fastConnectionWarningText.LabelSettings.FontSize = (int)(_warningDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_fastConnectionSaveText.LabelSettings.FontSize = (int)(_saveDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_fastConnectionWarningButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
-	
-	public override void _Process(double delta)
+
+	public override void _PhysicsProcess(double delta)
 	{
 		if (_languageChooseButton.Selected != _language)
 		{
@@ -206,6 +233,25 @@ public partial class ConnectionUI : Control
 				ErrorTranslation(2);
 			}
 		}
+		else if (_fastConnectionWarningButton.ButtonPressed)
+		{
+			if (_fastConnectionWarningTimer >= 20)
+			{
+				if (_fastConnectionWarning)
+				{
+					_fastConnectionWarningBackground.Visible = false;
+					_fastConnectionWarning = false;
+				}
+				else
+				{
+					_fastConnectionWarningBackground.Visible = true;
+					_fastConnectionWarning = true;
+				}
+				_fastConnectionWarningTimer = 0;
+			}
+		}
+
+		_fastConnectionWarningTimer += 1;
 		
 		if (in_connection == false)
 		{
@@ -231,6 +277,13 @@ public partial class ConnectionUI : Control
 		_pseudoInscriptionNode.Visible = true;
 		_passwordInscriptionNode.Visible = true;
 		_passwordConfirmInscriptionNode.Visible = true;
+		
+		FastConnectionSaveButton.Visible = false;
+		_fastConnectionWarningBackground.Visible = false;
+		_fastConnectionSaveText.Visible = false;
+		_fastConnectionWarningButton.Visible = false;
+		
+		_fastConnectionWarning = false;
 	}
 	
 	public void DejaCompte()
@@ -249,5 +302,9 @@ public partial class ConnectionUI : Control
 		_pseudoInscriptionNode.Visible = false;
 		_passwordInscriptionNode.Visible = false;
 		_passwordConfirmInscriptionNode.Visible = false;
+		
+		FastConnectionSaveButton.Visible = true;
+		_fastConnectionSaveText.Visible = true;
+		_fastConnectionWarningButton.Visible = true;
 	}
 }
