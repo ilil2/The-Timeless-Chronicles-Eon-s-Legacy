@@ -247,13 +247,13 @@ public partial class SettingsMenuUI : Control
         _languageChooseButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         _chatSizeButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         
-        _fullScreenButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _fullScreenButton.Position = new Vector2(_checkButtonFullScreenXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonFullScreenYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
+        _fullScreenButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.Y / _screenDefalutHight));
         _fullScreenButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
+        _fullScreenButton.Position = new Vector2(_checkButtonFullScreenXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonFullScreenYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
         
-        _enableChatButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _enableChatButton.Position = new Vector2(_checkButtonEnableChatXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonEnableChatYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
+        _enableChatButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.Y / _screenDefalutHight));
         _enableChatButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
+        _enableChatButton.Position = new Vector2(_checkButtonEnableChatXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonEnableChatYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
         
         //Label Size
         _gameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
@@ -336,8 +336,7 @@ public partial class SettingsMenuUI : Control
             PauseMenuManager.MainMenu = true;
             PauseMenuManager.SettingsMenu = false;
         }
-
-        if (_gameSettingsButton.ButtonPressed)
+        else if (_gameSettingsButton.ButtonPressed)
         {
             _gameSettings.Visible = true;
             _audioSettings.Visible = false;
@@ -367,7 +366,20 @@ public partial class SettingsMenuUI : Control
         }
         
         //Game
-        if (_resetGameSettingsButton.ButtonPressed)
+        if (_languageChooseButton.Selected != _language)
+        {
+            _language = _languageChooseButton.Selected;
+            _languageDict = GameManager.LanguageManager.GetLanguage(_language);
+            Translation();
+            GameManager.SettingsManager.SetSetting("language", _language);
+            
+            _inputList.Clear();
+            foreach (var (key, value) in GameManager.InputManger.GetAllControl())
+            {
+                _inputList.AddItem($"{key.ToUpper()} : {value}");
+            }
+        } 
+        else if (_resetGameSettingsButton.ButtonPressed)
         {
             GameManager.SettingsManager.ResetSettings();
             Dictionary<string, int> Settings = GameManager.SettingsManager.GetAllSettings();
@@ -384,21 +396,6 @@ public partial class SettingsMenuUI : Control
             
             //Chat Size
             Settings["chatSize"] = _chatSizeButton.Selected;
-                
-            if (_languageChooseButton.Selected != Settings["language"])
-            {
-                //Language
-                Settings["language"] = _languageChooseButton.Selected;
-                _language = Settings["language"];
-                _languageDict = GameManager.LanguageManager.GetLanguage(_language);
-                Translation();
-                    
-                _inputList.Clear();
-                foreach (var (key, value) in GameManager.InputManger.GetAllControl())
-                {
-                    _inputList.AddItem($"{key.ToUpper()} : {value}");
-                }
-            }
                 
             //Save
             GameManager.SettingsManager.SaveSettings();
