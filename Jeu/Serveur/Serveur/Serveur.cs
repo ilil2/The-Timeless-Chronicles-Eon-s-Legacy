@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -95,7 +96,7 @@ public class Serveur
         
         SendAll(soc, "start");
         
-        while (true)
+        while (ID > 0)
         {
             try
             {
@@ -127,14 +128,32 @@ public class Serveur
                 else if (s2[1] == "deco")
                 {
                     Console.WriteLine("deco");
-                    info[id] = s2[0] + "/deco";
+                    info[id] = "-1/co:-1;0;1/0;0;0";
+
+                    switch (id)
+                    {
+                        case 0:
+                            clients[0] = clients[1];
+                            clients[1] = clients[2];
+                            clients[2] = clients[3];
+                            break;
+                        case 1:
+                            clients[1] = clients[2];
+                            clients[2] = clients[3];
+                            break;
+                        case 2:
+                            clients[2] = clients[3];
+                            break;
+                    }
+                    ID -= 1;
+                    joueur_ready -= 1;
+                    
+                    SendAll(soc, $"deco:{id}");
                 }
                 else
                 {
                     Console.WriteLine(s);
                 }
-
-                Console.WriteLine(s);
 
                 SendAll(soc, GetInfo());
             }
