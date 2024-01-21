@@ -12,21 +12,11 @@ public partial class Listen2 : GameManager
 		    for (int i = 0; i < _nbJoueur; i++)
 		    {
 			    string[] CoordInfo = SplitInfo[i].Split('/');
-			    if (CoordInfo[1] != "deco")
-			    {
-				    if (CoordInfo[0] != InfoJoueur["id"])
-				    {
-					    CoordInfo[1] = CoordInfo[1].Substring(3);
-					    InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
-					    InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
-				    }
-			    }
-			    else
-			    {
-				    InfoAutreJoueur[$"co{CoordInfo[0]}"] = "0;-3;0";
-			    }
+			    CoordInfo[1] = CoordInfo[1].Substring(3); 
+			    InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
+			    InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
 		    }
-	    }
+        }
         
         else if (rep.Length > 2 && rep.Substring(0,2) == "on")
         {
@@ -48,6 +38,24 @@ public partial class Listen2 : GameManager
 		    }
 		    ((ChatUI)_chat).Outputaddtext = rep;
 	    }
+
+        else if (rep.Substring(0,4) == "deco")
+        {
+	        int id = Conversions.AtoI(rep.Substring(5));
+	        
+	        if (id == ((OtherArcherScript)Joueur2).GetID())
+	        {
+		        Joueur2.QueueFree();
+	        }
+	        else if (id == ((OtherArcherScript)Joueur3).GetID())
+	        {
+		        Joueur3.QueueFree();
+	        }
+	        else
+	        {
+		        Joueur4.QueueFree();
+	        }
+        }
 			
 	    else if (rep.Length > 4 && rep.Substring(0,5) == "start")
 	    {
