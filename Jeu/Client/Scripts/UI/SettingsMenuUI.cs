@@ -247,11 +247,11 @@ public partial class SettingsMenuUI : Control
         _languageChooseButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         _chatSizeButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         
-        _fullScreenButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.Y / _screenDefalutHight));
+        _fullScreenButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _fullScreenButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
         _fullScreenButton.Position = new Vector2(_checkButtonFullScreenXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonFullScreenYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
         
-        _enableChatButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.Y / _screenDefalutHight));
+        _enableChatButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _enableChatButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
         _enableChatButton.Position = new Vector2(_checkButtonEnableChatXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonEnableChatYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
         

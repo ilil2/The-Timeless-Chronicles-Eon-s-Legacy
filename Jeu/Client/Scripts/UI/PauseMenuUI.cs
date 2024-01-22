@@ -96,7 +96,7 @@ public partial class PauseMenuUI : Control
         
         if (_leaveConfirmButton.ButtonPressed)
         {
-            GetTree().Quit();
+            GetTree().Root.PropagateNotification((int)NotificationWMCloseRequest);
         }
         else if (_leaveCancelButton.ButtonPressed)
         {
