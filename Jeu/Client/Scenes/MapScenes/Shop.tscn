@@ -1,0 +1,81 @@
+[gd_scene load_steps=16 format=3 uid="uid://6kti0msj4r1b"]
+
+[ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
+[ext_resource type="Texture2D" uid="uid://d38yhfsw77p2s" path="res://Ressources/Map/Shop/material_emissive.png" id="2_6j5v3"]
+[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_3ealq"]
+[ext_resource type="Texture2D" uid="uid://c6a34xr6fp1ux" path="res://Ressources/Map/Shop/Emax.png" id="4_hhdoo"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Shop/Moon.cs" id="5_ppl74"]
+[ext_resource type="Texture2D" uid="uid://dod8x41ok44ud" path="res://Ressources/Map/Shop/Space/Moon.jpg" id="6_dgiau"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_m6a8n"]
+data = PackedVector3Array(5000, 0, 5000, -5000, 0, 5000, 5000, 0, -5000, -5000, 0, 5000, -5000, 0, -5000, 5000, 0, -5000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vginv"]
+size = Vector3(2, 1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i1otg"]
+transparency = 1
+albedo_texture = ExtResource("4_hhdoo")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_58087"]
+material = SubResource("StandardMaterial3D_i1otg")
+size = Vector2(1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5xkr"]
+albedo_texture = ExtResource("6_dgiau")
+
+[sub_resource type="SphereMesh" id="SphereMesh_2mly5"]
+material = SubResource("StandardMaterial3D_s5xkr")
+radius = 100.0
+height = 200.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bh7e5"]
+shader = ExtResource("1_qts26")
+shader_parameter/skyTexture = ExtResource("2_6j5v3")
+
+[sub_resource type="Sky" id="Sky_plrki"]
+sky_material = SubResource("ShaderMaterial_bh7e5")
+
+[sub_resource type="Environment" id="Environment_cmjvq"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_plrki")
+ambient_light_source = 3
+
+[node name="Shop" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("ConcavePolygonShape3D_m6a8n")
+
+[node name="SpecCam" parent="." instance=ExtResource("3_3ealq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Sh" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sh"]
+mesh = SubResource("BoxMesh_vginv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Sh"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, -0.9)
+mesh = SubResource("PlaneMesh_58087")
+
+[node name="Label3D" type="Label3D" parent="Sh/MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.57628e-07, -0.6)
+text = "Emax"
+
+[node name="Moon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+script = ExtResource("5_ppl74")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Moon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3000, 0, 0)
+mesh = SubResource("SphereMesh_2mly5")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cmjvq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0, 0, 0)
