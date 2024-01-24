@@ -21,8 +21,8 @@ public partial class MapLvl1Script : Node3D, IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random(42);
-	private Random FogRand = new Random(42);
+	private Random Rand = new Random();
+	private Random FogRand = new Random();
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
@@ -31,8 +31,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	private List<Node3D> RoomList = new List<Node3D>();
 	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
-	private static float SpawnX;
-	private static float SpawnZ;
+	private Node3D SpawnRoom;
 	private double MaxSpawnDist = 0;
 	private int FogState = 0;
 	private int StartTime = 0;
@@ -84,6 +83,7 @@ public partial class MapLvl1Script : Node3D, IMap
 				
 				
 				MapReady = true;
+				GetSpawnLocation();
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
@@ -110,12 +110,21 @@ public partial class MapLvl1Script : Node3D, IMap
 		return MapReady;
 	}
 	
-	public List<(int,int)> GetSpawnLocation()
+	public (int,int) GetSpawnLocation()
 	{
-		return new List<(int, int)>();
+		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");
+		List<(int,int,int)> Spawn = new List<(int,int,int)>();
+		for (int i = 0; i<4;i++)
+		{
+			Node3D Pos = SpawnPoint.GetChild<Node3D>(i);
+			(int,int,int) res = ((int)Pos.GlobalPosition.X,(int)Pos.GlobalPosition.Y,(int)Pos.GlobalPosition.Z);
+			GD.Print(res);
+			Spawn.Add(res); 
+		}
+		return new (0,0);
 	}
 	
-	public void Debug(double delta,bool enable)
+	public void DebugMode(double delta,CharacterBody3D Player)
 	{
 		
 	}
@@ -377,8 +386,8 @@ public partial class MapLvl1Script : Node3D, IMap
 
 	private double Distance(Node3D Room1, Node3D Room2)
 	{
-		return Math.Sqrt(Math.Pow(Room1.Position.X - Room2.Position.X, 2) +
-						 Math.Pow(Room1.Position.Z - Room2.Position.Z, 2));
+		return Math.Sqrt(Math.Pow(Room1.GlobalPosition.X - Room2.GlobalPosition.X, 2) +
+						 Math.Pow(Room1.GlobalPosition.Z - Room2.GlobalPosition.Z, 2));
 	}
 
 	private void OpenRoom()
@@ -432,8 +441,7 @@ public partial class MapLvl1Script : Node3D, IMap
 			if (MaxSpawnDist<DistToMain)
 			{
 				MaxSpawnDist = DistToMain;
-				SpawnX = ActualRoom.Position.X;
-				SpawnZ = ActualRoom.Position.Z;
+				SpawnRoom = RoomList[i];
 			}
 		}
 	}

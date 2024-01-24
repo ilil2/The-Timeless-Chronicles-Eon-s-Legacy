@@ -23,6 +23,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="JeuClient"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/zylann.hterrain/plugin.cfg")
+
 [filesystem]
 
 import/fbx/enabled=false
