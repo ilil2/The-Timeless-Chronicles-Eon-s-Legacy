@@ -17,7 +17,7 @@ To Do List du code:
 - Optimiser le jeu
 */
 
-public partial class MapLvl1Script : Node3D
+public partial class MapLvl1Script : Node3D, IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
@@ -110,62 +110,14 @@ public partial class MapLvl1Script : Node3D
 		return MapReady;
 	}
 	
-	public (int,int) GetSpawnLocation()
+	public List<(int,int)> GetSpawnLocation()
 	{
-		return ((int)SpawnX,(int)SpawnZ);
+		return new List<(int, int)>();
 	}
 	
-	public void DebugMode(double delta, CharacterBody3D Player)
+	public void Debug(double delta,bool enable)
 	{
-		Camera3D PlayerCam = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
-		// a enlever si no compil
-		//--
-		WorldEnvironment world = GetNode<WorldEnvironment>("World");
-		Godot.Environment env = world.Environment;
-		if (!SpecMode)
-		{
-			if (GameManager.DebugMode && FrameCount-StartInput>20)
-			{
-				StartInput=FrameCount;
-				PackedScene SpecCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn");
-				Camera3D Cam = SpecCam.Instantiate<Camera3D>();
-				Cam.Name = "SpecCam";
-				Cam.Position = PlayerCam.Position + new Vector3(0,2,0) + Player.Position;
-				Cam.Rotation = PlayerCam.Rotation;
-				Label FPS = new Label();
-				FPS.Name = "FPS";
-				FPS.Text = "FPS:";
-				Cam.AddChild(FPS);
-				AddChild(Cam);
-				PlayerCam.Current = false;
-				Cam.Current = true;
-				SpecMode = true;
-				
-				env.VolumetricFogEnabled = false;
-				GD.Print("True");
-			}
-			
-		}
-		else
-		{
-			Label Fps = GetNode<Label>("SpecCam/FPS");
-			Fps.Text = $"FPS: {(int)(1/delta)}";
-			if (!GameManager.DebugMode && FrameCount-StartInput>20)
-			{
-				StartInput=FrameCount;
-				Camera3D Cam = GetNode<Camera3D>("SpecCam");
-				RemoveChild(Cam);
-				Cam.QueueFree();
-				PlayerCam.Current = true;
-				Cam.Current = false;
-				SpecMode = false;
-				
-				GD.Print("False");
-				env.VolumetricFogEnabled = true;
-			}
-			
-			
-		}
+		
 	}
 	
 	private void CreateMob()

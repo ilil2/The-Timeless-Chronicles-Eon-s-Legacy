@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://6kti0msj4r1b"]
+[gd_scene load_steps=16 format=3 uid="uid://2j3yfkfo2et1"]
 
 [ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
 [ext_resource type="Texture2D" uid="uid://d38yhfsw77p2s" path="res://Ressources/Map/Shop/material_emissive.png" id="2_6j5v3"]
