@@ -50,6 +50,10 @@ environment = SubResource("Environment_pdaq0")
 
 [node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
 
+[node name="State" type="Label" parent="SpecCam"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="HTerrain" type="Node3D" parent="."]
 script = ExtResource("4_p2gbs")
 centered = true
