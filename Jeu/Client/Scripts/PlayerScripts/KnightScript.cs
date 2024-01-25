@@ -80,10 +80,15 @@ public partial class KnightScript : ClassScript
             Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
             IsWalking = true;
             MovementSpeed = WalkSpeed;
+            if (AnimationPlayer.CurrentAnimation != "Walk")
+            {
+                AnimationPlayer.Play("Walk");
+            }
         }
         else
         {
             IsWalking = false;
+            AnimationPlayer.Play("Init");
         }
 	    
         //Calcul de la rotation du joueur

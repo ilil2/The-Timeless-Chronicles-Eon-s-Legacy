@@ -21,7 +21,7 @@ public abstract partial class ClassScript : CharacterBody3D
     protected SpringArm3D CameraV;
     protected Camera3D Camera;
     protected Node3D CameraPlayer;
-    protected MeshInstance3D PlayerMesh;
+    protected Node3D PlayerMesh;
     protected AnimationPlayer AnimationPlayer;
     
     //Variable de camera
@@ -72,7 +72,7 @@ public abstract partial class ClassScript : CharacterBody3D
 		CameraH = GetNode<Node3D>("CameraPlayer/h");
 		Direction = Vector3.Back.Rotated(Vector3.Up, CameraH.GlobalTransform.Basis.GetEuler().Y);
 		
-		PlayerMesh = GetNode<MeshInstance3D>("PlayerBody");
+		PlayerMesh = GetNode<Node3D>("Player");
         
 		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
 	}
