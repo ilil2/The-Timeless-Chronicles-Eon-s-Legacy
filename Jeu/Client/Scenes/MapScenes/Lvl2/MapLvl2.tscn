@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=12 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="2_gwmug"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="4_p2gbs"]
 [ext_resource type="Resource" path="res://Scenes/MapScenes/Lvl2/TerrainMap2/data.hterrain" id="5_1ast1"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="6_hp6sn"]
-[ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="7_f60dw"]
+[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="7_mpmei"]
+[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="8_ltr22"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_x0kh0"]
 inner_radius = 149.0
@@ -32,12 +33,10 @@ adjustment_saturation = 1.15
 [sub_resource type="Resource" id="Resource_5d4v0"]
 script = ExtResource("6_hp6sn")
 mode = 0
-textures = [[ExtResource("7_f60dw")], [null]]
+textures = [[ExtResource("7_mpmei")], [ExtResource("8_ltr22")]]
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
-Rayon = 150
-Pas = 4
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 mesh = SubResource("TorusMesh_x0kh0")
