@@ -107,7 +107,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			Sphere.AddChild(meshInstance);
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 135;
+			const int radiusmap = 140;
 			double t = 2 * Math.PI * Rand.NextDouble();
 			double u = Rand.NextDouble() + Rand.NextDouble();
 			double? r = null;
@@ -175,14 +175,18 @@ public partial class MapLvl2Script : Node3D, IMap
 		{
 			
 			Node3D tree = TreeList[i];
+			Node3D LOD = tree.GetNode<Node3D>("LOD");
+			Node3D HD = tree.GetNode<Node3D>("HD");
 			double dist = Distance(Player,tree);
 			if (dist>50)
 			{
-				tree.Visible = false;
+				HD.Visible = false;
+				LOD.Visible = true;
 			}
 			else
 			{
-				tree.Visible = true;
+				HD.Visible = true;
+				LOD.Visible = false;
 			}
 		}
 		
