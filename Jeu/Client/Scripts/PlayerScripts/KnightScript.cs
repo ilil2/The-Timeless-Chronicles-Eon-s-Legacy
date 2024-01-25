@@ -72,40 +72,94 @@ public partial class KnightScript : ClassScript
     
     protected override void Move(double delta)
     {
-        if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-            Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+        if (!Attack() && AnimationPlayer.CurrentAnimation != "Hit")
         {
-            Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
-                Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
-            Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-            IsWalking = true;
-            MovementSpeed = WalkSpeed;
-            if (AnimationPlayer.CurrentAnimation != "Walk")
+            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+                Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
             {
-                AnimationPlayer.Play("Walk");
+                int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
+                int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
+                int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
+                int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
+                
+                Direction = new Vector3(left - right, 0, forward - backward);
+                Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+                IsWalking = true;
+                MovementSpeed = WalkSpeed;
+
+                if (left - right == 1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
+                {
+                    AnimationPlayer.Play("WalkDiagLeft");
+                }
+                else if (left - right == -1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                {
+                    AnimationPlayer.Play("WalkDiagRight");
+                }
+                else if (left - right == 1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                {
+                    AnimationPlayer.Play("WalkDiagRight");
+                }
+                else if (left - right == -1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
+                {
+                    AnimationPlayer.Play("WalkDiagLeft");
+                }
+                else if ((left - right == 1 || left - right == -1) && AnimationPlayer.CurrentAnimation != "WalkSide"
+                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
+                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                {
+                    AnimationPlayer.Play("WalkSide");
+                }
+                else if ((forward - backward == 1 || forward - backward == -1) && AnimationPlayer.CurrentAnimation != "Walk"
+                                                                               && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
+                                                                               && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                {
+                    AnimationPlayer.Play("Walk");
+                }
+                else if (!(left - right == 1 || left - right == -1 || forward - backward == 1 || forward - backward == -1))
+                {
+                    AnimationPlayer.Play("Init");
+                }
             }
+            else
+            {
+                IsWalking = false;
+                AnimationPlayer.Play("Init");
+            }
+	        
+            //Calcul de la rotation du joueur
+            PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		    
+            HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	        
+            Dash();
+	        
+            //Calcul du movement du joueur
+            Vector3 velocity = Velocity;
+            velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+            velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+            velocity.Y = VerticalVelocity.Y;
+		    
+            //Application du mouvement au joueur
+            Velocity = velocity;
+            MoveAndSlide();
         }
-        else
+    }
+
+    private bool Attack()
+    {
+        if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
-            IsWalking = false;
-            AnimationPlayer.Play("Init");
+            AnimationPlayer.Play("Hit");
+            GameManager.InfoJoueur["attack"] = "hit";
+            return true;
         }
-	    
-        //Calcul de la rotation du joueur
-        PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-		
-        HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	    
-        Dash();
-	    
-        //Calcul du movement du joueur
-        Vector3 velocity = Velocity;
-        velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-        velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-        velocity.Y = VerticalVelocity.Y;
-		
-        //Application du mouvement au joueur
-        Velocity = velocity;
-        MoveAndSlide();
+        else if (Input.IsMouseButtonPressed(MouseButton.Right))
+        {
+            AnimationPlayer.Play("Protection");
+            GameManager.InfoJoueur["attack"] = "protection";
+            return true;
+        }
+
+        return false;
     }
 }
