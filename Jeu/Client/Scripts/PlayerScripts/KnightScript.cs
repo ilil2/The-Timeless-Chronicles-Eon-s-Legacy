@@ -90,40 +90,48 @@ public partial class KnightScript : ClassScript
                 if (left - right == 1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
                 {
                     AnimationPlayer.Play("WalkDiagLeft");
+                    GameManager.InfoJoueur["attack"] = "walkdiagleft";
                 }
                 else if (left - right == -1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
                 {
                     AnimationPlayer.Play("WalkDiagRight");
+                    GameManager.InfoJoueur["attack"] = "walkdiagright";
                 }
                 else if (left - right == 1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
                 {
                     AnimationPlayer.Play("WalkDiagRight");
+                    GameManager.InfoJoueur["attack"] = "walkdiagright";
                 }
                 else if (left - right == -1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
                 {
                     AnimationPlayer.Play("WalkDiagLeft");
+                    GameManager.InfoJoueur["attack"] = "walkdiagleft";
                 }
                 else if ((left - right == 1 || left - right == -1) && AnimationPlayer.CurrentAnimation != "WalkSide"
                                                                    && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
                                                                    && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
                 {
                     AnimationPlayer.Play("WalkSide");
+                    GameManager.InfoJoueur["attack"] = "walkside";
                 }
                 else if ((forward - backward == 1 || forward - backward == -1) && AnimationPlayer.CurrentAnimation != "Walk"
                                                                                && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
                                                                                && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
                 {
                     AnimationPlayer.Play("Walk");
+                    GameManager.InfoJoueur["attack"] = "walk";
                 }
                 else if (!(left - right == 1 || left - right == -1 || forward - backward == 1 || forward - backward == -1))
                 {
                     AnimationPlayer.Play("Init");
+                    GameManager.InfoJoueur["attack"] = "init";
                 }
             }
             else
             {
                 IsWalking = false;
                 AnimationPlayer.Play("Init");
+                GameManager.InfoJoueur["attack"] = "init";
             }
 	        
             //Calcul de la rotation du joueur
