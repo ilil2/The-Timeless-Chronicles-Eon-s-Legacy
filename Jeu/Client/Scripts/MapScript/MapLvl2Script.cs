@@ -11,6 +11,7 @@ public partial class MapLvl2Script : Node3D, IMap
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
 	private List<Node3D> TreeList = new List<Node3D>();
+	private List<Node3D> SpawnPoint = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
 	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
@@ -182,6 +183,8 @@ public partial class MapLvl2Script : Node3D, IMap
 				HD.Visible = true;
 				LOD.Visible = false;
 			}
+			//pas assez opti pour le moment
+			//tree.Visible = MapTool.IsNodeVisible(tree, Cam);
 		}
 		
 	}
