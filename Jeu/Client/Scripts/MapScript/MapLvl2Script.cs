@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Lib;
 [Tool]
 public partial class MapLvl2Script : Node3D, IMap
 {
@@ -42,7 +43,7 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 		else if(state==2)
 		{
-			if ((FrameCount-StartTimer>1) && CheckSleep())
+			if ((FrameCount-StartTimer>1) && MapTool.CheckSleep(PseudoTreeList))
 			{
 				state = 3;
 				StartTimer = FrameCount;
@@ -54,21 +55,6 @@ public partial class MapLvl2Script : Node3D, IMap
 			state = 4;
 			StartTimer = FrameCount;
 		}
-	}
-
-	public (int,int) GetSpawnLocation()
-	{
-		throw new NotImplementedException();
-	}
-
-	public bool MapIsReady()
-	{
-		throw new NotImplementedException();
-	}
-
-	public void DebugMode(double delta, CharacterBody3D Player)
-	{
-		throw new NotImplementedException();
 	}
 	
 	private void CreateBorder()
@@ -157,17 +143,6 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 	}
 	
-	private bool CheckSleep()
-	{
-		for (int i = 0; i<PseudoTreeList.Count;i++)
-		{
-			if (PseudoTreeList[i].Sleeping == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
 	private void Render(Camera3D Cam)
 	{
 		Node3D Player = (Node3D)Cam;
@@ -177,7 +152,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			Node3D tree = TreeList[i];
 			Node3D LOD = tree.GetNode<Node3D>("LOD");
 			Node3D HD = tree.GetNode<Node3D>("HD");
-			double dist = Distance(Player,tree);
+			double dist = MapTool.Distance(Player,tree);
 			if (dist>50)
 			{
 				HD.Visible = false;
@@ -191,10 +166,19 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 		
 	}
-	
-	private double Distance(Node3D Room1, Node3D Room2)
+
+	public List<(int, int, int)> GetSpawnLocation()
 	{
-		return Math.Sqrt(Math.Pow(Room1.GlobalPosition.X - Room2.GlobalPosition.X, 2) +
-						 Math.Pow(Room1.GlobalPosition.Z - Room2.GlobalPosition.Z, 2));
+		throw new NotImplementedException();
+	}
+
+	public bool MapIsReady()
+	{
+		throw new NotImplementedException();
+	}
+
+	public void DebugMode(double delta, CharacterBody3D Player)
+	{
+		throw new NotImplementedException();
 	}
 }

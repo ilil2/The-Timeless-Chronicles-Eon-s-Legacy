@@ -1,6 +1,6 @@
 [gd_scene load_steps=280 format=3 uid="uid://dhvyhkdwxvtyo"]
 
-[ext_resource type="Script" path="res://Scenes/MapScenes/Lvl1/Boss1Map.cs" id="1_atvld"]
+[ext_resource type="Script" path="res://Scenes/MapScenes/Lvl1/BossScenes/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt1/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
 [ext_resource type="Texture2D" uid="uid://mfnhwhs5tuba" path="res://Ressources/Map/Egypt1/Ground/ground_0024_ao_1k.jpg" id="2_buywr"]
 [ext_resource type="Texture2D" uid="uid://b3f7hokp7wylx" path="res://Ressources/Map/Egypt1/Ground/ground_0024_height_1k.png" id="3_a7dis"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt1/Ground/ground_0024_roughness_1k.jpg" id="5_3j16s"]
 [ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="7_m2bom"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="9_da32q"]
-[ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/Exit.tscn" id="9_h3jfq"]
+[ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/BossScenes/Exit.tscn" id="9_h3jfq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofjsc"]
 resource_local_to_scene = true

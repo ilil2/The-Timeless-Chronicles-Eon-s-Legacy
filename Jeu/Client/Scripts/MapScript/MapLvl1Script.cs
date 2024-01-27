@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Environment = Godot.Environment;
+using Lib;
 
 /*
 To Do List du code:
@@ -17,7 +18,7 @@ To Do List du code:
 - Optimiser le jeu
 */
 
-public partial class MapLvl1Script : Node3D, IMap
+public partial class MapLvl1Script : Node3D
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
@@ -27,7 +28,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	private int NbRoom =250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
-	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
+	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
 	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
@@ -72,7 +73,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		FrameCount+=1;
 		if (!MapReady)
 		{
-			if (CheckSleep())
+			if (MapTool.CheckSleep(PseudoRoomList))
 			{
 				AddChild(NavMesh);
 				CreateMainRoom();
@@ -155,41 +156,6 @@ public partial class MapLvl1Script : Node3D, IMap
 		DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
 		const double time = 0.00001;
 		Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
-	}
-	
-	private bool IsNodeVisible(Node3D node, Camera3D camera)
-	{
-		// Not Use !
-		Vector3 cameraPosition = camera.GlobalTransform.Origin;
-		Vector3 nodePosition = node.GlobalTransform.Origin;
-
-		return !camera.IsPositionBehind(nodePosition);
-	}
-	
-	private void RenderDist()
-	{
-		Camera3D cam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
-		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
-		for (int i = 0; i<RoomList.Count; i++)
-		{
-			Node3D Room = RoomList[i];
-			if (!IsNodeVisible(Room,cam) && Distance(Room,(Node3D)Player)>30)
-			{
-				Room.Visible = false;
-			}
-			else
-			{
-				if (Distance(Room,(Node3D)Player)>100)
-				{
-					Room.GetNode<Node3D>("Misc").Visible = false;
-				}
-				else
-				{
-					Room.GetNode<Node3D>("Misc").Visible = true;
-				}
-				Room.Visible = true;
-			}
-		}
 	}
 	
 	private void CreateFog()
@@ -289,9 +255,8 @@ public partial class MapLvl1Script : Node3D, IMap
 			float Angle = 90*Rand.Next(0,4);
 			
 			
-			RigidBody3D PRoom = new RigidBody3D();
-			PRoom.LockRotation = true;
-			PhysicsBody3D Room = PRoom;
+			RigidBody3D Room = new RigidBody3D();
+			Room.LockRotation = true;
 			Room.AxisLockLinearY = true;
 			
 			CollisionShape3D RoomCollision = new CollisionShape3D();
@@ -321,7 +286,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	{
 		for (int i = 0; i < PseudoRoomList.Count; i++)
 		{
-			RigidBody3D PseudoRoom = (RigidBody3D)PseudoRoomList[i];
+			RigidBody3D PseudoRoom = PseudoRoomList[i];
 			MeshInstance3D MeshRoom = PseudoRoom.GetNode<MeshInstance3D>("Mesh");
 			BoxMesh BoxM = (BoxMesh)MeshRoom.Mesh;
 			
@@ -363,19 +328,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		RoomList.Add(MRoomGate);
 		NavMesh.AddChild(MRoomGate);
 	}
-
-	private bool CheckSleep()
-	{
-		for (int i = 0; i<PseudoRoomList.Count;i++)
-		{
-			step += 2;
-			if (((RigidBody3D)PseudoRoomList[i]).Sleeping == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+	
 
 	private Vector3 Roundm(float x, float z, int LenTile)
 	{
@@ -383,12 +336,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		int NewZ = (int)(Math.Floor((z+LenTile-1)/(float)(LenTile))*LenTile);
 		return new Vector3(NewX,0,NewZ);
 	}
-
-	private double Distance(Node3D Room1, Node3D Room2)
-	{
-		return Math.Sqrt(Math.Pow(Room1.GlobalPosition.X - Room2.GlobalPosition.X, 2) +
-						 Math.Pow(Room1.GlobalPosition.Z - Room2.GlobalPosition.Z, 2));
-	}
+	
 
 	private void OpenRoom()
 	{
@@ -398,7 +346,7 @@ public partial class MapLvl1Script : Node3D, IMap
 			for (int j = i+1; j < RoomList.Count; j++)
 			{
 				Node3D TestedRoom = RoomList[j].GetNode<Node3D>("Wall");
-				double dist = Distance(ActualRoom, TestedRoom);
+				double dist = MapTool.Distance(ActualRoom, TestedRoom);
 				
 				if (dist<100)
 				{
@@ -437,7 +385,7 @@ public partial class MapLvl1Script : Node3D, IMap
 					}
 				}
 			}
-			double DistToMain = Distance(ActualRoom,MainRoom);
+			double DistToMain = MapTool.Distance(ActualRoom,MainRoom);
 			if (MaxSpawnDist<DistToMain)
 			{
 				MaxSpawnDist = DistToMain;
