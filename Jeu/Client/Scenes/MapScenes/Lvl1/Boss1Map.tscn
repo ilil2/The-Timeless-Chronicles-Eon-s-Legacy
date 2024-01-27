@@ -4280,7 +4280,7 @@ omni_attenuation = 1.7
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Light"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 32, 0)
-light_energy = 10.0
+light_energy = 20.0
 light_volumetric_fog_energy = 4.925
 shadow_enabled = true
 spot_range = 4096.0

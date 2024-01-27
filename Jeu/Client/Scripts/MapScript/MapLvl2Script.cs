@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-
+[Tool]
 public partial class MapLvl2Script : Node3D, IMap
 {
 
@@ -148,8 +148,8 @@ public partial class MapLvl2Script : Node3D, IMap
 		{
 			Vector3 Pos = PseudoTreeList[i].Position;
 			RemoveChild(PseudoTreeList[i]);
-			Node3D tree = GD.Load<PackedScene>("res://Ressources/Map/Global/tre2/Model/Tree1.tscn").Instantiate<Node3D>();
-			tree.Position = Pos - new Vector3(0,2,0);
+			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{Rand.Next(1,6)}.tscn").Instantiate<Node3D>();
+			tree.Position = Pos - new Vector3(0,3,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
 			TreeList.Add(tree);

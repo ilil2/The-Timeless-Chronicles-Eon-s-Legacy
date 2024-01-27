@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=12 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="2_gwmug"]
@@ -9,10 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="7_mpmei"]
 [ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="8_ltr22"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
-
-[sub_resource type="TorusMesh" id="TorusMesh_x0kh0"]
-inner_radius = 149.0
-outer_radius = 150.0
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
 background_mode = 2
@@ -39,10 +35,6 @@ textures = [[ExtResource("7_mpmei")], [ExtResource("8_ltr22")]]
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.14547, 0)
-mesh = SubResource("TorusMesh_x0kh0")
-
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
 shadow_enabled = true
@@ -56,6 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.127, 0, 0)
 [node name="State" type="Label" parent="SpecCam"]
 offset_right = 40.0
 offset_bottom = 23.0
+text = "State 4"
 
 [node name="HTerrain" type="Node3D" parent="."]
 script = ExtResource("4_p2gbs")
