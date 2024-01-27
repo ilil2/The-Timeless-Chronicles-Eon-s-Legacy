@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="4_p2gbs"]
 [ext_resource type="Resource" path="res://Scenes/MapScenes/Lvl2/TerrainMap2/data.hterrain" id="5_1ast1"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="6_hp6sn"]
-[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="7_mpmei"]
-[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="8_ltr22"]
+[ext_resource type="Texture2D" uid="uid://b3ly6fvwwic0q" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot0_albedo_bump.png" id="7_m13uf"]
+[ext_resource type="Texture2D" uid="uid://dch1h2cqlcygw" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot0_normal_roughness.png" id="8_yghx5"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
@@ -30,7 +30,7 @@ adjustment_saturation = 1.15
 [sub_resource type="Resource" id="Resource_5d4v0"]
 script = ExtResource("6_hp6sn")
 mode = 0
-textures = [[ExtResource("7_mpmei")], [ExtResource("8_ltr22")]]
+textures = [[ExtResource("7_m13uf")], [ExtResource("8_yghx5")]]
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
