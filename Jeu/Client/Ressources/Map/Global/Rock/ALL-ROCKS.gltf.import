@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://k4qtnt7kg377"
-path="res://.godot/imported/ALL-ROCKS.gltf-4d03accfacc29116f0c5a5eb250553ea.scn"
+path="res://.godot/imported/ALL-ROCKS.gltf-4bfdf30a6dbf03c61fad9673b9683007.scn"
 
 [deps]
 
-source_file="res://Ressources/Map/Global/ALL-ROCKS.gltf"
-dest_files=["res://.godot/imported/ALL-ROCKS.gltf-4d03accfacc29116f0c5a5eb250553ea.scn"]
+source_file="res://Ressources/Map/Global/Rock/ALL-ROCKS.gltf"
+dest_files=["res://.godot/imported/ALL-ROCKS.gltf-4bfdf30a6dbf03c61fad9673b9683007.scn"]
 
 [params]
 

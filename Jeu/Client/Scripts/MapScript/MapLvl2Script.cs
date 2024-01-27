@@ -13,6 +13,22 @@ public partial class MapLvl2Script : Node3D, IMap
 	private List<Node3D> TreeList = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
+	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
+	{
+		{1,2.5f},
+		{2,1.5f},
+		{3,2f},
+		{4,3.5f},
+		{5,1f},
+	};
+	private Dictionary<float,int> RadiusToId = new Dictionary<float,int>
+	{
+		{2.5f,1},
+		{1.5f,2},
+		{2f,3},
+		{3.5f,4},
+		{1f,5},
+	};
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -77,14 +93,16 @@ public partial class MapLvl2Script : Node3D, IMap
 	private void CreateForest0()
 	{
 		const int nbtree = 500;
-		const float radius = 2.5f;
+		//const float radius = 2.5f;
 		for (int i = 0; i < nbtree; i++)
 		{
+			float radius = IdToRadius[Rand.Next(1,6)];
 			RigidBody3D Sphere = new RigidBody3D();
 			SphereShape3D sphereShape = new SphereShape3D();
 			SphereMesh sphereMesh = new SphereMesh();
 			CollisionShape3D collisionShape = new CollisionShape3D();
 			MeshInstance3D meshInstance = new MeshInstance3D();
+			meshInstance.Name = "Mesh";
 			sphereMesh.Radius = radius;
 			sphereMesh.Height = radius * 2;
 			meshInstance.Mesh = sphereMesh;
@@ -133,8 +151,9 @@ public partial class MapLvl2Script : Node3D, IMap
 		for (int i = 0; i<PseudoTreeList.Count;i++)
 		{
 			Vector3 Pos = PseudoTreeList[i].Position;
+			float Sp = ((SphereMesh)PseudoTreeList[i].GetNode<MeshInstance3D>("Mesh").Mesh).Radius;
 			RemoveChild(PseudoTreeList[i]);
-			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{Rand.Next(1,6)}.tscn").Instantiate<Node3D>();
+			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
 			tree.Position = Pos - new Vector3(0,3,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
