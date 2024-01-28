@@ -1,21 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=12 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
-[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="2_gwmug"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_02ou1"]
 [ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_rokdr"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="4_p2gbs"]
 [ext_resource type="Resource" path="res://Scenes/MapScenes/Lvl2/TerrainMap2/data.hterrain" id="5_1ast1"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="6_hp6sn"]
-[ext_resource type="Texture2D" uid="uid://b3ggyy3i53a7k" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot1_albedo_bump.png" id="7_c43pq"]
-[ext_resource type="Texture2D" uid="uid://b11j04rhtma2l" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot0_albedo_bump.png" id="7_m13uf"]
-[ext_resource type="Texture2D" uid="uid://wth2d3smukht" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot1_normal_roughness.png" id="8_hnieb"]
-[ext_resource type="Texture2D" uid="uid://bmukpipqa1ncb" path="res://Scenes/MapScenes/Lvl2/MapLvl2_slot0_normal_roughness.png" id="8_yghx5"]
+[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="7_xjml8"]
+[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="8_itphy"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = ExtResource("2_gwmug")
+sky = ExtResource("2_02ou1")
 ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
@@ -32,7 +30,7 @@ adjustment_saturation = 1.15
 [sub_resource type="Resource" id="Resource_5d4v0"]
 script = ExtResource("6_hp6sn")
 mode = 0
-textures = [[ExtResource("7_m13uf"), ExtResource("7_c43pq")], [ExtResource("8_yghx5"), ExtResource("8_hnieb")]]
+textures = [[ExtResource("7_xjml8")], [ExtResource("8_itphy")]]
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")

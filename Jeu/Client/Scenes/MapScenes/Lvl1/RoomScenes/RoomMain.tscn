@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://uutj1tmn03ss"]
 
-[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_3tuwg"]
+[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_3tuwg"]
 
 [sub_resource type="Image" id="Image_x8sdy"]
 data = {

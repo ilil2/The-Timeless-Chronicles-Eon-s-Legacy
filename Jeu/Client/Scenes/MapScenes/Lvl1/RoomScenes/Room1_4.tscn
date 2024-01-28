@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dhshcv8q6okxr"]
 
-[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_uqwqp"]
-[ext_resource type="Texture2D" uid="uid://digmdpp4xx861" path="res://Ressources/Map/Egypt1/Temple/textures/blinn4_diffuse.png" id="2_iysf5"]
+[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_uqwqp"]
+[ext_resource type="Texture2D" uid="uid://digmdpp4xx861" path="res://Ressources/Map/Egypt/Temple/textures/blinn4_diffuse.png" id="2_iysf5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bcw2y"]
 resource_name = "Egiptian_wall_1"

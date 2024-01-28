@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://psiq63vacswx"]
 
-[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="2_neu27"]
+[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="2_neu27"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj2se"]
 resource_name = "Egiptian_wall_1"

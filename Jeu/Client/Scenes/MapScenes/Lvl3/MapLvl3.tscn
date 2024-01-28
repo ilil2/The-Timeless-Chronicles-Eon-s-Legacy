@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bn7cup06ni2nw"]
 
-[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt1/SkyBox.res" id="1_ossj3"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_42jj3"]
 [ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="2_8xhfs"]
 
 [sub_resource type="Environment" id="Environment_2u4l1"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = ExtResource("1_ossj3")
+sky = ExtResource("1_42jj3")
 ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true

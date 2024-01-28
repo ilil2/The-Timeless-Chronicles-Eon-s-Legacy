@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://7v06sckafrc8"]
 
-[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt1/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_ci2pi"]
+[ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_ci2pi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oabrn"]
 resource_name = "blinn3"

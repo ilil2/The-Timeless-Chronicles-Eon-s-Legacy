@@ -5,7 +5,7 @@ public partial class Boss1Map : Node3D
 {
 	[Export] private int Rayon = 0;
 	[Export] private int Pas = 360;
-	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/w.tscn");
+	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/w.tscn");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
