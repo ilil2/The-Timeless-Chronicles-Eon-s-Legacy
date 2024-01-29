@@ -31,7 +31,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
 	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
-	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
+	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt/Temple/Asset/Small_gate.tscn");
 	private Node3D SpawnRoom;
 	private double MaxSpawnDist = 0;
 	private int FogState = 0;
