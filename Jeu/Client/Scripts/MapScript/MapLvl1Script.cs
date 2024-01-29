@@ -133,7 +133,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	
 	public void DebugMode(double delta,CharacterBody3D Player)
 	{
-		
+		bool Mode = MapTool.Debug(Player);
 	}
 	
 	private void CreateMob()

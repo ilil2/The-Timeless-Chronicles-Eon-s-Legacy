@@ -6,6 +6,9 @@ namespace Lib;
 
 public partial class MapTool : Node
 {
+	public bool DebugMode = false;
+	public Camera3D DebugCam;
+	
 	public static double Distance(Node3D Node1, Node3D Node2)
 	{
 		return Math.Sqrt(Math.Pow(Node1.GlobalPosition.X - Node2.GlobalPosition.X, 2) +
@@ -31,5 +34,18 @@ public partial class MapTool : Node
 			}
 		}
 		return true;
+	}
+	public static bool Debug(CharacterBody3D Player)
+	{
+		Camera3D CameraPlayer;
+		if(DebugMode)
+		{
+			DebugMode = false;
+		}
+		else
+		{
+			DebugMode = true;
+		}
+		return DebugMode;
 	}
 }
