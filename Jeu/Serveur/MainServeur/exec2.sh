@@ -1,0 +1,1 @@
+osascript -e 'tell application "Terminal" to do script "cd Desktop/Serveur/Jeu/Serveur/Serveur;dotnet run;read"'

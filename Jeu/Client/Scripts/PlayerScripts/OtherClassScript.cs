@@ -61,6 +61,11 @@ public partial class OtherClassScript : CharacterBody3D
 		Id = id;
 	}
 	
+	public int GetID()
+	{
+		return Id;
+	}
+	
 	public void SetClasse(string classe)
 	{
 		Classe = classe;

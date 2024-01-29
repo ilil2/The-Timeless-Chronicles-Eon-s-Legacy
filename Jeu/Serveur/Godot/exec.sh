@@ -1,0 +1,1 @@
+gnome-terminal -e 'bash -c "cd ../MainServeur;dotnet run;read"'
