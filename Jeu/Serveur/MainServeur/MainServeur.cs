@@ -189,9 +189,9 @@ public class MainServeur
                     
                     StreamWriter sw = new StreamWriter("port.txt"); 
                     Process p1 = new Process();
-                    p1.StartInfo.FileName = "bash";
-                    p1.StartInfo.Arguments = "exec.sh";
-                    //p1.StartInfo.FileName = "execwin.bat";
+                    //p1.StartInfo.FileName = "bash";
+                    //p1.StartInfo.Arguments = "exec.sh";
+                    p1.StartInfo.FileName = "execwin.bat";
                     
                     sw.Write(ports[0]);
                     sw.Close();
