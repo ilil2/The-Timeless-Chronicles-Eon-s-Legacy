@@ -2,11 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Lib;
-[Tool]
 public partial class MapLvl2Script : Node3D, IMap
 {
 
-	private Random Rand = new Random();
+	private Random Rand = new Random(42);
 	private int state = 0;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
@@ -72,6 +71,11 @@ public partial class MapLvl2Script : Node3D, IMap
 			state = 4;
 			StartTimer = FrameCount;
 		}
+	}
+	public void SetSeed(int seed)
+	{
+		Rand = new Random(seed)
+		GD.Print($"Seed set : {seed}");
 	}
 	
 	private void CreateBorder()

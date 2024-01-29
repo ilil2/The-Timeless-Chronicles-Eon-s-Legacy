@@ -22,8 +22,8 @@ public partial class MapLvl1Script : Node3D, IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random();
-	private Random FogRand = new Random();
+	private Random Rand = new Random(42);
+	private Random FogRand = new Random(42);
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
@@ -104,6 +104,12 @@ public partial class MapLvl1Script : Node3D, IMap
 			//RenderDist();
 		}
 		
+	}
+	public void SetSeed(int seed)
+	{
+		Rand = new Random(seed);
+		FogRand = new Random(seed);
+		GD.Print($"Seed set : {seed}");
 	}
 	
 	public bool MapIsReady()
