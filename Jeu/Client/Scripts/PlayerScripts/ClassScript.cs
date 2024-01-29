@@ -72,9 +72,7 @@ public abstract partial class ClassScript : CharacterBody3D
 		CameraH = GetNode<Node3D>("CameraPlayer/h");
 		Direction = Vector3.Back.Rotated(Vector3.Up, CameraH.GlobalTransform.Basis.GetEuler().Y);
 		
-		PlayerMesh = GetNode<Node3D>("Player");
-        
-		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
+		PlayerMesh = GetNode<Node3D>("Player"); 
 	}
 
     protected void Zoom(InputEvent @event)

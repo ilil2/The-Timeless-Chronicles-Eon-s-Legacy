@@ -84,7 +84,7 @@ public partial class MapLvl1Script : Node3D, IMap
 				
 				
 				MapReady = true;
-				GetSpawnLocation();
+				//GetSpawnLocation();
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
