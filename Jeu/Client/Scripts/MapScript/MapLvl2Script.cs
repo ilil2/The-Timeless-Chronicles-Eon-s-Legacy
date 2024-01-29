@@ -72,7 +72,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			StartTimer = FrameCount;
 		}
 	}
-	public void SetSeed(int seed)
+	public void SetSeed(int seed, int seed2)
 	{
 		Rand = new Random(seed)
 		GD.Print($"Seed set : {seed}");

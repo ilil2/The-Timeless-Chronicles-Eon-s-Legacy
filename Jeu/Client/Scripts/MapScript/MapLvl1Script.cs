@@ -105,10 +105,10 @@ public partial class MapLvl1Script : Node3D, IMap
 		}
 		
 	}
-	public void SetSeed(int seed)
+	public void SetSeed(int seed, int seed2)
 	{
 		Rand = new Random(seed);
-		FogRand = new Random(seed);
+		FogRand = new Random(seed2);
 		GD.Print($"Seed set : {seed}");
 	}
 	
