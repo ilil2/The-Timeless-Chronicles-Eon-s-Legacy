@@ -1,12 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://c60qrur4avmdk"]
+[gd_scene load_steps=8 format=3 uid="uid://c60qrur4avmdk"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/MobScript.cs" id="1_d2kga"]
+[ext_resource type="Shader" uid="uid://nwylxkfab5m4" path="res://Ressources/Map/death.tres" id="2_7i66y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjtd2"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u7e1"]
+render_priority = 0
+shader = ExtResource("2_7i66y")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/FloatParameter = null
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rliy6"]
+material = SubResource("ShaderMaterial_2u7e1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfl58"]
+render_priority = 0
+shader = ExtResource("2_7i66y")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/FloatParameter = null
 
 [sub_resource type="BoxMesh" id="BoxMesh_4arfr"]
+material = SubResource("ShaderMaterial_wfl58")
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Mob" type="CharacterBody3D"]

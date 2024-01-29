@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Environment = Godot.Environment;
+using Lib;
 
 /*
 To Do List du code:
@@ -21,18 +22,17 @@ public partial class MapLvl1Script : Node3D
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random(42);
-	private Random FogRand = new Random(42);
+	private Random Rand = new Random();
+	private Random FogRand = new Random();
 	private static bool MapReady = false;
 	private int NbRoom =250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
-	private List<PhysicsBody3D> PseudoRoomList = new List<PhysicsBody3D>();
+	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();
 	private List<Node3D> RoomList = new List<Node3D>();
 	private List<CharacterBody3D> MobList = new List<CharacterBody3D>();
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt1/Temple/Asset/Small_gate.tscn");
-	private static float SpawnX;
-	private static float SpawnZ;
+	private Node3D SpawnRoom;
 	private double MaxSpawnDist = 0;
 	private int FogState = 0;
 	private int StartTime = 0;
@@ -73,7 +73,7 @@ public partial class MapLvl1Script : Node3D
 		FrameCount+=1;
 		if (!MapReady)
 		{
-			if (CheckSleep())
+			if (MapTool.CheckSleep(PseudoRoomList))
 			{
 				AddChild(NavMesh);
 				CreateMainRoom();
@@ -84,6 +84,7 @@ public partial class MapLvl1Script : Node3D
 				
 				
 				MapReady = true;
+				GetSpawnLocation();
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
@@ -112,60 +113,21 @@ public partial class MapLvl1Script : Node3D
 	
 	public (int,int) GetSpawnLocation()
 	{
-		return ((int)SpawnX,(int)SpawnZ);
+		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");
+		List<(int,int,int)> Spawn = new List<(int,int,int)>();
+		for (int i = 0; i<4;i++)
+		{
+			Node3D Pos = SpawnPoint.GetChild<Node3D>(i);
+			(int,int,int) res = ((int)Pos.GlobalPosition.X,(int)Pos.GlobalPosition.Y,(int)Pos.GlobalPosition.Z);
+			GD.Print(res);
+			Spawn.Add(res); 
+		}
+		return new (0,0);
 	}
 	
-	public void DebugMode(double delta, CharacterBody3D Player)
+	public void DebugMode(double delta,CharacterBody3D Player)
 	{
-		Camera3D PlayerCam = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
-		// a enlever si no compil
-		//--
-		WorldEnvironment world = GetNode<WorldEnvironment>("World");
-		Godot.Environment env = world.Environment;
-		if (!SpecMode)
-		{
-			if (GameManager.DebugMode && FrameCount-StartInput>20)
-			{
-				StartInput=FrameCount;
-				PackedScene SpecCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn");
-				Camera3D Cam = SpecCam.Instantiate<Camera3D>();
-				Cam.Name = "SpecCam";
-				Cam.Position = PlayerCam.Position + new Vector3(0,2,0) + Player.Position;
-				Cam.Rotation = PlayerCam.Rotation;
-				Label FPS = new Label();
-				FPS.Name = "FPS";
-				FPS.Text = "FPS:";
-				Cam.AddChild(FPS);
-				AddChild(Cam);
-				PlayerCam.Current = false;
-				Cam.Current = true;
-				SpecMode = true;
-				
-				env.VolumetricFogEnabled = false;
-				GD.Print("True");
-			}
-			
-		}
-		else
-		{
-			Label Fps = GetNode<Label>("SpecCam/FPS");
-			Fps.Text = $"FPS: {(int)(1/delta)}";
-			if (!GameManager.DebugMode && FrameCount-StartInput>20)
-			{
-				StartInput=FrameCount;
-				Camera3D Cam = GetNode<Camera3D>("SpecCam");
-				RemoveChild(Cam);
-				Cam.QueueFree();
-				PlayerCam.Current = true;
-				Cam.Current = false;
-				SpecMode = false;
-				
-				GD.Print("False");
-				env.VolumetricFogEnabled = true;
-			}
-			
-			
-		}
+		
 	}
 	
 	private void CreateMob()
@@ -194,41 +156,6 @@ public partial class MapLvl1Script : Node3D
 		DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");
 		const double time = 0.00001;
 		Sun.Rotation = new Vector3(Sun.Rotation.X,(float)(Sun.Rotation.Y + time),Sun.Rotation.Z);
-	}
-	
-	private bool IsNodeVisible(Node3D node, Camera3D camera)
-	{
-		// Not Use !
-		Vector3 cameraPosition = camera.GlobalTransform.Origin;
-		Vector3 nodePosition = node.GlobalTransform.Origin;
-
-		return !camera.IsPositionBehind(nodePosition);
-	}
-	
-	private void RenderDist()
-	{
-		Camera3D cam = GetNode<Camera3D>("Player/CameraPlayer/h/v/Camera3D");
-		CharacterBody3D Player = GetNode<CharacterBody3D>("Player");
-		for (int i = 0; i<RoomList.Count; i++)
-		{
-			Node3D Room = RoomList[i];
-			if (!IsNodeVisible(Room,cam) && Distance(Room,(Node3D)Player)>30)
-			{
-				Room.Visible = false;
-			}
-			else
-			{
-				if (Distance(Room,(Node3D)Player)>100)
-				{
-					Room.GetNode<Node3D>("Misc").Visible = false;
-				}
-				else
-				{
-					Room.GetNode<Node3D>("Misc").Visible = true;
-				}
-				Room.Visible = true;
-			}
-		}
 	}
 	
 	private void CreateFog()
@@ -328,9 +255,8 @@ public partial class MapLvl1Script : Node3D
 			float Angle = 90*Rand.Next(0,4);
 			
 			
-			RigidBody3D PRoom = new RigidBody3D();
-			PRoom.LockRotation = true;
-			PhysicsBody3D Room = PRoom;
+			RigidBody3D Room = new RigidBody3D();
+			Room.LockRotation = true;
 			Room.AxisLockLinearY = true;
 			
 			CollisionShape3D RoomCollision = new CollisionShape3D();
@@ -360,7 +286,7 @@ public partial class MapLvl1Script : Node3D
 	{
 		for (int i = 0; i < PseudoRoomList.Count; i++)
 		{
-			RigidBody3D PseudoRoom = (RigidBody3D)PseudoRoomList[i];
+			RigidBody3D PseudoRoom = PseudoRoomList[i];
 			MeshInstance3D MeshRoom = PseudoRoom.GetNode<MeshInstance3D>("Mesh");
 			BoxMesh BoxM = (BoxMesh)MeshRoom.Mesh;
 			
@@ -402,19 +328,7 @@ public partial class MapLvl1Script : Node3D
 		RoomList.Add(MRoomGate);
 		NavMesh.AddChild(MRoomGate);
 	}
-
-	private bool CheckSleep()
-	{
-		for (int i = 0; i<PseudoRoomList.Count;i++)
-		{
-			step += 2;
-			if (((RigidBody3D)PseudoRoomList[i]).Sleeping == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+	
 
 	private Vector3 Roundm(float x, float z, int LenTile)
 	{
@@ -422,12 +336,7 @@ public partial class MapLvl1Script : Node3D
 		int NewZ = (int)(Math.Floor((z+LenTile-1)/(float)(LenTile))*LenTile);
 		return new Vector3(NewX,0,NewZ);
 	}
-
-	private double Distance(Node3D Room1, Node3D Room2)
-	{
-		return Math.Sqrt(Math.Pow(Room1.Position.X - Room2.Position.X, 2) +
-						 Math.Pow(Room1.Position.Z - Room2.Position.Z, 2));
-	}
+	
 
 	private void OpenRoom()
 	{
@@ -437,7 +346,7 @@ public partial class MapLvl1Script : Node3D
 			for (int j = i+1; j < RoomList.Count; j++)
 			{
 				Node3D TestedRoom = RoomList[j].GetNode<Node3D>("Wall");
-				double dist = Distance(ActualRoom, TestedRoom);
+				double dist = MapTool.Distance(ActualRoom, TestedRoom);
 				
 				if (dist<100)
 				{
@@ -476,12 +385,11 @@ public partial class MapLvl1Script : Node3D
 					}
 				}
 			}
-			double DistToMain = Distance(ActualRoom,MainRoom);
+			double DistToMain = MapTool.Distance(ActualRoom,MainRoom);
 			if (MaxSpawnDist<DistToMain)
 			{
 				MaxSpawnDist = DistToMain;
-				SpawnX = ActualRoom.Position.X;
-				SpawnZ = ActualRoom.Position.Z;
+				SpawnRoom = RoomList[i];
 			}
 		}
 	}

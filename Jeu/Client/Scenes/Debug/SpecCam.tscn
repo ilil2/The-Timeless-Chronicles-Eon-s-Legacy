@@ -4,3 +4,14 @@
 
 [node name="SpecCam" type="Camera3D"]
 script = ExtResource("1_bsgi7")
+
+[node name="FPS" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS:"
+
+[node name="POS" type="Label" parent="."]
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 50.0
+text = "POS:"

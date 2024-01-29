@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_02ou1"]
+[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_rokdr"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="4_p2gbs"]
+[ext_resource type="Resource" path="res://Scenes/MapScenes/Lvl2/TerrainMap2/data.hterrain" id="5_1ast1"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="6_hp6sn"]
+[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="7_xjml8"]
+[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="8_itphy"]
+[ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
+
+[sub_resource type="Environment" id="Environment_pdaq0"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("2_02ou1")
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+fog_density = 0.3015
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.878431, 0.803922, 0.662745, 1)
+volumetric_fog_emission = Color(0.623529, 0.505882, 0.223529, 1)
+volumetric_fog_sky_affect = 0.97
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_enabled = true
+adjustment_saturation = 1.15
+
+[sub_resource type="Resource" id="Resource_5d4v0"]
+script = ExtResource("6_hp6sn")
+mode = 0
+textures = [[ExtResource("7_xjml8")], [ExtResource("8_itphy")]]
+
+[sub_resource type="SphereMesh" id="SphereMesh_hk6u7"]
+
+[node name="MapLvl2" type="Node3D"]
+script = ExtResource("1_iykwk")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
+shadow_enabled = true
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pdaq0")
+
+[node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.211, 0, 0)
+
+[node name="State" type="Label" parent="SpecCam"]
+offset_top = 48.0
+offset_right = 54.0
+offset_bottom = 74.0
+text = "State 4"
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("4_p2gbs")
+centered = true
+_terrain_data = ExtResource("5_1ast1")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_5d4v0")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 5.0
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = null
+
+[node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.096, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hk6u7")

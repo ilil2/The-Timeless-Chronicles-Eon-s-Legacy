@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class SpecCam : Camera3D
@@ -85,6 +86,7 @@ public partial class SpecCam : Camera3D
 	{
 		_updateMouseLook();
 		_updateMovement(delta);
+		UpdateLabel(delta);
 	}
 	
 	private float _booltofloat(bool b)
@@ -140,5 +142,13 @@ public partial class SpecCam : Camera3D
 			RotateObjectLocal(new Vector3(1f,0f,0f), Mathf.DegToRad(-pitch));
 			
 		}
+	}
+	private void UpdateLabel(double delta)
+	{
+		Label FPS = GetNode<Label>("FPS");
+		Label POS = GetNode<Label>("POS");
+		
+		FPS.Text = $"FPS: {(int)(1/delta)}";
+		POS.Text = $"X: {MathF.Round(Position.X,2)}  Y: {MathF.Round(Position.Y,2)}  Z: {MathF.Round(Position.Z,2)}";
 	}
 }
