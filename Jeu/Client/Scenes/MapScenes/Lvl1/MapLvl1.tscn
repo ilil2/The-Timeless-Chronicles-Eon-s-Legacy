@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=19 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="2_wbwp3"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="7_wfpe1"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt/sphynx/10085_egypt_sphinx_iterations-2.obj" id="8_w8bmg"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="9_m6y1p"]
-[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="10_l64nl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r16a"]
 resource_local_to_scene = true
@@ -146,5 +145,3 @@ shadow_enabled = true
 
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vrgge")
-
-[node name="SpecCam" parent="." instance=ExtResource("10_l64nl")]
