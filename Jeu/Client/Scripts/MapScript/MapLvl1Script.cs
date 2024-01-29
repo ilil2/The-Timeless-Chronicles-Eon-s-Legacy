@@ -84,7 +84,6 @@ public partial class MapLvl1Script : Node3D, IMap
 				
 				
 				MapReady = true;
-				//GetSpawnLocation();
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
@@ -95,12 +94,20 @@ public partial class MapLvl1Script : Node3D, IMap
 				GD.Print($"Fog Start in {Duration}");	
 			}
 		}
-		else if (GameManager.StartMap)
+		else
 		{
 			//Process
 			CreateFog();
 			DayCycle();
-			
+			//Debug Map only
+			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>10)  // Remplacez ce nombre par le code scancode correct pour Tab sur votre clavier
+			{
+				CharacterBody3D P = GetNode<CharacterBody3D>("Joueur1");
+				StartInput = FrameCount;
+				DebugMode(delta,P);
+				GD.Print("Debug !");
+			}
+			//--------------
 			//RenderDist();
 		}
 		
@@ -133,7 +140,11 @@ public partial class MapLvl1Script : Node3D, IMap
 	
 	public void DebugMode(double delta,CharacterBody3D Player)
 	{
-		bool Mode = MapTool.Debug(Player);
+		bool Mode = MapTool.Debug(Player,this);
+		WorldEnvironment world = GetNode<WorldEnvironment>("World");
+		Godot.Environment env = world.Environment;
+		env.VolumetricFogEnabled = !Mode;
+		
 	}
 	
 	private void CreateMob()

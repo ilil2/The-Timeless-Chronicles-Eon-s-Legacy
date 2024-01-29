@@ -6,7 +6,7 @@ namespace Lib;
 
 public partial class MapTool : Node
 {
-	public bool DebugMode = false;
+	public static bool DebugM = false;
 	public Camera3D DebugCam;
 	
 	public static double Distance(Node3D Node1, Node3D Node2)
@@ -35,17 +35,29 @@ public partial class MapTool : Node
 		}
 		return true;
 	}
-	public static bool Debug(CharacterBody3D Player)
+	public static bool Debug(CharacterBody3D Player, Node3D Map)
 	{
-		Camera3D CameraPlayer;
-		if(DebugMode)
+		Camera3D CameraPlayer = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		if(DebugM)
 		{
-			DebugMode = false;
+			Camera3D DebugCam = Map.GetNode<Camera3D>("SpecCam");
+			DebugM = false;
+			CameraPlayer.Current = true;
+			DebugCam.Current = false;
+			Map.RemoveChild(DebugCam);
+			
 		}
 		else
 		{
-			DebugMode = true;
+			DebugM = true;
+			Camera3D DebugCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn").Instantiate<Camera3D>();
+			DebugCam.GlobalTransform = CameraPlayer.GlobalTransform;
+			Map.AddChild(DebugCam);
+			CameraPlayer.Current = false;
+			DebugCam.Current = true;
+			
+			
 		}
-		return DebugMode;
+		return DebugM;
 	}
 }

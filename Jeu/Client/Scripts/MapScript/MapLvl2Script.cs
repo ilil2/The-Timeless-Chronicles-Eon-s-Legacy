@@ -74,7 +74,7 @@ public partial class MapLvl2Script : Node3D, IMap
 	}
 	public void SetSeed(int seed, int seed2)
 	{
-		Rand = new Random(seed)
+		Rand = new Random(seed);
 		GD.Print($"Seed set : {seed}");
 	}
 	
