@@ -76,8 +76,8 @@ public partial class MapLvl2Script : Node3D, IMap
 	
 	private void CreateBorder()
 	{
-		const int Rayon = 150;
-		const int Pas = 4;
+		const int Rayon = 300;
+		const int Pas = 2;
 		for (int i = 0; i<360; i+=Pas)
 		{
 			float rot = Mathf.DegToRad(i);
@@ -93,7 +93,7 @@ public partial class MapLvl2Script : Node3D, IMap
 	}
 	private void CreateForest0()
 	{
-		const int nbtree = 500;
+		const int nbtree = 3000;
 		//const float radius = 2.5f;
 		for (int i = 0; i < nbtree; i++)
 		{
@@ -112,7 +112,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			Sphere.AddChild(meshInstance);
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 140;
+			const int radiusmap = 290;
 			double t = 2 * Math.PI * Rand.NextDouble();
 			double u = Rand.NextDouble() + Rand.NextDouble();
 			double? r = null;
@@ -173,15 +173,15 @@ public partial class MapLvl2Script : Node3D, IMap
 			Node3D LOD = tree.GetNode<Node3D>("LOD");
 			Node3D HD = tree.GetNode<Node3D>("HD");
 			double dist = MapTool.Distance(Player,tree);
-			if (dist>50)
+			if (dist>150)
 			{
 				HD.Visible = false;
-				LOD.Visible = true;
+				LOD.Visible = false;
 			}
 			else
 			{
-				HD.Visible = true;
-				LOD.Visible = false;
+				HD.Visible = false;
+				LOD.Visible = true;
 			}
 			//pas assez opti pour le moment
 			//tree.Visible = MapTool.IsNodeVisible(tree, Cam);
@@ -203,4 +203,5 @@ public partial class MapLvl2Script : Node3D, IMap
 	{
 		throw new NotImplementedException();
 	}
+	
 }

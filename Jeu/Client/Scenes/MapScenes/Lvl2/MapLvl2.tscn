@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_02ou1"]
@@ -32,6 +32,8 @@ script = ExtResource("6_hp6sn")
 mode = 0
 textures = [[ExtResource("7_xjml8")], [ExtResource("8_itphy")]]
 
+[sub_resource type="SphereMesh" id="SphereMesh_hk6u7"]
+
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
 
@@ -43,13 +45,13 @@ shadow_enabled = true
 environment = SubResource("Environment_pdaq0")
 
 [node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.127, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.211, 0, 0)
 
 [node name="State" type="Label" parent="SpecCam"]
 offset_top = 48.0
 offset_right = 54.0
 offset_bottom = 74.0
-text = "State 2"
+text = "State 4"
 
 [node name="HTerrain" type="Node3D" parent="."]
 script = ExtResource("4_p2gbs")
@@ -65,10 +67,13 @@ custom_globalmap_shader = null
 texture_set = SubResource("Resource_5d4v0")
 render_layers = 1
 cast_shadow = 1
-shader_params/u_ground_uv_scale = 1.0
+shader_params/u_ground_uv_scale = 5.0
 shader_params/u_depth_blending = true
 shader_params/u_triplanar = false
 shader_params/u_tile_reduction = null
 
 [node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.942, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.096, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hk6u7")
