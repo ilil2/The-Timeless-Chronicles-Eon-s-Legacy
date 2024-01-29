@@ -43,11 +43,11 @@ public partial class Listen2 : GameManager
         {
 	        int id = Conversions.AtoI(rep.Substring(5));
 	        
-	        if (id == ((OtherArcherScript)Joueur2).GetID())
+	        if (id == ((OtherClassScript)Joueur2).GetID())
 	        {
 		        Joueur2.QueueFree();
 	        }
-	        else if (id == ((OtherArcherScript)Joueur3).GetID())
+	        else if (id == ((OtherClassScript)Joueur3).GetID())
 	        {
 		        Joueur3.QueueFree();
 	        }
