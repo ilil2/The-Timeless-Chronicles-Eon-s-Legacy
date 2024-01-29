@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using JeuClient.Scripts.PlayerScripts;
+using Lib;
 
 public partial class ArcherScript : ClassScript
 {
@@ -16,12 +17,12 @@ public partial class ArcherScript : ClassScript
 	{
 		InitPlayer();
 
-		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (_camera.Current && !GameManager._pausemode)
+		if (Camera.Current && !GameManager._pausemode)
 		{
 			Zoom(@event);
 		}
@@ -30,16 +31,36 @@ public partial class ArcherScript : ClassScript
 	public override void _Process(double delta)
 	{
 		SendPosition();
-		Pause();
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		Pause();
 		PhysicsReset();
 		Gravity(delta);
 
-		if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+			{
+				//Changement de la vitesse du joueur si il sprint
+				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
+				{
+					MovementSpeed = RunSpeed;
+					IsRunning = true;
+				}
+				else
+				{
+					MovementSpeed = WalkSpeed;
+					IsRunning = false;
+				}
+			}
+			else
+			{
+				IsRunning = false;
+			}
+			
 			Move(delta);
 			ShootArrow();
 		}
@@ -49,6 +70,79 @@ public partial class ArcherScript : ClassScript
 		}
 	}
 	
+	protected override void Dash()
+	{
+		if (CanDash)
+		{
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
+			{
+				if (!IsWalking)
+				{
+					Direction = new Vector3(0, 0, 1);
+					Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+				}
+			    
+				HorizontalVelocity = Direction * DashPower;
+				CanDash = false;
+			}
+		}
+		else
+		{
+			DashTimer += 1;
+			if (DashTimer % 20 == 0)
+			{
+				CanDash = true;
+				DashTimer = 0;
+			}
+		}
+	}
+
+	protected override void Move(double delta)
+	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+		{
+			Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
+				Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
+			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+			IsWalking = true;
+		    
+			//Changement de la vitesse du joueur si il sprint
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
+			{ 
+				MovementSpeed = RunSpeed;
+				IsRunning = true;
+			}
+			else
+			{
+				MovementSpeed = WalkSpeed;
+				IsRunning = false;
+			}
+		}
+		else
+		{
+			IsRunning = false;
+			IsWalking = false;
+		}
+	    
+		//Calcul de la rotation du joueur
+		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		
+		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	    
+		Dash();
+	    
+		//Calcul du movement du joueur
+		Vector3 velocity = Velocity;
+		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+		velocity.Y = VerticalVelocity.Y;
+		
+		//Application du mouvement au joueur
+		Velocity = velocity;
+		MoveAndSlide();
+	}
+
 	private void ShootArrow()
 	{
 		_shootTimer += 1;
@@ -58,7 +152,7 @@ public partial class ArcherScript : ClassScript
 			if (!_shootAnimation)
 			{
 				_shootAnimation = true;
-				_animationPlayer.Play("ArrowShootView");
+				AnimationPlayer.Play("ArrowShootView");
 			}
 			
 			IsShooting = true;
@@ -84,12 +178,12 @@ public partial class ArcherScript : ClassScript
 			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
 			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
 
-			double rotationY = _cameraH.Rotation.Y;
-			Vector3 arrowPosition = new Vector3(_cameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
+			double rotationY = CameraH.Rotation.Y;
+			Vector3 arrowPosition = new Vector3(CameraV.GlobalPosition.X + (float)Math.Sin(rotationY)*2, Position.Y + 1, Position.Z + (float)Math.Cos(rotationY)*2);
 			
 			arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y, (arrowPosition.Z + GlobalPosition.Z) / 2);
-			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), _cameraV.Rotation.X);
-			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(_cameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
+			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
 			
 			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
@@ -97,7 +191,7 @@ public partial class ArcherScript : ClassScript
 			IsShooting = false;
 			_shootPower = 1;
 
-			_animationPlayer.Play("ArrowShootViewReset");
+			AnimationPlayer.Play("ArrowShootViewReset");
 			_shootAnimation = false;
 		}
 	}

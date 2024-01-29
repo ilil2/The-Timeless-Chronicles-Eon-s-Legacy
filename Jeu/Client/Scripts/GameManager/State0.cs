@@ -20,8 +20,11 @@ public partial class State0 : GameManager
 			        {
 				        tentative_connection = false;
 				        InfoJoueur["pseudo"] = ConnectionUI._pseudo;
-				        FastConnectionManager.SetConnection(ConnectionUI._pseudo, ConnectionUI._password);
-				        FastConnectionManager.SaveConnection();
+				        if (ConnectionUI.FastConnectionSaveButton.ButtonPressed)
+				        {
+					        FastConnectionManager.SetConnection(ConnectionUI._pseudo, ConnectionUI._password);
+					        FastConnectionManager.SaveConnection();
+				        }
 			        }
 			        else
 			        {
@@ -61,7 +64,7 @@ public partial class State0 : GameManager
 		        }
 	        }
 	        
-	        else if (ConnectionUI.FastConnectionButton.ButtonPressed)
+	        else if (ConnectionUI.FastConnectionButton.ButtonPressed && ConnectionUI._pseudo != "" && ConnectionUI._password != "")
 	        {
 		        tw.WriteLine($"conn:{ConnectionUI._pseudo};{Hashing.ToSHA256(ConnectionUI._password)}");
 		        tw.Flush();

@@ -4,70 +4,75 @@ using Lib;
 
 namespace JeuClient.Scripts.PlayerScripts;
 
-public partial class ClassScript : CharacterBody3D
+public abstract partial class ClassScript : CharacterBody3D
 {
 	//Variable de base du joueur
-    protected int _id;
-    protected string _pseudo;
-    protected string _classe;
+    protected int Id;
+    protected string Pseudo;
+    protected string Classe;
+    
+    protected int MaxHealth;
+    protected int Heath;
+    protected int MaxStamina;
+    protected int Stamina;
     
     //Variable des objets
-    protected Node3D _cameraH;
-    protected SpringArm3D _cameraV;
-    protected Camera3D _camera;
-    protected Node3D _cameraPlayer;
-    protected MeshInstance3D _playerMesh;
-    protected AnimationPlayer _animationPlayer;
+    protected Node3D CameraH;
+    protected SpringArm3D CameraV;
+    protected Camera3D Camera;
+    protected Node3D CameraPlayer;
+    protected Node3D PlayerMesh;
+    protected AnimationPlayer AnimationPlayer;
     
     //Variable de camera
     private float _fovMax = 80;
     private float _fovMin = 40;
     
     //Variable de mouvement
-    protected float _gravity = 9.8f;
-    protected float _walkSpeed = 4.2f;
-    protected float _runSpeed = 7.5f;
-    protected float _dashPower = 80.0f;
-    protected bool _canDash = true;
-    protected int dashTimer;
+    protected float GravityValue = 9.8f;
+    protected float WalkSpeed = 4.2f;
+    protected float RunSpeed = 7.5f;
+    protected float DashPower = 80.0f;
+    protected bool CanDash = true;
+    protected int DashTimer;
 
-    protected bool _isWalking;
-    protected bool _isRunning;
+    protected bool IsWalking;
+    protected bool IsRunning;
     
-    protected Vector3 _direction;
-    protected Vector3 _horizontalVelocity;
-    protected Vector3 _movement;
-    protected Vector3 _verticalVelocity;
-    protected float _movementSpeed;
-    protected float _angularAcceleration = 10;
-    protected int _acceleration = 15;
+    protected Vector3 Direction;
+    protected Vector3 HorizontalVelocity;
+    protected Vector3 Movement;
+    protected Vector3 VerticalVelocity;
+    protected float MovementSpeed;
+    protected float AngularAcceleration = 10;
+    protected int Acceleration = 15;
     
-    private int pauseTimer;
+    private int _pauseTimer;
     
     public SpringArm3D GetCameraVect()
     {
-	    return _cameraV;
+	    return CameraV;
     }
     
     public Node3D GetCameraH()
 	{
-	    return _cameraH;
+	    return CameraH;
 	}
     
     protected void InitPlayer()
 	{
 		//Initialisation des variables du joueur
-		_id = Conversions.AtoI(GameManager.InfoJoueur["id"]);
-		_pseudo = GameManager.InfoJoueur["pseudo"];
-		_classe = GameManager.InfoJoueur["class"];
+		Id = Conversions.AtoI(GameManager.InfoJoueur["id"]);
+		Pseudo = GameManager.InfoJoueur["pseudo"];
+		Classe = GameManager.InfoJoueur["class"];
         
-		_cameraPlayer = GetNode<Node3D>("CameraPlayer");
-		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
-		_cameraV = GetNode<SpringArm3D>("CameraPlayer/h/v");
-		_cameraH = GetNode<Node3D>("CameraPlayer/h");
-		_direction = Vector3.Back.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y);
+		CameraPlayer = GetNode<Node3D>("CameraPlayer");
+		Camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		CameraV = GetNode<SpringArm3D>("CameraPlayer/h/v");
+		CameraH = GetNode<Node3D>("CameraPlayer/h");
+		Direction = Vector3.Back.Rotated(Vector3.Up, CameraH.GlobalTransform.Basis.GetEuler().Y);
 		
-		_playerMesh = GetNode<MeshInstance3D>("PlayerBody");
+		PlayerMesh = GetNode<Node3D>("Player");
         
 		Position = new Vector3(new Random().Next(-10, 10), 0, new Random().Next(-10, 10));
 	}
@@ -76,16 +81,16 @@ public partial class ClassScript : CharacterBody3D
     {
 	    if (@event.AsText() == "Mouse Wheel Down")
 	    {
-		    if (_camera.Fov <= _fovMax)
+		    if (Camera.Fov <= _fovMax)
 		    {
-			    _camera.Fov  += 2;
+			    Camera.Fov  += 2;
 		    }
 	    }
 	    else if (@event.AsText() == "Mouse Wheel Up")
 	    {
-		    if (_camera.Fov >= _fovMin)
+		    if (Camera.Fov >= _fovMin)
 		    {
-			    _camera.Fov -= 2;
+			    Camera.Fov -= 2;
 		    }
 	    }
     }
@@ -94,122 +99,53 @@ public partial class ClassScript : CharacterBody3D
 	{
 		//Envoie de la position du joueur au serveur
 	    GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
-	    GameManager.InfoJoueur["orientation"] = $"{_playerMesh.Rotation.X};{_playerMesh.Rotation.Y};{_playerMesh.Rotation.Z}";
+	    GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
 	}
 
     protected void Pause()
     {
-	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && !GameManager._pausemode && pauseTimer > 20)
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && !GameManager._pausemode && _pauseTimer > 20)
 	    {
-		    pauseTimer = 0;
+		    _pauseTimer = 0;
 		    GameManager._pausemode = true;
 		    Input.MouseMode = Input.MouseModeEnum.Visible;
 		    PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
 		    Control pauseMenu = pauseUI.Instantiate<Control>();
 		    AddChild(pauseMenu);
 	    }
-	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && GameManager._pausemode && pauseTimer > 20)
+	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && GameManager._pausemode && _pauseTimer > 20)
 	    {
-		    pauseTimer = 0;
+		    _pauseTimer = 0;
 		    GameManager._pausemode = false;
 	    }
 	    
-	    pauseTimer += 1;
+	    _pauseTimer += 1;
     }
 
     protected void PhysicsReset()
     {
 	    //Reset du mouvement du joueur
-	    _movementSpeed = 0f;
+	    MovementSpeed = 0f;
     }
     
     protected void Gravity(double delta)
 	{
 	    if (!IsOnFloor())
 	    {
-		    _verticalVelocity += Vector3.Down * _gravity * 2 * (float)delta;
+		    VerticalVelocity += Vector3.Down * GravityValue * 2 * (float)delta;
 	    }
 	    else
 	    {
-		    _verticalVelocity = Vector3.Down * _gravity / 10 * (float)delta;
+		    VerticalVelocity = Vector3.Down * GravityValue / 10 * (float)delta;
 	    }
 	}
-
-    private void Dash()
-    {
-	    if (_canDash)
-	    {
-		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
-		    {
-			    if (!_isWalking)
-			    {
-				    _direction = new Vector3(0, 0, 1);
-				    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
-			    }
-			    
-			    _horizontalVelocity = _direction * _dashPower;
-			    _canDash = false;
-		    }
-	    }
-	    else
-	    {
-		    dashTimer += 1;
-		    if (dashTimer % 20 == 0)
-		    {
-			    _canDash = true;
-			    dashTimer = 0;
-		    }
-	    }
-    }
-
-    protected void Move(double delta)
-    {
-	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-	    {
-		    _direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
-			    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
-		    _direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
-		    _isWalking = true;
-
-		    //Changement de la vitesse du joueur si il sprint
-		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && _isWalking)
-		    {
-			    _movementSpeed = _runSpeed;
-			    _isRunning = true;
-		    }
-		    else
-		    {
-			    _movementSpeed = _walkSpeed;
-			    _isRunning = false;
-		    }
-	    }
-	    else
-	    {
-		    _isWalking = false;
-		    _isRunning = false;
-	    }
-	    
-	    //Calcul de la rotation du joueur
-	    _playerMesh.Rotation = new Vector3(0, _cameraH.Rotation.Y + (float) Math.PI, 0);
-		
-	    _horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
-	    
-	    Dash();
-	    
-	    //Calcul du movement du joueur
-	    Vector3 velocity = Velocity;
-	    velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
-	    velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
-	    velocity.Y = _verticalVelocity.Y;
-		
-	    //Application du mouvement au joueur
-	    Velocity = velocity;
-	    MoveAndSlide();
-    }
     
+    protected abstract void Dash();
+    
+    protected abstract void Move(double delta);
+
     public Node3D GetCamera()
 	{
-	    return _cameraPlayer;
+	    return CameraPlayer;
 	}
 }
