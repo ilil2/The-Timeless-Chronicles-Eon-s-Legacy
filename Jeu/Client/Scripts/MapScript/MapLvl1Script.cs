@@ -18,7 +18,7 @@ To Do List du code:
 - Optimiser le jeu
 */
 
-public partial class MapLvl1Script : Node3D
+public partial class MapLvl1Script : Node3D, IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
@@ -111,7 +111,7 @@ public partial class MapLvl1Script : Node3D
 		return MapReady;
 	}
 	
-	public (int,int) GetSpawnLocation()
+	public List<(int,int,int)> GetSpawnLocation()
 	{
 		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");
 		List<(int,int,int)> Spawn = new List<(int,int,int)>();
@@ -122,7 +122,7 @@ public partial class MapLvl1Script : Node3D
 			GD.Print(res);
 			Spawn.Add(res); 
 		}
-		return new (0,0);
+		return Spawn;
 	}
 	
 	public void DebugMode(double delta,CharacterBody3D Player)
