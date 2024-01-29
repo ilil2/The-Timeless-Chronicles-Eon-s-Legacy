@@ -1,17 +1,18 @@
 using System;
+using System.Collections.Generic;
 using Godot;
+using Lib;
 
 public partial class State5 : GameManager
 {
 	public static void State()
 	{
-		(int x, int z) = ((MapLvl1Script)Map).GetSpawnLocation();
-		Random rand = new Random();
+		List<(int, int, int)> SpawnLocation = ((MapLvl1Script)Map).GetSpawnLocation();
 		
 		PackedScene SceneJoueur1 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/{InfoJoueur["class"]}.tscn");
 		Joueur1 = SceneJoueur1.Instantiate<CharacterBody3D>(); 
 		Joueur1.Name = "Joueur1"; 
-		Joueur1.Position = new Vector3(x + rand.Next(-6,6),0,z + rand.Next(-6,6)); 
+		Joueur1.Position = new Vector3(SpawnLocation[Conversions.AtoI(InfoJoueur["id"])].Item1,SpawnLocation[Conversions.AtoI(InfoJoueur["id"])].Item2,SpawnLocation[Conversions.AtoI(InfoJoueur["id"])].Item3); 
 		InfoJoueur["co"] = "0;0;0";
 		InfoJoueur["orientation"] = "0;0;0";
 		InfoJoueur["attack"] = "";
