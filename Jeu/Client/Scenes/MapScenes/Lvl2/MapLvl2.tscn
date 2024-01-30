@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
-[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_02ou1"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
 [ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_rokdr"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
-sky = ExtResource("2_02ou1")
+sky = ExtResource("2_t0ei3")
 ssao_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
