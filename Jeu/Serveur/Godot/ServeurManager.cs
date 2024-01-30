@@ -22,6 +22,8 @@ public partial class ServeurManager : Node3D
 		//p1.StartInfo.Arguments = "exec.sh";
 		p1.StartInfo.FileName = "execwin.bat";
 
+		//a executer a la fin du _ready
+		Write();
 		p1.Start();
 	}
 
@@ -41,5 +43,13 @@ public partial class ServeurManager : Node3D
 	{
 		Seed = rand.Next(0, 1000000);
 		AleateSeed = rand.Next(0, 1000000);
+		Write();
+	}
+
+	private void Write()
+	{
+		StreamWriter sw = new StreamWriter("DayInfo.txt");
+		sw.Write($"{Seed}*{AleateSeed}");
+		sw.Close();
 	}
 }

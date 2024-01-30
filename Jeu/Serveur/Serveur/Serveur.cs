@@ -14,6 +14,8 @@ public class Serveur
 
     protected static string[] info = new string[4];
     private static ClientCom[] clients = new ClientCom[4];
+    
+    private static string? _seed = "42*42";
 
     public static string GetInfo()
     {
@@ -35,9 +37,17 @@ public class Serveur
             UDP.TCPSend(soc, s, clients[i].ep);
         }
     }
+    
+    private static void GetSeed()
+    {
+        StreamReader sr = new StreamReader("../Godot/DayInfo.txt");
+        _seed = sr.ReadLine();
+        sr.Close();
+    }
 
     public void MainProgram(int n)
     {
+        GetSeed();
         //Prog pr = (Prog)o;
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Dgram,ProtocolType.Udp);
         IPEndPoint iep = new IPEndPoint(IPAddress.Any, n);
@@ -53,7 +63,7 @@ public class Serveur
                 ClientCom clicom = new ClientCom(soc,ID,ep);         //creation de l'objet client
                 clients[ID] = clicom;
                 
-                UDP.Send(soc, ID.ToString(), ep);        //envoie de l'ID au client
+                UDP.Send(soc, ID.ToString() + _seed, ep);        //envoie de l'ID au client
                 Console.WriteLine("Client connecté : " + ID);
                 ID++;
             }
