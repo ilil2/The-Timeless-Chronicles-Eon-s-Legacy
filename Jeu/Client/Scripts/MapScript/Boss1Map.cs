@@ -1,7 +1,9 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
 [Tool]
-public partial class Boss1Map : Node3D
+public partial class Boss1Map : Node3D, IMap
 {
 	[Export] private int Rayon = 0;
 	[Export] private int Pas = 360;
@@ -24,5 +26,25 @@ public partial class Boss1Map : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	}
+
+	public List<(int, int, int)> GetSpawnLocation()
+	{
+		throw new NotImplementedException();
+	}
+
+	public bool MapIsReady()
+	{
+		throw new NotImplementedException();
+	}
+
+	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	{
+		throw new NotImplementedException();
+	}
+
+	public void SetSeed(int seed, int seed2)
+	{
+		throw new NotImplementedException();
 	}
 }
