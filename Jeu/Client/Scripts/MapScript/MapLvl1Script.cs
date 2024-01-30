@@ -25,7 +25,7 @@ public partial class MapLvl1Script : Node3D, IMap
 	private Random Rand = new Random(42);
 	private Random FogRand = new Random(42);
 	private static bool MapReady = false;
-	private int NbRoom =250;
+	private int NbRoom = 250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=9 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
@@ -22,6 +22,16 @@ volumetric_fog_temporal_reprojection_amount = 0.99
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_liic6"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rni42"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d80ur"]
+radius = 4.0
+height = 8.0
+
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
 
@@ -32,6 +42,34 @@ shadow_enabled = true
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pdaq0")
 
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_liic6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_rni42")
+
+[node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296, 0, 0)
+
+[node name="Spawn" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Node3D2" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Node3D3" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="Node3D4" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="SpawnArea" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_d80ur")
+
 [node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.211, 0, 0)
 
@@ -40,6 +78,3 @@ offset_top = 48.0
 offset_right = 54.0
 offset_bottom = 74.0
 text = "State 2"
-
-[node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.096, 0, 0)

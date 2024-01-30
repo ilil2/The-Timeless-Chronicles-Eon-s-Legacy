@@ -7,6 +7,7 @@ public partial class MapLvl2Script : Node3D, IMap
 
 	private Random Rand = new Random(42);
 	private int state = 0;
+	private bool MapReady = false;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
 	private List<Node3D> TreeList = new List<Node3D>();
@@ -33,7 +34,7 @@ public partial class MapLvl2Script : Node3D, IMap
 	public override void _Ready()
 	{
 		CreateBorder();
-		CreateForest0();
+		//CreateForest0();
 		state = 1;
 		
 	}
@@ -52,7 +53,7 @@ public partial class MapLvl2Script : Node3D, IMap
 		{
 			if (FrameCount-StartTimer>1)
 			{
-				CreateForest1();
+				//CreateForest1();
 				state = 2;
 				StartTimer = FrameCount;
 			}
@@ -67,7 +68,7 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 		else if(state==3)
 		{
-			CreateForest2();
+			//CreateForest2();
 			state = 4;
 			StartTimer = FrameCount;
 		}
@@ -104,16 +105,18 @@ public partial class MapLvl2Script : Node3D, IMap
 			float radius = IdToRadius[Rand.Next(1,6)];
 			RigidBody3D Sphere = new RigidBody3D();
 			SphereShape3D sphereShape = new SphereShape3D();
-			SphereMesh sphereMesh = new SphereMesh();
 			CollisionShape3D collisionShape = new CollisionShape3D();
+			
 			MeshInstance3D meshInstance = new MeshInstance3D();
+			SphereMesh sphereMesh = new SphereMesh();
 			meshInstance.Name = "Mesh";
 			sphereMesh.Radius = radius;
 			sphereMesh.Height = radius * 2;
 			meshInstance.Mesh = sphereMesh;
+			Sphere.AddChild(meshInstance);
+			
 			sphereShape.Radius = radius;
 			collisionShape.Shape = sphereShape;
-			Sphere.AddChild(meshInstance);
 			Sphere.AddChild(collisionShape);
 
 			const int radiusmap = 290;
@@ -195,12 +198,19 @@ public partial class MapLvl2Script : Node3D, IMap
 
 	public List<(int, int, int)> GetSpawnLocation()
 	{
-		throw new NotImplementedException();
+		List<(int, int, int)> res = new List<(int, int, int)>();
+		Node3D Spawn = GetNode<Node3D>("Spawn");
+		for(int i = 0; i<Spawn.GetChildCount();i++)
+		{
+			Vector3 Pos = Spawn.GetChild<Node3D>(i).Position;
+			res.Add(new ((int)Pos.X,(int)Pos.Y,(int)Pos.Z));
+		}
+		return res;
 	}
 
 	public bool MapIsReady()
 	{
-		throw new NotImplementedException();
+		return MapReady;
 	}
 
 	public void DebugMode(CharacterBody3D Player, bool DebugMode)
