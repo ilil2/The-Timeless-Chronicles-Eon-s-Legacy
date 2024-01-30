@@ -99,14 +99,8 @@ public partial class MapLvl1Script : Node3D, IMap
 			//Process
 			CreateFog();
 			DayCycle();
-			//Debug Map only
-			if (Input.IsKeyPressed(Key.Tab) && FrameCount-StartInput>10)  // Remplacez ce nombre par le code scancode correct pour Tab sur votre clavier
-			{
-				CharacterBody3D P = GetNode<CharacterBody3D>("Joueur1");
-				StartInput = FrameCount;
-				DebugMode(delta,P);
-				GD.Print("Debug !");
-			}
+			//Debug Map onl
+			
 			//--------------
 			//RenderDist();
 		}
@@ -138,12 +132,12 @@ public partial class MapLvl1Script : Node3D, IMap
 		return Spawn;
 	}
 	
-	public void DebugMode(double delta,CharacterBody3D Player)
+	public void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
-		bool Mode = MapTool.Debug(Player,this);
+		MapTool.Debug(Player,this,DebugMode);
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
 		Godot.Environment env = world.Environment;
-		env.VolumetricFogEnabled = !Mode;
+		env.VolumetricFogEnabled = !DebugMode;
 		
 	}
 	

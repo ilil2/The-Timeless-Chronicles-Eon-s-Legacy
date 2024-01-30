@@ -6,7 +6,6 @@ namespace Lib;
 
 public partial class MapTool : Node
 {
-	public static bool DebugM = false;
 	public Camera3D DebugCam;
 	
 	public static double Distance(Node3D Node1, Node3D Node2)
@@ -35,7 +34,7 @@ public partial class MapTool : Node
 		}
 		return true;
 	}
-	public static bool Debug(CharacterBody3D Player, Node3D Map)
+	public static void Debug(CharacterBody3D Player, Node3D Map, bool DebugM)
 	{
 		Camera3D CameraPlayer = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		if(DebugM)
@@ -58,6 +57,5 @@ public partial class MapTool : Node
 			
 			
 		}
-		return DebugM;
 	}
 }

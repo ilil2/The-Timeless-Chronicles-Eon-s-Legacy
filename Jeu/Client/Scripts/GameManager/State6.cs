@@ -7,7 +7,7 @@ public partial class State6 : GameManager
 	{
 		if (!Quit)
 			UDP.Send(soc2,InfoJoueur["id"] + "_" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
-		((MapLvl1Script)Map).DebugMode(delta, Joueur1);
+		
 
 		if (!_pausemode && Lib.Conversions.ItoB(SettingsManager.GetAllSettings()["enableChat"]))
 		{
@@ -40,6 +40,8 @@ public partial class State6 : GameManager
 					if (commandchat == "debug")
 					{
 						DebugMode = !DebugMode;
+						((MapLvl1Script)Map).DebugMode(Joueur1,DebugMode);
+						
 					}
 					else if (commandchat == "display")
 					{

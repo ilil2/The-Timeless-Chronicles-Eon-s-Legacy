@@ -203,7 +203,7 @@ public partial class MapLvl2Script : Node3D, IMap
 		throw new NotImplementedException();
 	}
 
-	public void DebugMode(double delta, CharacterBody3D Player)
+	public void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		throw new NotImplementedException();
 	}
