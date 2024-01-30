@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=12 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_02ou1"]
@@ -32,13 +32,11 @@ script = ExtResource("6_hp6sn")
 mode = 0
 textures = [[ExtResource("7_xjml8")], [ExtResource("8_itphy")]]
 
-[sub_resource type="SphereMesh" id="SphereMesh_hk6u7"]
-
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
+transform = Transform3D(-0.693377, 0.437999, -0.572176, 5.6933e-09, 0.794055, 0.607846, 0.720575, 0.421467, -0.550579, 0, 2.76815, 9.26053)
 shadow_enabled = true
 
 [node name="World" type="WorldEnvironment" parent="."]
@@ -74,6 +72,3 @@ shader_params/u_tile_reduction = null
 
 [node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.096, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_hk6u7")

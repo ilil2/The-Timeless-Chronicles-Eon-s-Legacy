@@ -184,7 +184,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			}
 			else
 			{
-				HD.Visible = false;
+				HD.Visible = true;
 				LOD.Visible = true;
 			}
 			//pas assez opti pour le moment
