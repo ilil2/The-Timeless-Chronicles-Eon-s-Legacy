@@ -10,3 +10,8 @@ git restore --staged Jeu/Serveur/MainServeur/port.txt
 git restore --staged Jeu/Serveur/Godot/.gitignore
 git restore --staged Jeu/Serveur/Godot/.gitattributes
 git restore --staged Jeu/Serveur/Godot/.idea
+
+git restore --staged Jeu/.DStore
+git restore --staged Jeu/Client/.DStore
+git restore --staged Jeu/Client/Script/Save
+git restore --staged Jeu/Serveur/Godot/DayInfo.txt
