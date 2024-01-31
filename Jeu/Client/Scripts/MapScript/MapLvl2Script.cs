@@ -2,13 +2,11 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Lib;
-public partial class MapLvl2Script : Node3D, IMap
+public partial class MapLvl2Script : IMap
 {
 
 	private Random Rand = new Random(42);
 	public int step = 0;
-	private int state = 0;
-	private bool MapReady = false;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
 	private List<Node3D> TreeList = new List<Node3D>();
@@ -35,57 +33,34 @@ public partial class MapLvl2Script : Node3D, IMap
 	public override void _Ready()
 	{
 		CreateBorder();
-	
-		//CreateForest0();
-		state = 1;
+		PseudoCreateForest();
 		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		FrameCount+=1;
 		if (!MapReady)
 		{
-			MapReady = true;
-		}
-		FrameCount+=1;
-		//Debug
-		Camera3D DebugCam = GetNode<Camera3D>("SpecCam");
-		Label S = DebugCam.GetNode<Label>("State");
-		S.Text = $"State {state}";
-		Render(DebugCam);
-		//Debug
-		if(state==1)
-		{
-			if (FrameCount-StartTimer>1)
+			
+			if(MapTool.CheckSleep(PseudoTreeList))
 			{
-				//CreateForest1();
-				state = 2;
-				StartTimer = FrameCount;
+				CreateForest();
+				MapReady = true;
 			}
+			//GD.Print(MapTool.CheckSleep(PseudoTreeList));
+		
 		}
-		else if(state==2)
-		{
-			if ((FrameCount-StartTimer>1) && MapTool.CheckSleep(PseudoTreeList))
-			{
-				state = 3;
-				StartTimer = FrameCount;
-			}
-		}
-		else if(state==3)
-		{
-			//CreateForest2();
-			state = 4;
-			StartTimer = FrameCount;
-		}
+		
 	}
 	
-	public int Step()
+	public override int Step()
 	{
 		return step;
 	}
 	
-	public List<(int, int, int)> GetSpawnLocation()
+	public override List<(int, int, int)> GetSpawnLocation()
 	{
 		List<(int, int, int)> res = new List<(int, int, int)>();
 		Node3D Spawn = GetNode<Node3D>("Spawn");
@@ -97,17 +72,17 @@ public partial class MapLvl2Script : Node3D, IMap
 		return res;
 	}
 
-	public bool MapIsReady()
+	public override bool MapIsReady()
 	{
 		return MapReady;
 	}
 
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		throw new NotImplementedException();
 	}
 	
-	public void SetSeed(int seed, int seed2)
+	public override void SetSeed(int seed, int seed2)
 	{
 		Rand = new Random(seed);
 		GD.Print($"Seed set : {seed}");
@@ -133,14 +108,15 @@ public partial class MapLvl2Script : Node3D, IMap
 	
 	
 	
-	private void CreateForest0()
+	private void PseudoCreateForest()
 	{
 		const int nbtree = 3000;
 		//const float radius = 2.5f;
 		for (int i = 0; i < nbtree; i++)
 		{
-			float radius = IdToRadius[Rand.Next(1,6)];
+			float radius = IdToRadius[1];//Rand.Next(1,6)];
 			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
 			SphereShape3D sphereShape = new SphereShape3D();
 			CollisionShape3D collisionShape = new CollisionShape3D();
 			
@@ -172,7 +148,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			double? x = radiusmap * r * Math.Cos(t);
 			double? z = radiusmap * r * Math.Sin(t);
 
-			Sphere.Position = new Vector3((float)x, 10, (float)z);
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
 			PseudoTreeList.Add(Sphere);
 			AddChild(Sphere);
 
@@ -180,18 +156,7 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 	}
 
-	private void CreateForest1()
-	{
-		for (int i = 0; i<PseudoTreeList.Count;i++)
-		{
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockLinearX = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockLinearZ = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularX = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularY = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularZ = true;
-		}
-	}
-	private void CreateForest2()
+	private void CreateForest()
 	{
 		for (int i = 0; i<PseudoTreeList.Count;i++)
 		{
@@ -199,7 +164,7 @@ public partial class MapLvl2Script : Node3D, IMap
 			float Sp = ((SphereMesh)PseudoTreeList[i].GetNode<MeshInstance3D>("Mesh").Mesh).Radius;
 			RemoveChild(PseudoTreeList[i]);
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
-			tree.Position = Pos - new Vector3(0,3,0);
+			tree.Position = Pos;
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
 			TreeList.Add(tree);
@@ -207,30 +172,5 @@ public partial class MapLvl2Script : Node3D, IMap
 		}
 	}
 	
-	private void Render(Camera3D Cam)
-	{
-		Node3D Player = (Node3D)Cam;
-		for (int i = 0; i<TreeList.Count;i++)
-		{
-			
-			Node3D tree = TreeList[i];
-			Node3D LOD = tree.GetNode<Node3D>("LOD");
-			Node3D HD = tree.GetNode<Node3D>("HD");
-			double dist = MapTool.Distance(Player,tree);
-			if (dist>150)
-			{
-				HD.Visible = false;
-				LOD.Visible = false;
-			}
-			else
-			{
-				HD.Visible = true;
-				LOD.Visible = true;
-			}
-			//pas assez opti pour le moment
-			//tree.Visible = MapTool.IsNodeVisible(tree, Cam);
-		}
-		
-	}
 	
 }

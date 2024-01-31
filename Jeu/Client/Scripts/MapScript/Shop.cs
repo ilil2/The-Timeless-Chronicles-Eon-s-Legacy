@@ -2,9 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class Shop : Node3D, IMap
+public partial class Shop : IMap
 {
-	private bool MapReady = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,12 +18,12 @@ public partial class Shop : Node3D, IMap
 		}
 	}
 	
-	public int Step()
+	public override int Step()
 	{
 		return 0;
 	}
 
-	public List<(int, int, int)> GetSpawnLocation()
+	public override List<(int, int, int)> GetSpawnLocation()
 	{
 		List<(int,int,int)> res = new List<(int,int,int)>();
 		res.Add((0,0,0));
@@ -35,17 +34,17 @@ public partial class Shop : Node3D, IMap
 		return res;
 	}
 
-	public bool MapIsReady()
+	public override bool MapIsReady()
 	{
 		return MapReady;
 	}
 
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		throw new NotImplementedException();
 	}
 
-	public void SetSeed(int seed, int seed2)
+	public override void SetSeed(int seed, int seed2)
 	{
 		Random Rand = new Random(seed);
 	}

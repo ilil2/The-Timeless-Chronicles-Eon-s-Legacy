@@ -2,11 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public interface IMap
+public abstract partial class IMap : Node3D
 {
-	public int Step();
-	public List<(int,int,int)> GetSpawnLocation();
-	public bool MapIsReady();
-	public void DebugMode(CharacterBody3D Player, bool DebugMode);
-	public void SetSeed(int seed, int seed2);
+	protected bool MapReady = false;
+	public abstract int Step();
+	public abstract List<(int,int,int)> GetSpawnLocation();
+	public abstract bool MapIsReady();
+	public abstract void DebugMode(CharacterBody3D Player, bool DebugMode);
+	public abstract void SetSeed(int seed, int seed2);
 }

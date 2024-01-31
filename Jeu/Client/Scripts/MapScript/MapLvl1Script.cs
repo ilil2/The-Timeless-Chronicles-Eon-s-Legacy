@@ -7,13 +7,12 @@ using Environment = Godot.Environment;
 using Lib;
 
 
-public partial class MapLvl1Script : Node3D, IMap
+public partial class MapLvl1Script : IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
 	private Random Rand = new Random(42);
 	private Random FogRand = new Random(42);
-	private static bool MapReady = false;
 	private int NbRoom = 250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
@@ -95,12 +94,12 @@ public partial class MapLvl1Script : Node3D, IMap
 		
 	}
 	
-	public int Step()
+	public override int Step()
 	{
 		return step;
 	}
 	
-	public List<(int,int,int)> GetSpawnLocation()
+	public override List<(int,int,int)> GetSpawnLocation()
 	{
 		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");
 		List<(int,int,int)> Spawn = new List<(int,int,int)>();
@@ -114,12 +113,12 @@ public partial class MapLvl1Script : Node3D, IMap
 		return Spawn;
 	}
 	
-	public bool MapIsReady()
+	public override bool MapIsReady()
 	{
 		return MapReady;
 	}
 	
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		MapTool.Debug(Player,this,DebugMode);
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
@@ -128,7 +127,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		
 	}
 	
-	public void SetSeed(int seed, int seed2)
+	public override void SetSeed(int seed, int seed2)
 	{
 		Rand = new Random(seed);
 		FogRand = new Random(seed2);

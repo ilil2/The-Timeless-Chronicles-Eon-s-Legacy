@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
+[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="3_dyqhn"]
+[ext_resource type="Texture2D" uid="uid://imjob5grvv77" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-ao.png" id="4_ioaq2"]
+[ext_resource type="Texture2D" uid="uid://dl8eaglt7hq2e" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-height.png" id="5_1syy5"]
+[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="6_ybwmf"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
@@ -21,7 +25,18 @@ volumetric_fog_temporal_reprojection_amount = 0.99
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m73o"]
+albedo_texture = ExtResource("3_dyqhn")
+normal_enabled = true
+normal_texture = ExtResource("6_ybwmf")
+ao_enabled = true
+ao_texture = ExtResource("4_ioaq2")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_1syy5")
+uv1_scale = Vector3(200, 200, 200)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_liic6"]
+material = SubResource("StandardMaterial3D_6m73o")
 size = Vector2(1000, 1000)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rni42"]
@@ -67,5 +82,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="SpawnArea" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("SphereMesh_d80ur")
