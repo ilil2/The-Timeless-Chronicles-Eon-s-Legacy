@@ -68,6 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="SpawnArea" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_d80ur")
 
 [node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]

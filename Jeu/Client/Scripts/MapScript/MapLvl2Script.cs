@@ -73,6 +73,29 @@ public partial class MapLvl2Script : Node3D, IMap
 			StartTimer = FrameCount;
 		}
 	}
+	
+	public List<(int, int, int)> GetSpawnLocation()
+	{
+		List<(int, int, int)> res = new List<(int, int, int)>();
+		Node3D Spawn = GetNode<Node3D>("Spawn");
+		for(int i = 0; i<Spawn.GetChildCount();i++)
+		{
+			Vector3 Pos = Spawn.GetChild<Node3D>(i).Position;
+			res.Add(new ((int)Pos.X,(int)Pos.Y,(int)Pos.Z));
+		}
+		return res;
+	}
+
+	public bool MapIsReady()
+	{
+		return MapReady;
+	}
+
+	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	{
+		throw new NotImplementedException();
+	}
+	
 	public void SetSeed(int seed, int seed2)
 	{
 		Rand = new Random(seed);
@@ -96,6 +119,9 @@ public partial class MapLvl2Script : Node3D, IMap
 			AddChild(Wall);
 		}
 	}
+	
+	
+	
 	private void CreateForest0()
 	{
 		const int nbtree = 3000;
@@ -194,28 +220,6 @@ public partial class MapLvl2Script : Node3D, IMap
 			//tree.Visible = MapTool.IsNodeVisible(tree, Cam);
 		}
 		
-	}
-
-	public List<(int, int, int)> GetSpawnLocation()
-	{
-		List<(int, int, int)> res = new List<(int, int, int)>();
-		Node3D Spawn = GetNode<Node3D>("Spawn");
-		for(int i = 0; i<Spawn.GetChildCount();i++)
-		{
-			Vector3 Pos = Spawn.GetChild<Node3D>(i).Position;
-			res.Add(new ((int)Pos.X,(int)Pos.Y,(int)Pos.Z));
-		}
-		return res;
-	}
-
-	public bool MapIsReady()
-	{
-		return MapReady;
-	}
-
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
-	{
-		throw new NotImplementedException();
 	}
 	
 }
