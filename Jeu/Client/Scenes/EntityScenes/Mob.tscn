@@ -9,7 +9,7 @@
 render_priority = 0
 shader = ExtResource("2_7i66y")
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
-shader_parameter/FloatParameter = null
+shader_parameter/Timer = -0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rliy6"]
 material = SubResource("ShaderMaterial_2u7e1")
@@ -18,7 +18,7 @@ material = SubResource("ShaderMaterial_2u7e1")
 render_priority = 0
 shader = ExtResource("2_7i66y")
 shader_parameter/ColorParameter = Color(1, 1, 1, 1)
-shader_parameter/FloatParameter = null
+shader_parameter/Timer = null
 
 [sub_resource type="BoxMesh" id="BoxMesh_4arfr"]
 material = SubResource("ShaderMaterial_wfl58")
@@ -39,6 +39,7 @@ mesh = SubResource("CapsuleMesh_rliy6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)
+visible = false
 mesh = SubResource("BoxMesh_4arfr")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

@@ -95,6 +95,11 @@ public partial class MapLvl1Script : Node3D, IMap
 		
 	}
 	
+	public int Step()
+	{
+		return step;
+	}
+	
 	public List<(int,int,int)> GetSpawnLocation()
 	{
 		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=8 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
-[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_rokdr"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
@@ -70,12 +69,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 [node name="SpawnArea" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("SphereMesh_d80ur")
-
-[node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.211, 0, 0)
-
-[node name="State" type="Label" parent="SpecCam"]
-offset_top = 48.0
-offset_right = 54.0
-offset_bottom = 74.0
-text = "State 2"

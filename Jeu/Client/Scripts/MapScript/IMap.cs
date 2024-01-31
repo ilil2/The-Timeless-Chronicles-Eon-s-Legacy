@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public interface IMap
 {
+	public int Step();
 	public List<(int,int,int)> GetSpawnLocation();
 	public bool MapIsReady();
 	public void DebugMode(CharacterBody3D Player, bool DebugMode);

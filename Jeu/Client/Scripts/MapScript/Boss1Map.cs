@@ -28,6 +28,11 @@ public partial class Boss1Map : Node3D, IMap
 	{
 	}
 
+	public int Step()
+	{
+		return 0;
+	}
+
 	public List<(int, int, int)> GetSpawnLocation()
 	{
 		throw new NotImplementedException();

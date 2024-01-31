@@ -6,6 +6,7 @@ public partial class MapLvl2Script : Node3D, IMap
 {
 
 	private Random Rand = new Random(42);
+	public int step = 0;
 	private int state = 0;
 	private bool MapReady = false;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
@@ -34,6 +35,7 @@ public partial class MapLvl2Script : Node3D, IMap
 	public override void _Ready()
 	{
 		CreateBorder();
+	
 		//CreateForest0();
 		state = 1;
 		
@@ -42,6 +44,10 @@ public partial class MapLvl2Script : Node3D, IMap
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (!MapReady)
+		{
+			MapReady = true;
+		}
 		FrameCount+=1;
 		//Debug
 		Camera3D DebugCam = GetNode<Camera3D>("SpecCam");
@@ -72,6 +78,11 @@ public partial class MapLvl2Script : Node3D, IMap
 			state = 4;
 			StartTimer = FrameCount;
 		}
+	}
+	
+	public int Step()
+	{
+		return step;
 	}
 	
 	public List<(int, int, int)> GetSpawnLocation()
