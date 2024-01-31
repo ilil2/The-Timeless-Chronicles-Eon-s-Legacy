@@ -34,6 +34,8 @@ public partial class MapLvl2Script : IMap
 	{
 		CreateBorder();
 		PseudoCreateForest();
+		CreatePseudoSpawnPoint();
+		CreatePseudoKey();
 		
 	}
 
@@ -79,7 +81,7 @@ public partial class MapLvl2Script : IMap
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
-		throw new NotImplementedException();
+		MapTool.Debug(Player,this,DebugMode);
 	}
 	
 	public override void SetSeed(int seed, int seed2)
@@ -119,10 +121,47 @@ public partial class MapLvl2Script : IMap
 			Sphere.AxisLockLinearY = true;
 			SphereShape3D sphereShape = new SphereShape3D();
 			CollisionShape3D collisionShape = new CollisionShape3D();
+			collisionShape.Name = "Coll";
+			
+			sphereShape.Radius = radius;
+			collisionShape.Shape = sphereShape;
+			Sphere.AddChild(collisionShape);
+
+			const int radiusmap = 290;
+			double t = 2 * Math.PI * Rand.NextDouble();
+			double u = Rand.NextDouble() + Rand.NextDouble();
+			double? r = null;
+			if (u>1)
+			{
+				r = 2 - u;
+			}
+			else
+			{
+				r = u;
+			}
+
+			double? x = radiusmap * r * Math.Cos(t);
+			double? z = radiusmap * r * Math.Sin(t);
+
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
+			PseudoTreeList.Add(Sphere);
+			AddChild(Sphere);
+		}
+	}
+	
+	private void CreatePseudoSpawnPoint()
+	{
+		const int nbMob = 750;
+		const float radius = 1f;
+		for (int i = 0; i < nbMob; i++)
+		{
+			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
+			SphereShape3D sphereShape = new SphereShape3D();
+			CollisionShape3D collisionShape = new CollisionShape3D();
 			
 			MeshInstance3D meshInstance = new MeshInstance3D();
 			SphereMesh sphereMesh = new SphereMesh();
-			meshInstance.Name = "Mesh";
 			sphereMesh.Radius = radius;
 			sphereMesh.Height = radius * 2;
 			meshInstance.Mesh = sphereMesh;
@@ -149,10 +188,51 @@ public partial class MapLvl2Script : IMap
 			double? z = radiusmap * r * Math.Sin(t);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
-			PseudoTreeList.Add(Sphere);
+			//PseudoTreeList.Add(Sphere);
 			AddChild(Sphere);
+		}
+	}
+	
+	private void CreatePseudoKey()
+	{
+		const int nbKey = 4;
+		const float radius = 1f;
+		for (int i = 0; i < nbKey; i++)
+		{
+			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
+			SphereShape3D sphereShape = new SphereShape3D();
+			CollisionShape3D collisionShape = new CollisionShape3D();
+			
+			MeshInstance3D meshInstance = new MeshInstance3D();
+			BoxMesh sphereMesh = new BoxMesh();
+			sphereMesh.Size = new Vector3(1,2,1);
+			meshInstance.Mesh = sphereMesh;
+			Sphere.AddChild(meshInstance);
+			
+			sphereShape.Radius = radius;
+			collisionShape.Shape = sphereShape;
+			Sphere.AddChild(collisionShape);
 
+			const int radiusmap = 290;
+			double t = 2 * Math.PI * Rand.NextDouble();
+			double u = Rand.NextDouble() + Rand.NextDouble();
+			double? r = null;
+			if (u>1)
+			{
+				r = 2 - u;
+			}
+			else
+			{
+				r = u;
+			}
 
+			double? x = radiusmap * r * Math.Cos(t);
+			double? z = radiusmap * r * Math.Sin(t);
+
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
+			//PseudoTreeList.Add(Sphere);
+			AddChild(Sphere);
 		}
 	}
 
@@ -161,7 +241,7 @@ public partial class MapLvl2Script : IMap
 		for (int i = 0; i<PseudoTreeList.Count;i++)
 		{
 			Vector3 Pos = PseudoTreeList[i].Position;
-			float Sp = ((SphereMesh)PseudoTreeList[i].GetNode<MeshInstance3D>("Mesh").Mesh).Radius;
+			float Sp = ((SphereShape3D)PseudoTreeList[i].GetNode<CollisionShape3D>("Coll").Shape).Radius;
 			RemoveChild(PseudoTreeList[i]);
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
 			tree.Position = Pos;
