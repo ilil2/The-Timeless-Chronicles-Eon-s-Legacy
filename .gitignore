@@ -11,3 +11,11 @@ Jeu/Serveur/Serveur/obj/
 *.DS_Store
 *.csproj
 *.DotSetting.user
+Jeu/Client/Script/Save
+Jeu/Serveur/Godot/.gitignore
+Jeu/Serveur/Godot/.gitattribute
+Jeu/Serveur/Godot/.idea
+Jeu/Serveur/Godot/DayInfo.txt
+Jeu/Serveur/Godot/Bourse.json
+Jeu/Serveur/Godot/Meteo.json
+Jeu/Serveur/MainServeur/port.txt
