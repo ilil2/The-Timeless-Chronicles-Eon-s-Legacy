@@ -35,8 +35,4 @@ public partial class Shop : IMap
 		throw new NotImplementedException();
 	}
 
-	public override void SetSeed(int seed, int seed2)
-	{
-		Random Rand = new Random(seed);
-	}
 }

@@ -39,8 +39,4 @@ public partial class Boss1Map : IMap
 		throw new NotImplementedException();
 	}
 
-	public override void SetSeed(int seed, int seed2)
-	{
-		throw new NotImplementedException();
-	}
 }

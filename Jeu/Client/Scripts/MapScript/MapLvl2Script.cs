@@ -6,6 +6,7 @@ public partial class MapLvl2Script : IMap
 {
 
 	private Random Rand = new Random(42);
+	private Random Rand2 = new Random(42);
 	public int step = 0;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
@@ -74,11 +75,6 @@ public partial class MapLvl2Script : IMap
 		MapTool.Debug(Player,this,DebugMode);
 	}
 	
-	public override void SetSeed(int seed, int seed2)
-	{
-		Rand = new Random(seed);
-		GD.Print($"Seed set : {seed}");
-	}
 	
 	private void CreateBorder()
 	{
@@ -117,21 +113,7 @@ public partial class MapLvl2Script : IMap
 			collisionShape.Shape = sphereShape;
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 290;
-			double t = 2 * Math.PI * Rand.NextDouble();
-			double u = Rand.NextDouble() + Rand.NextDouble();
-			double? r = null;
-			if (u>1)
-			{
-				r = 2 - u;
-			}
-			else
-			{
-				r = u;
-			}
-
-			double? x = radiusmap * r * Math.Cos(t);
-			double? z = radiusmap * r * Math.Sin(t);
+			(double? x, double? z) = GetRandomPos(Rand);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
 			PseudoTreeList.Add(Sphere);
@@ -161,25 +143,11 @@ public partial class MapLvl2Script : IMap
 			collisionShape.Shape = sphereShape;
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 290;
-			double t = 2 * Math.PI * Rand.NextDouble();
-			double u = Rand.NextDouble() + Rand.NextDouble();
-			double? r = null;
-			if (u>1)
-			{
-				r = 2 - u;
-			}
-			else
-			{
-				r = u;
-			}
-
-			double? x = radiusmap * r * Math.Cos(t);
-			double? z = radiusmap * r * Math.Sin(t);
+			(double? x, double? z) = GetRandomPos(Rand2);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
 			//PseudoTreeList.Add(Sphere);
-			AddChild(Sphere);
+			//AddChild(Sphere);
 		}
 	}
 	
@@ -204,26 +172,32 @@ public partial class MapLvl2Script : IMap
 			collisionShape.Shape = sphereShape;
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 290;
-			double t = 2 * Math.PI * Rand.NextDouble();
-			double u = Rand.NextDouble() + Rand.NextDouble();
-			double? r = null;
-			if (u>1)
-			{
-				r = 2 - u;
-			}
-			else
-			{
-				r = u;
-			}
-
-			double? x = radiusmap * r * Math.Cos(t);
-			double? z = radiusmap * r * Math.Sin(t);
+			(double? x, double? z) = GetRandomPos(Rand2);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
 			//PseudoTreeList.Add(Sphere);
 			AddChild(Sphere);
 		}
+	}
+	
+	private (double? x,double? z) GetRandomPos(Random Rando)
+	{
+		const int radiusmap = 290;
+		double t = 2 * Math.PI * Rando.NextDouble();
+		double u = Rando.NextDouble() + Rando.NextDouble();
+		double? r = null;
+		if (u>1)
+		{
+			r = 2 - u;
+		}
+		else
+		{
+			r = u;
+		}
+		double? x = radiusmap * r * Math.Cos(t);
+		double? z = radiusmap * r * Math.Sin(t);
+		
+		return new (x,z);
 	}
 
 	private void CreateForest()

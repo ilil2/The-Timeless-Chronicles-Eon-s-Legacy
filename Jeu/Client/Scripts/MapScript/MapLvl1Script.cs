@@ -11,8 +11,6 @@ public partial class MapLvl1Script : IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random(42);
-	private Random FogRand = new Random(42);
 	private int NbRoom = 250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
@@ -74,7 +72,7 @@ public partial class MapLvl1Script : IMap
 				GD.Print($"{NbRoom} Room");
 				GD.Print($"Map crée en {stopwatch.Elapsed}");
 				
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				fogwatch.Start();
 				GD.Print($"Fog Start in {Duration}");	
 			}
@@ -116,13 +114,7 @@ public partial class MapLvl1Script : IMap
 		
 	}
 	
-	public override void SetSeed(int seed, int seed2)
-	{
-		Rand = new Random(seed);
-		FogRand = new Random(seed2);
-		GD.Print($"Seed set : {seed}");
-	}
-	
+
 	private void CreateMob()
 	{
 		for(int i = 0; i<RoomList.Count; i++)
@@ -179,7 +171,7 @@ public partial class MapLvl1Script : IMap
 			{
 				env.VolumetricFogDensity=(float)0.1;
 				FogState=2;
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog Start! End in {Duration} seconde");
 			}
@@ -202,7 +194,7 @@ public partial class MapLvl1Script : IMap
 			{
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog End! Next Fog in {Duration} seconde");		
 			}
