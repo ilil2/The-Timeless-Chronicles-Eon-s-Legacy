@@ -75,10 +75,22 @@ public partial class AssassinScript : ClassScript
                 Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
             Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
             IsWalking = true;
-            MovementSpeed = WalkSpeed;
+		    
+            //Changement de la vitesse du joueur si il sprint
+            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
+            { 
+                MovementSpeed = RunSpeed;
+                IsRunning = true;
+            }
+            else
+            {
+                MovementSpeed = WalkSpeed;
+                IsRunning = false;
+            }
         }
         else
         {
+            IsRunning = false;
             IsWalking = false;
         }
 	    
