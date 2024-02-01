@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dedkb1t6s37rh"]
+[gd_scene load_steps=8 format=3 uid="uid://dedkb1t6s37rh"]
 
 [ext_resource type="Material" uid="uid://b43rchsflaulg" path="res://Ressources/Map/Global/tre2/Textures/woodHD.tres" id="1_6216t"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Tree.cs" id="1_ibye3"]
 [ext_resource type="Material" uid="uid://dsl2gnibltpj" path="res://Ressources/Map/Global/tre2/Textures/leavesLOD.tres" id="4_nqjlt"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ic0ug"]
@@ -64,6 +65,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2asg6")
 
 [node name="Tree2" type="Node3D"]
+script = ExtResource("1_ibye3")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
