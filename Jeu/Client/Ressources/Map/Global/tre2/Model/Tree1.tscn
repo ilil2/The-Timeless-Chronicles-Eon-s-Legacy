@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://jv8dmvoq7klm"]
 
 [ext_resource type="Material" uid="uid://b43rchsflaulg" path="res://Ressources/Map/Global/tre2/Textures/woodHD.tres" id="1_6wuoh"]
-[ext_resource type="Script" path="res://Scripts/MapScript/Tree.cs" id="1_333sw"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Tree.cs" id="1_333sw"]
 [ext_resource type="Material" uid="uid://dsl2gnibltpj" path="res://Ressources/Map/Global/tre2/Textures/leavesLOD.tres" id="4_e04je"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hbs7u"]

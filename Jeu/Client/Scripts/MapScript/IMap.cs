@@ -23,6 +23,6 @@ public abstract partial class IMap : Node3D
 		Rand = new Random(seed);
 		Rand2 = new Random(seed2);
 		GD.Print($"Seed1 set : {seed}");
-		GD.Print($"Seed2 set : {see2}");
+		GD.Print($"Seed2 set : {seed2}");
 	}
 }

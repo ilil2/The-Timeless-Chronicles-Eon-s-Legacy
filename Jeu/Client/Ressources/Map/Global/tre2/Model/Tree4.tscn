@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b63agyfsi8yai"]
+[gd_scene load_steps=9 format=3 uid="uid://b63agyfsi8yai"]
 
 [ext_resource type="Material" uid="uid://b43rchsflaulg" path="res://Ressources/Map/Global/tre2/Textures/woodHD.tres" id="1_f1nry"]
-[ext_resource type="Script" path="res://Scripts/MapScript/Tree.cs" id="1_pebit"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Tree.cs" id="1_tnc45"]
 [ext_resource type="Material" uid="uid://dsl2gnibltpj" path="res://Ressources/Map/Global/tre2/Textures/leavesLOD.tres" id="4_s7gdc"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_023kf"]
@@ -64,8 +64,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7j3l6")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u3j54"]
+points = PackedVector3Array(-4.05365, -1.638, 6.66918, 4.18326, 2.2047, -1.01784, 4.18326, 0.00921738, -1.01784, -2.40562, 2.2047, -3.76305, 0.888011, 3.30285, 7.2189, -1.85574, -2.73615, -3.21446, 0.888011, -1.638, 7.2189, -1.30667, 4.95088, -1.56643, -3.50296, 2.2047, 7.2189, 2.53523, -2.73615, -3.21446, -4.05365, 2.2047, -2.11615, 1.98616, 3.85192, -3.76305, 1.98616, -3.28603, -1.01784, 2.53523, -1.08893, -4.31276, 1.43708, 4.95088, -1.01784, 1.98616, 2.2047, 7.2189, -3.50296, -1.638, -2.66361, -3.50296, -2.18708, 7.2189, 4.18326, 2.75378, -2.66361, 4.18326, -1.08893, -1.56643, 1.98616, 0.00921738, 7.2189, 3.0843, -2.73615, -1.01784, 3.63338, 3.30285, -1.01784, -4.05365, 1.10575, 7.2189, -0.757596, 3.85192, -3.76305, -0.757596, -2.18708, 7.2189, -0.208523, 3.30285, 7.2189, -2.40562, -2.73615, -0.466993, 3.63338, -1.638, -3.21446, 3.63338, 1.65482, -3.76305, 1.43708, 4.95088, -2.11615, -1.85574, 4.40019, -2.66361)
+
 [node name="Tree4" type="Node3D"]
-script = ExtResource("1_pebit")
+script = ExtResource("1_tnc45")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
@@ -79,3 +82,10 @@ skeleton = NodePath("")
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -3.22223, 201.789, -0.58371)
 mesh = SubResource("ArrayMesh_t2acy")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.115746, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.0322223, 2.01789, -0.0058371)
+shape = SubResource("ConvexPolygonShape3D_u3j54")

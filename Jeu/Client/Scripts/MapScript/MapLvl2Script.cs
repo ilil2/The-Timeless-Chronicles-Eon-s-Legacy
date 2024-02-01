@@ -10,8 +10,8 @@ public partial class MapLvl2Script : IMap
 	public int step = 0;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
-	private List<Node3D> TreeList = new List<Node3D>();
 	private List<Node3D> SpawnPoint = new List<Node3D>();
+	private List<Node3D> KeyList = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
 	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
@@ -50,9 +50,10 @@ public partial class MapLvl2Script : IMap
 			if(MapTool.CheckSleep(PseudoTreeList))
 			{
 				CreateForest();
+				CreateKey();
+				RemoveSafeArea();
 				MapReady = true;
 			}
-			//GD.Print(MapTool.CheckSleep(PseudoTreeList));
 		
 		}
 		
@@ -92,6 +93,9 @@ public partial class MapLvl2Script : IMap
 			Wall.Rotation += new Vector3(0,-rot,0);
 			AddChild(Wall);
 		}
+		Node3D RotGate = GetNode<Node3D>("RotationGate");
+		float rotG = Mathf.DegToRad(Rand.Next(0,181)*2);
+		RotGate.Rotation = new Vector3(0,rotG,0);
 	}
 	
 	
@@ -175,7 +179,7 @@ public partial class MapLvl2Script : IMap
 			(double? x, double? z) = GetRandomPos(Rand2);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
-			//PseudoTreeList.Add(Sphere);
+			KeyList.Add(Sphere);
 			AddChild(Sphere);
 		}
 	}
@@ -208,12 +212,31 @@ public partial class MapLvl2Script : IMap
 			float Sp = ((SphereShape3D)PseudoTreeList[i].GetNode<CollisionShape3D>("Coll").Shape).Radius;
 			RemoveChild(PseudoTreeList[i]);
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
-			tree.Position = Pos + new Vector3(0,Rand.Next(-10,11)/10f,0);
+			tree.Position = Pos + new Vector3(0,Rand.Next(-10,1)/10f,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
-			TreeList.Add(tree);
 			
 		}
+	}
+	
+	private void CreateKey()
+	{
+		for (int i = 0; i<KeyList.Count;i++)
+		{
+			Node3D Key = KeyList[i];
+			Node3D RealKey = GD.Load<PackedScene>($"res://Ressources/Map/Global/Object/key.tscn").Instantiate<Node3D>();
+			RealKey.Position = Key.Position;
+			RemoveChild(Key);
+			Key.QueueFree();
+			AddChild(RealKey);
+		}
+	}
+	
+	private void RemoveSafeArea()
+	{
+		StaticBody3D SafeArea = GetNode<StaticBody3D>("SafeArea");
+		RemoveChild(SafeArea);
+		SafeArea.QueueFree();
 	}
 	
 	

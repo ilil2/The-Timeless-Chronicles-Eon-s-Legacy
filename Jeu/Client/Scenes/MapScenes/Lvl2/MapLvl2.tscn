@@ -42,9 +42,8 @@ size = Vector2(1000, 1000)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rni42"]
 data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
 
-[sub_resource type="SphereMesh" id="SphereMesh_d80ur"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_2aotq"]
 radius = 4.0
-height = 8.0
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
@@ -64,8 +63,10 @@ mesh = SubResource("PlaneMesh_liic6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rni42")
 
-[node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 296, 0, 0)
+[node name="RotationGate" type="Node3D" parent="."]
+
+[node name="DwarfGate" parent="RotationGate" instance=ExtResource("9_la0ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
 
 [node name="Spawn" type="Node3D" parent="."]
 
@@ -81,5 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 [node name="Node3D4" type="Node3D" parent="Spawn"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[node name="SpawnArea" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_d80ur")
+[node name="SafeArea" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea"]
+shape = SubResource("SphereShape3D_2aotq")
