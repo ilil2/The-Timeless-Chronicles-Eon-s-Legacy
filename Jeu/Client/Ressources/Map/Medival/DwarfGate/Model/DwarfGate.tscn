@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dtxs11ub2f3pg"]
+[gd_scene load_steps=20 format=3 uid="uid://dtxs11ub2f3pg"]
 
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/DwarfGate.cs" id="1_5xuxn"]
 [ext_resource type="Texture2D" uid="uid://s2ym3fli5krm" path="res://Ressources/Map/Medival/DwarfGate/Textures/DungeonStructureHeadDEP_ST_Albedo.png" id="1_mgdfu"]
 [ext_resource type="Texture2D" uid="uid://bnk6dbpdi2pu0" path="res://Ressources/Map/Medival/DwarfGate/Textures/DungeonStructureHeadDEP_ST_Normal.png" id="2_x3uqv"]
 [ext_resource type="Texture2D" uid="uid://cnblh25sl0lpq" path="res://Ressources/Map/Medival/DwarfGate/Textures/DungeonStructureTowerDEP_ST_Albedo.png" id="3_3qsof"]
@@ -148,6 +149,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_56xsl")
 
 [node name="DwarfGate" type="Node3D"]
+script = ExtResource("1_5xuxn")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.01, 0)

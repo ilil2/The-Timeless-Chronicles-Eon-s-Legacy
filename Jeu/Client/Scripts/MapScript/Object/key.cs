@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class key : Node3D
+public partial class key : IRender
 {
 	private Node3D Model;
 	private int FrameCount = 0;
@@ -19,6 +19,10 @@ public partial class key : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		if(RenderSetup())
+		{
+			Render();
+		}
 		FrameCount+=SpeedLinearY;
 		//GD.Print(Math.Sin(Mathf.DegToRad(FrameCount)));
 		Model.Position = InitPos + new Vector3(0,(float)Math.Sin(Mathf.DegToRad(FrameCount))/LinearY,0);
