@@ -40,7 +40,7 @@ public partial class State6 : GameManager
 					if (commandchat == "debug")
 					{
 						DebugMode = !DebugMode;
-						((MapLvl1Script)Map).DebugMode(Joueur1,DebugMode);
+						((IMap)Map).DebugMode(Joueur1,DebugMode);
 						
 					}
 					else if (commandchat == "display")
