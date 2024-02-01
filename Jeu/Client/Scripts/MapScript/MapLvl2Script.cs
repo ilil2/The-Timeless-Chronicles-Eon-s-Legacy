@@ -224,7 +224,7 @@ public partial class MapLvl2Script : IMap
 		for (int i = 0; i<KeyList.Count;i++)
 		{
 			Node3D Key = KeyList[i];
-			Node3D RealKey = GD.Load<PackedScene>($"res://Ressources/Map/Global/Object/key.tscn").Instantiate<Node3D>();
+			Node3D RealKey = GD.Load<PackedScene>($"res://Ressources/Map/Global/Object/Key/key.tscn").Instantiate<Node3D>();
 			RealKey.Position = Key.Position;
 			RemoveChild(Key);
 			Key.QueueFree();
