@@ -7,12 +7,6 @@
 radius = 0.513457
 height = 1.99835
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ryx"]
-albedo_color = Color(0.266667, 0.67451, 0.258824, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
-material = SubResource("StandardMaterial3D_i8ryx")
-
 [sub_resource type="Animation" id="Animation_7qoi7"]
 resource_name = "ArrowShootView"
 length = 0.5
@@ -67,16 +61,18 @@ _data = {
 "RESET": SubResource("Animation_rkdsq")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ryx"]
+albedo_color = Color(0.266667, 0.67451, 0.258824, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vyull"]
+material = SubResource("StandardMaterial3D_i8ryx")
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_52yle")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.00044167, 0.820133, -0.00166586)
 shape = SubResource("CapsuleShape3D_hlrpq")
-
-[node name="PlayerBody" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
-mesh = SubResource("CapsuleMesh_vyull")
 
 [node name="CameraPlayer" parent="." instance=ExtResource("2_nufjl")]
 
@@ -88,3 +84,10 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_8tlyc")
 }
+
+[node name="Player" type="Node3D" parent="."]
+
+[node name="PlayerBody" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.000106931, 0.816324, -0.00391802)
+mesh = SubResource("CapsuleMesh_vyull")
+skeleton = NodePath("../..")
