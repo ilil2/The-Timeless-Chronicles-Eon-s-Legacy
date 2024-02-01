@@ -33,7 +33,7 @@ ao_enabled = true
 ao_texture = ExtResource("4_ioaq2")
 heightmap_enabled = true
 heightmap_texture = ExtResource("5_1syy5")
-uv1_scale = Vector3(200, 200, 200)
+uv1_scale = Vector3(500, 500, 500)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_liic6"]
 material = SubResource("StandardMaterial3D_6m73o")

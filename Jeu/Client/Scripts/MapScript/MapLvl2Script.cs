@@ -57,11 +57,6 @@ public partial class MapLvl2Script : IMap
 		
 	}
 	
-	public override int Step()
-	{
-		return step;
-	}
-	
 	public override List<(int, int, int)> GetSpawnLocation()
 	{
 		List<(int, int, int)> res = new List<(int, int, int)>();
@@ -72,11 +67,6 @@ public partial class MapLvl2Script : IMap
 			res.Add(new ((int)Pos.X,(int)Pos.Y,(int)Pos.Z));
 		}
 		return res;
-	}
-
-	public override bool MapIsReady()
-	{
-		return MapReady;
 	}
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
@@ -116,7 +106,7 @@ public partial class MapLvl2Script : IMap
 		//const float radius = 2.5f;
 		for (int i = 0; i < nbtree; i++)
 		{
-			float radius = IdToRadius[1];//Rand.Next(1,6)];
+			float radius = IdToRadius[Rand.Next(1,6)];
 			RigidBody3D Sphere = new RigidBody3D();
 			Sphere.AxisLockLinearY = true;
 			SphereShape3D sphereShape = new SphereShape3D();
@@ -244,7 +234,7 @@ public partial class MapLvl2Script : IMap
 			float Sp = ((SphereShape3D)PseudoTreeList[i].GetNode<CollisionShape3D>("Coll").Shape).Radius;
 			RemoveChild(PseudoTreeList[i]);
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
-			tree.Position = Pos;
+			tree.Position = Pos + new Vector3(0,Rand.Next(-10,11)/10f,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
 			TreeList.Add(tree);

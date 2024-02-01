@@ -28,17 +28,8 @@ public partial class Boss1Map : IMap
 	{
 	}
 
-	public override int Step()
-	{
-		return 0;
-	}
 
 	public override List<(int, int, int)> GetSpawnLocation()
-	{
-		throw new NotImplementedException();
-	}
-
-	public override bool MapIsReady()
 	{
 		throw new NotImplementedException();
 	}

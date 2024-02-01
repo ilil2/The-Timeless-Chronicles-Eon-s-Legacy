@@ -17,11 +17,6 @@ public partial class Shop : IMap
 			MapReady = true;
 		}
 	}
-	
-	public override int Step()
-	{
-		return 0;
-	}
 
 	public override List<(int, int, int)> GetSpawnLocation()
 	{
@@ -34,10 +29,6 @@ public partial class Shop : IMap
 		return res;
 	}
 
-	public override bool MapIsReady()
-	{
-		return MapReady;
-	}
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{

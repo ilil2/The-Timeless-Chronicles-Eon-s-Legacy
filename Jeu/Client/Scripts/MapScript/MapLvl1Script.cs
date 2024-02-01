@@ -45,11 +45,9 @@ public partial class MapLvl1Script : IMap
 		{(7,7),5}
 	};
 
-	public int step;
 	
 	public override void _Ready()
 	{
-		step = 0;
 		stopwatch.Start();
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
@@ -94,10 +92,6 @@ public partial class MapLvl1Script : IMap
 		
 	}
 	
-	public override int Step()
-	{
-		return step;
-	}
 	
 	public override List<(int,int,int)> GetSpawnLocation()
 	{
@@ -111,11 +105,6 @@ public partial class MapLvl1Script : IMap
 			Spawn.Add(res); 
 		}
 		return Spawn;
-	}
-	
-	public override bool MapIsReady()
-	{
-		return MapReady;
 	}
 	
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
