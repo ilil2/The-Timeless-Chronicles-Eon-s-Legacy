@@ -41,7 +41,7 @@ public partial class GameManager : Node3D
 	public static Settings SettingsManager;
 	public static FastConnection FastConnectionManager;
 	
-	protected static Node3D Map;
+	protected static IMap Map;
 	protected static Control ProgressBar;
 	
 	protected static bool tentative_connection = true;
@@ -140,7 +140,7 @@ public partial class GameManager : Node3D
 		AddChild(connectionMenu);
 		const int lvl = 2;
 		PackedScene MapScene = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl{lvl}/MapLvl{lvl}.tscn");
-		Map = MapScene.Instantiate<Node3D>();
+		Map = MapScene.Instantiate<IMap>();
 		
 		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");
 		_chat = ChatSceneUI.Instantiate<Control>();
