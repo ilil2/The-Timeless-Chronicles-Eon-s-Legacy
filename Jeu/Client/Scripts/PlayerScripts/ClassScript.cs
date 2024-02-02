@@ -104,6 +104,8 @@ public abstract partial class ClassScript : CharacterBody3D
     {
 	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && !GameManager._pausemode && _pauseTimer > 20)
 	    {
+		    AnimationPlayer.Stop();
+		    GameManager.InfoJoueur["attack"] = "init";
 		    _pauseTimer = 0;
 		    GameManager._pausemode = true;
 		    Input.MouseMode = Input.MouseModeEnum.Visible;

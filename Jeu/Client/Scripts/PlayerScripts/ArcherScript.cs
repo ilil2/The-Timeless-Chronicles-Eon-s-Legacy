@@ -41,26 +41,6 @@ public partial class ArcherScript : ClassScript
 
 		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-			{
-				//Changement de la vitesse du joueur si il sprint
-				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
-				{
-					MovementSpeed = RunSpeed;
-					IsRunning = true;
-				}
-				else
-				{
-					MovementSpeed = WalkSpeed;
-					IsRunning = false;
-				}
-			}
-			else
-			{
-				IsRunning = false;
-			}
-			
 			Move(delta);
 			ShootArrow();
 		}
