@@ -10,7 +10,6 @@ public partial class ServeurManager : Node3D
 	private int DateDay2 = DateTime.Now.Day;
 	
 	private int Seed = 42;
-	private int AleateSeed = 42;
 	
 	private Random rand = new Random();
 	
@@ -25,7 +24,6 @@ public partial class ServeurManager : Node3D
 
 		//a executer a la fin du _ready
 		Seed = JeuServeur.Random.Rand();
-		AleateSeed = rand.Next(0, 1000000);
 		Write();
 		p1.Start();
 	}
@@ -45,14 +43,13 @@ public partial class ServeurManager : Node3D
 	private void Exec()
 	{
 		Seed = JeuServeur.Random.Rand();
-		AleateSeed = rand.Next(0, 1000000);
 		Write();
 	}
 
 	private void Write()
 	{
 		StreamWriter sw = new StreamWriter("DayInfo.txt");
-		sw.Write($"{Seed}*{AleateSeed}");
+		sw.Write($"{Seed}");
 		sw.Close();
 	}
 }

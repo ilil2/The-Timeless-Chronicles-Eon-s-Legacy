@@ -16,6 +16,8 @@ public class Serveur
     private static ClientCom[] clients = new ClientCom[4];
     
     private static string? _seed = "42*42";
+    private static Random _rand = new Random();
+    private static int _seed2 = _rand.Next(0, 1000000);
 
     public static string GetInfo()
     {
@@ -63,7 +65,7 @@ public class Serveur
                 ClientCom clicom = new ClientCom(soc,ID,ep);         //creation de l'objet client
                 clients[ID] = clicom;
                 
-                UDP.Send(soc, ID.ToString() + _seed, ep);        //envoie de l'ID au client
+                UDP.Send(soc, ID.ToString() + $"{_seed}*{_seed2}", ep);        //envoie de l'ID au client
                 Console.WriteLine("Client connecté : " + ID);
                 ID++;
             }

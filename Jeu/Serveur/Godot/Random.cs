@@ -75,9 +75,9 @@ public class Random
         JsonElement timeSeries = root.GetProperty("Time Series (Daily)");
         JsonElement today = timeSeries.GetProperty($"{_years}-{_month.ToString().PadLeft(2,'0')}-{_day.ToString().PadLeft(2,'0')}");
         JsonElement closemarcket = today.GetProperty("4. close");
-        JsonElement openmarket = today.GetProperty("5. volume");
+        JsonElement volume = today.GetProperty("5. volume");
 
-        return (int)float.Parse(closemarcket.GetString(),CultureInfo.InvariantCulture) * int.Parse(openmarket.GetString());
+        return (int)float.Parse(closemarcket.GetString(),CultureInfo.InvariantCulture) * int.Parse(volume.GetString());
     }
 
     private static int GetMeteo()
