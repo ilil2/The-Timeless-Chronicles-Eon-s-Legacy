@@ -81,6 +81,8 @@ public partial class GameManager : Node3D
 	public static bool DebugMode = false;
 	public static bool Fog = true;
 	protected static bool Quit = false; 
+	protected static int Seed = 42;
+	protected static int AleateSeed = 42;
 	
 	private static string GetIp()
 	{

@@ -13,6 +13,7 @@ public partial class ServeurManager : Node3D
 	private int AleateSeed = 42;
 	
 	private Random rand = new Random();
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,6 +24,8 @@ public partial class ServeurManager : Node3D
 		p1.StartInfo.FileName = "execwin.bat";
 
 		//a executer a la fin du _ready
+		Seed = JeuServeur.Random.Rand();
+		AleateSeed = rand.Next(0, 1000000);
 		Write();
 		p1.Start();
 	}
@@ -41,7 +44,7 @@ public partial class ServeurManager : Node3D
 	//a effectuer tout les jours
 	private void Exec()
 	{
-		Seed = rand.Next(0, 1000000);
+		Seed = JeuServeur.Random.Rand();
 		AleateSeed = rand.Next(0, 1000000);
 		Write();
 	}

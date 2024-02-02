@@ -23,7 +23,9 @@ public partial class State3 : GameManager
         
         UDP.Send(soc2,"connect",iep2);    //envoie requette de connection au serveur secondaire
         InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
-        ((IMap)Map).SetSeed(Conversions.AtoI(InfoJoueur["id"].Split('*')[0]),Conversions.AtoI(InfoJoueur["id"].Split('*')[1]));
+        Seed = Conversions.AtoI(InfoJoueur["id"].Split('*')[0].Substring(1));
+        AleateSeed = Conversions.AtoI(InfoJoueur["id"].Split('*')[1]);
+        ((IMap)Map).SetSeed(Seed,AleateSeed);
         InfoJoueur["id"] = InfoJoueur["id"].Substring(0,1);
         UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["pseudo"]}",iep2);    //envoie du pseudo au serveur secondaire
         
