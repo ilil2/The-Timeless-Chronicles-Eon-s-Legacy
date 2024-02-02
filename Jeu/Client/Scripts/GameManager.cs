@@ -138,8 +138,8 @@ public partial class GameManager : Node3D
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/UI/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
-		
-		PackedScene MapScene = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/MapLvl1.tscn");
+		const int lvl = 2;
+		PackedScene MapScene = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl{lvl}/MapLvl{lvl}.tscn");
 		Map = MapScene.Instantiate<Node3D>();
 		
 		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");

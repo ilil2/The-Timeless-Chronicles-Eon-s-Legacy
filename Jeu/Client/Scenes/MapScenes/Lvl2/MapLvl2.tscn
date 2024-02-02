@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=13 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
-[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_rokdr"]
+[ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="3_dyqhn"]
+[ext_resource type="Texture2D" uid="uid://imjob5grvv77" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-ao.png" id="4_ioaq2"]
+[ext_resource type="Texture2D" uid="uid://dl8eaglt7hq2e" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-height.png" id="5_1syy5"]
+[ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="6_ybwmf"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
@@ -22,6 +25,26 @@ volumetric_fog_temporal_reprojection_amount = 0.99
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m73o"]
+albedo_texture = ExtResource("3_dyqhn")
+normal_enabled = true
+normal_texture = ExtResource("6_ybwmf")
+ao_enabled = true
+ao_texture = ExtResource("4_ioaq2")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_1syy5")
+uv1_scale = Vector3(500, 500, 500)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_liic6"]
+material = SubResource("StandardMaterial3D_6m73o")
+size = Vector2(1000, 1000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rni42"]
+data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2aotq"]
+radius = 4.0
+
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
 
@@ -32,14 +55,34 @@ shadow_enabled = true
 [node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pdaq0")
 
-[node name="SpecCam" parent="." instance=ExtResource("3_rokdr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 290.211, 0, 0)
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_liic6")
 
-[node name="State" type="Label" parent="SpecCam"]
-offset_top = 48.0
-offset_right = 54.0
-offset_bottom = 74.0
-text = "State 2"
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
 
-[node name="DwarfGate" parent="." instance=ExtResource("9_la0ss")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.096, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_rni42")
+
+[node name="RotationGate" type="Node3D" parent="."]
+
+[node name="DwarfGate" parent="RotationGate" instance=ExtResource("9_la0ss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
+
+[node name="Spawn" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="Node3D2" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="Node3D3" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="Node3D4" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="SafeArea" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea"]
+shape = SubResource("SphereShape3D_2aotq")

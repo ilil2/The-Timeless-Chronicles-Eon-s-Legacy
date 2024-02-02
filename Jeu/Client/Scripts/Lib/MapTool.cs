@@ -13,6 +13,11 @@ public partial class MapTool : Node
 		return Math.Sqrt(Math.Pow(Node1.GlobalPosition.X - Node2.GlobalPosition.X, 2) +
 						 Math.Pow(Node1.GlobalPosition.Z - Node2.GlobalPosition.Z, 2));
 	}
+	public static double Distance(Vector3 Node1, Vector3 Node2)
+	{
+		return Math.Sqrt(Math.Pow(Node1.X - Node2.X, 2) +
+						 Math.Pow(Node1.Z - Node2.Z, 2));
+	}
 	
 	public static bool IsNodeVisible(Node3D node, Camera3D camera)
 	{

@@ -6,26 +6,12 @@ using System.IO;
 using Environment = Godot.Environment;
 using Lib;
 
-/*
-To Do List du code:
-- La rotation des salles -OK
-- La séparation des types dans les scenes Room -PB
-- Récup coo de la salle la plus loin -OK
-- Ajout du dernier type de salle -OK
-- Corrigé les % et la génération -OK
-- Déco des salles
-- SpawnPoint des mobs 
-- Optimiser le jeu
-*/
 
-public partial class MapLvl1Script : Node3D, IMap
+public partial class MapLvl1Script : IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private Random Rand = new Random(42);
-	private Random FogRand = new Random(42);
-	private static bool MapReady = false;
-	private int NbRoom =250;
+	private int NbRoom = 250;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();
@@ -37,7 +23,6 @@ public partial class MapLvl1Script : Node3D, IMap
 	private int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
-	private bool SpecMode = false;
 	private int FrameCount = 0;
 	private int StartInput = 0;
 	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
@@ -58,11 +43,9 @@ public partial class MapLvl1Script : Node3D, IMap
 		{(7,7),5}
 	};
 
-	public int step;
 	
 	public override void _Ready()
 	{
-		step = 0;
 		stopwatch.Start();
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
@@ -89,7 +72,7 @@ public partial class MapLvl1Script : Node3D, IMap
 				GD.Print($"{NbRoom} Room");
 				GD.Print($"Map crée en {stopwatch.Elapsed}");
 				
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				fogwatch.Start();
 				GD.Print($"Fog Start in {Duration}");	
 			}
@@ -106,19 +89,9 @@ public partial class MapLvl1Script : Node3D, IMap
 		}
 		
 	}
-	public void SetSeed(int seed, int seed2)
-	{
-		Rand = new Random(seed);
-		FogRand = new Random(seed2);
-		GD.Print($"Seed set : {seed}");
-	}
 	
-	public bool MapIsReady()
-	{
-		return MapReady;
-	}
 	
-	public List<(int,int,int)> GetSpawnLocation()
+	public override List<(int,int,int)> GetSpawnLocation()
 	{
 		Node3D SpawnPoint = SpawnRoom.GetNode<Node3D>("Spawn");
 		List<(int,int,int)> Spawn = new List<(int,int,int)>();
@@ -132,7 +105,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		return Spawn;
 	}
 	
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
+	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		MapTool.Debug(Player,this,DebugMode);
 		WorldEnvironment world = GetNode<WorldEnvironment>("World");
@@ -141,6 +114,7 @@ public partial class MapLvl1Script : Node3D, IMap
 		
 	}
 	
+
 	private void CreateMob()
 	{
 		for(int i = 0; i<RoomList.Count; i++)
@@ -197,7 +171,7 @@ public partial class MapLvl1Script : Node3D, IMap
 			{
 				env.VolumetricFogDensity=(float)0.1;
 				FogState=2;
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog Start! End in {Duration} seconde");
 			}
@@ -220,12 +194,14 @@ public partial class MapLvl1Script : Node3D, IMap
 			{
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
-				Duration = FogRand.Next(120,260);
+				Duration = Rand2.Next(120,260);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog End! Next Fog in {Duration} seconde");		
 			}
 		}
 	}
+	
+	
 	
 	private StaticBody3D InitMainRoom()
 	{
@@ -272,19 +248,13 @@ public partial class MapLvl1Script : Node3D, IMap
 			
 			CollisionShape3D RoomCollision = new CollisionShape3D();
 			BoxShape3D BoxShape = new BoxShape3D();
-			MeshInstance3D RoomMesh = new MeshInstance3D();
-			BoxMesh BoxM = new BoxMesh();
 			
 			BoxShape.Size = new Vector3(h * LenWall, 14 * LenWall, w * LenWall);
-			BoxM.Size = new Vector3(h * LenWall, LenWall, w * LenWall);
 			
 			RoomCollision.Shape = BoxShape;
 			RoomCollision.Position = new Vector3(0,7*LenWall,0);
-			RoomMesh.Mesh = BoxM;
-			RoomMesh.Position = new Vector3(0,LenWall/2,0);
-			RoomMesh.Name = "Mesh";
+			RoomCollision.Name = "Coll";
 			Room.AddChild(RoomCollision);
-			Room.AddChild(RoomMesh);
 			Room.Position = Roundm((float)x*LenWall,(float)z*LenWall,LenWall);
 			Room.RotationDegrees = new Vector3(0,Angle,0);
 			AddChild(Room);
@@ -298,8 +268,8 @@ public partial class MapLvl1Script : Node3D, IMap
 		for (int i = 0; i < PseudoRoomList.Count; i++)
 		{
 			RigidBody3D PseudoRoom = PseudoRoomList[i];
-			MeshInstance3D MeshRoom = PseudoRoom.GetNode<MeshInstance3D>("Mesh");
-			BoxMesh BoxM = (BoxMesh)MeshRoom.Mesh;
+			CollisionShape3D MeshRoom = PseudoRoom.GetNode<CollisionShape3D>("Coll");
+			BoxShape3D BoxM = (BoxShape3D)MeshRoom.Shape;
 			
 			(int h, int w) = ((int)BoxM.Size.X/LenWall,(int)BoxM.Size.Z/LenWall);
 			int ID = LenToId[(h,w)];

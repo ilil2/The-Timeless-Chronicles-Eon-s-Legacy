@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://nwylxkfab5m4"]
+[gd_resource type="VisualShader" load_steps=14 format=3 uid="uid://nwylxkfab5m4"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_3u3m5"]
 default_input_values = [0, 0.0, 1, 0.1]
@@ -12,6 +12,9 @@ default_value_enabled = true
 [sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_nffkx"]
 default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
 op_type = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_hete1"]
+parameter_name = "Timer"
 
 [sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_6tbym"]
 parameter_name = "Albedo"
@@ -36,11 +39,6 @@ function = 0
 
 [sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_xr1c8"]
 
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_yvi6h"]
-
-[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_uu0wy"]
-parameter_name = "FloatParameter"
-
 [resource]
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
@@ -48,7 +46,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 uniform sampler2D Albedo;
 uniform sampler2D tex_frg_4;
 uniform vec4 ColorParameter : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
-uniform float FloatParameter;
+uniform float Timer;
 
 
 
@@ -67,20 +65,12 @@ void fragment() {
 	vec4 n_out12p0 = ColorParameter;
 
 
-// Input:5
-	float n_out5p0 = TIME;
-
-
-// FloatParameter:9
-	float n_out9p0 = FloatParameter;
-
-
-// FloatOp:8
-	float n_out8p0 = n_out5p0 + n_out9p0;
+// FloatParameter:14
+	float n_out14p0 = Timer;
 
 
 // FloatFunc:6
-	float n_out6p0 = sin(n_out8p0);
+	float n_out6p0 = sin(n_out14p0);
 
 
 	float n_out7p0;
@@ -126,15 +116,11 @@ nodes/fragment/3/position = Vector2(100, 0)
 nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_rhod4")
 nodes/fragment/4/position = Vector2(-380, 160)
 nodes/fragment/5/node = SubResource("VisualShaderNodeInput_c53ar")
-nodes/fragment/5/position = Vector2(-960, 640)
+nodes/fragment/5/position = Vector2(-1020, 500)
 nodes/fragment/6/node = SubResource("VisualShaderNodeFloatFunc_kc2h6")
 nodes/fragment/6/position = Vector2(-380, 640)
 nodes/fragment/7/node = SubResource("VisualShaderNodeRemap_xr1c8")
 nodes/fragment/7/position = Vector2(-100, 640)
-nodes/fragment/8/node = SubResource("VisualShaderNodeFloatOp_yvi6h")
-nodes/fragment/8/position = Vector2(-600, 640)
-nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_uu0wy")
-nodes/fragment/9/position = Vector2(-960, 780)
 nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_3u3m5")
 nodes/fragment/10/position = Vector2(-620, 480)
 nodes/fragment/11/node = SubResource("VisualShaderNodeStep_muxy3")
@@ -143,4 +129,6 @@ nodes/fragment/12/node = SubResource("VisualShaderNodeColorParameter_4rfnn")
 nodes/fragment/12/position = Vector2(-1037.34, 301.611)
 nodes/fragment/13/node = SubResource("VisualShaderNodeMix_nffkx")
 nodes/fragment/13/position = Vector2(-280, 460)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0, 4, 0, 0, 1, 6, 0, 7, 0, 7, 0, 0, 19, 8, 0, 6, 0, 5, 0, 8, 0, 9, 0, 8, 1, 7, 0, 10, 0, 4, 1, 11, 0, 11, 0, 0, 5, 12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFloatParameter_hete1")
+nodes/fragment/14/position = Vector2(-1000, 600)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0, 4, 0, 0, 1, 6, 0, 7, 0, 7, 0, 0, 19, 7, 0, 10, 0, 4, 1, 11, 0, 11, 0, 0, 5, 12, 0, 13, 1, 10, 0, 13, 2, 13, 0, 11, 1, 14, 0, 6, 0)

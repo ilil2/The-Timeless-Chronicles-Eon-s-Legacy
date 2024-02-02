@@ -2,15 +2,16 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Lib;
-public partial class MapLvl2Script : Node3D, IMap
+public partial class MapLvl2Script : IMap
 {
 
 	private Random Rand = new Random(42);
-	private int state = 0;
+	private Random Rand2 = new Random(42);
+	public int step = 0;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
-	private List<Node3D> TreeList = new List<Node3D>();
 	private List<Node3D> SpawnPoint = new List<Node3D>();
+	private List<Node3D> KeyList = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
 	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
@@ -33,8 +34,9 @@ public partial class MapLvl2Script : Node3D, IMap
 	public override void _Ready()
 	{
 		CreateBorder();
-		CreateForest0();
-		state = 1;
+		PseudoCreateForest();
+		CreatePseudoSpawnPoint();
+		CreatePseudoKey();
 		
 	}
 
@@ -42,41 +44,38 @@ public partial class MapLvl2Script : Node3D, IMap
 	public override void _Process(double delta)
 	{
 		FrameCount+=1;
-		//Debug
-		Camera3D DebugCam = GetNode<Camera3D>("SpecCam");
-		Label S = DebugCam.GetNode<Label>("State");
-		S.Text = $"State {state}";
-		Render(DebugCam);
-		//Debug
-		if(state==1)
+		if (!MapReady)
 		{
-			if (FrameCount-StartTimer>1)
+			
+			if(MapTool.CheckSleep(PseudoTreeList))
 			{
-				CreateForest1();
-				state = 2;
-				StartTimer = FrameCount;
+				CreateForest();
+				CreateKey();
+				RemoveSafeArea();
+				MapReady = true;
 			}
+		
 		}
-		else if(state==2)
-		{
-			if ((FrameCount-StartTimer>1) && MapTool.CheckSleep(PseudoTreeList))
-			{
-				state = 3;
-				StartTimer = FrameCount;
-			}
-		}
-		else if(state==3)
-		{
-			CreateForest2();
-			state = 4;
-			StartTimer = FrameCount;
-		}
+		
 	}
-	public void SetSeed(int seed, int seed2)
+	
+	public override List<(int, int, int)> GetSpawnLocation()
 	{
-		Rand = new Random(seed);
-		GD.Print($"Seed set : {seed}");
+		List<(int, int, int)> res = new List<(int, int, int)>();
+		Node3D Spawn = GetNode<Node3D>("Spawn");
+		for(int i = 0; i<Spawn.GetChildCount();i++)
+		{
+			Vector3 Pos = Spawn.GetChild<Node3D>(i).Position;
+			res.Add(new ((int)Pos.X,(int)Pos.Y,(int)Pos.Z));
+		}
+		return res;
 	}
+
+	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
+	{
+		MapTool.Debug(Player,this,DebugMode);
+	}
+	
 	
 	private void CreateBorder()
 	{
@@ -94,8 +93,14 @@ public partial class MapLvl2Script : Node3D, IMap
 			Wall.Rotation += new Vector3(0,-rot,0);
 			AddChild(Wall);
 		}
+		Node3D RotGate = GetNode<Node3D>("RotationGate");
+		float rotG = Mathf.DegToRad(Rand.Next(0,181)*2);
+		RotGate.Rotation = new Vector3(0,rotG,0);
 	}
-	private void CreateForest0()
+	
+	
+	
+	private void PseudoCreateForest()
 	{
 		const int nbtree = 3000;
 		//const float radius = 2.5f;
@@ -103,109 +108,136 @@ public partial class MapLvl2Script : Node3D, IMap
 		{
 			float radius = IdToRadius[Rand.Next(1,6)];
 			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
 			SphereShape3D sphereShape = new SphereShape3D();
-			SphereMesh sphereMesh = new SphereMesh();
 			CollisionShape3D collisionShape = new CollisionShape3D();
+			collisionShape.Name = "Coll";
+			
+			sphereShape.Radius = radius;
+			collisionShape.Shape = sphereShape;
+			Sphere.AddChild(collisionShape);
+
+			(double? x, double? z) = GetRandomPos(Rand);
+
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
+			PseudoTreeList.Add(Sphere);
+			AddChild(Sphere);
+		}
+	}
+	
+	private void CreatePseudoSpawnPoint()
+	{
+		const int nbMob = 750;
+		const float radius = 1f;
+		for (int i = 0; i < nbMob; i++)
+		{
+			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
+			SphereShape3D sphereShape = new SphereShape3D();
+			CollisionShape3D collisionShape = new CollisionShape3D();
+			
 			MeshInstance3D meshInstance = new MeshInstance3D();
-			meshInstance.Name = "Mesh";
+			SphereMesh sphereMesh = new SphereMesh();
 			sphereMesh.Radius = radius;
 			sphereMesh.Height = radius * 2;
 			meshInstance.Mesh = sphereMesh;
+			Sphere.AddChild(meshInstance);
+			
 			sphereShape.Radius = radius;
 			collisionShape.Shape = sphereShape;
-			Sphere.AddChild(meshInstance);
 			Sphere.AddChild(collisionShape);
 
-			const int radiusmap = 290;
-			double t = 2 * Math.PI * Rand.NextDouble();
-			double u = Rand.NextDouble() + Rand.NextDouble();
-			double? r = null;
-			if (u>1)
-			{
-				r = 2 - u;
-			}
-			else
-			{
-				r = u;
-			}
+			(double? x, double? z) = GetRandomPos(Rand2);
 
-			double? x = radiusmap * r * Math.Cos(t);
-			double? z = radiusmap * r * Math.Sin(t);
-
-			Sphere.Position = new Vector3((float)x, 10, (float)z);
-			PseudoTreeList.Add(Sphere);
-			AddChild(Sphere);
-
-
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
+			//PseudoTreeList.Add(Sphere);
+			//AddChild(Sphere);
 		}
 	}
-
-	private void CreateForest1()
+	
+	private void CreatePseudoKey()
 	{
-		for (int i = 0; i<PseudoTreeList.Count;i++)
+		const int nbKey = 4;
+		const float radius = 1f;
+		for (int i = 0; i < nbKey; i++)
 		{
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockLinearX = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockLinearZ = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularX = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularY = true;
-			((PhysicsBody3D)PseudoTreeList[i]).AxisLockAngularZ = true;
+			RigidBody3D Sphere = new RigidBody3D();
+			Sphere.AxisLockLinearY = true;
+			SphereShape3D sphereShape = new SphereShape3D();
+			CollisionShape3D collisionShape = new CollisionShape3D();
+			
+			MeshInstance3D meshInstance = new MeshInstance3D();
+			BoxMesh sphereMesh = new BoxMesh();
+			sphereMesh.Size = new Vector3(1,2,1);
+			meshInstance.Mesh = sphereMesh;
+			Sphere.AddChild(meshInstance);
+			
+			sphereShape.Radius = radius;
+			collisionShape.Shape = sphereShape;
+			Sphere.AddChild(collisionShape);
+
+			(double? x, double? z) = GetRandomPos(Rand2);
+
+			Sphere.Position = new Vector3((float)x, 0, (float)z);
+			KeyList.Add(Sphere);
+			AddChild(Sphere);
 		}
 	}
-	private void CreateForest2()
+	
+	private (double? x,double? z) GetRandomPos(Random Rando)
+	{
+		const int radiusmap = 290;
+		double t = 2 * Math.PI * Rando.NextDouble();
+		double u = Rando.NextDouble() + Rando.NextDouble();
+		double? r = null;
+		if (u>1)
+		{
+			r = 2 - u;
+		}
+		else
+		{
+			r = u;
+		}
+		double? x = radiusmap * r * Math.Cos(t);
+		double? z = radiusmap * r * Math.Sin(t);
+		
+		return new (x,z);
+	}
+
+	private void CreateForest()
 	{
 		for (int i = 0; i<PseudoTreeList.Count;i++)
 		{
 			Vector3 Pos = PseudoTreeList[i].Position;
-			float Sp = ((SphereMesh)PseudoTreeList[i].GetNode<MeshInstance3D>("Mesh").Mesh).Radius;
+			float Sp = ((SphereShape3D)PseudoTreeList[i].GetNode<CollisionShape3D>("Coll").Shape).Radius;
 			RemoveChild(PseudoTreeList[i]);
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
-			tree.Position = Pos - new Vector3(0,3,0);
+			tree.Position = Pos + new Vector3(0,Rand.Next(-10,1)/10f,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			AddChild(tree);
-			TreeList.Add(tree);
 			
 		}
 	}
 	
-	private void Render(Camera3D Cam)
+	private void CreateKey()
 	{
-		Node3D Player = (Node3D)Cam;
-		for (int i = 0; i<TreeList.Count;i++)
+		for (int i = 0; i<KeyList.Count;i++)
 		{
-			
-			Node3D tree = TreeList[i];
-			Node3D LOD = tree.GetNode<Node3D>("LOD");
-			Node3D HD = tree.GetNode<Node3D>("HD");
-			double dist = MapTool.Distance(Player,tree);
-			if (dist>150)
-			{
-				HD.Visible = false;
-				LOD.Visible = false;
-			}
-			else
-			{
-				HD.Visible = true;
-				LOD.Visible = true;
-			}
-			//pas assez opti pour le moment
-			//tree.Visible = MapTool.IsNodeVisible(tree, Cam);
+			Node3D Key = KeyList[i];
+			Node3D RealKey = GD.Load<PackedScene>($"res://Ressources/Map/Global/Object/Key/key.tscn").Instantiate<Node3D>();
+			RealKey.Position = Key.Position;
+			RemoveChild(Key);
+			Key.QueueFree();
+			AddChild(RealKey);
 		}
-		
 	}
-
-	public List<(int, int, int)> GetSpawnLocation()
+	
+	private void RemoveSafeArea()
 	{
-		throw new NotImplementedException();
+		StaticBody3D SafeArea = GetNode<StaticBody3D>("SafeArea");
+		RemoveChild(SafeArea);
+		SafeArea.QueueFree();
 	}
-
-	public bool MapIsReady()
-	{
-		throw new NotImplementedException();
-	}
-
-	public void DebugMode(CharacterBody3D Player, bool DebugMode)
-	{
-		throw new NotImplementedException();
-	}
+	
 	
 }
