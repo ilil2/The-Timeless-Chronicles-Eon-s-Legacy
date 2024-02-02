@@ -7,7 +7,7 @@ public partial class State4 : GameManager
     {
         if (MapOnLoad)
         {
-            ((ProgressBarMapLvl1)ProgressBar).Load = ((MapLvl1Script)Map).step;
+            ((ProgressBarMapLvl1)ProgressBar).Load = ((IMap)Map).Step();
         }
         if (ClassSelectUI.ClassChose != "")
         {

@@ -200,14 +200,14 @@ public partial class GameManager : Node3D
 				AddChild(Joueur1);
 				switch (_nbJoueur)
 				{
-					case 1:
+					case 2:
 						AddChild(Joueur2);
 						break;
-					case 2:
+					case 3:
 						AddChild(Joueur2);
 						AddChild(Joueur3);
 						break;
-					case 3:
+					case 4:
 						AddChild(Joueur2);
 						AddChild(Joueur3);
 						AddChild(Joueur4);
