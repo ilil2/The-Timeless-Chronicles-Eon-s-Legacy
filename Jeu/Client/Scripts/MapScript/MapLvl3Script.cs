@@ -18,9 +18,10 @@ public partial class MapLvl3Script : IMap
 				MapGrid[i, j] = 0;
 			}
 		}
-		CreateMap(20,16,16);
-		PrintMatrix(MapGrid);
+		CreateMap(10,16,16);
 		CreateCity();
+		MapGrid[16, 16] = 2;
+		PrintMatrix(MapGrid);
 		MapReady = true;
 	}
 
@@ -46,87 +47,63 @@ public partial class MapLvl3Script : IMap
 	
 	private void CreateMap(int n, int i, int j)
 	{
-		MapGrid[i,j] = n;
+		MapGrid[i,j] = 1;
 		if(n>0)
 		{
 			for(int m = 0; m<2 ;m++)
 			{
 				List<(int,int)> PossibleAction = new List<(int,int)>();
-				if(i<MapLenght-2)
+				if(i<MapLenght-2 && MapGrid[i+2,j]==0)
 				{
-					if(MapGrid[i+2,j]==0)
-					{
-						PossibleAction.Add((2,0));
-					}
+					PossibleAction.Add((2,0));
 				}
-				if(i>1)
+				if(i>1 && MapGrid[i-2,j]==0)
 				{
-					if(MapGrid[i-2,j]==0)
-					{
-						PossibleAction.Add((-2,0));
-					}
+					PossibleAction.Add((-2,0));
 				}
-				if(j<MapLenght-2)
+				if(j<MapLenght-2 && MapGrid[i,j+2]==0)
+				{ 
+					PossibleAction.Add((0,2));
+				}
+				if(j>1 && MapGrid[i,j-2]==0)
 				{
-					if(MapGrid[i,j+2]==0)
-					{
-						PossibleAction.Add((0,2));
-					}
+					PossibleAction.Add((0,-2));
 				}
-				if(j>1)
-				{
-					if(MapGrid[i,j-2]==0)
-					{
-						PossibleAction.Add((0,-2));
-					}
-				}
-				if(PossibleAction.Count!=0)
+				if(PossibleAction.Count!=0 && n!=1)
 				{
 					int random = Rand.Next(0,PossibleAction.Count);
 					(int x,int y) = PossibleAction[random];
-					if(n!=1)
-					{
-						if(x==0)
-						{
-							MapGrid[i+(x)/2,j+(y)/2] = -1;
-						}
-						else
-						{
-							MapGrid[i+(x)/2,j+(y)/2] = -2;
-						}
-					}
+					if(x==0) MapGrid[i+(x)/2,j+(y)/2] = -1;
+					else MapGrid[i+(x)/2,j+(y)/2] = -2;
 					CreateMap(n-1,i+x,j+y);
 				}
-			}
-			
+			}	
 		}
 	}
 	private void PrintMatrix(int[,] matrix)
 	{
-		int rows = matrix.GetLength(0);
-		int cols = matrix.GetLength(1);
-
-		for (int i = 0; i < rows; i++)
+		for (int i = 0; i < MapLenght; i++)
 		{
 			string res = "";
-			for (int j = 0; j < cols; j++)
-			{	
-				if(matrix[i, j]>0)
+			for (int j = 0; j < MapLenght; j++)
+			{
+				switch (matrix[i, j])
 				{
-					string r = matrix[i, j].ToString().PadRight(2);
-					res+=$"O";
-				}
-				else if(matrix[i, j]==-1)
-				{
-					res+=$"-";
-				}
-				else if(matrix[i, j]==-2)
-				{
-					res+=$"|";
-				}
-				else
-				{
-					res+=$".";
+					case 0:
+						res += " ";
+						break;
+					case 1:
+						res += "o";
+						break;
+					case -1:
+						res += "-";
+						break;
+					case -2:
+						res += "|";
+						break;
+					default:
+						res += "#";
+						break;
 				}
 			}
 			GD.Print(res);
@@ -135,38 +112,37 @@ public partial class MapLvl3Script : IMap
 	
 	private void CreateCity()
 	{
+		const int LenI = 16;
 		for (int i = 0; i < MapLenght; i++)
 		{
 			for (int j = 0; j < MapLenght; j++)
 			{
-				if(MapGrid[i, j] > 0)
+				switch (MapGrid[i, j])
 				{
-					Node3D Bat = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building5.tscn").Instantiate<Node3D>();
-					Bat.Position = new Vector3((i-16)*27,0,(j-16)*25);
-					AddChild(Bat);
-				}
-				else if(MapGrid[i, j]==-1)
-				{
-					Node3D Bat = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
-					Node3D R = Bat.GetNode<Node3D>("Roof");
-					Bat.RemoveChild(R);
-					R.Position = new Vector3((i-16)*27,R.Position.Y,(j-16)*25);
-					
-					AddChild(R);
-				}
-				else if(MapGrid[i, j]==-2)
-				{
-					Node3D Bat = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
-					Node3D R = Bat.GetNode<Node3D>("Roof2");
-					Bat.RemoveChild(R);
-					R.Position = new Vector3((i-16)*27,R.Position.Y,(j-16)*25);
-					AddChild(R);
-				}
-				else
-				{
-					Node3D Bat = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building10.tscn").Instantiate<Node3D>();
-					Bat.Position = new Vector3((i-16)*27,0,(j-16)*25);
-					AddChild(Bat);
+					case 0:
+						Node3D Bat0 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building10.tscn").Instantiate<Node3D>();
+						Bat0.Position = new Vector3((i-LenI)*27,0,(j-LenI)*25);
+						AddChild(Bat0);
+						break;
+					case 1:
+						Node3D Bat1 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building5.tscn").Instantiate<Node3D>();
+						Bat1.Position = new Vector3((i-LenI)*27,0,(j-LenI)*25);
+						AddChild(Bat1);
+						break;
+					case -1:
+						Node3D Bat2 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
+						Node3D R1 = Bat2.GetNode<Node3D>("Roof");
+						Bat2.RemoveChild(R1);
+						R1.Position = new Vector3((i-LenI)*27,R1.Position.Y,(j-LenI)*25);
+						AddChild(R1);
+						break;
+					case -2:
+						Node3D Bat3 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
+						Node3D R2 = Bat3.GetNode<Node3D>("Roof2");
+						Bat3.RemoveChild(R2);
+						R2.Position = new Vector3((i-LenI)*27,R2.Position.Y,(j-LenI)*25);
+						AddChild(R2);
+						break;
 				}
 			}
 		}
