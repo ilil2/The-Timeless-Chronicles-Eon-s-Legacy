@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn7cup06ni2nw"]
+[gd_scene load_steps=8 format=3 uid="uid://bn7cup06ni2nw"]
 
+[ext_resource type="Script" path="res://Scripts/MapScript/MapLvl3Script.cs" id="1_7lg3q"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_42jj3"]
-[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="2_8xhfs"]
 
 [sub_resource type="Environment" id="Environment_2u4l1"]
 background_mode = 2
@@ -26,7 +26,15 @@ size = Vector2(1000, 1000)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7s0se"]
 data = PackedVector3Array(500, 0, 500, -500, 0, 500, 500, 0, -500, -500, 0, 500, -500, 0, -500, 500, 0, -500)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxn85"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8b825"]
+material = SubResource("StandardMaterial3D_nxn85")
+size = Vector3(1, 20, 1)
+
 [node name="MapLvl3" type="Node3D"]
+script = ExtResource("1_7lg3q")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
@@ -43,5 +51,6 @@ mesh = SubResource("PlaneMesh_u20ev")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7s0se")
 
-[node name="SpecCam" parent="." instance=ExtResource("2_8xhfs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30.8386, 0)
+[node name="Target" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 70, 0)
+mesh = SubResource("BoxMesh_8b825")

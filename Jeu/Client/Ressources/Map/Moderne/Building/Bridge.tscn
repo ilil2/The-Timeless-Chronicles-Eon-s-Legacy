@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3on6d5unns0d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh14b"]
+resource_name = "ground"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
+roughness = 0.90198
+normal_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_06b2b"]
+material = SubResource("StandardMaterial3D_vh14b")
+size = Vector3(10, 0.5, 23)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23ua3"]
+resource_name = "ground"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
+roughness = 0.90198
+normal_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_t8j5x"]
+material = SubResource("StandardMaterial3D_23ua3")
+size = Vector3(25, 0.5, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 34.0526, -0.46)
+mesh = SubResource("BoxMesh_06b2b")
+skeleton = NodePath("../Mesh")
+
+[node name="Roof2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 34.0526, -0.46)
+mesh = SubResource("BoxMesh_t8j5x")
+skeleton = NodePath("../Mesh")
