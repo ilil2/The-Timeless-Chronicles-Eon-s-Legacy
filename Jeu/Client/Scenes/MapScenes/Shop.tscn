@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://dc36p4sfw2iub"]
 
-[ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_mwfki"]
-[ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_p3opu"]
-[ext_resource type="Texture2D" uid="uid://d38yhfsw77p2s" path="res://Ressources/Map/Shop/material_emissive.png" id="2_uy5cy"]
-[ext_resource type="Texture2D" uid="uid://c6a34xr6fp1ux" path="res://Ressources/Map/Shop/Emax.png" id="3_15hyj"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_kgg25"]
+[ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
+[ext_resource type="Texture2D" uid="uid://d38yhfsw77p2s" path="res://Ressources/Map/Shop/material_emissive.png" id="2_6j5v3"]
+[ext_resource type="Texture2D" uid="uid://c6a34xr6fp1ux" path="res://Ressources/Map/Shop/Emax.png" id="4_hhdoo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oifs2"]
-shader = ExtResource("1_mwfki")
-shader_parameter/skyTexture = ExtResource("2_uy5cy")
+shader = ExtResource("1_qts26")
+shader_parameter/skyTexture = ExtResource("2_6j5v3")
 
 [sub_resource type="Sky" id="Sky_8db5c"]
 sky_material = SubResource("ShaderMaterial_oifs2")
@@ -24,13 +24,13 @@ size = Vector3(2, 1, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdcvb"]
 transparency = 1
-albedo_texture = ExtResource("3_15hyj")
+albedo_texture = ExtResource("4_hhdoo")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_efih6"]
 material = SubResource("StandardMaterial3D_xdcvb")
 
 [node name="Shop" type="Node3D"]
-script = ExtResource("1_p3opu")
+script = ExtResource("1_kgg25")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_6q7mc")

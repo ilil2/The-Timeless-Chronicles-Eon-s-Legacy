@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Lib;
-
+[Tool]
 public partial class MapLvl3Script : IMap
 {
 	// Called when the node enters the scene tree for the first time.
@@ -120,7 +120,8 @@ public partial class MapLvl3Script : IMap
 				switch (MapGrid[i, j])
 				{
 					case 0:
-						Node3D Bat0 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building10.tscn").Instantiate<Node3D>();
+						int nb = Rand.Next(6,11);
+						Node3D Bat0 = GD.Load<PackedScene>($"res://Ressources/Map/Moderne/Building/Building{nb}.tscn").Instantiate<Node3D>();
 						Bat0.Position = new Vector3((i-LenI)*27,0,(j-LenI)*25);
 						AddChild(Bat0);
 						break;
