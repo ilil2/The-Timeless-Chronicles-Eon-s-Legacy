@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://daoa7lbaedlf2"]
+[gd_scene load_steps=6 format=3 uid="uid://daoa7lbaedlf2"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Building.cs" id="1_5l5x0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fae56"]
 resource_name = "ground"
@@ -9,7 +11,6 @@ normal_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdwsw"]
 resource_name = "hotel_glas"
-transparency = 4
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.82098, 0.82098, 0.82098, 0.3)
 emission_enabled = true
@@ -63,13 +64,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0us0u")
 
-[sub_resource type="BoxMesh" id="BoxMesh_qhvpg"]
-size = Vector3(25, 0.5, 23)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_l4vms"]
-size = Vector3(25, 42, 23)
-
 [node name="Building6" type="Node3D"]
+script = ExtResource("1_5l5x0")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
@@ -83,14 +79,3 @@ skeleton = NodePath("")
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 711.997, 0, 0)
 mesh = SubResource("ArrayMesh_v1c4r")
 skeleton = NodePath("")
-
-[node name="Roof" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 41.2654, -0.46)
-mesh = SubResource("BoxMesh_qhvpg")
-skeleton = NodePath("../Mesh")
-
-[node name="Coll" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Coll"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.072, 20.513, -0.46)
-shape = SubResource("BoxShape3D_l4vms")
