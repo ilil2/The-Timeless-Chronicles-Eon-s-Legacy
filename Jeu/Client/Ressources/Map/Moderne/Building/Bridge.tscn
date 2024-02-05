@@ -1,51 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3on6d5unns0d"]
+[gd_scene load_steps=2 format=3 uid="uid://c3on6d5unns0d"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh14b"]
-resource_name = "ground"
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
-roughness = 0.90198
-normal_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_vkd7h"]
-material = SubResource("StandardMaterial3D_vh14b")
-size = Vector3(10, 0.5, 27)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cum0y"]
-data = PackedVector3Array(-5, 0.25, 13.5, 5, 0.25, 13.5, -5, -0.25, 13.5, 5, 0.25, 13.5, 5, -0.25, 13.5, -5, -0.25, 13.5, 5, 0.25, -13.5, -5, 0.25, -13.5, 5, -0.25, -13.5, -5, 0.25, -13.5, -5, -0.25, -13.5, 5, -0.25, -13.5, 5, 0.25, 13.5, 5, 0.25, -13.5, 5, -0.25, 13.5, 5, 0.25, -13.5, 5, -0.25, -13.5, 5, -0.25, 13.5, -5, 0.25, -13.5, -5, 0.25, 13.5, -5, -0.25, -13.5, -5, 0.25, 13.5, -5, -0.25, 13.5, -5, -0.25, -13.5, 5, 0.25, 13.5, -5, 0.25, 13.5, 5, 0.25, -13.5, -5, 0.25, 13.5, -5, 0.25, -13.5, 5, 0.25, -13.5, -5, -0.25, 13.5, 5, -0.25, 13.5, -5, -0.25, -13.5, 5, -0.25, 13.5, 5, -0.25, -13.5, -5, -0.25, -13.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23ua3"]
-resource_name = "ground"
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
-roughness = 0.90198
-normal_enabled = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_un08n"]
-material = SubResource("StandardMaterial3D_23ua3")
-size = Vector3(29, 0.5, 10)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ane0m"]
-data = PackedVector3Array(-14.5, 0.25, 5, 14.5, 0.25, 5, -14.5, -0.25, 5, 14.5, 0.25, 5, 14.5, -0.25, 5, -14.5, -0.25, 5, 14.5, 0.25, -5, -14.5, 0.25, -5, 14.5, -0.25, -5, -14.5, 0.25, -5, -14.5, -0.25, -5, 14.5, -0.25, -5, 14.5, 0.25, 5, 14.5, 0.25, -5, 14.5, -0.25, 5, 14.5, 0.25, -5, 14.5, -0.25, -5, 14.5, -0.25, 5, -14.5, 0.25, -5, -14.5, 0.25, 5, -14.5, -0.25, -5, -14.5, 0.25, 5, -14.5, -0.25, 5, -14.5, -0.25, -5, 14.5, 0.25, 5, -14.5, 0.25, 5, 14.5, 0.25, -5, -14.5, 0.25, 5, -14.5, 0.25, -5, 14.5, 0.25, -5, -14.5, -0.25, 5, 14.5, -0.25, 5, -14.5, -0.25, -5, 14.5, -0.25, 5, 14.5, -0.25, -5, -14.5, -0.25, -5)
+[ext_resource type="PackedScene" uid="uid://b54eigxv77gm3" path="res://Ressources/Map/Moderne/catwalk.tscn" id="1_cjbt2"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Roof" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 34.0526, -0.46)
-mesh = SubResource("BoxMesh_vkd7h")
-skeleton = NodePath("../Mesh")
+[node name="Roof" parent="." instance=ExtResource("1_cjbt2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 34.2029, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_cum0y")
-
-[node name="Roof2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 34.0526, -0.46)
-mesh = SubResource("BoxMesh_un08n")
-skeleton = NodePath("../Mesh")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Roof2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Roof2/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ane0m")
+[node name="Roof2" parent="." instance=ExtResource("1_cjbt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.2029, 0)

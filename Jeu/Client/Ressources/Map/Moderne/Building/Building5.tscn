@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bodmx1wc3td7s"]
+[gd_scene load_steps=9 format=3 uid="uid://bodmx1wc3td7s"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Object/Building.cs" id="1_ny8lr"]
 
@@ -64,12 +64,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_32v73")
 
-[sub_resource type="BoxMesh" id="BoxMesh_drb37"]
-material = SubResource("StandardMaterial3D_nf445")
-size = Vector3(25, 0.5, 23)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01ul6"]
+resource_name = "ground"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
+roughness = 0.90198
+normal_enabled = true
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_borik"]
-data = PackedVector3Array(-12.5, 0.25, 11.5, 12.5, 0.25, 11.5, -12.5, -0.25, 11.5, 12.5, 0.25, 11.5, 12.5, -0.25, 11.5, -12.5, -0.25, 11.5, 12.5, 0.25, -11.5, -12.5, 0.25, -11.5, 12.5, -0.25, -11.5, -12.5, 0.25, -11.5, -12.5, -0.25, -11.5, 12.5, -0.25, -11.5, 12.5, 0.25, 11.5, 12.5, 0.25, -11.5, 12.5, -0.25, 11.5, 12.5, 0.25, -11.5, 12.5, -0.25, -11.5, 12.5, -0.25, 11.5, -12.5, 0.25, -11.5, -12.5, 0.25, 11.5, -12.5, -0.25, -11.5, -12.5, 0.25, 11.5, -12.5, -0.25, 11.5, -12.5, -0.25, -11.5, 12.5, 0.25, 11.5, -12.5, 0.25, 11.5, 12.5, 0.25, -11.5, -12.5, 0.25, 11.5, -12.5, 0.25, -11.5, 12.5, 0.25, -11.5, -12.5, -0.25, 11.5, 12.5, -0.25, 11.5, -12.5, -0.25, -11.5, 12.5, -0.25, 11.5, 12.5, -0.25, -11.5, -12.5, -0.25, -11.5)
+[sub_resource type="BoxMesh" id="BoxMesh_drb37"]
+material = SubResource("StandardMaterial3D_01ul6")
+size = Vector3(23, 0.5, 23)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_856hn"]
+size = Vector3(23, 0.5, 23)
 
 [node name="Building5" type="Node3D"]
 script = ExtResource("1_ny8lr")
@@ -78,21 +85,21 @@ script = ExtResource("1_ny8lr")
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="Residential Buildings 005" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -549.025, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -449.025, 0, 50)
 mesh = SubResource("ArrayMesh_aetli")
 skeleton = NodePath("")
 
 [node name="Residential Buildings 006" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 710.995, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 610.995, 0, 50)
 mesh = SubResource("ArrayMesh_aetli")
 skeleton = NodePath("")
 
 [node name="Roof" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0718117, 34.0526, -0.46)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.0526, 0)
 mesh = SubResource("BoxMesh_drb37")
 skeleton = NodePath("../Mesh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Roof"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_borik")
+shape = SubResource("BoxShape3D_856hn")

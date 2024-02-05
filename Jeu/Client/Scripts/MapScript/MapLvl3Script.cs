@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using Lib;
-[Tool]
+
 public partial class MapLvl3Script : IMap
 {
 	/*
@@ -14,8 +14,13 @@ public partial class MapLvl3Script : IMap
 	// Called when the node enters the scene tree for the first time.
 	private int MapLenght = 33;//Nombre impaire uniquement
 	private int[,] MapGrid;
+	private (int x,int y) S;
+	private const int Gap = 30;
+	private const int LenI = (32)/2;
 	public override void _Ready()
 	{
+		Rand = new Random();
+		
 		MapGrid = new int[MapLenght,MapLenght];
 		for (int i = 0; i < MapLenght; i++)
 		{
@@ -24,11 +29,11 @@ public partial class MapLvl3Script : IMap
 				MapGrid[i, j] = 0;
 			}
 		}
-		CreateMap(10,16,16);
+		CreateMap(12,16,16);
 		CreateCity();
-		MapGrid[16, 16] = 2;
-		(int x,int y) S = GetSpawnBuilding();
+		S = GetSpawnBuilding();
 		GD.Print($"x: {S.x}, y: {S.y}");
+		MapGrid[16, 16] = 2;
 		MapGrid[S.x, S.y] = 2;
 		PrintMatrix(MapGrid);
 		MapReady = true;
@@ -43,11 +48,10 @@ public partial class MapLvl3Script : IMap
 	{
 		List<(int, int, int)> Res = new List<(int, int, int)>();
 		
-		(int x,int y) S = GetSpawnBuilding();
-		Res.Add(((S.x-16)*27,200,(S.y-16)*25));
-		Res.Add(((S.x-16)*27,200,(S.y-16)*25));
-		Res.Add(((S.x-16)*27,200,(S.y-16)*25));
-		Res.Add(((S.x-16)*27,200,(S.y-16)*25));
+		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
+		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
+		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
+		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
 		
 		
 		return Res;
@@ -125,7 +129,6 @@ public partial class MapLvl3Script : IMap
 	
 	private void CreateCity()
 	{
-		const int LenI = 16;
 		for (int i = 0; i < MapLenght; i++)
 		{
 			for (int j = 0; j < MapLenght; j++)
@@ -133,34 +136,34 @@ public partial class MapLvl3Script : IMap
 				switch (MapGrid[i, j])
 				{
 					case 0:
-						int nb = Rand.Next(6,12);
+						int nb = Rand.Next(6,11);
 						if(nb==11)
 						{
 							nb=3;
 						}
 						int rot = Rand.Next(0,4)*90;
 						Node3D Bat0 = GD.Load<PackedScene>($"res://Ressources/Map/Moderne/Building/Building{nb}.tscn").Instantiate<Node3D>();
-						Bat0.Position = new Vector3((i-LenI)*27,0,(j-LenI)*25);
+						Bat0.Position = new Vector3((i-LenI)*Gap,0,(j-LenI)*Gap);
 						Bat0.Rotation = new Vector3(0,(float)Mathf.DegToRad(rot),0);
 						AddChild(Bat0);
 						break;
 					case 1:
 						Node3D Bat1 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building5.tscn").Instantiate<Node3D>();
-						Bat1.Position = new Vector3((i-LenI)*27,0,(j-LenI)*25);
+						Bat1.Position = new Vector3((i-LenI)*Gap,0,(j-LenI)*Gap);
 						AddChild(Bat1);
 						break;
 					case -1:
 						Node3D Bat2 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
-						MeshInstance3D R1 = Bat2.GetNode<MeshInstance3D>("Roof");
+						Node3D R1 = Bat2.GetNode<Node3D>("Roof");
 						Bat2.RemoveChild(R1);
-						R1.Position = new Vector3((i-LenI)*27,R1.Position.Y,(j-LenI)*25);
+						R1.Position = new Vector3((i-LenI)*Gap,R1.Position.Y,(j-LenI)*Gap);
 						AddChild(R1);
 						break;
 					case -2:
 						Node3D Bat3 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
-						MeshInstance3D R2 = Bat3.GetNode<MeshInstance3D>("Roof2");
+						Node3D R2 = Bat3.GetNode<Node3D>("Roof2");
 						Bat3.RemoveChild(R2);
-						R2.Position = new Vector3((i-LenI)*27,R2.Position.Y,(j-LenI)*25);
+						R2.Position = new Vector3((i-LenI)*Gap,R2.Position.Y,(j-LenI)*Gap);
 						AddChild(R2);
 						break;
 				}
@@ -178,7 +181,7 @@ public partial class MapLvl3Script : IMap
 			{
 				if(MapGrid[i,j]==1)
 				{
-					double dist = MapTool.Distance(new Vector3(i,0,j),new Vector3(0,0,0));
+					double dist = MapTool.Distance(new Vector3(i,0,j),new Vector3(16,0,16));
 					if (dist>Max)
 					{
 						Max = dist;

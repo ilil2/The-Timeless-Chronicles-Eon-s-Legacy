@@ -71,11 +71,11 @@ script = ExtResource("1_5l5x0")
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
 
 [node name="Residential Buildings 006" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -547.492, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 610, 0, 40)
 mesh = SubResource("ArrayMesh_v1c4r")
 skeleton = NodePath("")
 
 [node name="Residential Buildings 007" type="MeshInstance3D" parent="Mesh"]
-transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 711.997, 0, 0)
+transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -448.276, 0, 40)
 mesh = SubResource("ArrayMesh_v1c4r")
 skeleton = NodePath("")
