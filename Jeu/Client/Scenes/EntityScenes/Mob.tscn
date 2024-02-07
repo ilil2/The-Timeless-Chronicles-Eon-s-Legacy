@@ -1,31 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://c60qrur4avmdk"]
+[gd_scene load_steps=9 format=3 uid="uid://c60qrur4avmdk"]
 
-[ext_resource type="Script" path="res://Scripts/EntityScripts/MobScript.cs" id="1_d2kga"]
-[ext_resource type="Shader" uid="uid://nwylxkfab5m4" path="res://Ressources/Map/death.tres" id="2_7i66y"]
+[ext_resource type="Script" path="res://Scripts/EntityScripts/MobScript.cs" id="1_q1moj"]
+[ext_resource type="Texture2D" uid="uid://2upn1vs5xr5t" path="res://Ressources/Graphismes/Mob/red.png" id="2_a0n8w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjtd2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u7e1"]
-render_priority = 0
-shader = ExtResource("2_7i66y")
-shader_parameter/ColorParameter = Color(1, 1, 1, 1)
-shader_parameter/Timer = -0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ytnr"]
+albedo_texture = ExtResource("2_a0n8w")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rliy6"]
-material = SubResource("ShaderMaterial_2u7e1")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfl58"]
-render_priority = 0
-shader = ExtResource("2_7i66y")
-shader_parameter/ColorParameter = Color(1, 1, 1, 1)
-shader_parameter/Timer = null
 
 [sub_resource type="BoxMesh" id="BoxMesh_4arfr"]
-material = SubResource("ShaderMaterial_wfl58")
 size = Vector3(0.5, 0.5, 0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wodr"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yyn8f"]
+material = SubResource("StandardMaterial3D_6wodr")
+size = Vector3(0.5, 0.75, 0.35)
+
 [node name="Mob" type="CharacterBody3D"]
-script = ExtResource("1_d2kga")
+script = ExtResource("1_q1moj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -34,17 +30,29 @@ shape = SubResource("CapsuleShape3D_tjtd2")
 [node name="Body" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+[node name="Body" type="MeshInstance3D" parent="Body"]
+material_override = SubResource("StandardMaterial3D_7ytnr")
 mesh = SubResource("CapsuleMesh_rliy6")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Body"]
+[node name="Lens" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)
-visible = false
 mesh = SubResource("BoxMesh_4arfr")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
+[node name="Backpack" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175966, -0.471405)
+mesh = SubResource("BoxMesh_yyn8f")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
-text = "Sleep:"
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_use_custom = true
+debug_path_custom_color = Color(0, 1, 1, 1)
+
+[node name="Ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, 0)
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0, 1, 1)
+debug_shape_thickness = 5
+
+[node name="State" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22216, 0)
+text = "Test"
