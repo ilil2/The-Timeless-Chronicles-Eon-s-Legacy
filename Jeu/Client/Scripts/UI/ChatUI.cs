@@ -14,6 +14,8 @@ public partial class ChatUI : Control
 
 	private bool _onchat;
 	
+	private int _chatEnableCooldown;
+	
 	private float _screenDefalutWidth = 1152;
 	private float _chatDefaultSize = 12;
 	private float _chatInputDefaultSize = 15;
@@ -36,6 +38,8 @@ public partial class ChatUI : Control
 		_input.AddThemeFontSizeOverride("font_size", (int)(_chatInputDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
 		_output.LabelSettings.FontSize = (int)(_chatDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
+	
+	
 
 	public override void _Process(double delta)
 	{
@@ -82,7 +86,26 @@ public partial class ChatUI : Control
 			}
 		}
 	}
-	
+
+	public override void _PhysicsProcess(double delta)
+	{
+		_chatEnableCooldown += 1;
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && _chatEnableCooldown > 20)
+		{
+			if (Visible)
+			{
+				_chatEnableCooldown = 0;
+				GameManager.SettingsManager.SetSetting("enableChat", 0);
+				_input.ReleaseFocus();
+			}
+			else
+			{
+				_chatEnableCooldown = 0;
+				GameManager.SettingsManager.SetSetting("enableChat", 1);
+			}
+		}
+	}
+
 	public bool IsOnChat()
 	{
 		return _onchat;

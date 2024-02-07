@@ -102,7 +102,7 @@ public abstract partial class ClassScript : CharacterBody3D
 
     protected void Pause()
     {
-	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && !GameManager._pausemode && _pauseTimer > 20)
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _pauseTimer > 20)
 	    {
 		    AnimationPlayer.Stop();
 		    GameManager.InfoJoueur["attack"] = "init";
@@ -113,7 +113,7 @@ public abstract partial class ClassScript : CharacterBody3D
 		    Control pauseMenu = pauseUI.Instantiate<Control>();
 		    AddChild(pauseMenu);
 	    }
-	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[15].Item2) && GameManager._pausemode && _pauseTimer > 20)
+	    else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _pauseTimer > 20)
 	    {
 		    _pauseTimer = 0;
 		    GameManager._pausemode = false;

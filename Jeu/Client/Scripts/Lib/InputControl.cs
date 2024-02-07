@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Godot;
@@ -76,10 +75,11 @@ public class InputControl
             (languageDict["settingsMenuControlsItem1"], Key.Key1),            // 9
             (languageDict["settingsMenuControlsItem2"], Key.Key2),            // 10
             (languageDict["settingsMenuControlsItem3"], Key.Key3),            // 11
-            (languageDict["settingsMenuControlsInventory"], Key.Tab),         // 12
+            (languageDict["settingsMenuControlsInventory"], Key.I),           // 12
             (languageDict["settingsMenuControlsReload"], Key.R),              // 13
             (languageDict["settingsMenuControlsChat"], Key.T),                // 14
-            (languageDict["settingsMenuControlsPause"], Key.Escape)           // 15
+            (languageDict["settingsMenuControlsEnableChat"], Key.Tab),        // 15
+            (languageDict["settingsMenuControlsPause"], Key.Escape)           // 16
         };
     }
     
