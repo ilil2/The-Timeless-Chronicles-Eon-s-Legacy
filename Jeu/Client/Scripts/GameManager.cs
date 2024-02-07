@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 using System.Threading;
@@ -8,7 +10,6 @@ using Lib;
 
 using System.Net;
 using System.Net.Sockets;
-using Godot.Collections;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class GameManager : Node3D
@@ -56,8 +57,8 @@ public partial class GameManager : Node3D
 	
 	protected static Thread th2;
 	
-	public static Dictionary<string, string> InfoJoueur = new Dictionary<string, string>();
-	public static Dictionary<string, string> InfoAutreJoueur = new Dictionary<string, string>();
+	public static Godot.Collections.Dictionary<string, string> InfoJoueur = new Godot.Collections.Dictionary<string, string>();
+	public static Godot.Collections.Dictionary<string, string> InfoAutreJoueur = new Godot.Collections.Dictionary<string, string>();
 
 	protected static bool _loadMap = false;
 
@@ -83,6 +84,8 @@ public partial class GameManager : Node3D
 	protected static bool Quit = false; 
 	protected static int Seed = 42;
 	protected static int AleateSeed = 42;
+	
+	protected static Queue<IMap> Lvls = new Queue<IMap>();
 	
 	private static string GetIp()
 	{
@@ -116,6 +119,13 @@ public partial class GameManager : Node3D
 		Console.WriteLine("quit");
 	}
 	
+	private void EnqueueMap(string path)
+	{
+		PackedScene MapScene = GD.Load<PackedScene>(path);
+		Map = MapScene.Instantiate<IMap>();
+		Lvls.Enqueue(Map);
+	}
+	
 	public override void _Ready()
 	{
 		//GetTree().Connect("window_close_request", new Callable(this, nameof(OnQuit)));
@@ -138,9 +148,15 @@ public partial class GameManager : Node3D
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/UI/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
-		const int lvl = 3;
-		PackedScene MapScene = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl{lvl}/MapLvl{lvl}.tscn");
-		Map = MapScene.Instantiate<IMap>();
+
+		for (int i = 1; i <= 3; i++)
+		{
+			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/MapLvl{i}.tscn");
+			//EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/BossScenes/Boss{i}Map.tscn");
+			EnqueueMap($"res://Scenes/MapScenes/Shop.tscn");
+		}
+
+		Map = Lvls.Dequeue();
 		
 		PackedScene ChatSceneUI = GD.Load<PackedScene>("res://Scenes/UI/ChatUI.tscn");
 		_chat = ChatSceneUI.Instantiate<Control>();
@@ -188,6 +204,8 @@ public partial class GameManager : Node3D
 				{
 					AddChild(ProgressBar);
 					AddChild(Map);
+					AddChild(_chat);
+					_chat.Visible = false;
 					
 					MapOnLoad = true;
 					_loadMap = false;
@@ -213,7 +231,7 @@ public partial class GameManager : Node3D
 						AddChild(Joueur4);
 						break;
 				}
-				AddChild(_chat);
+				_chat.Visible = true;
 			}
 			
 			else if (state == 6)
@@ -221,6 +239,41 @@ public partial class GameManager : Node3D
 				State6.State(delta);
 			}
 			
+			else if (state == 7)
+			{
+				if (_loadMap)
+				{
+					Map.QueueFree();
+					RemoveChild(Joueur1);
+					switch (_nbJoueur)
+					{
+						case 2:
+							RemoveChild(Joueur2);
+							break;
+						case 3:
+							RemoveChild(Joueur2);
+							RemoveChild(Joueur3);
+							break;
+						case 4:
+							RemoveChild(Joueur2);
+							RemoveChild(Joueur3);
+							RemoveChild(Joueur4);
+							break;
+					}
+					_chat.Visible = false;
+					
+					PackedScene ProgressBarMap = GD.Load<PackedScene>("res://Scenes/UI/ProgressBarMapLvl1.tscn");
+					ProgressBar = ProgressBarMap.Instantiate<Control>();
+					AddChild(ProgressBar);
+					Map = Lvls.Dequeue();
+					AddChild(Map);
+					
+					MapOnLoad = true;
+					_loadMap = false;
+					
+				}
+				State4.State();
+			}
 		}
 		catch (Exception e)
 		{

@@ -7,7 +7,7 @@ public partial class State5 : GameManager
 {
 	public static void State()
 	{
-		List<(int, int, int)> SpawnLocation = ((IMap)Map).GetSpawnLocation();
+		List<(int, int, int)> SpawnLocation = Map.GetSpawnLocation();
 		
 		PackedScene SceneJoueur1 = GD.Load<PackedScene>($"res://Scenes/PlayerScenes/{InfoJoueur["class"]}.tscn");
 		Joueur1 = SceneJoueur1.Instantiate<CharacterBody3D>(); 

@@ -7,7 +7,7 @@ public partial class State4 : GameManager
     {
         if (MapOnLoad)
         {
-            ((ProgressBarMapLvl1)ProgressBar).Load = ((IMap)Map).Step();
+            ((ProgressBarMapLvl1)ProgressBar).Load = Map.Step();
         }
         if (ClassSelectUI.ClassChose != "")
         {
@@ -15,7 +15,7 @@ public partial class State4 : GameManager
             ClassSelectUI.ClassChose = "";
             UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["class"]}",iep2);
         }
-        else if (((IMap)Map).MapIsReady() && !StartMap)
+        else if (Map.MapIsReady() && !StartMap)
         {
             Map.Visible = false;
             UDP.Send(soc2,"load",iep2);
