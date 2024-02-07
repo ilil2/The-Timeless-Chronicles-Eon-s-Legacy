@@ -2,11 +2,18 @@
   "Meta Data": {
     "1. Information": "Daily Prices (open, high, low, close) and Volumes",
     "2. Symbol": "UBI.PA",
-    "3. Last Refreshed": "2024-01-31",
+    "3. Last Refreshed": "2024-02-01",
     "4. Output Size": "Compact",
     "5. Time Zone": "US/Eastern"
   },
   "Time Series (Daily)": {
+    "2024-02-01": {
+      "1. open": "20.3700",
+      "2. high": "20.4500",
+      "3. low": "19.9900",
+      "4. close": "20.2100",
+      "5. volume": "349098"
+    },
     "2024-01-31": {
       "1. open": "20.2900",
       "2. high": "20.7400",
@@ -699,13 +706,6 @@
       "3. low": "27.0700",
       "4. close": "27.4100",
       "5. volume": "283113"
-    },
-    "2023-09-11": {
-      "1. open": "27.9000",
-      "2. high": "28.0300",
-      "3. low": "27.4000",
-      "4. close": "27.8200",
-      "5. volume": "146558"
     }
   }
 }
