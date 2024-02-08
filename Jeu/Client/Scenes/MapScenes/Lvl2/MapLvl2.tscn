@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://l13lfrsuqtlm"]
+[gd_scene load_steps=16 format=3 uid="uid://l13lfrsuqtlm"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl2Script.cs" id="1_iykwk"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_t0ei3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://imjob5grvv77" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-ao.png" id="4_ioaq2"]
 [ext_resource type="Texture2D" uid="uid://dl8eaglt7hq2e" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-height.png" id="5_1syy5"]
 [ext_resource type="Texture2D" uid="uid://cgpmgn6e7wdeq" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-normal.png" id="6_ybwmf"]
+[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_mb11d"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
 [sub_resource type="Environment" id="Environment_pdaq0"]
@@ -47,6 +48,10 @@ top_radius = 300.0
 bottom_radius = 300.0
 height = 0.5
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5dgw"]
+height = 4.0
+radius = 4.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_2aotq"]
 radius = 4.0
 
@@ -77,6 +82,13 @@ mesh = SubResource("CylinderMesh_7pr53")
 
 [node name="DwarfGate" parent="RotationGate" instance=ExtResource("9_la0ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
+
+[node name="Exit" parent="RotationGate/DwarfGate" instance=ExtResource("8_mb11d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0493798)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationGate/DwarfGate/Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_i5dgw")
 
 [node name="Spawn" type="Node3D" parent="."]
 

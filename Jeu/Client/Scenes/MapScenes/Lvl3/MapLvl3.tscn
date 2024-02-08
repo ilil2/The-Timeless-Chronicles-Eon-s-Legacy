@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn7cup06ni2nw"]
+[gd_scene load_steps=14 format=3 uid="uid://bn7cup06ni2nw"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl3Script.cs" id="1_7lg3q"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_42jj3"]
+[ext_resource type="PackedScene" uid="uid://bodmx1wc3td7s" path="res://Ressources/Map/Moderne/Building/Building5.tscn" id="3_850ff"]
+[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="4_hpnhy"]
 
 [sub_resource type="Environment" id="Environment_2u4l1"]
 background_mode = 2
@@ -44,6 +46,10 @@ emission = Color(0.580392, 0.580392, 0.580392, 1)
 edge_fade = 0.2
 density_texture = SubResource("NoiseTexture3D_fuqtr")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_63xl1"]
+height = 4.0
+radius = 4.0
+
 [node name="MapLvl3" type="Node3D"]
 script = ExtResource("1_7lg3q")
 
@@ -70,3 +76,12 @@ mesh = SubResource("BoxMesh_8b825")
 [node name="FogVolume" type="FogVolume" parent="."]
 size = Vector3(1000, 50, 1000)
 material = SubResource("FogMaterial_rgl2n")
+
+[node name="Building5" parent="." instance=ExtResource("3_850ff")]
+
+[node name="Exit" parent="." instance=ExtResource("4_hpnhy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7, 0)
+shape = SubResource("CylinderShape3D_63xl1")
