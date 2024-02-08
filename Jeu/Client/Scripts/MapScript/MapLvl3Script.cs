@@ -19,7 +19,6 @@ public partial class MapLvl3Script : IMap
 	private const int LenI = (32)/2;
 	public override void _Ready()
 	{
-		Rand = new Random();
 		
 		MapGrid = new int[MapLenght,MapLenght];
 		for (int i = 0; i < MapLenght; i++)
