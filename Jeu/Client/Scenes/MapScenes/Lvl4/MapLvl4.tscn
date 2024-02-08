@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwy6rgkofs20l"]
+
+[ext_resource type="PackedScene" uid="uid://dx14g0334u1ha" path="res://Scenes/Debug/WIP.tscn" id="1_bt8ak"]
+[ext_resource type="Script" path="res://Scenes/Debug/WIP.cs" id="1_mexvr"]
+
+[node name="MapLvl4" type="Node3D"]
+script = ExtResource("1_mexvr")
+
+[node name="WIP" parent="." instance=ExtResource("1_bt8ak")]
