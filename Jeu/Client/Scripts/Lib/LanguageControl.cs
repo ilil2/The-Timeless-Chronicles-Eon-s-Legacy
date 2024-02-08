@@ -114,6 +114,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventory"},
             {"settingsMenuControlsReload", "Reload"},
             {"settingsMenuControlsChat", "Chat"},
+            {"settingsMenuControlsEnableChat", "Enable Chat"},
             {"settingsMenuControlsPause", "Pause"},
         },
         
@@ -225,7 +226,9 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventaire"},
             {"settingsMenuControlsReload", "Recharger"},
             {"settingsMenuControlsChat", "Tchat"},
+            {"settingsMenuControlsEnableChat", "Activer le tchat"},
             {"settingsMenuControlsPause", "Pause"},
+            
         },
         
         new Dictionary<string, string>
@@ -336,6 +339,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventori"},
             {"settingsMenuControlsReload", "Adsevel"},
             {"settingsMenuControlsChat", "C'hat"},
+            {"settingsMenuControlsEnableChat", "Gweredekaat ar c'hat"},
             {"settingsMenuControlsPause", "Meneger"},
         },
         
@@ -447,6 +451,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventar"},
             {"settingsMenuControlsReload", "Nachladen"},
             {"settingsMenuControlsChat", "Chat"},
+            {"settingsMenuControlsEnableChat", "Chat aktivieren"},
             {"settingsMenuControlsPause", "Pause"},
         },
         
@@ -558,6 +563,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventario"},
             {"settingsMenuControlsReload", "Recargar"},
             {"settingsMenuControlsChat", "Chat"},
+            {"settingsMenuControlsEnableChat", "Activar el chat"},
             {"settingsMenuControlsPause", "Pausa"},
         },
         
@@ -669,6 +675,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Enportaĵo"},
             {"settingsMenuControlsReload", "Reŝarĝi"},
             {"settingsMenuControlsChat", "Babilejo"},
+            {"settingsMenuControlsEnableChat", "Aktivigi babilejon"},
             {"settingsMenuControlsPause", "Paŭzo"},
         },
         
@@ -780,6 +787,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Inventarium"},
             {"settingsMenuControlsReload", "Reload"},
             {"settingsMenuControlsChat", "Chat"},
+            {"settingsMenuControlsEnableChat", "Chat activare"},
             {"settingsMenuControlsPause", "Pause"},
         },
         
@@ -891,7 +899,8 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "I-inventory"},
             {"settingsMenuControlsReload", "Qalisa"},
             {"settingsMenuControlsChat", "I-chat"},
-            {"settingsMenuControlsPause", "I-Pause"},
+            {"settingsMenuControlsEnableChat", "Vumela i-chat"},
+            {"settingsMenuControlsPause", "I-Menyu yokuqeda"},
         },
         
         new Dictionary<string, string>
@@ -1002,6 +1011,7 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "库存"},
             {"settingsMenuControlsReload", "重新加载"},
             {"settingsMenuControlsChat", "聊天"},
+            {"settingsMenuControlsEnableChat", "启用聊天"},
             {"settingsMenuControlsPause", "暂停"},
         },
         
@@ -1113,7 +1123,8 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Αποθήκη"},
             {"settingsMenuControlsReload", "Επαναφόρτωση"},
             {"settingsMenuControlsChat", "Συνομιλία"},
-            {"settingsMenuControlsPause", "Παύση"},
+            {"settingsMenuControlsEnableChat", "Ενεργοποίηση συνομιλίας"},
+            {"settingsMenuControlsPause", "Μενού παύσης"},
             
         },
         
@@ -1225,7 +1236,8 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "Инвентарь"},
             {"settingsMenuControlsReload", "Перезагрузить"},
             {"settingsMenuControlsChat", "Чат"},
-            {"settingsMenuControlsPause", "Пауза"},
+            {"settingsMenuControlsEnableChat", "Включить чат"},
+            {"settingsMenuControlsPause", "Меню паузы"},
         },
         
         new Dictionary<string, string>
@@ -1336,7 +1348,8 @@ public class LanguageControl
             {"settingsMenuControlsInventory", "496e76656e746f7279"},
             {"settingsMenuControlsReload", "52656c6f6164"},
             {"settingsMenuControlsChat", "43686174"},
-            {"settingsMenuControlsPause", "5061757365"},
+            {"settingsMenuControlsEnableChat", "456e61626c652043686174"},
+            {"settingsMenuControlsPause", "4d656e75207061757365"},
         }
     };
     

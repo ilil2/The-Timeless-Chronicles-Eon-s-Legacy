@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg3y20bi1p3mh"]
+[gd_scene load_steps=11 format=3 uid="uid://bg3y20bi1p3mh"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SettingsMenuUI.cs" id="1_pcuhq"]
 
@@ -6,12 +6,6 @@
 font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_gkl8n"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_un81t"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_sqgv6"]
 font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_53v7n"]
@@ -118,72 +112,17 @@ max_value = 31.0
 step = 1.0
 value = 1.0
 
-[node name="FullScreenText" type="Label" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.09
-anchor_top = 0.63
-anchor_right = 0.215
-anchor_bottom = 0.688
-offset_left = 0.319992
-offset_top = -0.240021
-offset_right = 1.31999
-offset_bottom = 0.175995
-text = "Full Screen :"
-label_settings = SubResource("LabelSettings_un81t")
-
-[node name="FullScreenButton" type="CheckButton" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.382
-anchor_top = 0.617
-anchor_right = 0.479
-anchor_bottom = 0.71
-offset_left = -0.0639648
-offset_top = 0.184021
-offset_right = -67.808
-offset_bottom = -36.08
-scale = Vector2(2.5, 2.5)
-
-[node name="EnableChatText" type="Label" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.556
-anchor_top = 0.358
-anchor_right = 0.694
-anchor_bottom = 0.417
-offset_left = -0.512085
-offset_top = 0.0159912
-offset_right = 0.511963
-offset_bottom = -0.216003
-text = "Enable Chat :"
-label_settings = SubResource("LabelSettings_sqgv6")
-
-[node name="EnableChatButton" type="CheckButton" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.799
-anchor_top = 0.346
-anchor_right = 0.894
-anchor_bottom = 0.438
-offset_left = -0.447937
-offset_top = -0.207993
-offset_right = -65.888
-offset_bottom = -35.824
-scale = Vector2(2.5, 2.5)
-button_pressed = true
-
 [node name="ChatSizeText" type="Label" parent="GameSettings"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.556
-anchor_top = 0.494
+anchor_top = 0.37
 anchor_right = 0.664
-anchor_bottom = 0.552
-offset_left = -0.512085
-offset_top = -0.112
-offset_right = 0.0718994
-offset_bottom = 0.303955
+anchor_bottom = 0.429
+offset_left = -0.512062
+offset_top = 0.239997
+offset_right = 0.0719604
+offset_bottom = 0.00798702
 text = "Chat Size :"
 label_settings = SubResource("LabelSettings_53v7n")
 
@@ -191,13 +130,13 @@ label_settings = SubResource("LabelSettings_53v7n")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.778
-anchor_top = 0.494
+anchor_top = 0.37
 anchor_right = 0.917
-anchor_bottom = 0.543
-offset_left = -0.255981
-offset_top = -0.112
-offset_right = -0.383911
-offset_bottom = -0.864014
+anchor_bottom = 0.417
+offset_left = -0.255943
+offset_top = 0.239997
+offset_right = -0.38382
+offset_bottom = 0.783983
 item_count = 3
 selected = 1
 popup/item_0/text = "Small"

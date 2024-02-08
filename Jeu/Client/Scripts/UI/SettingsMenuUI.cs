@@ -16,10 +16,6 @@ public partial class SettingsMenuUI : Control
     private float _titleDefaultSize = 40;
     private float _buttonDefaultSize = 25;
     private float _textDefaultSize = 20;
-    private float _checkButtonDefaultSize = 2.5f;
-    
-    private float _checkButtonSizeX = 44;
-    private float _checkButtonSizeY = 24;
     
     private bool _isChangingInput;
     
@@ -28,8 +24,6 @@ public partial class SettingsMenuUI : Control
     private Button _gameSettingsButton;
     private OptionButton _languageChooseButton;
     private ScrollBar _mouseSensibilityBar;
-    private CheckButton _fullScreenButton;
-    private CheckButton _enableChatButton;
     private OptionButton _chatSizeButton;
     private Button _resetGameSettingsButton;
     private Button _saveGameSettingsButton;
@@ -37,19 +31,9 @@ public partial class SettingsMenuUI : Control
     private Label _gameSettingsText;
     private Label _languageChooseText;
     private Label _mouseSensibilityText;
-    private Label _fullScreenText;
-    private Label _enableChatText;
     private Label _chatSizeText;
     private Label _resetGameSettingsText;
     private Label _saveGameSettingsText;
-    
-    private bool _isFullScreen = false;
-    private bool _isChatEnable = true;
-    
-    private float _checkButtonEnableChatXPosition = 920;
-    private float _checkButtonEnableChatYPosition = 224;
-    private float _checkButtonFullScreenXPosition = 440;
-    private float _checkButtonFullScreenYPosition = 400;
     
     //Audio
     private Control _audioSettings;
@@ -112,22 +96,6 @@ public partial class SettingsMenuUI : Control
         _languageChooseButton.Selected = _language;
         
         _mouseSensibilityBar.Value = Settings["mouseSensibility"];
-
-        if (Settings["enableChat"] == 1)
-        {
-            _enableChatButton.ButtonPressed = true;
-        }
-        else
-        {
-            _enableChatButton.ButtonPressed = false;
-        }
-        
-        
-        _fullScreenButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
-        _fullScreenButton.Position = new Vector2(_checkButtonFullScreenXPosition, _checkButtonFullScreenYPosition);
-        
-        _enableChatButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
-        _enableChatButton.Position = new Vector2(_checkButtonEnableChatXPosition, _checkButtonEnableChatYPosition);
         
         //Audio
         _audioSettings = GetNode<Control>("AudioSettings");
@@ -174,8 +142,6 @@ public partial class SettingsMenuUI : Control
         
         _languageChooseText.Text = _languageDict["settingsMenuGameLanguage"];
         _mouseSensibilityText.Text = _languageDict["settingsMenuGameMouseSensibility"];
-        _fullScreenText.Text = _languageDict["settingsMenuGameFullScreen"];
-        _enableChatText.Text = _languageDict["settingsMenuGameEnableChat"];
         _chatSizeText.Text = _languageDict["settingsMenuGameChatSize"];
         //_chatSizeButton.SetItemText(0, _languageDict["settingsMenuGameChatSizeSmall"]);
         //_chatSizeButton.SetItemText(1, _languageDict["settingsMenuGameChatSizeMedium"]);
@@ -230,15 +196,11 @@ public partial class SettingsMenuUI : Control
         //Button
         _languageChooseButton = GetNode<OptionButton>("GameSettings/LanguageChooseButton");
         _chatSizeButton = GetNode<OptionButton>("GameSettings/ChatSizeButton");
-        _fullScreenButton = GetNode<CheckButton>("GameSettings/FullScreenButton");
-        _enableChatButton = GetNode<CheckButton>("GameSettings/EnableChatButton");
         
         //Label
         _gameSettingsText = GetNode<Label>("GameSettingsButton/GameSettingsText");
         _languageChooseText = GetNode<Label>("GameSettings/LanguageChooseText");
         _mouseSensibilityText = GetNode<Label>("GameSettings/MouseSensibilityText");
-        _fullScreenText = GetNode<Label>("GameSettings/FullScreenText");
-        _enableChatText = GetNode<Label>("GameSettings/EnableChatText");
         _chatSizeText = GetNode<Label>("GameSettings/ChatSizeText");
         _resetGameSettingsText = GetNode<Label>("GameSettings/ResetGameSettingsButton/ResetGameSettingsText");
         _saveGameSettingsText = GetNode<Label>("GameSettings/SaveGameSettingsButton/SaveGameSettingsText");
@@ -247,20 +209,10 @@ public partial class SettingsMenuUI : Control
         _languageChooseButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         _chatSizeButton.AddThemeFontSizeOverride("font_size", (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
         
-        _fullScreenButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _fullScreenButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
-        _fullScreenButton.Position = new Vector2(_checkButtonFullScreenXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonFullScreenYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
-        
-        _enableChatButton.Scale = new Vector2(_checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _enableChatButton.Size = new Vector2(_checkButtonSizeX, _checkButtonSizeY);
-        _enableChatButton.Position = new Vector2(_checkButtonEnableChatXPosition * (GetViewportRect().Size.X / _screenDefalutWidth), _checkButtonEnableChatYPosition * (GetViewportRect().Size.Y / _screenDefalutHight));
-        
         //Label Size
         _gameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _languageChooseText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _mouseSensibilityText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _fullScreenText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-        _enableChatText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _chatSizeText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _resetGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
         _saveGameSettingsText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
@@ -399,30 +351,6 @@ public partial class SettingsMenuUI : Control
                 
             //Save
             GameManager.SettingsManager.SaveSettings();
-        }
-        else if (!_enableChatButton.ButtonPressed && _isChatEnable)
-        {
-            _isChatEnable = false;
-            
-            GameManager.SettingsManager.SetSetting("enableChat", 0);
-        }
-        else if (_enableChatButton.ButtonPressed && !_isChatEnable)
-        {
-            _isChatEnable = true;
-            
-            GameManager.SettingsManager.SetSetting("enableChat", 1);
-        }
-        else if (!_fullScreenButton.ButtonPressed && _isFullScreen)
-        {
-            _isFullScreen = false;
-            
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
-        }
-        else if (_fullScreenButton.ButtonPressed && !_isFullScreen)
-        {
-            _isFullScreen = true;
-            
-            DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
         }
         
         //Audio

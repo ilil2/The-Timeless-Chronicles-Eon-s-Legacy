@@ -1,16 +1,17 @@
-Avancer;90
-Reculer;83
-Gauche;81
-Droite;68
+Forward;90
+Backward;83
+Left;81
+Right;68
 Sprint;4194325
 Dash;32
-Capacité 1;65
-Capacité 2;69
-Capacité 3;70
-Objet 1;49
-Objet 2;50
-Objet 3;51
-Inventaire;4194306
-Recharger;82
-Tchat;84
+Capacity 1;65
+Capacity 2;69
+Capacity 3;70
+Item 1;49
+Item 2;50
+Item 3;51
+Inventory;73
+Reload;82
+Chat;84
+Enable Chat;4194306
 Pause;4194305
