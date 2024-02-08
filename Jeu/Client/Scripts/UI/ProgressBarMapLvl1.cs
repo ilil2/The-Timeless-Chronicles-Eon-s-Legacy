@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public partial class ProgressBarMapLvl1 : Control
 {
-	public int Load = 0;
-	private ProgressBar _progressBar;
+	private Sprite2D _progressBar;
 	private Label _label;
 	
 	private float _screenDefalutWidth = 1152;
@@ -17,8 +16,6 @@ public partial class ProgressBarMapLvl1 : Control
 	
 	public override void _Ready()
 	{
-		_progressBar = GetNode<ProgressBar>("ProgressBar");
-		
 		_language = GameManager.SettingsManager.GetAllSettings()["language"];
 		_languageDict = GameManager.LanguageManager.GetLanguage(_language);
 	}
@@ -26,24 +23,17 @@ public partial class ProgressBarMapLvl1 : Control
 	public void OnResize()
 	{
 		_label = GetNode<Label>("wait");
+		_progressBar = GetNode<Sprite2D>("Sprite2D");
         
 		_label.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_progressBar.Scale = new Vector2(GetViewportRect().Size.X / _screenDefalutWidth * 0.2f, GetViewportRect().Size.X / _screenDefalutWidth * 0.2f);
+		_progressBar.Position = new Vector2(128 * (GetViewportRect().Size.X / _screenDefalutWidth), 504 * (GetViewportRect().Size.Y / 648));
+
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		_progressBar.Value = Load/1.5f;
-		if (Load == 2500)
-		{
-			_label.Text = _languageDict["gameLoadingMapWaitingText"];
-		}
-		else if (Load >= 150)
-		{
-			_label.Text = _languageDict["gameLoadingMapText"] + "100%";
-		}
-		else
-		{
-			_label.Text = _languageDict["gameLoadingMapText"] + (int)_progressBar.Value + "%";
-		}
+		_progressBar.RotationDegrees += 1;
+		_label.Text = _languageDict["gameLoadingMapWaitingText"];
 	}
 }
