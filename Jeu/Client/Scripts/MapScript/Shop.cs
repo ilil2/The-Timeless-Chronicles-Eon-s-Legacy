@@ -22,10 +22,10 @@ public partial class Shop : IMap
 	public override List<(int, int, int)> GetSpawnLocation()
 	{
 		List<(int,int,int)> res = new List<(int,int,int)>();
-		res.Add((0,0,0));
-		res.Add((0,0,0));
-		res.Add((0,0,0));
-		res.Add((0,0,0));
+		res.Add((1,10,0));
+		res.Add((0,5,1));
+		res.Add((-1,3,0));
+		res.Add((0,0,-1));
 		
 		return res;
 	}

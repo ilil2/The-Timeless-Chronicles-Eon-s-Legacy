@@ -97,6 +97,7 @@ public partial class ChatUI : Control
 				_chatEnableCooldown = 0;
 				GameManager.SettingsManager.SetSetting("enableChat", 0);
 				_input.ReleaseFocus();
+				_onchat = false;
 			}
 			else
 			{
