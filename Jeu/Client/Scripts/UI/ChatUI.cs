@@ -61,7 +61,7 @@ public partial class ChatUI : Control
 		if (_onchat)
 		{
 			_colorRect.Color = new Color(0,0,0,0.75f);
-			if (Input.IsKeyPressed(Key.Enter))
+			if (Input.IsKeyPressed(Key.Enter) && Visible)
 			{
 				Inputtext = _input.Text;
 				_input.Text = ""; 
@@ -69,7 +69,7 @@ public partial class ChatUI : Control
 				_input.ReleaseFocus();
 			}
 
-			if (Input.IsKeyPressed(Key.Escape))
+			if (Input.IsKeyPressed(Key.Escape) && Visible)
 			{
 				_onchat = false;
 				_input.Text = "";
@@ -79,7 +79,7 @@ public partial class ChatUI : Control
 		else
 		{
 			_colorRect.Color = new Color(0,0,0,0.6f);
-			if (Input.IsKeyPressed(Key.T))
+			if (Input.IsKeyPressed(Key.T) && Visible)
 			{
 				_onchat = true;
 				_input.GrabFocus();
