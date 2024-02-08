@@ -25,7 +25,7 @@ public partial class State3 : GameManager
         InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
         Seed = Conversions.AtoI(InfoJoueur["id"].Split('*')[0].Substring(1));
         AleateSeed = Conversions.AtoI(InfoJoueur["id"].Split('*')[1]);
-        ((IMap)Map).SetSeed(Seed,AleateSeed);
+        Map.SetSeed(Seed,AleateSeed);
         InfoJoueur["id"] = InfoJoueur["id"].Substring(0,1);
         UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["pseudo"]}",iep2);    //envoie du pseudo au serveur secondaire
         

@@ -22,10 +22,17 @@ public partial class Listen2 : GameManager
         {
 	        rep = rep.Substring(3);
 	        string id = rep.Split('|')[0];
+	        rep = rep.Split('|')[1];
 
-	        if (InfoJoueur["id"] != id)
+	        if (rep == "next")
 	        {
-		        InfoAutreJoueur[$"attack{id}"] = rep.Split('|')[1];
+		        state = 7;
+		        _loadMap = true;
+		        StartMap = false;
+	        }
+	        else if (InfoJoueur["id"] != id)
+	        {
+		        InfoAutreJoueur[$"attack{id}"] = rep;
 	        }
         }
 			

@@ -154,4 +154,4 @@ text = "Player"
 transform = Transform3D(-4.37114e-11, 0, 0.001, 0, 0.001, 0, -0.001, 0, -4.37114e-11, 0.0496332, 0.477277, 0)
 pixel_size = 2.0
 modulate = Color(0.313726, 0.313726, 0.313726, 1)
-text = "4 Morts"
+text = "Info"

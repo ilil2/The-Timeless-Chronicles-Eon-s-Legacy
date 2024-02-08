@@ -99,6 +99,11 @@ public partial class State6 : GameManager
 							}
 						}
 					}
+					
+					else if (commandchat == "next")
+					{
+						InfoJoueur["attack"] = "next";
+					}
 				}
 				else if (commandchat == "cheat on")
 				{

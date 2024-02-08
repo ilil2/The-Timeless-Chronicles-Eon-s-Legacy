@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3on6d5unns0d"]
+
+[ext_resource type="PackedScene" uid="uid://b54eigxv77gm3" path="res://Ressources/Map/Moderne/catwalk.tscn" id="1_cjbt2"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Roof" parent="." instance=ExtResource("1_cjbt2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 34.2029, 0)
+
+[node name="Roof2" parent="." instance=ExtResource("1_cjbt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.2029, 0)

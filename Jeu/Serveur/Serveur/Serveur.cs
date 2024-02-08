@@ -93,21 +93,19 @@ public class Serveur
         
         info = new[] { "-1/co:1;0;1/0;0;0", "-1/co:-1;0;1/0;0;0", "-1/co:1;0;-1/0;0;0", "-1/co:-1;0;1/0;0;0" };
         
-        joueur_ready = 0;
-
-        while (joueur_ready < ID)
-        {
-            string s = UDP.Receive(soc);
-            if (s == "load")
-            {
-                joueur_ready++;
-            }
-        }
+        Wait(soc);
         
         Console.WriteLine("Tout les joueurs sont chargés");
         
         SendAll(soc, "start");
-        
+
+        Thread th = new Thread(GameServeur);
+        th.Start(soc);
+    }
+
+    private void GameServeur(object o)
+    {
+        Socket soc = (Socket)o;
         while (ID > 0)
         {
             try
@@ -128,7 +126,13 @@ public class Serveur
                 }
                 else if (s2[1].Substring(0, 2) == "on")
                 {
-                    SendAll(soc, $"on:{s2[0]}|{s2[1].Substring(3)}");
+                    s2[1] = s2[1].Substring(3);
+                    SendAll(soc, $"on:{s2[0]}|{s2[1]}");
+                    if (s2[1] == "next")
+                    {
+                        Wait(soc);
+                    }
+                    SendAll(soc,"start");
                 }
                 else if (s2[1].Substring(0, 4) == "chat")
                 {
@@ -158,7 +162,6 @@ public class Serveur
                             break;
                     }
                     ID -= 1;
-                    joueur_ready -= 1;
                     
                     SendAll(soc, $"deco:{id}");
                 }
@@ -172,6 +175,19 @@ public class Serveur
             catch 
             {
                 Console.WriteLine("erreur");
+            }
+        }
+    }
+
+    private void Wait(Socket soc)
+    {
+        joueur_ready = 0;
+        while (joueur_ready < ID)
+        {
+            string s = UDP.Receive(soc);
+            if (s == "load")
+            {
+                joueur_ready++;
             }
         }
     }

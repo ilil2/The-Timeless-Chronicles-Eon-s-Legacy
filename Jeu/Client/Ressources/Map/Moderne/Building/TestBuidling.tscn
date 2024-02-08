@@ -1,0 +1,43 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfkg68lhd3d23"]
+
+[ext_resource type="PackedScene" uid="uid://dlo3wy4a0fyen" path="res://Ressources/Map/Moderne/Building/Building1.tscn" id="1_rx0te"]
+[ext_resource type="PackedScene" uid="uid://cq4pubkfwxjm3" path="res://Ressources/Map/Moderne/Building/Building2.tscn" id="2_fjwpq"]
+[ext_resource type="PackedScene" uid="uid://dulleqqam5384" path="res://Ressources/Map/Moderne/Building/Building3.tscn" id="3_eqooi"]
+[ext_resource type="PackedScene" uid="uid://cmpch7lmd58t" path="res://Ressources/Map/Moderne/Building/Building4.tscn" id="4_araqe"]
+[ext_resource type="PackedScene" uid="uid://bodmx1wc3td7s" path="res://Ressources/Map/Moderne/Building/Building5.tscn" id="5_5h611"]
+[ext_resource type="PackedScene" uid="uid://daoa7lbaedlf2" path="res://Ressources/Map/Moderne/Building/Building6.tscn" id="6_ewiig"]
+[ext_resource type="PackedScene" uid="uid://cqtlkufwe7kl0" path="res://Ressources/Map/Moderne/Building/Building7.tscn" id="7_rp72l"]
+[ext_resource type="PackedScene" uid="uid://dxd4rygp2pr7m" path="res://Ressources/Map/Moderne/Building/Building8.tscn" id="8_2urlh"]
+[ext_resource type="PackedScene" uid="uid://be1bjt87f5wj4" path="res://Ressources/Map/Moderne/Building/Building9.tscn" id="9_mefjb"]
+[ext_resource type="PackedScene" uid="uid://bxvrjtkxph4ef" path="res://Ressources/Map/Moderne/Building/Building10.tscn" id="10_1eql3"]
+
+[node name="TestBuidling" type="Node3D"]
+
+[node name="Building1" parent="." instance=ExtResource("1_rx0te")]
+
+[node name="Building2" parent="." instance=ExtResource("2_fjwpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24)
+
+[node name="Building3" parent="." instance=ExtResource("3_eqooi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
+
+[node name="Building4" parent="." instance=ExtResource("4_araqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -72)
+
+[node name="Building5" parent="." instance=ExtResource("5_5h611")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -96)
+
+[node name="Building6" parent="." instance=ExtResource("6_ewiig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -120)
+
+[node name="Building7" parent="." instance=ExtResource("7_rp72l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -144)
+
+[node name="Building8" parent="." instance=ExtResource("8_2urlh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -168)
+
+[node name="Building9" parent="." instance=ExtResource("9_mefjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -192)
+
+[node name="Building10" parent="." instance=ExtResource("10_1eql3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -216)

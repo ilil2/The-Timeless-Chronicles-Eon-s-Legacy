@@ -7,3 +7,5 @@
 [node name="NavMesh" type="NavigationRegion3D"]
 navigation_mesh = SubResource("NavigationMesh_0txv1")
 script = ExtResource("1_n1v7s")
+
+[connection signal="bake_finished" from="." to="." method="_on_bake_finished"]

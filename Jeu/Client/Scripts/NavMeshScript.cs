@@ -3,6 +3,7 @@ using System;
 
 public partial class NavMeshScript : NavigationRegion3D
 {
+	public bool NavMeshReady = false;
 	public override void _Ready()
 	{
 	}
@@ -15,4 +16,10 @@ public partial class NavMeshScript : NavigationRegion3D
 	{
 		BakeNavigationMesh(true);
 	}
+	
+	private void _on_bake_finished()
+	{
+		NavMeshReady = true;
+	}
 }
+

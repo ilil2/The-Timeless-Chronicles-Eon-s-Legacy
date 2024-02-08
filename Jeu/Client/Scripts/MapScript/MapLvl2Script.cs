@@ -14,6 +14,7 @@ public partial class MapLvl2Script : IMap
 	private List<Node3D> KeyList = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
+	private NavigationRegion3D NavMesh;
 	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
 	{
 		{1,2.5f},
@@ -33,10 +34,13 @@ public partial class MapLvl2Script : IMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		CreateBorder();
 		PseudoCreateForest();
 		CreatePseudoSpawnPoint();
 		CreatePseudoKey();
+		NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
+		
 		
 	}
 
@@ -44,17 +48,38 @@ public partial class MapLvl2Script : IMap
 	public override void _Process(double delta)
 	{
 		FrameCount+=1;
-		if (!MapReady)
+		if (!SetUp)
 		{
 			
 			if(MapTool.CheckSleep(PseudoTreeList))
 			{
+				MeshInstance3D GR = GetNode<MeshInstance3D>("Ground");
+				MeshInstance3D LR = GR.GetNode<MeshInstance3D>("ForNav");
+				GR.RemoveChild(LR);
+				NavMesh.NavigationMesh = new NavigationMesh();
+				NavMesh.NavigationMesh.AgentMaxClimb = 0;
+				NavMesh.NavigationMesh.AgentHeight = 0.5f;
+				NavMesh.NavigationMesh.AgentRadius = 0f;
+				NavMesh.NavigationMesh.AgentMaxSlope = 0.1f;
+				NavMesh.AddChild(LR);
 				CreateForest();
 				CreateKey();
 				RemoveSafeArea();
-				MapReady = true;
+				AddChild(NavMesh);
+				((NavMeshScript)NavMesh).CreateNavMesh();
+				//MapReady = true;
+				NavMesh.Visible = false;
+				SetUp = true;
 			}
-		
+		}
+		else if (!MapReady && (NavMesh as NavMeshScript).NavMeshReady)
+		{
+			CreateSpawnPoint();
+			MapReady = true;
+		}
+		else
+		{
+			
 		}
 		
 	}
@@ -127,7 +152,7 @@ public partial class MapLvl2Script : IMap
 	
 	private void CreatePseudoSpawnPoint()
 	{
-		const int nbMob = 750;
+		const int nbMob = 300;
 		const float radius = 1f;
 		for (int i = 0; i < nbMob; i++)
 		{
@@ -150,8 +175,8 @@ public partial class MapLvl2Script : IMap
 			(double? x, double? z) = GetRandomPos(Rand2);
 
 			Sphere.Position = new Vector3((float)x, 0, (float)z);
-			//PseudoTreeList.Add(Sphere);
-			//AddChild(Sphere);
+			SpawnPoint.Add(Sphere);
+			AddChild(Sphere);
 		}
 	}
 	
@@ -214,8 +239,24 @@ public partial class MapLvl2Script : IMap
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
 			tree.Position = Pos + new Vector3(0,Rand.Next(-10,1)/10f,0);
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
+			MeshInstance3D ForNav = tree.GetNode<MeshInstance3D>("ForNav");
+			tree.RemoveChild(ForNav);
+			ForNav.Position = tree.Position;
+			NavMesh.AddChild(ForNav);
 			AddChild(tree);
 			
+		}
+	}
+	
+	private void CreateSpawnPoint()
+	{
+		for (int i = 0; i<SpawnPoint.Count;i++)
+		{
+			Vector3 Pos = SpawnPoint[i].Position;
+			RemoveChild(SpawnPoint[i]);
+			CharacterBody3D Mob = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn").Instantiate<CharacterBody3D>();
+			Mob.Position = Pos;
+			AddChild(Mob);
 		}
 	}
 	

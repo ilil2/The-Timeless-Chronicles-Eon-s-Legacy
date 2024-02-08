@@ -1,1 +1,1 @@
-start cmd /k "@echo off && cd ..\MainServeur && dotnet run && pause"
+start cmd /c "@echo off && cd ..\MainServeur && dotnet run"
