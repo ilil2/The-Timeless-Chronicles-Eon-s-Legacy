@@ -36,7 +36,7 @@ public partial class MobScript : CharacterBody3D
 	
 	public override void _Ready()
 	{
-		Parent = GetParent();
+		Parent = GetParent().GetParent();
 		PosInnit = Position;
 		RotInnit = Rotation;
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
@@ -48,86 +48,93 @@ public partial class MobScript : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta) //Raycast
 	{
-		if(Distance(Player.Position,this.Position)<=DistVue)
+		if(PlayerSet)
 		{
-			if (Distance(Player.Position,this.Position)<=1 && Alive)
+			if(Distance(Player.Position,this.Position)<=DistVue)
 			{
-				SetUpDeath();
-			}
-			if(!Alive)
-			{
-				Death();
-			}
-			if(!PlayerSet && GameManager.Joueur1!=null)
-			{
-				Player = GameManager.Joueur1;
-				PlayerSet = true;
-			}
-			if (PlayerSet) 
-			{
-				IsTooFar = !(Distance(Player.Position,this.Position)<=DistVue);
-				Ray.Rotation = new Vector3(0,-Rotation.Y,0);
-				Ray.TargetPosition = new Vector3(Player.GlobalPosition.X - GlobalPosition.X, 1 , Player.GlobalPosition.Z - GlobalPosition.Z );
-				Label3D St = GetNode<Label3D>("State");
-				St.Text = $"State: {state}";
-				if (state == 0 || state == -1) // Si ne suit pas le joueur
+				if (Distance(Player.Position,this.Position)<=1 && Alive)
 				{
-					if (!Ray.IsColliding() && !IsTooFar) // si rien entre mob et joueur
+					SetUpDeath();
+				}
+				if(!Alive)
+				{
+					Death();
+				}
+				if (PlayerSet) 
+				{
+					IsTooFar = !(Distance(Player.Position,this.Position)<=DistVue);
+					Ray.Rotation = new Vector3(0,-Rotation.Y,0);
+					Ray.TargetPosition = new Vector3(Player.GlobalPosition.X - GlobalPosition.X, 1 , Player.GlobalPosition.Z - GlobalPosition.Z );
+					Label3D St = GetNode<Label3D>("State");
+					St.Text = $"State: {state}";
+					if (state == 0 || state == -1) // Si ne suit pas le joueur
 					{
-						state = 1;
-						//GD.Print("not colliding");
+						if (!Ray.IsColliding() && !IsTooFar) // si rien entre mob et joueur
+						{
+							state = 1;
+							//GD.Print("not colliding");
+							Nav.TargetPosition = Player.GlobalPosition;
+							Agro = AgroMax;
+						}
+					}
+					if (state == 1 && !IsTooFar) // si suit le joueur
+					{
 						Nav.TargetPosition = Player.GlobalPosition;
-						Agro = AgroMax;
+						if (Ray.IsColliding()) // si qqc entre mob et joueur
+						{
+							Agro -=1; 
+							//GD.Print("colliding");
+						}
+						else Agro = AgroMax; // si rien entre mob et joueur
 					}
 				}
-				if (state == 1 && !IsTooFar) // si suit le joueur
-				{
-					Nav.TargetPosition = Player.GlobalPosition;
-					if (Ray.IsColliding()) // si qqc entre mob et joueur
-					{
-						Agro -=1; 
-						//GD.Print("colliding");
-					}
-					else Agro = AgroMax; // si rien entre mob et joueur
-				}
+				SkipFrame = false; // Faire la prochaine frame
 			}
-		SkipFrame = false; // Faire la prochaine frame
 		}
 	}
 	public override void _Process(double delta) //NavMesh
 	{
-		if(Distance(Player.Position,this.Position)<=DistVue)
+		if(PlayerSet)
 		{
-			if (IsTooFar && Agro > 0) Agro -= 1;
-			if (Agro <= 0) 
+			if(Distance(Player.Position,this.Position)<=DistVue)
 			{
-				state = 0;
-				if (Distance(Position,PosInnit)<1 && state == 0) state = -1;
-				else Nav.TargetPosition = PosInnit;
-			}
-			if (state == -1) 
-			{
-				Rotation = RotInnit;
-			}
-			else
-			{
-				var dir = new Vector3();  //Pathfiding
-				var NextPos = Nav.GetNextPathPosition();
-				dir = NextPos - GlobalPosition;
-				dir = dir.Normalized();
-				Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
-				MoveAndSlide();
-				
-				try
+				if (IsTooFar && Agro > 0) Agro -= 1;
+				if (Agro <= 0) 
 				{
-					LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+					state = 0;
+					if (Distance(Position,PosInnit)<1 && state == 0) state = -1;
+					else Nav.TargetPosition = PosInnit;
 				}
-				catch
+				if (state == -1) 
 				{
-					GD.Print("Still Error");
+					Rotation = RotInnit;
 				}
-				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);  
+				else
+				{
+					var dir = new Vector3();  //Pathfiding
+					var NextPos = Nav.GetNextPathPosition();
+					dir = NextPos - GlobalPosition;
+					dir = dir.Normalized();
+					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+					MoveAndSlide();
+					
+					try
+					{
+						LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+					}
+					catch
+					{
+						GD.Print("Still Error");
+					}
+					Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);  
+				}
 			}
+		}
+		if(!PlayerSet && GameManager.Joueur1!=null && Parent.IsAncestorOf(GameManager.Joueur1))
+		{
+			Player = GameManager.Joueur1;
+			PlayerSet = true;
+			GD.Print("Player Set !");
 		}
 	}
 	

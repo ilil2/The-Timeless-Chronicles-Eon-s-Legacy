@@ -59,6 +59,8 @@ public partial class MapLvl2Script : IMap
 				NavMesh.NavigationMesh = new NavigationMesh();
 				NavMesh.NavigationMesh.AgentMaxClimb = 0;
 				NavMesh.NavigationMesh.AgentHeight = 0.5f;
+				NavMesh.NavigationMesh.AgentRadius = 0f;
+				NavMesh.NavigationMesh.AgentMaxSlope = 0.1f;
 				NavMesh.AddChild(LR);
 				CreateForest();
 				CreateKey();

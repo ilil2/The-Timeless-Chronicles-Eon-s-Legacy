@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b54eigxv77gm3"]
+[gd_scene load_steps=12 format=3 uid="uid://b54eigxv77gm3"]
 
 [ext_resource type="Texture2D" uid="uid://b7viiqfi8exid" path="res://Ressources/Map/Moderne/catwalk_0.png" id="1_ewd3i"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Catwalk.cs" id="1_g0p8a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ilsg"]
 resource_name = "test"
@@ -90,6 +91,7 @@ size = Vector3(37, 0.1, 0.2)
 size = Vector3(37, 1, 1)
 
 [node name="CatWalk" type="Node3D"]
+script = ExtResource("1_g0p8a")
 
 [node name="Mesh" type="Node3D" parent="."]
 transform = Transform3D(1.571, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

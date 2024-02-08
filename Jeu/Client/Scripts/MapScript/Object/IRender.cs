@@ -8,9 +8,11 @@ public abstract partial class IRender : Node3D
 	private Vector3 PlayerPos = new Vector3();
 	private bool PlayerSet = false;
 	protected int RenderDist = 150;
+	protected Node3D Parent;
 	protected bool RenderSetup()
 	{
-		if(!PlayerSet && GameManager.Joueur1!=null)
+		Parent = (Node3D)GetParent().GetParent();
+		if(!PlayerSet && GameManager.Joueur1!=null && Parent.IsAncestorOf(GameManager.Joueur1))
 		{
 			Player = GameManager.Joueur1;
 			PlayerSet = true;
