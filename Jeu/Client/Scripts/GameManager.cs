@@ -50,7 +50,7 @@ public partial class GameManager : Node3D
 	protected static bool conn = true;					//connexion au serveur principal
 	private bool join = false;					//partie rejointe
 	
-	protected static int state = 0;
+	public static int state = 0;
 	
 	protected static Socket soc2;
 	protected static IPEndPoint iep2;
@@ -62,7 +62,7 @@ public partial class GameManager : Node3D
 
 	protected static bool _loadMap = false;
 
-	protected static int _nbJoueur = 0;
+	public static int _nbJoueur = 0;
 	public static CharacterBody3D Joueur1;
 	public static CharacterBody3D Joueur2;
 	public static CharacterBody3D Joueur3;

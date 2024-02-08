@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class key : IRender
 {
@@ -9,6 +10,7 @@ public partial class key : IRender
 	private const int LinearY = 5;
 	private const float SpeedRotation = 1f;
 	private const int SpeedLinearY = 3;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,4 +30,15 @@ public partial class key : IRender
 		Model.Position = InitPos + new Vector3(0,(float)Math.Sin(Mathf.DegToRad(FrameCount))/LinearY,0);
 		Model.RotationDegrees += new Vector3(0,SpeedRotation,0);
 	}
+	
+	private void _on_area_3d_body_entered(Node3D body)
+	{
+		if(body is ClassScript)
+		{
+			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
+			QueueFree();
+		}
+	}
 }
+
+

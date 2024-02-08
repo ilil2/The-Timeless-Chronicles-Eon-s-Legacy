@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brgiv8w85t52d"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/Exit.cs" id="1_impt8"]
+
+[node name="Exit" type="Area3D"]
+script = ExtResource("1_impt8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
