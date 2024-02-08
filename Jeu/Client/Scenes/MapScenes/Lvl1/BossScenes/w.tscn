@@ -190,7 +190,7 @@ shape = SubResource("BoxShape3D_64xln")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 10, 0)
 light_color = Color(0.439216, 0.439216, 0.439216, 1)
 light_energy = 5.0
-omni_range = 150.0
+omni_range = 57.0
 omni_attenuation = 1.2
 
 [node name="Obelisk_mesh" type="Node3D" parent="."]
