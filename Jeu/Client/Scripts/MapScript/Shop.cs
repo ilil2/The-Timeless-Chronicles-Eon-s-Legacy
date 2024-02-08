@@ -32,7 +32,7 @@ public partial class Shop : IMap
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
-		throw new NotImplementedException();
+		MapTool.Debug(Player,this,DebugMode);
 	}
 
 }
