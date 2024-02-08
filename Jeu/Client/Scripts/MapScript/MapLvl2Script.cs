@@ -34,11 +34,13 @@ public partial class MapLvl2Script : IMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		LoadingStage = "Create Border";
 		CreateBorder();
+		LoadingStage = "Create PseudoMap";
 		PseudoCreateForest();
 		CreatePseudoSpawnPoint();
 		CreatePseudoKey();
+		LoadingStage = "Create NavMesh";
 		NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 		
 		
@@ -62,20 +64,25 @@ public partial class MapLvl2Script : IMap
 				NavMesh.NavigationMesh.AgentRadius = 0f;
 				NavMesh.NavigationMesh.AgentMaxSlope = 0.1f;
 				NavMesh.AddChild(LR);
+				LoadingStage = "Create Map";
 				CreateForest();
 				CreateKey();
 				RemoveSafeArea();
 				AddChild(NavMesh);
+				LoadingStage = "Calculate NavMesh";
 				((NavMeshScript)NavMesh).CreateNavMesh();
 				//MapReady = true;
+				LoadingStage = "Calculate NavRegion";
 				NavMesh.Visible = false;
 				SetUp = true;
 			}
 		}
 		else if (!MapReady && (NavMesh as NavMeshScript).NavMeshReady)
 		{
+			LoadingStage = "Spawn Mob";
 			CreateSpawnPoint();
 			MapReady = true;
+			LoadingStage = "En attente des autres joueurs :(";
 		}
 		else
 		{

@@ -16,6 +16,7 @@ public partial class WIP : IMap
 		if (!MapReady)
 		{
 			MapReady = true;
+			LoadingStage = "En attente des autres joueurs :(";
 		}
 	}
 

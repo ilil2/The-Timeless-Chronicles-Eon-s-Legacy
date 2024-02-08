@@ -9,6 +9,7 @@ public abstract partial class IMap : Node3D
 	protected Random Rand = new Random(42);
 	protected Random Rand2 = new Random(42);
 	protected int step = 0;
+	public string LoadingStage = "rien pour l'instant";
 	public int Step()
 	{
 		return step;

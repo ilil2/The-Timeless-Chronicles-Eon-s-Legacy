@@ -28,14 +28,19 @@ public partial class MapLvl3Script : IMap
 				MapGrid[i, j] = 0;
 			}
 		}
+		LoadingStage = "Create MapGrid";
 		CreateMap(12,16,16);
+		LoadingStage = "Create Map";
 		CreateCity();
+		LoadingStage = "Get SpawnPoint";
 		S = GetSpawnBuilding();
 		GD.Print($"x: {S.x}, y: {S.y}");
 		MapGrid[16, 16] = 2;
 		MapGrid[S.x, S.y] = 2;
 		PrintMatrix(MapGrid);
 		MapReady = true;
+		LoadingStage = "test";
+		LoadingStage = "En attente des autres joueurs :(";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

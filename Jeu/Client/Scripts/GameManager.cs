@@ -42,7 +42,7 @@ public partial class GameManager : Node3D
 	public static Settings SettingsManager;
 	public static FastConnection FastConnectionManager;
 	
-	protected static IMap Map;
+	public static IMap Map;
 	protected static Control ProgressBar;
 	
 	protected static bool tentative_connection = true;

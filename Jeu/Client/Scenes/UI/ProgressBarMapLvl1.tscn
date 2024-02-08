@@ -28,22 +28,21 @@ offset_bottom = -0.223999
 [node name="wait" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.118
-anchor_top = 0.742
-anchor_right = 0.888
-anchor_bottom = 0.889
-offset_left = 0.0639906
-offset_top = 0.183972
-offset_right = 0.0239182
-offset_bottom = -0.0720377
+anchor_left = 0.09
+anchor_top = 0.815
+anchor_right = 0.924
+anchor_bottom = 0.961
+offset_left = 0.319992
+offset_top = -0.120056
+offset_right = -0.447998
+offset_bottom = 0.271973
 text = "Chargement de la map : 0%"
 label_settings = SubResource("LabelSettings_cvhed")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(128, 504)
-scale = Vector2(0.2, 0.2)
+position = Vector2(64, 576)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_t3nyo")
 
 [connection signal="resized" from="." to="." method="OnResize"]

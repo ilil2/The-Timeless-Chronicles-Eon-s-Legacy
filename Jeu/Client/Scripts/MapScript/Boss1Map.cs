@@ -12,6 +12,7 @@ public partial class Boss1Map : IMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		LoadingStage = "Create Border";
 		for (int i = 0; i<360; i+=Pas)
 		{
 			float rot = Mathf.DegToRad(i);
@@ -29,6 +30,7 @@ public partial class Boss1Map : IMap
 		if (!MapReady)
 		{
 			MapReady = true;
+			LoadingStage = "En attente des autres joueurs :(";
 		}
 	}
 

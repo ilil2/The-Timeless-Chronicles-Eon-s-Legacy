@@ -24,16 +24,16 @@ public partial class ProgressBarMapLvl1 : Control
 	{
 		_label = GetNode<Label>("wait");
 		_progressBar = GetNode<Sprite2D>("Sprite2D");
-        
+		
 		_label.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_progressBar.Scale = new Vector2(GetViewportRect().Size.X / _screenDefalutWidth * 0.2f, GetViewportRect().Size.X / _screenDefalutWidth * 0.2f);
-		_progressBar.Position = new Vector2(128 * (GetViewportRect().Size.X / _screenDefalutWidth), 504 * (GetViewportRect().Size.Y / 648));
+		_progressBar.Scale = new Vector2(GetViewportRect().Size.X / _screenDefalutWidth * 0.1f, GetViewportRect().Size.X / _screenDefalutWidth * 0.1f);
+		_progressBar.Position = new Vector2(64 * (GetViewportRect().Size.X / _screenDefalutWidth), 576 * (GetViewportRect().Size.Y / 648));
 
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		_progressBar.RotationDegrees += 1;
-		_label.Text = _languageDict["gameLoadingMapWaitingText"];
+		_label.Text = (GameManager.Map as IMap).LoadingStage;
 	}
 }

@@ -47,8 +47,10 @@ public partial class MapLvl1Script : IMap
 	public override void _Ready()
 	{
 		stopwatch.Start();
+		LoadingStage = "Create PseudoMap";
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
+		LoadingStage = "Room Placement";
 	}
 	
 	public override void _Process(double delta)
@@ -59,14 +61,18 @@ public partial class MapLvl1Script : IMap
 			if (MapTool.CheckSleep(PseudoRoomList))
 			{
 				AddChild(NavMesh);
+				LoadingStage = "Create MainRoom";
 				CreateMainRoom();
+				LoadingStage = "Create Map";
 				CreateMap();
+				LoadingStage = "Open Rooms";
 				OpenRoom();
 				//((NavMeshScript)NavMesh).CreateNavMesh();
 				//CreateMob();
 				
 				
 				MapReady = true;
+				LoadingStage = "En attente des autres joueurs :(";
 				stopwatch.Stop();
 		
 				GD.Print($"{NbRoom} Room");
