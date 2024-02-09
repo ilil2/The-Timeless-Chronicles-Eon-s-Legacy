@@ -8,7 +8,9 @@ public partial class Boss1Map : IMap
 {
 	private int Rayon = 57;
 	private int Pas = 6;
+	private int Pas2 = 12;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/w.tscn");
+	private PackedScene Pi = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/p.tscn");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -17,6 +19,16 @@ public partial class Boss1Map : IMap
 		{
 			float rot = Mathf.DegToRad(i);
 			Node3D Wall = Wa.Instantiate<Node3D>();
+			double X = Math.Cos(rot);
+			double Z = Math.Sin(rot);
+			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
+			Wall.Rotation += new Vector3(0,-rot,0);
+			AddChild(Wall);
+		}
+		for (int i = 0; i<360; i+=Pas2)
+		{
+			float rot = Mathf.DegToRad(i);
+			Node3D Wall = Pi.Instantiate<Node3D>();
 			double X = Math.Cos(rot);
 			double Z = Math.Sin(rot);
 			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
