@@ -27,8 +27,12 @@ public partial class OtherClassScript : CharacterBody3D
 
 	protected void SetPosition()
 	{
-		string[] positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
-		Position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
+		try
+		{
+			string[] positions = GameManager.InfoAutreJoueur[$"co{Id}"].Split(";");
+			Position = new Vector3(Lib.Conversions.AtoF(positions[0]), Lib.Conversions.AtoF(positions[1]), Lib.Conversions.AtoF(positions[2]));
+		}
+		catch{}
 	}
 	
 	protected void SetRotation()
