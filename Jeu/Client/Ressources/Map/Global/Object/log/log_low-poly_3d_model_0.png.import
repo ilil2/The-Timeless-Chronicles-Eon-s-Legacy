@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpocotipprk4u"
-path.s3tc="res://.godot/imported/log_low-poly_3d_model_0.jpg-1fc59b08f1276030495b302ae88b7d17.s3tc.ctex"
+uid="uid://dn1cen01tlahq"
+path.s3tc="res://.godot/imported/log_low-poly_3d_model_0.png-486b1b3caa67f7205ff5bdefb3cf7dd1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Ressources/Map/Global/log/log_low-poly_3d_model_0.jpg"
-dest_files=["res://.godot/imported/log_low-poly_3d_model_0.jpg-1fc59b08f1276030495b302ae88b7d17.s3tc.ctex"]
+source_file="res://Ressources/Map/Global/Object/log/log_low-poly_3d_model_0.png"
+dest_files=["res://.godot/imported/log_low-poly_3d_model_0.png-486b1b3caa67f7205ff5bdefb3cf7dd1.s3tc.ctex"]
 
 [params]
 

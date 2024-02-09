@@ -1,0 +1,21 @@
+BlueSky: https://github.com/emirthab/third-person-controller
+Log: https://sketchfab.com/3d-models/log-low-poly-3d-model-3e15d23bb0094c58ba690024a58ff744#download
+tree: https://solarcompost.itch.io/solarcompost-trees
+SandGround: https://www.texturecan.com/details/215/
+Pot: https://sketchfab.com/3d-models/egyptian-pottery-f53afbe2077a4c12bc7e13dffeac11f1
+Pyramid: https://poly.pizza/m/3pabPM-VTTH
+Sphinx: https://free3d.com/3d-model/-egypt-sphinx-v2--884713.html
+Temple: https://sketchfab.com/3d-models/egyptian-tomb-asset-pack-00849e5ba3004841963146512c3a09a1
+Rock: https://cosmo-art.itch.io/low-poly-rocks
+Ghost: https://sketchfab.com/3d-models/low-poly-ghost-character-4e6b7329c21b400e806d078dd0969212
+Gravestone: https://www.turbosquid.com/fr/3d-models/3d-gravestone-grave-1600314
+Key: https://sketchfab.com/3d-models/simple-gold-key-fc87b71b4385435dbb7c9056ee97e614
+Portal: https://sketchfab.com/3d-models/stargate-5ddae865059443b988f3fa51b8c1531c
+DwarfGate: https://www.cgtrader.com/free-3d-models/architectural/decoration/dwarven-expedition-pack-stylized-assets
+Building: https://free3d.com/3d-model/array-house-example-3033.html
+CatWalk: https://sketchfab.com/3d-models/catwalk-559af90bc3734709a38b28ab6a6089a4
+Knight: https://sketchfab.com/3d-models/medieval-knight-rigged-for-ue45-1c7a83c0832a4ab28d9f1a46d282fcf9
+Archer: https://www.cadnav.com/3d-models/model-23414.html
+Assassin: https://www.turbosquid.com/3d-models/futuristic-ninja-soldier-3d-model/1141143
+Scientifique: https://creazilla.com/nodes/1795171-scientist-3d-model
+

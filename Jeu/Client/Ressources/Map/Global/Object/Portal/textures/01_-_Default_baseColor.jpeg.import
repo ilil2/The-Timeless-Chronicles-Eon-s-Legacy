@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ybpfxcwkjwem"
-path.s3tc="res://.godot/imported/02_-_Default_baseColor.jpeg-17159a10fccf55c9c806e965a0b799fe.s3tc.ctex"
+uid="uid://dhfdrs6a3o5xg"
+path.s3tc="res://.godot/imported/01_-_Default_baseColor.jpeg-a5d678f9ac6f02cdaa4910700db1c480.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Ressources/Map/Global/Portal/textures/02_-_Default_baseColor.jpeg"
-dest_files=["res://.godot/imported/02_-_Default_baseColor.jpeg-17159a10fccf55c9c806e965a0b799fe.s3tc.ctex"]
+source_file="res://Ressources/Map/Global/Object/Portal/textures/01_-_Default_baseColor.jpeg"
+dest_files=["res://.godot/imported/01_-_Default_baseColor.jpeg-a5d678f9ac6f02cdaa4910700db1c480.s3tc.ctex"]
 
 [params]
 
