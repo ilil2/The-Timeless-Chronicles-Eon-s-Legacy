@@ -106,6 +106,7 @@ public abstract partial class ClassScript : CharacterBody3D
 		{
 			AnimationPlayer.Stop();
 			GameManager.InfoJoueur["attack"] = "init";
+			CameraV.SpringLength = -4;
 			_pauseTimer = 0;
 			GameManager._pausemode = true;
 			Input.MouseMode = Input.MouseModeEnum.Visible;

@@ -9,6 +9,8 @@ public partial class AssassinScript : ClassScript
     {
         InitPlayer();
         
+        AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        
         WalkSpeed = 5f;
         RunSpeed = 8f;
         DashPower = 120.0f;
