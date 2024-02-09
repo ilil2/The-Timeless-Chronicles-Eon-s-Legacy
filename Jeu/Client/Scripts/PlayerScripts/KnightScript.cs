@@ -36,11 +36,7 @@ public partial class KnightScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
-
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-        {
-            Move(delta);
-        }
+        Move(delta);
     }
     
     protected override void Dash()
@@ -74,72 +70,76 @@ public partial class KnightScript : ClassScript
     {
         if (!Attack() && AnimationPlayer.CurrentAnimation != "Hit")
         {
-            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-                Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+            if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
             {
-                int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-                int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
-                int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-                int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
-                
-                Direction = new Vector3(left - right, 0, forward - backward);
-                Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-                IsWalking = true;
-                MovementSpeed = WalkSpeed;
+                if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+                    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+                {
+                    int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
+                    int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
+                    int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
+                    int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
+                    
+                    Direction = new Vector3(left - right, 0, forward - backward);
+                    Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+                    IsWalking = true;
+                    MovementSpeed = WalkSpeed;
 
-                if (left - right == 1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
-                {
-                    AnimationPlayer.Play("WalkDiagLeft");
-                    GameManager.InfoJoueur["attack"] = "walkdiagleft";
+                    if (left - right == 1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
+                    {
+                        AnimationPlayer.Play("WalkDiagLeft");
+                        GameManager.InfoJoueur["attack"] = "walkdiagleft";
+                    }
+                    else if (left - right == -1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                    {
+                        AnimationPlayer.Play("WalkDiagRight");
+                        GameManager.InfoJoueur["attack"] = "walkdiagright";
+                    }
+                    else if (left - right == 1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                    {
+                        AnimationPlayer.Play("WalkDiagRight");
+                        GameManager.InfoJoueur["attack"] = "walkdiagright";
+                    }
+                    else if (left - right == -1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
+                    {
+                        AnimationPlayer.Play("WalkDiagLeft");
+                        GameManager.InfoJoueur["attack"] = "walkdiagleft";
+                    }
+                    else if ((left - right == 1 || left - right == -1) && AnimationPlayer.CurrentAnimation != "WalkSide"
+                                                                       && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
+                                                                       && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                    {
+                        AnimationPlayer.Play("WalkSide");
+                        GameManager.InfoJoueur["attack"] = "walkside";
+                    }
+                    else if ((forward - backward == 1 || forward - backward == -1) && AnimationPlayer.CurrentAnimation != "Walk"
+                                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
+                                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                    {
+                        AnimationPlayer.Play("Walk");
+                        GameManager.InfoJoueur["attack"] = "walk";
+                    }
+                    else if (!(left - right == 1 || left - right == -1 || forward - backward == 1 || forward - backward == -1))
+                    {
+                        AnimationPlayer.Play("Init");
+                        GameManager.InfoJoueur["attack"] = "init";
+                    }
                 }
-                else if (left - right == -1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
+                else
                 {
-                    AnimationPlayer.Play("WalkDiagRight");
-                    GameManager.InfoJoueur["attack"] = "walkdiagright";
-                }
-                else if (left - right == 1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-                {
-                    AnimationPlayer.Play("WalkDiagRight");
-                    GameManager.InfoJoueur["attack"] = "walkdiagright";
-                }
-                else if (left - right == -1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
-                {
-                    AnimationPlayer.Play("WalkDiagLeft");
-                    GameManager.InfoJoueur["attack"] = "walkdiagleft";
-                }
-                else if ((left - right == 1 || left - right == -1) && AnimationPlayer.CurrentAnimation != "WalkSide"
-                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
-                                                                   && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-                {
-                    AnimationPlayer.Play("WalkSide");
-                    GameManager.InfoJoueur["attack"] = "walkside";
-                }
-                else if ((forward - backward == 1 || forward - backward == -1) && AnimationPlayer.CurrentAnimation != "Walk"
-                                                                               && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
-                                                                               && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-                {
-                    AnimationPlayer.Play("Walk");
-                    GameManager.InfoJoueur["attack"] = "walk";
-                }
-                else if (!(left - right == 1 || left - right == -1 || forward - backward == 1 || forward - backward == -1))
-                {
+                    IsWalking = false;
                     AnimationPlayer.Play("Init");
                     GameManager.InfoJoueur["attack"] = "init";
                 }
+	            
+                //Calcul de la rotation du joueur
+                PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		        
+                HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	            
+                Dash();
+                
             }
-            else
-            {
-                IsWalking = false;
-                AnimationPlayer.Play("Init");
-                GameManager.InfoJoueur["attack"] = "init";
-            }
-	        
-            //Calcul de la rotation du joueur
-            PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-		    
-            HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	        
-            Dash();
 	        
             //Calcul du movement du joueur
             Vector3 velocity = Velocity;

@@ -42,13 +42,13 @@ public partial class ScientistScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
+        if (!_isShooting)
+        {
+            Move(delta);
+        }
 
         if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
         {
-            if (!_isShooting)
-            {
-                Move(delta);
-            }
             ShootLaser();
         }
         else
@@ -89,26 +89,29 @@ public partial class ScientistScript : ClassScript
     
     protected override void Move(double delta)
     {
-        if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-            Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
         {
-            Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
-                Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
-            Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-            IsWalking = true;
-            MovementSpeed = WalkSpeed;
+            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+                Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+            {
+                Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
+                    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
+                Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+                IsWalking = true;
+                MovementSpeed = WalkSpeed;
+            }
+            else
+            {
+                IsWalking = false;
+            }
+	        
+            //Calcul de la rotation du joueur
+            PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		    
+            HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	        
+            Dash();
         }
-        else
-        {
-            IsWalking = false;
-        }
-	    
-        //Calcul de la rotation du joueur
-        PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-		
-        HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	    
-        Dash();
 	    
         //Calcul du movement du joueur
         Vector3 velocity = Velocity;
