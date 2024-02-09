@@ -33,7 +33,7 @@ public partial class key : IRender
 	
 	private void _on_area_3d_body_entered(Node3D body)
 	{
-		if(body is ClassScript)
+		if(body is ClassScript || body is OtherClassScript)
 		{
 			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
 			QueueFree();

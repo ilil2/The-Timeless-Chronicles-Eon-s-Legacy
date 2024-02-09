@@ -5,84 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Object/Portal/textures/01_-_Default_baseColor.jpeg" id="3_eacal"]
 [ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Object/Portal/textures/01_-_Default_normal.png" id="4_qn2yb"]
 
-[sub_resource type="Animation" id="Animation_dsrmv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh/Stargate:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mesh/Stargate/Gate:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Mesh/Stargate/Portal:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, 3.14159, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Mesh/Stargate/Ring:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(1.5708, 2.0944, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_mv7sa"]
-resource_name = "Open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh/Stargate:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mesh/Stargate/Gate:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.5708, 3.14159, 0), Vector3(1.5708, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_n76gx"]
 resource_name = "Close"
 tracks/0/type = "value"
@@ -137,6 +59,84 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(1.5708, 0, 0), Vector3(1.5708, -2.0944, 0), Vector3(1.5708, -4.18879, 0), Vector3(1.5708, -6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mv7sa"]
+resource_name = "Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh/Stargate:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh/Stargate/Gate:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 3.14159, 0), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dsrmv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh/Stargate:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh/Stargate/Gate:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Mesh/Stargate/Portal:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 3.14159, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Mesh/Stargate/Ring:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 2.0944, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qui62"]
@@ -313,7 +313,7 @@ transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, -1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0)
 
 [node name="Gate" type="Node3D" parent="Mesh/Stargate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 9.53674e-07, 5.77308, -0.725411)
+transform = Transform3D(1, 0, 0, 0, -3.61999e-06, -1, 0, 1, -3.61999e-06, 9.53674e-07, 5.77308, -0.725411)
 
 [node name="Gate_02 - Default_0" type="MeshInstance3D" parent="Mesh/Stargate/Gate"]
 mesh = SubResource("ArrayMesh_wm6pb")
@@ -325,14 +325,14 @@ mesh = SubResource("ArrayMesh_lxow2")
 skeleton = NodePath("")
 
 [node name="Portal" type="Node3D" parent="Mesh/Stargate"]
-transform = Transform3D(-1, -8.74227e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74227e-08, -1, 4.37114e-08, 9.53674e-07, 5.77308, -0.725411)
+transform = Transform3D(-1, 2.53518e-06, -9.17733e-12, 0, -3.61999e-06, -1, -2.53518e-06, -1, 3.61999e-06, 9.53674e-07, 5.77308, -0.725411)
 
 [node name="Portal_01 - Default_0" type="MeshInstance3D" parent="Mesh/Stargate/Portal"]
 mesh = SubResource("ArrayMesh_i2wf4")
 skeleton = NodePath("")
 
 [node name="Ring" type="Node3D" parent="Mesh/Stargate"]
-transform = Transform3D(-0.5, 0.866026, -3.78552e-08, 0, -4.37114e-08, -1, -0.866026, -0.5, 2.18557e-08, 9.53674e-07, 5.77308, -0.725411)
+transform = Transform3D(-0.500004, 0.866023, -3.13499e-06, 0, -3.61999e-06, -1, -0.866023, -0.500004, 1.81001e-06, 9.53674e-07, 5.77308, -0.725411)
 
 [node name="Ring_02 - Default_0" type="MeshInstance3D" parent="Mesh/Stargate/Ring"]
 mesh = SubResource("ArrayMesh_ne1ap")
