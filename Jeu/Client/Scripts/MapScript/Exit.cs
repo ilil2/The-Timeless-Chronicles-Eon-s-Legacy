@@ -22,7 +22,7 @@ public partial class Exit : Area3D
 	
 	private void _on_body_entered(Node3D body)
 	{
-		if(body is ClassScript)
+		if(body is ClassScript || body is OtherClassScript)
 		{
 			PlayerIn++;
 			GD.Print($"{(body as ClassScript).Pseudo} find Exit, {PlayerIn} Player, {AllInside()}");
@@ -34,7 +34,7 @@ public partial class Exit : Area3D
 	}
 	private void _on_body_exited(Node3D body)
 	{
-		if(body is ClassScript)
+		if(body is ClassScript || body is OtherClassScript)
 		{
 			PlayerIn--;
 			GD.Print($"{(body as ClassScript).Pseudo} leave Exit, {PlayerIn} Player, {AllInside()}");
