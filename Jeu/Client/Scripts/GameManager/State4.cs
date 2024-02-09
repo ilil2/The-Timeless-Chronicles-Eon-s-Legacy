@@ -19,7 +19,7 @@ public partial class State4 : GameManager
 		}
 		else if (StartMap)
 		{
-			GameManager.ProgressBar.QueueFree();
+			ProgressBar.QueueFree();
 			Map.Visible = true;
 			state = 5;
 		}

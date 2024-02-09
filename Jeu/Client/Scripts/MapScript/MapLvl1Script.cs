@@ -70,8 +70,7 @@ public partial class MapLvl1Script : IMap
 				//((NavMeshScript)NavMesh).CreateNavMesh();
 				//CreateMob();
 				
-				
-				MapReady = true;
+				CreateExit();				MapReady = true;
 				LoadingStage = "En attente des autres joueurs :(";
 				stopwatch.Stop();
 		
@@ -379,5 +378,16 @@ public partial class MapLvl1Script : IMap
 				SpawnRoom = RoomList[i];
 			}
 		}
+	}
+	private void CreateExit()
+	{
+		Area3D area = GetNode<Area3D>("Exit");
+		CollisionShape3D Coll = new CollisionShape3D();
+		CylinderShape3D Shape = new CylinderShape3D();
+		Shape.Radius = 4;
+		Shape.Height = 4;
+		Coll.Shape = Shape;
+		Coll.Position += new Vector3(0,2,0);
+		area.AddChild(Coll);
 	}
 }
