@@ -1,0 +1,1 @@
+screen -S session_name -d -m bash -c "cd ../Serveur;dotnet run ; screen -S session_name -X quit"
