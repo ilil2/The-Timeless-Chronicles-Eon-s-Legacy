@@ -92,13 +92,19 @@ public partial class GameManager : Node3D
 		StreamReader sr = new StreamReader("Scripts/Save/IP.txt");
 		string res = sr.ReadLine();
 		sr.Close();
+		if (char.IsLetter(res[0]))
+		{
+			IPAddress[] addresses = Dns.GetHostAddresses(res);
+			IPAddress firstAddress = addresses[0];
+			res = firstAddress.ToString();
+		}
 		return res;
 	}
 
 	
 	public override void _Notification(int what)
 	{
-		if (what == NotificationWMCloseRequest)
+		if (what == NotificationWMCloseRequest || what == NotificationCrash)
 		{
 			OnQuit();
 			GetTree().Quit(); // default behavior
@@ -266,6 +272,7 @@ public partial class GameManager : Node3D
 					ProgressBar = ProgressBarMap.Instantiate<Control>();
 					AddChild(ProgressBar);
 					Map = Lvls.Dequeue();
+					Map.SetSeed(Seed,AleateSeed);
 					AddChild(Map);
 					
 					MapOnLoad = true;

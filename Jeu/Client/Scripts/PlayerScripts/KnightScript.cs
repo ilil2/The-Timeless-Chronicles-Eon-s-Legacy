@@ -11,7 +11,7 @@ public partial class KnightScript : ClassScript
 		//Initialisation du joueur
 		InitPlayer();
 		
-		WalkSpeed = 3.6f;
+		WalkSpeed = 6f;
 		RunSpeed = 6.8f;
 		DashPower = 70.0f;
 		
