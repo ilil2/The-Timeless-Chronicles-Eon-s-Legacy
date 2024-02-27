@@ -52,12 +52,11 @@ public partial class MapLvl3Script : IMap
 	{
 		List<(int, int, int)> Res = new List<(int, int, int)>();
 		
-		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
-		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
-		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
-		Res.Add(((S.x-LenI)*Gap,200,(S.y-LenI)*Gap));
-		
-		
+		Res.Add((((S.x-LenI)*Gap)+1,35,((S.y-LenI)*Gap)+1));
+		Res.Add((((S.x-LenI)*Gap)-1,35,((S.y-LenI)*Gap)+1));
+		Res.Add((((S.x-LenI)*Gap)+1,35,((S.y-LenI)*Gap)-1));
+		Res.Add((((S.x-LenI)*Gap)-1,35,((S.y-LenI)*Gap)-1));
+	
 		return Res;
 	}
 
