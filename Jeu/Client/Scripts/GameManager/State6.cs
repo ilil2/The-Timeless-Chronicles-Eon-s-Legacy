@@ -45,7 +45,8 @@ public partial class State6 : GameManager
 					}
 					else if (commandchat == "display")
 					{
-						DebugMode = DebugMode;
+						CDisplay = !CDisplay;
+						((IMap)Map).SetUpCursor(Joueur1,CDisplay);
 					}
 					else if (commandchat.Length > 3 && commandchat.Substring(0,4) == "help")
 					{

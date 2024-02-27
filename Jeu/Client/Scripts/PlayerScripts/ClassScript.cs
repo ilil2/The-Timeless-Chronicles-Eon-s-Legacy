@@ -17,6 +17,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected int Stamina;
 	
 	//Variable des objets
+	public bool PlayerIsHere = false;
 	protected Node3D CameraH;
 	protected SpringArm3D CameraV;
 	protected Camera3D Camera;
@@ -98,6 +99,8 @@ public abstract partial class ClassScript : CharacterBody3D
 		//Envoie de la position du joueur au serveur
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
+		PlayerIsHere = true;
+
 	}
 
 	protected void Pause()

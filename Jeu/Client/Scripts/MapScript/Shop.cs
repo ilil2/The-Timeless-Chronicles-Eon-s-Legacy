@@ -13,11 +13,14 @@ public partial class Shop : IMap
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
 		if (!MapReady)
 		{
 			MapReady = true;
 			LoadingStage = "En attente des autres joueurs :(";
+			
 		}
+		
 	}
 
 	public override List<(int, int, int)> GetSpawnLocation()

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfjbagqt5owby"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/pointer.cs" id="1_5bkvv"]
+[ext_resource type="Texture2D" uid="uid://dhc27s7rfltol" path="res://Ressources/Graphismes/cursor.png" id="1_uxq7v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2o8nb"]
+transparency = 1
+albedo_texture = ExtResource("1_uxq7v")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lxrqb"]
+material = SubResource("StandardMaterial3D_2o8nb")
+
+[node name="Pointer" type="Node3D"]
+script = ExtResource("1_5bkvv")
+
+[node name="Arrow" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, -1)
+mesh = SubResource("PlaneMesh_lxrqb")

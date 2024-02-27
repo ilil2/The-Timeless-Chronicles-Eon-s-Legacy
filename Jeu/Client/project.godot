@@ -10,9 +10,10 @@ config_version=5
 
 [application]
 
-config/name="JeuClient"
+config/name="The Timeless Chronicles: Eon's Legacy"
 run/main_scene="res://Scenes/main_scene.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
+boot_splash/image="res://Ressources/Graphismes/IntroLogo.png"
 config/icon="res://Ressources/Graphismes/LogoJeu.png"
 
 [display]

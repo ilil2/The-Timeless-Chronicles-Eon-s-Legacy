@@ -46,6 +46,7 @@ public partial class MapLvl3Script : IMap
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+	
 	}
 
 	public override List<(int, int, int)> GetSpawnLocation()

@@ -80,6 +80,7 @@ public partial class GameManager : Node3D
 
 	protected static bool Cheat = false;
 	public static bool DebugMode = false;
+	public static bool CDisplay = false;
 	public static bool Fog = true;
 	protected static bool Quit = false; 
 	protected static int Seed = 42;
