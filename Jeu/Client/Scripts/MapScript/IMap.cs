@@ -39,8 +39,34 @@ public abstract partial class IMap : Node3D
 				case 2:
 					Node3D pointer1 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
 					pointer1.Name = "Pointer";
-					(pointer1 as pointer).SetTarget(GameManager.Joueur2);
 					Player.AddChild(pointer1);
+					(pointer1 as pointer).SetTarget(GameManager.Joueur2);
+					GD.Print($"nb J = {GameManager._nbJoueur}");
+					break;
+				case 3:
+					Node3D p2ointer1 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
+					p2ointer1.Name = "Pointer";
+					Player.AddChild(p2ointer1);
+					(p2ointer1 as pointer).SetTarget(GameManager.Joueur2);
+					Node3D p2ointer2 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
+					p2ointer2.Name = "Pointer";
+					Player.AddChild(p2ointer2);
+					(p2ointer2 as pointer).SetTarget(GameManager.Joueur3);
+					GD.Print($"nb J = {GameManager._nbJoueur}");
+					break;
+				case 4:
+					Node3D p3ointer1 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
+					p3ointer1.Name = "Pointer";
+					Player.AddChild(p3ointer1);
+					(p3ointer1 as pointer).SetTarget(GameManager.Joueur2);
+					Node3D p3ointer2 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
+					p3ointer2.Name = "Pointer";
+					Player.AddChild(p3ointer2);
+					(p3ointer2 as pointer).SetTarget(GameManager.Joueur3);
+					Node3D p3ointer3 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
+					p3ointer3.Name = "Pointer";
+					Player.AddChild(p3ointer3);
+					(p3ointer3 as pointer).SetTarget(GameManager.Joueur4);
 					GD.Print($"nb J = {GameManager._nbJoueur}");
 					break;
 				default:
