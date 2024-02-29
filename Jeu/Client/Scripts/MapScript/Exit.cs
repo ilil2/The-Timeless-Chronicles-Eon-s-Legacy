@@ -25,7 +25,6 @@ public partial class Exit : Area3D
 		if(body is ClassScript || body is OtherClassScript)
 		{
 			PlayerIn++;
-			GD.Print($"{(body as ClassScript).Pseudo} find Exit, {PlayerIn} Player, {AllInside()}");
 			if(AllInside())
 			{
 				GameManager.InfoJoueur["attack"] = "next";
@@ -37,7 +36,6 @@ public partial class Exit : Area3D
 		if(body is ClassScript || body is OtherClassScript)
 		{
 			PlayerIn--;
-			GD.Print($"{(body as ClassScript).Pseudo} leave Exit, {PlayerIn} Player, {AllInside()}");
 		}
 	}
 }

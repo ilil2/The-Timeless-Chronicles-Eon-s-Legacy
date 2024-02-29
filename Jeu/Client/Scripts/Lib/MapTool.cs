@@ -44,11 +44,18 @@ public partial class MapTool : Node
 		Camera3D CameraPlayer = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		if(DebugM)
 		{
-			Camera3D DebugCam = Map.GetNode<Camera3D>("SpecCam");
-			DebugM = false;
-			CameraPlayer.Current = true;
-			DebugCam.Current = false;
-			Map.RemoveChild(DebugCam);
+			try
+			{
+				Camera3D DebugCam = Map.GetNode<Camera3D>("SpecCam");
+				DebugM = false;
+				CameraPlayer.Current = true;
+				DebugCam.Current = false;
+				Map.RemoveChild(DebugCam);
+			}
+			catch
+			{
+				DebugM = false;
+			}
 			
 		}
 		else

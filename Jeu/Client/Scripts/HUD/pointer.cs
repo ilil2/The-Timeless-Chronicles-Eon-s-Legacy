@@ -16,11 +16,18 @@ public partial class pointer : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Ready)
+		try
 		{
-			LookAt(Target.GlobalPosition);	
-			double d = MapTool.Distance(GlobalPosition,Target.GlobalPosition);
-			t.Text = $"{Mathf.Round(d)}m";
+			if(Ready)
+			{
+				LookAt(Target.GlobalPosition);	
+				double d = MapTool.Distance(GlobalPosition,Target.GlobalPosition);
+				t.Text = $"{Mathf.Round(d)}m";
+			}
+		}
+		catch
+		{
+			QueueFree();
 		}
 	}
 	
