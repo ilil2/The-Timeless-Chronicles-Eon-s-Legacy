@@ -37,8 +37,12 @@ public partial class OtherClassScript : CharacterBody3D
 	
 	protected void SetRotation()
 	{
-		string[] orientations = GameManager.InfoAutreJoueur[$"orientation{Id}"].Split(";");
-		Rotation = new Vector3(Lib.Conversions.AtoF(orientations[0]), Lib.Conversions.AtoF(orientations[1]), Lib.Conversions.AtoF(orientations[2]));
+		try
+		{
+			string[] orientations = GameManager.InfoAutreJoueur[$"orientation{Id}"].Split(";");
+			Rotation = new Vector3(Lib.Conversions.AtoF(orientations[0]), Lib.Conversions.AtoF(orientations[1]), Lib.Conversions.AtoF(orientations[2]));
+		}
+		catch{}
 	}
 	
 	private void SetPseudo()
