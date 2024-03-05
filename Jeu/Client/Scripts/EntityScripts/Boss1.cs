@@ -29,15 +29,41 @@ public partial class Boss_niv1_Script : CharacterBody3D
 	private float StateDeath = -0.1f;
 	private Random R = new Ramdom(); 
 	
+	 // Zones d'attaque
+	private Area3D slashArea;
+	private Area3D bumpArea;
+	private Area3D boubouleArea;
+	
 	public override void _Ready()
 	{
 		Parent = GetParent().GetParent();
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
-		attackTimer = new Timer();
+		// Création d'un timer pour le cooldown des attacks 
+		attackTimer = new Timer(); 
 		AddChild(attackTimer);
 		attackTimer.WaitTime = 2f; // Cooldown de 2 secondes entre les attaques
 		attackTimer.OneShot = true;
 		attackTimer.Connect("timeout", this, nameof(OnAttackTimerTimeout));
+		
+	   // Initialisation des zones d'attaque
+		slashArea = GetNode<Area3D>("SlashArea");
+		bumpArea = GetNode<Area3D>("BumpArea");
+		boubouleArea = GetNode<Area3D>("BoubouleArea");
+
+		// Connexion des signaux pour les collisions
+		slashArea.Connect("body_entered", this, nameof(OnAttackBodyEntered), new Godot.Collections.Array { "Slash" });
+		bumpArea.Connect("body_entered", this, nameof(OnAttackBodyEntered), new Godot.Collections.Array { "Bump" });
+		boubouleArea.Connect("body_entered", this, nameof(OnAttackBodyEntered), new Godot.Collections.Array { "Bouboule" });
+	}
+	
+	   private void OnAttackBodyEntered(Node body, string attackType)
+	{
+		if (body is Player && Alive)
+		{
+			// Endroit ou il faut mettre chaque chose que fait chaque atk 
+			GD.Print($"{attackType} hit the player!");
+			Player.TakeDamage(CalculateDamage(attackType)); //  CalculateDamage a implenter pour les dégats
+		}
 	}
 
 	
@@ -107,6 +133,8 @@ public partial class Boss_niv1_Script : CharacterBody3D
 	
 	private void Attack()
 	{
+		int a;
+		
 		if (HP <= 500) 
 		{
 			state = 3; 
@@ -115,6 +143,7 @@ public partial class Boss_niv1_Script : CharacterBody3D
 		{
 				
 			// Implémentez la logique d'attaque ici
+			
 			a = R.Next(1,3); // choisir atk
 			if (a = 1 )
 			{
@@ -167,10 +196,14 @@ public partial class Boss_niv1_Script : CharacterBody3D
 	
 	private void Slash()
 	{
+		CalculateDamage("Slash");
+		ToggleAttackArea(slashArea, true);
 		GD.Print("Je me slash");
 	}
 	private void Bump()
 	{
+		CalculateDamage("Bump");
+		ToggleAttackArea(bumpArea, true);
 		GD.Print("Je te Bump");
 	}
 	private void Buff()
@@ -179,26 +212,69 @@ public partial class Boss_niv1_Script : CharacterBody3D
 	}
 	private void Bouboule()
 	{
+		CalculateDamage("Bouboule");
+		ToggleAttackArea(boubouleArea, true);
 		GD.Print("Bouffe mes boules");
 	}
+	
+	private int CalculateDamage(string attackType)
+	{
+		// Mettre les dégats subit par le joueur 
+		switch (attackType)
+		{
+			case "Slash":
+				return 50;
+			case "Bump":
+				return 30;
+			case "Bouboule":
+				return 400;
+			default:
+				return 0; // Pas de dégâts pour Buff ou types inconnus
+		}
+	}
+	
+	private void DisableAttackArea(Area3D area)
+{
+	area.Monitoring = false; // Désactive la zone d'attaque
+}
 
+ 
+// Fonction activer/désactiver les zones d'attaque 
+private void ToggleAttackArea(Area3D area, bool isActive)
+{
+	area.Monitoring = isActive; // Active ou désactive la détection de collision
+	if (isActive)
+	{
+		Timer timer = new Timer(); // Création d'un nouveau Timer
+		AddChild(timer); 
+		timer.WaitTime = 0.5f; // Définition du délai avant désactivation de l'area 3D
+		timer.OneShot = true; // Le Timer s'arrête après son exécution
+		// Définition de l'action à effectuer lorsque le Timer atteint 0
+		timer.Connect("timeout", this, "TimeoutHandler", new Godot.Collections.Array { timer, area });
+		timer.Start(); // Démarrage du Timer
+	}
+}
+
+// Timer atteint 0
+private void TimeoutHandler(Godot.Object[] args)
+{
+	if (args.Length == 2 && args[0] is Timer timer && args[1] is Area3D area)
+	{
+		DisableAttackArea(area); // Désactivation de l'aire d'attaque
+		timer.QueueFree(); // Suppression du Timer
+	}
+}
+
+
+	
 	// Dégâts reçus par le boss
 	public void TakeDamage(int damage)
 	{
 		HP -= damage;
 		if (HP <= 0)
 		{
-			Die();
+			SetUpDeath();
 		}
 	}
-	private void Death()
-	{
-		tim += 0.01f;
-		MeshInstance3D M = GetNode<MeshInstance3D>("Body/Body"); 
-		(M.MaterialOverride as ShaderMaterial).SetShaderParameter("Timer",tim);
-		if(tim>=1.1f)
-		{
-			QueueFree();
-		}
-	}
+	
 }
