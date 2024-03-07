@@ -51,6 +51,7 @@ public partial class MapLvl1Script : IMap
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
 		LoadingStage = "Room Placement";
+		Rand = new Random();//debug
 	}
 	
 	public override void _Process(double delta)
@@ -318,8 +319,8 @@ public partial class MapLvl1Script : IMap
 
 	private Vector3 Roundm(float x, float z, int LenTile)
 	{
-		int NewX = (int)(Math.Ceiling((x+LenTile-1)/(float)(LenTile))*LenTile);
-		int NewZ = (int)(Math.Ceiling((z+LenTile-1)/(float)(LenTile))*LenTile);
+		int NewX = (int)(Math.Floor((x+LenTile-1)/(float)(LenTile))*LenTile);
+		int NewZ = (int)(Math.Floor((z+LenTile-1)/(float)(LenTile))*LenTile);
 		return new Vector3(NewX,0,NewZ);
 	}
 	

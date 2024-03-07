@@ -148,3 +148,6 @@ shadow_enabled = true
 environment = SubResource("Environment_vrgge")
 
 [node name="Exit" parent="." instance=ExtResource("10_gbivg")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 5)
