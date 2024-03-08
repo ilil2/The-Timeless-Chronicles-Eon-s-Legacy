@@ -14,21 +14,21 @@ public partial class OtherScientistScript : OtherClassScript
     {
         PseudoManager();
 
-        if (GameManager.InfoAutreJoueur[$"attack{Id}"] != "" && GameManager.InfoAutreJoueur[$"attack{Id}"] != "stop")
-        {
-            PackedScene laserScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Laser.tscn");
-            Node3D laser = laserScene.Instantiate<Node3D>();
-            
-            string[] laserInfo = GameManager.InfoAutreJoueur[$"attack{Id}"].Split(";");
-            
-            laser.Position = new Vector3(laserInfo[0].ToFloat(), laserInfo[1].ToFloat(), laserInfo[2].ToFloat());
-            laser.Rotation = new Vector3(laserInfo[3].ToFloat(), laserInfo[4].ToFloat(), laserInfo[5].ToFloat());
+        if (GameManager.InfoAutreJoueur[$"attack{Id}"] != "" && GameManager.InfoAutreJoueur[$"attack{Id}"] != "stop" && GameManager.InfoAutreJoueur[$"attack{Id}"] != "next")
+		{
+			PackedScene laserScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Laser.tscn");
+			Node3D laser = laserScene.Instantiate<Node3D>();
+			
+			string[] laserInfo = GameManager.InfoAutreJoueur[$"attack{Id}"].Split(";");
+			
+			laser.Position = new Vector3(float.Parse(laserInfo[0]), float.Parse(laserInfo[1]), float.Parse(laserInfo[2]));
+			laser.Rotation = new Vector3(float.Parse(laserInfo[3]), float.Parse(laserInfo[4]), float.Parse(laserInfo[5]));
 
-            ((Laser)laser).SetLaserID(Id);
-            GetTree().Root.AddChild(laser);
+			((Laser)laser).SetLaserID(Id);
+			GetTree().Root.AddChild(laser);
 
-            GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
-        }
+			GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+		}
     }
     
     public override void _PhysicsProcess(double delta)

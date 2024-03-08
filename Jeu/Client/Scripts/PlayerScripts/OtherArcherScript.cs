@@ -14,16 +14,17 @@ public partial class OtherArcherScript : OtherClassScript
     {
         PseudoManager();
 
-        if (GameManager.InfoAutreJoueur[$"attack{Id}"] != "")
+        if (GameManager.InfoAutreJoueur[$"attack{Id}"] != "" && GameManager.InfoAutreJoueur[$"attack{Id}"] != "next")
         {
             PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
             RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
             
+            GD.Print(GameManager.InfoAutreJoueur[$"attack{Id}"]);
             string[] arrowInfo = GameManager.InfoAutreJoueur[$"attack{Id}"].Split(";");
             
-            arrow.Position = new Vector3(arrowInfo[0].ToFloat(), arrowInfo[1].ToFloat(), arrowInfo[2].ToFloat());
-            arrow.Rotation = new Vector3(arrowInfo[3].ToFloat(), arrowInfo[4].ToFloat(), arrowInfo[5].ToFloat());
-            arrow.LinearVelocity = new Vector3(arrowInfo[6].ToFloat(), arrowInfo[7].ToFloat(), arrowInfo[8].ToFloat());
+            arrow.Position = new Vector3(float.Parse(arrowInfo[0]), float.Parse(arrowInfo[1]), float.Parse(arrowInfo[2]));
+            arrow.Rotation = new Vector3(float.Parse(arrowInfo[3]), float.Parse(arrowInfo[4]), float.Parse(arrowInfo[5]));
+            arrow.LinearVelocity = new Vector3(float.Parse(arrowInfo[6]), float.Parse(arrowInfo[7]), float.Parse(arrowInfo[8]));
             GetTree().Root.AddChild(arrow);
             
             GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
