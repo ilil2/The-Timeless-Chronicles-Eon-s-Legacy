@@ -6,7 +6,8 @@ public partial class OtherKnightScript : OtherClassScript
 	public override void _Ready()
 	{
 		InitOtherPlayer();
-		AnimationOtherPlayer = GetNode<AnimationPlayer>("AnimationOtherPlayer");
+		AnimationOtherTree = GetNode<AnimationTree>("AnimationOtherTree");
+		AnimationOtherTree.Active = true;
 	}
 	
 	public override void _Process(double delta)
@@ -22,31 +23,40 @@ public partial class OtherKnightScript : OtherClassScript
 		switch (GameManager.InfoAutreJoueur[$"attack{Id}"])
 		{
 			case "hit":
-				AnimationOtherPlayer.Play("Hit");
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", true);
+				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 			case "protection":
-				AnimationOtherPlayer.Play("Protection");
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", true);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
+				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 			case "init":
-				AnimationOtherPlayer.Play("Init");
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
+				AnimationOtherTree.Set("parameters/conditions/Idle", true);
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 			case "walk":
-				AnimationOtherPlayer.Play("Walk");
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
+				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(0, 1));
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 			case "walkside":
-				AnimationOtherPlayer.Play("WalkSide");
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
-				break;
-			case "walkdiagleft":
-				AnimationOtherPlayer.Play("WalkDiagLeft");
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
-				break;
-			case "walkdiagright":
-				AnimationOtherPlayer.Play("WalkDiagRight");
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
+				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 		}

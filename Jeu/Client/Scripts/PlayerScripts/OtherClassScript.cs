@@ -7,6 +7,7 @@ public partial class OtherClassScript : CharacterBody3D
 	protected Label3D Pseudo;
 	
 	protected AnimationPlayer AnimationOtherPlayer;
+	protected AnimationTree AnimationOtherTree;
 
 	protected int Id;
 	protected string Classe;

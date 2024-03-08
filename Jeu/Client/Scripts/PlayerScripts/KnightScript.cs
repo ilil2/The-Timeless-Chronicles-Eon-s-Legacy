@@ -15,7 +15,8 @@ public partial class KnightScript : ClassScript
 		RunSpeed = 6.8f;
 		DashPower = 70.0f;
 		
-		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		AnimationTree = GetNode<AnimationTree>("AnimationTree");
+		AnimationTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -29,6 +30,7 @@ public partial class KnightScript : ClassScript
 	public override void _Process(double delta)
 	{
 		SendPosition();
+		Animation();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -68,8 +70,6 @@ public partial class KnightScript : ClassScript
 	
 	protected override void Move(double delta)
 	{
-		if (!Attack() && AnimationPlayer.CurrentAnimation != "Hit")
-		{
 			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 			{
 				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
@@ -84,54 +84,8 @@ public partial class KnightScript : ClassScript
 					Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
 					IsWalking = true;
 					MovementSpeed = WalkSpeed;
+				}
 
-					if (left - right == 1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
-					{
-						AnimationPlayer.Play("WalkDiagLeft");
-						GameManager.InfoJoueur["attack"] = "walkdiagleft";
-					}
-					else if (left - right == -1 && forward - backward == 1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-					{
-						AnimationPlayer.Play("WalkDiagRight");
-						GameManager.InfoJoueur["attack"] = "walkdiagright";
-					}
-					else if (left - right == 1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-					{
-						AnimationPlayer.Play("WalkDiagRight");
-						GameManager.InfoJoueur["attack"] = "walkdiagright";
-					}
-					else if (left - right == -1 && forward - backward == -1 && AnimationPlayer.CurrentAnimation != "WalkDiagLeft")
-					{
-						AnimationPlayer.Play("WalkDiagLeft");
-						GameManager.InfoJoueur["attack"] = "walkdiagleft";
-					}
-					else if ((left - right == 1 || left - right == -1) && AnimationPlayer.CurrentAnimation != "WalkSide"
-																	   && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
-																	   && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-					{
-						AnimationPlayer.Play("WalkSide");
-						GameManager.InfoJoueur["attack"] = "walkside";
-					}
-					else if ((forward - backward == 1 || forward - backward == -1) && AnimationPlayer.CurrentAnimation != "Walk"
-																				   && AnimationPlayer.CurrentAnimation != "WalkDiagLeft"
-																				   && AnimationPlayer.CurrentAnimation != "WalkDiagRight")
-					{
-						AnimationPlayer.Play("Walk");
-						GameManager.InfoJoueur["attack"] = "walk";
-					}
-					else if (!(left - right == 1 || left - right == -1 || forward - backward == 1 || forward - backward == -1))
-					{
-						AnimationPlayer.Play("Init");
-						GameManager.InfoJoueur["attack"] = "init";
-					}
-				}
-				else
-				{
-					IsWalking = false;
-					AnimationPlayer.Play("Init");
-					GameManager.InfoJoueur["attack"] = "init";
-				}
-				
 				//Calcul de la rotation du joueur
 				PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 				
@@ -150,24 +104,71 @@ public partial class KnightScript : ClassScript
 			//Application du mouvement au joueur
 			Velocity = velocity;
 			MoveAndSlide();
-		}
 	}
 
 	private bool Attack()
 	{
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
-			AnimationPlayer.Play("Hit");
 			GameManager.InfoJoueur["attack"] = "hit";
 			return true;
 		}
-		else if (Input.IsMouseButtonPressed(MouseButton.Right))
+		if (Input.IsMouseButtonPressed(MouseButton.Right))
 		{
-			AnimationPlayer.Play("Protection");
 			GameManager.InfoJoueur["attack"] = "protection";
 			return true;
 		}
 
 		return false;
+	}
+
+	private void Animation()
+	{
+		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
+		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
+		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
+		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
+		
+		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		{
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenBlock", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", true);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+		}
+		else if (Input.IsMouseButtonPressed(MouseButton.Right))
+		{
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenBlock", true);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+		}
+		else if (left || right || forward || backward)
+		{
+			AnimationTree.Set("parameters/conditions/WhenWalk", true);
+			AnimationTree.Set("parameters/conditions/WhenBlock", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+
+			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+			{
+				GameManager.InfoJoueur["attack"] = "walkside";
+			}
+			else
+			{
+				GameManager.InfoJoueur["attack"] = "walk";
+			}
+		}
+		else
+		{
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenBlock", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["attack"] = "init";
+		}
+		
+		AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
 	}
 }

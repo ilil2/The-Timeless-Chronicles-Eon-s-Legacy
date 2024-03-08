@@ -24,6 +24,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected Node3D CameraPlayer;
 	protected Node3D PlayerMesh;
 	protected AnimationPlayer AnimationPlayer;
+	protected AnimationTree AnimationTree;
 	
 	//Variable de camera
 	private float _fovMax = 80;
@@ -107,7 +108,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _pauseTimer > 20)
 		{
-			AnimationPlayer.Stop();
 			GameManager.InfoJoueur["attack"] = "init";
 			CameraV.SpringLength = -4;
 			_pauseTimer = 0;
