@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using JeuClient.Scripts.PlayerScripts;
+using Lib;
 
 public partial class Exit : Area3D
 {
@@ -27,7 +28,7 @@ public partial class Exit : Area3D
 			PlayerIn++;
 			if(AllInside())
 			{
-				GameManager.InfoJoueur["attack"] = "next";
+				UDP.OneShot("next");
 			}
 		}
 	}

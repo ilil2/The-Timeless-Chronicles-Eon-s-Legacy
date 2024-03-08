@@ -52,13 +52,13 @@ public partial class GameManager : Node3D
 	
 	public static int state = 0;
 	
-	protected static Socket soc2;
-	protected static IPEndPoint iep2;
+	public static Socket soc2;
+	public static IPEndPoint iep2;
 	
 	protected static Thread th2;
 	
-	public static Godot.Collections.Dictionary<string, string> InfoJoueur = new Godot.Collections.Dictionary<string, string>();
-	public static Godot.Collections.Dictionary<string, string> InfoAutreJoueur = new Godot.Collections.Dictionary<string, string>();
+	public static Dictionary<string, string> InfoJoueur = new Dictionary<string, string>();
+	public static Dictionary<string, string> InfoAutreJoueur = new Dictionary<string, string>();
 
 	protected static bool _loadMap = false;
 

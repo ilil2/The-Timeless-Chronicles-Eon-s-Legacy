@@ -50,6 +50,7 @@ public partial class Laser : Node3D
         {
             if (GameManager.InfoJoueur["attack"] == "stop")
             {
+                GameManager.InfoJoueur["attack"] = "";
                 QueueFree();
             }
         }

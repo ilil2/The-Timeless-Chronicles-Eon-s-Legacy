@@ -109,7 +109,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _pauseTimer > 20)
 		{
-			GameManager.InfoJoueur["attack"] = "init";
+			UDP.OneShot("init");
 			CameraV.SpringLength = -4;
 			_pauseTimer = 0;
 			GameManager._pausemode = true;

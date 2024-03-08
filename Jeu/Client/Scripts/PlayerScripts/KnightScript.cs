@@ -117,12 +117,12 @@ public partial class KnightScript : ClassScript
 	{
 		if (Input.IsMouseButtonPressed(MouseButton.Left))
 		{
-			GameManager.InfoJoueur["attack"] = "hit";
+			UDP.OneShot("hit");
 			return true;
 		}
 		if (Input.IsMouseButtonPressed(MouseButton.Right))
 		{
-			GameManager.InfoJoueur["attack"] = "protection";
+			UDP.OneShot("protection");
 			return true;
 		}
 
@@ -145,7 +145,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", true);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "hit";
+			UDP.OneShot("hit");
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
@@ -156,7 +156,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", false);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			GameManager.InfoJoueur["attack"] = "protection";
+			UDP.OneShot("protection");
 		}
 		else if ((left || right || forward || backward) && AnimationState != 1 && AnimationState != 2)
 		{
@@ -171,11 +171,11 @@ public partial class KnightScript : ClassScript
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
-				GameManager.InfoJoueur["attack"] = "walkside";
+				UDP.OneShot("walkside");
 			}
 			else
 			{
-				GameManager.InfoJoueur["attack"] = "walk";
+				UDP.OneShot("walk");
 			}
 		}
 		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
@@ -187,7 +187,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "idle";
+			UDP.OneShot("idle");
 		}
 	}
 }

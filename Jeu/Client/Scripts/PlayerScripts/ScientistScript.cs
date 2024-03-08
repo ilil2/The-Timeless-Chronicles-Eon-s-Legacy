@@ -167,7 +167,7 @@ public partial class ScientistScript : ClassScript
             Vector3 laserPosition = new Vector3(CameraV.GlobalPosition.X + (float)Math.Sin(rotationY), Position.Y + 1.2f, Position.Z + (float)Math.Cos(rotationY));
             laser.GlobalPosition = new Vector3((laserPosition.X + GlobalPosition.X) / 2, laserPosition.Y, (laserPosition.Z + GlobalPosition.Z) / 2);
             laser.Rotation = new Vector3(CameraV.Rotation.X + 0.15f, (float)rotationY, CameraV.Rotation.X + 0.15f);
-            GameManager.InfoJoueur["attack"] = $"{laser.Position.X};{laser.Position.Y};{laser.Position.Z};{laser.Rotation.X};{laser.Rotation.Y};{laser.Rotation.Z}";
+            UDP.OneShot($"{laser.Position.X};{laser.Position.Y};{laser.Position.Z};{laser.Rotation.X};{laser.Rotation.Y};{laser.Rotation.Z}");
             GetTree().Root.AddChild(laser);
             
             GameManager.LockCamera = true;
@@ -175,6 +175,7 @@ public partial class ScientistScript : ClassScript
         
         if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
         {
+	        UDP.OneShot("stop");
             GameManager.InfoJoueur["attack"] = "stop";
             _isShooting = false;
             GameManager.LockCamera = false;
@@ -196,7 +197,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", true);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			GameManager.InfoJoueur["attack"] = "shoot";
+			UDP.OneShot("shoot");
 			
 			_shootCooldown = 0;
 			_isShooting = true;
@@ -213,11 +214,11 @@ public partial class ScientistScript : ClassScript
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
-				GameManager.InfoJoueur["attack"] = "walkside";
+				UDP.OneShot("walkside");
 			}
 			else
 			{
-				GameManager.InfoJoueur["attack"] = "walk";
+				UDP.OneShot("walk");
 			}
 		}
 		else if ((!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting) && !(left || right || forward || backward) && AnimationState != 0)
@@ -228,7 +229,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "idle";
+			UDP.OneShot("idle");
 		}
 	}
 }
