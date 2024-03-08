@@ -38,12 +38,11 @@ public partial class KnightScript : ClassScript
 		Pause();
 		PhysicsReset();
 		Gravity(delta);
-		Move(delta);
-
 		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
 			Animation();
 		}
+		Move(delta);
 	}
 	
 	protected override void Dash()
@@ -75,7 +74,7 @@ public partial class KnightScript : ClassScript
 	
 	protected override void Move(double delta)
 	{
-		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat() && AnimationState != 2)
 		{
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
 			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
@@ -98,17 +97,20 @@ public partial class KnightScript : ClassScript
 				
 			Dash();
 				
+			//Calcul du movement du joueur
+			Vector3 velocity = Velocity;
+			velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+			velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+			velocity.Y = VerticalVelocity.Y;
+			
+			//Application du mouvement au joueur
+			Velocity = velocity;
+			MoveAndSlide();
 		}
-			
-		//Calcul du movement du joueur
-		Vector3 velocity = Velocity;
-		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-		velocity.Y = VerticalVelocity.Y;
-			
-		//Application du mouvement au joueur
-		Velocity = velocity;
-		MoveAndSlide();
+		else
+		{
+			Velocity = new Vector3(0, 0, 0);
+		}
 	}
 
 	private bool Attack()
@@ -141,11 +143,11 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenWalk", false);
 			AnimationTree.Set("parameters/conditions/WhenBlock", false);
 			AnimationTree.Set("parameters/conditions/WhenHit", true);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationTree.Set("parameters/conditions/Idle", true);
 			
 			GameManager.InfoJoueur["attack"] = "hit";
 		}
-		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2)
+		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
 			AnimationState = 2;
 			
@@ -156,7 +158,7 @@ public partial class KnightScript : ClassScript
 			
 			GameManager.InfoJoueur["attack"] = "protection";
 		}
-		else if ((left || right || forward || backward) && AnimationState != 1)
+		else if ((left || right || forward || backward) && AnimationState != 1 && AnimationState != 2)
 		{
 			AnimationState = 1;
 			

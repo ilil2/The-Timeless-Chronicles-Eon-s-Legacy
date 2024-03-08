@@ -192,8 +192,21 @@ public partial class ArcherScript : ClassScript
 		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
-		
-		if (!_isAiming && IsShooting && AnimationState != 3)
+
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming)
+		{
+			AnimationState = 6;
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAim", false);
+			AnimationTree.Set("parameters/conditions/WhenShoot", false);
+			AnimationTree.Set("parameters/conditions/WhenHitBow", true);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["attack"] = "hitbow";
+		}
+		else if (!_isAiming && IsShooting && AnimationState != 3)
 		{
 			AnimationState = 3;
 			
@@ -201,6 +214,7 @@ public partial class ArcherScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
 			AnimationTree.Set("parameters/conditions/WhenAim", false);
 			AnimationTree.Set("parameters/conditions/WhenShoot", true);
+			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
 			GameManager.InfoJoueur["attack"] = "shoot";
@@ -216,6 +230,7 @@ public partial class ArcherScript : ClassScript
 				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
 				AnimationTree.Set("parameters/conditions/WhenAim", false);
 				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 				AnimationTree.Set("parameters/conditions/Idle", false);
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
@@ -237,6 +252,7 @@ public partial class ArcherScript : ClassScript
 				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
 				AnimationTree.Set("parameters/conditions/WhenAim", true);
 				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 				AnimationTree.Set("parameters/conditions/Idle", false);
 				
 				GameManager.InfoJoueur["attack"] = "aim";
@@ -252,6 +268,7 @@ public partial class ArcherScript : ClassScript
 				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
 				AnimationTree.Set("parameters/conditions/WhenAim", false);
 				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 				AnimationTree.Set("parameters/conditions/Idle", false);
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
@@ -273,6 +290,7 @@ public partial class ArcherScript : ClassScript
 				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
 				AnimationTree.Set("parameters/conditions/WhenAim", false);
 				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 				AnimationTree.Set("parameters/conditions/Idle", false);
 
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
@@ -295,6 +313,7 @@ public partial class ArcherScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
 			AnimationTree.Set("parameters/conditions/WhenAim", false);
 			AnimationTree.Set("parameters/conditions/WhenShoot", false);
+			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
 			GameManager.InfoJoueur["attack"] = "idle";
