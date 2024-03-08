@@ -16,6 +16,7 @@ public partial class State5 : GameManager
 		InfoJoueur["co"] = "0;0;0";
 		InfoJoueur["orientation"] = "0;0;0";
 		InfoJoueur["attack"] = "";
+		InfoJoueur["info"] = "";
 				
 		switch (_nbJoueur)
 		{

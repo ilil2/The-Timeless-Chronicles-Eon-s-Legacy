@@ -146,6 +146,7 @@ public partial class ScientistScript : ClassScript
         
         if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
         {
+            GameManager.InfoJoueur["info"] = "stop";
             GameManager.InfoJoueur["attack"] = "stop";
             _isShooting = false;
             GameManager.LockCamera = false;
