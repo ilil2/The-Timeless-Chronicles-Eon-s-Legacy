@@ -84,22 +84,6 @@ public partial class KnightScript : ClassScript
 		}
 	}
 
-	private bool Attack()
-	{
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
-		{
-			GameManager.InfoJoueur["attack"] = "hit";
-			return true;
-		}
-		if (Input.IsMouseButtonPressed(MouseButton.Right))
-		{
-			GameManager.InfoJoueur["attack"] = "protection";
-			return true;
-		}
-
-		return false;
-	}
-
 	private void Animation()
 	{
 		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
@@ -116,7 +100,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", true);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "hit";
+			GameManager.InfoJoueur["animation"] = "hit";
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
@@ -127,7 +111,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", false);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			GameManager.InfoJoueur["attack"] = "protection";
+			GameManager.InfoJoueur["animation"] = "protection";
 		}
 		else if ((left || right || forward || backward) && AnimationState != 1 && AnimationState != 2)
 		{
@@ -142,11 +126,11 @@ public partial class KnightScript : ClassScript
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
-				GameManager.InfoJoueur["attack"] = "walkside";
+				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 			else
 			{
-				GameManager.InfoJoueur["attack"] = "walk";
+				GameManager.InfoJoueur["animation"] = "walk";
 			}
 		}
 		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
@@ -158,7 +142,7 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHit", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "idle";
+			GameManager.InfoJoueur["animation"] = "idle";
 		}
 	}
 }

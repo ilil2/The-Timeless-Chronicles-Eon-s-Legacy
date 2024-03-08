@@ -35,7 +35,7 @@ public partial class OtherArcherScript : OtherClassScript
         SetPosition();
         SetRotation();
         
-        switch (GameManager.InfoAutreJoueur[$"attack{Id}"])
+        switch (GameManager.InfoAutreJoueur[$"animation{Id}"])
         {
             case "hitbow":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -44,6 +44,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", true);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "shoot":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -52,7 +53,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenShoot", true);
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aim":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -61,7 +62,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "walk":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
@@ -71,7 +72,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
                 AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(0, 1));
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "walkside":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
@@ -81,7 +82,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
                 AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aimwalk":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -91,7 +92,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
                 AnimationOtherTree.Set("parameters/AimWalk/blend_position", new Vector2(0, 1));
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aimwalkside":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -101,7 +102,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", false);
                 AnimationOtherTree.Set("parameters/AimWalk/blend_position", new Vector2(1, 0));
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "idle":
                 AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
@@ -110,7 +111,7 @@ public partial class OtherArcherScript : OtherClassScript
                 AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
                 AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
                 AnimationOtherTree.Set("parameters/conditions/Idle", true);
-                GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
         }
     }

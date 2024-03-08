@@ -147,7 +147,7 @@ public partial class ScientistScript : ClassScript
         if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
         {
             GameManager.InfoJoueur["info"] = "stop";
-            GameManager.InfoJoueur["attack"] = "stop";
+            GameManager.InfoJoueur["animation"] = "stop";
             _isShooting = false;
             GameManager.LockCamera = false;
         }
@@ -168,7 +168,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", true);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			GameManager.InfoJoueur["attack"] = "shoot";
+			GameManager.InfoJoueur["animation"] = "shoot";
 			
 			_shootCooldown = 0;
 			_isShooting = true;
@@ -185,11 +185,11 @@ public partial class ScientistScript : ClassScript
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
-				GameManager.InfoJoueur["attack"] = "walkside";
+				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 			else
 			{
-				GameManager.InfoJoueur["attack"] = "walk";
+				GameManager.InfoJoueur["animation"] = "walk";
 			}
 		}
 		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
@@ -200,7 +200,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			GameManager.InfoJoueur["attack"] = "idle";
+			GameManager.InfoJoueur["animation"] = "idle";
 		}
 	}
 }

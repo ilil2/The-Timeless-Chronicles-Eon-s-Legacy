@@ -36,34 +36,34 @@ public partial class OtherScientistScript : OtherClassScript
         SetPosition();
         SetRotation();
 
-		switch (GameManager.InfoAutreJoueur[$"attack{Id}"])
+		switch (GameManager.InfoAutreJoueur[$"animation{Id}"])
 		{
 			case "shoot":
 				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
 				AnimationOtherTree.Set("parameters/conditions/WhenShoot", true);
 				AnimationOtherTree.Set("parameters/conditions/Idle", false);
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "walk":
 				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
 				AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
 				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(0, 1));
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "walkside":
 				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
 				AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
 				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "stop":
 			case "idle":
 				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
 				AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
 				AnimationOtherTree.Set("parameters/conditions/Idle", true);
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 		}
     }
