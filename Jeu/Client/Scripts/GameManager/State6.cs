@@ -17,6 +17,12 @@ public partial class State6 : GameManager
 		{
 			_chat.Visible = false;
 		}
+		
+		if (InfoJoueur["attack"] != "")
+		{
+			UDP.Send(soc2,InfoJoueur["id"] + "_" + "on:" + InfoJoueur["attack"],iep2);
+			InfoJoueur["attack"] = "";
+		}
 	}
 
 	private static void Chat()
@@ -97,7 +103,7 @@ public partial class State6 : GameManager
 					
 					else if (commandchat == "next")
 					{
-						UDP.OneShot("next");
+						InfoJoueur["attack"] = "next";
 					}
 				}
 				else if (commandchat == "cheat on")

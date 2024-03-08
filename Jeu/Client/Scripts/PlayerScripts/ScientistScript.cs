@@ -146,7 +146,6 @@ public partial class ScientistScript : ClassScript
         
         if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
         {
-	        UDP.OneShot("stop");
             GameManager.InfoJoueur["attack"] = "stop";
             _isShooting = false;
             GameManager.LockCamera = false;
@@ -168,7 +167,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", true);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			UDP.OneShot("shoot");
+			GameManager.InfoJoueur["attack"] = "shoot";
 			
 			_shootCooldown = 0;
 			_isShooting = true;
@@ -185,11 +184,11 @@ public partial class ScientistScript : ClassScript
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
-				UDP.OneShot("walkside");
+				GameManager.InfoJoueur["attack"] = "walkside";
 			}
 			else
 			{
-				UDP.OneShot("walk");
+				GameManager.InfoJoueur["attack"] = "walk";
 			}
 		}
 		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
@@ -200,7 +199,7 @@ public partial class ScientistScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenShoot", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			UDP.OneShot("idle");
+			GameManager.InfoJoueur["attack"] = "idle";
 		}
 	}
 }

@@ -150,7 +150,7 @@ public partial class ArcherScript : ClassScript
 			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
 			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
 			
-			UDP.OneShot($"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}");
+			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
 			
 			_shootPower = 1;
@@ -175,7 +175,7 @@ public partial class ArcherScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHitBow", true);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			UDP.OneShot("hitbow");
+			GameManager.InfoJoueur["attack"] = "hitbow";
 		}
 		else if (!_isAiming && IsShooting && AnimationState != 3)
 		{
@@ -188,7 +188,7 @@ public partial class ArcherScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 			AnimationTree.Set("parameters/conditions/Idle", false);
 			
-			UDP.OneShot("shoot");
+			GameManager.InfoJoueur["attack"] = "shoot";
 			IsShooting = false;
 		}
 		else if (_isAiming)
@@ -206,11 +206,11 @@ public partial class ArcherScript : ClassScript
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
-					UDP.OneShot("aimwalkside");
+					GameManager.InfoJoueur["attack"] = "aimwalkside";
 				}
 				else
 				{
-					UDP.OneShot("aimwalk");
+					GameManager.InfoJoueur["attack"] = "aimwalk";
 				}
 				
 				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
@@ -226,7 +226,7 @@ public partial class ArcherScript : ClassScript
 				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 				AnimationTree.Set("parameters/conditions/Idle", false);
 				
-				UDP.OneShot("aim");
+				GameManager.InfoJoueur["attack"] = "aim";
 			}
 		}
 		else if (left || right || forward || backward)
@@ -244,11 +244,11 @@ public partial class ArcherScript : ClassScript
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
-					UDP.OneShot("aimwalkside");
+					GameManager.InfoJoueur["attack"] = "aimwalkside";
 				}
 				else
 				{
-					UDP.OneShot("aimwalk");
+					GameManager.InfoJoueur["attack"] = "aimwalk";
 				}
 				
 				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
@@ -266,11 +266,11 @@ public partial class ArcherScript : ClassScript
 
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
-					UDP.OneShot("walkside");
+					GameManager.InfoJoueur["attack"] = "walkside";
 				}
 				else
 				{
-					UDP.OneShot("walk");
+					GameManager.InfoJoueur["attack"] = "walk";
 				}
 				
 				AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
@@ -287,7 +287,7 @@ public partial class ArcherScript : ClassScript
 			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
 			AnimationTree.Set("parameters/conditions/Idle", true);
 			
-			UDP.OneShot("idle");
+			GameManager.InfoJoueur["attack"] = "idle";
 		}
 	}
 }
