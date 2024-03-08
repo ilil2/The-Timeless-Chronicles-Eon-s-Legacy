@@ -19,7 +19,8 @@ public partial class ScientistScript : ClassScript
     {
         InitPlayer();
         
-        AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        AnimationTree = GetNode<AnimationTree>("AnimationTree");
+        AnimationTree.Active = true;
 
         _shootCooldown = _shootCooldownValue - 50;
         
@@ -54,7 +55,8 @@ public partial class ScientistScript : ClassScript
 
         if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
         {
-            ShootLaser();
+	        ShootLaser();
+	        Animation();
         }
         else
         {
@@ -133,13 +135,18 @@ public partial class ScientistScript : ClassScript
     {
         _shootCooldown += 1;
         
+        if (CameraV.SpringLength > -4 && !IsAiming)
+        {
+	        CameraV.SpringLength -= 0.1f;
+        }
+        
         if (Input.IsMouseButtonPressed(MouseButton.Right))
         {
-            if (!_shootAnimation)
-            {
-                _shootAnimation = true;
-                AnimationPlayer.Play("LaserShootView");
-            }
+	        if (CameraV.SpringLength <= 0)
+	        {
+		        CameraV.SpringLength += 0.1f;
+	        }
+	        
             IsAiming = true;
 			
             PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/HUD/ViewFinder.tscn");
@@ -149,14 +156,10 @@ public partial class ScientistScript : ClassScript
         else if (IsAiming && !_isShooting)
         {
             IsAiming = false;
-            AnimationPlayer.Play("LaserShootViewReset");
-            _shootAnimation = false;
-            
         }
         
         if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting)
         {
-            _isShooting = true;
             PackedScene laserScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Laser.tscn");
             Node3D laser = laserScene.Instantiate<Node3D>();
             
@@ -167,7 +170,6 @@ public partial class ScientistScript : ClassScript
             GameManager.InfoJoueur["attack"] = $"{laser.Position.X};{laser.Position.Y};{laser.Position.Z};{laser.Rotation.X};{laser.Rotation.Y};{laser.Rotation.Z}";
             GetTree().Root.AddChild(laser);
             
-            _shootCooldown = 0;
             GameManager.LockCamera = true;
         }
         
@@ -178,4 +180,55 @@ public partial class ScientistScript : ClassScript
             GameManager.LockCamera = false;
         }
     }
+    
+    private void Animation()
+	{
+		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
+		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
+		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
+		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
+		
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && AnimationState != 2)
+		{
+			AnimationState = 2;
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenShoot", true);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+			
+			GameManager.InfoJoueur["attack"] = "shoot";
+			
+			_shootCooldown = 0;
+			_isShooting = true;
+		}
+		else if ((left || right || forward || backward) && AnimationState != 1)
+		{
+			AnimationState = 1;
+			
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", true);
+			AnimationTree.Set("parameters/conditions/WhenShoot", false);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+
+			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+			{
+				GameManager.InfoJoueur["attack"] = "walkside";
+			}
+			else
+			{
+				GameManager.InfoJoueur["attack"] = "walk";
+			}
+		}
+		else if ((!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting) && !(left || right || forward || backward) && AnimationState != 0)
+		{
+			AnimationState = 0;
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenShoot", false);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["attack"] = "idle";
+		}
+	}
 }
