@@ -24,10 +24,10 @@ public partial class State6 : GameManager
 			InfoJoueur["attack"] = "";
 		}
 
-		if (InfoJoueur["annimation"] != "")
+		if (InfoJoueur["animation"] != "")
 		{
-			UDP.Send(soc2,InfoJoueur["id"] + "_" + "an:" + InfoJoueur["annimation"],iep2);
-			InfoJoueur["annimation"] = "";
+			UDP.Send(soc2,InfoJoueur["id"] + "_" + "an:" + InfoJoueur["animation"],iep2);
+			InfoJoueur["animation"] = "";
 		}
 	}
 
