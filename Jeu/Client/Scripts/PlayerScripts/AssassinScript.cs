@@ -14,6 +14,11 @@ public partial class AssassinScript : ClassScript
         WalkSpeed = 5f;
         RunSpeed = 8f;
         DashPower = 120.0f;
+        
+        //Soutenance
+        WalkSpeed = 6f;
+        RunSpeed = 6.8f;
+        DashPower = 70.0f;
     }
 
     public override void _Input(InputEvent @event)

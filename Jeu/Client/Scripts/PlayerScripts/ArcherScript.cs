@@ -15,9 +15,15 @@ public partial class ArcherScript : ClassScript
 	
 	public override void _Ready()
 	{
+		//Soutenance
+		WalkSpeed = 6f;
+		RunSpeed = 6.8f;
+		DashPower = 70.0f;
+		
 		InitPlayer();
 
-		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		AnimationTree = GetNode<AnimationTree>("AnimationTree");
+		AnimationTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -43,6 +49,7 @@ public partial class ArcherScript : ClassScript
 		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
 			ShootArrow();
+			Animation();
 		}
 		else
 		{
@@ -129,13 +136,17 @@ public partial class ArcherScript : ClassScript
 	private void ShootArrow()
 	{
 		_shootTimer += 1;
+
+		if (CameraV.SpringLength > -4 && !_isAiming)
+		{
+			CameraV.SpringLength -= 0.1f;
+		}
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Right) && _shootTimer > 30)
 		{
-			if (!_shootAnimation)
+			if (CameraV.SpringLength <= 0)
 			{
-				_shootAnimation = true;
-				AnimationPlayer.Play("ArrowShootView");
+				CameraV.SpringLength += 0.1f;
 			}
 			
 			IsShooting = true;
@@ -171,11 +182,122 @@ public partial class ArcherScript : ClassScript
 			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
 			
-			IsShooting = false;
 			_shootPower = 1;
+		}
+	}
+	
+	private void Animation()
+	{
+		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
+		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
+		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
+		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
+		
+		if (!_isAiming && IsShooting && AnimationState != 3)
+		{
+			AnimationState = 3;
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAim", false);
+			AnimationTree.Set("parameters/conditions/WhenShoot", true);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+			
+			GameManager.InfoJoueur["attack"] = "shoot";
+			IsShooting = false;
+		}
+		else if (_isAiming)
+		{
+			if ((left || right || forward || backward) && AnimationState != 2)
+			{
+				AnimationState = 2;
+				
+				AnimationTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
+				AnimationTree.Set("parameters/conditions/WhenAim", false);
+				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/Idle", false);
+				
+				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				{
+					GameManager.InfoJoueur["attack"] = "aimwalkside";
+				}
+				else
+				{
+					GameManager.InfoJoueur["attack"] = "aimwalk";
+				}
+				
+				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			}
+			else if (AnimationState != 1)
+			{
+				AnimationState = 1;
+				
+				AnimationTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
+				AnimationTree.Set("parameters/conditions/WhenAim", true);
+				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/Idle", false);
+				
+				GameManager.InfoJoueur["attack"] = "aim";
+			}
+		}
+		else if (left || right || forward || backward)
+		{
+			if (_isAiming && AnimationState != 4)
+			{
+				AnimationState = 4;
+				
+				AnimationTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
+				AnimationTree.Set("parameters/conditions/WhenAim", false);
+				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/Idle", false);
+				
+				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				{
+					GameManager.InfoJoueur["attack"] = "aimwalkside";
+				}
+				else
+				{
+					GameManager.InfoJoueur["attack"] = "aimwalk";
+				}
+				
+				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			}
+			else if (AnimationState != 5)
+			{
+				AnimationState = 5;
+				
+				AnimationTree.Set("parameters/conditions/WhenWalk", true);
+				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
+				AnimationTree.Set("parameters/conditions/WhenAim", false);
+				AnimationTree.Set("parameters/conditions/WhenShoot", false);
+				AnimationTree.Set("parameters/conditions/Idle", false);
 
-			AnimationPlayer.Play("ArrowShootViewReset");
-			_shootAnimation = false;
+				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				{
+					GameManager.InfoJoueur["attack"] = "walkside";
+				}
+				else
+				{
+					GameManager.InfoJoueur["attack"] = "walk";
+				}
+				
+				AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			}
+		}
+		else if ((_isAiming || !IsShooting) && !_isAiming && AnimationState != 0)
+		{
+			AnimationState = 0;
+			
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenAim", false);
+			AnimationTree.Set("parameters/conditions/WhenShoot", false);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["attack"] = "idle";
 		}
 	}
 }

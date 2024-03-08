@@ -8,7 +8,7 @@ script = ExtResource("1_obrbp")
 [node name="h" type="Node3D" parent="."]
 
 [node name="v" type="SpringArm3D" parent="h"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19219, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2, 2.08165e-12)
 spring_length = -4.0
 
 [node name="Camera3D" type="Camera3D" parent="h/v"]

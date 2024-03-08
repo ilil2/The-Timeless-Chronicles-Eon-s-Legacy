@@ -22,6 +22,11 @@ public partial class ScientistScript : ClassScript
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         _shootCooldown = _shootCooldownValue - 50;
+        
+        //Soutenance
+        WalkSpeed = 6f;
+        RunSpeed = 6.8f;
+        DashPower = 70.0f;
     }
 
     public override void _Input(InputEvent @event)

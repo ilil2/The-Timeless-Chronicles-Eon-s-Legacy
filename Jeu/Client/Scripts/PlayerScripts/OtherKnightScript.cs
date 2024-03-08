@@ -36,13 +36,6 @@ public partial class OtherKnightScript : OtherClassScript
 				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
-			case "init":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
-				AnimationOtherTree.Set("parameters/conditions/Idle", true);
-				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
-				break;
 			case "walk":
 				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
 				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
@@ -57,6 +50,13 @@ public partial class OtherKnightScript : OtherClassScript
 				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
 				AnimationOtherTree.Set("parameters/conditions/Idle", false);
 				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
+				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
+				break;
+			case "idle":
+				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
+				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
+				AnimationOtherTree.Set("parameters/conditions/Idle", true);
 				GameManager.InfoAutreJoueur[$"attack{Id}"] = "";
 				break;
 		}

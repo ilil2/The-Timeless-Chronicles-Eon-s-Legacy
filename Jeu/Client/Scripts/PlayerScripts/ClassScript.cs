@@ -25,6 +25,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected Node3D PlayerMesh;
 	protected AnimationPlayer AnimationPlayer;
 	protected AnimationTree AnimationTree;
+	protected int AnimationState = -1;
 	
 	//Variable de camera
 	private float _fovMax = 80;
