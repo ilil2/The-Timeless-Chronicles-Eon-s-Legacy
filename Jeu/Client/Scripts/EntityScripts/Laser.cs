@@ -20,6 +20,8 @@ public partial class Laser : Node3D
         _rangeMax = GetNode<StaticBody3D>("Range");
         
         _startPoint = GlobalPosition;
+        
+        Visible = false;
     }
     
     public override void _PhysicsProcess(double delta)
@@ -59,5 +61,10 @@ public partial class Laser : Node3D
     public void SetLaserID(int id)
     {
         _laserId = id;
+    }
+    
+    public void TimeOut()
+    {
+        Visible = true;
     }
 }

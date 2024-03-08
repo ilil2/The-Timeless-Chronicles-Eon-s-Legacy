@@ -145,8 +145,6 @@ public abstract partial class ClassScript : CharacterBody3D
 		}
 	}
 	
-	protected abstract void Dash();
-	
 	protected abstract void Move(double delta);
 
 	public Node3D GetCamera()

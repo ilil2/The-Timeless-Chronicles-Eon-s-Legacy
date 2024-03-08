@@ -56,33 +56,6 @@ public partial class ArcherScript : ClassScript
 			_shootTimer = 0;
 		}
 	}
-	
-	protected override void Dash()
-	{
-		if (CanDash)
-		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
-			{
-				if (!IsWalking)
-				{
-					Direction = new Vector3(0, 0, 1);
-					Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-				}
-			    
-				HorizontalVelocity = Direction * DashPower;
-				CanDash = false;
-			}
-		}
-		else
-		{
-			DashTimer += 1;
-			if (DashTimer % 20 == 0)
-			{
-				CanDash = true;
-				DashTimer = 0;
-			}
-		}
-	}
 
 	protected override void Move(double delta)
 	{
@@ -118,8 +91,6 @@ public partial class ArcherScript : ClassScript
 			PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 			
 			HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-		    
-			Dash();
 		}
 	    
 		//Calcul du movement du joueur

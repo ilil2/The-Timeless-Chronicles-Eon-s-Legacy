@@ -42,7 +42,7 @@ public partial class AssassinScript : ClassScript
         Move(delta);
     }
     
-    protected override void Dash()
+    protected void Dash()
     {
         if (CanDash)
         {

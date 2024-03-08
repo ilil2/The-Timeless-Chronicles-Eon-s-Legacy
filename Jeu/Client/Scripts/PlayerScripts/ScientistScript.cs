@@ -67,33 +67,6 @@ public partial class ScientistScript : ClassScript
         }
     }
     
-    protected override void Dash()
-    {
-        if (CanDash)
-        {
-            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
-            {
-                if (!IsWalking)
-                {
-                    Direction = new Vector3(0, 0, 1);
-                    Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-                }
-			    
-                HorizontalVelocity = Direction * DashPower;
-                CanDash = false;
-            }
-        }
-        else
-        {
-            DashTimer += 1;
-            if (DashTimer % 20 == 0)
-            {
-                CanDash = true;
-                DashTimer = 0;
-            }
-        }
-    }
-    
     protected override void Move(double delta)
     {
         if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
@@ -116,8 +89,6 @@ public partial class ScientistScript : ClassScript
             PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 		    
             HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	        
-            Dash();
         }
 	    
         //Calcul du movement du joueur
@@ -221,7 +192,7 @@ public partial class ScientistScript : ClassScript
 				UDP.OneShot("walk");
 			}
 		}
-		else if ((!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting) && !(left || right || forward || backward) && AnimationState != 0)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
 		{
 			AnimationState = 0;
 			
