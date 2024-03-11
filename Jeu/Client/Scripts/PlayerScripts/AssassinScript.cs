@@ -9,7 +9,8 @@ public partial class AssassinScript : ClassScript
     {
         InitPlayer();
         
-        AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        AnimationTree = GetNode<AnimationTree>("AnimationTree");
+        AnimationTree.Active = true;
         
         WalkSpeed = 5f;
         RunSpeed = 8f;
@@ -18,7 +19,7 @@ public partial class AssassinScript : ClassScript
         //Soutenance
         WalkSpeed = 6f;
         RunSpeed = 6.8f;
-        DashPower = 70.0f;
+        DashPower = 140.0f;
     }
 
     public override void _Input(InputEvent @event)
@@ -39,6 +40,10 @@ public partial class AssassinScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
+        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+        {
+	        Animation();
+        }
         Move(delta);
     }
     
@@ -117,4 +122,66 @@ public partial class AssassinScript : ClassScript
         Velocity = velocity;
         MoveAndSlide();
     }
+    
+    private void Animation()
+	{
+		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
+		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
+		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
+		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
+
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2)
+		{
+			AnimationState = 2;
+			
+			AnimationTree.Set("parameters/conditions/WhenSprint", false);
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", true);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["animation"] = "hit";
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3)
+		{
+			AnimationState = 3;
+			
+			AnimationTree.Set("parameters/conditions/WhenSprint", true);
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+			
+			GameManager.InfoJoueur["animation"] = "sprint";
+		}
+		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && AnimationState != 1)
+		{
+			AnimationState = 1;
+			
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			
+			AnimationTree.Set("parameters/conditions/WhenSprint", false);
+			AnimationTree.Set("parameters/conditions/WhenWalk", true);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", false);
+
+			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+			{
+				GameManager.InfoJoueur["animation"] = "walkside";
+			}
+			else
+			{
+				GameManager.InfoJoueur["animation"] = "walk";
+			}
+		}
+		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
+		{
+			AnimationState = 0;
+			
+			AnimationTree.Set("parameters/conditions/WhenSprint", false);
+			AnimationTree.Set("parameters/conditions/WhenWalk", false);
+			AnimationTree.Set("parameters/conditions/WhenHit", false);
+			AnimationTree.Set("parameters/conditions/Idle", true);
+			
+			GameManager.InfoJoueur["animation"] = "idle";
+		}
+	}
 }
