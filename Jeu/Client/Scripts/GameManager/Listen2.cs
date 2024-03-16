@@ -74,6 +74,8 @@ public partial class Listen2 : GameManager
 			{
 				Joueur4.QueueFree();
 			}
+
+			_nbJoueur -= 1;
 		}
 			
 		else if (rep.Length > 4 && rep.Substring(0,5) == "start")
