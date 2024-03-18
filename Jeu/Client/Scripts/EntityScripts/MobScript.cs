@@ -60,7 +60,7 @@ public partial class MobScript : CharacterBody3D
 				{
 					Death();
 				}
-				if (PlayerSet) 
+				if (PlayerSet && Alive) 
 				{
 					IsTooFar = !(Distance(Player.Position,this.Position)<=DistVue);
 					Ray.Rotation = new Vector3(0,-Rotation.Y,0);
@@ -94,7 +94,7 @@ public partial class MobScript : CharacterBody3D
 	}
 	public override void _Process(double delta) //NavMesh
 	{
-		if(PlayerSet)
+		if(PlayerSet && Alive)
 		{
 			if(Distance(Player.Position,this.Position)<=DistVue)
 			{

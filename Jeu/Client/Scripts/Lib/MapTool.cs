@@ -70,4 +70,20 @@ public partial class MapTool : Node
 			
 		}
 	}
+	
+	public static List<RigidBody3D> Concat(List<RigidBody3D> item1, List<RigidBody3D> item2)
+	{
+		List<RigidBody3D> res = new List<RigidBody3D>();
+		foreach (var e in item1)
+		{
+			res.Add(e);
+		}
+
+		foreach (var e in item2)
+		{
+			res.Add(e);
+		}
+
+		return res;
+	}
 }

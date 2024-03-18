@@ -10,7 +10,7 @@ public partial class MapLvl2Script : IMap
 	public int step = 0;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private List<RigidBody3D> PseudoTreeList = new List<RigidBody3D>();
-	private List<Node3D> SpawnPoint = new List<Node3D>();
+	private List<RigidBody3D> SpawnPoint = new List<RigidBody3D>();
 	private List<Node3D> KeyList = new List<Node3D>();
 	public int FrameCount = 0;
 	private int StartTimer = 0;
@@ -53,7 +53,7 @@ public partial class MapLvl2Script : IMap
 		if (!SetUp)
 		{
 			
-			if(MapTool.CheckSleep(PseudoTreeList))
+			if(MapTool.CheckSleep(MapTool.Concat(PseudoTreeList,SpawnPoint)))
 			{
 				MeshInstance3D GR = GetNode<MeshInstance3D>("Ground");
 				MeshInstance3D LR = GR.GetNode<MeshInstance3D>("ForNav");
@@ -159,8 +159,8 @@ public partial class MapLvl2Script : IMap
 	
 	private void CreatePseudoSpawnPoint()
 	{
-		const int nbMob = 300;
-		const float radius = 1f;
+		const int nbMob = 100;
+		const float radius = 2f;
 		for (int i = 0; i < nbMob; i++)
 		{
 			RigidBody3D Sphere = new RigidBody3D();
