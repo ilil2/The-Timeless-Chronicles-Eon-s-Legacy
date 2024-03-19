@@ -1,9 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://d36mr37qinwb2"]
+[gd_scene load_steps=8 format=3 uid="uid://d36mr37qinwb2"]
 
-[ext_resource type="PackedScene" uid="uid://dx14g0334u1ha" path="res://Scenes/Debug/WIP.tscn" id="1_o5l32"]
-[ext_resource type="Script" path="res://Scenes/Debug/WIP.cs" id="1_vwfcc"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Boss3Map.cs" id="1_mee1v"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_3vfkm"]
+[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="3_74h51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_01ul6"]
+resource_name = "ground"
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.376471, 0.376471, 0.376471, 1)
+roughness = 0.90198
+normal_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_m34r2"]
+material = SubResource("StandardMaterial3D_01ul6")
+size = Vector3(143, 1, 143)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wh3np"]
+data = PackedVector3Array(-71.5, 0.5, 71.5, 71.5, 0.5, 71.5, -71.5, -0.5, 71.5, 71.5, 0.5, 71.5, 71.5, -0.5, 71.5, -71.5, -0.5, 71.5, 71.5, 0.5, -71.5, -71.5, 0.5, -71.5, 71.5, -0.5, -71.5, -71.5, 0.5, -71.5, -71.5, -0.5, -71.5, 71.5, -0.5, -71.5, 71.5, 0.5, 71.5, 71.5, 0.5, -71.5, 71.5, -0.5, 71.5, 71.5, 0.5, -71.5, 71.5, -0.5, -71.5, 71.5, -0.5, 71.5, -71.5, 0.5, -71.5, -71.5, 0.5, 71.5, -71.5, -0.5, -71.5, -71.5, 0.5, 71.5, -71.5, -0.5, 71.5, -71.5, -0.5, -71.5, 71.5, 0.5, 71.5, -71.5, 0.5, 71.5, 71.5, 0.5, -71.5, -71.5, 0.5, 71.5, -71.5, 0.5, -71.5, 71.5, 0.5, -71.5, -71.5, -0.5, 71.5, 71.5, -0.5, 71.5, -71.5, -0.5, -71.5, 71.5, -0.5, 71.5, 71.5, -0.5, -71.5, -71.5, -0.5, -71.5)
+
+[sub_resource type="Environment" id="Environment_r4w88"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("2_3vfkm")
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+fog_density = 0.3015
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.878431, 0.803922, 0.662745, 1)
+volumetric_fog_emission = Color(0.623529, 0.505882, 0.223529, 1)
+volumetric_fog_sky_affect = 0.97
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_enabled = true
+adjustment_saturation = 1.15
 
 [node name="Boss3Map" type="Node3D"]
-script = ExtResource("1_vwfcc")
+script = ExtResource("1_mee1v")
 
-[node name="WIP" parent="." instance=ExtResource("1_o5l32")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.7738, 0)
+mesh = SubResource("BoxMesh_m34r2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_wh3np")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
+shadow_enabled = true
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r4w88")
+
+[node name="SpecCam" parent="." instance=ExtResource("3_74h51")]

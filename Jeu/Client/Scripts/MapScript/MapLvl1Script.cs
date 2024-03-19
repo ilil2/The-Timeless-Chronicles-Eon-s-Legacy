@@ -81,7 +81,9 @@ public partial class MapLvl1Script : IMap
 				Duration = Rand2.Next(120,260);
 				fogwatch.Start();
 				GD.Print($"Fog Start in {Duration}");	
+				
 			}
+		
 		}
 		else
 		{
@@ -233,8 +235,8 @@ public partial class MapLvl1Script : IMap
 			double r = 0;
 			if (u > 1) r = 2 - u;
 			else r = u;
-			double x = ((NbRoom / 10)+0) * r * Math.Cos(t);
-			double z = ((NbRoom / 10)+0) * r * Math.Sin(t);
+			double x = 30 * r * Math.Cos(t);
+			double z = 30 * r * Math.Sin(t);
 
 			int ID;// = Rand.Next(1, 6);
 			int SubID;
@@ -248,7 +250,13 @@ public partial class MapLvl1Script : IMap
 			float Angle = 90*Rand.Next(0,4);
 			
 			
+			MeshInstance3D Mes = new MeshInstance3D();
+			BoxMesh Me = new BoxMesh();
+			Me.Size = new Vector3(h*LenWall,2,w*LenWall);
+			Mes.Mesh = Me;
+			
 			RigidBody3D Room = new RigidBody3D();
+			Room.AddChild(Mes);//Debug
 			Room.LockRotation = true;
 			Room.AxisLockLinearY = true;
 			
