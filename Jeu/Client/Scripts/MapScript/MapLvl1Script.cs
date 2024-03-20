@@ -54,45 +54,60 @@ public partial class MapLvl1Script : IMap
 		//Rand = new Random();//debug
 	}
 	
+	public override void _PhysicsProcess(double delta)
+	{
+		GD.Print(LoadingStage);
+	}
+	
 	public override void _Process(double delta)
 	{
 		FrameCount+=1;
-		if (!MapReady)
+		if (!SetUp)
 		{
 			if (MapTool.CheckSleep(PseudoRoomList))
 			{
-				AddChild(NavMesh);
+				
 				LoadingStage = "Create MainRoom";
 				CreateMainRoom();
 				LoadingStage = "Create Map";
 				CreateMap();
 				LoadingStage = "Open Rooms";
 				OpenRoom();
-				//((NavMeshScript)NavMesh).CreateNavMesh();
+				AddNavMesh();
+				AddChild(NavMesh);
+				LoadingStage = "Calculate NavMesh";
+				((NavMeshScript)NavMesh).CreateNavMesh();
 				//CreateMob();
 				
-				CreateExit();				MapReady = true;
-				LoadingStage = "En attente des autres joueurs :(";
-				stopwatch.Stop();
-		
-				GD.Print($"{NbRoom} Room");
-				GD.Print($"Map crée en {stopwatch.Elapsed}");
+				LoadingStage = "Calculate NavRegion";
+				NavMesh.Visible = true;
 				
-				Duration = Rand2.Next(120,260);
-				fogwatch.Start();
-				GD.Print($"Fog Start in {Duration}");	
+				CreateExit();
+				SetUp = true;
 				
 			}
 		
 		}
+		else if (!MapReady && (NavMesh as NavMeshScript).NavMeshReady)
+		{
+			stopwatch.Stop();
+		
+			GD.Print($"{NbRoom} Room");
+			GD.Print($"Map crée en {stopwatch.Elapsed}");
+				
+			Duration = Rand2.Next(120,260);
+			fogwatch.Start();
+			GD.Print($"Fog Start in {Duration}");	
+			
+			MapReady = true;
+			LoadingStage = "En attente des autres joueurs :(";
+			
+		}
 		else
 		{
 			//Process
-			CreateFog();
+			//CreateFog();
 			DayCycle();
-			//Debug Map onl
-			
-			//--------------
 			//RenderDist();
 		}
 		
@@ -302,7 +317,7 @@ public partial class MapLvl1Script : IMap
 			Node3D Room = R.Instantiate<Node3D>();
 			Room.Position = Roundm(X, Z, LenWall);
 			Room.RotationDegrees = new Vector3(0,A,0);
-			NavMesh.AddChild(Room);
+			AddChild(Room);
 			RoomList.Add(Room);
 			
 			step += 3;
@@ -315,13 +330,13 @@ public partial class MapLvl1Script : IMap
 		
 		PackedScene MR = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMain.tscn");
 		Node3D MRoom = MR.Instantiate<Node3D>();
-		NavMesh.AddChild(MRoom);
+		AddChild(MRoom);
 		RoomList.Add(MRoom);
 		
 		PackedScene MRG = GD.Load<PackedScene>($"res://Scenes/MapScenes/Lvl1/RoomScenes/RoomMainGate.tscn");
 		Node3D MRoomGate = MRG.Instantiate<Node3D>();
 		RoomList.Add(MRoomGate);
-		NavMesh.AddChild(MRoomGate);
+		AddChild(MRoomGate);
 	}
 	
 
@@ -398,5 +413,23 @@ public partial class MapLvl1Script : IMap
 		Coll.Shape = Shape;
 		Coll.Position += new Vector3(0,2,0);
 		area.AddChild(Coll);
+	}
+	
+	private void AddNavMesh()
+	{
+		for (int i = 0; i < RoomList.Count;i++)
+		{
+			Node3D N = RoomList[i].GetNode<Node3D>("Nav");
+			RoomList[i].RemoveChild(N);
+			N.Position+=RoomList[i].GlobalPosition;
+			N.Rotation=RoomList[i].Rotation;
+			N.Visible = false;
+			NavMesh.AddChild(N);
+			Node3D W = RoomList[i].GetNode<Node3D>("Wall");
+			RoomList[i].RemoveChild(W);
+			W.Position+=RoomList[i].GlobalPosition;
+			W.Rotation=RoomList[i].Rotation;
+			NavMesh.AddChild(W);
+		}
 	}
 }
