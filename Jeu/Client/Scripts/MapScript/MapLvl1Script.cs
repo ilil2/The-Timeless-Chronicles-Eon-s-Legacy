@@ -77,7 +77,8 @@ public partial class MapLvl1Script : IMap
 				AddChild(NavMesh);
 				LoadingStage = "Calculate NavMesh";
 				((NavMeshScript)NavMesh).CreateNavMesh();
-				//CreateMob();
+				RoomList.Remove(SpawnRoom);
+				CreateMob();
 				
 				LoadingStage = "Calculate NavRegion";
 				NavMesh.Visible = true;
@@ -143,19 +144,18 @@ public partial class MapLvl1Script : IMap
 		for(int i = 0; i<RoomList.Count; i++)
 		{
 			Node3D Room = RoomList[i].GetNode<Node3D>("Spawn");
-			for(int j = 0; j<Room.GetChildCount(); j++)
-			{
-				Node3D SpawnPoint = Room.GetChild<Node3D>(j);
-				if(Rand.Next(1,4)==1)
+				for(int j = 0; j<Room.GetChildCount(); j++)
 				{
-					PackedScene M = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn");
-					CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
-					Mob.Position = SpawnPoint.GlobalTransform.Origin;
-					MobList.Add(Mob);
-					AddChild(Mob);
+					Node3D SpawnPoint = Room.GetChild<Node3D>(j);
+					if(Rand.Next(1,5)==1)
+					{
+						PackedScene M = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn");
+						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
+						Mob.Position = SpawnPoint.GlobalTransform.Origin;
+						MobList.Add(Mob);
+						AddChild(Mob);
+					}
 				}
-			}
-			
 		}
 	}
 	

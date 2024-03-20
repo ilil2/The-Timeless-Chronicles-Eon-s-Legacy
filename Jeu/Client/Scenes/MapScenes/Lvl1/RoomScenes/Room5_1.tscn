@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bbiw60443slqp"]
+[gd_scene load_steps=27 format=3 uid="uid://bbiw60443slqp"]
 
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_c5bkt"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="3_buidw"]
@@ -236,6 +236,12 @@ size = Vector3(0.328, 2, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3w0io"]
 size = Vector3(42, 0.1, 42)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0nveq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_iti2j"]
+material = SubResource("StandardMaterial3D_0nveq")
 
 [node name="Room5" type="Node3D"]
 
@@ -1076,3 +1082,7 @@ shape = SubResource("BoxShape3D_rdj0g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_3w0io")
 skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1088, 0)
+mesh = SubResource("SphereMesh_iti2j")
