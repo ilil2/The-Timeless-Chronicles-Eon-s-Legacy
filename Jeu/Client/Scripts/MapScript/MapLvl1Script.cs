@@ -56,7 +56,7 @@ public partial class MapLvl1Script : IMap
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		GD.Print(LoadingStage);
+		//GD.Print(LoadingStage);
 	}
 	
 	public override void _Process(double delta)

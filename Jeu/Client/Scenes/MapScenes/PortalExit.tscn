@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cade40hgg6crx"]
 
-[ext_resource type="PackedScene" uid="uid://cgf1r4oxf8vto" path="res://Ressources/Map/Global/Object/Portal/Portal.tscn" id="1_4evf4"]
-[ext_resource type="Script" path="res://Scripts/MapScript/PortalExit.cs" id="1_021k1"]
-[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="3_ar1eg"]
+[ext_resource type="Script" path="res://Scripts/MapScript/PortalExit.cs" id="1_40k01"]
+[ext_resource type="PackedScene" uid="uid://cgf1r4oxf8vto" path="res://Ressources/Map/Global/Portal/Portal.tscn" id="2_lseyv"]
+[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="3_6jyd3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6m37h"]
 size = Vector3(3, 1, 0.2)
@@ -14,9 +14,9 @@ size = Vector3(4, 0.1, 4)
 size = Vector3(4, 3, 4)
 
 [node name="PortalExit" type="Node3D"]
-script = ExtResource("1_021k1")
+script = ExtResource("1_40k01")
 
-[node name="Portal" parent="." instance=ExtResource("1_4evf4")]
+[node name="Portal" parent="." instance=ExtResource("2_lseyv")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 1, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Portal"]
@@ -56,7 +56,7 @@ shape = SubResource("BoxShape3D_6ufep")
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -2, -3.1, 8.74228e-08)
 shape = SubResource("BoxShape3D_6ufep")
 
-[node name="Exit" parent="Cage" instance=ExtResource("3_ar1eg")]
+[node name="Exit" parent="Cage" instance=ExtResource("3_6jyd3")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cage/Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.6, 0)
