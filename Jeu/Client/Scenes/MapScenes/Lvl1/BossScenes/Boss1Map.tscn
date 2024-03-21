@@ -1,4 +1,4 @@
-[gd_scene load_steps=280 format=3 uid="uid://bnmjhfrfx7ohn"]
+[gd_scene load_steps=279 format=3 uid="uid://bnmjhfrfx7ohn"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt/Ground/ground_0024_normal_opengl_1k.png" id="4_i3k8p"]
 [ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt/Ground/ground_0024_roughness_1k.jpg" id="5_3j16s"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="9_da32q"]
-[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="9_gjopi"]
 [ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/BossScenes/Exit.tscn" id="9_h3jfq"]
+[ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://PortalExit.tscn" id="9_ymb4d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofjsc"]
 resource_local_to_scene = true
@@ -3307,10 +3307,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rao11")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fkde5"]
-height = 4.0
-radius = 4.0
-
 [sub_resource type="SphereMesh" id="SphereMesh_2rqxr"]
 
 [node name="Boss1Map" type="Node3D"]
@@ -4741,12 +4737,10 @@ transform = Transform3D(0.977795, 0.0154014, -0.00293611, -0.0190122, 0.792057, 
 mesh = SubResource("ArrayMesh_g4f3j")
 skeleton = NodePath("")
 
-[node name="Exit2" parent="." instance=ExtResource("9_gjopi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.6751, 0, 0)
+[node name="PortalExit" parent="." instance=ExtResource("9_ymb4d")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -41, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("CylinderShape3D_fkde5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Exit2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PortalExit"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.95095e-08, 0, -0.675098)
 mesh = SubResource("SphereMesh_2rqxr")
+skeleton = NodePath("")

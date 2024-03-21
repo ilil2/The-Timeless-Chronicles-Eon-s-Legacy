@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://cgf1r4oxf8vto"]
 
-[ext_resource type="Texture2D" uid="uid://ybpfxcwkjwem" path="res://Ressources/Map/Global/Object/Portal/textures/02_-_Default_baseColor.jpeg" id="1_gyuvr"]
-[ext_resource type="Texture2D" uid="uid://bnc15xd5id7b3" path="res://Ressources/Map/Global/Object/Portal/textures/02_-_Default_normal.png" id="2_5irka"]
-[ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Object/Portal/textures/01_-_Default_baseColor.jpeg" id="3_eacal"]
-[ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Object/Portal/textures/01_-_Default_normal.png" id="4_qn2yb"]
+[ext_resource type="Texture2D" uid="uid://ybpfxcwkjwem" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_baseColor.jpeg" id="1_gyuvr"]
+[ext_resource type="Texture2D" uid="uid://bnc15xd5id7b3" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_normal.png" id="2_5irka"]
+[ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_baseColor.jpeg" id="3_eacal"]
+[ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_normal.png" id="4_qn2yb"]
 
 [sub_resource type="Animation" id="Animation_n76gx"]
 resource_name = "Close"

@@ -50,7 +50,7 @@ public partial class KnightScript : ClassScript
 		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat() && AnimationState != 2)
 		{
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+				Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 			{
 				int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
 				int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));

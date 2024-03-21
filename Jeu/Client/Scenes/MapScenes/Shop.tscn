@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dc36p4sfw2iub"]
+[gd_scene load_steps=15 format=3 uid="uid://dc36p4sfw2iub"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_kgg25"]
 [ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
 [ext_resource type="Texture2D" uid="uid://d38yhfsw77p2s" path="res://Ressources/Map/Shop/material_emissive.png" id="2_6j5v3"]
 [ext_resource type="Texture2D" uid="uid://c6a34xr6fp1ux" path="res://Ressources/Map/Shop/Emax.png" id="4_hhdoo"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="5_b2bu8"]
+[ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://PortalExit.tscn" id="6_n3v2o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oifs2"]
 shader = ExtResource("1_qts26")
@@ -77,3 +78,6 @@ shape = SubResource("CylinderShape3D_qaswp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="PortalExit" parent="." instance=ExtResource("6_n3v2o")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5, 0, -50)
