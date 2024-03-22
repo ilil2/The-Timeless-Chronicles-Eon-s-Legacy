@@ -1,7 +1,7 @@
 using Godot;
 using System;
 //Ceci est un commentaire
-public partial class IABoss : CharacterBody3D
+public partial class Boss1: CharacterBody3D
 {
 	//stats
 	private int speed = 2; // vitesse
@@ -21,7 +21,8 @@ public partial class IABoss : CharacterBody3D
 	
 	// Autre
 	private Node Parent;
-	private CharacterBody3D Player = new CharacterBody3D();
+	private Camera3D Cam;
+	private Camera3D Player;
 	private bool PlayerSet = false;
 	private float StateDeath = -0.1f;
 	
@@ -29,15 +30,18 @@ public partial class IABoss : CharacterBody3D
 	{
 		Parent = GetParent().GetParent();
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
+		Cam = GetNode<Camera3D>("SpecCam");
+		Player = Cam; 
+		PlayerSet = true;
 	}
 	
 	public override void _Process(double delta) //NavMesh
 	{
 		if(PlayerSet)
 		{
+			GD.Print(Player.Position);
 			if(Distance(Player.Position,this.Position)<=DistVue)
 			{
-				if (Agro > 0) Agro -= 1;
 				var dir = new Vector3();  //Pathfiding
 				var NextPos = Nav.GetNextPathPosition();
 				dir = NextPos - GlobalPosition;
@@ -56,9 +60,9 @@ public partial class IABoss : CharacterBody3D
 				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0); 
 			}
 		}
-		if(!PlayerSet && Parent.IsAncestorOf(GameManager.Joueur1))
+		if(!PlayerSet) // &&  Parent.IsAncestorOf(GameManager.Joueur1)
 		{
-			Player = GameManager.Joueur1;
+			Player = Cam;
 			PlayerSet = true;
 			GD.Print("Player Set !");
 		}

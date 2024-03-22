@@ -18,7 +18,7 @@ public partial class MobScript : CharacterBody3D
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
 	private RayCast3D Ray; // Activer le pathfiding
-	public int Agro = 0; // stop quand agro = 0
+	public int Agro = 1; // stop quand agro = 0
 	private int state; // -1 = repos | 0 = retour à position initiale | 1 = suivre joueur
 	private Vector3 PosInnit; // position initiale
 	private Vector3 RotInnit; // rotation innitiale
@@ -27,7 +27,8 @@ public partial class MobScript : CharacterBody3D
 	
 	// Autre
 	private Node Parent;
-	private CharacterBody3D Player = new CharacterBody3D();
+	private Camera3D Player;
+	private Camera3D Cam;
 	private Vector3 Me = new Vector3();
 	private Vector3 PlayerPos = new Vector3();
 	private bool PlayerSet = false;
@@ -43,6 +44,8 @@ public partial class MobScript : CharacterBody3D
 		Nav.TargetPosition = PosInnit;
 		Ray = GetNode<RayCast3D>("Ray");
 		state = -1;
+		Cam = GetNode<Camera3D>("SpecCam");
+		PlayerSet = true ; 
 		
 	}
 
@@ -94,6 +97,7 @@ public partial class MobScript : CharacterBody3D
 	}
 	public override void _Process(double delta) //NavMesh
 	{
+		GD.Print(Player.Position);
 		if(PlayerSet)
 		{
 			if(Distance(Player.Position,this.Position)<=DistVue)
@@ -130,9 +134,9 @@ public partial class MobScript : CharacterBody3D
 				}
 			}
 		}
-		if(!PlayerSet && GameManager.Joueur1!=null && Parent.IsAncestorOf(GameManager.Joueur1))
+		if(!PlayerSet) // && GameManager.Joueur1!=null && Parent.IsAncestorOf(GameManager.Joueur1)
 		{
-			Player = GameManager.Joueur1;
+			Player = Cam;
 			PlayerSet = true;
 			GD.Print("Player Set !");
 		}

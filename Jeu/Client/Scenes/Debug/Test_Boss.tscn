@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtws2bnlgh241"]
+[gd_scene load_steps=6 format=3 uid="uid://dtws2bnlgh241"]
 
 [ext_resource type="PackedScene" uid="uid://chj7g338qfi5q" path="res://Scenes/EntityScenes/Boss1.tscn" id="1_wxrvq"]
 [ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="2_kx200"]
@@ -6,6 +6,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvtrx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7ykav"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uia84"]
 
 [node name="Test_Boss" type="Node3D"]
 
@@ -26,5 +28,13 @@ shadow_enabled = true
 [node name="Boss1" parent="." instance=ExtResource("1_wxrvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.981607, 1.48901, -0.840671)
 
-[node name="SpecCam" parent="." instance=ExtResource("2_kx200")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45107, 1.08273)
+[node name="SpecCam" parent="Boss1" instance=ExtResource("2_kx200")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.981607, -0.09507, 1.9234)
+fov = 37.8493
+
+[node name="Area3D" type="Area3D" parent="Boss1/SpecCam"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boss1/SpecCam/Area3D"]
+shape = SubResource("SphereShape3D_uia84")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
