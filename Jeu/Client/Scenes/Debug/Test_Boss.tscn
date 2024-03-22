@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtws2bnlgh241"]
+[gd_scene load_steps=5 format=3 uid="uid://dtws2bnlgh241"]
 
 [ext_resource type="PackedScene" uid="uid://chj7g338qfi5q" path="res://Scenes/EntityScenes/Boss1.tscn" id="1_wxrvq"]
+[ext_resource type="PackedScene" uid="uid://bvm8uefdo7jku" path="res://Scenes/Debug/SpecCam.tscn" id="2_kx200"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kvtrx"]
 
@@ -25,5 +26,5 @@ shadow_enabled = true
 [node name="Boss1" parent="." instance=ExtResource("1_wxrvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.981607, 1.48901, -0.840671)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.98917, 0.146774, 0, -0.146774, 0.98917, 0, 3.82527, 3.39863)
+[node name="SpecCam" parent="." instance=ExtResource("2_kx200")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45107, 1.08273)
