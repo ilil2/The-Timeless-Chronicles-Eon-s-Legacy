@@ -17,9 +17,11 @@ public partial class MapLvl3Script : IMap
 	private (int x,int y) S;
 	private const int Gap = 30;
 	private const int LenI = (32)/2;
+	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 	public override void _Ready()
 	{
-		
+		((NavMeshScript)NavMesh).InitNavMesh();
+		AddChild(NavMesh);	
 		MapGrid = new int[MapLenght,MapLenght];
 		for (int i = 0; i < MapLenght; i++)
 		{
@@ -38,15 +40,20 @@ public partial class MapLvl3Script : IMap
 		MapGrid[16, 16] = 2;
 		MapGrid[S.x, S.y] = 2;
 		PrintMatrix(MapGrid);
-		MapReady = true;
-		LoadingStage = "test";
+		LoadingStage = "Calculate NavMesh";
+		((NavMeshScript)NavMesh).CreateNavMesh();
+		SetUp = true;
 		LoadingStage = "En attente des autres joueurs :(";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-	
+		if (!MapReady && (NavMesh as NavMeshScript).NavMeshReady)
+		{
+			MapReady = true;
+			LoadingStage = "En attente des autres joueurs :(";
+		}
 	}
 
 	public override List<(int, int, int)> GetSpawnLocation()
@@ -155,12 +162,20 @@ public partial class MapLvl3Script : IMap
 						Node3D Bat1 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Building5.tscn").Instantiate<Node3D>();
 						Bat1.Position = new Vector3((i-LenI)*Gap,0,(j-LenI)*Gap);
 						AddChild(Bat1);
+						MeshInstance3D Roof = Bat1.GetNode<MeshInstance3D>("Roof");
+						Bat1.RemoveChild(Roof);
+						Roof.Position+=Bat1.GlobalPosition;
+						NavMesh.AddChild(Roof);
 						break;
 					case -1:
 						Node3D Bat2 = GD.Load<PackedScene>("res://Ressources/Map/Moderne/Building/Bridge.tscn").Instantiate<Node3D>();
 						Node3D R1 = Bat2.GetNode<Node3D>("Roof");
 						Bat2.RemoveChild(R1);
 						R1.Position = new Vector3((i-LenI)*Gap,R1.Position.Y,(j-LenI)*Gap);
+						MeshInstance3D Roof2 = Bat2.GetNode<MeshInstance3D>("MRoof");
+						Bat2.RemoveChild(Roof2);
+						Roof2.Position = new Vector3((i-LenI)*Gap,R1.Position.Y,(j-LenI)*Gap);
+						NavMesh.AddChild(Roof2);
 						AddChild(R1);
 						break;
 					case -2:
@@ -168,6 +183,10 @@ public partial class MapLvl3Script : IMap
 						Node3D R2 = Bat3.GetNode<Node3D>("Roof2");
 						Bat3.RemoveChild(R2);
 						R2.Position = new Vector3((i-LenI)*Gap,R2.Position.Y,(j-LenI)*Gap);
+						MeshInstance3D Roof3 = Bat3.GetNode<MeshInstance3D>("MRoof2");
+						Bat3.RemoveChild(Roof3);
+						Roof3.Position = new Vector3((i-LenI)*Gap,R2.Position.Y,(j-LenI)*Gap);
+						NavMesh.AddChild(Roof3);
 						AddChild(R2);
 						break;
 				}

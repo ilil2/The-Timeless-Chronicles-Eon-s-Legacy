@@ -11,9 +11,11 @@ public partial class Boss1Map : IMap
 	private int Pas2 = 12;
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/w.tscn");
 	private PackedScene Pi = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/p.tscn");
+	private NavigationRegion3D Nav;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Nav = GetNode<NavigationRegion3D>("Nav");
 		LoadingStage = "Create Border";
 		for (int i = 0; i<360; i+=Pas)
 		{
@@ -23,7 +25,7 @@ public partial class Boss1Map : IMap
 			double Z = Math.Sin(rot);
 			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
 			Wall.Rotation += new Vector3(0,-rot,0);
-			AddChild(Wall);
+			Nav.AddChild(Wall);
 		}
 		for (int i = 0; i<360; i+=Pas2)
 		{
@@ -33,7 +35,7 @@ public partial class Boss1Map : IMap
 			double Z = Math.Sin(rot);
 			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
 			Wall.Rotation += new Vector3(0,-rot,0);
-			AddChild(Wall);
+			Nav.AddChild(Wall);
 		}
 	}
 

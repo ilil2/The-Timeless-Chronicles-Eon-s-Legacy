@@ -62,7 +62,16 @@ public partial class PortalExit : Node3D
 			double Min = 99999999999.0;
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
-				double dist = MapTool.Distance(Portal.GlobalPosition,GameManager.ListJoueur[i].GlobalPosition);
+				double dist = 0.0;
+				try
+				{
+					dist = MapTool.Distance(Portal.GlobalPosition,GameManager.ListJoueur[i].GlobalPosition);	
+				}
+				catch
+				{
+					GD.Print("ERROR: ListJoueur Non set");
+					dist = Min+1;
+				}
 				if(Min>dist)
 				{
 					Min = dist;

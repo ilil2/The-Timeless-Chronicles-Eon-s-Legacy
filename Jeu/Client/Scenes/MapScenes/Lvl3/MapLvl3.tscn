@@ -37,14 +37,14 @@ size = Vector3(1, 20, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1b17t"]
 
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_fuqtr"]
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_7ul4i"]
 noise = SubResource("FastNoiseLite_1b17t")
 
 [sub_resource type="FogMaterial" id="FogMaterial_rgl2n"]
 density = 1.5
 emission = Color(0.580392, 0.580392, 0.580392, 1)
 edge_fade = 0.2
-density_texture = SubResource("NoiseTexture3D_fuqtr")
+density_texture = SubResource("NoiseTexture3D_7ul4i")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_63xl1"]
 height = 4.0

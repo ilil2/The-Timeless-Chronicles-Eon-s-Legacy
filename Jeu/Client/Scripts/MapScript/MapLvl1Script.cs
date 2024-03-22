@@ -46,12 +46,13 @@ public partial class MapLvl1Script : IMap
 	
 	public override void _Ready()
 	{
+		((NavMeshScript)NavMesh).InitNavMesh();
 		stopwatch.Start();
 		LoadingStage = "Create PseudoMap";
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
 		LoadingStage = "Room Placement";
-		//Rand = new Random();//debug
+		Rand = new Random();//debug
 	}
 	
 	public override void _PhysicsProcess(double delta)

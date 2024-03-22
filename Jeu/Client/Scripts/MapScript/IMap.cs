@@ -12,6 +12,7 @@ public abstract partial class IMap : Node3D
 	protected Random Rand2 = new Random(69);
 	protected int step = 0;
 	public bool PlayerSet = false;
+	public bool CanExit = true;
 	public string LoadingStage = "rien pour l'instant";
 	public int Step()
 	{
