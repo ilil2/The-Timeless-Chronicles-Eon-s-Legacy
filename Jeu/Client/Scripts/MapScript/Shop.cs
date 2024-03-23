@@ -5,9 +5,15 @@ using Lib;
 
 public partial class Shop : IMap
 {
+	private Node3D Emax;
+	private AnimationPlayer EmaxAnimation;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Emax = GetNode<Node3D>("Shop/Emax");
+		EmaxAnimation = Emax.GetNode<AnimationPlayer>("AnimationPlayer");
+		EmaxAnimation.Play("Animation");
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

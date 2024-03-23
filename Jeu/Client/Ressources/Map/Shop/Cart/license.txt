@@ -1,0 +1,11 @@
+Model Information:
+* title:	Alchemist merchant cart
+* source:	https://sketchfab.com/3d-models/alchemist-merchant-cart-09c8c27e2b85466e946aad7a335ff14f
+* author:	AprilMoon (https://sketchfab.com/AprilMoon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Alchemist merchant cart" (https://sketchfab.com/3d-models/alchemist-merchant-cart-09c8c27e2b85466e946aad7a335ff14f) by AprilMoon (https://sketchfab.com/AprilMoon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
