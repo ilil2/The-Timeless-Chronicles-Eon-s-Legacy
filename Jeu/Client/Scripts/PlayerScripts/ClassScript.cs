@@ -11,10 +11,11 @@ public abstract partial class ClassScript : CharacterBody3D
 	public string Pseudo;
 	protected string Classe;
 	
-	protected int MaxHealth;
-	protected int Heath;
-	protected int MaxStamina;
-	protected int Stamina;
+	protected float MaxHealth = 100;
+	protected float Heath = 100;
+	protected float MaxStamina = 100;
+	protected float Stamina = 100;
+	protected bool IsDead = false;
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;
@@ -62,9 +63,13 @@ public abstract partial class ClassScript : CharacterBody3D
 		return CameraH;
 	}
 	
+	public Node3D GetCamera()
+	{
+		return CameraPlayer;
+	}
+	
 	protected void InitPlayer()
 	{
-		//Initialisation des variables du joueur
 		Id = Conversions.AtoI(GameManager.InfoJoueur["id"]);
 		Pseudo = GameManager.InfoJoueur["pseudo"];
 		Classe = GameManager.InfoJoueur["class"];
@@ -75,7 +80,7 @@ public abstract partial class ClassScript : CharacterBody3D
 		CameraH = GetNode<Node3D>("CameraPlayer/h");
 		Direction = Vector3.Back.Rotated(Vector3.Up, CameraH.GlobalTransform.Basis.GetEuler().Y);
 		
-		PlayerMesh = GetNode<Node3D>("Player"); 
+		PlayerMesh = GetNode<Node3D>("Player");
 	}
 
 	protected void Zoom(InputEvent @event)
@@ -98,7 +103,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	protected void SendPosition()
 	{
-		//Envoie de la position du joueur au serveur
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
 		PlayerIsHere = true;
@@ -129,7 +133,6 @@ public abstract partial class ClassScript : CharacterBody3D
 
 	protected void PhysicsReset()
 	{
-		//Reset du mouvement du joueur
 		MovementSpeed = 0f;
 	}
 	
@@ -146,9 +149,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	}
 	
 	protected abstract void Move(double delta);
-
-	public Node3D GetCamera()
-	{
-		return CameraPlayer;
-	}
+	
+	protected abstract void TakeDamage(float damage);
 }

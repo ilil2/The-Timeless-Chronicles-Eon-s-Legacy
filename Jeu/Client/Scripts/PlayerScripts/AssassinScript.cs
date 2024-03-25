@@ -15,11 +15,6 @@ public partial class AssassinScript : ClassScript
         WalkSpeed = 5f;
         RunSpeed = 8f;
         DashPower = 120.0f;
-        
-        //Soutenance
-        WalkSpeed = 6f;
-        RunSpeed = 6.8f;
-        DashPower = 140.0f;
     }
 
     public override void _Input(InputEvent @event)
@@ -40,9 +35,21 @@ public partial class AssassinScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+        if (!IsDead)
         {
-	        Animation();
+	        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+	        {
+		        Animation();
+	        }
+	        else
+	        {
+		        if (AnimationState != 0)
+		        {
+			        AnimationState = 0;
+			        AnimationSet(false, false, false, true);
+			        GameManager.InfoJoueur["animation"] = "idle";
+		        }
+	        }
         }
         Move(delta);
     }
@@ -122,7 +129,7 @@ public partial class AssassinScript : ClassScript
         Velocity = velocity;
         MoveAndSlide();
     }
-    
+
     private void Animation()
 	{
 		bool left = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2);
@@ -134,22 +141,14 @@ public partial class AssassinScript : ClassScript
 		{
 			AnimationState = 2;
 			
-			AnimationTree.Set("parameters/conditions/WhenSprint", false);
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenHit", true);
-			AnimationTree.Set("parameters/conditions/Idle", true);
+			AnimationSet(false, false, true, true);
 			
 			GameManager.InfoJoueur["animation"] = "hit";
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3)
 		{
 			AnimationState = 3;
-			
-			AnimationTree.Set("parameters/conditions/WhenSprint", true);
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenHit", false);
-			AnimationTree.Set("parameters/conditions/Idle", false);
-			
+			AnimationSet(false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "sprint";
 		}
 		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && AnimationState != 1)
@@ -158,10 +157,7 @@ public partial class AssassinScript : ClassScript
 			
 			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
 			
-			AnimationTree.Set("parameters/conditions/WhenSprint", false);
-			AnimationTree.Set("parameters/conditions/WhenWalk", true);
-			AnimationTree.Set("parameters/conditions/WhenHit", false);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationSet(true, false, false, false);
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
@@ -175,13 +171,29 @@ public partial class AssassinScript : ClassScript
 		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
 		{
 			AnimationState = 0;
-			
-			AnimationTree.Set("parameters/conditions/WhenSprint", false);
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenHit", false);
-			AnimationTree.Set("parameters/conditions/Idle", true);
-			
+			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";
+		}
+	}
+    
+	private void AnimationSet(bool walk, bool sprint, bool hit, bool idle, bool death = false)
+	{
+		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
+		AnimationTree.Set("parameters/conditions/WhenSprint", sprint);
+		AnimationTree.Set("parameters/conditions/WhenHit", hit);
+		AnimationTree.Set("parameters/conditions/Idle", idle);
+		AnimationTree.Set("parameters/conditions/Death", death);
+		
+	}
+	
+	protected override void TakeDamage(float damage)
+	{
+		Heath -= damage;
+		if (Heath <= 0)
+		{
+			AnimationState = -1;
+			AnimationSet(false, false, false, false, true);
+			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
 }

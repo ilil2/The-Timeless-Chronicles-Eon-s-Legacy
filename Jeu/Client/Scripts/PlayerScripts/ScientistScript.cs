@@ -17,17 +17,12 @@ public partial class ScientistScript : ClassScript
     
     public override void _Ready()
     {
-        InitPlayer();
+	    InitPlayer();
         
         AnimationTree = GetNode<AnimationTree>("AnimationTree");
         AnimationTree.Active = true;
 
         _shootCooldown = _shootCooldownValue - 50;
-        
-        //Soutenance
-        WalkSpeed = 6f;
-        RunSpeed = 6.8f;
-        DashPower = 70.0f;
     }
 
     public override void _Input(InputEvent @event)
@@ -48,22 +43,33 @@ public partial class ScientistScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
+        
+        if (!IsDead)
+        {
+	        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+	        {
+		        Animation();
+		        ShootLaser();
+	        }
+	        else
+	        {
+		        if (_shootCooldown >= _shootCooldownValue)
+		        {
+			        _shootCooldown = _shootCooldownValue - 20;
+		        }
+		        
+		        if (AnimationState != 0)
+		        {
+			        AnimationState = 0;
+			        AnimationSet(false, false, true);
+			        GameManager.InfoJoueur["animation"] = "idle";
+		        }
+	        }
+        }
+        
         if (!_isShooting)
         {
-            Move(delta);
-        }
-
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-        {
-	        ShootLaser();
-	        Animation();
-        }
-        else
-        {
-            if (_shootCooldown >= _shootCooldownValue)
-            {
-                _shootCooldown = _shootCooldownValue - 20;
-            }
+	        Move(delta);
         }
     }
     
@@ -168,9 +174,7 @@ public partial class ScientistScript : ClassScript
 		{
 			AnimationState = 2;
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", true);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationSet(false, true, false);
 			
 			GameManager.InfoJoueur["animation"] = "shoot";
 			
@@ -183,9 +187,7 @@ public partial class ScientistScript : ClassScript
 			
 			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", true);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationSet(true, false, false);
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
@@ -200,11 +202,28 @@ public partial class ScientistScript : ClassScript
 		{
 			AnimationState = 0;
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/Idle", true);
+			AnimationSet(false, false, true);
 			
 			GameManager.InfoJoueur["animation"] = "idle";
+		}
+	}
+    
+	private void AnimationSet(bool walk, bool shoot, bool idle, bool death = false)
+	{
+		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
+		AnimationTree.Set("parameters/conditions/WhenShoot", shoot);
+		AnimationTree.Set("parameters/conditions/Idle", idle);
+		AnimationTree.Set("parameters/conditions/Death", death);
+	}
+	
+	protected override void TakeDamage(float damage)
+	{
+		Heath -= damage;
+		if (Heath <= 0)
+		{
+			AnimationState = -1;
+			//AnimationSet(false, false, false, true); TODO: Add death animation
+			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
 }

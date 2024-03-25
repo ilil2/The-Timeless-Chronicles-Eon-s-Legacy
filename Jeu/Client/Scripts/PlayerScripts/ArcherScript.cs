@@ -15,11 +15,6 @@ public partial class ArcherScript : ClassScript
 	
 	public override void _Ready()
 	{
-		//Soutenance
-		WalkSpeed = 6f;
-		RunSpeed = 6.8f;
-		DashPower = 70.0f;
-		
 		InitPlayer();
 
 		AnimationTree = GetNode<AnimationTree>("AnimationTree");
@@ -44,17 +39,27 @@ public partial class ArcherScript : ClassScript
 		Pause();
 		PhysicsReset();
 		Gravity(delta);
+		
+		if (!IsDead)
+		{
+			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+			{
+				Animation();
+				ShootArrow();
+			}
+			else
+			{
+				if (AnimationState != 0)
+				{
+					AnimationState = 0;
+					AnimationSet(false, false, false, false, false, true);
+					GameManager.InfoJoueur["animation"] = "idle";
+				}
+				_shootTimer = 0;
+			}
+		}
+		
 		Move(delta);
-
-		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-		{
-			ShootArrow();
-			Animation();
-		}
-		else
-		{
-			_shootTimer = 0;
-		}
 	}
 
 	protected override void Move(double delta)
@@ -159,27 +164,13 @@ public partial class ArcherScript : ClassScript
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming)
 		{
 			AnimationState = 6;
-			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAim", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/WhenHitBow", true);
-			AnimationTree.Set("parameters/conditions/Idle", true);
-			
+			AnimationSet(false, false, false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hitbow";
 		}
 		else if (!_isAiming && IsShooting && AnimationState != 3)
 		{
 			AnimationState = 3;
-			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAim", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", true);
-			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-			AnimationTree.Set("parameters/conditions/Idle", false);
-			
+			AnimationSet(false, false, false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "shoot";
 			IsShooting = false;
 		}
@@ -188,13 +179,7 @@ public partial class ArcherScript : ClassScript
 			if ((left || right || forward || backward) && AnimationState != 2)
 			{
 				AnimationState = 2;
-				
-				AnimationTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
-				AnimationTree.Set("parameters/conditions/WhenAim", false);
-				AnimationTree.Set("parameters/conditions/WhenShoot", false);
-				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-				AnimationTree.Set("parameters/conditions/Idle", false);
+				AnimationSet(false, true, false, false, false, false);
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
@@ -210,14 +195,7 @@ public partial class ArcherScript : ClassScript
 			else if (AnimationState != 1)
 			{
 				AnimationState = 1;
-				
-				AnimationTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
-				AnimationTree.Set("parameters/conditions/WhenAim", true);
-				AnimationTree.Set("parameters/conditions/WhenShoot", false);
-				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-				AnimationTree.Set("parameters/conditions/Idle", false);
-				
+				AnimationSet(false, false, true, false, false, false);
 				GameManager.InfoJoueur["animation"] = "aim";
 			}
 		}
@@ -226,13 +204,7 @@ public partial class ArcherScript : ClassScript
 			if (_isAiming && AnimationState != 4)
 			{
 				AnimationState = 4;
-				
-				AnimationTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationTree.Set("parameters/conditions/WhenAimWalk", true);
-				AnimationTree.Set("parameters/conditions/WhenAim", false);
-				AnimationTree.Set("parameters/conditions/WhenShoot", false);
-				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-				AnimationTree.Set("parameters/conditions/Idle", false);
+				AnimationSet(false, true, false, false, false, false);
 				
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
@@ -248,13 +220,7 @@ public partial class ArcherScript : ClassScript
 			else if (AnimationState != 5)
 			{
 				AnimationState = 5;
-				
-				AnimationTree.Set("parameters/conditions/WhenWalk", true);
-				AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
-				AnimationTree.Set("parameters/conditions/WhenAim", false);
-				AnimationTree.Set("parameters/conditions/WhenShoot", false);
-				AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-				AnimationTree.Set("parameters/conditions/Idle", false);
+				AnimationSet(true, false, false, false, false, false);
 
 				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 				{
@@ -271,15 +237,30 @@ public partial class ArcherScript : ClassScript
 		else if ((_isAiming || !IsShooting) && !_isAiming && AnimationState != 0)
 		{
 			AnimationState = 0;
-			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAimWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenAim", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/WhenHitBow", false);
-			AnimationTree.Set("parameters/conditions/Idle", true);
-			
+			AnimationSet(false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";
+		}
+	}
+	
+	private void AnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool death = false)
+	{
+		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
+		AnimationTree.Set("parameters/conditions/WhenAimWalk", aimwalk);
+		AnimationTree.Set("parameters/conditions/WhenAim", aim);
+		AnimationTree.Set("parameters/conditions/WhenShoot", shoot);
+		AnimationTree.Set("parameters/conditions/WhenHitBow", hit);
+		AnimationTree.Set("parameters/conditions/Idle", idle);
+		AnimationTree.Set("parameters/conditions/Death", death);
+	}
+	
+	protected override void TakeDamage(float damage)
+	{
+		Heath -= damage;
+		if (Heath <= 0)
+		{
+			AnimationState = -1;
+			AnimationSet(false, false, false, false, false, false, true);
+			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
 }
