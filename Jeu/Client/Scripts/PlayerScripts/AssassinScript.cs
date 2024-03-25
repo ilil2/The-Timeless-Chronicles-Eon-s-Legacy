@@ -40,6 +40,7 @@ public partial class AssassinScript : ClassScript
 	        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 	        {
 		        Animation();
+		        Move(delta);
 	        }
 	        else
 	        {
@@ -49,9 +50,9 @@ public partial class AssassinScript : ClassScript
 			        AnimationSet(false, false, false, true);
 			        GameManager.InfoJoueur["animation"] = "idle";
 		        }
+		        Velocity = new Vector3(0, 0, 0);
 	        }
         }
-        Move(delta);
     }
     
     protected void Dash()
@@ -83,41 +84,38 @@ public partial class AssassinScript : ClassScript
     
     protected override void Move(double delta)
     {
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-        {
-            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-                Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-            {
-                Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
-                    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
-                Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-                IsWalking = true;
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+	    {
+		    Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
+			    Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
+		    Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+		    IsWalking = true;
 		        
-                //Changement de la vitesse du joueur si il sprint
-                if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
-                { 
-                    MovementSpeed = RunSpeed;
-                    IsRunning = true;
-                }
-                else
-                {
-                    MovementSpeed = WalkSpeed;
-                    IsRunning = false;
-                }
-            }
-            else
-            {
-                IsRunning = false;
-                IsWalking = false;
-            }
+		    //Changement de la vitesse du joueur si il sprint
+		    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
+		    { 
+			    MovementSpeed = RunSpeed;
+			    IsRunning = true;
+		    }
+		    else
+		    {
+			    MovementSpeed = WalkSpeed;
+			    IsRunning = false;
+		    }
+	    }
+	    else
+	    { 
+		    IsRunning = false; 
+		    IsWalking = false;
+	    }
 	        
-            //Calcul de la rotation du joueur
-            PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+	    //Calcul de la rotation du joueur
+	    PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 		    
-            HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	    HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
 	        
-            Dash();
-        }
+	    Dash();
         
         //Calcul du movement du joueur
         Vector3 velocity = Velocity;
@@ -186,7 +184,7 @@ public partial class AssassinScript : ClassScript
 		
 	}
 	
-	protected override void TakeDamage(float damage)
+	public override void TakeDamage(float damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)

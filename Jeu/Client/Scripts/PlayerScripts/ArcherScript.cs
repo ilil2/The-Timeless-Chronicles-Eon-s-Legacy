@@ -46,6 +46,7 @@ public partial class ArcherScript : ClassScript
 			{
 				Animation();
 				ShootArrow();
+				Move(delta);
 			}
 			else
 			{
@@ -56,49 +57,41 @@ public partial class ArcherScript : ClassScript
 					GameManager.InfoJoueur["animation"] = "idle";
 				}
 				_shootTimer = 0;
+				Velocity = new Vector3(0, 0, 0);
 			}
 		}
-		
-		Move(delta);
 	}
 
 	protected override void Move(double delta)
 	{
-		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-			{
-				int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-				int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
-				int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-				int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
+			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
+			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
+			int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
+			int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
 					
-				Direction = new Vector3(left - right, 0, forward - backward);
-				Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-				IsWalking = true;
-				MovementSpeed = WalkSpeed;
-			}
+			Direction = new Vector3(left - right, 0, forward - backward);
+			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+			IsWalking = true;
+			MovementSpeed = WalkSpeed;
+		}
 		    
-			//Calcul de la rotation du joueur
-			PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		//Calcul de la rotation du joueur
+		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 			
-			HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
 	    
-			//Calcul du movement du joueur
-			Vector3 velocity = Velocity;
-			velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-			velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-			velocity.Y = VerticalVelocity.Y;
+		//Calcul du movement du joueur
+		Vector3 velocity = Velocity;
+		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+		velocity.Y = VerticalVelocity.Y;
 			
-			//Application du mouvement au joueur
-			Velocity = velocity;
-			MoveAndSlide();
-		}
-		else
-		{
-			Velocity = new Vector3(0, 0, 0);
-		}
+		//Application du mouvement au joueur
+		Velocity = velocity;
+		MoveAndSlide();
 	}
 
 	private void ShootArrow()
@@ -253,7 +246,7 @@ public partial class ArcherScript : ClassScript
 		AnimationTree.Set("parameters/conditions/Death", death);
 	}
 	
-	protected override void TakeDamage(float damage)
+	public override void TakeDamage(float damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)
