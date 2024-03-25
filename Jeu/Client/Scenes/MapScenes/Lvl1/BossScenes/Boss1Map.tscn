@@ -1,4 +1,4 @@
-[gd_scene load_steps=280 format=3 uid="uid://bnmjhfrfx7ohn"]
+[gd_scene load_steps=286 format=3 uid="uid://bnmjhfrfx7ohn"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="9_da32q"]
 [ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/BossScenes/Exit.tscn" id="9_h3jfq"]
 [ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://Scenes/MapScenes/PortalExit.tscn" id="9_ymb4d"]
+[ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_ldyb2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk88x"]
 resource_name = "Rocks"
@@ -212,7 +213,7 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("9_da32q")
 roughness = 0.822698
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_p1da2"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_qgv4c"]
 _surfaces = [{
 "aabb": AABB(2.43437, 0, 0.5, 0.33127, 2, 4),
 "format": 4097,
@@ -242,7 +243,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray(204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 204, 204, 44, 64, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 0, 0, 32, 64, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 0, 0, 32, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 204, 204, 44, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 63, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 63, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 144, 64, 255, 127, 255, 255, 255, 255, 255, 63, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 144, 64, 255, 127, 255, 255, 255, 255, 255, 63, 204, 204, 44, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 0, 0, 32, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 0, 0, 32, 64, 0, 0, 0, 0, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 204, 204, 44, 64, 0, 0, 0, 0, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 0, 0, 32, 64, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 255, 63, 0, 0, 32, 64, 0, 0, 0, 0, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 255, 63, 0, 0, 32, 64, 233, 81, 184, 62, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 255, 63, 0, 0, 32, 64, 236, 81, 184, 62, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 255, 63, 204, 204, 44, 64, 0, 0, 0, 0, 0, 0, 144, 64, 255, 255, 255, 127, 254, 255, 0, 0, 204, 204, 44, 64, 0, 0, 0, 0, 0, 0, 0, 63, 255, 255, 255, 127, 254, 255, 0, 0, 204, 204, 44, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 127, 254, 255, 0, 0, 204, 204, 44, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 255, 255, 127, 254, 255, 0, 0, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 255, 255, 127, 0, 128, 0, 0, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 127, 0, 128, 0, 0, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 0, 63, 255, 255, 255, 127, 0, 128, 0, 0, 42, 0, 49, 64, 0, 0, 0, 64, 0, 0, 144, 64, 255, 255, 255, 127, 0, 128, 0, 0, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 0, 0, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 0, 0, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 0, 0, 164, 204, 27, 64, 0, 0, 0, 64, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 0, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 255, 255, 127, 234, 255, 0, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 127, 234, 255, 0, 0, 204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 255, 255, 127, 234, 255, 0, 0, 204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 255, 255, 127, 234, 255, 0, 0, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 205, 255, 231, 63, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 245, 63, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 245, 63, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 245, 63, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 245, 63, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 2, 64, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 4, 0, 1, 64, 42, 0, 49, 64, 236, 30, 201, 62, 0, 0, 144, 64, 255, 255, 255, 127, 252, 255, 0, 0, 42, 0, 49, 64, 239, 30, 201, 62, 0, 0, 0, 63, 255, 255, 255, 127, 252, 255, 0, 0, 42, 0, 49, 64, 72, 63, 241, 62, 0, 0, 0, 63, 255, 255, 255, 127, 252, 255, 0, 0, 42, 0, 49, 64, 71, 63, 241, 62, 0, 0, 144, 64, 255, 255, 255, 127, 252, 255, 0, 0, 164, 204, 27, 64, 239, 30, 201, 62, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 253, 63, 164, 204, 27, 64, 236, 30, 201, 62, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 253, 63, 164, 204, 27, 64, 71, 63, 241, 62, 0, 0, 144, 64, 0, 0, 255, 127, 255, 127, 253, 63, 164, 204, 27, 64, 72, 63, 241, 62, 0, 0, 0, 63, 0, 0, 255, 127, 255, 127, 253, 63, 204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 0, 0, 255, 255, 255, 63, 204, 204, 44, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 63, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 127, 0, 0, 255, 255, 255, 63, 42, 0, 49, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 0, 0, 255, 255, 255, 63, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 127, 0, 0, 0, 0, 255, 63, 0, 0, 32, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 0, 0, 0, 0, 255, 63, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 144, 64, 255, 127, 0, 0, 0, 0, 255, 63, 164, 204, 27, 64, 102, 102, 230, 63, 0, 0, 0, 63, 255, 127, 0, 0, 0, 0, 255, 63, 204, 204, 44, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 0, 0, 0, 0, 5, 0, 204, 204, 44, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 127, 0, 0, 0, 0, 1, 0, 136, 230, 46, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 127, 0, 0, 0, 0, 1, 0, 136, 230, 46, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 0, 0, 0, 0, 5, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 5, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 255, 255, 255, 1, 0, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 255, 255, 255, 1, 0, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 5, 0, 0, 0, 32, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 127, 0, 0, 8, 128, 255, 63, 0, 0, 32, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 0, 0, 255, 127, 255, 63, 68, 230, 29, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 0, 0, 255, 127, 255, 63, 68, 230, 29, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 127, 0, 0, 8, 128, 255, 63, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 255, 246, 127, 255, 63, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 127, 255, 255, 254, 127, 255, 63, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 127, 255, 255, 254, 127, 255, 63, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 255, 246, 127, 255, 63, 42, 0, 49, 64, 72, 63, 241, 62, 0, 0, 0, 63, 255, 191, 255, 191, 248, 255, 252, 127, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 191, 255, 191, 248, 255, 252, 127, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 191, 255, 191, 2, 0, 1, 0, 42, 0, 49, 64, 71, 63, 241, 62, 0, 0, 144, 64, 255, 191, 255, 191, 2, 0, 1, 0, 164, 204, 27, 64, 71, 63, 241, 62, 0, 0, 144, 64, 255, 63, 255, 191, 250, 127, 2, 64, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 63, 255, 191, 250, 127, 2, 64, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 63, 255, 191, 3, 128, 253, 63, 164, 204, 27, 64, 72, 63, 241, 62, 0, 0, 0, 63, 255, 63, 255, 191, 3, 128, 253, 63, 136, 230, 46, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 191, 255, 63, 252, 255, 1, 0, 42, 0, 49, 64, 239, 30, 201, 62, 0, 0, 0, 63, 255, 191, 255, 63, 252, 255, 1, 0, 42, 0, 49, 64, 236, 30, 201, 62, 0, 0, 144, 64, 255, 191, 255, 63, 6, 0, 252, 127, 136, 230, 46, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 191, 255, 63, 6, 0, 252, 127, 68, 230, 29, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 63, 255, 63, 251, 127, 253, 63, 164, 204, 27, 64, 236, 30, 201, 62, 0, 0, 144, 64, 255, 63, 255, 63, 251, 127, 253, 63, 164, 204, 27, 64, 239, 30, 201, 62, 0, 0, 0, 63, 255, 63, 255, 63, 4, 128, 2, 64, 68, 230, 29, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 63, 255, 63, 4, 128, 2, 64, 204, 204, 44, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 172, 44, 169, 41, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 138, 44, 69, 86, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 101, 29, 178, 78, 42, 0, 49, 64, 72, 63, 241, 62, 0, 0, 0, 63, 255, 255, 255, 255, 156, 13, 205, 70, 42, 0, 49, 64, 239, 30, 201, 62, 0, 0, 0, 63, 255, 255, 255, 255, 109, 30, 200, 48, 136, 230, 46, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 254, 42, 128, 42, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 73, 211, 165, 41, 204, 204, 44, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 123, 211, 65, 86, 136, 230, 46, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 163, 226, 173, 78, 42, 0, 49, 64, 236, 30, 201, 62, 0, 0, 144, 64, 255, 127, 255, 127, 112, 242, 198, 70, 42, 0, 49, 64, 71, 63, 241, 62, 0, 0, 144, 64, 255, 127, 255, 127, 130, 225, 193, 48, 136, 230, 46, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 246, 212, 123, 42, 0, 0, 32, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 81, 211, 168, 41, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 119, 211, 67, 86, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 144, 64, 255, 127, 255, 127, 156, 226, 177, 78, 164, 204, 27, 64, 71, 63, 241, 62, 0, 0, 144, 64, 255, 127, 255, 127, 101, 242, 204, 70, 164, 204, 27, 64, 236, 30, 201, 62, 0, 0, 144, 64, 255, 127, 255, 127, 147, 225, 201, 48, 68, 230, 29, 64, 233, 81, 184, 62, 0, 0, 144, 64, 255, 127, 255, 127, 255, 212, 128, 42, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 175, 44, 167, 41, 0, 0, 32, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 128, 44, 63, 86, 68, 230, 29, 64, 236, 81, 184, 62, 0, 0, 0, 63, 255, 255, 255, 255, 95, 29, 175, 78, 164, 204, 27, 64, 239, 30, 201, 62, 0, 0, 0, 63, 255, 255, 255, 255, 164, 13, 210, 70, 164, 204, 27, 64, 72, 63, 241, 62, 0, 0, 0, 63, 255, 255, 255, 255, 83, 30, 214, 48, 68, 230, 29, 64, 36, 6, 1, 63, 0, 0, 0, 63, 255, 255, 255, 255, 250, 42, 130, 42, 42, 0, 49, 64, 71, 63, 241, 62, 0, 0, 144, 64, 85, 250, 86, 122, 252, 255, 0, 0, 42, 0, 49, 64, 71, 63, 241, 62, 0, 0, 144, 64, 80, 173, 173, 210, 252, 255, 0, 0, 164, 204, 27, 64, 72, 63, 241, 62, 0, 0, 0, 63, 147, 7, 108, 120, 255, 127, 253, 63, 164, 204, 27, 64, 72, 63, 241, 62, 0, 0, 0, 63, 171, 78, 171, 206, 255, 127, 253, 63, 204, 204, 44, 64, 233, 81, 184, 62, 0, 0, 144, 64, 63, 202, 64, 74, 0, 0, 5, 0, 136, 230, 46, 64, 236, 81, 184, 62, 0, 0, 0, 63, 246, 165, 247, 37, 0, 0, 1, 0, 136, 230, 46, 64, 236, 81, 184, 62, 0, 0, 0, 63, 93, 238, 94, 110, 0, 0, 1, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 0, 63, 75, 227, 178, 156, 255, 255, 5, 0, 204, 204, 44, 64, 36, 6, 1, 63, 0, 0, 144, 64, 129, 156, 125, 227, 255, 255, 1, 0, 0, 0, 32, 64, 236, 81, 184, 62, 0, 0, 0, 63, 59, 57, 196, 70, 8, 128, 255, 63, 68, 230, 29, 64, 233, 81, 184, 62, 0, 0, 144, 64, 105, 26, 149, 101, 255, 127, 255, 63, 0, 0, 32, 64, 36, 6, 1, 63, 0, 0, 144, 64, 55, 31, 54, 159, 246, 127, 255, 63)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_p1da2")
+shadow_mesh = SubResource("ArrayMesh_qgv4c")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_in66k"]
 size = Vector3(0.328, 2, 4)
@@ -3313,6 +3314,267 @@ size = Vector2(120, 120)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jb1v2"]
 data = PackedVector3Array(1530, 0, 1530, -1530, 0, 1530, 1530, 0, -1530, -1530, 0, 1530, -1530, 0, -1530, 1530, 0, -1530)
 
+[sub_resource type="Animation" id="Animation_f8db0"]
+resource_name = "Enter"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 31, 0), Vector3(0, -0.2, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam1:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(18.7753, 5, 18.7753), Vector3(16.3258, 7, 16.3258), Vector3(15.3529, 5.34486, 15.3529)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cam1:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.523599, 0.785398, 0), Vector3(0.523599, 0.785398, 0), Vector3(-0.261799, 0.785398, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cam1:current")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationSpawn/S1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8.74228e-08, 31, 2), Vector3(0, 0, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AnimationSpawn/S2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-8.74228e-08, 31, -2), Vector3(0, 0, -2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AnimationSpawn/S3:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-2, 31, 0), Vector3(-2, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../AnimationSpawn/S4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2, 31, 0), Vector3(2, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wnbm8"]
+resource_name = "Exit"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit2:exit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PortalExit:PlayClose")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rpa2t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 31, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(20, 4, 20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Cam1:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.523599, 0.785398, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Cam1:current")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationSpawn/S1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(8.74228e-08, 31, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AnimationSpawn/S2:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.74228e-08, 31, -2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AnimationSpawn/S3:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2, 31, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../AnimationSpawn/S4:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 31, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Exit2:exit")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../PortalExit:PlayClose")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vos03"]
+_data = {
+"Enter": SubResource("Animation_f8db0"),
+"Exit": SubResource("Animation_wnbm8"),
+"RESET": SubResource("Animation_rpa2t")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ttc0l"]
+size = Vector3(4, 3, 4)
+
 [node name="Boss1Map" type="Node3D"]
 script = ExtResource("1_atvld")
 
@@ -4752,3 +5014,34 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nav/Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_jb1v2")
+
+[node name="Animation" type="Node3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+libraries = {
+"": SubResource("AnimationLibrary_vos03")
+}
+
+[node name="Cam1" type="Camera3D" parent="Animation"]
+transform = Transform3D(0.707107, 0.353553, 0.612372, 0, 0.866025, -0.5, -0.707107, 0.353553, 0.612372, 20, 4, 20)
+current = true
+
+[node name="AnimationSpawn" type="Node3D" parent="."]
+
+[node name="S1" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.74228e-08, 31, 2)
+
+[node name="S2" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, 31, -2)
+
+[node name="S3" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 31, 0)
+
+[node name="S4" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 31, 0)
+
+[node name="Exit2" parent="." instance=ExtResource("10_ldyb2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, -3.6, 0)
+shape = SubResource("BoxShape3D_ttc0l")

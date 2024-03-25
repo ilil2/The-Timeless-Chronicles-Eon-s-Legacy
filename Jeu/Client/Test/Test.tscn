@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdamv1bikitha"]
+
+[ext_resource type="Script" path="res://Test/Test.cs" id="1_i6q6b"]
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="2_jcnuk"]
+
+[sub_resource type="Environment" id="Environment_8roky"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("2_jcnuk")
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+fog_density = 0.3015
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.878431, 0.803922, 0.662745, 1)
+volumetric_fog_emission = Color(0.623529, 0.505882, 0.223529, 1)
+volumetric_fog_sky_affect = 0.97
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_enabled = true
+adjustment_saturation = 1.15
+
+[sub_resource type="TextMesh" id="TextMesh_5oqo8"]
+text = "TEST"
+
+[sub_resource type="BoxMesh" id="BoxMesh_ah5d8"]
+size = Vector3(1, 0.01, 0.1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_i6q6b")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.892271, -0.274443, 0.358517, 0.336547, 0.12506, 0.933325, -0.300981, 0.953436, -0.0192245, 0, 2.76815, 9.26053)
+shadow_enabled = true
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8roky")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.580753)
+
+[node name="LineEdit" type="LineEdit" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.406
+anchor_top = 0.469
+anchor_right = 0.594
+anchor_bottom = 0.519
+offset_left = 0.287964
+offset_top = 0.0879822
+offset_right = -0.288025
+offset_bottom = -1.31204
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+max_length = 15
+flat = true
+
+[node name="T" type="MeshInstance3D" parent="."]
+mesh = SubResource("TextMesh_5oqo8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0878499, 0)
+mesh = SubResource("BoxMesh_ah5d8")

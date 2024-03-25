@@ -8,10 +8,12 @@ public partial class PortalExit : Node3D
 	private Node3D Portal;
 	private AnimationPlayer AnimationPortal;
 	private bool Open = false;
+	[Export] private bool PlayClose = false;
 	private Camera3D Spec;
 	private bool PlayerIn = false;
 	private Label nb;
 	private int NbPlayer = 0;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,6 +25,11 @@ public partial class PortalExit : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if(PlayClose)
+		{
+			PlayClose = false;
+			AnimationPortal.Play("Close");
+		}
 		if(PlayerIn)
 		{
 			nb.Text = $"{NbPlayer}/{GameManager._nbJoueur}, En attente des autres joueurs ...";

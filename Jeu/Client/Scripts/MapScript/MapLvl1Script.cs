@@ -7,6 +7,7 @@ using Environment = Godot.Environment;
 using Lib;
 
 
+
 public partial class MapLvl1Script : IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
@@ -26,6 +27,7 @@ public partial class MapLvl1Script : IMap
 	private int FrameCount = 0;
 	private int StartInput = 0;
 	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
+	private List<Node3D> AnimationSpawn = new List<Node3D>();
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -43,9 +45,13 @@ public partial class MapLvl1Script : IMap
 		{(7,7),5}
 	};
 
-	
 	public override void _Ready()
 	{
+		foreach(Node3D s in GetNode<Node3D>("AnimationSpawn").GetChildren())
+		{
+			AnimationSpawn.Add(s);
+		}
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer"); 
 		((NavMeshScript)NavMesh).InitNavMesh();
 		stopwatch.Start();
 		LoadingStage = "Create PseudoMap";
@@ -62,12 +68,12 @@ public partial class MapLvl1Script : IMap
 	
 	public override void _Process(double delta)
 	{
+		PlayCinematic();
 		FrameCount+=1;
 		if (!SetUp)
 		{
 			if (MapTool.CheckSleep(PseudoRoomList))
 			{
-				
 				LoadingStage = "Create MainRoom";
 				CreateMainRoom();
 				LoadingStage = "Create Map";
@@ -431,6 +437,17 @@ public partial class MapLvl1Script : IMap
 			W.Position+=RoomList[i].GlobalPosition;
 			W.Rotation=RoomList[i].Rotation;
 			NavMesh.AddChild(W);
+		}
+	}
+	public void PlayCinematic()
+	{
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
+		if(Ani.CurrentAnimation == "Exit")
+		{
+			for(int i = 0; i<GameManager._nbJoueur;i++)
+			{
+				GameManager.ListJoueur[i].GlobalPosition = AnimationSpawn[i].GlobalPosition;
+			}
 		}
 	}
 }

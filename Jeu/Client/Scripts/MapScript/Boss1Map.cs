@@ -12,9 +12,15 @@ public partial class Boss1Map : IMap
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/w.tscn");
 	private PackedScene Pi = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/p.tscn");
 	private NavigationRegion3D Nav;
+	private List<Node3D> AnimationSpawn = new List<Node3D>();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		foreach(Node3D s in GetNode<Node3D>("AnimationSpawn").GetChildren())
+		{
+			AnimationSpawn.Add(s);
+		}
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
 		Nav = GetNode<NavigationRegion3D>("Nav");
 		LoadingStage = "Create Border";
 		for (int i = 0; i<360; i+=Pas)
@@ -44,12 +50,19 @@ public partial class Boss1Map : IMap
 		if (!MapReady)
 		{
 			MapReady = true;
+			GameManager.SettingsManager.SetSetting("enableChat",0);
+			Ani.Play("Enter");
 			LoadingStage = "En attente des autres joueurs :(";
+		}
+		else
+		{
+			PlayCinematic();
 		}
 	}
 
 	public override List<(int, int, int)> GetSpawnLocation()
 	{
+		/**/
 		List<(int,int,int)> res = new List<(int,int,int)>();
 		res.Add((1,10,0));
 		res.Add((0,5,1));
@@ -63,6 +76,18 @@ public partial class Boss1Map : IMap
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{
 		MapTool.Debug(Player,this,DebugMode);
+	}
+	
+	public void PlayCinematic()
+	{
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
+		if(Ani.CurrentAnimation == "Enter")
+		{
+			for(int i = 0; i<GameManager._nbJoueur;i++)
+			{
+				GameManager.ListJoueur[i].GlobalPosition = AnimationSpawn[i].GlobalPosition;
+			}
+		}
 	}
 
 }

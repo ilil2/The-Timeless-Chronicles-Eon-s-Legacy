@@ -10,6 +10,7 @@ public partial class Shop : IMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
 		Emax = GetNode<Node3D>("Shop/Emax");
 		EmaxAnimation = Emax.GetNode<AnimationPlayer>("AnimationPlayer");
 		EmaxAnimation.Play("Animation");

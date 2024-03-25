@@ -20,7 +20,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	public bool PlayerIsHere = false;
 	protected Node3D CameraH;
 	protected SpringArm3D CameraV;
-	protected Camera3D Camera;
+	public Camera3D Camera;
 	protected Node3D CameraPlayer;
 	protected Node3D PlayerMesh;
 	protected AnimationPlayer AnimationPlayer;

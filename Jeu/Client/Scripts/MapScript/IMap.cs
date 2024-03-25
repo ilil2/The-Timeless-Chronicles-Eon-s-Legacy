@@ -13,6 +13,7 @@ public abstract partial class IMap : Node3D
 	protected int step = 0;
 	public bool PlayerSet = false;
 	public bool CanExit = true;
+	public AnimationPlayer Ani;
 	public string LoadingStage = "rien pour l'instant";
 	public int Step()
 	{
