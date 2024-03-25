@@ -38,81 +38,57 @@ public partial class OtherArcherScript : OtherClassScript
         switch (GameManager.InfoAutreJoueur[$"animation{Id}"])
         {
             case "hitbow":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", true);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(false, false, false, false, true, false);
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "shoot":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(false, false, false, true, false, false);
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aim":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(false, false, true, false, false, false);
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "walk":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(true, false, false, false, false, false);
                 AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(0, 1));
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "walkside":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(true, false, false, false, false, false);
                 AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aimwalk":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(false, true, false, false, false, false);
                 AnimationOtherTree.Set("parameters/AimWalk/blend_position", new Vector2(0, 1));
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "aimwalkside":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", true);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", false);
+                OtherAnimationSet(false, true, false, false, false, false);
                 AnimationOtherTree.Set("parameters/AimWalk/blend_position", new Vector2(1, 0));
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "idle":
-                AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenAim", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenShoot", false);
-                AnimationOtherTree.Set("parameters/conditions/WhenHitBow", false);
-                AnimationOtherTree.Set("parameters/conditions/Idle", true);
+                OtherAnimationSet(false, false, false, false, false, true);
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
+            case "death":
+                OtherAnimationSet(false, false, false, false, false, false, true);
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+                break;
+            
         }
+    }
+    
+    private void OtherAnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool death = false)
+    {
+        AnimationOtherTree.Set("parameters/conditions/WhenWalk", walk);
+        AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", aimwalk);
+        AnimationOtherTree.Set("parameters/conditions/WhenAim", aim);
+        AnimationOtherTree.Set("parameters/conditions/WhenShoot", shoot);
+        AnimationOtherTree.Set("parameters/conditions/WhenHitBow", hit);
+        AnimationOtherTree.Set("parameters/conditions/Idle", idle);
+        AnimationOtherTree.Set("parameters/conditions/Death", death);
     }
 }
