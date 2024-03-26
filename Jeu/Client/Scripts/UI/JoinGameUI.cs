@@ -11,6 +11,7 @@ public partial class JoinGameUI : Control
 	
 	//Variable de la zone de texte
 	private LineEdit _gameID;
+	private TextMesh _gameIDMesh;
 	
 	//variable des label
 	private Label _title;
@@ -32,6 +33,7 @@ public partial class JoinGameUI : Control
 		_backButton = GetNode<Button>("BackButton");
 		_joinGameButton = GetNode<Button>("JoinButton");
 		_animationPlayer = GetParent().GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer");
+		_gameIDMesh = GetParent().GetNode<MeshInstance3D>("Lobby3D/JoinGame/JoinGameIDLine/TextMesh").Mesh as TextMesh;
 		Translation();
 	}
 	
@@ -66,6 +68,7 @@ public partial class JoinGameUI : Control
 		if (_backButton.ButtonPressed)
 		{
 			_animationPlayer.Play("JoinGame-Lobby");
+			GD.Print("1");
 			LobbyManager.ValidID = false;
 			LobbyManager.LobbyUI_ = true;
 			QueueFree();
@@ -73,6 +76,7 @@ public partial class JoinGameUI : Control
 
 		if (_joinGameButton.ButtonPressed)
 		{
+			GD.Print("2");
 			LobbyManager.IDJoinGame = _gameID.Text;
 			LobbyManager.JoinGamePressed = true;
 			if (LobbyManager.ValidID)
@@ -83,14 +87,24 @@ public partial class JoinGameUI : Control
 			}
 		}
 		
-		if (LobbyManager.kill)
-		{
-			LobbyManager.kill = false;
-			LobbyManager.ValidID = false;
-			LobbyManager.LobbyUI_ = true;
-			QueueFree();
-		}
-		
 		_idError.Text = LobbyManager.IDError;
+		
+		if (_gameID.Text == "")
+		{
+			(_gameIDMesh.Material as StandardMaterial3D).AlbedoColor = new Color(0.50f, 0.50f, 0.50f);
+			if (_gameID.HasFocus())
+			{
+				_gameIDMesh.Text = "";
+			}
+			else
+			{
+				_gameIDMesh.Text = "Game ID";
+			}
+		}
+		else
+		{
+			(_gameIDMesh.Material as StandardMaterial3D).AlbedoColor = new Color(0, 0, 0);
+			_gameIDMesh.Text = _gameID.Text;
+		}
 	}
 }

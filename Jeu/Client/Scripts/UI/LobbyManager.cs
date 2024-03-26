@@ -45,8 +45,7 @@ public partial class LobbyManager : Control
 			MenuState = 0;
 			LobbyUI_ = false;
 		}
-
-		if (JoinGameUI_)
+		else if (JoinGameUI_)
 		{
 			PackedScene JoinGameScene = GD.Load<PackedScene>("res://Scenes/UI/JoinGameUI.tscn");
 			Control JoinGameMenu = JoinGameScene.Instantiate<Control>();
@@ -55,8 +54,7 @@ public partial class LobbyManager : Control
 			MenuState = 1;
 			JoinGameUI_ = false;
 		}
-
-		if (CreateGameUI_)
+		else if (CreateGameUI_)
 		{
 			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/UI/CreateGameUI.tscn");
 			Control CreateGameMenu = CreateGameScene.Instantiate<Control>();
@@ -66,8 +64,7 @@ public partial class LobbyManager : Control
 			CreateGameUI_ = false;
 			CreateGameUI.StartButtonVisible = true;
 		}
-		
-		if(JoinGameWithID)
+		else if(JoinGameWithID)
 		{
 			PackedScene CreateGameScene = GD.Load<PackedScene>("res://Scenes/UI/CreateGameUI.tscn");
 			Control CreateGameMenu = CreateGameScene.Instantiate<Control>();

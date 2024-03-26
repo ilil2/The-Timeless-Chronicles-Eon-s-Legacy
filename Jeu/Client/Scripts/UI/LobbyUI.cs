@@ -59,6 +59,7 @@ public partial class LobbyUI : Control
 
 		if (_createGameButton.ButtonPressed)
 		{
+			_animationPlayer.Play("Lobby-CreateGame");
 			LobbyManager.CreateGameUI_ = true;
 			QueueFree();
 		}

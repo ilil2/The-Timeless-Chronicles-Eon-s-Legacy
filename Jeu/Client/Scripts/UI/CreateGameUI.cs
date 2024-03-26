@@ -9,13 +9,14 @@ public partial class CreateGameUI : Control
 	private Button _startGameButton;
 	
 	private Label _title;
-	private Label _idGame;
+	private TextMesh _idGame;
 	private Label _backButtonText;
 	private Label _startButtonText;
-	private Label _namePlayer1;
-	private Label _namePlayer2;
-	private Label _namePlayer3;
-	private Label _namePlayer4;
+	private TextMesh _namePlayer1;
+	private TextMesh _namePlayer2;
+	private TextMesh _namePlayer3;
+	private TextMesh _namePlayer4;
+	
 	
 	public static bool StartButtonVisible = true;
 	
@@ -28,11 +29,15 @@ public partial class CreateGameUI : Control
 	private int _language;
 	private Dictionary<string, string> _languageDict;
 	
+	private AnimationPlayer _animationPlayer;
+	
 	public override void _Ready()
 	{
 		_backButton = GetNode<Button>("BackButton");
 		_startGameButton = GetNode<Button>("StartGameButton");
 		LobbyManager.CreateButtonPressed = true;
+		
+		_animationPlayer = GetParent().GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer");
 		
 		//Language
 		_language = GameManager.SettingsManager.GetAllSettings()["language"];
@@ -50,22 +55,17 @@ public partial class CreateGameUI : Control
 	public void OnResize()
 	{
 		_title = GetNode<Label>("CreateTextMenu");
-		_idGame = GetNode<Label>("IDGameText");
+		_idGame = GetParent().GetNode<MeshInstance3D>("Lobby3D/CreateGame/IDGameText").Mesh as TextMesh;
 		_backButtonText = GetNode<Label>("BackButton/BackButtonText");
 		_startButtonText = GetNode<Label>("StartGameButton/StartButtonText");
-		_namePlayer1 = GetNode<Label>("Player1Text");
-		_namePlayer2 = GetNode<Label>("Player2Text");
-		_namePlayer3 = GetNode<Label>("Player3Text");
-		_namePlayer4 = GetNode<Label>("Player4Text");
+		_namePlayer1 = GetParent().GetNode<MeshInstance3D>("Lobby3D/CreateGame/Player1Text").Mesh as TextMesh;
+		_namePlayer2 = GetParent().GetNode<MeshInstance3D>("Lobby3D/CreateGame/Player2Text").Mesh as TextMesh;
+		_namePlayer3 = GetParent().GetNode<MeshInstance3D>("Lobby3D/CreateGame/Player3Text").Mesh as TextMesh;
+		_namePlayer4 = GetParent().GetNode<MeshInstance3D>("Lobby3D/CreateGame/Player4Text").Mesh as TextMesh;
 		
 		_title.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_idGame.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_backButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 		_startButtonText.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_namePlayer1.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_namePlayer2.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_namePlayer3.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_namePlayer4.LabelSettings.FontSize = (int)(_textDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 
 	public override void _Process(double delta)
@@ -74,6 +74,7 @@ public partial class CreateGameUI : Control
 
 		if (_backButton.ButtonPressed)
 		{
+			_animationPlayer.Play("CreateGame-Lobby");
 			LobbyManager.LobbyUI_ = true;
 			LobbyManager.BackButtonPressed = true;
 			QueueFree();
