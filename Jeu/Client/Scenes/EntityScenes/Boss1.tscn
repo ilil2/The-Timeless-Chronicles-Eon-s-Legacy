@@ -1,18 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://chj7g338qfi5q"]
+[gd_scene load_steps=5 format=3 uid="uid://chj7g338qfi5q"]
 
-[ext_resource type="Script" path="res://Scripts/EntityScripts/Boss1.cs" id="1_ta7jg"]
+[ext_resource type="Script" path="res://Boss1.gd" id="1_iwm6a"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_awdjl"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rfrxp"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rbnmx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qq7pt"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_70koe"]
+material = SubResource("StandardMaterial3D_qq7pt")
 
 [node name="Boss1" type="CharacterBody3D"]
-script = ExtResource("1_ta7jg")
+script = ExtResource("1_iwm6a")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_awdjl")
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_rbnmx")
+shape = SubResource("CapsuleShape3D_rfrxp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_70koe")
