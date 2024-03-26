@@ -15,11 +15,14 @@ public partial class LobbyUI : Control
 	private float _screenDefalutWidth = 1152;
 	private float _titleDefaultSize = 40;
 	private float _buttonDefaultSize = 20;
+	
+	private AnimationPlayer _animationPlayer;
 
 	public override void _Ready()
 	{
 		_joinGameButton = GetNode<Button>("JoinGameButton");
 		_createGameButton = GetNode<Button>("CreateGameButton");
+		_animationPlayer = GetParent().GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer");
 		
 		Translation();
 	}
@@ -49,6 +52,7 @@ public partial class LobbyUI : Control
 	{
 		if (_joinGameButton.ButtonPressed)
 		{
+			_animationPlayer.Play("Lobby-JoinGame");
 			LobbyManager.JoinGameUI_ = true;
 			QueueFree();
 		}

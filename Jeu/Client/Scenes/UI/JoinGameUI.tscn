@@ -38,6 +38,7 @@ grow_vertical = 2
 script = ExtResource("1_qj3v0")
 
 [node name="BackButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.056
 anchor_top = 0.099
@@ -47,6 +48,7 @@ offset_left = -0.512002
 offset_top = -0.152004
 offset_right = -0.384012
 offset_bottom = 0.319993
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_5w7gt")
 
 [node name="BackButtonText" type="Label" parent="BackButton"]
@@ -65,6 +67,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.632
 anchor_top = 0.469
@@ -76,6 +79,7 @@ offset_right = 0.447937
 offset_bottom = -0.264069
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_kdm0b")
 
 [node name="JoinButtonText" type="Label" parent="JoinButton"]
@@ -94,6 +98,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinGameIDLine" type="LineEdit" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.333
 anchor_top = 0.469
@@ -111,6 +116,7 @@ alignment = 1
 max_length = 6
 
 [node name="JoinTextMenu" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.389
 anchor_top = 0.173
@@ -128,6 +134,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="IDErrorText" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.333

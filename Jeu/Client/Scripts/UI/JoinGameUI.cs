@@ -24,11 +24,14 @@ public partial class JoinGameUI : Control
 	private float _buttonDefaultSize = 20;
 	private float _errorDefaultSize = 16;
 	
+	private AnimationPlayer _animationPlayer;
+	
 	public override void _Ready()
 	{
 		//Recuperation des elements du menu
 		_backButton = GetNode<Button>("BackButton");
 		_joinGameButton = GetNode<Button>("JoinButton");
+		_animationPlayer = GetParent().GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer");
 		Translation();
 	}
 	
@@ -62,6 +65,7 @@ public partial class JoinGameUI : Control
 		//Verifie un bouton est presser et lequel c'est.
 		if (_backButton.ButtonPressed)
 		{
+			_animationPlayer.Play("JoinGame-Lobby");
 			LobbyManager.ValidID = false;
 			LobbyManager.LobbyUI_ = true;
 			QueueFree();

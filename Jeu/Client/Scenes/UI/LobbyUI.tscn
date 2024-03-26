@@ -18,6 +18,7 @@ grow_vertical = 2
 script = ExtResource("1_w6pp2")
 
 [node name="LobbyMenuText" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.368
 anchor_top = 0.173
@@ -35,6 +36,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CreateGameButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.389
 anchor_top = 0.395
@@ -44,6 +46,7 @@ offset_left = -0.128033
 offset_top = 0.039993
 offset_right = 0.127998
 offset_bottom = 0.311977
+mouse_default_cursor_shape = 2
 
 [node name="CreateButtonText" type="Label" parent="CreateGameButton"]
 layout_mode = 1
@@ -62,6 +65,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinGameButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.389
 anchor_top = 0.58
@@ -71,6 +75,7 @@ offset_left = -0.128033
 offset_top = 0.159972
 offset_right = 0.127998
 offset_bottom = -0.216036
+mouse_default_cursor_shape = 2
 
 [node name="JoinButtonText" type="Label" parent="JoinGameButton"]
 layout_mode = 1
