@@ -82,6 +82,8 @@ public partial class CreateGameUI : Control
 
 		if (_startGameButton.ButtonPressed)
 		{
+			_animationPlayer.Play("StartGame");
+            
 			LobbyManager.StartGame = true;
 		}
 		

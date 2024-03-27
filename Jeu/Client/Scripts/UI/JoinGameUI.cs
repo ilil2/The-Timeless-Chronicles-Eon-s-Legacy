@@ -68,7 +68,6 @@ public partial class JoinGameUI : Control
 		if (_backButton.ButtonPressed)
 		{
 			_animationPlayer.Play("JoinGame-Lobby");
-			GD.Print("1");
 			LobbyManager.ValidID = false;
 			LobbyManager.LobbyUI_ = true;
 			QueueFree();
@@ -76,14 +75,18 @@ public partial class JoinGameUI : Control
 
 		if (_joinGameButton.ButtonPressed)
 		{
-			GD.Print("2");
 			LobbyManager.IDJoinGame = _gameID.Text;
 			LobbyManager.JoinGamePressed = true;
 			if (LobbyManager.ValidID)
 			{
+				_animationPlayer.Play("JoinGame-CreateGame");
 				LobbyManager.JoinGamePressed = false;
 				LobbyManager.JoinGameWithID = true;
 				QueueFree();
+			}
+			else
+			{
+				_animationPlayer.Play("JoinGame-Error");
 			}
 		}
 		

@@ -11,8 +11,6 @@ public partial class ScientistScript : ClassScript
     private bool _shootAnimation;
     
     private int _shootCooldownValue = 100;
-    
-    
     public static bool IsAiming;
     
     public override void _Ready()
@@ -216,6 +214,7 @@ public partial class ScientistScript : ClassScript
 		Heath -= damage;
 		if (Heath <= 0)
 		{
+			IsDead = true;
 			AnimationState = -1;
 			//AnimationSet(false, false, false, true); TODO: Add death animation
 			GameManager.InfoJoueur["animation"] = "death";

@@ -29,6 +29,7 @@ public partial class LobbyManager : Control
 		PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyUI.tscn");
 		Control LobbyMenu = LobbyScene.Instantiate<Control>();
 		AddChild(LobbyMenu);
+		GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer").Play("Enter");
 	}
 
 	public override void _Process(double delta)

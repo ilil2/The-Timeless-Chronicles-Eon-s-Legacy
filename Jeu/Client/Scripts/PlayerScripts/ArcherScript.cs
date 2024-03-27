@@ -251,6 +251,7 @@ public partial class ArcherScript : ClassScript
 		Heath -= damage;
 		if (Heath <= 0)
 		{
+			IsDead = true;
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
