@@ -17,6 +17,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ro5ai")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.012
+anchor_right = 1.0
+anchor_bottom = 0.988
+offset_top = -0.224
+offset_bottom = -0.223999
+color = Color(0, 0, 0, 1)
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1

@@ -241,6 +241,8 @@ public partial class GameManager : Node3D
 						AddChild(Joueur4);
 						break;
 				}
+				Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = true;
+				
 				_chat.Visible = true;
 			}
 			

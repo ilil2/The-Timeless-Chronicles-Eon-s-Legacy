@@ -19,7 +19,7 @@ transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 
 transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 0, 12, -4)
 spot_range = 10.0
 
-[node name="Cam" type="Node3D" parent="."]
+[node name="Cam" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, -0.183013, 0.683013, 0, 0.965926, 0.258819, -0.707107, -0.183013, 0.683013, 2, 2, 2)
 
 [node name="Ex" type="Area3D" parent="."]

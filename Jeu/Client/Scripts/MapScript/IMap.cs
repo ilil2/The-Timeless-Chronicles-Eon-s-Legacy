@@ -14,10 +14,18 @@ public abstract partial class IMap : Node3D
 	public bool PlayerSet = false;
 	public bool CanExit = true;
 	public AnimationPlayer Ani;
+	[Export] public bool CamOnPlayer = false;
 	public string LoadingStage = "rien pour l'instant";
 	public int Step()
 	{
 		return step;
+	}
+	public void SyncCam()
+	{
+		if(GameManager.Joueur1!=null)
+		{
+			GameManager.Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = CamOnPlayer;
+		}
 	}
 	public abstract List<(int,int,int)> GetSpawnLocation();
 	public bool MapIsReady()

@@ -19,6 +19,8 @@ public partial class PortalExit : Node3D
 	{
 		Portal = GetNode<Node3D>("Portal");
 		AnimationPortal = Portal.GetNode<AnimationPlayer>("AnimationPlayer");
+		Camera3D Cam = GetNode<Camera3D>("Cam");
+		Cam.Current = false;
 		
 	}
 
@@ -114,12 +116,9 @@ public partial class PortalExit : Node3D
 
 	private void PlaceCam()
 	{
-		Node3D Cam = GetNode<Node3D>("Cam");
-		Camera3D newCam = new Camera3D();
-		newCam.Position = Cam.Position;
-		newCam.Rotation = Cam.Rotation;
-		AddChild(newCam);
-		newCam.Current = true;
+		Camera3D Cam = GetNode<Camera3D>("Cam");
+		Cam.Current = true;
+		(GetParent() as IMap).CamOnPlayer = false;
 		
 	}
 }

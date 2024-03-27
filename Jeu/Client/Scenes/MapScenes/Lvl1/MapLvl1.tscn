@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=31 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="2_yl85q"]
@@ -259,6 +259,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(4.5, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_rqxng"]
 length = 0.001
@@ -334,15 +346,68 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("..:CamOnPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_wax11"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:CamOnPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mjmwp"]
 _data = {
+"Enter": SubResource("Animation_wax11"),
 "Exit": SubResource("Animation_vo7at"),
 "RESET": SubResource("Animation_rqxng")
 }
 
 [node name="MapLvl1" type="Node3D"]
 script = ExtResource("1_faj1b")
+CamOnPlayer = true
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)
@@ -353,513 +418,513 @@ environment = SubResource("Environment_vrgge")
 
 [node name="Exit" parent="." instance=ExtResource("10_gbivg")]
 
-[node name="Ground2" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0, -1, 0)
 mesh = SubResource("ArrayMesh_kxky1")
 skeleton = NodePath("")
 
-[node name="Ground" type="StaticBody3D" parent="Ground2"]
+[node name="Ground" type="StaticBody3D" parent="Ground"]
 transform = Transform3D(0.1, -1.0472e-05, 0, -4.57746e-13, -4.37114e-09, -0.1, 1.0472e-05, 0.1, -4.37114e-09, 0, -4.37114e-09, 0.1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Ground"]
 shape = SubResource("ConcavePolygonShape3D_emni7")
 
-[node name="Sphynx" type="MeshInstance3D" parent="Ground2"]
+[node name="Sphynx" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(0.001, -0.00173205, -2.09527e-07, 0.00173205, 0.001, -8.74228e-11, 1.04839e-07, -1.81412e-07, 0.002, -69.436, -19.416, 0.0927287)
 material_override = SubResource("StandardMaterial3D_4im4m")
 mesh = ExtResource("8_fgtiq")
 
-[node name="Pyramid" type="MeshInstance3D" parent="Ground2"]
+[node name="Pyramid" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(0.1, -1.0472e-05, 0, -4.57746e-13, -4.37114e-09, -0.1, 1.0472e-05, 0.1, -4.37114e-09, -78.5, 84, 0.0917832)
 mesh = SubResource("ArrayMesh_vuigq")
 skeleton = NodePath("")
 
-[node name="Pyramid2" type="MeshInstance3D" parent="Ground2"]
+[node name="Pyramid2" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(0.1, -1.0472e-05, 0, -4.57746e-13, -4.37114e-09, -0.1, 1.0472e-05, 0.1, -4.37114e-09, -102.2, 71.6, -3.2107)
 mesh = SubResource("ArrayMesh_vuigq")
 skeleton = NodePath("")
 
-[node name="Tunnel" type="Node3D" parent="Ground2"]
+[node name="Tunnel" type="Node3D" parent="Ground"]
 transform = Transform3D(0.08, 0, 0, 0, -3.49691e-09, -0.08, 0, 0.08, -3.49691e-09, 0, 3.80075e-08, -0.86951)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 0, 0)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics2" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics2" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, 4.24264, 0, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics2"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics2/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics2/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics2/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics2/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics3" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics3" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 7.15493e-08, 0, -6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics3"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics3/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics3/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics3/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics3/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics4" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics4" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, -4.24264, 0, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics4"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics4/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics4/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics4/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics4/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics5" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics5" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 0, -5.24537e-07)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics5"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics5/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics5/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics5/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics5/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics6" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics6" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, -4.24264, 0, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics6"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics6/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics6/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics6/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics6/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics7" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics7" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.62268e-07, 0, 6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics7"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics7/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics7/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics7/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics7/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics8" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics8" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, 4.24264, 0, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics8"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics8/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics8/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics8/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics8/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics9" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics9" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 3, 0)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics9"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics9/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics9/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics9/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics9/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics10" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics10" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, 4.24264, 3, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics10"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics10/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics10/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics10/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics10/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics11" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics11" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 7.15493e-08, 3, -6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics11"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics11"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics11/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics11/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics11/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics11/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics12" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics12" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, -4.24264, 3, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics12"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics12"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics12/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics12/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics12/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics12/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics13" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics13" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 3, -5.24537e-07)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics13"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics13/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics13/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics13/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics13/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics14" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics14" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, -4.24264, 3, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics14"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics14"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics14/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics14/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics14/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics14/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics15" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics15" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.62268e-07, 3, 6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics15"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics15"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics15/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics15/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics15/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics15/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics16" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics16" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, 4.24264, 3, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics16"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics16"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics16/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics16/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics16/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics16/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics17" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics17" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 6, 0)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics17"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics17"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics17/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics17/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics17/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics17/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics18" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics18" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, 4.24264, 6, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics18"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics18"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics18/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics18/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics18/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics18/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics19" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics19" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 7.15493e-08, 6, -6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics19"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics19"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics19/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics19/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics19/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics19/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics20" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics20" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, -4.24264, 6, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics20"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics20"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics20/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics20/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics20/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics20/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics21" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics21" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 6, -5.24537e-07)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics21"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics21"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics21/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics21/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics21/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics21/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics22" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics22" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, -4.24264, 6, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics22"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics22"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics22/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics22/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics22/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics22/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics23" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics23" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.62268e-07, 6, 6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics23"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics23"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics23/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics23/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics23/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics23/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics24" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics24" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, 4.24264, 6, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics24"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics24"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics24/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics24/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics24/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics24/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics25" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics25" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6, 9, 0)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics25"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics25"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics25/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics25/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics25/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics25/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics26" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics26" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, 4.24264, 9, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics26"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics26"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics26/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics26/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics26/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics26/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics27" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics27" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 7.15493e-08, 9, -6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics27"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics27"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics27/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics27/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics27/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics27/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics28" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics28" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, -4.24264, 9, -4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics28"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics28"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics28/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics28/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics28/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics28/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics29" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics29" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 9, -5.24537e-07)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics29"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics29"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics29/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics29/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics29/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics29/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics30" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics30" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, -4.24264, 9, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics30"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics30"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics30/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics30/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics30/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics30/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics31" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics31" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, -2.62268e-07, 9, 6)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics31"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics31"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics31/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics31/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics31/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics31/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
-[node name="Wall_mesh_heiroglyphics32" type="Node3D" parent="Ground2/Tunnel"]
+[node name="Wall_mesh_heiroglyphics32" type="Node3D" parent="Ground/Tunnel"]
 transform = Transform3D(1.06066, 0, -1.06066, 0, 1.5, 0, 1.06066, 0, 1.06066, 4.24264, 9, 4.24264)
 metadata/_edit_group_ = true
 
-[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics32"]
+[node name="Wall_mesh_heiroglyphics_blinn3_0" type="MeshInstance3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics32"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.5)
 mesh = SubResource("ArrayMesh_q6tbw")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics32/Wall_mesh_heiroglyphics_blinn3_0"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics32/Wall_mesh_heiroglyphics_blinn3_0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/Tunnel/Wall_mesh_heiroglyphics32/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Tunnel/Wall_mesh_heiroglyphics32/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_6eojh")
 
@@ -886,3 +951,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_mjmwp")
 }
+
+[node name="ColorRect" type="ColorRect" parent="Animation"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

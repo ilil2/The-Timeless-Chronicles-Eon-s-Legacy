@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dc36p4sfw2iub"]
+[gd_scene load_steps=22 format=3 uid="uid://dc36p4sfw2iub"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_kgg25"]
 [ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drrwd38pct32e" path="res://Ressources/Map/Shop/Cart/Cart.tscn" id="6_424vs"]
 [ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://Scenes/MapScenes/PortalExit.tscn" id="6_n3v2o"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_r0qgr"]
+[ext_resource type="PackedScene" uid="uid://0rk02j3cj0tg" path="res://Scenes/MapScenes/PortalEnter.tscn" id="9_usxab"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oifs2"]
 shader = ExtResource("1_qts26")
@@ -36,6 +37,46 @@ size = Vector3(7, 4, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpv76"]
 size = Vector3(4, 3, 4)
 
+[sub_resource type="Animation" id="Animation_xnosq"]
+resource_name = "Enter"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.7, 2, 2.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PortalEnter:PlayOpen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:CamOnPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="Animation" id="Animation_lx3cg"]
 resource_name = "Exit"
 length = 1.2
@@ -62,6 +103,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_eo0sj"]
@@ -90,9 +143,46 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../PortalEnter:PlayOpen")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..:CamOnPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jhhj"]
 _data = {
+"Enter": SubResource("Animation_xnosq"),
 "Exit": SubResource("Animation_lx3cg"),
 "RESET": SubResource("Animation_eo0sj")
 }
@@ -133,6 +223,7 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -0.943573)
 
 [node name="Cart" parent="Shop" instance=ExtResource("6_424vs")]
 transform = Transform3D(-0.126785, 0, -0.271892, 0, 0.3, 0, 0.271892, 0, -0.126785, 3, 0, -1.3)
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Shop/Cart"]
 
@@ -142,9 +233,6 @@ shape = SubResource("BoxShape3D_ri28c")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-
-[node name="PortalExit" parent="." instance=ExtResource("6_n3v2o")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5, 0, -50)
 
 [node name="Exit" parent="." instance=ExtResource("8_r0qgr")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -4.94115, 0, -50.034)
@@ -159,3 +247,17 @@ shape = SubResource("BoxShape3D_dpv76")
 libraries = {
 "": SubResource("AnimationLibrary_7jhhj")
 }
+
+[node name="ColorRect" type="ColorRect" parent="Animation"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="PortalExit" parent="." instance=ExtResource("6_n3v2o")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5, 0, -50)
+
+[node name="PortalEnter" parent="." instance=ExtResource("9_usxab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.35441)
+PlayOpen = false

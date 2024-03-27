@@ -64,6 +64,7 @@ public partial class MapLvl1Script : IMap
 	public override void _PhysicsProcess(double delta)
 	{
 		//GD.Print(LoadingStage);
+		SyncCam();
 	}
 	
 	public override void _Process(double delta)
@@ -109,6 +110,7 @@ public partial class MapLvl1Script : IMap
 			
 			MapReady = true;
 			LoadingStage = "En attente des autres joueurs :(";
+			Ani.Play("Enter");
 			
 		}
 		else
