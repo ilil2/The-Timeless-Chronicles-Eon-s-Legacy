@@ -1,17 +1,71 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2nshsm3c0cuc"]
+[gd_scene load_steps=7 format=3 uid="uid://d2nshsm3c0cuc"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ClassSelectUI.cs" id="1_aqayr"]
-[ext_resource type="Texture2D" uid="uid://dejwk05duxp0h" path="res://Ressources/Graphismes/Assassin.png" id="2_hf6md"]
-[ext_resource type="Texture2D" uid="uid://crrkp88elb2cn" path="res://Ressources/Graphismes/Scientist.png" id="3_yfgtf"]
-[ext_resource type="Texture2D" uid="uid://dnks1vkcma0su" path="res://Ressources/Graphismes/Knight.png" id="4_esys1"]
-[ext_resource type="Texture2D" uid="uid://bgget38lcrrc6" path="res://Ressources/Graphismes/Archer.png" id="5_vlmc0"]
+[ext_resource type="PackedScene" uid="uid://barf07laiuuxn" path="res://Scenes/UI/ClassSelect3D.tscn" id="2_dfeq5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ccqnc"]
-font_size = 20
+[sub_resource type="Animation" id="Animation_0svco"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="LabelSettings" id="LabelSettings_ad70f"]
-font_size = 27
-font_color = Color(1, 1, 0.847059, 1)
+[sub_resource type="Animation" id="Animation_bq8pu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_o312c"]
+resource_name = "Exit"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xwvr"]
+_data = {
+"Enter": SubResource("Animation_0svco"),
+"Exit": SubResource("Animation_o312c"),
+"RESET": SubResource("Animation_bq8pu")
+}
 
 [node name="ClassSelect" type="Control"]
 layout_mode = 3
@@ -22,211 +76,62 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aqayr")
 
-[node name="AssassinButton" type="Button" parent="."]
+[node name="Ready" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.764
-anchor_top = 0.642
-anchor_right = 0.944
-anchor_bottom = 0.741
-offset_left = -0.128128
-offset_top = -0.0160432
-offset_right = 0.511871
-offset_bottom = -0.168067
-
-[node name="AssassinButtonText" type="Label" parent="AssassinButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = "Assassin"
-label_settings = SubResource("LabelSettings_ccqnc")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="KnightButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.292
-anchor_top = 0.642
-anchor_right = 0.472
-anchor_bottom = 0.741
-offset_left = -0.384026
-offset_top = -0.0160432
-offset_right = 0.255901
-offset_bottom = -0.168067
-
-[node name="KnightButtonText" type="Label" parent="KnightButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = "Knight"
-label_settings = SubResource("LabelSettings_ccqnc")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ArcherButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.056
-anchor_top = 0.642
-anchor_right = 0.236
-anchor_bottom = 0.741
-offset_left = -0.512002
-offset_top = -0.0160432
-offset_right = 0.127951
-offset_bottom = -0.168067
-
-[node name="ArcherButtonText" type="Label" parent="ArcherButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = "Archer"
-label_settings = SubResource("LabelSettings_ccqnc")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ReadyButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.41
-anchor_top = 0.802
-anchor_right = 0.59
-anchor_bottom = 0.901
-offset_left = -0.319996
-offset_top = 0.30397
-offset_right = 0.319962
-offset_bottom = 0.151924
-
-[node name="ReadyButtonText" type="Label" parent="ReadyButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
+anchor_left = 0.417
+anchor_top = 0.84
+anchor_right = 0.583
+anchor_bottom = 0.938
+offset_left = -0.384033
+offset_top = -0.320007
+offset_right = 0.383972
+offset_bottom = 0.175964
 text = "Ready"
-label_settings = SubResource("LabelSettings_ccqnc")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="ScientistButton" type="Button" parent="."]
+[node name="Left" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.528
-anchor_top = 0.642
-anchor_right = 0.708
-anchor_bottom = 0.741
-offset_left = -0.255997
-offset_top = -0.0160432
-offset_right = 0.383995
-offset_bottom = -0.168067
+anchor_left = 0.333
+anchor_top = 0.84
+anchor_right = 0.389
+anchor_bottom = 0.938
+offset_left = 0.384003
+offset_top = -0.320007
+offset_right = -0.128021
+offset_bottom = 0.175964
+text = "<"
 
-[node name="ScientistButtonText" type="Label" parent="ScientistButton"]
+[node name="Right" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 0.611
+anchor_top = 0.84
+anchor_right = 0.667
+anchor_bottom = 0.938
+offset_left = 0.127991
+offset_top = -0.320007
+offset_right = -0.384033
+offset_bottom = 0.175964
+text = ">"
+
+[node name="ClassSelect3D" parent="." instance=ExtResource("2_dfeq5")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Scientist"
-label_settings = SubResource("LabelSettings_ccqnc")
-horizontal_alignment = 1
-vertical_alignment = 1
+color = Color(0, 0, 0, 1)
 
-[node name="ImgAssassin" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.764
-anchor_top = 0.086
-anchor_right = 0.944
-anchor_bottom = 0.605
-offset_left = -0.128067
-offset_top = 0.271998
-offset_right = 0.511925
-offset_bottom = -0.0400124
-texture = ExtResource("2_hf6md")
-expand_mode = 1
-
-[node name="ImgScientist" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.528
-anchor_top = 0.086
-anchor_right = 0.708
-anchor_bottom = 0.605
-offset_left = -0.255997
-offset_top = 0.271998
-offset_right = 0.383995
-offset_bottom = -0.0400124
-texture = ExtResource("3_yfgtf")
-expand_mode = 1
-
-[node name="ImgKnight" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.292
-anchor_top = 0.086
-anchor_right = 0.472
-anchor_bottom = 0.605
-offset_left = -0.384029
-offset_top = 0.271998
-offset_right = 0.255962
-offset_bottom = -0.0400124
-texture = ExtResource("4_esys1")
-expand_mode = 1
-
-[node name="ImgArcher" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.056
-anchor_top = 0.086
-anchor_right = 0.236
-anchor_bottom = 0.605
-offset_left = -0.512002
-offset_top = 0.271998
-offset_right = 0.127981
-offset_bottom = -0.0400124
-texture = ExtResource("5_vlmc0")
-expand_mode = 1
-
-[node name="EnAttente" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.312
-anchor_top = 0.802
-anchor_right = 0.687
-anchor_bottom = 0.901
-offset_left = 0.575993
-offset_top = 0.30397
-offset_right = 0.575897
-offset_bottom = 0.151924
-text = "Waiting for the other players..."
-label_settings = SubResource("LabelSettings_ad70f")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4xwvr")
+}
 
 [connection signal="resized" from="." to="." method="OnResize"]
+[connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

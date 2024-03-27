@@ -30,6 +30,7 @@ public partial class CreateGameUI : Control
 	private Dictionary<string, string> _languageDict;
 	
 	private AnimationPlayer _animationPlayer;
+	private string LastAnimation = "";
 	
 	public override void _Ready()
 	{
@@ -83,9 +84,13 @@ public partial class CreateGameUI : Control
 		if (_startGameButton.ButtonPressed)
 		{
 			_animationPlayer.Play("StartGame");
-            
+		}
+		if(_animationPlayer.CurrentAnimation == "" && LastAnimation == "StartGame")
+		{
 			LobbyManager.StartGame = true;
 		}
+		LastAnimation = _animationPlayer.CurrentAnimation;
+		
 		
 		_idGame.Text = _languageDict["createGameMenuID"] + LobbyManager.IDConnectGame;
 		_namePlayer1.Text = _languageDict["createGameMenuPlayer1"] + LobbyManager.NamePlayer[0];
