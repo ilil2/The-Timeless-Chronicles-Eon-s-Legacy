@@ -40,7 +40,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Create Game"},
-            {"createGameMenuBackButton", "<= Back"},
+            {"createGameMenuBackButton", "Back =>"},
             {"createGameMenuStartGame", "Start Game"},
             {"createGameMenuID", "Game ID: "},
             {"createGameMenuPlayer1", "Player 1: "},
@@ -152,7 +152,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Créer une partie"},
-            {"createGameMenuBackButton", "<= Retour"},
+            {"createGameMenuBackButton", "Retour =>"},
             {"createGameMenuStartGame", "Démarrer la partie"},
             {"createGameMenuID", "ID de la partie : "},
             {"createGameMenuPlayer1", "Joueur 1 : "},
@@ -265,7 +265,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Krouiñ ur gemennadenn"},
-            {"createGameMenuBackButton", "<= Distreiñ"},
+            {"createGameMenuBackButton", "Distreiñ =>"},
             {"createGameMenuStartGame", "Kregiñ ar gemennadenn"},
             {"createGameMenuID", "ID ar gemennadenn : "},
             {"createGameMenuPlayer1", "Mestr 1 : "},
@@ -377,7 +377,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Spiel erstellen"},
-            {"createGameMenuBackButton", "<= Zurück"},
+            {"createGameMenuBackButton", "Zurück =>"},
             {"createGameMenuStartGame", "Spiel starten"},
             {"createGameMenuID", "Spiel-ID : "},
             {"createGameMenuPlayer1", "Spieler 1 : "},
@@ -489,7 +489,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Crear juego"},
-            {"createGameMenuBackButton", "<= Regreso"},
+            {"createGameMenuBackButton", "Regreso =>"},
             {"createGameMenuStartGame", "Comenzar el juego"},
             {"createGameMenuID", "ID del juego : "},
             {"createGameMenuPlayer1", "Jugador 1 : "},
@@ -601,7 +601,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Krei ludon"},
-            {"createGameMenuBackButton", "<= Reen"},
+            {"createGameMenuBackButton", "Reen =>"},
             {"createGameMenuStartGame", "Komenci la ludon"},
             {"createGameMenuID", "Ludo-ID : "},
             {"createGameMenuPlayer1", "Ludanto 1 : "},
@@ -713,7 +713,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Ludum creare"},
-            {"createGameMenuBackButton", "<= Retro"},
+            {"createGameMenuBackButton", "Retro =>"},
             {"createGameMenuStartGame", "Ludum incipere"},
             {"createGameMenuID", "Ludum ID : "},
             {"createGameMenuPlayer1", "Ludens 1 : "},
@@ -825,7 +825,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Yakha umdlalo"},
-            {"createGameMenuBackButton", "<= Emuva"},
+            {"createGameMenuBackButton", "Emuva =>"},
             {"createGameMenuStartGame", "Qala umdlalo"},
             {"createGameMenuID", "ID umdlalo : "},
             {"createGameMenuPlayer1", "Umshayeli 1 : "},
@@ -937,7 +937,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "创建游戏"},
-            {"createGameMenuBackButton", "<= 返回"},
+            {"createGameMenuBackButton", "返回 =>"},
             {"createGameMenuStartGame", "开始游戏"},
             {"createGameMenuID", "游戏ID : "},
             {"createGameMenuPlayer1", "玩家 1 : "},
@@ -1049,7 +1049,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Δημιουργία παιχνιδιού"},
-            {"createGameMenuBackButton", "<= Πίσω"},
+            {"createGameMenuBackButton", "Πίσω =>"},
             {"createGameMenuStartGame", "Ξεκινήστε το παιχνίδι"},
             {"createGameMenuID", "Αναγνωριστικό παιχνιδιού : "},
             {"createGameMenuPlayer1", "Παίκτης 1 : "},
@@ -1162,7 +1162,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Создать игру"},
-            {"createGameMenuBackButton", "<= Назад"},
+            {"createGameMenuBackButton", "Назад =>"},
             {"createGameMenuStartGame", "Начать игру"},
             {"createGameMenuID", "Идентификатор игры : "},
             {"createGameMenuPlayer1", "Игрок 1 : "},
@@ -1274,7 +1274,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "4372656174652047616d65"},
-            {"createGameMenuBackButton", "<3d204261636b"},
+            {"createGameMenuBackButton", "3d3e204261636b>"},
             {"createGameMenuStartGame", "53746172742047616d65"},
             {"createGameMenuID", "4944206f66207468652047616d65"},
             {"createGameMenuPlayer1", "506c6179657220313a"},

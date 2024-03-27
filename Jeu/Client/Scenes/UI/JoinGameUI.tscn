@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsj6avqrdhr22"]
+[gd_scene load_steps=6 format=3 uid="uid://dsj6avqrdhr22"]
 
 [ext_resource type="Script" path="res://Scripts/UI/JoinGameUI.cs" id="1_qj3v0"]
 
@@ -9,24 +9,12 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_5w7gt"]
 events = [SubResource("InputEventKey_h0cs1")]
 
-[sub_resource type="LabelSettings" id="LabelSettings_rmhpq"]
-font_size = 20
-
 [sub_resource type="InputEventKey" id="InputEventKey_pj17l"]
 pressed = true
 keycode = 4194309
 
 [sub_resource type="Shortcut" id="Shortcut_kdm0b"]
 events = [SubResource("InputEventKey_pj17l")]
-
-[sub_resource type="LabelSettings" id="LabelSettings_0pfou"]
-font_size = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_ffel6"]
-font_size = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_tb80a"]
-font_color = Color(0.678431, 0.141176, 0, 1)
 
 [node name="JoinGameUI" type="Control"]
 layout_mode = 3
@@ -41,110 +29,46 @@ script = ExtResource("1_qj3v0")
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.056
-anchor_top = 0.099
-anchor_right = 0.167
-anchor_bottom = 0.16
-offset_left = -0.512002
-offset_top = -0.152004
-offset_right = -0.384012
-offset_bottom = 0.319993
+anchor_top = 0.086
+anchor_right = 0.257
+anchor_bottom = 0.185
+offset_left = -0.512001
+offset_top = 0.271999
+offset_right = -0.0639954
+offset_bottom = 2.12
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_5w7gt")
-
-[node name="BackButtonText" type="Label" parent="BackButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = "<= Back"
-label_settings = SubResource("LabelSettings_rmhpq")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="JoinButton" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.632
 anchor_top = 0.469
-anchor_right = 0.701
+anchor_right = 0.708
 anchor_bottom = 0.593
 offset_left = -0.0640259
 offset_top = 0.0879822
-offset_right = 0.447937
-offset_bottom = -0.264069
+offset_right = 0.383972
+offset_bottom = -0.264008
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_kdm0b")
 
-[node name="JoinButtonText" type="Label" parent="JoinButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = ">"
-label_settings = SubResource("LabelSettings_0pfou")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="JoinGameIDLine" type="LineEdit" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-anchor_left = 0.333
+anchor_left = 0.326
 anchor_top = 0.469
 anchor_right = 0.611
 anchor_bottom = 0.593
-offset_left = 0.384003
+offset_left = 0.447998
 offset_top = 0.0879822
 offset_right = 0.127991
-offset_bottom = -0.264069
+offset_bottom = -0.264008
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "ID of the Game"
 alignment = 1
 max_length = 6
-
-[node name="JoinTextMenu" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-anchor_left = 0.389
-anchor_top = 0.173
-anchor_right = 0.611
-anchor_bottom = 0.272
-offset_left = -0.128021
-offset_top = -0.104004
-offset_right = 0.127991
-offset_bottom = -0.256012
-grow_horizontal = 2
-grow_vertical = 2
-text = "Join Game"
-label_settings = SubResource("LabelSettings_ffel6")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="IDErrorText" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.333
-anchor_top = 0.593
-anchor_right = 0.701
-anchor_bottom = 0.628
-offset_left = 0.383995
-offset_top = -0.264035
-offset_right = 0.44796
-offset_bottom = 0.0559864
-label_settings = SubResource("LabelSettings_tb80a")
-
-[connection signal="resized" from="." to="." method="OnResize"]

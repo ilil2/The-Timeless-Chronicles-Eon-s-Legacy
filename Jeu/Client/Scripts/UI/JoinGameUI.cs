@@ -4,67 +4,47 @@ using System.Collections.Generic;
 
 public partial class JoinGameUI : Control
 {
-	
-	//Variables des boutons
 	private Button _backButton;
 	private Button _joinGameButton;
 	
-	//Variable de la zone de texte
 	private LineEdit _gameID;
 	private TextMesh _gameIDMesh;
 	
-	//variable des label
-	private Label _title;
-	private Label _idError;
-	private Label _backButtonText;
-	private Label _joinButtonText;
-	
-	private float _screenDefalutWidth = 1152;
-	private float _titleDefaultSize = 40;
-	private float _lineEditDefaultSize = 30;
-	private float _buttonDefaultSize = 20;
-	private float _errorDefaultSize = 16;
+	private TextMesh _title;
+	private TextMesh _backButtonText;
+	private TextMesh _idError;
 	
 	private AnimationPlayer _animationPlayer;
+
+	private Dictionary<string, string> _languageDict;
 	
 	public override void _Ready()
 	{
-		//Recuperation des elements du menu
 		_backButton = GetNode<Button>("BackButton");
 		_joinGameButton = GetNode<Button>("JoinButton");
 		_animationPlayer = GetParent().GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer");
 		_gameIDMesh = GetParent().GetNode<MeshInstance3D>("Lobby3D/JoinGame/JoinGameIDLine/TextMesh").Mesh as TextMesh;
+		_idError = GetParent().GetNode<MeshInstance3D>("Lobby3D/JoinGame/JoinTextError").Mesh as TextMesh;
+		_gameID = GetNode<LineEdit>("JoinGameIDLine");
+		
 		Translation();
 	}
 	
 	private void Translation()
 	{
 		int language = GameManager.SettingsManager.GetAllSettings()["language"];
-		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+		_languageDict = GameManager.LanguageManager.GetLanguage(language);
 		
-		_title.Text = languageDict["joinGameMenuTitle"];
-		_backButtonText.Text = languageDict["joinGameMenuBackButton"];
-		_gameID.PlaceholderText = languageDict["joinGameMenuGameID"];
+		_title = GetParent().GetNode<MeshInstance3D>("Lobby3D/JoinGame/JoinTextMenu").Mesh as TextMesh;
+		_backButtonText = GetParent().GetNode<MeshInstance3D>("Lobby3D/JoinGame/BackButton/TextMesh").Mesh as TextMesh;
+		
+		_title.Text = _languageDict["joinGameMenuTitle"];
+		_backButtonText.Text = _languageDict["joinGameMenuBackButton"];
 	}
 	
-	public void OnResize()
-	{
-		_gameID = GetNode<LineEdit>("JoinGameIDLine");
-		_title = GetNode<Label>("JoinTextMenu");
-		_idError = GetNode<Label>("IDErrorText");
-		_backButtonText = GetNode<Label>("BackButton/BackButtonText");
-		_joinButtonText = GetNode<Label>("JoinButton/JoinButtonText");
-		
-		_gameID.AddThemeFontSizeOverride("font_size", (int)(_lineEditDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth)));
-		_title.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_backButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_joinButtonText.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_idError.LabelSettings.FontSize = (int)(_errorDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-	}
 
 	public override void _Process(double delta)
 	{
-		//Verifie un bouton est presser et lequel c'est.
 		if (_backButton.ButtonPressed)
 		{
 			_animationPlayer.Play("JoinGame-Lobby");
@@ -94,19 +74,19 @@ public partial class JoinGameUI : Control
 		
 		if (_gameID.Text == "")
 		{
-			(_gameIDMesh.Material as StandardMaterial3D).AlbedoColor = new Color(0.50f, 0.50f, 0.50f);
+			((StandardMaterial3D)_gameIDMesh.Material).AlbedoColor = new Color(0.5f, 0.5f, 0.5f);
 			if (_gameID.HasFocus())
 			{
 				_gameIDMesh.Text = "";
 			}
 			else
 			{
-				_gameIDMesh.Text = "Game ID";
+				_gameIDMesh.Text = _languageDict["joinGameMenuGameID"];
 			}
 		}
 		else
 		{
-			(_gameIDMesh.Material as StandardMaterial3D).AlbedoColor = new Color(0, 0, 0);
+			((StandardMaterial3D)_gameIDMesh.Material).AlbedoColor = new Color(0, 0, 0);
 			_gameIDMesh.Text = _gameID.Text;
 		}
 	}
