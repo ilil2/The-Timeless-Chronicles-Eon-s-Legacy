@@ -25,7 +25,6 @@ public partial class ClassSelectUI : Control
 	
 	public override void _Ready()
 	{
-		
 		_animation = GetNode<AnimationPlayer>("AnimationPlayer");
 		_pivot = GetNode<Node3D>("ClassSelect3D/Pivot");
 		_animation.Play("Enter");
@@ -56,10 +55,12 @@ public partial class ClassSelectUI : Control
 	public override void _Process(double delta)
 	{
 		_classText.Text = _languageDict[_classList[_classID]];
+		
 		if (Supr)
 		{
 			QueueFree();
 		}
+		
 		if(_pivot.RotationDegrees.Y < _angleTarget-2)
 		{
 			_pivot.RotationDegrees += new Vector3(0,2,0);
@@ -79,12 +80,9 @@ public partial class ClassSelectUI : Control
 	{
 		if (!_isReady)
 		{
+			_animation.Play("Ready");
 			_isReady = true;
 			ClassChose = _classList[_classID];
-			_buttonReady.Visible = false;
-			_buttonRight.Visible = false;
-			_buttonLeft.Visible = false;
-		
 			_waitingText.Text = _languageDict["selectClassMenuWaitingText"];
 		}
 	}
@@ -94,9 +92,13 @@ public partial class ClassSelectUI : Control
 	{
 		if (!_isReady)
 		{
+			_animation.Play("Left");
 			_angleTarget += 90;
 			_classID -= 1;
-			_classID %= 4;
+			if (_classID < 0)
+			{
+				_classID += 4;
+			}
 		}
 	}
 
@@ -105,6 +107,7 @@ public partial class ClassSelectUI : Control
 	{
 		if (!_isReady)
 		{
+			_animation.Play("Right");
 			_angleTarget -= 90;
 			_classID += 1;
 			_classID %= 4;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2nshsm3c0cuc"]
+[gd_scene load_steps=10 format=3 uid="uid://d2nshsm3c0cuc"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ClassSelectUI.cs" id="1_aqayr"]
 [ext_resource type="PackedScene" uid="uid://barf07laiuuxn" path="res://Scenes/UI/ClassSelect3D.tscn" id="2_dfeq5"]
@@ -59,12 +59,195 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClassSelect3D/ButtonReady:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.617605, -1.76617)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ClassSelect3D/ButtonReady:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ClassSelect3D/ButtonLeft:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.921, 0.618, -1.766)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ClassSelect3D/ButtonRight:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.921243, 0.617605, -1.76617)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ClassSelect3D/WaitingText:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ClassSelect3D/ButtonRight:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ClassSelect3D/ButtonLeft:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_eg1nt"]
+resource_name = "Left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClassSelect3D/ButtonLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.921, 0.618, -1.766), Vector3(0.921, 0.568, -1.716), Vector3(0.921, 0.618, -1.766)]
+}
+
+[sub_resource type="Animation" id="Animation_ukm5x"]
+resource_name = "Right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClassSelect3D/ButtonRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.921243, 0.617605, -1.76617), Vector3(-0.921, 0.568, -1.716), Vector3(-0.921243, 0.617605, -1.76617)]
+}
+
+[sub_resource type="Animation" id="Animation_qoe58"]
+resource_name = "Ready"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClassSelect3D/ButtonReady:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.617605, -1.76617), Vector3(2.08165e-12, 0.568, -1.716), Vector3(0, 0.617605, -1.76617)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ClassSelect3D/ButtonReady:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClassSelect3D/WaitingText:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ClassSelect3D/ButtonRight:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ClassSelect3D/ButtonLeft:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4xwvr"]
 _data = {
 "Enter": SubResource("Animation_0svco"),
 "Exit": SubResource("Animation_o312c"),
-"RESET": SubResource("Animation_bq8pu")
+"Left": SubResource("Animation_eg1nt"),
+"RESET": SubResource("Animation_bq8pu"),
+"Ready": SubResource("Animation_qoe58"),
+"Right": SubResource("Animation_ukm5x")
 }
 
 [node name="ClassSelect" type="Control"]
@@ -77,43 +260,46 @@ grow_vertical = 2
 script = ExtResource("1_aqayr")
 
 [node name="Ready" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.417
-anchor_top = 0.84
-anchor_right = 0.583
-anchor_bottom = 0.938
-offset_left = -0.384033
-offset_top = -0.320007
-offset_right = 0.383972
-offset_bottom = 0.175964
-text = "Ready"
-
-[node name="Left" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.333
-anchor_top = 0.84
-anchor_right = 0.389
-anchor_bottom = 0.938
-offset_left = 0.384003
-offset_top = -0.320007
-offset_right = -0.128021
-offset_bottom = 0.175964
-text = "<"
+anchor_top = 0.741
+anchor_right = 0.667
+anchor_bottom = 0.901
+offset_left = 0.383995
+offset_top = -0.168036
+offset_right = -0.384064
+offset_bottom = 0.151985
+mouse_default_cursor_shape = 2
 
-[node name="Right" type="Button" parent="."]
+[node name="Left" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.611
-anchor_top = 0.84
-anchor_right = 0.667
-anchor_bottom = 0.938
-offset_left = 0.127991
-offset_top = -0.320007
-offset_right = -0.384033
-offset_bottom = 0.175964
-text = ">"
+anchor_left = 0.215
+anchor_top = 0.741
+anchor_right = 0.306
+anchor_bottom = 0.901
+offset_left = 0.319996
+offset_top = -0.168036
+offset_right = -0.512028
+offset_bottom = 0.151985
+mouse_default_cursor_shape = 2
+
+[node name="Right" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.694
+anchor_top = 0.741
+anchor_right = 0.785
+anchor_bottom = 0.901
+offset_left = 0.511993
+offset_top = -0.168036
+offset_right = -0.32003
+offset_bottom = 0.151985
+mouse_default_cursor_shape = 2
 
 [node name="ClassSelect3D" parent="." instance=ExtResource("2_dfeq5")]
 
