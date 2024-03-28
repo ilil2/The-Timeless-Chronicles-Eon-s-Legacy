@@ -42,5 +42,3 @@ offset_right = 0.447998
 offset_bottom = -0.176003
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_qni2j")
-
-[connection signal="resized" from="." to="." method="OnResize"]

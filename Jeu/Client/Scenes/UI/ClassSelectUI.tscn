@@ -30,6 +30,9 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_o312c"]
+resource_name = "Exit"
+
 [sub_resource type="Animation" id="Animation_bq8pu"]
 length = 0.001
 tracks/0/type = "value"
@@ -56,9 +59,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_o312c"]
-resource_name = "Exit"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4xwvr"]
 _data = {
@@ -131,7 +131,6 @@ libraries = {
 "": SubResource("AnimationLibrary_4xwvr")
 }
 
-[connection signal="resized" from="." to="." method="OnResize"]
 [connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
 [connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

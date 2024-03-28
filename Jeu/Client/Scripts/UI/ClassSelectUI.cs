@@ -7,90 +7,108 @@ public partial class ClassSelectUI : Control
 	public static string ClassChose = "";
 	public static bool Supr = false; 
 	
-	
-	//Variable du texte d'attente
-	
-	
-	
-	private float _screenDefalutWidth = 1152;
-	private float _waitingTextDefaultSize = 27;
-	private float _buttonDefaultSize = 20;
-	
 	private bool _isReady = false;
-	private List<string> ClassList = new List<string>{"Knight","Scientist","Assassin","Archer"};
-	private int ClassID = 0;
-	private int AngleTarget = 0;
-	private Node3D Pivot;
-	private AnimationPlayer animation;
-	private TextMesh ClassText;
+	private List<string> _classList = new List<string>{"Knight","Scientist","Assassin","Archer"};
+	private int _classID = 0;
+	private int _angleTarget = 0;
+	
+	private Node3D _pivot;
+	private Node3D _buttonReady;
+	private Node3D _buttonLeft;
+	private Node3D _buttonRight;
+	private AnimationPlayer _animation;
+	private TextMesh _classText;
+	private TextMesh _readyText;
+	private TextMesh _waitingText;
+
+	private Dictionary<string, string> _languageDict;
 	
 	public override void _Ready()
 	{
 		
-		animation = GetNode<AnimationPlayer>("AnimationPlayer");
-		Pivot = GetNode<Node3D>("ClassSelect3D/Pivot");
-		animation.Play("Enter");
-		Pivot.GetNode<AnimationPlayer>("Knight/AnimationPlayer").Play("Idle");	
-		Pivot.GetNode<AnimationPlayer>("Scientist/AnimationPlayer").Play("Idle");	
-		Pivot.GetNode<AnimationPlayer>("Assassin/AnimationPlayer").Play("Idle");	
-		Pivot.GetNode<AnimationPlayer>("Archer/AnimationPlayer").Play("Idle");	
-		ClassText = (GetNode<MeshInstance3D>("ClassSelect3D/TextMesh").Mesh as TextMesh);
+		_animation = GetNode<AnimationPlayer>("AnimationPlayer");
+		_pivot = GetNode<Node3D>("ClassSelect3D/Pivot");
+		_animation.Play("Enter");
+		_pivot.GetNode<AnimationPlayer>("Knight/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Scientist/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Assassin/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Archer/AnimationPlayer").Play("Idle");
+		
+		_classText = GetNode<MeshInstance3D>("ClassSelect3D/TextMesh").Mesh as TextMesh;
+		_readyText = GetNode<MeshInstance3D>("ClassSelect3D/ButtonReady/TextMesh").Mesh as TextMesh;
+		_waitingText = GetNode<MeshInstance3D>("ClassSelect3D/WaitingText").Mesh as TextMesh;
+		
+		_buttonReady = GetNode<Node3D>("ClassSelect3D/ButtonReady");
+		_buttonLeft = GetNode<Node3D>("ClassSelect3D/ButtonLeft");
+		_buttonRight = GetNode<Node3D>("ClassSelect3D/ButtonRight");
+		
 		Translation();
 	}
 	
 	private void Translation()
 	{
 		int language = GameManager.SettingsManager.GetAllSettings()["language"];
-		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
-	}
-	
-	public void OnResize()
-	{
-	
+		_languageDict = GameManager.LanguageManager.GetLanguage(language);
+		
+		_readyText.Text = _languageDict["selectClassMenuReadyButton"];
 	}
 	
 	public override void _Process(double delta)
 	{
-		ClassText.Text = ClassList[ClassID];
+		_classText.Text = _languageDict[_classList[_classID]];
 		if (Supr)
 		{
 			QueueFree();
 		}
-		if(Pivot.RotationDegrees.Y<AngleTarget-2)
+		if(_pivot.RotationDegrees.Y < _angleTarget-2)
 		{
-			Pivot.RotationDegrees+=new Vector3(0,2,0);
+			_pivot.RotationDegrees += new Vector3(0,2,0);
 		}
-		else if(Pivot.RotationDegrees.Y>AngleTarget+2)
+		else if(_pivot.RotationDegrees.Y > _angleTarget+2)
 		{
-			Pivot.RotationDegrees+=new Vector3(0,-2,0);
+			_pivot.RotationDegrees += new Vector3(0,-2,0);
 		}
 		else
 		{
-			Pivot.RotationDegrees=new Vector3(0,AngleTarget,0);
+			_pivot.RotationDegrees = new Vector3(0,_angleTarget,0);
 		}
 		
 	}
 	
 	private void _on_ready_pressed()
 	{
-		_isReady = true;
-		ClassChose = ClassList[ClassID];
+		if (!_isReady)
+		{
+			_isReady = true;
+			ClassChose = _classList[_classID];
+			_buttonReady.Visible = false;
+			_buttonRight.Visible = false;
+			_buttonLeft.Visible = false;
+		
+			_waitingText.Text = _languageDict["selectClassMenuWaitingText"];
+		}
 	}
 
 
 	private void _on_left_pressed()
 	{
-		AngleTarget+=90;
-		ClassID-=1;
-		ClassID%=4;
+		if (!_isReady)
+		{
+			_angleTarget += 90;
+			_classID -= 1;
+			_classID %= 4;
+		}
 	}
 
 
 	private void _on_right_pressed()
 	{
-		AngleTarget-=90;
-		ClassID+=1;
-		ClassID%=4;
+		if (!_isReady)
+		{
+			_angleTarget -= 90;
+			_classID += 1;
+			_classID %= 4;
+		}
 	}
 }
 
