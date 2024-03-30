@@ -143,7 +143,7 @@ public partial class GameManager : Node3D
 		InputManger = new InputControl();
 		FastConnectionManager = new FastConnection();
 		
-		soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
+		soc = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);	//creation du socke
 		iep = new IPEndPoint(IPAddress.Parse(IP), 9191);						//adresse + port du serveur principal
 		soc.Connect(iep);				//conexion
 		
