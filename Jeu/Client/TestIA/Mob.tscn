@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://c60qrur4avmdk"]
+
+[ext_resource type="Script" path="res://TestIA/MobmongUs.cs" id="1_rnd32"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjtd2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ytnr"]
+albedo_color = Color(0.913725, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rliy6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4arfr"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrsr0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yyn8f"]
+material = SubResource("StandardMaterial3D_lrsr0")
+size = Vector3(0.5, 0.75, 0.35)
+
+[node name="Mob" type="CharacterBody3D"]
+script = ExtResource("1_rnd32")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_tjtd2")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Suppositoire" type="MeshInstance3D" parent="Body"]
+material_override = SubResource("StandardMaterial3D_7ytnr")
+mesh = SubResource("CapsuleMesh_rliy6")
+
+[node name="Visiaire" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.3)
+mesh = SubResource("BoxMesh_4arfr")
+
+[node name="Sac_a_dos" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.175966, -0.471405)
+mesh = SubResource("BoxMesh_yyn8f")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="Ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, 0)
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0, 1, 1)
+debug_shape_thickness = 5
