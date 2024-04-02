@@ -55,7 +55,7 @@ public partial class KnightScript : ClassScript
 	protected override void Move(double delta)
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 		{
 			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
 			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)); 
@@ -142,7 +142,8 @@ public partial class KnightScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Heath -= damage;
+		Stamina -= damage;
+		/*
 		if (Heath <= 0)
 		{
 			IsDead = true;
@@ -150,5 +151,6 @@ public partial class KnightScript : ClassScript
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 		}
+		*/
 	}
 }
