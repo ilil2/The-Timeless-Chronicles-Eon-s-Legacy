@@ -16,6 +16,11 @@ public partial class NavMeshScript : NavigationRegion3D
 	{
 		BakeNavigationMesh(true);
 	}
+	public void InitNavMesh()
+	{
+		NavigationMesh Nav = new NavigationMesh();
+		NavigationMesh = Nav;
+	}
 	
 	private void _on_bake_finished()
 	{

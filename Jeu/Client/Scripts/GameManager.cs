@@ -67,6 +67,7 @@ public partial class GameManager : Node3D
 	public static CharacterBody3D Joueur2;
 	public static CharacterBody3D Joueur3;
 	public static CharacterBody3D Joueur4;
+	public static List<CharacterBody3D> ListJoueur;
 
 	public static Control _chat;
 
@@ -221,7 +222,9 @@ public partial class GameManager : Node3D
 			else if (state == 5)
 			{
 				State5.State();
-				
+				ListJoueur = new List<CharacterBody3D>{
+					Joueur1,Joueur2,Joueur3,Joueur4
+				};	
 				AddChild(Joueur1);
 				switch (_nbJoueur)
 				{
@@ -238,6 +241,8 @@ public partial class GameManager : Node3D
 						AddChild(Joueur4);
 						break;
 				}
+				Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = true;
+				
 				_chat.Visible = true;
 			}
 			

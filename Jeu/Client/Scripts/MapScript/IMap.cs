@@ -12,10 +12,20 @@ public abstract partial class IMap : Node3D
 	protected Random Rand2 = new Random(69);
 	protected int step = 0;
 	public bool PlayerSet = false;
+	public bool CanExit = true;
+	public AnimationPlayer Ani;
+	[Export] public bool CamOnPlayer = false;
 	public string LoadingStage = "rien pour l'instant";
 	public int Step()
 	{
 		return step;
+	}
+	public void SyncCam()
+	{
+		if(GameManager.Joueur1!=null)
+		{
+			GameManager.Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = CamOnPlayer;
+		}
 	}
 	public abstract List<(int,int,int)> GetSpawnLocation();
 	public bool MapIsReady()

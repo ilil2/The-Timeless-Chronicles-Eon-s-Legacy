@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bj8rilpef5eb"]
+[gd_scene load_steps=40 format=3 uid="uid://bj8rilpef5eb"]
 
 [ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="1_bdecf"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="2_osxtw"]
@@ -301,8 +301,18 @@ shadow_mesh = SubResource("ArrayMesh_6g88w")
 [sub_resource type="BoxShape3D" id="BoxShape3D_egfoo"]
 size = Vector3(0.328, 2, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ajbmg"]
+[sub_resource type="BoxMesh" id="BoxMesh_8raf5"]
 size = Vector3(42, 0.1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0c2ta"]
+size = Vector3(30, 2, 6)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sq1ba"]
+top_radius = 0.2
+bottom_radius = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_vlsi1"]
+size = Vector3(1, 2, 5)
 
 [node name="Room4" type="Node3D"]
 
@@ -850,7 +860,41 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_egfoo")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Nav" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Nav"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-visible = false
-mesh = SubResource("BoxMesh_ajbmg")
+mesh = SubResource("BoxMesh_8raf5")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.576528, 1, 0)
+mesh = SubResource("BoxMesh_0c2ta")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.05092, 0, -5.75117)
+mesh = SubResource("CylinderMesh_sq1ba")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04908, 0, -4.95117)
+mesh = SubResource("CylinderMesh_sq1ba")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.84908, 0, 5.04883)
+mesh = SubResource("CylinderMesh_sq1ba")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.95092, 0, 5.04883)
+mesh = SubResource("CylinderMesh_sq1ba")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(0.642788, 0, -0.766045, 0, 1, 0, 0.766045, 0, 0.642788, -14.0304, 1, -3.56098)
+mesh = SubResource("BoxMesh_vlsi1")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(-0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871557, 1.00467, 1, -4.45399)
+mesh = SubResource("BoxMesh_vlsi1")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(-0.0871557, 0, -0.996195, 0, 1, 0, 0.996195, 0, -0.0871557, 3.02705, 1, 4.55656)
+mesh = SubResource("BoxMesh_vlsi1")

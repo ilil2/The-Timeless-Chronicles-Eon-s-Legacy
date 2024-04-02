@@ -111,3 +111,5 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/Wall_mesh_heiroglyphics4/Wall_mesh_heiroglyphics_blinn3_0/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_sr17k")
+
+[node name="Nav" type="Node3D" parent="."]

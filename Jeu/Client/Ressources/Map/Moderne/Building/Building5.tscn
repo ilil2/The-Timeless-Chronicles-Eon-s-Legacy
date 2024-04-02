@@ -103,3 +103,17 @@ skeleton = NodePath("../Mesh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Roof/StaticBody3D"]
 shape = SubResource("BoxShape3D_856hn")
+
+[node name="Spawn" type="Node3D" parent="."]
+
+[node name="SpawnPoint" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 34.053, 9)
+
+[node name="SpawnPoint2" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 34.053, -9)
+
+[node name="SpawnPoint3" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 34.053, 9)
+
+[node name="SpawnPoint4" type="Node3D" parent="Spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 34.053, -9)

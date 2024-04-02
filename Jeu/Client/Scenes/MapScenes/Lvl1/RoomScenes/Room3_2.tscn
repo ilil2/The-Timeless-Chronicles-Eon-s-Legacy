@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b5euwiavawhnn"]
+[gd_scene load_steps=57 format=3 uid="uid://b5euwiavawhnn"]
 
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_xk8sj"]
 [ext_resource type="Texture2D" uid="uid://bemwyk5i1tjjt" path="res://Ressources/Map/Egypt/pot/egyptian_pottery_9.png" id="2_7sdxa"]
@@ -456,12 +456,19 @@ shadow_mesh = SubResource("ArrayMesh_0kdqe")
 [sub_resource type="BoxShape3D" id="BoxShape3D_ujiax"]
 size = Vector3(0.328, 2, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wd6w0"]
+[sub_resource type="BoxMesh" id="BoxMesh_8fajw"]
 size = Vector3(30, 0.1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_trwbj"]
+size = Vector3(18, 2, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kg10r"]
+size = Vector3(2.5, 1, 3)
 
 [node name="Room3" type="Node3D"]
 
 [node name="Misc" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
 [node name="Wall_mesh_heiroglyphics" type="Node3D" parent="Misc"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2, 0, 0)
@@ -1283,7 +1290,33 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_ujiax")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Nav" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Nav"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-visible = false
-mesh = SubResource("BoxMesh_wd6w0")
+mesh = SubResource("BoxMesh_8fajw")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+mesh = SubResource("BoxMesh_trwbj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+mesh = SubResource("BoxMesh_trwbj")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1, -1)
+mesh = SubResource("BoxMesh_trwbj")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.81791, 0, -2.46274)
+mesh = SubResource("BoxMesh_kg10r")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.91791, 0, 2.83726)
+mesh = SubResource("BoxMesh_kg10r")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(0.642788, 0, -0.766044, 0, 1, 0, 0.766044, 0, 0.642788, -3.62228, 0, -1.96633)
+mesh = SubResource("BoxMesh_kg10r")

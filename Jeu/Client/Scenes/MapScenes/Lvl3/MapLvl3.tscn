@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bn7cup06ni2nw"]
+[gd_scene load_steps=17 format=3 uid="uid://bn7cup06ni2nw"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl3Script.cs" id="1_7lg3q"]
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_42jj3"]
@@ -37,18 +37,55 @@ size = Vector3(1, 20, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1b17t"]
 
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_fuqtr"]
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_7ul4i"]
 noise = SubResource("FastNoiseLite_1b17t")
 
 [sub_resource type="FogMaterial" id="FogMaterial_rgl2n"]
 density = 1.5
 emission = Color(0.580392, 0.580392, 0.580392, 1)
 edge_fade = 0.2
-density_texture = SubResource("NoiseTexture3D_fuqtr")
+density_texture = SubResource("NoiseTexture3D_7ul4i")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_63xl1"]
 height = 4.0
 radius = 4.0
+
+[sub_resource type="Animation" id="Animation_lx3cg"]
+resource_name = "Exit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit:exit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7x2xn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Exit:exit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7jhhj"]
+_data = {
+"Exit": SubResource("Animation_lx3cg"),
+"RESET": SubResource("Animation_7x2xn")
+}
 
 [node name="MapLvl3" type="Node3D"]
 script = ExtResource("1_7lg3q")
@@ -85,3 +122,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.7, 0)
 shape = SubResource("CylinderShape3D_63xl1")
+
+[node name="Animation" type="Node3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
+libraries = {
+"": SubResource("AnimationLibrary_7jhhj")
+}

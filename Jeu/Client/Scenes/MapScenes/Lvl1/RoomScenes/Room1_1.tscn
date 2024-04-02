@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b7unor7dmtl84"]
+[gd_scene load_steps=47 format=3 uid="uid://b7unor7dmtl84"]
 
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_f57rv"]
 [ext_resource type="Texture2D" uid="uid://digmdpp4xx861" path="res://Ressources/Map/Egypt/Temple/textures/blinn4_diffuse.png" id="2_qvy3i"]
@@ -346,6 +346,12 @@ size = Vector3(0.328, 2, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_l6dv1"]
 size = Vector3(18, 0.1, 18)
 
+[sub_resource type="BoxMesh" id="BoxMesh_fjeo6"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_foj6u"]
+size = Vector3(2.5, 1, 3)
+
 [node name="Room1" type="Node3D"]
 
 [node name="Misc" type="Node3D" parent="."]
@@ -666,7 +672,21 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1, 2.5)
 shape = SubResource("BoxShape3D_mnsvd")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Nav" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Nav"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-visible = false
 mesh = SubResource("BoxMesh_l6dv1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 1, 2.1)
+mesh = SubResource("BoxMesh_fjeo6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -0.9)
+mesh = SubResource("BoxMesh_fjeo6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Nav"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.4, 0.4)
+mesh = SubResource("BoxMesh_foj6u")
