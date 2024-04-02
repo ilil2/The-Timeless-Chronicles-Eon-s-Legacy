@@ -23,42 +23,40 @@ public partial class OtherKnightScript : OtherClassScript
 		switch (GameManager.InfoAutreJoueur[$"animation{Id}"])
 		{
 			case "hit":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", true);
-				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				OtherAnimationSet(false, false, true, false);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "protection":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", true);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
-				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				OtherAnimationSet(false, true, false, false);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "walk":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
-				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				OtherAnimationSet(true, false, false, false);
 				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(0, 1));
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "walkside":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", true);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
-				AnimationOtherTree.Set("parameters/conditions/Idle", false);
+				OtherAnimationSet(true, false, false, false);
 				AnimationOtherTree.Set("parameters/Walk/blend_position", new Vector2(1, 0));
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 			case "idle":
-				AnimationOtherTree.Set("parameters/conditions/WhenWalk", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenBlock", false);
-				AnimationOtherTree.Set("parameters/conditions/WhenHit", false);
-				AnimationOtherTree.Set("parameters/conditions/Idle", true);
+				OtherAnimationSet(false, false, false, true);
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+				break;
+			case "death":
+				OtherAnimationSet(false, false, false, false, true);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
 		}
+	}
+	
+	private void OtherAnimationSet(bool walk, bool block, bool hit, bool idle, bool death = false)
+	{
+		AnimationOtherTree.Set("parameters/conditions/WhenWalk", walk);
+		AnimationOtherTree.Set("parameters/conditions/WhenBlock", block);
+		AnimationOtherTree.Set("parameters/conditions/WhenHit", hit);
+		AnimationOtherTree.Set("parameters/conditions/Idle", idle);
+		AnimationOtherTree.Set("parameters/conditions/Death", death);
 	}
 }

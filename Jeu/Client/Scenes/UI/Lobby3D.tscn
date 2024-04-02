@@ -1,0 +1,759 @@
+[gd_scene load_steps=43 format=3 uid="uid://da4b8u505twlj"]
+
+[ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_qce88"]
+[ext_resource type="PackedScene" uid="uid://dwy0e543no7fj" path="res://Ressources/Map/UIScenes/LobbyScene.tscn" id="2_tu6nj"]
+[ext_resource type="PackedScene" uid="uid://bcgtb7erfddhm" path="res://Ressources/Map/UIScenes/CreateGameScene.tscn" id="3_8i6s8"]
+
+[sub_resource type="Environment" id="Environment_qtxw2"]
+background_mode = 2
+background_color = Color(0.647059, 0.909804, 0.917647, 1)
+sky = ExtResource("1_qce88")
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+fog_density = 0.3015
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0.878431, 0.803922, 0.662745, 1)
+volumetric_fog_emission = Color(0.623529, 0.505882, 0.223529, 1)
+volumetric_fog_sky_affect = 0.97
+volumetric_fog_temporal_reprojection_amount = 0.99
+adjustment_enabled = true
+adjustment_saturation = 1.15
+
+[sub_resource type="BoxMesh" id="BoxMesh_7083k"]
+size = Vector3(1.3, 0.3, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eer05"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_xdfgt"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Join Game"
+font_size = 12
+
+[sub_resource type="BoxMesh" id="BoxMesh_xr8br"]
+size = Vector3(1.3, 0.3, 0.1)
+
+[sub_resource type="TextMesh" id="TextMesh_cw1kf"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Create Game"
+font_size = 12
+
+[sub_resource type="TextMesh" id="TextMesh_1ak3i"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Lobby"
+font_size = 20
+
+[sub_resource type="BoxMesh" id="BoxMesh_6snwq"]
+size = Vector3(1.5, 0.37, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mko2j"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_23own"]
+material = SubResource("StandardMaterial3D_mko2j")
+text = "AAAAAA"
+font_size = 14
+
+[sub_resource type="BoxMesh" id="BoxMesh_2sqqf"]
+size = Vector3(0.37, 0.37, 0.1)
+
+[sub_resource type="TextMesh" id="TextMesh_tpm2q"]
+material = SubResource("StandardMaterial3D_eer05")
+text = ">"
+font_size = 30
+
+[sub_resource type="BoxMesh" id="BoxMesh_hai3i"]
+size = Vector3(0.8, 0.2, 0.1)
+
+[sub_resource type="TextMesh" id="TextMesh_kg26v"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "<= Back"
+font_size = 12
+
+[sub_resource type="TextMesh" id="TextMesh_xbowr"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Join Game"
+font_size = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5ivn"]
+albedo_color = Color(0.568627, 0.164706, 0.117647, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_i5grn"]
+material = SubResource("StandardMaterial3D_u5ivn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8bt64"]
+size = Vector3(1.5, 0.37, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qmvv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_xgavu"]
+material = SubResource("StandardMaterial3D_7qmvv")
+text = "Start Game"
+font_size = 12
+
+[sub_resource type="BoxMesh" id="BoxMesh_newgm"]
+size = Vector3(0.8, 0.2, 0.1)
+
+[sub_resource type="TextMesh" id="TextMesh_ux2th"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Back =>"
+font_size = 12
+
+[sub_resource type="TextMesh" id="TextMesh_spdg6"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Create Game"
+font_size = 20
+
+[sub_resource type="TextMesh" id="TextMesh_hhm1s"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Game ID : ERROR"
+font_size = 14
+horizontal_alignment = 0
+
+[sub_resource type="TextMesh" id="TextMesh_y8x1m"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Player 1: ..."
+font_size = 12
+horizontal_alignment = 0
+
+[sub_resource type="TextMesh" id="TextMesh_juv4t"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Player 2: ..."
+font_size = 12
+horizontal_alignment = 0
+
+[sub_resource type="TextMesh" id="TextMesh_oti1e"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Player 3: ..."
+font_size = 12
+horizontal_alignment = 0
+
+[sub_resource type="TextMesh" id="TextMesh_g1pll"]
+material = SubResource("StandardMaterial3D_eer05")
+text = "Player 4: ..."
+font_size = 12
+horizontal_alignment = 0
+
+[sub_resource type="Animation" id="Animation_0o88b"]
+resource_name = "CreateGame-ClassSelect"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lgrqx"]
+resource_name = "CreateGame-Lobby"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreateGame/BackButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.955, 1.05858, -1.77687), Vector3(-2.005, 1.059, -1.777), Vector3(-1.955, 1.05858, -1.77687)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-8, 2.08165e-12, 6), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 1.5708, 3.48787e-16), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8oysa"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ssgb8"]
+resource_name = "JoinGame-CreateGame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 4.71239, 0), Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8, 0, 6), Vector3(-8, 0, 6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("JoinGame/JoinButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2, -0.0980439, 0.908814), Vector3(2.05, -0.098, 0.909), Vector3(2, -0.0980439, 0.908814)]
+}
+
+[sub_resource type="Animation" id="Animation_mm2g5"]
+resource_name = "JoinGame-Error"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JoinGame/JoinButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2, -0.0980439, 0.908814), Vector3(2.05, -0.098, 0.909), Vector3(2, -0.098, 0.909)]
+}
+
+[sub_resource type="Animation" id="Animation_hjnfj"]
+resource_name = "JoinGame-Lobby"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("JoinGame/BackButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.955, 1.059, -1.777), Vector3(2.005, 1.059, -1.827), Vector3(1.955, 1.059, -1.777)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(8, 2.08165e-12, 6), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(3.48787e-16, -1.5708, 3.48787e-16), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b0mc3"]
+resource_name = "Lobby-CreateGame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lobby/CreateGameButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.177859, -1.976), Vector3(0, 0.178, -2.026), Vector3(2.08165e-12, 0.177859, -1.976)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-8, 2.08165e-12, 6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 1.5708, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_2n306"]
+resource_name = "Lobby-JoinGame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lobby/JoinGameButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -0.36, -1.976), Vector3(0, -0.36, -2.026), Vector3(2.08165e-12, -0.36, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(8, 2.08165e-12, 6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, -1.5708, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_rdkhm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lobby/JoinGameButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, -0.36, -1.976)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("JoinGame/BackButton:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.955, 1.059, -1.777)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Lobby/CreateGameButton:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 0.177859, -1.976)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CreateGame/BackButton:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.955, 1.059, -1.777)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("JoinGame/JoinButton:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, -0.0980439, 0.908814)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CreateGame/StartGameButton:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2, -0.723093, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gfcx5"]
+resource_name = "StartGame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CreateGame/StartGameButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-2, -0.723093, 0), Vector3(-2.05, -0.723, 0), Vector3(-2, -0.723093, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_72c4h"]
+_data = {
+"CreateGame-ClassSelect": SubResource("Animation_0o88b"),
+"CreateGame-Lobby": SubResource("Animation_lgrqx"),
+"Enter": SubResource("Animation_8oysa"),
+"JoinGame-CreateGame": SubResource("Animation_ssgb8"),
+"JoinGame-Error": SubResource("Animation_mm2g5"),
+"JoinGame-Lobby": SubResource("Animation_hjnfj"),
+"Lobby-CreateGame": SubResource("Animation_b0mc3"),
+"Lobby-JoinGame": SubResource("Animation_2n306"),
+"RESET": SubResource("Animation_rdkhm"),
+"StartGame": SubResource("Animation_gfcx5")
+}
+
+[node name="Lobby3D" type="Node3D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.977521, 0.11776, -0.174884, 0.00266906, 0.836324, 0.548229, 0.210819, 0.535439, -0.817839, 0, 2.76815, 9.26053)
+shadow_enabled = true
+
+[node name="World" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qtxw2")
+
+[node name="Lobby" type="Node3D" parent="."]
+
+[node name="JoinGameButton" type="Node3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 0.999982, 0.00600389, 0, -0.00600389, 0.999982, 2.08165e-12, -0.36, -1.976)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="Lobby/JoinGameButton"]
+mesh = SubResource("BoxMesh_7083k")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="Lobby/JoinGameButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774306)
+mesh = SubResource("TextMesh_xdfgt")
+skeleton = NodePath("../..")
+
+[node name="CreateGameButton" type="Node3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 0.99997, -0.00771428, 0, 0.00771428, 0.99997, 2.08165e-12, 0.177859, -1.976)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="Lobby/CreateGameButton"]
+mesh = SubResource("BoxMesh_xr8br")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="Lobby/CreateGameButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774306)
+mesh = SubResource("TextMesh_cw1kf")
+skeleton = NodePath("../..")
+
+[node name="LobbyMenuText" type="MeshInstance3D" parent="Lobby"]
+transform = Transform3D(1, 0, 0, 0, 0.984411, -0.175882, 0, 0.175882, 0.984411, 0, 0.811225, -1.95057)
+mesh = SubResource("TextMesh_1ak3i")
+skeleton = NodePath("../..")
+
+[node name="LobbyScene" parent="Lobby" instance=ExtResource("2_tu6nj")]
+
+[node name="JoinGame" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.08165e-12, 6)
+
+[node name="JoinGameIDLine" type="Node3D" parent="JoinGame"]
+transform = Transform3D(0.016161, -3.54378e-16, -0.999869, 3.48787e-16, 1, -3.48787e-16, 0.999869, -3.43105e-16, 0.016161, 2, -0.0980439, -0.1696)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="JoinGame/JoinGameIDLine"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.12238e-23, 0, -1.12238e-23, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_6snwq")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="JoinGame/JoinGameIDLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774307)
+mesh = SubResource("TextMesh_23own")
+skeleton = NodePath("../..")
+
+[node name="JoinButton" type="Node3D" parent="JoinGame"]
+transform = Transform3D(-0.19971, -2.72104e-16, -0.979855, 3.48787e-16, 1, -3.48787e-16, 0.979855, -4.11417e-16, -0.19971, 2, -0.0980439, 0.908814)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="JoinGame/JoinButton"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.12238e-23, 0, -1.12238e-23, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_2sqqf")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="JoinGame/JoinButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774307)
+mesh = SubResource("TextMesh_tpm2q")
+skeleton = NodePath("../..")
+
+[node name="BackButton" type="Node3D" parent="JoinGame"]
+transform = Transform3D(0.429669, -0.350182, -0.83232, 0.114628, 0.935437, -0.334392, 0.895682, 0.0482707, 0.442069, 1.955, 1.059, -1.777)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="JoinGame/BackButton"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.12238e-23, 0, -1.12238e-23, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_hai3i")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="JoinGame/BackButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774307)
+mesh = SubResource("TextMesh_kg26v")
+skeleton = NodePath("../..")
+
+[node name="JoinTextMenu" type="MeshInstance3D" parent="JoinGame"]
+transform = Transform3D(-4.37114e-08, -0.262189, -0.965016, 0, 0.965016, -0.262189, 1, -1.14607e-08, -4.21822e-08, 1.95, 0.852, 0)
+mesh = SubResource("TextMesh_xbowr")
+skeleton = NodePath("../..")
+
+[node name="JoinTextError" type="MeshInstance3D" parent="JoinGame"]
+transform = Transform3D(-4.3535e-08, 0.0897461, -0.995965, 3.92293e-09, 0.995965, 0.0897461, 1, 6.85983e-16, -4.37114e-08, 2.08805, -0.464353, 0)
+mesh = SubResource("TextMesh_i5grn")
+skeleton = NodePath("../..")
+
+[node name="CreateGame" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.08165e-12, 6)
+
+[node name="StartGameButton" type="Node3D" parent="CreateGame"]
+transform = Transform3D(-4.31611e-08, -0.158175, 0.987411, -6.91406e-09, 0.987411, 0.158175, -1, 3.48787e-16, -4.37114e-08, -2, -0.723093, 0)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="CreateGame/StartGameButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.12238e-23, 0, 1.12238e-23, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_8bt64")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="CreateGame/StartGameButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774307)
+mesh = SubResource("TextMesh_xgavu")
+skeleton = NodePath("../..")
+
+[node name="BackButton" type="Node3D" parent="CreateGame"]
+transform = Transform3D(0.495098, 0.237396, 0.835775, -0.091135, 0.970831, -0.221771, -0.864044, 0.0336298, 0.502291, -1.955, 1.059, -1.777)
+metadata/_edit_group_ = true
+
+[node name="Mesh3D" type="MeshInstance3D" parent="CreateGame/BackButton"]
+transform = Transform3D(1, 0, 2.98023e-08, 3.72529e-09, 1, 8.84756e-09, 0, -1.95578e-08, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_newgm")
+skeleton = NodePath("../..")
+
+[node name="TextMesh" type="MeshInstance3D" parent="CreateGame/BackButton"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0774307)
+mesh = SubResource("TextMesh_ux2th")
+skeleton = NodePath("../..")
+
+[node name="CreateTextMenu" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-4.21854e-08, 0.26192, 0.96509, 1.14489e-08, 0.96509, -0.26192, -1, 3.48787e-16, -4.37114e-08, -1.95, 1.062, 0)
+mesh = SubResource("TextMesh_spdg6")
+skeleton = NodePath("../..")
+
+[node name="IDGameText" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9913, 0.58091, 1.06705)
+mesh = SubResource("TextMesh_hhm1s")
+skeleton = NodePath("../..")
+
+[node name="Player1Text" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-0.0381088, 3.61825e-16, 0.999274, 3.48787e-16, 1, -3.48787e-16, -0.999274, 3.35242e-16, -0.0381088, -2.00219, 0.359296, 0.78161)
+mesh = SubResource("TextMesh_y8x1m")
+skeleton = NodePath("../..")
+
+[node name="Player2Text" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-0.0381088, 3.61825e-16, 0.999274, 3.48787e-16, 1, -3.48787e-16, -0.999274, 3.35242e-16, -0.0381088, -2.00217, 0.145917, 0.781918)
+mesh = SubResource("TextMesh_juv4t")
+skeleton = NodePath("../..")
+
+[node name="Player3Text" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-0.0381088, 3.61825e-16, 0.999274, 3.48787e-16, 1, -3.48787e-16, -0.999274, 3.35242e-16, -0.0381088, -2.00217, -0.0758522, 0.782042)
+mesh = SubResource("TextMesh_oti1e")
+skeleton = NodePath("../..")
+
+[node name="Player4Text" type="MeshInstance3D" parent="CreateGame"]
+transform = Transform3D(-0.0381088, 3.61825e-16, 0.999274, 3.48787e-16, 1, -3.48787e-16, -0.999274, 3.35242e-16, -0.0381088, -2.00217, -0.300852, 0.782042)
+mesh = SubResource("TextMesh_g1pll")
+skeleton = NodePath("../..")
+
+[node name="CreateGameScene" parent="CreateGame" instance=ExtResource("3_8i6s8")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_72c4h")
+}

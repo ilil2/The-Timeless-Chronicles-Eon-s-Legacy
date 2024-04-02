@@ -79,7 +79,6 @@ public partial class State2 : GameManager
 		}
 		else
 		{
-			LobbyManager.InRunning = false;
 			state = 3;
 		}
 	}

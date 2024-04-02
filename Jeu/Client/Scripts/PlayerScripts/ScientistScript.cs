@@ -11,23 +11,16 @@ public partial class ScientistScript : ClassScript
     private bool _shootAnimation;
     
     private int _shootCooldownValue = 100;
-    
-    
     public static bool IsAiming;
     
     public override void _Ready()
     {
-        InitPlayer();
+	    InitPlayer();
         
         AnimationTree = GetNode<AnimationTree>("AnimationTree");
         AnimationTree.Active = true;
 
         _shootCooldown = _shootCooldownValue - 50;
-        
-        //Soutenance
-        WalkSpeed = 6f;
-        RunSpeed = 6.8f;
-        DashPower = 70.0f;
     }
 
     public override void _Input(InputEvent @event)
@@ -48,62 +41,68 @@ public partial class ScientistScript : ClassScript
         Pause();
         PhysicsReset();
         Gravity(delta);
-        if (!_isShooting)
+        
+        if (!IsDead)
         {
-            Move(delta);
-        }
-
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-        {
-	        ShootLaser();
-	        Animation();
-        }
-        else
-        {
-            if (_shootCooldown >= _shootCooldownValue)
-            {
-                _shootCooldown = _shootCooldownValue - 20;
-            }
+	        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+	        {
+		        Animation();
+		        ShootLaser();
+		        
+		        if (!_isShooting)
+		        {
+			        Move(delta);
+		        }
+	        }
+	        else
+	        {
+		        if (_shootCooldown >= _shootCooldownValue)
+		        {
+			        _shootCooldown = _shootCooldownValue - 20;
+		        }
+		        
+		        if (AnimationState != 0)
+		        {
+			        AnimationState = 0;
+			        AnimationSet(false, false, true);
+			        GameManager.InfoJoueur["animation"] = "idle";
+		        }
+		        
+		        Velocity = new Vector3(0, 0, 0);
+	        }
         }
     }
     
     protected override void Move(double delta)
     {
-        if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
-        {
-            if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-                Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-            {
-	            int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-	            int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
-	            int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-	            int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
-					
-	            Direction = new Vector3(left - right, 0, forward - backward);
-	            Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-	            IsWalking = true;
-	            MovementSpeed = WalkSpeed;
-            }
-	        
-            //Calcul de la rotation du joueur
-            PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-		    
-            HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	    
-	        //Calcul du movement du joueur
-	        Vector3 velocity = Velocity;
-	        velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-	        velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-	        velocity.Y = VerticalVelocity.Y;
-			
-	        //Application du mouvement au joueur
-	        Velocity = velocity;
-	        MoveAndSlide();
-	    }
-	    else
+	    if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
+	        Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 	    {
-		    Velocity = new Vector3(0, 0, 0);
+		    int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
+		    int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
+		    int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
+		    int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
+					
+		    Direction = new Vector3(left - right, 0, forward - backward);
+		    Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+		    IsWalking = true;
+		    MovementSpeed = WalkSpeed;
 	    }
+	        
+	    //Calcul de la rotation du joueur
+	    PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+		    
+	    HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+	    
+	    //Calcul du movement du joueur
+	    Vector3 velocity = Velocity;
+	    velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+	    velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+	    velocity.Y = VerticalVelocity.Y;
+			
+	    //Application du mouvement au joueur
+	    Velocity = velocity;
+	    MoveAndSlide();
     }
     
     private void ShootLaser()
@@ -168,9 +167,7 @@ public partial class ScientistScript : ClassScript
 		{
 			AnimationState = 2;
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", true);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationSet(false, true, false);
 			
 			GameManager.InfoJoueur["animation"] = "shoot";
 			
@@ -183,9 +180,7 @@ public partial class ScientistScript : ClassScript
 			
 			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", true);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/Idle", false);
+			AnimationSet(true, false, false);
 
 			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
 			{
@@ -200,11 +195,29 @@ public partial class ScientistScript : ClassScript
 		{
 			AnimationState = 0;
 			
-			AnimationTree.Set("parameters/conditions/WhenWalk", false);
-			AnimationTree.Set("parameters/conditions/WhenShoot", false);
-			AnimationTree.Set("parameters/conditions/Idle", true);
+			AnimationSet(false, false, true);
 			
 			GameManager.InfoJoueur["animation"] = "idle";
+		}
+	}
+    
+	private void AnimationSet(bool walk, bool shoot, bool idle, bool death = false)
+	{
+		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
+		AnimationTree.Set("parameters/conditions/WhenShoot", shoot);
+		AnimationTree.Set("parameters/conditions/Idle", idle);
+		AnimationTree.Set("parameters/conditions/Death", death);
+	}
+	
+	public override void TakeDamage(float damage)
+	{
+		Heath -= damage;
+		if (Heath <= 0)
+		{
+			IsDead = true;
+			AnimationState = -1;
+			//AnimationSet(false, false, false, true); TODO: Add death animation
+			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
 }

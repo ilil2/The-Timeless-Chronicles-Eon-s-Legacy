@@ -1,9 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv5j204tf023i"]
+[gd_scene load_steps=4 format=3 uid="uid://dv5j204tf023i"]
 
 [ext_resource type="Script" path="res://Scripts/UI/CreateGameUI.cs" id="1_vy15b"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_1kjyb"]
-font_size = 25
 
 [sub_resource type="InputEventKey" id="InputEventKey_8pn74"]
 pressed = true
@@ -12,171 +9,36 @@ keycode = 4194305
 [sub_resource type="Shortcut" id="Shortcut_qni2j"]
 events = [SubResource("InputEventKey_8pn74")]
 
-[sub_resource type="LabelSettings" id="LabelSettings_5a531"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_8q2ae"]
-font_size = 40
-
-[sub_resource type="LabelSettings" id="LabelSettings_korgq"]
-font_size = 25
-
 [node name="CreateGameUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vy15b")
 
 [node name="StartGameButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 anchor_left = 0.354
-anchor_top = 0.687
-anchor_right = 0.639
-anchor_bottom = 0.786
+anchor_top = 0.675
+anchor_right = 0.646
+anchor_bottom = 0.8
 offset_left = 0.191986
-offset_top = 0.319946
-offset_right = -0.128113
-offset_bottom = 0.167999
-
-[node name="StartButtonText" type="Label" parent="StartGameButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.039
-anchor_right = 1.0
-anchor_bottom = 0.973
-offset_top = 2.46514
-offset_right = 6.10352e-05
-offset_bottom = 2.49861
-grow_horizontal = 2
-grow_vertical = 2
-text = "Start Game"
-label_settings = SubResource("LabelSettings_1kjyb")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_right = -0.192017
+mouse_default_cursor_shape = 2
 
 [node name="BackButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-anchor_left = 0.056
-anchor_top = 0.099
-anchor_right = 0.167
-anchor_bottom = 0.16
-offset_left = -0.512001
-offset_top = -0.152004
-offset_right = -0.384018
-offset_bottom = 0.319992
+anchor_left = 0.75
+anchor_top = 0.086
+anchor_right = 0.951
+anchor_bottom = 0.187
+offset_left = -6.10352e-05
+offset_top = 0.271999
+offset_right = 0.447998
+offset_bottom = -0.176003
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_qni2j")
-
-[node name="BackButtonText" type="Label" parent="BackButton"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.987
-offset_top = 1.0
-offset_right = 1.52588e-05
-offset_bottom = 0.00166321
-grow_horizontal = 2
-grow_vertical = 2
-text = "<= Back"
-label_settings = SubResource("LabelSettings_5a531")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CreateTextMenu" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.389
-anchor_top = 0.099
-anchor_right = 0.611
-anchor_bottom = 0.198
-offset_left = -0.128021
-offset_top = -0.152004
-offset_right = 0.127991
-offset_bottom = -0.304001
-grow_horizontal = 2
-grow_vertical = 2
-text = "Create Game"
-label_settings = SubResource("LabelSettings_8q2ae")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="IDGameText" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.306
-anchor_top = 0.287
-anchor_right = 0.497
-anchor_bottom = 0.349
-offset_left = -0.512024
-offset_top = 0.320023
-offset_right = -0.544006
-offset_bottom = 0.144012
-grow_horizontal = 2
-grow_vertical = 2
-text = "Game ID : ERREUR"
-label_settings = SubResource("LabelSettings_korgq")
-vertical_alignment = 1
-
-[node name="Player1Text" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.354
-anchor_top = 0.35
-anchor_right = 0.694
-anchor_bottom = 0.425
-offset_left = 0.191986
-offset_top = -1.52588e-05
-offset_right = 0.511963
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Player 1: ..."
-label_settings = SubResource("LabelSettings_korgq")
-vertical_alignment = 1
-
-[node name="Player2Text" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.354
-anchor_top = 0.425
-anchor_right = 0.694
-anchor_bottom = 0.5
-offset_left = 0.191986
-offset_top = 3.05176e-05
-offset_right = 0.511841
-offset_bottom = -0.599976
-grow_horizontal = 2
-grow_vertical = 2
-text = "Player 2: ..."
-label_settings = SubResource("LabelSettings_korgq")
-vertical_alignment = 1
-
-[node name="Player3Text" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.354
-anchor_top = 0.5
-anchor_right = 0.694
-anchor_bottom = 0.575
-offset_left = 0.191986
-offset_right = 0.511841
-offset_bottom = -0.592041
-grow_horizontal = 2
-grow_vertical = 2
-text = "Player 3: ..."
-label_settings = SubResource("LabelSettings_korgq")
-vertical_alignment = 1
-
-[node name="Player4Text" type="Label" parent="."]
-layout_mode = 2
-anchor_left = 0.354
-anchor_top = 0.575
-anchor_right = 0.694
-anchor_bottom = 0.65
-offset_left = 0.191986
-offset_top = -3.05176e-05
-offset_right = 0.511963
-offset_bottom = -3.05176e-05
-text = "Player 4: ..."
-label_settings = SubResource("LabelSettings_korgq")
-vertical_alignment = 1
-
-[connection signal="resized" from="." to="." method="OnResize"]

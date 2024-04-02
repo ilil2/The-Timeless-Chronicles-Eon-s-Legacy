@@ -7,130 +7,111 @@ public partial class ClassSelectUI : Control
 	public static string ClassChose = "";
 	public static bool Supr = false; 
 	
-	//Variables des buttons du menu
-	private Button _buttonArcher;
-	private Button _buttonKnight;
-	private Button _buttonScientist;
-	private Button _buttonAssassin;
-	private Button _buttonReady;
-	
-	//Variable du texte d'attente
-	private Label _waitingText;
-	
-	private Label _readyButtonText;
-	private Label _archerButtonText;
-	private Label _knightButtonText;
-	private Label _scientistButtonText;
-	private Label _assassinButtonText;
-	
-	private float _screenDefalutWidth = 1152;
-	private float _waitingTextDefaultSize = 27;
-	private float _buttonDefaultSize = 20;
-	
-	private string _className = "";
 	private bool _isReady = false;
+	private List<string> _classList = new List<string>{"Knight","Scientist","Assassin","Archer"};
+	private int _classID = 0;
+	private int _angleTarget = 0;
+	
+	private Node3D _pivot;
+	private Node3D _buttonReady;
+	private Node3D _buttonLeft;
+	private Node3D _buttonRight;
+	private AnimationPlayer _animation;
+	private TextMesh _classText;
+	private TextMesh _readyText;
+	private TextMesh _waitingText;
+
+	private Dictionary<string, string> _languageDict;
 	
 	public override void _Ready()
 	{
-		//Recuperation des buttons du menu
-		_buttonArcher = GetNode<Button>("ArcherButton");
-		_buttonKnight = GetNode<Button>("KnightButton");
-		_buttonScientist = GetNode<Button>("ScientistButton");
-		_buttonAssassin = GetNode<Button>("AssassinButton");
-		_buttonReady = GetNode<Button>("ReadyButton");
-
-		_waitingText.Visible = false;
-
+		_animation = GetNode<AnimationPlayer>("AnimationPlayer");
+		_pivot = GetNode<Node3D>("ClassSelect3D/Pivot");
+		_animation.Play("Enter");
+		_pivot.GetNode<AnimationPlayer>("Knight/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Scientist/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Assassin/AnimationPlayer").Play("Idle");	
+		_pivot.GetNode<AnimationPlayer>("Archer/AnimationPlayer").Play("Idle");
+		
+		_classText = GetNode<MeshInstance3D>("ClassSelect3D/TextMesh").Mesh as TextMesh;
+		_readyText = GetNode<MeshInstance3D>("ClassSelect3D/ButtonReady/TextMesh").Mesh as TextMesh;
+		_waitingText = GetNode<MeshInstance3D>("ClassSelect3D/WaitingText").Mesh as TextMesh;
+		
+		_buttonReady = GetNode<Node3D>("ClassSelect3D/ButtonReady");
+		_buttonLeft = GetNode<Node3D>("ClassSelect3D/ButtonLeft");
+		_buttonRight = GetNode<Node3D>("ClassSelect3D/ButtonRight");
+		
 		Translation();
 	}
 	
 	private void Translation()
 	{
 		int language = GameManager.SettingsManager.GetAllSettings()["language"];
-		Dictionary<string, string> languageDict = GameManager.LanguageManager.GetLanguage(language);
+		_languageDict = GameManager.LanguageManager.GetLanguage(language);
 		
-		_readyButtonText.Text = languageDict["selectClassMenuReadyButton"];
-		_waitingText.Text = languageDict["selectClassMenuWaitingText"];
-		_archerButtonText.Text = languageDict["selectClassMenuArcherClass"];
-		_knightButtonText.Text = languageDict["selectClassMenuKnightClass"];
-		_assassinButtonText.Text = languageDict["selectClassMenuAssassinClass"];
-		_scientistButtonText.Text = languageDict["selectClassMenuScientistClass"];
-	}
-	
-	public void OnResize()
-	{
-		_readyButtonText = GetNode<Label>("ReadyButton/ReadyButtonText");
-		_waitingText = GetNode<Label>("EnAttente");
-		_archerButtonText = GetNode<Label>("ArcherButton/ArcherButtonText");
-		_knightButtonText = GetNode<Label>("KnightButton/KnightButtonText");
-		_assassinButtonText	= GetNode<Label>("AssassinButton/AssassinButtonText");
-		_scientistButtonText = GetNode<Label>("ScientistButton/ScientistButtonText");
-		
-		_readyButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_waitingText.LabelSettings.FontSize = (int)(_waitingTextDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_archerButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_knightButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_assassinButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		_scientistButtonText.LabelSettings.FontSize = (int)(_buttonDefaultSize * (GetViewportRect().Size.X / _screenDefalutWidth));
-		
+		_readyText.Text = _languageDict["selectClassMenuReadyButton"];
 	}
 	
 	public override void _Process(double delta)
 	{
+		_classText.Text = _languageDict[_classList[_classID]];
+		
 		if (Supr)
 		{
 			QueueFree();
 		}
 		
-		if (_buttonArcher.ButtonPressed && !_isReady)
+		if(_pivot.RotationDegrees.Y < _angleTarget-2)
 		{
-			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "Archer";
-			
-			_buttonArcher.Visible = false;
-			_buttonKnight.Visible = true;
-			_buttonScientist.Visible = true;
-			_buttonAssassin.Visible = true;
+			_pivot.RotationDegrees += new Vector3(0,2,0);
 		}
-		else if (_buttonKnight.ButtonPressed && !_isReady)
+		else if(_pivot.RotationDegrees.Y > _angleTarget+2)
 		{
-			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "Knight";
-			
-			_buttonArcher.Visible = true;
-			_buttonKnight.Visible = false;
-			_buttonScientist.Visible = true;
-			_buttonAssassin.Visible = true;
+			_pivot.RotationDegrees += new Vector3(0,-2,0);
 		}
-		else if (_buttonScientist.ButtonPressed && !_isReady)
+		else
 		{
-			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "Scientist";
-			
-			_buttonArcher.Visible = true;
-			_buttonKnight.Visible = true;
-			_buttonScientist.Visible = false;
-			_buttonAssassin.Visible = true;
-		}
-		else if (_buttonAssassin.ButtonPressed && !_isReady)
-		{
-			//Changement du nom de la classe choisi et masquage du bonton associé
-			_className = "Assassin";
-			
-			_buttonArcher.Visible = true;
-			_buttonKnight.Visible = true;
-			_buttonScientist.Visible = true;
-			_buttonAssassin.Visible = false;
-		} 
-		else if (_buttonReady.ButtonPressed && _className != "")
-		{
-			_buttonReady.Visible = false;
-			_waitingText.Visible = true;
-
-			_isReady = true;
-
-			ClassChose = _className;
+			_pivot.RotationDegrees = new Vector3(0,_angleTarget,0);
 		}
 		
 	}
+	
+	private void _on_ready_pressed()
+	{
+		if (!_isReady)
+		{
+			_animation.Play("Ready");
+			_isReady = true;
+			ClassChose = _classList[_classID];
+			_waitingText.Text = _languageDict["selectClassMenuWaitingText"];
+		}
+	}
+
+
+	private void _on_left_pressed()
+	{
+		if (!_isReady)
+		{
+			_animation.Play("Left");
+			_angleTarget += 90;
+			_classID -= 1;
+			if (_classID < 0)
+			{
+				_classID += 4;
+			}
+		}
+	}
+
+
+	private void _on_right_pressed()
+	{
+		if (!_isReady)
+		{
+			_animation.Play("Right");
+			_angleTarget -= 90;
+			_classID += 1;
+			_classID %= 4;
+		}
+	}
 }
+
