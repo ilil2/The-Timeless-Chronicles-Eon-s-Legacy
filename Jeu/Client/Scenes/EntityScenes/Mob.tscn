@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c60qrur4avmdk"]
 
-[ext_resource type="Script" path="res://Scripts/EntityScripts/MobScript.cs" id="1_q1moj"]
+[ext_resource type="Script" path="res://Scripts/EntityScripts/Mobmongus.cs" id="1_vxgrw"]
 [ext_resource type="Texture2D" uid="uid://2upn1vs5xr5t" path="res://Ressources/Graphismes/Mob/red.png" id="2_a0n8w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjtd2"]
@@ -21,7 +21,7 @@ material = SubResource("StandardMaterial3D_6wodr")
 size = Vector3(0.5, 0.75, 0.35)
 
 [node name="Mob" type="CharacterBody3D"]
-script = ExtResource("1_q1moj")
+script = ExtResource("1_vxgrw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
