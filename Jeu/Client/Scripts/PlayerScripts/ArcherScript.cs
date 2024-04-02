@@ -65,7 +65,7 @@ public partial class ArcherScript : ClassScript
 	protected override void Move(double delta)
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 		{
 			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
 			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
@@ -77,12 +77,12 @@ public partial class ArcherScript : ClassScript
 			IsWalking = true;
 			MovementSpeed = WalkSpeed;
 		}
-		    
+			
 		//Calcul de la rotation du joueur
 		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 			
 		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-	    
+		
 		//Calcul du movement du joueur
 		Vector3 velocity = Velocity;
 		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
@@ -256,5 +256,9 @@ public partial class ArcherScript : ClassScript
 			AnimationSet(false, false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 		}
+	}
+	public override void UseStamina(int stamina)
+	{
+		Stamina-=stamina;
 	}
 }

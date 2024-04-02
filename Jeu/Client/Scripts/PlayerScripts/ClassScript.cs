@@ -151,6 +151,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected abstract void Move(double delta);
 	
 	public abstract void TakeDamage(int damage);
+	public abstract void UseStamina(int stamina);
 	
 	public int GetHealth()
 	{
