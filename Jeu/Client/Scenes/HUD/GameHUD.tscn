@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://cngf2783qgwxk"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/GameHUD.cs" id="1_qiq70"]
+
+[node name="GameHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qiq70")
+
+[node name="HpBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.864
+anchor_right = 0.701
+anchor_bottom = 0.889
+offset_left = 0.191998
+offset_top = 0.127985
+offset_right = 0.44796
+offset_bottom = -0.0720377
+step = 1.0
+value = 99.0
+show_percentage = false

@@ -184,7 +184,7 @@ public partial class AssassinScript : ClassScript
 		
 	}
 	
-	public override void TakeDamage(float damage)
+	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)

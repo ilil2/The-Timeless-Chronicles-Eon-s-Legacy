@@ -11,10 +11,10 @@ public abstract partial class ClassScript : CharacterBody3D
 	public string Pseudo;
 	protected string Classe;
 	
-	protected float MaxHealth = 100;
-	protected float Heath = 100;
-	protected float MaxStamina = 100;
-	protected float Stamina = 100;
+	protected int MaxHealth = 100;
+	protected int Heath = 100;
+	protected int MaxStamina = 100;
+	protected int Stamina = 100;
 	protected bool IsDead = false;
 	
 	//Variable des objets
@@ -150,5 +150,25 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	protected abstract void Move(double delta);
 	
-	public abstract void TakeDamage(float damage);
+	public abstract void TakeDamage(int damage);
+	
+	public int GetHealth()
+	{
+		return Heath;
+	}
+	
+	public int GetMaxHealth()
+	{
+		return MaxHealth;
+	}
+	
+	public int GetStamina()
+	{
+		return Stamina;
+	}
+	
+	public int GetMaxStamina()
+	{
+		return MaxStamina;
+	}
 }

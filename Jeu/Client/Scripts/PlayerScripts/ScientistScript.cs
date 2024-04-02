@@ -209,7 +209,7 @@ public partial class ScientistScript : ClassScript
 		AnimationTree.Set("parameters/conditions/Death", death);
 	}
 	
-	public override void TakeDamage(float damage)
+	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)

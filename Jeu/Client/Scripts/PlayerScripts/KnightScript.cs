@@ -98,6 +98,8 @@ public partial class KnightScript : ClassScript
 			AnimationSet(false, false, true, true);
 			
 			GameManager.InfoJoueur["animation"] = "hit";
+			
+			TakeDamage(10);
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
@@ -138,7 +140,7 @@ public partial class KnightScript : ClassScript
 		
 	}
 	
-	public override void TakeDamage(float damage)
+	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)

@@ -70,6 +70,7 @@ public partial class GameManager : Node3D
 	public static List<CharacterBody3D> ListJoueur;
 
 	public static Control _chat;
+	private Control _GameHud;
 
 	protected static string IP;
 	protected static bool MapOnLoad = false;
@@ -171,6 +172,9 @@ public partial class GameManager : Node3D
 		
 		PackedScene ProgressBarMap = GD.Load<PackedScene>("res://Scenes/UI/ProgressBarMapLvl1.tscn");
 		ProgressBar = ProgressBarMap.Instantiate<Control>();
+		
+		PackedScene GameHud = GD.Load<PackedScene>("res://Scenes/HUD/GameHUD.tscn");
+		_GameHud = GameHud.Instantiate<Control>();
 	}
 	
 	//process
@@ -213,6 +217,8 @@ public partial class GameManager : Node3D
 					AddChild(ProgressBar);
 					AddChild(Map);
 					AddChild(_chat);
+					AddChild(_GameHud);
+					_GameHud.Visible = false;
 					_chat.Visible = false;
 					
 					MapOnLoad = true;
@@ -244,6 +250,7 @@ public partial class GameManager : Node3D
 				Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = true;
 				
 				_chat.Visible = true;
+				_GameHud.Visible = true;
 			}
 			
 			else if (state == 6)
