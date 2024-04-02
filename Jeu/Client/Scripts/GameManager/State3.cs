@@ -32,6 +32,7 @@ public partial class State3 : GameManager
 
 		th2 = new Thread(Listen2);    //initialisation thread
 		th2.Start();                        //debut du thread
+		LobbyManager.InRunning = false;
 		state = 4;
 		
 	}

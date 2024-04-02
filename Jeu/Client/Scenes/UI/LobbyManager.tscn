@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlx2usxbvyfga"]
+[gd_scene load_steps=3 format=3 uid="uid://dlx2usxbvyfga"]
 
 [ext_resource type="Script" path="res://Scripts/UI/LobbyManager.cs" id="1_qcvf8"]
+[ext_resource type="PackedScene" uid="uid://da4b8u505twlj" path="res://Scenes/UI/Lobby3D.tscn" id="2_0cl7r"]
 
 [node name="LobbyManager" type="Control"]
 layout_mode = 3
@@ -10,3 +11,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qcvf8")
+
+[node name="Lobby3D" parent="." instance=ExtResource("2_0cl7r")]

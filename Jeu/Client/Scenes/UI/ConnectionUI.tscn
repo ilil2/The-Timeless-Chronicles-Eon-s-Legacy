@@ -94,7 +94,6 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PasswordInscription" type="LineEdit" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -112,7 +111,6 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PasswordConfirmInscription" type="LineEdit" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -130,7 +128,6 @@ secret = true
 shortcut_keys_enabled = false
 
 [node name="PseudoInscription" type="LineEdit" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -159,6 +156,7 @@ offset_right = 0.127991
 offset_bottom = 1.28
 grow_horizontal = 2
 grow_vertical = 0
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_mo20d")
 
 [node name="ConnectionButtonText" type="Label" parent="Connection"]
@@ -178,7 +176,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Inscription" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.361
@@ -191,6 +188,7 @@ offset_right = 0.191956
 offset_bottom = -0.120056
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_wniwu")
 
 [node name="InscriptionButtonText" type="Label" parent="Inscription"]
@@ -218,6 +216,7 @@ offset_right = -0.192017
 offset_bottom = -0.128021
 grow_horizontal = 2
 grow_vertical = 0
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="NoCompteButtonText" type="Label" parent="NoCompte"]
@@ -233,7 +232,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DejaCompte" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.514
@@ -246,6 +244,7 @@ offset_right = -0.192017
 offset_bottom = -0.120056
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="DejaCompteButtonText" type="Label" parent="DejaCompte"]
@@ -317,6 +316,7 @@ offset_left = -0.256001
 offset_top = -0.176003
 offset_right = 0.384003
 offset_bottom = 0.295998
+mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 20
 
 [node name="FastConnectionButton" type="Button" parent="."]
@@ -330,6 +330,7 @@ offset_left = -0.384064
 offset_top = -0.176002
 offset_right = 0.255928
 offset_bottom = 0.295998
+mouse_default_cursor_shape = 2
 
 [node name="FastConnectionText" type="Label" parent="FastConnectionButton"]
 layout_mode = 1
@@ -355,6 +356,7 @@ offset_top = 0.184021
 offset_right = -11.648
 offset_bottom = -12.104
 scale = Vector2(1.5, 1.5)
+mouse_default_cursor_shape = 2
 
 [node name="FastConnectionSaveText" type="Label" parent="."]
 layout_mode = 1
@@ -381,6 +383,7 @@ offset_left = 0.319977
 offset_top = 0.183929
 offset_right = 0.12796
 offset_bottom = 0.0799866
+mouse_default_cursor_shape = 16
 
 [node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningButton"]
 layout_mode = 1

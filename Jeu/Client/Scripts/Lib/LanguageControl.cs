@@ -40,7 +40,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Create Game"},
-            {"createGameMenuBackButton", "<= Back"},
+            {"createGameMenuBackButton", "Back =>"},
             {"createGameMenuStartGame", "Start Game"},
             {"createGameMenuID", "Game ID: "},
             {"createGameMenuPlayer1", "Player 1: "},
@@ -54,10 +54,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "ID of the Game"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Archer"},
-            {"selectClassMenuKnightClass", "Knight"},
-            {"selectClassMenuScientistClass", "Scientist"},
-            {"selectClassMenuAssassinClass", "Assassin"},
+            {"Archer", "Archer"},
+            {"Knight", "Knight"},
+            {"Scientist", "Scientist"},
+            {"Assassin", "Assassin"},
             {"selectClassMenuReadyButton", "Ready"},
             {"selectClassMenuWaitingText", "Waiting for the other players..."},
             
@@ -124,7 +124,7 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Connexion"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "Pseudonyme"},
             {"connectionMenuPasswordText", "Mot de passe"},
             {"connectionMenuConnectionButton", "Connexion"},
             {"connectionMenuNoAccountButton", "Pas de compte ?"},
@@ -137,7 +137,7 @@ public class LanguageControl
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscription"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "Pseudonyme"},
             {"inscriptionMenuPasswordText", "Mot de passe"},
             {"inscriptionMenuPasswordConfirmText", "Confirmer le mot de passe"},
             {"inscriptionMenuInscriptionButton", "Inscription"},
@@ -152,7 +152,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Créer une partie"},
-            {"createGameMenuBackButton", "<= Retour"},
+            {"createGameMenuBackButton", "Retour =>"},
             {"createGameMenuStartGame", "Démarrer la partie"},
             {"createGameMenuID", "ID de la partie : "},
             {"createGameMenuPlayer1", "Joueur 1 : "},
@@ -166,10 +166,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "ID de la partie"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Archer"},
-            {"selectClassMenuKnightClass", "Chevalier"},
-            {"selectClassMenuScientistClass", "Scientifique"},
-            {"selectClassMenuAssassinClass", "Assassin"},
+            {"Archer", "Archer"},
+            {"Knight", "Chevalier"},
+            {"Scientist", "Scientifique"},
+            {"Assassin", "Assassin"},
             {"selectClassMenuReadyButton", "Prêt"},
             {"selectClassMenuWaitingText", "En attente des autres joueurs..."},
             
@@ -265,7 +265,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Krouiñ ur gemennadenn"},
-            {"createGameMenuBackButton", "<= Distreiñ"},
+            {"createGameMenuBackButton", "Distreiñ =>"},
             {"createGameMenuStartGame", "Kregiñ ar gemennadenn"},
             {"createGameMenuID", "ID ar gemennadenn : "},
             {"createGameMenuPlayer1", "Mestr 1 : "},
@@ -279,10 +279,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "ID ar gemennadenn"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Sagittaire"},
-            {"selectClassMenuKnightClass", "Kavaler"},
-            {"selectClassMenuScientistClass", "Skiantour"},
-            {"selectClassMenuAssassinClass", "Lec'helour"},
+            {"Archer", "Sagittaire"},
+            {"Knight", "Kavaler"},
+            {"Scientist", "Skiantour"},
+            {"Assassin", "Lec'helour"},
             {"selectClassMenuReadyButton", "Gwir"},
             {"selectClassMenuWaitingText", "Ouzhpennet gant ar c'hemmennadennoù all..."},
             
@@ -349,7 +349,7 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Verbindung"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "Pseudonym"},
             {"connectionMenuPasswordText", "Passwort"},
             {"connectionMenuConnectionButton", "Verbindung"},
             {"connectionMenuNoAccountButton", "Kein Konto?"},
@@ -362,7 +362,7 @@ public class LanguageControl
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Einschreibung"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "Pseudonym"},
             {"inscriptionMenuPasswordText", "Passwort"},
             {"inscriptionMenuPasswordConfirmText", "Passwort bestätigen"},
             {"inscriptionMenuInscriptionButton", "Einschreibung"},
@@ -377,7 +377,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Spiel erstellen"},
-            {"createGameMenuBackButton", "<= Zurück"},
+            {"createGameMenuBackButton", "Zurück =>"},
             {"createGameMenuStartGame", "Spiel starten"},
             {"createGameMenuID", "Spiel-ID : "},
             {"createGameMenuPlayer1", "Spieler 1 : "},
@@ -391,10 +391,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "Spiel-ID"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Bogenschütze"},
-            {"selectClassMenuKnightClass", "Ritter"},
-            {"selectClassMenuScientistClass", "Wissenschaftler"},
-            {"selectClassMenuAssassinClass", "Attentäter"},
+            {"Archer", "Bogenschütze"},
+            {"Knight", "Ritter"},
+            {"Scientist", "Wissenschaftler"},
+            {"Assassin", "Attentäter"},
             {"selectClassMenuReadyButton", "Bereit"},
             {"selectClassMenuWaitingText", "Warten auf die anderen Spieler..."},
             
@@ -461,7 +461,7 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Conexión"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "Seudónimo"},
             {"connectionMenuPasswordText", "Contraseña"},
             {"connectionMenuConnectionButton", "Conexión"},
             {"connectionMenuNoAccountButton", "¿No tienes una cuenta?"},
@@ -474,7 +474,7 @@ public class LanguageControl
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscripción"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "Seudónimo"},
             {"inscriptionMenuPasswordText", "Contraseña"},
             {"inscriptionMenuPasswordConfirmText", "Confirmar contraseña"},
             {"inscriptionMenuInscriptionButton", "Inscripción"},
@@ -489,7 +489,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Crear juego"},
-            {"createGameMenuBackButton", "<= Regreso"},
+            {"createGameMenuBackButton", "Regreso =>"},
             {"createGameMenuStartGame", "Comenzar el juego"},
             {"createGameMenuID", "ID del juego : "},
             {"createGameMenuPlayer1", "Jugador 1 : "},
@@ -503,10 +503,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "ID del juego"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Arquero"},
-            {"selectClassMenuKnightClass", "Caballero"},
-            {"selectClassMenuScientistClass", "Científico"},
-            {"selectClassMenuAssassinClass", "Asesino"},
+            {"Archer", "Arquero"},
+            {"Knight", "Caballero"},
+            {"Scientist", "Científico"},
+            {"Assassin", "Asesino"},
             {"selectClassMenuReadyButton", "Listo"},
             {"selectClassMenuWaitingText", "Esperando a los otros jugadores..."},
             
@@ -573,7 +573,7 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Konekto"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "Pseŭdonomo"},
             {"connectionMenuPasswordText", "Pasvorto"},
             {"connectionMenuConnectionButton", "Konekto"},
             {"connectionMenuNoAccountButton", "Ĉu vi ne havas konton?"},
@@ -586,7 +586,7 @@ public class LanguageControl
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inskribo"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "Pseŭdonomo"},
             {"inscriptionMenuPasswordText", "Pasvorto"},
             {"inscriptionMenuPasswordConfirmText", "Konfirmu pasvorton"},
             {"inscriptionMenuInscriptionButton", "Inskribo"},
@@ -601,7 +601,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Krei ludon"},
-            {"createGameMenuBackButton", "<= Reen"},
+            {"createGameMenuBackButton", "Reen =>"},
             {"createGameMenuStartGame", "Komenci la ludon"},
             {"createGameMenuID", "Ludo-ID : "},
             {"createGameMenuPlayer1", "Ludanto 1 : "},
@@ -615,10 +615,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "Ludo-ID"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Arĉisto"},
-            {"selectClassMenuKnightClass", "Kavaliro"},
-            {"selectClassMenuScientistClass", "Sciencisto"},
-            {"selectClassMenuAssassinClass", "Murdisto"},
+            {"Archer", "Arĉisto"},
+            {"Knight", "Kavaliro"},
+            {"Scientist", "Sciencaĵisto"},
+            {"Assassin", "Asasino"},
             {"selectClassMenuReadyButton", "Preparita"},
             {"selectClassMenuWaitingText", "Atendante la aliajn ludantojn..."},
             
@@ -685,26 +685,26 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Connexio"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "Pseudonym"},
             {"connectionMenuPasswordText", "Password"},
             {"connectionMenuConnectionButton", "Connexio"},
             {"connectionMenuNoAccountButton", "Non habes rationem?"},
             {"connectionMenuFastConnectionButton", "Connexio celeriter"},
-            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo vel password falsum"},
+            {"connectionMenuErrorUsernameOrPasswordText", "Pseudonym vel password falsum"},
             {"connectionMenuErrorFastConnectionText", "Error in connexione celeriter"},
             {"connectionMenuErrorNoFastConnectionText", "Nulla connexio celeriter registrata"},
-            {"connectionMenuFastConnectionSaveButton", "Serva pseudo et password localiter."},
-            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Cave :\nServare pseudo et password localiter facilius est in ingressu, sed potest periculum securitatis habere. Si instrumentum tuum compromissum est, tuae informationes possunt esse accessibiles."},
+            {"connectionMenuFastConnectionSaveButton", "Serva pseudonym et password localiter."},
+            {"connectionMenuFastConnectionSaveWarningText", "/!\\ Cave :\nServare pseudonym et password localiter facilius est in ingressu, sed potest periculum securitatis habere. Si instrumentum tuum compromissum est, tuae informationes possunt esse accessibiles."},
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Inscriptio"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "Pseudonym"},
             {"inscriptionMenuPasswordText", "Password"},
             {"inscriptionMenuPasswordConfirmText", "Password confirmare"},
             {"inscriptionMenuInscriptionButton", "Inscriptio"},
             {"inscriptionMenuAlreadyAccountButton", "Habes rationem?"},
             {"inscriptionMenuErrorIncorrectConfirmText", "Password confirmare falsum"},
-            {"inscriptionMenuErrorAlreadyExistText", "Pseudo iam existit"},
+            {"inscriptionMenuErrorAlreadyExistText", "Pseudonym iam existit"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -713,7 +713,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Ludum creare"},
-            {"createGameMenuBackButton", "<= Retro"},
+            {"createGameMenuBackButton", "Retro =>"},
             {"createGameMenuStartGame", "Ludum incipere"},
             {"createGameMenuID", "Ludum ID : "},
             {"createGameMenuPlayer1", "Ludens 1 : "},
@@ -727,10 +727,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "Ludum ID"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Sagittarius"},
-            {"selectClassMenuKnightClass", "Eques"},
-            {"selectClassMenuScientistClass", "Scientist"},
-            {"selectClassMenuAssassinClass", "Occisor"},
+            {"Archer", "Sagittarius"},
+            {"Knight", "Eques"},
+            {"Scientist", "Scientista"},
+            {"Assassin", "Assassinus"},
             {"selectClassMenuReadyButton", "Paratus"},
             {"selectClassMenuWaitingText", "Expectans alii ludum..."},
             
@@ -797,12 +797,12 @@ public class LanguageControl
             
             //Connection Menu
             {"connectionMenuTitle", "Ukuxhumana"},
-            {"connectionMenuPseudoText", "Pseudo"},
+            {"connectionMenuPseudoText", "I-pseudo"},
             {"connectionMenuPasswordText", "Iphasiwedi"},
             {"connectionMenuConnectionButton", "Ukuxhumana"},
             {"connectionMenuNoAccountButton", "Awunayo i-akhawunti?"},
             {"connectionMenuFastConnectionButton", "Ukuxhumana okukhulu"},
-            {"connectionMenuErrorUsernameOrPasswordText", "Pseudo noma iphasiwedi elingenayo"},
+            {"connectionMenuErrorUsernameOrPasswordText", "I-pseudo noma iphasiwedi elingenayo"},
             {"connectionMenuErrorFastConnectionText", "Iphutha ekuxhumaneni okukhulu"},
             {"connectionMenuErrorNoFastConnectionText", "Awukho ukuxhumana okukhulu okuqashisayo"},
             {"connectionMenuFastConnectionSaveButton", "Londoloza i-pseudo noma iphasiwedi ekhaya."},
@@ -810,13 +810,13 @@ public class LanguageControl
             
             //Inscription Menu
             {"inscriptionMenuTitle", "Ukubhalisa"},
-            {"inscriptionMenuPseudoText", "Pseudo"},
+            {"inscriptionMenuPseudoText", "I-pseudo"},
             {"inscriptionMenuPasswordText", "Iphasiwedi"},
             {"inscriptionMenuPasswordConfirmText", "Yaqinisa iphasiwedi"},
             {"inscriptionMenuInscriptionButton", "Ukubhalisa"},
             {"inscriptionMenuAlreadyAccountButton", "Unayo i-akhawunti?"},
             {"inscriptionMenuErrorIncorrectConfirmText", "Yaqinisa iphasiwedi elingenayo"},
-            {"inscriptionMenuErrorAlreadyExistText", "Pseudo elingenayo"},
+            {"inscriptionMenuErrorAlreadyExistText", "I-pseudo elingenayo"},
             
             //Lobby Menu
             {"lobbyMenuTitle", "Lobby"},
@@ -825,7 +825,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Yakha umdlalo"},
-            {"createGameMenuBackButton", "<= Emuva"},
+            {"createGameMenuBackButton", "Emuva =>"},
             {"createGameMenuStartGame", "Qala umdlalo"},
             {"createGameMenuID", "ID umdlalo : "},
             {"createGameMenuPlayer1", "Umshayeli 1 : "},
@@ -839,10 +839,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "ID umdlalo"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Umshayeli"},
-            {"selectClassMenuKnightClass", "Umkhonto"},
-            {"selectClassMenuScientistClass", "Umfundi"},
-            {"selectClassMenuAssassinClass", "Ukubulala"},
+            {"Archer", "Umbuyiseli"},
+            {"Knight", "Umkhosi"},
+            {"Scientist", "Umlungisi"},
+            {"Assassin", "Umlilo"},
             {"selectClassMenuReadyButton", "Kuyaqhubeka"},
             {"selectClassMenuWaitingText", "Ukungathintana kwezinye izinhlangano..."},
             
@@ -937,7 +937,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "创建游戏"},
-            {"createGameMenuBackButton", "<= 返回"},
+            {"createGameMenuBackButton", "返回 =>"},
             {"createGameMenuStartGame", "开始游戏"},
             {"createGameMenuID", "游戏ID : "},
             {"createGameMenuPlayer1", "玩家 1 : "},
@@ -951,10 +951,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "游戏ID"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "弓箭手"},
-            {"selectClassMenuKnightClass", "骑士"},
-            {"selectClassMenuScientistClass", "科学家"},
-            {"selectClassMenuAssassinClass", "刺客"},
+            {"Archer", "弓箭手"},
+            {"Knight", "骑士"},
+            {"Scientist", "科学家"},
+            {"Assassin", "刺客"},
             {"selectClassMenuReadyButton", "准备好了"},
             {"selectClassMenuWaitingText", "等待其他玩家..."},
             
@@ -1049,7 +1049,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Δημιουργία παιχνιδιού"},
-            {"createGameMenuBackButton", "<= Πίσω"},
+            {"createGameMenuBackButton", "Πίσω =>"},
             {"createGameMenuStartGame", "Ξεκινήστε το παιχνίδι"},
             {"createGameMenuID", "Αναγνωριστικό παιχνιδιού : "},
             {"createGameMenuPlayer1", "Παίκτης 1 : "},
@@ -1063,10 +1063,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "Αναγνωριστικό παιχνιδιού"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Τοξότης"},
-            {"selectClassMenuKnightClass", "Ιππότης"},
-            {"selectClassMenuScientistClass", "Επιστήμονας"},
-            {"selectClassMenuAssassinClass", "Δολοφόνος"},
+            {"Archer", "Τοξότης"},
+            {"Knight", "Ιππότης"},
+            {"Scientist", "Επιστήμονας"},
+            {"Assassin", "Δολοφόνος"},
             {"selectClassMenuReadyButton", "Δάνειο"},
             {"selectClassMenuWaitingText", "Περιμένοντας τους άλλους παίκτες..."},
             
@@ -1162,7 +1162,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "Создать игру"},
-            {"createGameMenuBackButton", "<= Назад"},
+            {"createGameMenuBackButton", "Назад =>"},
             {"createGameMenuStartGame", "Начать игру"},
             {"createGameMenuID", "Идентификатор игры : "},
             {"createGameMenuPlayer1", "Игрок 1 : "},
@@ -1176,10 +1176,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "Идентификатор игры"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "Лучник"},
-            {"selectClassMenuKnightClass", "Рыцарь"},
-            {"selectClassMenuScientistClass", "Ученый"},
-            {"selectClassMenuAssassinClass", "Убийца"},
+            {"Archer", "Лучник"},
+            {"Knight", "Рыцарь"},
+            {"Scientist", "Ученый"},
+            {"Assassin", "Убийца"},
             {"selectClassMenuReadyButton", "Готов"},
             {"selectClassMenuWaitingText", "Ожидание других игроков..."},
             
@@ -1274,7 +1274,7 @@ public class LanguageControl
             
             //Create Game Menu
             {"createGameMenuTitle", "4372656174652047616d65"},
-            {"createGameMenuBackButton", "<3d204261636b"},
+            {"createGameMenuBackButton", "3d3e204261636b>"},
             {"createGameMenuStartGame", "53746172742047616d65"},
             {"createGameMenuID", "4944206f66207468652047616d65"},
             {"createGameMenuPlayer1", "506c6179657220313a"},
@@ -1288,10 +1288,10 @@ public class LanguageControl
             {"joinGameMenuGameID", "4944206f66207468652047616d65"},
             
             //Select Class Menu
-            {"selectClassMenuArcherClass", "417263686572"},
-            {"selectClassMenuKnightClass", "4b6e69676874"},
-            {"selectClassMenuScientistClass", "536369656e74697374"},
-            {"selectClassMenuAssassinClass", "417373617373696e"},
+            {"Archer", "417263686572"},
+            {"Knight", "4b6e69676874"},
+            {"Scientist", "536369656e74697374"},
+            {"Assassin", "417373617373696e"},
             {"selectClassMenuReadyButton", "5265616479"},
             {"selectClassMenuWaitingText", "57616974696e6720666f7220746865206f7468657220706c6179657273202e2e2e"},
             
