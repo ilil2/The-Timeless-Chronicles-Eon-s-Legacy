@@ -53,6 +53,11 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	private int _pauseTimer;
 	
+	public int GetId()
+	{
+		return Id;
+	}
+	
 	public SpringArm3D GetCameraVect()
 	{
 		return CameraV;

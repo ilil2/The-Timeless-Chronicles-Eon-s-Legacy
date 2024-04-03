@@ -100,6 +100,7 @@ public partial class KnightScript : ClassScript
 			GameManager.InfoJoueur["animation"] = "hit";
 			
 			UseStamina(10);
+			TakeDamage(10);
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
@@ -140,6 +141,7 @@ public partial class KnightScript : ClassScript
 		
 	}
 	
+	
 	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
@@ -149,10 +151,17 @@ public partial class KnightScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("Timer").Start();
 		}
 	}
 	public override void UseStamina(int stamina)
 	{
 		Stamina-=stamina;
 	}
+	
+	private void _on_timer_timeout()
+	{
+		Position-=new Vector3(0,10,0);
+	}
 }
+
