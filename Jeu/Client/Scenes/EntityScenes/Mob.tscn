@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c60qrur4avmdk"]
+[gd_scene load_steps=16 format=3 uid="uid://c60qrur4avmdk"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mobmongus.cs" id="1_vxgrw"]
 [ext_resource type="Texture2D" uid="uid://2upn1vs5xr5t" path="res://Ressources/Graphismes/Mob/red.png" id="2_a0n8w"]
+[ext_resource type="PackedScene" uid="uid://bsxpfpeww7nwe" path="res://Scenes/EntityScenes/weapon.tscn" id="3_vb04o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjtd2"]
 
@@ -19,6 +20,103 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_yyn8f"]
 material = SubResource("StandardMaterial3D_6wodr")
 size = Vector3(0.5, 0.75, 0.35)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1eqx6"]
+material = SubResource("StandardMaterial3D_7ytnr")
+radius = 0.2
+height = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h63vj"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1shfl"]
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_mdwan"]
+resource_name = "Hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.776048, 1.11071, 0), Vector3(-0.908682, 1.39869, -0.23723), Vector3(0.603526, 0.668989, 0.828367), Vector3(-0.776048, 1.11071, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.288119, 0.19902, 0), Vector3(1.25897, 3.09657, 2.55668), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/Weapon/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="Animation" id="Animation_8jtyb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.776048, 1.11071, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sword/Weapon/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spruo"]
+_data = {
+"Hit": SubResource("Animation_mdwan"),
+"RESET": SubResource("Animation_8jtyb")
+}
 
 [node name="Mob" type="CharacterBody3D"]
 script = ExtResource("1_vxgrw")
@@ -54,5 +152,33 @@ debug_shape_custom_color = Color(0, 0, 1, 1)
 debug_shape_thickness = 5
 
 [node name="State" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22216, 0)
-text = "Test"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35528, 0)
+visible = false
+text = "NoSet
+"
+
+[node name="HP" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12691, 0)
+text = "HP: -1"
+
+[node name="Sword" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.776048, 1.11071, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sword"]
+mesh = SubResource("SphereMesh_1eqx6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Sword"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.551825, 0)
+mesh = SubResource("CylinderMesh_h63vj")
+
+[node name="Weapon" parent="Sword" instance=ExtResource("3_vb04o")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sword/Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.764827, 0)
+shape = SubResource("CapsuleShape3D_1shfl")
+disabled = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_spruo")
+}
