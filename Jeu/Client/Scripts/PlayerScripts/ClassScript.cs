@@ -9,7 +9,7 @@ public abstract partial class ClassScript : CharacterBody3D
 	//Variable de base du joueur
 	protected int Id;
 	public string Pseudo;
-	protected string Classe;
+	public string Classe;
 	
 	protected int MaxHealth = 100;
 	protected int Heath = 100;
@@ -36,9 +36,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected float GravityValue = 9.8f;
 	protected float WalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
-	protected float DashPower = 80.0f;
-	protected bool CanDash = true;
-	protected int DashTimer;
 
 	protected bool IsWalking;
 	protected bool IsRunning;
@@ -156,7 +153,11 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected abstract void Move(double delta);
 	
 	public abstract void TakeDamage(int damage);
-	public abstract void UseStamina(int stamina);
+	
+	public void UseStamina(int stamina)
+	{
+		Stamina -= stamina;
+	}
 	
 	public int GetHealth()
 	{

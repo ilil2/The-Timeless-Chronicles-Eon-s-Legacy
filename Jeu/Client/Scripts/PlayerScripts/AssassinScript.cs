@@ -5,6 +5,10 @@ using Lib;
 
 public partial class AssassinScript : ClassScript
 {
+	protected float DashPower = 80.0f;
+	protected bool CanDash = true;
+	protected int DashTimer;
+	
 	public override void _Ready()
 	{
 		InitPlayer();
@@ -194,9 +198,5 @@ public partial class AssassinScript : ClassScript
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 		}
-	}
-	public override void UseStamina(int stamina)
-	{
-		Stamina-=stamina;
 	}
 }

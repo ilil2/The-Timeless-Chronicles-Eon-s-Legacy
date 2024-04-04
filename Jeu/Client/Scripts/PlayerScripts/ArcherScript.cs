@@ -257,8 +257,4 @@ public partial class ArcherScript : ClassScript
 			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
-	public override void UseStamina(int stamina)
-	{
-		Stamina-=stamina;
-	}
 }

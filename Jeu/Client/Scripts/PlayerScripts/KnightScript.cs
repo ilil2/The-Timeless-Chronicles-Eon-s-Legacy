@@ -99,8 +99,7 @@ public partial class KnightScript : ClassScript
 			
 			GameManager.InfoJoueur["animation"] = "hit";
 			
-			UseStamina(10);
-			TakeDamage(10);
+			UseStamina();
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
@@ -154,14 +153,10 @@ public partial class KnightScript : ClassScript
 			GetNode<Timer>("Timer").Start();
 		}
 	}
-	public override void UseStamina(int stamina)
-	{
-		Stamina-=stamina;
-	}
 	
 	private void _on_timer_timeout()
 	{
-		Position-=new Vector3(0,10,0);
+		Position -= new Vector3(0,10,0);
 	}
 }
 

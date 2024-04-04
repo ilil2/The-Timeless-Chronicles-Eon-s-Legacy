@@ -220,8 +220,4 @@ public partial class ScientistScript : ClassScript
 			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
-	public override void UseStamina(int stamina)
-	{
-		Stamina-=stamina;
-	}
 }
