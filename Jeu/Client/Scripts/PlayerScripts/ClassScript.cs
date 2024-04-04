@@ -13,8 +13,8 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	protected int MaxHealth = 100;
 	protected int Heath = 100;
-	protected int MaxStamina = 100;
-	protected int Stamina = 100;
+	protected int MaxStamina = 1000;
+	protected int Stamina = 1000;
 	protected bool IsDead = false;
 	
 	//Variable des objets
@@ -154,9 +154,15 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	public abstract void TakeDamage(int damage);
 	
-	public void UseStamina(int stamina)
+	public bool UseStamina(int stamina)
 	{
-		Stamina -= stamina;
+		if (Stamina >= stamina)
+		{
+			Stamina -= stamina;
+			return true;
+		}
+
+		return false;
 	}
 	
 	public int GetHealth()

@@ -91,15 +91,13 @@ public partial class KnightScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && UseStamina(50))
 		{
 			AnimationState = 3;
 			
 			AnimationSet(false, false, true, true);
 			
 			GameManager.InfoJoueur["animation"] = "hit";
-			
-			UseStamina();
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
