@@ -15,6 +15,8 @@ public partial class Listen2 : GameManager
 				CoordInfo[1] = CoordInfo[1].Substring(3); 
 				InfoAutreJoueur[$"co{CoordInfo[0]}"] = CoordInfo[1];
 				InfoAutreJoueur[$"orientation{CoordInfo[0]}"] = CoordInfo[2];
+				InfoAutreJoueur[$"hp{CoordInfo[0]}"] = CoordInfo[3];
+				InfoAutreJoueur[$"mp{CoordInfo[0]}"] = CoordInfo[4];
 			}
 		}
 		

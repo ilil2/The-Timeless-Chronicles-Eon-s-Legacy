@@ -6,7 +6,7 @@ public partial class State6 : GameManager
 	public static void State(double delta)
 	{
 		if (!Quit)
-			UDP.Send(soc2,InfoJoueur["id"] + "_" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"],iep2);
+			UDP.Send(soc2,InfoJoueur["id"] + "_" + "in:co:" + InfoJoueur["co"] + "/" + InfoJoueur["orientation"] + "/" + InfoJoueur["hp"] + "/" + InfoJoueur["mp"],iep2);
 		
 
 		if (!_pausemode && Lib.Conversions.ItoB(SettingsManager.GetAllSettings()["enableChat"]))

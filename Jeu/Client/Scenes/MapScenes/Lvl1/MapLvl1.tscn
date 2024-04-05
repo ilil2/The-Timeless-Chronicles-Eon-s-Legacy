@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=32 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="2_yl85q"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_gbivg"]
 [ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/BossScenes/Exit.tscn" id="11_1lqt0"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="11_ugkqj"]
+[ext_resource type="PackedScene" uid="uid://x4qvhw8gjj5q" path="res://Scenes/MapScenes/NoMan'sLand.tscn" id="13_ocr2g"]
 
 [sub_resource type="Environment" id="Environment_vrgge"]
 background_mode = 2
@@ -183,6 +184,33 @@ shadow_mesh = SubResource("ArrayMesh_p1da2")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6eojh"]
 size = Vector3(0.328, 2, 4)
+
+[sub_resource type="Animation" id="Animation_wax11"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:CamOnPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_vo7at"]
 resource_name = "Exit"
@@ -365,33 +393,6 @@ tracks/7/path = NodePath("..:CamOnPlayer")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_wax11"]
-resource_name = "Enter"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..:CamOnPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -960,3 +961,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="NoMan\'sLand" parent="." instance=ExtResource("13_ocr2g")]
