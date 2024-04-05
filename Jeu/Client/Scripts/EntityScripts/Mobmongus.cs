@@ -25,7 +25,6 @@ public partial class Mobmongus : MobScript
 			if(Ani.CurrentAnimation != "Hit" && Alive)
 			{
 				Ani.Play("Hit");
-				TakeDamage(10);
 			}
 		}
 		

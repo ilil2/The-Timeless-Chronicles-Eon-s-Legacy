@@ -446,7 +446,6 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
-
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
@@ -1048,5 +1047,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="Animation"]
-transform = Transform3D(-4.068e-08, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, -3.99089e-10, -4.2222e-08, 10, 5, 0)
+transform = Transform3D(-3.61696e-06, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, 9.25209e-07, -3.49664e-06, 10, 5, 0)
+
 [node name="NoMan\'sLand" parent="." instance=ExtResource("13_ocr2g")]

@@ -19,7 +19,7 @@ public partial class Weapon : Area3D
 	{
 		if(body is ClassScript player )
 		{
-			GD.Print("Player Hit !");
+			player.TakeDamage(1);
 		}
 	}
 }

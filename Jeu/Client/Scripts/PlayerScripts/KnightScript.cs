@@ -149,7 +149,9 @@ public partial class KnightScript : ClassScript
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 			GetNode<Timer>("Timer").Start();
+			Position += new Vector3(0,-10,0);
 		}
+		Stamina = 1000;
 	}
 	
 	private void _on_timer_timeout()
