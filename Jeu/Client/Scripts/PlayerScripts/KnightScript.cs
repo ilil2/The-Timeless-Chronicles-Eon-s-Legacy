@@ -55,7 +55,7 @@ public partial class KnightScript : ClassScript
 	protected override void Move(double delta)
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-		    Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
 		{
 			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
 			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)); 
@@ -91,7 +91,7 @@ public partial class KnightScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && UseStamina(50))
 		{
 			AnimationState = 3;
 			
@@ -138,7 +138,8 @@ public partial class KnightScript : ClassScript
 		
 	}
 	
-	public override void TakeDamage(float damage)
+	
+	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
 		if (Heath <= 0)
@@ -147,6 +148,13 @@ public partial class KnightScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("Timer").Start();
 		}
 	}
+	
+	private void _on_timer_timeout()
+	{
+		Position -= new Vector3(0,10,0);
+	}
 }
+

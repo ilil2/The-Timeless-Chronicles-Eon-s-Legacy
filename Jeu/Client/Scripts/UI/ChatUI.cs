@@ -53,7 +53,7 @@ public partial class ChatUI : Control
 			
 		if (Outputaddtext != "")
 		{
-			RemoveNoah(Outputaddtext);
+			Outputaddtext = RemoveNoah(Outputaddtext);
 			_outputtext += Outputaddtext + "\n";
 			Outputaddtext = "";
 		}
@@ -112,14 +112,16 @@ public partial class ChatUI : Control
 		return _onchat;
 	}
 
-	private void RemoveNoah(string s)
+	private string RemoveNoah(string s)
 	{
 		string[] s2 = s.Split("noah");
-		s = "";
+		string s3 = "";
 		
 		foreach (var c in s2)
 		{
-			s += s2;
+			s3 += s2;
 		}
+		
+		return s3;
 	}
 }

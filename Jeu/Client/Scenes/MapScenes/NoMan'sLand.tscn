@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://x4qvhw8gjj5q"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/NoMansLand.cs" id="1_rl3ek"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xp2u4"]
+size = Vector3(2000, 1, 2000)
+
+[node name="NoMan\'sLand" type="Area3D"]
+script = ExtResource("1_rl3ek")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.5, 0)
+shape = SubResource("BoxShape3D_xp2u4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

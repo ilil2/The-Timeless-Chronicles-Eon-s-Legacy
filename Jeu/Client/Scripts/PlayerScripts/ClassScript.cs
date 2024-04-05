@@ -9,12 +9,12 @@ public abstract partial class ClassScript : CharacterBody3D
 	//Variable de base du joueur
 	protected int Id;
 	public string Pseudo;
-	protected string Classe;
+	public string Classe;
 	
-	protected float MaxHealth = 100;
-	protected float Heath = 100;
-	protected float MaxStamina = 100;
-	protected float Stamina = 100;
+	protected int MaxHealth = 100;
+	protected int Heath = 100;
+	protected int MaxStamina = 1000;
+	protected int Stamina = 1000;
 	protected bool IsDead = false;
 	
 	//Variable des objets
@@ -36,9 +36,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected float GravityValue = 9.8f;
 	protected float WalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
-	protected float DashPower = 80.0f;
-	protected bool CanDash = true;
-	protected int DashTimer;
 
 	protected bool IsWalking;
 	protected bool IsRunning;
@@ -52,6 +49,11 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected int Acceleration = 15;
 	
 	private int _pauseTimer;
+	
+	public int GetId()
+	{
+		return Id;
+	}
 	
 	public SpringArm3D GetCameraVect()
 	{
@@ -150,5 +152,36 @@ public abstract partial class ClassScript : CharacterBody3D
 	
 	protected abstract void Move(double delta);
 	
-	public abstract void TakeDamage(float damage);
+	public abstract void TakeDamage(int damage);
+	
+	public bool UseStamina(int stamina)
+	{
+		if (Stamina >= stamina)
+		{
+			Stamina -= stamina;
+			return true;
+		}
+
+		return false;
+	}
+	
+	public int GetHealth()
+	{
+		return Heath;
+	}
+	
+	public int GetMaxHealth()
+	{
+		return MaxHealth;
+	}
+	
+	public int GetStamina()
+	{
+		return Stamina;
+	}
+	
+	public int GetMaxStamina()
+	{
+		return MaxStamina;
+	}
 }

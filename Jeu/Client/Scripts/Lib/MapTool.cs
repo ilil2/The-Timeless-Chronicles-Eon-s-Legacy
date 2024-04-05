@@ -39,7 +39,7 @@ public partial class MapTool : Node
 		}
 		return true;
 	}
-	public static void Debug(CharacterBody3D Player, Node3D Map, bool DebugM)
+	public static void Debug(CharacterBody3D Player, IMap Map, bool DebugM)
 	{
 		Camera3D CameraPlayer = Player.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		if(DebugM)
@@ -48,7 +48,9 @@ public partial class MapTool : Node
 			{
 				Camera3D DebugCam = Map.GetNode<Camera3D>("SpecCam");
 				DebugM = false;
+
 				(Map as IMap).CamOnPlayer = true;
+
 				DebugCam.Current = false;
 				Map.RemoveChild(DebugCam);
 			}
@@ -64,7 +66,9 @@ public partial class MapTool : Node
 			Camera3D DebugCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn").Instantiate<Camera3D>();
 			DebugCam.GlobalTransform = CameraPlayer.GlobalTransform;
 			Map.AddChild(DebugCam);
+      
 			(Map as IMap).CamOnPlayer = false;
+
 			DebugCam.Current = true;
 			
 			

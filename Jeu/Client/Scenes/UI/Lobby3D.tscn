@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://da4b8u505twlj"]
+[gd_scene load_steps=44 format=3 uid="uid://da4b8u505twlj"]
 
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_qce88"]
 [ext_resource type="PackedScene" uid="uid://dwy0e543no7fj" path="res://Ressources/Map/UIScenes/LobbyScene.tscn" id="2_tu6nj"]
@@ -102,13 +102,17 @@ material = SubResource("StandardMaterial3D_eer05")
 text = "Back =>"
 font_size = 12
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lycp"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="TextMesh" id="TextMesh_spdg6"]
-material = SubResource("StandardMaterial3D_eer05")
+material = SubResource("StandardMaterial3D_4lycp")
 text = "Create Game"
 font_size = 20
 
 [sub_resource type="TextMesh" id="TextMesh_hhm1s"]
 material = SubResource("StandardMaterial3D_eer05")
+custom_aabb = AABB(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 text = "Game ID : ERROR"
 font_size = 14
 horizontal_alignment = 0

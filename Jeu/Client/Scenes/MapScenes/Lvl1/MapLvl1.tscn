@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bsfr0jvwps7xy"]
+[gd_scene load_steps=32 format=3 uid="uid://bsfr0jvwps7xy"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/MapLvl1Script.cs" id="1_faj1b"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="2_yl85q"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_gbivg"]
 [ext_resource type="PackedScene" uid="uid://cm6e2coom833x" path="res://Scenes/MapScenes/Lvl1/BossScenes/Exit.tscn" id="11_1lqt0"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="11_ugkqj"]
+[ext_resource type="PackedScene" uid="uid://x4qvhw8gjj5q" path="res://Scenes/MapScenes/NoMan'sLand.tscn" id="13_ocr2g"]
 
 [sub_resource type="Environment" id="Environment_vrgge"]
 background_mode = 2
@@ -445,6 +446,7 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
@@ -1047,3 +1049,4 @@ color = Color(0, 0, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="Animation"]
 transform = Transform3D(-4.068e-08, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, -3.99089e-10, -4.2222e-08, 10, 5, 0)
+[node name="NoMan\'sLand" parent="." instance=ExtResource("13_ocr2g")]
