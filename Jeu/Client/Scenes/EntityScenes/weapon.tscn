@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsxpfpeww7nwe"]
+
+[ext_resource type="Script" path="res://Scripts/EntityScripts/Weapon.cs" id="1_wjnnh"]
+
+[node name="Weapon" type="Area3D"]
+script = ExtResource("1_wjnnh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
