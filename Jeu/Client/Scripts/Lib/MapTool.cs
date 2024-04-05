@@ -48,7 +48,9 @@ public partial class MapTool : Node
 			{
 				Camera3D DebugCam = Map.GetNode<Camera3D>("SpecCam");
 				DebugM = false;
-				Map.CamOnPlayer = true;
+
+				(Map as IMap).CamOnPlayer = true;
+
 				DebugCam.Current = false;
 				Map.RemoveChild(DebugCam);
 			}
@@ -64,7 +66,9 @@ public partial class MapTool : Node
 			Camera3D DebugCam = GD.Load<PackedScene>("res://Scenes/Debug/SpecCam.tscn").Instantiate<Camera3D>();
 			DebugCam.GlobalTransform = CameraPlayer.GlobalTransform;
 			Map.AddChild(DebugCam);
-			Map.CamOnPlayer = false;
+      
+			(Map as IMap).CamOnPlayer = false;
+
 			DebugCam.Current = true;
 			
 			

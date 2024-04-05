@@ -31,6 +31,7 @@ public partial class PortalExit : Node3D
 		{
 			PlayClose = false;
 			AnimationPortal.Play("Close");
+			GetNode<Camera3D>("Cam").Current = true;
 		}
 		if(PlayerIn)
 		{

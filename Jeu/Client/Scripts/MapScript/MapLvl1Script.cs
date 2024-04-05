@@ -12,7 +12,7 @@ public partial class MapLvl1Script : IMap
 {
 	private Stopwatch stopwatch = new Stopwatch();
 	private Stopwatch fogwatch = new Stopwatch();
-	private int NbRoom = 250;
+	private int NbRoom = 150;
 	private int LenWall = 6;
 	private StaticBody3D MainRoom;
 	private List<RigidBody3D> PseudoRoomList = new List<RigidBody3D>();
@@ -58,7 +58,7 @@ public partial class MapLvl1Script : IMap
 		MainRoom = InitMainRoom();
 		CreatePseudoMap();
 		LoadingStage = "Room Placement";
-		Rand = new Random();//debug
+		//Rand = new Random();//debug
 	}
 	
 	public override void _PhysicsProcess(double delta)
