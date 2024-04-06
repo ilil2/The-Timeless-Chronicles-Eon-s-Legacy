@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
 {
@@ -18,7 +19,6 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
-	private RayCast3D Ray; // Activer le pathfiding
 	public int Agro = 0; // stop quand agro = 0
 	public int state; // -1 = repos | 0 = retour à position initiale | 1 = suivre joueur | 2 = attaque
 	private Vector3 PosInnit; // position initiale
@@ -28,21 +28,29 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	// Autre
 	private Node Parent;
-	private CharacterBody3D Player = new CharacterBody3D();
+	private CharacterBody3D Player = null;
 	private Vector3 Me = new Vector3();
 	private Vector3 PlayerPos = new Vector3();
 	private bool PlayerSet = false;
 	protected int RenderDist = 150;
 	private float StateDeath = -0.1f;
+	private List<RayCast3D> RayList = new List<RayCast3D>();
 	
 	public void Ready()
 	{
 		Parent = GetParent().GetParent();
+		for(int i = 0; i<GameManager._nbJoueur; i++)
+		{
+			RayCast3D R = new RayCast3D();
+			R.Position = new Vector3(0,1,0);
+			AddChild(R);
+			RayList.Add(R);
+		}
 		PosInnit = Position;
 		RotInnit = Rotation;
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
 		Nav.TargetPosition = PosInnit;
-		Ray = GetNode<RayCast3D>("Ray");
+		
 		Ani = GetNode<AnimationPlayer>("Animation");
 		state = -1;
 		
@@ -50,6 +58,24 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
+		Player = GetPlayer(SetRay());
+		if(Player == null && state!=0)
+		{
+			Nav.TargetPosition = PosInnit;
+		}
+		if(state==0)
+		{
+			if(Position==PosInnit)
+			{
+				state = -1;
+			}
+		}
+		if(Player!=null && state!=1)
+		{
+			Nav.TargetPosition = Player.GlobalPosition;
+			state = 1;
+		}
+		/*
 		if(PlayerSet)
 		{
 			if(Distance(Player.Position,this.Position)<=DistVue)
@@ -66,14 +92,13 @@ public abstract partial class MobScript : CharacterBody3D
 				{
 					Death();
 				}
-				if (PlayerSet && Alive) 
+				if (Alive) 
 				{
 					IsTooFar = !(Distance(Player.Position,this.Position)<=DistVue);
 					Ray.Rotation = new Vector3(0,-Rotation.Y,0);
-					Ray.TargetPosition = new Vector3(Player.GlobalPosition.X - GlobalPosition.X, 1 , Player.GlobalPosition.Z - GlobalPosition.Z );
 					if (state == 0 || state == -1) // Si ne suit pas le joueur
 					{
-						if (!Ray.IsColliding() && !IsTooFar) // si rien entre mob et joueur
+						if (PlayerVisible(Player) && !IsTooFar) // si rien entre mob et joueur
 						{
 							state = 1;
 							//GD.Print("not colliding");
@@ -84,7 +109,7 @@ public abstract partial class MobScript : CharacterBody3D
 					if (state == 1 && !IsTooFar) // si suit le joueur
 					{
 						Nav.TargetPosition = Player.GlobalPosition;
-						if (Ray.IsColliding()) // si qqc entre mob et joueur
+						if (!PlayerVisible(Player)) // si qqc entre mob et joueur
 						{
 							Agro -=1; 
 							//GD.Print("colliding");
@@ -94,10 +119,26 @@ public abstract partial class MobScript : CharacterBody3D
 				}
 				SkipFrame = false; // Faire la prochaine frame
 			}
-		}
+		}*/
 	}
 	public void Process(double delta) //NavMesh
 	{
+		if(state==0 || state==1)
+		{
+			var dir = new Vector3();  //Pathfiding
+			var NextPos = Nav.GetNextPathPosition();
+			dir = NextPos - GlobalPosition;
+			dir = dir.Normalized();
+			Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+			MoveAndSlide();
+			//LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+			//Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+		}
+		if(state==1)
+		{
+			Nav.TargetPosition = Player.GlobalPosition;
+		}
+		/*
 		if(PlayerSet && Alive)
 		{
 			if(Distance(Player.Position,this.Position)<=DistVue)
@@ -134,12 +175,11 @@ public abstract partial class MobScript : CharacterBody3D
 				}
 			}
 		}
-		if(!PlayerSet && GameManager.Joueur1!=null && Parent.IsAncestorOf(GameManager.Joueur1))
+		if(!PlayerSet && GameManager.Joueur1!=null && GameManager.Joueur1.IsInsideTree())
 		{
-			Player = GameManager.Joueur1;
 			PlayerSet = true;
 			GD.Print("Player Set !");
-		}
+		}*/
 	}
 	
 	public virtual void TakeDamage(int damage)
@@ -184,4 +224,44 @@ public abstract partial class MobScript : CharacterBody3D
 			QueueFree();
 		}
 	}
+	
+	
+	private List<int> SetRay()
+	{
+		List<int> res = new List<int>();
+		if(GameManager.ListJoueur!=null && GameManager.ListJoueur[0]!=null)
+		{
+			for(int i = 0; i<GameManager._nbJoueur;i++)
+			{
+				CharacterBody3D play = GameManager.ListJoueur[i];
+				if(Distance(GlobalPosition,play.GlobalPosition)<=DistVue)
+				{
+					RayList[i].TargetPosition = new Vector3(play.GlobalPosition.X - GlobalPosition.X, 0 , play.GlobalPosition.Z - GlobalPosition.Z );
+					res.Add(i);
+				}
+			}	
+		}
+		return res;
+	}
+	private CharacterBody3D GetPlayer(List<int> PlayerList)
+	{
+		GD.Print(Agro);
+		double MinDist = 9999999999.0;
+		CharacterBody3D res = null;
+		for(int i = 0; i<PlayerList.Count;i++)
+		{
+			int id = PlayerList[i];
+			if(RayList[id].GetCollider()==GameManager.ListJoueur[id])
+			{
+				double d = Distance(GlobalPosition,GameManager.ListJoueur[id].GlobalPosition);
+				if(d<MinDist)
+				{
+					MinDist = d;
+					res = GameManager.ListJoueur[id];
+				}
+			}
+		}
+		return res;
+	}
+	
 }

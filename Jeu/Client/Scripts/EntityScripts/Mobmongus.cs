@@ -8,9 +8,8 @@ public partial class Mobmongus : MobScript
 	public override void _Ready()
 	{
 		Ready();
-		St = GetNode<Label3D>("State");
 		Hp = GetNode<Label3D>("HP");
-		Hp.Text = $"HP: {HP}";
+		Hp.Text = $"HP: {state}";
 	}
 	public override void _PhysicsProcess(double delta)
 	{

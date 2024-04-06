@@ -144,19 +144,6 @@ mesh = SubResource("BoxMesh_yyn8f")
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
 
-[node name="Ray" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-target_position = Vector3(0, 0, 0)
-hit_from_inside = true
-debug_shape_custom_color = Color(0, 0, 1, 1)
-debug_shape_thickness = 5
-
-[node name="State" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35528, 0)
-visible = false
-text = "NoSet
-"
-
 [node name="HP" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12691, 0)
 text = "HP: -1"

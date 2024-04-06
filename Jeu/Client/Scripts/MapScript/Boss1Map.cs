@@ -47,6 +47,7 @@ public partial class Boss1Map : IMap
 
 	public override void _Process(double delta)
 	{
+		//t.Text = $"CamOnPlayer = {CamOnPlayer}\n Cam1 = {GetNode<Camera3D>("Animation/Cam1").Current}\n Cam2 = {GetNode<Camera3D>("PortalExit/Cam").Current} \n CA = {Ani.CurrentAnimation}";
 		if (!MapReady)
 		{
 			MapReady = true;
@@ -80,12 +81,15 @@ public partial class Boss1Map : IMap
 	
 	public void PlayCinematic()
 	{
-		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
 		if(Ani.CurrentAnimation == "Enter")
 		{
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
-				GameManager.ListJoueur[i].GlobalPosition = AnimationSpawn[i].GlobalPosition;
+				if(GameManager.ListJoueur[i].IsInsideTree())
+				{
+					GameManager.ListJoueur[i].GlobalPosition = AnimationSpawn[i].GlobalPosition;
+				}
+				
 			}
 		}
 	}

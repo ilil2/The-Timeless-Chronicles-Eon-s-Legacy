@@ -9,29 +9,31 @@ public partial class PortalExit : Node3D
 	private AnimationPlayer AnimationPortal;
 	private bool Open = false;
 	[Export] private bool PlayClose = false;
-	private Camera3D Spec;
+	[Export] private bool OnCam = false;
+	private Camera3D Cam;
 	private bool PlayerIn = false;
 	private Label nb;
 	private int NbPlayer = 0;
+
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Portal = GetNode<Node3D>("Portal");
 		AnimationPortal = Portal.GetNode<AnimationPlayer>("AnimationPlayer");
-		Camera3D Cam = GetNode<Camera3D>("Cam");
-		Cam.Current = false;
+		Cam = GetNode<Camera3D>("Cam");
+		Cam.Current = OnCam;
 		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		Cam.Current = OnCam;
 		if(PlayClose)
 		{
 			PlayClose = false;
 			AnimationPortal.Play("Close");
-			GetNode<Camera3D>("Cam").Current = true;
 		}
 		if(PlayerIn)
 		{
@@ -73,13 +75,13 @@ public partial class PortalExit : Node3D
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
 				double dist = 0.0;
-				try
+				if(GameManager.ListJoueur[i]!= null && GameManager.ListJoueur[i].IsInsideTree())
 				{
 					dist = MapTool.Distance(Portal.GlobalPosition,GameManager.ListJoueur[i].GlobalPosition);	
 				}
-				catch
+				else
 				{
-					GD.Print("ERROR: ListJoueur Non set");
+					GD.Print("ERROR: Player Non set (PortalExit)");
 					dist = Min+1;
 				}
 				if(Min>dist)
@@ -91,9 +93,9 @@ public partial class PortalExit : Node3D
 		}
 		else
 		{
-			return 11.0;
+			return 1000.0;
 		}
-		return MapTool.Distance(Portal.GlobalPosition,GameManager.ListJoueur[0].GlobalPosition);
+		//return MapTool.Distance(Portal.GlobalPosition,GameManager.ListJoueur[0].GlobalPosition);
 	}
 	private void _on_ex_body_entered(Node3D body)
 	{
