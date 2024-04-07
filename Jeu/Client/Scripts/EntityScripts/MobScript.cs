@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using JeuClient.Scripts.PlayerScripts;
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
 {
@@ -9,7 +10,9 @@ public abstract partial class MobScript : CharacterBody3D
 	protected int accel = 10; // acceleration
 	protected int DistVue = 30; // Distance de vue
 	public int HP = 100; // health point
-	protected int AgroMax = 300; // Valeur Maximum de l'Agro
+	public int HpMax = 100;
+	protected int AgroMax = 100; // Valeur Maximum de l'Agro
+	public int Agro = 0; // stop quand agro = 0
 	public bool Alive = true;
 	private float TimerDeath = -0.1f;
 	protected AnimationPlayer Ani;
@@ -19,8 +22,7 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
-	public int Agro = 0; // stop quand agro = 0
-	public int state; // -1 = repos | 0 = retour à position initiale | 1 = suivre joueur | 2 = attaque
+	public int state; // -1 = repos | 0 = retour à position initiale | 1 = suivre joueur | 2 = attaque | 3 = suivre sans vue
 	private Vector3 PosInnit; // position initiale
 	private Vector3 RotInnit; // rotation innitiale
 	private bool SkipFrame = true; // RayCast3D ne fonctionne pas à la première frame
@@ -29,10 +31,10 @@ public abstract partial class MobScript : CharacterBody3D
 	// Autre
 	private Node Parent;
 	private CharacterBody3D Player = null;
+	private CharacterBody3D LastPlayer = null;
 	private Vector3 Me = new Vector3();
 	private Vector3 PlayerPos = new Vector3();
 	private bool PlayerSet = false;
-	protected int RenderDist = 150;
 	private float StateDeath = -0.1f;
 	private List<RayCast3D> RayList = new List<RayCast3D>();
 	
@@ -58,22 +60,51 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
-		Player = GetPlayer(SetRay());
-		if(Player == null && state!=0)
+		if(Alive)
 		{
-			Nav.TargetPosition = PosInnit;
-		}
-		if(state==0)
-		{
-			if(Position==PosInnit)
+			if(Player!=null)
 			{
-				state = -1;
+				LastPlayer = Player;
+			}
+			Player = GetPlayer(SetRay());
+			if(Player == null && state!=0)
+			{
+				if(Agro<=0)
+				{
+					state = 0;
+					Nav.TargetPosition = PosInnit;
+				}
+				else
+				{
+					Agro-=1;
+					Nav.TargetPosition = LastPlayer.GlobalPosition;
+					state = 3;
+				}
+			}
+			if(state==0)
+			{
+				if(Position==PosInnit)
+				{
+					state = -1;
+				}
+			}
+			if(Player!=null && state!=1)
+			{
+				Nav.TargetPosition = Player.GlobalPosition;
+				state = 1;
+			}
+			if(Player!=null && state==1 && Distance(Player.GlobalPosition,GlobalPosition)<1)
+			{
+				state=2;
 			}
 		}
-		if(Player!=null && state!=1)
+		else
 		{
-			Nav.TargetPosition = Player.GlobalPosition;
-			state = 1;
+			//Death();
+			if(Ani.CurrentAnimation=="")
+			{
+				QueueFree();
+			}
 		}
 		/*
 		if(PlayerSet)
@@ -123,7 +154,7 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
-		if(state==0 || state==1)
+		if(state==0 || state==1 || state == 3)
 		{
 			var dir = new Vector3();  //Pathfiding
 			var NextPos = Nav.GetNextPathPosition();
@@ -137,6 +168,7 @@ public abstract partial class MobScript : CharacterBody3D
 		if(state==1)
 		{
 			Nav.TargetPosition = Player.GlobalPosition;
+			Agro = AgroMax;
 		}
 		/*
 		if(PlayerSet && Alive)
@@ -229,12 +261,12 @@ public abstract partial class MobScript : CharacterBody3D
 	private List<int> SetRay()
 	{
 		List<int> res = new List<int>();
-		if(GameManager.ListJoueur!=null && GameManager.ListJoueur[0]!=null)
+		if(GameManager.ListJoueur!=null)
 		{
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
 				CharacterBody3D play = GameManager.ListJoueur[i];
-				if(Distance(GlobalPosition,play.GlobalPosition)<=DistVue)
+				if(play!=null && Distance(GlobalPosition,play.GlobalPosition)<=DistVue)
 				{
 					RayList[i].TargetPosition = new Vector3(play.GlobalPosition.X - GlobalPosition.X, 0 , play.GlobalPosition.Z - GlobalPosition.Z );
 					res.Add(i);
@@ -245,13 +277,12 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	private CharacterBody3D GetPlayer(List<int> PlayerList)
 	{
-		GD.Print(Agro);
 		double MinDist = 9999999999.0;
 		CharacterBody3D res = null;
 		for(int i = 0; i<PlayerList.Count;i++)
 		{
 			int id = PlayerList[i];
-			if(RayList[id].GetCollider()==GameManager.ListJoueur[id])
+			if(!(GameManager.ListJoueur[id] as ClassScript).IsDead && RayList[id].GetCollider()==GameManager.ListJoueur[id])
 			{
 				double d = Distance(GlobalPosition,GameManager.ListJoueur[id].GlobalPosition);
 				if(d<MinDist)

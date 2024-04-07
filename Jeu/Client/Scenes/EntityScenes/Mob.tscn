@@ -148,6 +148,14 @@ debug_path_custom_color = Color(0, 1, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12691, 0)
 text = "HP: -1"
 
+[node name="Agro" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31661, 0)
+text = "Agro: -1"
+
+[node name="State" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.51195, 0)
+text = "State: -1"
+
 [node name="Sword" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.776048, 1.11071, 0)
 
