@@ -1,7 +1,8 @@
-[gd_scene load_steps=44 format=3 uid="uid://da4b8u505twlj"]
+[gd_scene load_steps=45 format=3 uid="uid://da4b8u505twlj"]
 
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="1_qce88"]
 [ext_resource type="PackedScene" uid="uid://dwy0e543no7fj" path="res://Ressources/Map/UIScenes/LobbyScene.tscn" id="2_tu6nj"]
+[ext_resource type="PackedScene" uid="uid://jux34gf7kys3" path="res://Ressources/Map/UIScenes/JoinGame.tscn" id="3_0gg0f"]
 [ext_resource type="PackedScene" uid="uid://bcgtb7erfddhm" path="res://Ressources/Map/UIScenes/CreateGameScene.tscn" id="3_8i6s8"]
 
 [sub_resource type="Environment" id="Environment_qtxw2"]
@@ -693,6 +694,9 @@ skeleton = NodePath("../..")
 transform = Transform3D(-4.3535e-08, 0.0897461, -0.995965, 3.92293e-09, 0.995965, 0.0897461, 1, 6.85983e-16, -4.37114e-08, 2.08805, -0.464353, 0)
 mesh = SubResource("TextMesh_i5grn")
 skeleton = NodePath("../..")
+
+[node name="JoinGame" parent="JoinGame" instance=ExtResource("3_0gg0f")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.15306, -0.894364, 0)
 
 [node name="CreateGame" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.08165e-12, 6)

@@ -156,9 +156,19 @@ public partial class MapLvl1Script : IMap
 				for(int j = 0; j<Room.GetChildCount(); j++)
 				{
 					Node3D SpawnPoint = Room.GetChild<Node3D>(j);
-					if(Rand.Next(1,5)==1)
+					if(Rand.Next(1,3)==1)
 					{
-						PackedScene M = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn");
+						int m = Rand.Next(0,2);
+						string name = "";
+						if(m==0)
+						{
+							name = "Mummy";
+						}
+						else
+						{
+							name = "Skeleton";
+						}
+						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
 						Mob.Position = SpawnPoint.GlobalTransform.Origin;
 						MobList.Add(Mob);

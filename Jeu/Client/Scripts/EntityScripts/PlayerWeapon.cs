@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerWeapon : Area3D
 {
-	[Export] private int Damage = 30;
+	[Export] private int Damage = 10;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

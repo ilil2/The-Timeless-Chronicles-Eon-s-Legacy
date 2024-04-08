@@ -4,10 +4,12 @@ using JeuClient.Scripts.PlayerScripts;
 
 public partial class NoMansLand : Area3D
 {
+	private IMap Map;
 	private PackedScene Grave = GD.Load<PackedScene>("res://Ressources/Map/Global/Object/Gravestone/Gravestone.tscn");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Map = GetParent<IMap>();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,8 +25,12 @@ public partial class NoMansLand : Area3D
 			Stone.Name = $"{player.GetId()}";
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			AddChild(Stone);
-			Stone.Rotation = player.Rotation;
+			Stone.Rotation = player.GetNode<Node3D>("Player").Rotation;
 			(Stone as Gravestone).Pseudo.Text = player.Pseudo;
+			Map.CamOnPlayer = false;
+			//debug
+			Stone.GetNode<Camera3D>("Camera3D").Current = true;;
+			
 		}
 	}
 

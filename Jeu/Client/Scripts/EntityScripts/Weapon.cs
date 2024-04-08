@@ -5,6 +5,7 @@ using JeuClient.Scripts.PlayerScripts;
 public partial class Weapon : Area3D
 {
 	private CollisionShape3D Shape;
+	[Export] private int Damage = 1;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,7 +20,7 @@ public partial class Weapon : Area3D
 	{
 		if(body is ClassScript player )
 		{
-			player.TakeDamage(1);
+			player.TakeDamage(Damage);
 		}
 	}
 }

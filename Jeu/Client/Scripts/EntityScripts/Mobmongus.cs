@@ -15,8 +15,8 @@ public partial class Mobmongus : MobScript
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		St.Text = $"State: {state}";
-		Ag.Text = $"Agro: {Agro}/{AgroMax}";
+		//St.Text = $"State: {state}";
+		//Ag.Text = $"Agro: {Agro}/{AgroMax}";
 		PhysicsProcess(delta);
 	}
 	public override void _Process(double delta) 

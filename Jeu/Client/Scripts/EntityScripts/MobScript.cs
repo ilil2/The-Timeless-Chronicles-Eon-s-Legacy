@@ -9,6 +9,7 @@ public abstract partial class MobScript : CharacterBody3D
 	protected int speed = 2; // vitesse
 	protected int accel = 10; // acceleration
 	protected int DistVue = 30; // Distance de vue
+	protected int DistAtk = 1; // Distance d'attaque
 	public int HP = 100; // health point
 	public int HpMax = 100;
 	protected int AgroMax = 100; // Valeur Maximum de l'Agro
@@ -93,7 +94,7 @@ public abstract partial class MobScript : CharacterBody3D
 				Nav.TargetPosition = Player.GlobalPosition;
 				state = 1;
 			}
-			if(Player!=null && state==1 && Distance(Player.GlobalPosition,GlobalPosition)<1)
+			if(Player!=null && state==1 && Distance(Player.GlobalPosition,GlobalPosition)<DistAtk)
 			{
 				state=2;
 			}
@@ -162,13 +163,19 @@ public abstract partial class MobScript : CharacterBody3D
 			dir = dir.Normalized();
 			Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
 			MoveAndSlide();
-			//LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-			//Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+			//LookAt(new Vector3(Nav.TargetPosition.X, 0, Nav.TargetPosition.Z)); //Orientation
+			LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+			Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 		}
 		if(state==1)
 		{
 			Nav.TargetPosition = Player.GlobalPosition;
 			Agro = AgroMax;
+		}
+		if(state==-1)
+		{
+			Rotation = RotInnit;
+			Ani.Stop();
 		}
 		/*
 		if(PlayerSet && Alive)
@@ -266,9 +273,10 @@ public abstract partial class MobScript : CharacterBody3D
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
 				CharacterBody3D play = GameManager.ListJoueur[i];
-				if(play!=null && Distance(GlobalPosition,play.GlobalPosition)<=DistVue)
+				if(play!=null && play.IsInsideTree() && Distance(GlobalPosition,play.GlobalPosition)<=DistVue)
 				{
 					RayList[i].TargetPosition = new Vector3(play.GlobalPosition.X - GlobalPosition.X, 0 , play.GlobalPosition.Z - GlobalPosition.Z );
+					RayList[i].Rotation = new Vector3(0,-Rotation.Y,0);
 					res.Add(i);
 				}
 			}	
