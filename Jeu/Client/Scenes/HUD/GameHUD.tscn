@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cngf2783qgwxk"]
+[gd_scene load_steps=10 format=3 uid="uid://cngf2783qgwxk"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/GameHUD.cs" id="1_qiq70"]
 [ext_resource type="Texture2D" uid="uid://bxm5dmkny8a63" path="res://Ressources/Graphismes/KnightLogo.png" id="2_sb6ih"]
@@ -7,7 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://c3r850ndkpyd4" path="res://Ressources/Graphismes/ScientistLogo.png" id="5_qmr6o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adaw3"]
-font_size = 30
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_rarrg"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_2fu1n"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_86uie"]
+font_size = 15
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -56,9 +65,9 @@ anchor_left = 0.125
 anchor_top = 0.815
 anchor_right = 0.271
 anchor_bottom = 0.884
-offset_top = -0.120037
-offset_right = -0.192032
-offset_bottom = 0.167959
+offset_top = -0.119937
+offset_right = -0.192028
+offset_bottom = 0.168059
 text = "Pseudo"
 label_settings = SubResource("LabelSettings_adaw3")
 
@@ -119,5 +128,348 @@ offset_left = -0.0640001
 offset_top = 0.0799866
 offset_right = 0.0639954
 offset_bottom = -0.223999
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer1" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer1"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.667
+anchor_right = 0.236
+anchor_bottom = 0.679
+offset_left = 0.383995
+offset_top = -0.216036
+offset_right = 0.127981
+offset_bottom = 0.00798702
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer1"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.691
+anchor_right = 0.236
+anchor_bottom = 0.704
+offset_left = 0.383995
+offset_top = 0.231971
+offset_right = 0.127981
+offset_bottom = -0.192036
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.63
+anchor_right = 0.174
+anchor_bottom = 0.668
+offset_left = 0.383995
+offset_top = -0.240036
+offset_right = -0.448011
+offset_bottom = 0.135972
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_rarrg")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.63
+anchor_right = 0.076
+anchor_bottom = 0.716
+offset_left = -0.256001
+offset_top = -0.240036
+offset_right = 0.447994
+offset_bottom = 0.0319867
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.63
+anchor_right = 0.076
+anchor_bottom = 0.716
+offset_left = -0.256001
+offset_top = -0.240036
+offset_right = 0.447994
+offset_bottom = 0.0319867
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.63
+anchor_right = 0.076
+anchor_bottom = 0.716
+offset_left = -0.256001
+offset_top = -0.240036
+offset_right = 0.447994
+offset_bottom = 0.0319867
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.63
+anchor_right = 0.076
+anchor_bottom = 0.716
+offset_left = -0.256001
+offset_top = -0.240036
+offset_right = 0.447994
+offset_bottom = 0.0319867
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer2" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer2"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.543
+anchor_right = 0.236
+anchor_bottom = 0.556
+offset_left = 0.383995
+offset_top = 0.135972
+offset_right = 0.127981
+offset_bottom = -0.288035
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer2"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.568
+anchor_right = 0.236
+anchor_bottom = 0.58
+offset_left = 0.383995
+offset_top = -0.0640121
+offset_right = 0.127981
+offset_bottom = 0.159972
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.506
+anchor_right = 0.174
+anchor_bottom = 0.543
+offset_left = 0.383995
+offset_top = 0.111973
+offset_right = -0.448011
+offset_bottom = 1.13597
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_2fu1n")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.506
+anchor_right = 0.076
+anchor_bottom = 0.593
+offset_left = -0.256001
+offset_top = 0.111973
+offset_right = 0.447994
+offset_bottom = -0.264035
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.5
+anchor_right = 0.076
+anchor_bottom = 0.593
+offset_left = -0.256001
+offset_top = 4.0
+offset_right = 0.447994
+offset_bottom = -0.264035
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.5
+anchor_right = 0.076
+anchor_bottom = 0.593
+offset_left = -0.256001
+offset_top = 4.0
+offset_right = 0.447994
+offset_bottom = -0.264035
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.506
+anchor_right = 0.076
+anchor_bottom = 0.593
+offset_left = -0.256001
+offset_top = 0.111973
+offset_right = 0.447994
+offset_bottom = -0.264035
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer3" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer3"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.42
+anchor_right = 0.236
+anchor_bottom = 0.432
+offset_left = 0.383995
+offset_top = -0.160011
+offset_right = 0.127981
+offset_bottom = 0.0639927
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer3"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.444
+anchor_right = 0.236
+anchor_bottom = 0.457
+offset_left = 0.383995
+offset_top = 0.287977
+offset_right = 0.127981
+offset_bottom = -0.136011
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_top = 0.383
+anchor_right = 0.174
+anchor_bottom = 0.421
+offset_left = 0.383995
+offset_top = -0.184011
+offset_right = -0.448011
+offset_bottom = 0.191978
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_86uie")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.383
+anchor_right = 0.076
+anchor_bottom = 0.469
+offset_left = -0.256001
+offset_top = -0.184011
+offset_right = 0.447994
+offset_bottom = 0.0879924
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.383
+anchor_right = 0.076
+anchor_bottom = 0.469
+offset_left = -0.256001
+offset_top = -0.184011
+offset_right = 0.447994
+offset_bottom = 0.0879924
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.383
+anchor_right = 0.076
+anchor_bottom = 0.469
+offset_left = -0.256001
+offset_top = -0.184011
+offset_right = 0.447994
+offset_bottom = 0.0879924
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.383
+anchor_right = 0.076
+anchor_bottom = 0.469
+offset_left = -0.256001
+offset_top = -0.184011
+offset_right = 0.447994
+offset_bottom = 0.0879924
 texture = ExtResource("5_qmr6o")
 expand_mode = 1

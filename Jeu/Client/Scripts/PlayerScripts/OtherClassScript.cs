@@ -2,29 +2,36 @@ using Godot;
 using System;
 using JeuClient.Scripts.PlayerScripts;
 
-public partial class OtherClassScript : PlayerScript
+public abstract partial class OtherClassScript : PlayerScript
 {
 	public Vector3 EntityPosition;
-	protected Label3D Pseudo;
+	public Label3D PseudoText;
 	
 	protected AnimationPlayer AnimationOtherPlayer;
 	protected AnimationTree AnimationOtherTree;
 
-	protected int Id;
-	protected string Classe;
+	public int Id;
+	public string Classe;
+	public string Pseudo; 
+	
+	private int Health = 100;
+	private int Maxhealth = 100;
+	private int Stamina = 1000;
+	private int Maxstamina = 1000;
 	
 	protected void InitOtherPlayer()
 	{
 		EntityPosition = Position;
-		Pseudo = GetNode<Label3D>("LabelPseudo");
+		PseudoText = GetNode<Label3D>("LabelPseudo");
+		Pseudo = GameManager.InfoAutreJoueur[$"pseudo{Id}"];
 		SetPseudo();
 	}
 
 	protected void PseudoManager()
 	{
 		string[] playerPositions = GameManager.InfoJoueur["co"].Split(";");
-		Pseudo.LookAt(new Vector3(Lib.Conversions.AtoF(playerPositions[0]), Lib.Conversions.AtoF(playerPositions[1]), Lib.Conversions.AtoF(playerPositions[2])), Vector3.Up);
-		Pseudo.Rotation = new Vector3(0, Pseudo.Rotation.Y + (float)Math.PI, 0);
+		PseudoText.LookAt(new Vector3(Lib.Conversions.AtoF(playerPositions[0]), Lib.Conversions.AtoF(playerPositions[1]), Lib.Conversions.AtoF(playerPositions[2])), Vector3.Up);
+		PseudoText.Rotation = new Vector3(0, PseudoText.Rotation.Y + (float)Math.PI, 0);
 	}
 
 	protected void SetPosition()
@@ -49,21 +56,20 @@ public partial class OtherClassScript : PlayerScript
 	
 	private void SetPseudo()
 	{
-		string pseudoName = GameManager.InfoAutreJoueur[$"pseudo{Id}"];
-		switch (pseudoName)
+		switch (Pseudo)
 		{
 			case "OttoLeBG":
 			case "Darkrentin":
 			case "ilyann":
 			case "Narth":
-				Pseudo.Modulate = new Color(0.99f,0.82f,0.11f);
+				PseudoText.Modulate = new Color(0.99f,0.82f,0.11f);
 				break;
 			default:
-				Pseudo.Modulate = new Color(1,1,1);
+				PseudoText.Modulate = new Color(1,1,1);
 				break;
 		}
 
-		Pseudo.Text = pseudoName;
+		PseudoText.Text = Pseudo;
 	}
 	
 	public void SetID(int id)
@@ -79,5 +85,25 @@ public partial class OtherClassScript : PlayerScript
 	public void SetClasse(string classe)
 	{
 		Classe = classe;
+	}
+	
+	public int GetHealth()
+	{
+		return Health;
+	}
+	
+	public int GetMaxHealth()
+	{
+		return Maxhealth;
+	}
+	
+	public int GetStamina()
+	{
+		return Stamina;
+	}
+	
+	public int GetMaxStamina()
+	{
+		return Maxstamina;
 	}
 }
