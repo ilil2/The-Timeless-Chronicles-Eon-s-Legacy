@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://jux34gf7kys3"]
+
+[ext_resource type="PackedScene" uid="uid://dlo3wy4a0fyen" path="res://Ressources/Map/Moderne/Building/Building1.tscn" id="1_0w101"]
+[ext_resource type="PackedScene" uid="uid://dulleqqam5384" path="res://Ressources/Map/Moderne/Building/Building3.tscn" id="2_y3s03"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_ehpex"]
+density = 1.4
+
+[node name="JoinGame" type="Node3D"]
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(7, 1, 5)
+material = SubResource("FogMaterial_ehpex")
+
+[node name="Building1" parent="." instance=ExtResource("1_0w101")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -2.63806, -0.170953, -0.441292)
+
+[node name="Building3" parent="." instance=ExtResource("2_y3s03")]
+transform = Transform3D(-4.37114e-09, 0, -0.1, 0, 0.1, 0, 0.1, 0, -4.37114e-09, 2, 0, -1.5)

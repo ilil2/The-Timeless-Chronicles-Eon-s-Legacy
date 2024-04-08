@@ -150,6 +150,7 @@ public partial class MapLvl1Script : IMap
 
 	private void CreateMob()
 	{
+		int id = 0;
 		for(int i = 0; i<RoomList.Count; i++)
 		{
 			Node3D Room = RoomList[i].GetNode<Node3D>("Spawn");
@@ -170,6 +171,8 @@ public partial class MapLvl1Script : IMap
 						}
 						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
+						((MobScript)Mob).ID = id;
+						id++;
 						Mob.Position = SpawnPoint.GlobalTransform.Origin;
 						MobList.Add(Mob);
 						AddChild(Mob);
