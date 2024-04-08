@@ -156,7 +156,7 @@ public partial class MapLvl1Script : IMap
 				for(int j = 0; j<Room.GetChildCount(); j++)
 				{
 					Node3D SpawnPoint = Room.GetChild<Node3D>(j);
-					if(Rand.Next(1,3)==1)
+					if(Rand.Next(1,5)==1)
 					{
 						int m = Rand.Next(0,2);
 						string name = "";

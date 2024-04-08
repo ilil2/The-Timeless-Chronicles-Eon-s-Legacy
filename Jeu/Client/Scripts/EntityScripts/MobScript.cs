@@ -290,7 +290,7 @@ public abstract partial class MobScript : CharacterBody3D
 		for(int i = 0; i<PlayerList.Count;i++)
 		{
 			int id = PlayerList[i];
-			if(!(GameManager.ListJoueur[id] as ClassScript).IsDead && RayList[id].GetCollider()==GameManager.ListJoueur[id])
+			if(GameManager.ListJoueur[id]!=null && !((PlayerScript)GameManager.ListJoueur[id]).IsDead && RayList[id].GetCollider()==GameManager.ListJoueur[id])
 			{
 				double d = Distance(GlobalPosition,GameManager.ListJoueur[id].GlobalPosition);
 				if(d<MinDist)

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using JeuClient.Scripts.PlayerScripts;
 
-public partial class OtherClassScript : Player
+public partial class OtherClassScript : PlayerScript
 {
 	public Vector3 EntityPosition;
 	protected Label3D Pseudo;
