@@ -4,7 +4,7 @@ using Lib;
 
 namespace JeuClient.Scripts.PlayerScripts;
 
-public abstract partial class ClassScript : Player
+public abstract partial class ClassScript : PlayerScript
 {
 	//Variable de base du joueur
 	protected int Id;
