@@ -6,8 +6,10 @@ using Lib;
 public partial class AssassinScript : ClassScript
 {
 	protected float DashPower = 80.0f;
+	protected int DashCount = 3;
 	protected bool CanDash = true;
 	protected int DashTimer;
+	protected bool _isSprinting;
 	
 	public override void _Ready()
 	{
@@ -61,9 +63,9 @@ public partial class AssassinScript : ClassScript
 	
 	protected void Dash()
 	{
-		if (CanDash)
+		if (CanDash && DashCount > 0)
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2))
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(100))
 			{
 				if (!IsWalking)
 				{
@@ -72,6 +74,7 @@ public partial class AssassinScript : ClassScript
 				}
 				
 				HorizontalVelocity = Direction * DashPower;
+				DashCount -= 1;
 				CanDash = false;
 			}
 		}
@@ -95,8 +98,7 @@ public partial class AssassinScript : ClassScript
 				Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
 			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
 			IsWalking = true;
-				
-			//Changement de la vitesse du joueur si il sprint
+			
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
 			{ 
 				MovementSpeed = RunSpeed;
@@ -113,21 +115,18 @@ public partial class AssassinScript : ClassScript
 			IsRunning = false; 
 			IsWalking = false;
 		}
-			
-		//Calcul de la rotation du joueur
+		
 		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
 			
 		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
 			
 		Dash();
 		
-		//Calcul du movement du joueur
 		Vector3 velocity = Velocity;
 		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
 		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
 		velocity.Y = VerticalVelocity.Y;
 		
-		//Application du mouvement au joueur
 		Velocity = velocity;
 		MoveAndSlide();
 	}
@@ -139,7 +138,7 @@ public partial class AssassinScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && UseStamina(50))
 		{
 			AnimationState = 2;
 			
@@ -185,7 +184,8 @@ public partial class AssassinScript : ClassScript
 		AnimationTree.Set("parameters/conditions/WhenHit", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
-		
+
+		_isSprinting = sprint;
 	}
 	
 	public override void TakeDamage(int damage)
@@ -197,6 +197,33 @@ public partial class AssassinScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+		}
+	}
+	
+	private void _on_dash_timeout()
+	{
+		if (DashCount < 3)
+		{
+			DashCount += 1;
+		}
+	}
+
+	private void _on_sprint_timeout()
+	{
+		if (_isSprinting)
+		{
+			if (!UseStamina(10))
+			{
+				TakeDamage(1);
+			}
+		}
+	}
+	
+	private void _on_stamina_timeout()
+	{
+		if (Stamina + 5 <= MaxStamina)
+		{
+			Stamina += 5;
 		}
 	}
 }

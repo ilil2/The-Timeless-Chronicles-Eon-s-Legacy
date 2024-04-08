@@ -220,4 +220,12 @@ public partial class ScientistScript : ClassScript
 			GameManager.InfoJoueur["animation"] = "death";
 		}
 	}
+	
+	private void _on_stamina_timeout()
+	{
+		if (Stamina + 5 <= MaxStamina)
+		{
+			Stamina += 5;
+		}
+	}
 }
