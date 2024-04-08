@@ -4,7 +4,7 @@ using Lib;
 
 namespace JeuClient.Scripts.PlayerScripts;
 
-public abstract partial class ClassScript : CharacterBody3D
+public abstract partial class ClassScript : Player
 {
 	//Variable de base du joueur
 	protected int Id;
@@ -15,7 +15,6 @@ public abstract partial class ClassScript : CharacterBody3D
 	protected int Heath = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
-	public bool IsDead = false;
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;
