@@ -15,7 +15,7 @@ public partial class Mummy : MobScript
 	public override void _Process(double delta) 
 	{
 		Process(delta);
-		if(state == 1 || state == 3 || state == 0)
+		if(Alive&&(state == 1 || state == 3 || state == 0))
 		{
 			if(Ani.CurrentAnimation != "Hit" && Ani.CurrentAnimation!="Walk")
 			{
@@ -37,16 +37,21 @@ public partial class Mummy : MobScript
 	}
 	public override void TakeDamage(int damage)
 	{
-		HP -= damage;
-		GD.Print(HP);
-		//Hp.Text = $"HP: {HP}/{HpMax}";
-		Ani.Play("Hit");
-		if(HP<=0)
+		if(Alive)
 		{
-			Alive = false;
-			Ani.Stop();
-			Ani.Play("Die");
-			//SetUpDeath();
+			HP -= damage;
+			GD.Print(HP);
+			if(HP<=0)
+			{
+				GD.Print("Mort");
+				Alive = false;
+				Ani.Stop();
+				Ani.Play("Die");
+			}
+			else
+			{
+				Ani.Play("Hit");
+			}
 		}
 	}
 }

@@ -255,6 +255,7 @@ public partial class ArcherScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("DeathTimer").Start();
 		}
 	}
 	
@@ -264,5 +265,9 @@ public partial class ArcherScript : ClassScript
 		{
 			Stamina += 5;
 		}
+	}
+	private void _on_death_timer_timeout()
+	{
+		Position -= new Vector3(0,10,0);
 	}
 }
