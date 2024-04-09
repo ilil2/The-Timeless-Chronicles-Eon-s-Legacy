@@ -118,9 +118,9 @@ public partial class GameHUD : Control
 				_otherClassChoose1 = true;
 			}
 			
-			_pseudo.Text = otherPlayer1.Pseudo;
-			_hpBar.Value = (float)otherPlayer1.GetHealth() / otherPlayer1.GetMaxHealth() * 100;
-			_mpBar.Value = (float)otherPlayer1.GetStamina() / otherPlayer1.GetMaxStamina() * 100;
+			_otherPlayer1Pseudo.Text = otherPlayer1.Pseudo;
+			_otherPlayer1HpBar.Value = (float)otherPlayer1.GetHealth() / otherPlayer1.GetMaxHealth() * 100;
+			_otherPlayer1MpBar.Value = (float)otherPlayer1.GetStamina() / otherPlayer1.GetMaxStamina() * 100;
 			
 			if (otherPlayer2 != null)
 			{
@@ -149,9 +149,9 @@ public partial class GameHUD : Control
 					_otherClassChoose2 = true;
 				}
 			
-				_pseudo.Text = otherPlayer2.Pseudo;
-				_hpBar.Value = (float)otherPlayer2.GetHealth() / otherPlayer2.GetMaxHealth() * 100;
-				_mpBar.Value = (float)otherPlayer2.GetStamina() / otherPlayer2.GetMaxStamina() * 100;
+				_otherPlayer2Pseudo.Text = otherPlayer2.Pseudo;
+				_otherPlayer2HpBar.Value = (float)otherPlayer2.GetHealth() / otherPlayer2.GetMaxHealth() * 100;
+				_otherPlayer2MpBar.Value = (float)otherPlayer2.GetStamina() / otherPlayer2.GetMaxStamina() * 100;
 				
 				if (otherPlayer3 != null)
 				{
@@ -180,9 +180,9 @@ public partial class GameHUD : Control
 						_otherClassChoose3 = true;
 					}
 			
-					_pseudo.Text = otherPlayer3.Pseudo;
-					_hpBar.Value = (float)otherPlayer3.GetHealth() / otherPlayer3.GetMaxHealth() * 100;
-					_mpBar.Value = (float)otherPlayer3.GetStamina() / otherPlayer3.GetMaxStamina() * 100;
+					_otherPlayer3Pseudo.Text = otherPlayer3.Pseudo;
+					_otherPlayer3HpBar.Value = (float)otherPlayer3.GetHealth() / otherPlayer3.GetMaxHealth() * 100;
+					_otherPlayer3MpBar.Value = (float)otherPlayer3.GetStamina() / otherPlayer3.GetMaxStamina() * 100;
 				}
 			}
 		}
