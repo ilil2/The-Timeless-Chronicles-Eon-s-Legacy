@@ -12,11 +12,9 @@ public abstract partial class OtherClassScript : PlayerScript
 
 	public int Id;
 	public string Classe;
-	public string Pseudo; 
+	private string Pseudo; 
 	
-	private int Health = 100;
 	private int Maxhealth = 100;
-	private int Stamina = 1000;
 	private int Maxstamina = 1000;
 	
 	protected void InitOtherPlayer()
@@ -87,19 +85,9 @@ public abstract partial class OtherClassScript : PlayerScript
 		Classe = classe;
 	}
 	
-	public int GetHealth()
-	{
-		return Health;
-	}
-	
 	public int GetMaxHealth()
 	{
 		return Maxhealth;
-	}
-	
-	public int GetStamina()
-	{
-		return Stamina;
 	}
 	
 	public int GetMaxStamina()

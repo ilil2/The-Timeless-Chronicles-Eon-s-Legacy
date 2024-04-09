@@ -118,9 +118,9 @@ public partial class GameHUD : Control
 				_otherClassChoose1 = true;
 			}
 			
-			_otherPlayer1Pseudo.Text = otherPlayer1.Pseudo;
-			_otherPlayer1HpBar.Value = (float)otherPlayer1.GetHealth() / otherPlayer1.GetMaxHealth() * 100;
-			_otherPlayer1MpBar.Value = (float)otherPlayer1.GetStamina() / otherPlayer1.GetMaxStamina() * 100;
+			_otherPlayer1Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer1.Id}"];
+			_otherPlayer1HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxHealth() * 100;
+			_otherPlayer1MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxStamina() * 100;
 			
 			if (otherPlayer2 != null)
 			{
@@ -149,9 +149,9 @@ public partial class GameHUD : Control
 					_otherClassChoose2 = true;
 				}
 			
-				_otherPlayer2Pseudo.Text = otherPlayer2.Pseudo;
-				_otherPlayer2HpBar.Value = (float)otherPlayer2.GetHealth() / otherPlayer2.GetMaxHealth() * 100;
-				_otherPlayer2MpBar.Value = (float)otherPlayer2.GetStamina() / otherPlayer2.GetMaxStamina() * 100;
+				_otherPlayer2Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer2.Id}"];
+				_otherPlayer2HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxHealth() * 100;
+				_otherPlayer2MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxStamina() * 100;
 				
 				if (otherPlayer3 != null)
 				{
@@ -180,9 +180,9 @@ public partial class GameHUD : Control
 						_otherClassChoose3 = true;
 					}
 			
-					_otherPlayer3Pseudo.Text = otherPlayer3.Pseudo;
-					_otherPlayer3HpBar.Value = (float)otherPlayer3.GetHealth() / otherPlayer3.GetMaxHealth() * 100;
-					_otherPlayer3MpBar.Value = (float)otherPlayer3.GetStamina() / otherPlayer3.GetMaxStamina() * 100;
+					_otherPlayer3Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer3.Id}"];
+					_otherPlayer3HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer3.Id}"]) / otherPlayer3.GetMaxHealth() * 100;
+					_otherPlayer3MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer3.Id}"])  / otherPlayer3.GetMaxStamina() * 100;
 				}
 			}
 		}
