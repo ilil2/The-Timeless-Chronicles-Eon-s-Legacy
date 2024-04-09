@@ -158,7 +158,7 @@ public partial class KnightScript : ClassScript
 		}
 		else
 		{
-			if (!UseStamina(damage))
+			if (!UseStamina(damage*20))
 			{
 				Heath -= damage;
 				if (Heath <= 0)
