@@ -60,6 +60,7 @@ public partial class OtherScientistScript : OtherClassScript
 			case "death":
 				//OtherAnimationSet(false, false, false, true); TODO: Add death animation
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+				isAlive = false;
 				break;
 		}
     }

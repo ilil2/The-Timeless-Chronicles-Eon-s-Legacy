@@ -45,7 +45,7 @@ value = 99.0
 show_percentage = false
 
 [node name="MpBar" type="ProgressBar" parent="."]
-modulate = Color(0, 0.560784, 0, 1)
+self_modulate = Color(0, 0.560784, 0, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.104
@@ -74,6 +74,7 @@ text = "Pseudo"
 label_settings = SubResource("LabelSettings_adaw3")
 
 [node name="IconKnight" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
@@ -88,6 +89,7 @@ texture = ExtResource("2_sb6ih")
 expand_mode = 1
 
 [node name="IconArcher" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
@@ -102,6 +104,7 @@ texture = ExtResource("3_vc7hb")
 expand_mode = 1
 
 [node name="IconAssassin" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
@@ -116,6 +119,7 @@ texture = ExtResource("4_s05g6")
 expand_mode = 1
 
 [node name="IconScientist" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007

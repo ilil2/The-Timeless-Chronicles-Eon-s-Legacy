@@ -11,8 +11,9 @@ public abstract partial class OtherClassScript : PlayerScript
 	protected AnimationTree AnimationOtherTree;
 
 	public int Id;
+	public bool isAlive = true;
 	public string Classe;
-	private string Pseudo; 
+	private string Pseudo;
 	
 	private int Maxhealth = 100;
 	private int Maxstamina = 1000;

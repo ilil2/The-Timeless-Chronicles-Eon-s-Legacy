@@ -31,6 +31,8 @@ public partial class GameHUD : Control
 	private TextureRect _otherPlayer3Icon;
 	private bool _otherClassChoose3;
 	
+	private Color _deathColor = new Color(0.4f,0.4f,0.4f);
+	
 	public override void _Ready()
 	{
 		_hpBar = GetNode<ProgressBar>("HpBar");
@@ -78,7 +80,7 @@ public partial class GameHUD : Control
 						_icon = GetNode<TextureRect>("IconAssassin");
 						_icon.Visible = true;
 						break;
-					case "Scientist":
+					default:
 						_icon = GetNode<TextureRect>("IconScientist");
 						_icon.Visible = true;
 						break;
@@ -94,95 +96,143 @@ public partial class GameHUD : Control
 		if (otherPlayer1 != null)
 		{
 			_otherPlayer1.Visible = true;
+			
 			if (!_otherClassChoose1)
 			{
 				switch (otherPlayer1.Classe)
 				{
 					case "Knight":
-						_icon = GetNode<TextureRect>("OtherPlayer1/IconKnight");
-						_icon.Visible = true;
+						_otherPlayer1Icon = GetNode<TextureRect>("OtherPlayer1/IconKnight");
+						_otherPlayer1Icon.Visible = true;
 						break;
 					case "Archer":
-						_icon = GetNode<TextureRect>("OtherPlayer1/IconArcher");
-						_icon.Visible = true;
+						_otherPlayer1Icon = GetNode<TextureRect>("OtherPlayer1/IconArcher");
+						_otherPlayer1Icon.Visible = true;
 						break;
 					case "Assassin":
-						_icon = GetNode<TextureRect>("OtherPlayer1/IconAssassin");
-						_icon.Visible = true;
+						_otherPlayer1Icon = GetNode<TextureRect>("OtherPlayer1/IconAssassin");
+						_otherPlayer1Icon.Visible = true;
 						break;
-					case "Scientist":
-						_icon = GetNode<TextureRect>("OtherPlayer1/IconScientist");
-						_icon.Visible = true;
+					default:
+						_otherPlayer1Icon = GetNode<TextureRect>("OtherPlayer1/IconScientist");
+						_otherPlayer1Icon.Visible = true;
 						break;
 				}
 				_otherClassChoose1 = true;
 			}
 			
-			_otherPlayer1Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer1.Id}"];
-			_otherPlayer1HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxHealth() * 100;
-			_otherPlayer1MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxStamina() * 100;
+			if (otherPlayer1.isAlive)
+			{
+				_otherPlayer1Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer1.Id}"];
+				_otherPlayer1HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxHealth() * 100;
+				_otherPlayer1MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxStamina() * 100;
+				_otherPlayer1HpBar.Modulate = new Color(1,0,0);
+				_otherPlayer1MpBar.Modulate = new Color(0,0.56f,0);
+				_otherPlayer1Icon.Modulate = new Color(1,1,1);
+			}
+			else
+			{
+				_otherPlayer1Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer1.Id}"] + " X";
+				_otherPlayer1HpBar.Value = 100;
+				_otherPlayer1MpBar.Value = 100;
+				_otherPlayer1HpBar.Modulate = _deathColor;
+				_otherPlayer1MpBar.Modulate = _deathColor;
+				_otherPlayer1Icon.Modulate = _deathColor;
+			}
 			
 			if (otherPlayer2 != null)
 			{
 				_otherPlayer2.Visible = true;
+				
 				if (!_otherClassChoose2)
 				{
 					switch (otherPlayer2.Classe)
 					{
 						case "Knight":
-							_icon = GetNode<TextureRect>("OtherPlayer2/IconKnight");
-							_icon.Visible = true;
+							_otherPlayer2Icon = GetNode<TextureRect>("OtherPlayer2/IconKnight");
+							_otherPlayer2Icon.Visible = true;
 							break;
 						case "Archer":
-							_icon = GetNode<TextureRect>("OtherPlayer2/IconArcher");
-							_icon.Visible = true;
+							_otherPlayer2Icon = GetNode<TextureRect>("OtherPlayer2/IconArcher");
+							_otherPlayer2Icon.Visible = true;
 							break;
 						case "Assassin":
-							_icon = GetNode<TextureRect>("OtherPlayer2/IconAssassin");
-							_icon.Visible = true;
+							_otherPlayer2Icon = GetNode<TextureRect>("OtherPlayer2/IconAssassin");
+							_otherPlayer2Icon.Visible = true;
 							break;
-						case "Scientist":
-							_icon = GetNode<TextureRect>("OtherPlayer2/IconScientist");
-							_icon.Visible = true;
+						default:
+							_otherPlayer2Icon = GetNode<TextureRect>("OtherPlayer2/IconScientist");
+							_otherPlayer2Icon.Visible = true;
 							break;
 					}
 					_otherClassChoose2 = true;
 				}
-			
-				_otherPlayer2Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer2.Id}"];
-				_otherPlayer2HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxHealth() * 100;
-				_otherPlayer2MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxStamina() * 100;
+				
+				if (otherPlayer2.isAlive)
+				{
+					_otherPlayer2Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer2.Id}"];
+					_otherPlayer2HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxHealth() * 100;
+					_otherPlayer2MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxStamina() * 100;
+					_otherPlayer2HpBar.Modulate = new Color(1,0,0);
+					_otherPlayer2MpBar.Modulate = new Color(0,0.56f,0);
+					_otherPlayer2Icon.Modulate = new Color(1,1,1);
+				}
+				else
+				{
+					_otherPlayer2Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer2.Id}"] + " X";
+					_otherPlayer2HpBar.Value = 100;
+					_otherPlayer2MpBar.Value = 100;
+					_otherPlayer2HpBar.Modulate = _deathColor;
+					_otherPlayer2MpBar.Modulate = _deathColor;
+					_otherPlayer2Icon.Modulate = _deathColor;
+				}
 				
 				if (otherPlayer3 != null)
 				{
 					_otherPlayer3.Visible = true;
+					
 					if (!_otherClassChoose3)
 					{
 						switch (otherPlayer3.Classe)
 						{
 							case "Knight":
-								_icon = GetNode<TextureRect>("OtherPlayer3/IconKnight");
-								_icon.Visible = true;
+								_otherPlayer3Icon = GetNode<TextureRect>("OtherPlayer3/IconKnight");
+								_otherPlayer3Icon.Visible = true;
 								break;
 							case "Archer":
-								_icon = GetNode<TextureRect>("OtherPlayer3/IconArcher");
-								_icon.Visible = true;
+								_otherPlayer3Icon = GetNode<TextureRect>("OtherPlayer3/IconArcher");
+								_otherPlayer3Icon.Visible = true;
 								break;
 							case "Assassin":
-								_icon = GetNode<TextureRect>("OtherPlayer3/IconAssassin");
-								_icon.Visible = true;
+								_otherPlayer3Icon = GetNode<TextureRect>("OtherPlayer3/IconAssassin");
+								_otherPlayer3Icon.Visible = true;
 								break;
-							case "Scientist":
-								_icon = GetNode<TextureRect>("OtherPlayer3/IconScientist");
-								_icon.Visible = true;
+							default:
+								_otherPlayer3Icon = GetNode<TextureRect>("OtherPlayer3/IconScientist");
+								_otherPlayer3Icon.Visible = true;
 								break;
 						}
 						_otherClassChoose3 = true;
 					}
-			
-					_otherPlayer3Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer3.Id}"];
-					_otherPlayer3HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer3.Id}"]) / otherPlayer3.GetMaxHealth() * 100;
-					_otherPlayer3MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer3.Id}"])  / otherPlayer3.GetMaxStamina() * 100;
+					
+					if (otherPlayer3.isAlive)
+					{
+						_otherPlayer3Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer3.Id}"];
+						_otherPlayer3HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer3.Id}"]) / otherPlayer3.GetMaxHealth() * 100;
+						_otherPlayer3MpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"mp{otherPlayer3.Id}"])  / otherPlayer3.GetMaxStamina() * 100;
+						_otherPlayer3HpBar.Modulate = new Color(1,0,0);
+						_otherPlayer3MpBar.Modulate = new Color(0,0.56f,0);
+						_otherPlayer3Icon.Modulate = new Color(1,1,1);
+					}
+					else
+					{
+						_otherPlayer3Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer3.Id}"] + " X";
+						_otherPlayer3HpBar.Value = 100;
+						_otherPlayer3MpBar.Value = 100;
+						_otherPlayer3HpBar.Modulate = _deathColor;
+						_otherPlayer3MpBar.Modulate = _deathColor;
+						_otherPlayer3Icon.Modulate = _deathColor;
+					}
 				}
 			}
 		}
