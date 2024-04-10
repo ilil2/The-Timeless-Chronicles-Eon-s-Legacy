@@ -38,6 +38,7 @@ public partial class GameHUD : Control
 	
 	public override void _Ready()
 	{
+		OnInventory = false;
 		_inventory = GetNode<Panel>("ShopInventory");
 		
 		_hpBar = GetNode<ProgressBar>("HpBar");

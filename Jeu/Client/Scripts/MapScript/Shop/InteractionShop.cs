@@ -37,7 +37,7 @@ public partial class InteractionShop : Node3D
 
 	private void _on_shop_body_exited(Node3D body)
 	{
-		if(body is PlayerScript)
+		if(body is ClassScript)
 		{
 			OnShop = false;
 			Ani.Play("Close");	

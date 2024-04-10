@@ -187,6 +187,17 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		return Heath;
 	}
+	public void SetHealth(int health)
+	{
+		if(health>MaxHealth)
+		{
+			Heath = MaxHealth;
+		}
+		else
+		{
+			Heath = health;
+		}
+	}
 	
 	public int GetMaxHealth()
 	{
@@ -196,6 +207,14 @@ public abstract partial class ClassScript : PlayerScript
 	public int GetStamina()
 	{
 		return Stamina;
+	}
+	
+	public void SetStamina(int stamina)
+	{
+		if(stamina>MaxStamina)
+		{
+			stamina = MaxStamina;
+		}
 	}
 	
 	public int GetMaxStamina()
