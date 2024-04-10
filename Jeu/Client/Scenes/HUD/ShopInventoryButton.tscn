@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://n81bw3yhdfso"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/ShopInventoryButton.cs" id="1_7kq1f"]
+
+[node name="Button" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_right = 0.111
+anchor_bottom = 0.198
+offset_right = 0.127991
+offset_bottom = -0.304016
+text = "click"
+script = ExtResource("1_7kq1f")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

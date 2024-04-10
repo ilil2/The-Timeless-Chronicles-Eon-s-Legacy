@@ -1,17 +1,17 @@
 using Godot;
 using System;
 
-public partial class ShopInventory : Panel
+public partial class FastAccess : Panel
 {
-	public static Potion[] Inventory = new Potion[8];
-	public static TextureRect[] Slot = new TextureRect[8];
+	public static Potion[] Access = new Potion[8];
+	public static TextureRect[] FastSlot = new TextureRect[8];
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		for(int i = 0;i<8;i++)
+		for(int i = 0;i<3;i++)
 		{
 			Control slot = GetNode<Control>($"Slot{i+1}");
-			Slot[i] = slot.GetNode<TextureRect>("Logo");
+			FastSlot[i] = slot.GetNode<TextureRect>("Logo");
 		}
 		UpdateSlot();
 		//Logo.Texture = GD.Load<Texture2D>(Inventory[0].img);
@@ -21,17 +21,18 @@ public partial class ShopInventory : Panel
 	public override void _Process(double delta)
 	{
 	}
+	
 	private static void UpdateSlot()
 	{
-		for(int i = 0; i<8 ; i++)
+		for(int i = 0; i<3 ; i++)
 		{
-			if(Inventory[i]!=null)
+			if(Access[i]!=null)
 			{
-				(Slot[i] as TextureRect).Texture = GD.Load<Texture2D>(Inventory[i].img);
+				(FastSlot[i] as TextureRect).Texture = GD.Load<Texture2D>(Access[i].img);
 			}
 			else
 			{
-				(Slot[i] as TextureRect).Texture = null;
+				(FastSlot[i] as TextureRect).Texture = null;
 			}
 		}
 	}
@@ -58,9 +59,9 @@ public partial class ShopInventory : Panel
 	}
 	public static bool IsFull()
 	{
-		for(int i = 0; i<8 ; i++)
+		for(int i = 0; i<3 ; i++)
 		{
-			if(Inventory[i]==null)
+			if(Access[i]==null)
 			{
 				return false;
 			}
@@ -71,17 +72,17 @@ public partial class ShopInventory : Panel
 	{
 		Potion potion = NewPotion(ID);
 		int i = 0;
-		while(Inventory[i]!=null)
+		while(Access[i]!=null)
 		{
 			i++;
 		}
-		Inventory[i] = potion;
+		Access[i] = potion;
 		UpdateSlot();
 	}
 	public static Potion RemovePotion(int ID)
 	{
-		Potion res = Inventory[ID];
-		Inventory[ID] = null;
+		Potion res = Access[ID];
+		Access[ID] = null;
 		UpdateSlot();
 		return res;
 	}
