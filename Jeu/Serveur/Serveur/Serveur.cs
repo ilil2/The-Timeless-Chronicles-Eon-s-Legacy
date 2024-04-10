@@ -139,6 +139,11 @@ public class Serveur
                     s2[1] = s2[1].Substring(3);
                     SendAll(soc, $"an:{s2[0]}|{s2[1]}");
                 }
+                else if (s2[1].Substring(0, 2) == "ia")
+                {
+                    s2[1] = s2[1].Substring(3);
+                    SendAll(soc, $"ia:{s2[0]}|{s2[1]}");
+                }
                 else if (s2[1].Substring(0, 4) == "chat")
                 {
                     s2[1] = s2[1].Substring(5);
