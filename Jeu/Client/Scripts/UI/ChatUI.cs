@@ -119,7 +119,7 @@ public partial class ChatUI : Control
 		
 		foreach (var c in s2)
 		{
-			s3 += s2;
+			s3 += c;
 		}
 		
 		return s3;
