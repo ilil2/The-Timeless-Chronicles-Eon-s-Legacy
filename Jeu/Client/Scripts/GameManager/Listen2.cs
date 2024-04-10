@@ -5,7 +5,10 @@ public partial class Listen2 : GameManager
 	public static void Listen()
 	{
 		string rep = UDP.Receive(soc2);
-		if (rep.Length > 2 && rep.Substring(0,2) == "in")
+		string sub = rep.Substring(0,2);
+		bool len = rep.Length > 2;
+		
+		if (len && sub == "in")
 		{
 			string line = rep.Substring(3);
 			string[] SplitInfo = line.Split('|');
@@ -20,7 +23,7 @@ public partial class Listen2 : GameManager
 			}
 		}
 		
-		else if (rep.Length > 2 && rep.Substring(0,2) == "on")
+		else if (len && sub == "on")
 		{
 			rep = rep.Substring(3);
 			string id = rep.Split('|')[0];
@@ -38,7 +41,7 @@ public partial class Listen2 : GameManager
 			}
 		}
 		
-		else if (rep.Length > 2 && rep.Substring(0,2) == "an")
+		else if (len && sub == "an")
 		{
 			rep = rep.Substring(3);
 			string id = rep.Split('|')[0];
@@ -50,7 +53,7 @@ public partial class Listen2 : GameManager
 			}
 		}
 
-		else if (rep.Length > 2 && rep.Substring(0,2) == "ia")
+		else if (len && sub == "ia")
 		{
 			rep = rep.Substring(3);
 			string id = rep.Split('|')[0];
