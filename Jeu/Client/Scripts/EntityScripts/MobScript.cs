@@ -6,7 +6,7 @@ using JeuClient.Scripts.PlayerScripts;
 public abstract partial class MobScript : CharacterBody3D
 {
 	//stats
-	public in ID = -1;
+	public int ID = -1;
 	protected int speed = 2; // vitesse
 	protected int accel = 10; // acceleration
 	protected int DistVue = 30; // Distance de vue

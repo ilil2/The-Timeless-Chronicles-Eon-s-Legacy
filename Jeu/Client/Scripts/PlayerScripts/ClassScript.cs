@@ -15,6 +15,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected int Heath = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
+	public int Gold = 5000;
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;

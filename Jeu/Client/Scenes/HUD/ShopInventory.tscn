@@ -1,0 +1,242 @@
+[gd_scene load_steps=4 format=3 uid="uid://ybgpeisrpnbi"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/ShopInventory.cs" id="1_fj2ls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj3f1"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fueeo"]
+font_size = 20
+
+[node name="ShopInventory" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.889
+anchor_bottom = 0.198
+offset_right = -0.128052
+offset_bottom = -0.304016
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vj3f1")
+script = ExtResource("1_fj2ls")
+
+[node name="Slot1" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.125
+anchor_bottom = 1.0
+
+[node name="Logo" type="TextureRect" parent="Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "1"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot2" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.125
+anchor_right = 0.25
+anchor_bottom = 1.0
+
+[node name="Logo" type="TextureRect" parent="Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "2"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot3" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.25
+anchor_right = 0.375
+anchor_bottom = 1.0
+offset_right = -3.05176e-05
+
+[node name="Logo" type="TextureRect" parent="Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "3"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot4" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.375
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -3.05176e-05
+
+[node name="Logo" type="TextureRect" parent="Slot4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "4"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot5" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.625
+anchor_bottom = 1.0
+
+[node name="Logo" type="TextureRect" parent="Slot5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "5"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot6" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.625
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_right = -6.10352e-05
+
+[node name="Logo" type="TextureRect" parent="Slot6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "6"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot7" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.75
+anchor_right = 0.875
+anchor_bottom = 1.0
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+
+[node name="Logo" type="TextureRect" parent="Slot7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot7"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "7"
+label_settings = SubResource("LabelSettings_fueeo")
+
+[node name="Slot8" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.875
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.10352e-05
+
+[node name="Logo" type="TextureRect" parent="Slot8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot8"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "8
+"
+label_settings = SubResource("LabelSettings_fueeo")

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5einq1tsrldj"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/Shop/InteractionShop.cs" id="1_hujtb"]
+[ext_resource type="PackedScene" uid="uid://c0yicjixkkn0u" path="res://Scenes/MapScenes/ShopMenu.tscn" id="3_edfiu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fk4wi"]
+size = Vector3(2, 1, 1)
+
+[node name="InteractionShop" type="Node3D"]
+script = ExtResource("1_hujtb")
+
+[node name="ShopZone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShopZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_fk4wi")
+
+[node name="Shop" parent="." instance=ExtResource("3_edfiu")]
+
+[connection signal="body_entered" from="ShopZone" to="." method="_on_shop_body_entered"]
+[connection signal="body_exited" from="ShopZone" to="." method="_on_shop_body_exited"]
