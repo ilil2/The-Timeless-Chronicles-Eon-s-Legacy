@@ -47,6 +47,7 @@ public partial class OtherKnightScript : OtherClassScript
 			case "death":
 				OtherAnimationSet(false, false, false, false, true);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+				isAlive = false;
 				break;
 		}
 	}

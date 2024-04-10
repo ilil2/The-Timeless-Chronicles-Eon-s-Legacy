@@ -225,10 +225,10 @@ public abstract partial class MobScript : CharacterBody3D
 	public virtual void TakeDamage(int damage)
 	{
 		HP -= damage;
+		GD.Print("Je suis la");
 		if(HP<=0)
 		{
 			Ani.Stop();
-			SetUpDeath();
 		}
 	}
 	

@@ -17,6 +17,7 @@ public partial class PlayerWeapon : Area3D
 	{
 		if(body is MobScript mob)
 		{
+			GD.Print("TakeDamage");
 			mob.TakeDamage(Damage);
 		}
 	}

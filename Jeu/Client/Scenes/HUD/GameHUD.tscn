@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cngf2783qgwxk"]
+[gd_scene load_steps=10 format=3 uid="uid://cngf2783qgwxk"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/GameHUD.cs" id="1_qiq70"]
 [ext_resource type="Texture2D" uid="uid://bxm5dmkny8a63" path="res://Ressources/Graphismes/KnightLogo.png" id="2_sb6ih"]
@@ -7,7 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://c3r850ndkpyd4" path="res://Ressources/Graphismes/ScientistLogo.png" id="5_qmr6o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adaw3"]
-font_size = 30
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_rarrg"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_2fu1n"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_86uie"]
+font_size = 15
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -23,28 +32,30 @@ metadata/_edit_horizontal_guides_ = [376.0]
 modulate = Color(1, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.125
+anchor_left = 0.104
 anchor_top = 0.889
-anchor_right = 0.472
+anchor_right = 0.368
 anchor_bottom = 0.914
-offset_top = -0.0720215
-offset_right = 0.255859
-offset_bottom = -0.272095
+offset_left = 0.191998
+offset_top = -0.0720377
+offset_right = 0.0639648
+offset_bottom = -0.271984
 step = 1.0
 value = 99.0
 show_percentage = false
 
 [node name="MpBar" type="ProgressBar" parent="."]
-modulate = Color(0, 0.560784, 0, 1)
+self_modulate = Color(0, 0.560784, 0, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.125
+anchor_left = 0.104
 anchor_top = 0.926
-anchor_right = 0.472
+anchor_right = 0.368
 anchor_bottom = 0.951
-offset_top = -0.0480347
-offset_right = 0.255859
-offset_bottom = -0.248108
+offset_left = 0.191998
+offset_top = -0.048038
+offset_right = 0.0639648
+offset_bottom = -0.247984
 step = 1.0
 value = 99.0
 show_percentage = false
@@ -52,13 +63,13 @@ show_percentage = false
 [node name="Pseudo" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.125
-anchor_top = 0.815
-anchor_right = 0.271
-anchor_bottom = 0.884
-offset_top = -0.120037
-offset_right = -0.192032
-offset_bottom = 0.167959
+anchor_left = 0.104
+anchor_top = 0.84
+anchor_right = 0.25
+anchor_bottom = 0.887
+offset_left = 0.191998
+offset_top = -0.320022
+offset_bottom = 0.223984
 text = "Pseudo"
 label_settings = SubResource("LabelSettings_adaw3")
 
@@ -67,13 +78,13 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
-anchor_top = 0.79
-anchor_right = 0.118
+anchor_top = 0.827
+anchor_right = 0.097
 anchor_bottom = 0.988
-offset_left = -0.0640001
-offset_top = 0.0799866
-offset_right = 0.0639954
-offset_bottom = -0.223999
+offset_left = -0.0640002
+offset_top = 0.103986
+offset_right = 0.255997
+offset_bottom = -0.223984
 texture = ExtResource("2_sb6ih")
 expand_mode = 1
 
@@ -82,13 +93,13 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
-anchor_top = 0.79
-anchor_right = 0.118
+anchor_top = 0.827
+anchor_right = 0.097
 anchor_bottom = 0.988
-offset_left = -0.0640001
-offset_top = 0.0799866
-offset_right = 0.0639954
-offset_bottom = -0.223999
+offset_left = -0.0640002
+offset_top = 0.103986
+offset_right = 0.255997
+offset_bottom = -0.223984
 texture = ExtResource("3_vc7hb")
 expand_mode = 1
 
@@ -97,13 +108,13 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
-anchor_top = 0.79
-anchor_right = 0.118
+anchor_top = 0.827
+anchor_right = 0.097
 anchor_bottom = 0.988
-offset_left = -0.0640001
-offset_top = 0.0799866
-offset_right = 0.0639954
-offset_bottom = -0.223999
+offset_left = -0.0640002
+offset_top = 0.103986
+offset_right = 0.255997
+offset_bottom = -0.223984
 texture = ExtResource("4_s05g6")
 expand_mode = 1
 
@@ -112,12 +123,357 @@ visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
-anchor_top = 0.79
-anchor_right = 0.118
+anchor_top = 0.827
+anchor_right = 0.097
 anchor_bottom = 0.988
-offset_left = -0.0640001
-offset_top = 0.0799866
-offset_right = 0.0639954
-offset_bottom = -0.223999
+offset_left = -0.0640002
+offset_top = 0.103986
+offset_right = 0.255997
+offset_bottom = -0.223984
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer1" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer1"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.753
+anchor_right = 0.215
+anchor_bottom = 0.765
+offset_left = 0.575989
+offset_top = 0.0559559
+offset_right = 0.319965
+offset_bottom = 0.279971
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer1"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.778
+anchor_right = 0.215
+anchor_bottom = 0.79
+offset_left = 0.575989
+offset_top = -0.144067
+offset_right = 0.319965
+offset_bottom = 0.0799861
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.716
+anchor_right = 0.153
+anchor_bottom = 0.755
+offset_left = 0.575989
+offset_top = 0.0319562
+offset_right = -0.256029
+offset_bottom = -0.240066
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_rarrg")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.716
+anchor_right = 0.056
+anchor_bottom = 0.802
+offset_left = -0.0640002
+offset_top = 0.0319562
+offset_right = -0.51201
+offset_bottom = 0.30397
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.716
+anchor_right = 0.056
+anchor_bottom = 0.802
+offset_left = -0.0640002
+offset_top = 0.0319562
+offset_right = -0.51201
+offset_bottom = 0.30397
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.716
+anchor_right = 0.056
+anchor_bottom = 0.802
+offset_left = -0.0640002
+offset_top = 0.0319562
+offset_right = -0.51201
+offset_bottom = 0.30397
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer1"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.716
+anchor_right = 0.056
+anchor_bottom = 0.802
+offset_left = -0.0640002
+offset_top = 0.0319562
+offset_right = -0.51201
+offset_bottom = 0.30397
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer2" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer2"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.654
+anchor_right = 0.215
+anchor_bottom = 0.667
+offset_left = 0.575989
+offset_top = 0.207941
+offset_right = 0.319965
+offset_bottom = -0.216066
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer2"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.679
+anchor_right = 0.215
+anchor_bottom = 0.691
+offset_left = 0.575989
+offset_top = 0.0079565
+offset_right = 0.319965
+offset_bottom = 0.23191
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.617
+anchor_right = 0.153
+anchor_bottom = 0.656
+offset_left = 0.575989
+offset_top = 0.183941
+offset_right = -0.256029
+offset_bottom = -0.0880423
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_2fu1n")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.617
+anchor_right = 0.056
+anchor_bottom = 0.704
+offset_left = -0.0640002
+offset_top = 0.183941
+offset_right = -0.51201
+offset_bottom = -0.192067
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.617
+anchor_right = 0.056
+anchor_bottom = 0.704
+offset_left = -0.0640002
+offset_top = 0.183941
+offset_right = -0.51201
+offset_bottom = -0.192097
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.617
+anchor_right = 0.056
+anchor_bottom = 0.704
+offset_left = -0.0640002
+offset_top = 0.183941
+offset_right = -0.51201
+offset_bottom = -0.192097
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer2"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.617
+anchor_right = 0.056
+anchor_bottom = 0.704
+offset_left = -0.0640002
+offset_top = 0.183941
+offset_right = -0.51201
+offset_bottom = -0.192067
+texture = ExtResource("5_qmr6o")
+expand_mode = 1
+
+[node name="OtherPlayer3" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpBar" type="ProgressBar" parent="OtherPlayer3"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.556
+anchor_right = 0.215
+anchor_bottom = 0.568
+offset_left = 0.575989
+offset_top = -0.288035
+offset_right = 0.319965
+offset_bottom = -0.0639815
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="MpBar" type="ProgressBar" parent="OtherPlayer3"]
+modulate = Color(0, 0.560784, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.58
+anchor_right = 0.215
+anchor_bottom = 0.593
+offset_left = 0.575989
+offset_top = 0.159972
+offset_right = 0.319965
+offset_bottom = -0.264035
+step = 1.0
+value = 99.0
+show_percentage = false
+
+[node name="Pseudo" type="Label" parent="OtherPlayer3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062
+anchor_top = 0.519
+anchor_right = 0.153
+anchor_bottom = 0.556
+offset_left = 0.575989
+offset_top = -0.312035
+offset_right = -0.256029
+offset_bottom = 0.711965
+text = "Pseudo"
+label_settings = SubResource("LabelSettings_86uie")
+
+[node name="IconKnight" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.519
+anchor_right = 0.056
+anchor_bottom = 0.605
+offset_left = -0.0640002
+offset_top = -0.312035
+offset_right = -0.51201
+offset_bottom = -0.0400124
+texture = ExtResource("2_sb6ih")
+expand_mode = 1
+
+[node name="IconArcher" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.519
+anchor_right = 0.056
+anchor_bottom = 0.605
+offset_left = -0.0640002
+offset_top = -0.312035
+offset_right = -0.51201
+offset_bottom = -0.0400124
+texture = ExtResource("3_vc7hb")
+expand_mode = 1
+
+[node name="IconAssassin" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.519
+anchor_right = 0.056
+anchor_bottom = 0.605
+offset_left = -0.0640002
+offset_top = -0.312035
+offset_right = -0.51201
+offset_bottom = -0.0400124
+texture = ExtResource("4_s05g6")
+expand_mode = 1
+
+[node name="IconScientist" type="TextureRect" parent="OtherPlayer3"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.519
+anchor_right = 0.056
+anchor_bottom = 0.605
+offset_left = -0.0640002
+offset_top = -0.312035
+offset_right = -0.51201
+offset_bottom = -0.0400124
 texture = ExtResource("5_qmr6o")
 expand_mode = 1

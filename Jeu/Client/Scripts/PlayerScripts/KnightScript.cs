@@ -5,6 +5,7 @@ using Lib;
 
 public partial class KnightScript : ClassScript
 {
+	private bool _isBlocking;
 
 	public override void _Ready()
 	{
@@ -102,7 +103,9 @@ public partial class KnightScript : ClassScript
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
 		{
 			AnimationState = 2;
+			
 			AnimationSet(false, true, false, false);
+			
 			GameManager.InfoJoueur["animation"] = "protection";
 		}
 		else if ((left || right || forward || backward) && AnimationState != 1 && AnimationState != 2)
@@ -135,27 +138,55 @@ public partial class KnightScript : ClassScript
 		AnimationTree.Set("parameters/conditions/WhenHit", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
-		
+
+		_isBlocking = block;
 	}
-	
 	
 	public override void TakeDamage(int damage)
 	{
-		Heath -= damage;
-		if (Heath <= 0)
+		if (!_isBlocking)
 		{
-			IsDead = true;
-			AnimationState = -1;
-			AnimationSet(false, false, false, false, true);
-			GameManager.InfoJoueur["animation"] = "death";
-			GetNode<Timer>("Timer").Start();
+			Heath -= damage;
+			if (Heath <= 0)
+			{
+				IsDead = true;
+				AnimationState = -1;
+				AnimationSet(false, false, false, false, true);
+				GameManager.InfoJoueur["animation"] = "death";
+				GetNode<Timer>("DeathTimer").Start();
+			}
 		}
-		Stamina = 1000;
+		else
+		{
+			if (!UseStamina(damage*20))
+			{
+				Heath -= damage;
+				if (Heath <= 0)
+				{
+					IsDead = true;
+					AnimationState = -1;
+					AnimationSet(false, false, false, false, true);
+					GameManager.InfoJoueur["animation"] = "death";
+					GetNode<Timer>("DeathTimer").Start();
+				}
+			}
+		}
 	}
 	
-	private void _on_timer_timeout()
+	private void _on_death_timeout()
 	{
 		Position -= new Vector3(0,10,0);
+	}
+	
+	private void _on_stamina_timeout()
+	{
+		if (!_isBlocking)
+		{
+			if (Stamina + 5 <= MaxStamina)
+			{
+				Stamina += 5;
+			}
+		}
 	}
 }
 

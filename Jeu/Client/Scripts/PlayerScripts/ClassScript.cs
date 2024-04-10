@@ -107,6 +107,8 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
+		GameManager.InfoJoueur["hp"] = $"{Heath}";
+		GameManager.InfoJoueur["mp"] = $"{Stamina}";
 		PlayerIsHere = true;
 
 	}

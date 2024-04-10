@@ -128,7 +128,7 @@ public partial class ArcherScript : ClassScript
 			_shootTimer = 0;
 		}
 		
-		if (!_isAiming && IsShooting)
+		if (!_isAiming && IsShooting && UseStamina(50))
 		{
 			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
 			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
@@ -154,7 +154,7 @@ public partial class ArcherScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && UseStamina(50))
 		{
 			AnimationState = 6;
 			AnimationSet(false, false, false, false, true, true);
@@ -255,6 +255,19 @@ public partial class ArcherScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("DeathTimer").Start();
 		}
+	}
+	
+	private void _on_stamina_timeout()
+	{
+		if (Stamina + 5 <= MaxStamina)
+		{
+			Stamina += 5;
+		}
+	}
+	private void _on_death_timer_timeout()
+	{
+		Position -= new Vector3(0,10,0);
 	}
 }
