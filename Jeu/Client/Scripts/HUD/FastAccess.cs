@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Lib;
 
 public partial class FastAccess : Panel
 {
@@ -20,6 +21,33 @@ public partial class FastAccess : Panel
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[9].Item2))
+		{
+			if (Access[0] != null)
+			{
+				Access[0].UsePotion();
+				Access[0] = null;
+				UpdateSlot();
+			}
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[10].Item2))
+		{
+			if (Access[1] != null)
+			{
+				Access[1].UsePotion();
+				Access[1] = null;
+				UpdateSlot();
+			}
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[11].Item2))
+		{
+			if (Access[2] != null)
+			{
+				Access[2].UsePotion();
+				Access[2] = null;
+				UpdateSlot();
+			}
+		}
 	}
 	
 	private static void UpdateSlot()

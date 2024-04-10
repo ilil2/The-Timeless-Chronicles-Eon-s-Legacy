@@ -24,7 +24,7 @@ public partial class CameraPlayer : Node3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (_camera.Current && !GameManager._pausemode && !GameManager.LockCamera && !InteractionShop.OnShop)
+		if (_camera.Current && !GameManager._pausemode && !GameManager.LockCamera && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
 			if (@event is InputEventMouseMotion eventMouseMotion)
 			{
