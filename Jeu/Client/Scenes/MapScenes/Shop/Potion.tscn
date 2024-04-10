@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2w5s4oys4ehb"]
+
+[ext_resource type="Script" path="res://Scripts/MapScript/Shop/PotionUI.cs" id="1_puqjd"]
+[ext_resource type="Texture2D" uid="uid://c7wgky611jnqt" path="res://Ressources/Graphismes/AssasinLogo.png" id="2_8tfi8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qigbf"]
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_px37e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gai1x"]
+font_size = 20
+
+[node name="Potion" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.333
+anchor_bottom = 0.198
+offset_right = 0.384003
+offset_bottom = -0.304016
+script = ExtResource("1_puqjd")
+PotionLogo = ExtResource("2_8tfi8")
+
+[node name="Img" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.333
+anchor_bottom = 1.0
+offset_right = 0.127998
+texture = ExtResource("2_8tfi8")
+expand_mode = 1
+
+[node name="Desc" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.312
+anchor_right = 0.979
+anchor_bottom = 0.75
+offset_left = 0.0639954
+offset_top = 0.0639992
+offset_right = 0.0639954
+label_settings = SubResource("LabelSettings_qigbf")
+autowrap_mode = 3
+
+[node name="Price" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.75
+anchor_right = 0.549
+anchor_bottom = 0.953
+offset_left = 0.0639954
+offset_right = 0.18399
+offset_bottom = 0.0159912
+text = "Price: 0"
+label_settings = SubResource("LabelSettings_px37e")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.729
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 0.93
+offset_left = 0.0639954
+offset_right = 0.191986
+offset_bottom = -0.0400085
+theme_override_font_sizes/font_size = 10
+text = "Buy"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.354
+anchor_top = 0.062
+anchor_right = 0.979
+anchor_bottom = 0.305
+offset_left = 0.0639954
+offset_top = 0.0639997
+offset_right = 0.0639954
+offset_bottom = -8.04
+label_settings = SubResource("LabelSettings_gai1x")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

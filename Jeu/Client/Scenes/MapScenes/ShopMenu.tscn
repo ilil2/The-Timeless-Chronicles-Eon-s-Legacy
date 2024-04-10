@@ -1,0 +1,300 @@
+[gd_scene load_steps=14 format=3 uid="uid://c0yicjixkkn0u"]
+
+[ext_resource type="PackedScene" uid="uid://c2w5s4oys4ehb" path="res://Scenes/MapScenes/Shop/Potion.tscn" id="1_038po"]
+[ext_resource type="Texture2D" uid="uid://c7vinyy7u388f" path="res://Ressources/Graphismes/Potion/HealthPotion.png" id="2_jwpxp"]
+[ext_resource type="Texture2D" uid="uid://db0vn0y1m6w01" path="res://Ressources/Graphismes/Potion/defense potion.png" id="3_2ev6e"]
+[ext_resource type="Texture2D" uid="uid://cmhf7aq5otn0m" path="res://Ressources/Graphismes/Potion/antidote.png" id="4_vrufw"]
+[ext_resource type="Texture2D" uid="uid://dmks63m44b4jv" path="res://Ressources/Graphismes/Potion/resurrection potion.png" id="5_eeyew"]
+[ext_resource type="Texture2D" uid="uid://d1s2jvrweloxk" path="res://Ressources/Graphismes/Potion/agility potion.png" id="6_o08xi"]
+[ext_resource type="Texture2D" uid="uid://dqtwgt6orf8c1" path="res://Ressources/Graphismes/Potion/will potion.png" id="7_d3j3j"]
+[ext_resource type="PackedScene" uid="uid://ybgpeisrpnbi" path="res://Scenes/HUD/ShopInventory.tscn" id="8_1iufw"]
+
+[sub_resource type="Animation" id="Animation_h0pdt"]
+resource_name = "Close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.01, 0.01)]
+}
+
+[sub_resource type="Animation" id="Animation_5gh2y"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.025),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6p8yk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ofpd6"]
+resource_name = "Reset"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.01, 0.01)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_isqjr"]
+_data = {
+"Close": SubResource("Animation_h0pdt"),
+"Open": SubResource("Animation_5gh2y"),
+"RESET": SubResource("Animation_6p8yk"),
+"Reset": SubResource("Animation_ofpd6")
+}
+
+[node name="Shop" type="CanvasLayer"]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_isqjr")
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.917647)
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.099
+anchor_right = 0.944
+anchor_bottom = 0.889
+offset_left = -0.512001
+offset_top = -0.152008
+offset_right = 0.511963
+offset_bottom = -0.0720215
+
+[node name="Potion" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.111
+anchor_top = 0.198
+anchor_right = 0.444
+anchor_bottom = 0.395
+offset_left = 0.127991
+offset_top = -0.304001
+offset_right = 0.511963
+offset_bottom = 0.039978
+PotionLogo = ExtResource("2_jwpxp")
+Title = "Potion de Vie"
+Description = "Soigne 40% de la vie du joueur "
+Price = 150
+
+[node name="Potion2" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.5
+anchor_top = 0.198
+anchor_right = 0.833
+anchor_bottom = 0.395
+offset_top = -0.304016
+offset_right = 0.383911
+offset_bottom = 0.039978
+PotionLogo = ExtResource("3_2ev6e")
+Title = "Potion de resistance"
+Description = "Divise les degats subit par 2 pendant 30 secondes "
+Price = 300
+ID = 3
+
+[node name="Potion3" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.111
+anchor_top = 0.395
+anchor_right = 0.444
+anchor_bottom = 0.593
+offset_left = 0.127991
+offset_top = 0.0399933
+offset_right = 0.511963
+offset_bottom = -0.264038
+PotionLogo = ExtResource("4_vrufw")
+Title = "Potion d'energie"
+Description = "Redonne 60% de l’energie du joueur "
+Price = 150
+ID = 1
+
+[node name="Potion4" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.5
+anchor_top = 0.395
+anchor_right = 0.833
+anchor_bottom = 0.593
+offset_top = 0.0399933
+offset_right = 0.383911
+offset_bottom = -0.264038
+PotionLogo = ExtResource("5_eeyew")
+Title = "Potion de résurrection "
+Description = "Ressusite un joueur a proximité (à 50% de vie) "
+Price = 1500
+ID = 4
+
+[node name="Potion5" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.111
+anchor_top = 0.593
+anchor_right = 0.444
+anchor_bottom = 0.79
+offset_left = 0.127991
+offset_top = -0.264038
+offset_right = 0.511963
+offset_bottom = 0.0799866
+PotionLogo = ExtResource("6_o08xi")
+Title = "Potion de vitesse"
+Description = "Multiplie la vitesse par 1.5 pendant 30 secondes "
+Price = 100
+ID = 2
+
+[node name="Potion6" parent="." instance=ExtResource("1_038po")]
+anchor_left = 0.5
+anchor_top = 0.593
+anchor_right = 0.833
+anchor_bottom = 0.79
+offset_top = -0.264038
+offset_right = 0.383911
+offset_bottom = 0.0799866
+PotionLogo = ExtResource("7_d3j3j")
+Title = "Potion d’amnésie"
+Description = "Supprime une compétence aquises par le joueur"
+Price = 1000
+ID = 5
+
+[node name="Gold" type="Label" parent="."]
+offset_left = 896.0
+offset_top = 80.0
+offset_right = 1064.0
+offset_bottom = 112.0
+text = "Gold:"
+
+[node name="ShopInventory" parent="." instance=ExtResource("8_1iufw")]
+anchor_left = 0.056
+anchor_top = 0.79
+anchor_right = 0.944
+anchor_bottom = 0.988
+offset_left = -0.512001
+offset_top = 0.0799866
+offset_right = 0.511963
+offset_bottom = -0.223999

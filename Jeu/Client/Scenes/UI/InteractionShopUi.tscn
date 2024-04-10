@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://co1hengfj5viw"]
+
+[node name="InteractionShopUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.79
+anchor_right = 1.0
+anchor_bottom = 0.84
+offset_top = 0.0799866
+offset_bottom = -6.32001
+text = "Press E to open the shop"
+horizontal_alignment = 1
