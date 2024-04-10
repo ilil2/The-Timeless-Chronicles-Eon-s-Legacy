@@ -49,7 +49,19 @@ public partial class Listen2 : GameManager
 				InfoAutreJoueur[$"animation{id}"] = rep;
 			}
 		}
-			
+
+		else if (rep.Length > 2 && rep.Substring(0,2) == "ia")
+		{
+			rep = rep.Substring(3);
+			string id = rep.Split('|')[0];
+			rep = rep.Split('|')[1];
+
+			if (InfoJoueur["id"] != id)
+			{
+				InfoAutreJoueur[$"ia{id}"] = rep;
+			}
+		}
+		
 		else if (rep.Length > 4 && rep.Substring(0,4) == "chat")
 		{
 			rep = rep.Substring(5);

@@ -29,6 +29,12 @@ public partial class State6 : GameManager
 			UDP.Send(soc2,InfoJoueur["id"] + "_" + "an:" + InfoJoueur["animation"],iep2);
 			InfoJoueur["animation"] = "";
 		}
+
+		if (InfoJoueur["ia"] != "")
+		{
+			UDP.Send(soc2,InfoJoueur["id"] + "_" + "ia:" + InfoJoueur["ia"],iep2);
+			InfoJoueur["ia"] = "";
+		}
 	}
 
 	private static void Chat()
