@@ -119,12 +119,13 @@ public class Serveur
                 s2[1] = s2[1].Substring(4);
                 UDP.Send(soc, "re:" + s2[1], clients[Lib.Conversion.AtoI(s2[0])].ep);
             }*/
-
-                if (s2[1].Substring(0, 2) == "in")
+                
+                string sub = s2[1].Substring(0, 2);
+                if (sub == "in")
                 {
                     info[id] = s2[0] + "/" + s2[1].Substring(3);
                 }
-                else if (s2[1].Substring(0, 2) == "on")
+                else if (sub == "on")
                 {
                     s2[1] = s2[1].Substring(3);
                     SendAll(soc, $"on:{s2[0]}|{s2[1]}");
@@ -134,10 +135,15 @@ public class Serveur
                     }
                     SendAll(soc,"start");
                 }
-                else if (s2[1].Substring(0, 2) == "an")
+                else if (sub == "an")
                 {
                     s2[1] = s2[1].Substring(3);
                     SendAll(soc, $"an:{s2[0]}|{s2[1]}");
+                }
+                else if (sub == "ia")
+                {
+                    s2[1] = s2[1].Substring(3);
+                    SendAll(soc, $"ia:{s2[0]}|{s2[1]}");
                 }
                 else if (s2[1].Substring(0, 4) == "chat")
                 {
