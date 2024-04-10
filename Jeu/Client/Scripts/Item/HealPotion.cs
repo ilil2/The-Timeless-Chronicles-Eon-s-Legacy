@@ -13,6 +13,6 @@ public partial class HealPotion : Potion
 	public override void UsePotion()
 	{
 		GD.Print("I use HealPotion");
-		(GameManager.Joueur1 as ClassScript).SetHealth((GameManager.Joueur1 as ClassScript).GetHealth()+50);
+		(GameManager.Joueur1 as ClassScript p).SetHealth(p.GetHealth()+50);
 	}
 }
