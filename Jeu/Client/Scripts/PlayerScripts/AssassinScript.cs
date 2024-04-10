@@ -38,6 +38,8 @@ public partial class AssassinScript : ClassScript
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_uiTimer += 1;
+		
 		Pause();
 		PhysicsReset();
 		Gravity(delta);
@@ -45,6 +47,7 @@ public partial class AssassinScript : ClassScript
 		{
 			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 			{
+				Inventory();
 				Animation();
 				Move(delta);
 			}

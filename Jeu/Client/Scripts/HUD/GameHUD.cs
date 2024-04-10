@@ -4,6 +4,9 @@ using JeuClient.Scripts.PlayerScripts;
 
 public partial class GameHUD : Control
 {
+	private Panel _inventory;
+	public static bool OnInventory = false;
+	
 	private ProgressBar _hpBar;
 	private ProgressBar _mpBar;		
 	private Label _pseudo;
@@ -35,6 +38,8 @@ public partial class GameHUD : Control
 	
 	public override void _Ready()
 	{
+		_inventory = GetNode<Panel>("ShopInventory");
+		
 		_hpBar = GetNode<ProgressBar>("HpBar");
 		_mpBar = GetNode<ProgressBar>("MpBar");
 		_pseudo = GetNode<Label>("Pseudo");
@@ -61,6 +66,15 @@ public partial class GameHUD : Control
 		OtherClassScript otherPlayer1 = (OtherClassScript)GameManager.Joueur2;
 		OtherClassScript otherPlayer2 = (OtherClassScript)GameManager.Joueur3;
 		OtherClassScript otherPlayer3 = (OtherClassScript)GameManager.Joueur4;
+
+		if (OnInventory)
+		{
+			_inventory.Visible = true;
+		}
+		else
+		{
+			_inventory.Visible = false;	
+		}
 		
 		if (player != null)
 		{

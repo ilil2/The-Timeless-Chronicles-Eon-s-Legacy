@@ -48,7 +48,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected float AngularAcceleration = 10;
 	protected int Acceleration = 15;
 	
-	private int _pauseTimer;
+	protected int _uiTimer;
 	
 	public int GetId()
 	{
@@ -115,24 +115,40 @@ public abstract partial class ClassScript : PlayerScript
 
 	protected void Pause()
 	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _pauseTimer > 20)
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _uiTimer > 20)
 		{
 			GameManager.InfoJoueur["animation"] = "idle";
 			CameraV.SpringLength = -4;
-			_pauseTimer = 0;
+			_uiTimer = 0;
 			GameManager._pausemode = true;
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
 			Control pauseMenu = pauseUI.Instantiate<Control>();
 			AddChild(pauseMenu);
 		}
-		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _pauseTimer > 20)
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _uiTimer > 20)
 		{
-			_pauseTimer = 0;
+			_uiTimer = 0;
 			GameManager._pausemode = false;
 		}
-		
-		_pauseTimer += 1;
+	}
+	
+	protected void Inventory()
+	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[12].Item2) && !GameHUD.OnInventory && _uiTimer > 20)
+		{
+			GameManager.InfoJoueur["animation"] = "idle";
+			CameraV.SpringLength = -4;
+			_uiTimer = 0;
+			GameHUD.OnInventory = true;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[12].Item2) && GameHUD.OnInventory && _uiTimer > 20)
+		{
+			_uiTimer = 0;
+			GameHUD.OnInventory = false;
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
 	}
 
 	protected void PhysicsReset()
