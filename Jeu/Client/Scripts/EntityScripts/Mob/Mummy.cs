@@ -7,6 +7,7 @@ public partial class Mummy : MobScript
 	{
 		Ready();
 		DistAtk = 2;
+		HP = 40;
 	}
 	public override void _PhysicsProcess(double delta)
 	{

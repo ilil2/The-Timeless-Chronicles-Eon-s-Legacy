@@ -80,6 +80,10 @@ scroll_backward={
 ]
 }
 
+[physics]
+
+3d/physics_engine="GodotPhysics3D"
+
 [rendering]
 
 anti_aliasing/quality/msaa_3d=2

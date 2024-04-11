@@ -3062,7 +3062,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 0.533947)]
+"values": [Vector3(-0.299604, -0.602667, 0.46728)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -3074,7 +3074,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.03395)]
+"values": [Vector3(0.232937, -0.602666, 0.733947)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -3086,7 +3086,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.53395)]
+"values": [Vector3(-0.299604, -0.602667, 1.00061)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -3098,7 +3098,19 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 2.03395)]
+"values": [Vector3(0.232937, -0.602666, 1.26728)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Spell/Spike5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.299604, -0.602667, 1.53395)]
 }
 
 [sub_resource type="Animation" id="Animation_p8n18"]
@@ -3812,10 +3824,10 @@ tracks/100/path = NodePath("Spell/Spike1:position")
 tracks/100/interp = 1
 tracks/100/loop_wrap = true
 tracks/100/keys = {
-"times": PackedFloat32Array(0, 0.75, 1, 1.4, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.75, 0.85, 1.5, 1.6, 2.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.6, 0.533947), Vector3(0, -0.6, 0.533947), Vector3(0, 0.2, 0.533947), Vector3(0, 0.2, 0.533947), Vector3(0, -0.6, 0.533947)]
+"values": [Vector3(-0.299604, -0.602667, 0.46728), Vector3(-0.299604, -0.602667, 0.46728), Vector3(-0.0407848, 0.363259, 0.46728), Vector3(-0.0407848, 0.363259, 0.46728), Vector3(-0.299604, -0.602667, 0.46728), Vector3(-0.299604, -0.602667, 0.46728)]
 }
 tracks/101/type = "value"
 tracks/101/imported = false
@@ -3824,10 +3836,10 @@ tracks/101/path = NodePath("Spell/Spike2:position")
 tracks/101/interp = 1
 tracks/101/loop_wrap = true
 tracks/101/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.1, 1.5, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.85, 0.95, 1.6, 1.7, 2.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.03395), Vector3(0, -0.6, 1.03395), Vector3(0, 0.2, 1.03395), Vector3(0, 0.2, 1.03395), Vector3(0, -0.6, 1.03395)]
+"values": [Vector3(0.232937, -0.602666, 0.733947), Vector3(0.232937, -0.602666, 0.733947), Vector3(-0.0258819, 0.363259, 0.733947), Vector3(-0.0258819, 0.363259, 0.733947), Vector3(0.232937, -0.602666, 0.733947), Vector3(0.232937, -0.602666, 0.733947)]
 }
 tracks/102/type = "value"
 tracks/102/imported = false
@@ -3836,10 +3848,10 @@ tracks/102/path = NodePath("Spell/Spike3:position")
 tracks/102/interp = 1
 tracks/102/loop_wrap = true
 tracks/102/keys = {
-"times": PackedFloat32Array(0, 1, 1.2, 1.6, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.95, 1.05, 1.7, 1.8, 2.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.53395), Vector3(0, -0.6, 1.53395), Vector3(0, 0.2, 1.53395), Vector3(0, 0.2, 1.53395), Vector3(0, -0.6, 1.53395)]
+"values": [Vector3(-0.299604, -0.602667, 1.00061), Vector3(-0.299604, -0.602667, 1.00061), Vector3(-0.0407848, 0.363259, 1.00061), Vector3(-0.0407848, 0.363259, 1.00061), Vector3(-0.299604, -0.602667, 1.00061), Vector3(-0.299604, -0.602667, 1.00061)]
 }
 tracks/103/type = "value"
 tracks/103/imported = false
@@ -3848,10 +3860,22 @@ tracks/103/path = NodePath("Spell/Spike4:position")
 tracks/103/interp = 1
 tracks/103/loop_wrap = true
 tracks/103/keys = {
-"times": PackedFloat32Array(0, 1.1, 1.4, 1.7, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1.05, 1.15, 1.8, 1.9, 2.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, -0.6, 2.03395), Vector3(0, -0.6, 2.03395), Vector3(0, 0.2, 2.03395), Vector3(0, 0.2, 2.03395), Vector3(0, -0.6, 2.03395)]
+"values": [Vector3(0.232937, -0.602666, 1.26728), Vector3(0.232937, -0.602666, 1.26728), Vector3(-0.0258819, 0.363259, 1.26728), Vector3(-0.0258819, 0.363259, 1.26728), Vector3(0.232937, -0.602666, 1.26728), Vector3(0.232937, -0.602666, 1.26728)]
+}
+tracks/104/type = "value"
+tracks/104/imported = false
+tracks/104/enabled = true
+tracks/104/path = NodePath("Spell/Spike5:position")
+tracks/104/interp = 1
+tracks/104/loop_wrap = true
+tracks/104/keys = {
+"times": PackedFloat32Array(0, 1.15, 1.25, 1.9, 2, 2.325),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.299604, -0.602667, 1.53395), Vector3(-0.299604, -0.602667, 1.53395), Vector3(-0.0407848, 0.363259, 1.53395), Vector3(-0.0407848, 0.363259, 1.53395), Vector3(-0.299604, -0.602667, 1.53395), Vector3(-0.299604, -0.602667, 1.53395)]
 }
 
 [sub_resource type="Animation" id="Animation_fy8wv"]
@@ -4568,7 +4592,7 @@ tracks/100/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 0.533947)]
+"values": [Vector3(-0.299604, -0.602667, 0.46728)]
 }
 tracks/101/type = "value"
 tracks/101/imported = false
@@ -4580,7 +4604,7 @@ tracks/101/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.03395)]
+"values": [Vector3(0.232937, -0.602666, 0.733947)]
 }
 tracks/102/type = "value"
 tracks/102/imported = false
@@ -4592,7 +4616,7 @@ tracks/102/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 1.53395)]
+"values": [Vector3(-0.299604, -0.602667, 1.00061)]
 }
 tracks/103/type = "value"
 tracks/103/imported = false
@@ -4604,7 +4628,19 @@ tracks/103/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.6, 2.03395)]
+"values": [Vector3(0.232937, -0.602666, 1.26728)]
+}
+tracks/104/type = "value"
+tracks/104/imported = false
+tracks/104/enabled = true
+tracks/104/path = NodePath("Spell/Spike5:position")
+tracks/104/interp = 1
+tracks/104/loop_wrap = true
+tracks/104/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.299604, -0.602667, 1.53395)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yxxpq"]
@@ -4633,7 +4669,7 @@ uv1_scale = Vector3(2, 2, 2)
 [sub_resource type="CylinderMesh" id="CylinderMesh_div7o"]
 material = SubResource("StandardMaterial3D_nft61")
 top_radius = 0.0
-bottom_radius = 0.2
+bottom_radius = 0.1
 height = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_afemc"]
@@ -4655,7 +4691,7 @@ bones/0/name = "mixamorig_Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0.130905, -0.89902, -73.4327)
 bones/0/enabled = true
-bones/0/position = Vector3(0.855168, -1.24802, -66.2611)
+bones/0/position = Vector3(-3.95439, 0.879535, -64.7233)
 bones/0/rotation = Quaternion(-0.723712, -0.00387485, 0.0206623, 0.689782)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "mixamorig_Spine"
@@ -5120,43 +5156,57 @@ libraries = {
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Spike1" type="MeshInstance3D" parent="Spell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.533947)
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -0.299604, -0.602667, 0.46728)
 mesh = SubResource("CylinderMesh_div7o")
 metadata/_edit_group_ = true
 
 [node name="Weapon" parent="Spell/Spike1" instance=ExtResource("2_8xmtg")]
+Damage = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spell/Spike1/Weapon"]
 shape = SubResource("CylinderShape3D_afemc")
 
 [node name="Spike2" type="MeshInstance3D" parent="Spell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 1.03395)
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0.232937, -0.602666, 0.733947)
 mesh = SubResource("CylinderMesh_div7o")
 metadata/_edit_group_ = true
 
 [node name="Weapon" parent="Spell/Spike2" instance=ExtResource("2_8xmtg")]
+Damage = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spell/Spike2/Weapon"]
 shape = SubResource("CylinderShape3D_afemc")
 
 [node name="Spike3" type="MeshInstance3D" parent="Spell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 1.53395)
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -0.299604, -0.602667, 1.00061)
 mesh = SubResource("CylinderMesh_div7o")
 metadata/_edit_group_ = true
 
 [node name="Weapon" parent="Spell/Spike3" instance=ExtResource("2_8xmtg")]
+Damage = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spell/Spike3/Weapon"]
 shape = SubResource("CylinderShape3D_afemc")
 
 [node name="Spike4" type="MeshInstance3D" parent="Spell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 2.03395)
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0.232937, -0.602666, 1.26728)
 mesh = SubResource("CylinderMesh_div7o")
 metadata/_edit_group_ = true
 
 [node name="Weapon" parent="Spell/Spike4" instance=ExtResource("2_8xmtg")]
+Damage = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Spell/Spike4/Weapon"]
+shape = SubResource("CylinderShape3D_afemc")
+
+[node name="Spike5" type="MeshInstance3D" parent="Spell"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -0.299604, -0.602667, 1.53395)
+mesh = SubResource("CylinderMesh_div7o")
+metadata/_edit_group_ = true
+
+[node name="Weapon" parent="Spell/Spike5" instance=ExtResource("2_8xmtg")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spell/Spike5/Weapon"]
 shape = SubResource("CylinderShape3D_afemc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

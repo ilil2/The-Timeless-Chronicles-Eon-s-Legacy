@@ -1504,7 +1504,7 @@ debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
 
 [node name="Weapon" parent="." instance=ExtResource("5_18wht")]
-Damage = 5
+Damage = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Weapon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271668, 1.45494, 0.146446)
