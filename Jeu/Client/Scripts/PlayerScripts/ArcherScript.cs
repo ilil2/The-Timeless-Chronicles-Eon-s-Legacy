@@ -159,13 +159,13 @@ public partial class ArcherScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
 			AnimationState = 6;
 			AnimationSet(false, false, false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hitbow";
 		}
-		else if (!_isAiming && IsShooting && AnimationState != 3)
+		else if (!_isAiming && IsShooting && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
 			AnimationState = 3;
 			AnimationSet(false, false, false, true, false, false);

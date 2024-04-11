@@ -97,7 +97,7 @@ public partial class KnightScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
 			AnimationState = 3;
 			
@@ -105,7 +105,7 @@ public partial class KnightScript : ClassScript
 			
 			GameManager.InfoJoueur["animation"] = "hit";
 		}
-		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
+		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != 1)
 		{
 			AnimationState = 2;
 			

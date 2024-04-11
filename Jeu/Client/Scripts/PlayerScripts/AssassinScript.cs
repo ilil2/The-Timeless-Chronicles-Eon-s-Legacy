@@ -143,7 +143,7 @@ public partial class AssassinScript : ClassScript
 
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
 			AnimationState = 2;
 			
