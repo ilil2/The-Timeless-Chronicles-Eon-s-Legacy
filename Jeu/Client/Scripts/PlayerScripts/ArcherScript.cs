@@ -156,7 +156,9 @@ public partial class ArcherScript : ClassScript
 		bool right = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2);
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
-
+		
+		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
+		
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && UseStamina(50))
 		{
 			AnimationState = 6;
@@ -172,12 +174,13 @@ public partial class ArcherScript : ClassScript
 		}
 		else if (_isAiming)
 		{
-			if ((left || right || forward || backward) && AnimationState != 2)
+			if ((left || right || forward || backward) && direction != DirectionControl)
 			{
+				DirectionControl = direction;
 				AnimationState = 2;
 				AnimationSet(false, true, false, false, false, false);
 				
-				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				if (direction.Item1 != 0)
 				{
 					GameManager.InfoJoueur["animation"] = "aimwalkside";
 				}
@@ -186,7 +189,7 @@ public partial class ArcherScript : ClassScript
 					GameManager.InfoJoueur["animation"] = "aimwalk";
 				}
 				
-				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			}
 			else if (AnimationState != 1)
 			{
@@ -195,14 +198,15 @@ public partial class ArcherScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "aim";
 			}
 		}
-		else if (left || right || forward || backward)
+		else if (left || right || forward || backward && direction != DirectionControl)
 		{
-			if (_isAiming && AnimationState != 4)
+			if (_isAiming)
 			{
+				DirectionControl = direction;
 				AnimationState = 4;
 				AnimationSet(false, true, false, false, false, false);
 				
-				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				if (direction.Item1 != 0)
 				{
 					GameManager.InfoJoueur["animation"] = "aimwalkside";
 				}
@@ -211,14 +215,15 @@ public partial class ArcherScript : ClassScript
 					GameManager.InfoJoueur["animation"] = "aimwalk";
 				}
 				
-				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			}
-			else if (AnimationState != 5)
+			else
 			{
+				DirectionControl = direction;
 				AnimationState = 5;
 				AnimationSet(true, false, false, false, false, false);
 
-				if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+				if (direction.Item1 != 0)
 				{
 					GameManager.InfoJoueur["animation"] = "walkside";
 				}
@@ -227,7 +232,7 @@ public partial class ArcherScript : ClassScript
 					GameManager.InfoJoueur["animation"] = "walk";
 				}
 				
-				AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+				AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			}
 		}
 		else if ((_isAiming || !IsShooting) && !_isAiming && AnimationState != 0)

@@ -36,6 +36,8 @@ public abstract partial class ClassScript : PlayerScript
 	protected float GravityValue = 9.8f;
 	protected float WalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
+	
+	protected (int, int) DirectionControl = (0, 0);
 
 	protected bool IsWalking;
 	protected bool IsRunning;
