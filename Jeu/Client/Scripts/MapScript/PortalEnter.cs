@@ -40,7 +40,7 @@ public partial class PortalEnter : Node3D
 		{
 			for(int i = 0; i<GameManager._nbJoueur;i++)
 			{
-				if(GameManager.ListJoueur[i]!=null && GameManager.ListJoueur[i].IsInsideTree())
+				if(GameManager.ListJoueur!= null && GameManager.ListJoueur[i].IsInsideTree() && GameManager.ListJoueur[i]!=null)
 				{
 					GameManager.ListJoueur[i].GlobalPosition = AnimationSpawn[i].GlobalPosition;
 				}

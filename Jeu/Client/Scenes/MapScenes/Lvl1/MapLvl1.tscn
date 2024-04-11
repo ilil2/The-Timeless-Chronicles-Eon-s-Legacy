@@ -554,7 +554,7 @@ mesh = SubResource("ArrayMesh_vuigq")
 skeleton = NodePath("")
 
 [node name="Tunnel" type="Node3D" parent="Ground"]
-transform = Transform3D(0.08, 0, 0, 0, -3.49691e-09, -0.08, 0, 0.08, -3.49691e-09, 0, 3.80075e-08, -0.86951)
+transform = Transform3D(0.077, 0, 0, 0, -3.36578e-09, -0.077, 0, 0.077, -3.36578e-09, 0, 3.61703e-08, -0.82748)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics" type="Node3D" parent="Ground/Tunnel"]

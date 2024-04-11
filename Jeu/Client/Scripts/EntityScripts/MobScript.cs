@@ -85,7 +85,7 @@ public abstract partial class MobScript : CharacterBody3D
 			}
 			if(state==0)
 			{
-				if(Position==PosInnit)
+				if(Distance(Position,PosInnit)<=0.1)
 				{
 					state = -1;
 				}
@@ -156,27 +156,30 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
-		if(state==0 || state==1 || state == 3)
+		if(Alive)
 		{
-			var dir = new Vector3();  //Pathfiding
-			var NextPos = Nav.GetNextPathPosition();
-			dir = NextPos - GlobalPosition;
-			dir = dir.Normalized();
-			Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
-			MoveAndSlide();
-			//LookAt(new Vector3(Nav.TargetPosition.X, 0, Nav.TargetPosition.Z)); //Orientation
-			LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-			Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
-		}
-		if(state==1)
-		{
-			Nav.TargetPosition = Player.GlobalPosition;
-			Agro = AgroMax;
-		}
-		if(state==-1)
-		{
-			Rotation = RotInnit;
-			Ani.Stop();
+			if(state==0 || state==1 || state == 3)
+			{
+				var dir = new Vector3();  //Pathfiding
+				var NextPos = Nav.GetNextPathPosition();
+				dir = NextPos - GlobalPosition;
+				dir = dir.Normalized();
+				Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+				MoveAndSlide();
+				//LookAt(new Vector3(Nav.TargetPosition.X, 0, Nav.TargetPosition.Z)); //Orientation
+				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+			}
+			if(state==1)
+			{
+				Nav.TargetPosition = Player.GlobalPosition;
+				Agro = AgroMax;
+			}
+			if(state==-1)
+			{
+				Rotation = RotInnit;
+				Ani.Stop();
+			}
 		}
 		/*
 		if(PlayerSet && Alive)

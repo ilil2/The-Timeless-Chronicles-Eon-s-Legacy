@@ -38,6 +38,7 @@ public partial class PortalExit : Node3D
 		if(PlayerIn)
 		{
 			nb.Text = $"{NbPlayer}/{GameManager._nbJoueur}, En attente des autres joueurs ...";
+			OnCam = true;
 		}
 		double dist = GetMinDist();
 		if(dist>10)
