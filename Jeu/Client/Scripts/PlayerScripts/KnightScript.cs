@@ -120,17 +120,18 @@ public partial class KnightScript : ClassScript
 			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			AnimationSet(true, false, false, false);
 
-			if (direction.Item1 != 0)
+			if (direction.Item2 != 0)
 			{
-				GameManager.InfoJoueur["animation"] = "walkside";
+				GameManager.InfoJoueur["animation"] = "walk";
 			}
 			else
 			{
-				GameManager.InfoJoueur["animation"] = "walk";
+				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
 		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
 		{
+			DirectionControl = direction;
 			AnimationState = 0;
 			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";

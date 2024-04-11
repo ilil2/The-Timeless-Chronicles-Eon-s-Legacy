@@ -180,13 +180,13 @@ public partial class ArcherScript : ClassScript
 				AnimationState = 2;
 				AnimationSet(false, true, false, false, false, false);
 				
-				if (direction.Item1 != 0)
+				if (direction.Item2 != 0)
 				{
-					GameManager.InfoJoueur["animation"] = "aimwalkside";
+					GameManager.InfoJoueur["animation"] = "aimwalk";
 				}
 				else
 				{
-					GameManager.InfoJoueur["animation"] = "aimwalk";
+					GameManager.InfoJoueur["animation"] = "aimwalkside";
 				}
 				
 				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(direction.Item1, direction.Item2));
@@ -200,19 +200,19 @@ public partial class ArcherScript : ClassScript
 		}
 		else if (left || right || forward || backward && direction != DirectionControl)
 		{
+			AnimationState = 4;
 			if (_isAiming)
 			{
 				DirectionControl = direction;
-				AnimationState = 4;
 				AnimationSet(false, true, false, false, false, false);
 				
-				if (direction.Item1 != 0)
+				if (direction.Item2 != 0)
 				{
-					GameManager.InfoJoueur["animation"] = "aimwalkside";
+					GameManager.InfoJoueur["animation"] = "aimwalk";
 				}
 				else
 				{
-					GameManager.InfoJoueur["animation"] = "aimwalk";
+					GameManager.InfoJoueur["animation"] = "aimwalkside";
 				}
 				
 				AnimationTree.Set("parameters/AimWalk/blend_position", new Vector2(direction.Item1, direction.Item2));
@@ -220,23 +220,23 @@ public partial class ArcherScript : ClassScript
 			else
 			{
 				DirectionControl = direction;
-				AnimationState = 5;
-				AnimationSet(true, false, false, false, false, false);
 
-				if (direction.Item1 != 0)
-				{
-					GameManager.InfoJoueur["animation"] = "walkside";
-				}
-				else
+				if (direction.Item2 != 0)
 				{
 					GameManager.InfoJoueur["animation"] = "walk";
 				}
+				else
+				{
+					GameManager.InfoJoueur["animation"] = "walkside";
+				}
 				
 				AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
+				AnimationSet(true, false, false, false, false, false);
 			}
 		}
 		else if ((_isAiming || !IsShooting) && !_isAiming && AnimationState != 0)
 		{
+			DirectionControl = direction;
 			AnimationState = 0;
 			AnimationSet(false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";

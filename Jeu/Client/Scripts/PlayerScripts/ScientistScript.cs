@@ -166,6 +166,8 @@ public partial class ScientistScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 		
+		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
+
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && AnimationState != 2)
 		{
 			AnimationState = 2;
@@ -177,27 +179,27 @@ public partial class ScientistScript : ClassScript
 			_shootCooldown = 0;
 			_isShooting = true;
 		}
-		else if ((left || right || forward || backward) && AnimationState != 1)
+		else if ((left || right || forward || backward) && direction != DirectionControl)
 		{
 			AnimationState = 1;
-			
-			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			DirectionControl = direction;
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			
 			AnimationSet(true, false, false);
 
-			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+			if (direction.Item2 != 0)
 			{
-				GameManager.InfoJoueur["animation"] = "walkside";
+				GameManager.InfoJoueur["animation"] = "walk";
 			}
 			else
 			{
-				GameManager.InfoJoueur["animation"] = "walk";
+				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
 		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
 		{
 			AnimationState = 0;
-			
+			DirectionControl = direction;
 			AnimationSet(false, false, true);
 			
 			GameManager.InfoJoueur["animation"] = "idle";

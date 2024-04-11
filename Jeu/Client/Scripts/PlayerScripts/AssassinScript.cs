@@ -141,6 +141,8 @@ public partial class AssassinScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 
+		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
+
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && UseStamina(50))
 		{
 			AnimationState = 2;
@@ -155,25 +157,26 @@ public partial class AssassinScript : ClassScript
 			AnimationSet(false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "sprint";
 		}
-		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && AnimationState != 1)
+		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && direction != DirectionControl)
 		{
 			AnimationState = 1;
-			
-			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			DirectionControl = direction;
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			
 			AnimationSet(true, false, false, false);
 
-			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
+			if (direction.Item2 != 0)
 			{
-				GameManager.InfoJoueur["animation"] = "walkside";
+				GameManager.InfoJoueur["animation"] = "walk";
 			}
 			else
 			{
-				GameManager.InfoJoueur["animation"] = "walk";
+				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
 		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
 		{
+			DirectionControl = direction;
 			AnimationState = 0;
 			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";
