@@ -237,7 +237,7 @@ public partial class ArcherScript : ClassScript
 				AnimationSet(true, false, false, false, false, false);
 			}
 		}
-		else if ((_isAiming || !IsShooting || AnimationState != 3) && (!_isAiming || AnimationState != 1) && (!(left || right || forward || backward) || AnimationState != 4) && AnimationState != 0)
+		else if ((_isAiming || !IsShooting) && !_isAiming && (!(left || right || forward || backward) || AnimationState != 4) && AnimationState != 0)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;

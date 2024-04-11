@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c7wgky611jnqt" path="res://Ressources/Graphismes/AssasinLogo.png" id="4_s05g6"]
 [ext_resource type="Texture2D" uid="uid://c3r850ndkpyd4" path="res://Ressources/Graphismes/ScientistLogo.png" id="5_qmr6o"]
 [ext_resource type="PackedScene" uid="uid://ybgpeisrpnbi" path="res://Scenes/HUD/ShopInventory.tscn" id="6_kxpbd"]
-[ext_resource type="PackedScene" uid="uid://b36omasbu3thn" path="res://Scenes/HUD/FastAccess.tscn" id="7_6tdbt"]
+[ext_resource type="PackedScene" uid="uid://cky4r8mnxetki" path="res://Scenes/HUD/FastAccess.tscn" id="7_6tdbt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adaw3"]
 font_size = 20

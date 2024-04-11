@@ -197,7 +197,7 @@ public partial class ScientistScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if ((!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) || AnimationState != 2) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
 			AnimationState = 0;
 			DirectionControl = (0,0);

@@ -138,7 +138,7 @@ public partial class KnightScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if ((!Input.IsMouseButtonPressed(MouseButton.Right) || AnimationState != 2) && (!Input.IsMouseButtonPressed(MouseButton.Left) || AnimationState != 3) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
+		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;

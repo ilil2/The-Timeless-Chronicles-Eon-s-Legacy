@@ -178,7 +178,7 @@ public partial class AssassinScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if ((!Input.IsMouseButtonPressed(MouseButton.Left) || AnimationState != 2) && (!(left || right || forward || backward) || AnimationState != 1) && (!(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward) || AnimationState != 3) && AnimationState != 0)
+		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && (!(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward) || AnimationState != 3) && AnimationState != 0)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;
