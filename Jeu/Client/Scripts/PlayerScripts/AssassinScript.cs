@@ -203,6 +203,7 @@ public partial class AssassinScript : ClassScript
 			AnimationState = -1;
 			AnimationSet(false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("DeathTimer").Start();
 		}
 	}
 	
@@ -223,5 +224,10 @@ public partial class AssassinScript : ClassScript
 				TakeDamage(1);
 			}
 		}
+	}
+	
+	private void _on_death_timer_timeout()
+	{
+		Position -= new Vector3(0,10,0);
 	}
 }
