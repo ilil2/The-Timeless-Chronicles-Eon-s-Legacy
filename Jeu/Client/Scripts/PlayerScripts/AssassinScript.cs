@@ -199,7 +199,7 @@ public partial class AssassinScript : ClassScript
 	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
-		if (Heath <= 0)
+		if (Heath <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;

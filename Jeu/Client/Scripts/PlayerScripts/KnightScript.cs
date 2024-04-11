@@ -163,7 +163,7 @@ public partial class KnightScript : ClassScript
 		if (!_isBlocking)
 		{
 			Heath -= damage;
-			if (Heath <= 0)
+			if (Heath <= 0 && !IsDead)
 			{
 				IsDead = true;
 				AnimationState = -1;
@@ -177,7 +177,7 @@ public partial class KnightScript : ClassScript
 			if (!UseStamina(damage*20))
 			{
 				Heath -= damage;
-				if (Heath <= 0)
+				if (Heath <= 0 && !IsDead)
 				{
 					IsDead = true;
 					AnimationState = -1;

@@ -260,7 +260,7 @@ public partial class ArcherScript : ClassScript
 	public override void TakeDamage(int damage)
 	{
 		Heath -= damage;
-		if (Heath <= 0)
+		if (Heath <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;
