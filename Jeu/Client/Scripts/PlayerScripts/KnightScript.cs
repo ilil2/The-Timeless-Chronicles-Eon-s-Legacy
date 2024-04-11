@@ -41,7 +41,14 @@ public partial class KnightScript : ClassScript
 			{
 				Inventory();
 				Animation();
-				Move(delta);
+				if (_isBlocking)
+				{
+					Velocity = new Vector3(0, 0, 0);
+				}
+				else
+				{
+					Move(delta);
+				}
 			}
 			else
 			{
@@ -99,6 +106,7 @@ public partial class KnightScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
+			DirectionControl = (0,0);
 			AnimationState = 3;
 			
 			AnimationSet(false, false, true, true);
@@ -107,6 +115,7 @@ public partial class KnightScript : ClassScript
 		}
 		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != 1)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 2;
 			
 			AnimationSet(false, true, false, false);
@@ -129,9 +138,9 @@ public partial class KnightScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
+		else if ((!Input.IsMouseButtonPressed(MouseButton.Right) || AnimationState != 2) && (!Input.IsMouseButtonPressed(MouseButton.Left) || AnimationState != 3) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
-			DirectionControl = direction;
+			DirectionControl = (0,0);
 			AnimationState = 0;
 			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";

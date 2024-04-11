@@ -144,6 +144,7 @@ public partial class AssassinScript : ClassScript
 
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 2;
 			AnimationSet(false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hit";
@@ -155,6 +156,7 @@ public partial class AssassinScript : ClassScript
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 3;
 			AnimationSet(false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "sprint";
@@ -176,9 +178,9 @@ public partial class AssassinScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
+		else if ((!Input.IsMouseButtonPressed(MouseButton.Left) || AnimationState != 2) && (!(left || right || forward || backward) || AnimationState != 1) && (!(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward) || AnimationState != 3) && AnimationState != 0)
 		{
-			DirectionControl = direction;
+			DirectionControl = (0,0);
 			AnimationState = 0;
 			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";

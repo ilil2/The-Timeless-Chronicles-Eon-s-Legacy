@@ -170,6 +170,7 @@ public partial class ScientistScript : ClassScript
 
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 2;
 			
 			AnimationSet(false, true, false);
@@ -196,10 +197,10 @@ public partial class ScientistScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
+		else if ((!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) || AnimationState != 2) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
 			AnimationState = 0;
-			DirectionControl = direction;
+			DirectionControl = (0,0);
 			AnimationSet(false, false, true);
 			
 			GameManager.InfoJoueur["animation"] = "idle";

@@ -161,12 +161,14 @@ public partial class ArcherScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
+			DirectionControl = (0,0);
 			AnimationState = 6;
 			AnimationSet(false, false, false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hitbow";
 		}
 		else if (!_isAiming && IsShooting && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 3;
 			AnimationSet(false, false, false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "shoot";
@@ -176,8 +178,8 @@ public partial class ArcherScript : ClassScript
 		{
 			if ((left || right || forward || backward) && direction != DirectionControl)
 			{
+				AnimationState = 4;
 				DirectionControl = direction;
-				AnimationState = 2;
 				AnimationSet(false, true, false, false, false, false);
 				
 				if (direction.Item2 != 0)
@@ -193,12 +195,13 @@ public partial class ArcherScript : ClassScript
 			}
 			else if (AnimationState != 1)
 			{
+				DirectionControl = (0,0);
 				AnimationState = 1;
 				AnimationSet(false, false, true, false, false, false);
 				GameManager.InfoJoueur["animation"] = "aim";
 			}
 		}
-		else if (left || right || forward || backward && direction != DirectionControl)
+		else if ((left || right || forward || backward) && direction != DirectionControl)
 		{
 			AnimationState = 4;
 			if (_isAiming)
@@ -234,9 +237,9 @@ public partial class ArcherScript : ClassScript
 				AnimationSet(true, false, false, false, false, false);
 			}
 		}
-		else if ((_isAiming || !IsShooting) && !_isAiming && AnimationState != 0)
+		else if ((_isAiming || !IsShooting || AnimationState != 3) && (!_isAiming || AnimationState != 1) && (!(left || right || forward || backward) || AnimationState != 4) && AnimationState != 0)
 		{
-			DirectionControl = direction;
+			DirectionControl = (0,0);
 			AnimationState = 0;
 			AnimationSet(false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";
