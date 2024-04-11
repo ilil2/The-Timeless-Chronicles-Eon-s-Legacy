@@ -20,6 +20,7 @@ public partial class MapLvl3Script : IMap
 	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 	public override void _Ready()
 	{
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer"); 
 		((NavMeshScript)NavMesh).InitNavMesh();
 		AddChild(NavMesh);	
 		MapGrid = new int[MapLenght,MapLenght];
@@ -44,6 +45,11 @@ public partial class MapLvl3Script : IMap
 		((NavMeshScript)NavMesh).CreateNavMesh();
 		SetUp = true;
 		LoadingStage = "En attente des autres joueurs :(";
+	}
+	public override void _PhysicsProcess(double delta)
+	{
+		//GD.Print(LoadingStage);
+		SyncCam();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
