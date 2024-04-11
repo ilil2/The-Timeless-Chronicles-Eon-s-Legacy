@@ -9,7 +9,6 @@ public partial class AssassinScript : ClassScript
 	protected int DashCount = 3;
 	protected bool CanDash = true;
 	protected int DashTimer;
-	protected bool _isSprinting;
 	
 	public override void _Ready()
 	{
@@ -68,7 +67,7 @@ public partial class AssassinScript : ClassScript
 	{
 		if (CanDash && DashCount > 0)
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(100))
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(300))
 			{
 				if (!IsWalking)
 				{
@@ -143,13 +142,16 @@ public partial class AssassinScript : ClassScript
 
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
 			AnimationState = 2;
-			
 			AnimationSet(false, false, true, true);
-			
 			GameManager.InfoJoueur["animation"] = "hit";
+			
+			if (Stamina + 100 <= MaxStamina)
+			{
+				Stamina += 100;
+			}
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3)
 		{
@@ -190,8 +192,6 @@ public partial class AssassinScript : ClassScript
 		AnimationTree.Set("parameters/conditions/WhenHit", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
-
-		_isSprinting = sprint;
 	}
 	
 	public override void TakeDamage(int damage)
@@ -216,20 +216,12 @@ public partial class AssassinScript : ClassScript
 
 	private void _on_sprint_timeout()
 	{
-		if (_isSprinting)
+		if (IsRunning)
 		{
-			if (!UseStamina(10))
+			if (!UseStamina(15))
 			{
 				TakeDamage(1);
 			}
-		}
-	}
-	
-	private void _on_stamina_timeout()
-	{
-		if (Stamina + 5 <= MaxStamina)
-		{
-			Stamina += 5;
 		}
 	}
 }
