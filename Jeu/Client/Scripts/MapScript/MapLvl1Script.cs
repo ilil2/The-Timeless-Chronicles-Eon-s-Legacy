@@ -163,11 +163,11 @@ public partial class MapLvl1Script : IMap
 						string name = "";
 						if(m==0)
 						{
-							name = "Mummy";
+							name = "FogSkeleton";
 						}
 						else
 						{
-							name = "Skeleton";
+							name = "Gollem";
 						}
 						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();

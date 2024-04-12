@@ -314,7 +314,7 @@ color = Color(0, 0, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Animation/C"]
-transform = Transform3D(1, 4.81906e-08, 4.41586e-08, -6.38136e-08, 0.573576, 0.819152, 1.41471e-08, -0.819152, 0.573576, 0, 5, 9)
+transform = Transform3D(1, 4.8191e-08, 4.41586e-08, -6.38138e-08, 0.573576, 0.819152, 1.41475e-08, -0.819152, 0.573576, 0, 5, 9)
 
 [node name="Teleporter" parent="." instance=ExtResource("5_nhirv")]
 transform = Transform3D(2.12132, 0, 2.12132, 0, 3, 0, -2.12132, 0, 2.12132, 0, 34.3657, 0)

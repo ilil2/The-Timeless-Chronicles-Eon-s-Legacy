@@ -25,9 +25,9 @@ public partial class Mummy : MobScript
 		}
 		if(state == 2)
 		{
-			if(Ani.CurrentAnimation != "Spell" && Ani.CurrentAnimation != "Hit" && Alive)
+			if(Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Hit" && Alive)
 			{
-				Ani.Play("Spell");
+				Ani.Play("Atk");
 			}
 		}
 		if(state == -1)
@@ -47,7 +47,7 @@ public partial class Mummy : MobScript
 				GD.Print("Mort");
 				Alive = false;
 				Ani.Stop();
-				Ani.Play("Die");
+				Ani.Play("Death");
 			}
 			else
 			{

@@ -90,7 +90,7 @@ public abstract partial class MobScript : CharacterBody3D
 					state = -1;
 				}
 			}
-			if(Player!=null && state!=1)
+			if(Player!=null && state!=1 && (Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2"))
 			{
 				Nav.TargetPosition = Player.GlobalPosition;
 				state = 1;
@@ -178,7 +178,16 @@ public abstract partial class MobScript : CharacterBody3D
 			if(state==-1)
 			{
 				Rotation = RotInnit;
-				Ani.Stop();
+				if(Ani.CurrentAnimation!="Idle")
+				{
+					Ani.Play("Idle");
+				}
+			}
+			if(state==2 && Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2")
+			{
+				var NextPos = Nav.GetNextPathPosition();
+				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 			}
 		}
 		/*

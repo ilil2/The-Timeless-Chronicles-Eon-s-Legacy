@@ -18,16 +18,16 @@ public partial class Skeleton : MobScript
 		Process(delta);
 		if(Alive && (state == 1 || state == 3 || state == 0))
 		{
-			if(Ani.CurrentAnimation != "Hit" && Ani.CurrentAnimation!="Run")
+			if(Ani.CurrentAnimation != "Hit" && Ani.CurrentAnimation!="Walk")
 			{
-				Ani.Play("Run");
+				Ani.Play("Walk");
 			}
 		}
 		if(state == 2)
 		{
-			if(Ani.CurrentAnimation != "Box" && Ani.CurrentAnimation != "Hit" && Alive)
+			if(Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Hit" && Alive)
 			{
-				Ani.Play("Box");
+				Ani.Play("Atk");
 			}
 		}
 		if(state == -1)
@@ -47,7 +47,7 @@ public partial class Skeleton : MobScript
 				GD.Print("Mort");
 				Alive = false;
 				Ani.Stop();
-				Ani.Play("Die");
+				Ani.Play("Death");
 			}
 			else
 			{

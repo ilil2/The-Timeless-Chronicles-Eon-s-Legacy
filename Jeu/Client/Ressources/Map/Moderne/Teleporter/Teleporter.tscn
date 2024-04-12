@@ -121,7 +121,6 @@ mesh = SubResource("ArrayMesh_w7p2j")
 skeleton = NodePath("")
 
 [node name="Teleporter_low2" type="Node3D" parent="Sketchfab_model/Collada visual scene group"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="defaultMaterial2" type="MeshInstance3D" parent="Sketchfab_model/Collada visual scene group/Teleporter_low2"]
 mesh = SubResource("ArrayMesh_lej07")
