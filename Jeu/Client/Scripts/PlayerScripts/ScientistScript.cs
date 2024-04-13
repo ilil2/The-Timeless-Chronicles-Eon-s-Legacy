@@ -49,8 +49,8 @@ public partial class ScientistScript : ClassScript
 			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 			{
 				Inventory();
-				Animation();
 				ShootLaser();
+				Animation();
 				
 				if (!_isShooting)
 				{

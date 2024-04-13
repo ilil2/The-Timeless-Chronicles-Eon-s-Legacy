@@ -6,6 +6,9 @@ public partial class Laser : Node3D
 	private RayCast3D _laserRay;
 	private MeshInstance3D _laserMesh;
 	private StaticBody3D _rangeMax;
+	private Timer Atk;
+	private bool CanAtk = true;
+	[Export] private int damage = 10;
 	
 	private Vector3 _startPoint;
 
@@ -18,6 +21,7 @@ public partial class Laser : Node3D
 		_laserRay = GetNode<RayCast3D>("LaserRay");
 		_laserMesh = GetNode<MeshInstance3D>("LaserRay/LaserMesh");
 		_rangeMax = GetNode<StaticBody3D>("Range");
+		Atk = GetNode<Timer>("Atk");
 		
 		_startPoint = GlobalPosition;
 		
@@ -35,6 +39,21 @@ public partial class Laser : Node3D
 			_laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
 			
 			_rangeMax.Visible = false;
+			if(CanAtk && _laserRay.GetCollider() is MobScript mob)
+			{
+				CanAtk = false;
+				Atk.Start();
+				mob.TakeDamage(damage);
+				
+			}
+			if(CanAtk && _laserRay.GetCollider() is OtherClassScript player)
+			{
+				CanAtk = false;
+				Atk.Start();
+				GD.Print("Heal!");
+				//mettre le code pour heal ici;
+				
+			}
 		}
 		else
 		{
@@ -65,5 +84,9 @@ public partial class Laser : Node3D
 	public void TimeOut()
 	{
 		Visible = true;
+	}
+	private void _on_atk_timeout()
+	{
+		CanAtk = true;
 	}
 }
