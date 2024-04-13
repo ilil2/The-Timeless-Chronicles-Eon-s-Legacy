@@ -19,7 +19,7 @@ public partial class NoMansLand : Area3D
 	
 	private void _on_body_entered(Node3D body)
 	{
-		if (body is ClassScript player)
+		if (body is PlayerScript player)
 		{
 			Node3D Stone = Grave.Instantiate<Node3D>();
 			Stone.Name = $"{player.GetId()}";
@@ -37,7 +37,7 @@ public partial class NoMansLand : Area3D
 
 	private void _on_body_exited(Node3D body)
 	{
-		if (body is ClassScript player)
+		if (body is PlayerScript player)
 		{
 			GetNode<Node3D>($"{player.GetId}").QueueFree();
 		}

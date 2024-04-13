@@ -1,4 +1,4 @@
-[gd_scene load_steps=285 format=3 uid="uid://bnmjhfrfx7ohn"]
+[gd_scene load_steps=286 format=3 uid="uid://bnmjhfrfx7ohn"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
@@ -3693,6 +3693,8 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_ttc0l"]
 size = Vector3(4, 3, 4)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_23tby"]
+
 [node name="Boss1Map" type="Node3D"]
 script = ExtResource("1_atvld")
 
@@ -5181,3 +5183,11 @@ text = "CamOnPlayer = False
  Cam1 = True
  Cam2 = False 
  CA = "
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.58299)
+shape = SubResource("CylinderShape3D_23tby")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

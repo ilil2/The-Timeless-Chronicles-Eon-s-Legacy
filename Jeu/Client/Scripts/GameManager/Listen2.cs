@@ -64,11 +64,11 @@ public partial class Listen2 : GameManager
 		{
 			int id = Conversions.AtoI(rep.Substring(5));
 			
-			if (id == ((OtherClassScript)Joueur2).GetID())
+			if (id == ((OtherClassScript)Joueur2).GetId())
 			{
 				Joueur2.QueueFree();
 			}
-			else if (id == ((OtherClassScript)Joueur3).GetID())
+			else if (id == ((OtherClassScript)Joueur3).GetId())
 			{
 				Joueur3.QueueFree();
 			}

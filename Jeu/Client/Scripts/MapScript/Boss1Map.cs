@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using JeuClient.Scripts.PlayerScripts;
 using Lib;
 
 [Tool]
@@ -13,6 +14,7 @@ public partial class Boss1Map : IMap
 	private PackedScene Pi = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/p.tscn");
 	private NavigationRegion3D Nav;
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
+	private List<Vector3> BallPos = new List<Vector3>();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -42,6 +44,7 @@ public partial class Boss1Map : IMap
 			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
 			Wall.Rotation += new Vector3(0,-rot,0);
 			Nav.AddChild(Wall);
+			BallPos.Add(Wall.GetNode<Node3D>("Spawn").GlobalPosition);
 		}
 	}
 
@@ -94,5 +97,24 @@ public partial class Boss1Map : IMap
 			}
 		}
 	}
+	
+	public void MapAtk()
+	{
+		PackedScene Ball = GD.Load<PackedScene>("res://Scenes/EntityScenes/SmartBall.tscn");
+		for(int i = 0; i<BallPos.Count;i++)
+		{
+			Node3D ball = Ball.Instantiate<Node3D>();
+			ball.Position = BallPos[i];
+			AddChild(ball);
+		}
+	}
+	private void _on_area_3d_body_entered(Node3D body)
+	{
+		if(body is PlayerScript)
+		{
+			MapAtk();
+		}
+	}
 
 }
+

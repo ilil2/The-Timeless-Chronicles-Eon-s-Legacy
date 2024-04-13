@@ -6,10 +6,6 @@ namespace JeuClient.Scripts.PlayerScripts;
 
 public abstract partial class ClassScript : PlayerScript
 {
-	//Variable de base du joueur
-	protected int Id;
-	public string Pseudo;
-	public string Classe;
 	
 	protected int MaxHealth = 100;
 	protected int Heath = 100;
@@ -52,10 +48,6 @@ public abstract partial class ClassScript : PlayerScript
 	
 	protected int _uiTimer;
 	
-	public int GetId()
-	{
-		return Id;
-	}
 	
 	public SpringArm3D GetCameraVect()
 	{
@@ -168,6 +160,12 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			VerticalVelocity = Vector3.Down * GravityValue / 10 * (float)delta;
 		}
+	}
+	public override void Revive()
+	{
+		Position+= new Vector3(0,10,0);
+		SetHealth(GetMaxHealth());
+		SetStamina(GetMaxStamina());
 	}
 	
 	protected abstract void Move(double delta);
