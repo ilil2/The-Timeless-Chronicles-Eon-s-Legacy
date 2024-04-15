@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class Laser : Node3D
 {
@@ -39,18 +40,28 @@ public partial class Laser : Node3D
 			_laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
 			
 			_rangeMax.Visible = false;
-			if(CanAtk && _laserRay.GetCollider() is MobScript mob)
+			if (_laserId != -1)
 			{
-				CanAtk = false;
-				Atk.Start();
-				mob.TakeDamage(damage);
+				if(CanAtk && _laserRay.GetCollider() is MobScript mob)
+				{
+					CanAtk = false;
+					Atk.Start();
+					mob.TakeDamage(damage);
 				
-			}
-			if(CanAtk && _laserRay.GetCollider() is OtherClassScript)
-			{
-				CanAtk = false;
-				Atk.Start();
-				GameManager.InfoJoueur["attack"] = "heal";
+				}
+				if(CanAtk && _laserRay.GetCollider() is OtherClassScript)
+				{
+					CanAtk = false;
+					Atk.Start();
+					GameManager.InfoJoueur["attack"] = "heal";
+				}
+				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
+				{
+					CanAtk = false;
+					int id = int.Parse(gravestone.Name);
+					Atk.Start();
+					GameManager.InfoJoueur["attack"] = "revive";
+				}
 			}
 		}
 		else
