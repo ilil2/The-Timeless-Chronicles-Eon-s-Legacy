@@ -8,7 +8,7 @@ public abstract partial class ClassScript : PlayerScript
 {
 	
 	protected int MaxHealth = 100;
-	protected int Heath = 100;
+	protected int Health = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
 	public int Gold = 5000;
@@ -100,7 +100,7 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
-		GameManager.InfoJoueur["hp"] = $"{Heath}";
+		GameManager.InfoJoueur["hp"] = $"{Health}";
 		GameManager.InfoJoueur["mp"] = $"{Stamina}";
 		PlayerIsHere = true;
 	}
@@ -111,12 +111,12 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (GameManager.InfoAutreJoueur.ContainsKey($"attack{i}"))
 			{
-				if (GameManager.InfoAutreJoueur[$"attack{i}"] == "heal")
+				if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"heal{Id}")
 				{
 					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-					SetHealth(Heath + 20);
+					SetHealth(Health + 20);
 				}
-				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == "revive")
+				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"revive")
 				{
 					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
 					Revive();
@@ -186,7 +186,7 @@ public abstract partial class ClassScript : PlayerScript
 		SetStamina(GetMaxStamina());
 		IsDead = false;
 		GD.Print("Revive");
-		GD.Print($"HP {Heath} MP {Stamina} IsDead {IsDead}");
+		GD.Print($"HP {Health} MP {Stamina} IsDead {IsDead}");
 	}
 	
 	protected abstract void Move(double delta);
@@ -206,19 +206,18 @@ public abstract partial class ClassScript : PlayerScript
 	
 	public int GetHealth()
 	{
-		return Heath;
+		return Health;
 	}
 	public void SetHealth(int health)
 	{
 		if (health > MaxHealth)
 		{
-			Heath = MaxHealth;
+			Health = MaxHealth;
 		}
 		else
 		{
-			Heath = health;
+			Health = health;
 		}
-		GD.Print($"HP:{Heath}");
 	}
 	
 	public int GetMaxHealth()

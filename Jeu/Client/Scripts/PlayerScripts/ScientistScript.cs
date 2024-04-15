@@ -218,8 +218,8 @@ public partial class ScientistScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Heath -= damage;
-		if (Heath <= 0 && !IsDead)
+		Health -= damage;
+		if (Health <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;

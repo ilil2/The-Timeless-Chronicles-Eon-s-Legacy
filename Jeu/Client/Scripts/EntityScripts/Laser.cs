@@ -25,7 +25,7 @@ public partial class Laser : Node3D
 		Atk = GetNode<Timer>("Atk");
 		
 		_startPoint = GlobalPosition;
-		
+		_laserRay.Enabled = false;
 		Visible = false;
 	}
 	
@@ -49,19 +49,19 @@ public partial class Laser : Node3D
 					mob.TakeDamage(damage);
 				
 				}
-				if(CanAtk && _laserRay.GetCollider() is OtherClassScript)
+				if(CanAtk && _laserRay.GetCollider() is OtherClassScript player)
 				{
 					CanAtk = false;
 					Atk.Start();
-					GameManager.InfoJoueur["attack"] = "heal";
+					GameManager.InfoJoueur["attack"] = $"heal{player.Id}";
 				}
 				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
 				{
 					CanAtk = false;
-					int id = int.Parse(gravestone.Name);
 					Atk.Start();
 					GD.Print("Revive");
-					GameManager.InfoJoueur["attack"] = "revive";
+					GameManager.InfoJoueur["attack"] = $"revive";
+					//GameManager.InfoJoueur["attack"] = $"revive{gravestone.Pseudo}";
 				}
 				else
 				{
@@ -97,6 +97,7 @@ public partial class Laser : Node3D
 	
 	public void TimeOut()
 	{
+		_laserRay.Enabled = true;
 		Visible = true;
 	}
 	private void _on_atk_timeout()
