@@ -50,9 +50,7 @@ public partial class Laser : Node3D
 			{
 				CanAtk = false;
 				Atk.Start();
-				GD.Print("Heal!");
-				//mettre le code pour heal ici;
-				
+				GameManager.InfoJoueur["attack"] = $"heal={player.Id}";
 			}
 		}
 		else

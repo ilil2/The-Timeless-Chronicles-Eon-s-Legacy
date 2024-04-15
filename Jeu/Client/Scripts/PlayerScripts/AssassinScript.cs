@@ -33,6 +33,7 @@ public partial class AssassinScript : ClassScript
 	public override void _Process(double delta)
 	{
 		SendPosition();
+		HeathPlayer();
 	}
 
 	public override void _PhysicsProcess(double delta)

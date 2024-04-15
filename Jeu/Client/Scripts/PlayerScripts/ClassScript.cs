@@ -104,7 +104,17 @@ public abstract partial class ClassScript : PlayerScript
 		GameManager.InfoJoueur["hp"] = $"{Heath}";
 		GameManager.InfoJoueur["mp"] = $"{Stamina}";
 		PlayerIsHere = true;
+	}
 
+	protected void HeathPlayer()
+	{
+		for (int i = 0; i < GameManager._nbJoueur; i++)
+		{
+			if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"heal={i}")
+			{
+				SetHealth(Heath + 20);
+			}
+		}
 	}
 
 	protected void Pause()
@@ -189,7 +199,7 @@ public abstract partial class ClassScript : PlayerScript
 	}
 	public void SetHealth(int health)
 	{
-		if(health>MaxHealth)
+		if (health > MaxHealth)
 		{
 			Heath = MaxHealth;
 		}
