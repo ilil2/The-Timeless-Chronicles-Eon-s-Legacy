@@ -16,10 +16,6 @@ config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 boot_splash/image="res://Ressources/Graphismes/IntroLogo.png"
 config/icon="res://Ressources/Graphismes/LogoJeu.png"
 
-[display]
-
-window/vsync/vsync_mode=0
-
 [dotnet]
 
 project/assembly_name="JeuClient"
