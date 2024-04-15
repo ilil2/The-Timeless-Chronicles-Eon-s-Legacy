@@ -103,6 +103,9 @@ public partial class ConnectionUI : Control
 			_languageChooseButton.AddItem(language["languageName"]);
 		}
 		_languageChooseButton.Selected = _language;
+		
+		//Logo qui tourne
+		GetNode<AnimationPlayer>("AnimationPlayer").Play("logo");
 	}
 	
 	private void Translation()
