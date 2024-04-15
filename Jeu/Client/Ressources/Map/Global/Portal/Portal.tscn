@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://cgf1r4oxf8vto"]
+[gd_scene load_steps=23 format=3 uid="uid://cgf1r4oxf8vto"]
 
 [ext_resource type="Texture2D" uid="uid://ybpfxcwkjwem" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_baseColor.jpeg" id="1_adqfj"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Portal.cs" id="1_ml823"]
 [ext_resource type="Texture2D" uid="uid://bnc15xd5id7b3" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_normal.png" id="2_oq3nf"]
 [ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_baseColor.jpeg" id="3_fwx5h"]
 [ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_normal.png" id="4_4hgfj"]
+[ext_resource type="AudioStream" uid="uid://b543u6giiv6xw" path="res://Ressources/Sound_Design/Sound/Portal/portal_idle-34022.mp3" id="6_1g7q7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l136o"]
 resource_name = "02_-_Default"
@@ -300,6 +302,7 @@ _data = {
 }
 
 [node name="Portal" type="Node3D"]
+script = ExtResource("1_ml823")
 
 [node name="Stargate" type="Node3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -333,3 +336,8 @@ skeleton = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_ihcnw")
 }
+
+[node name="Idle" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_1g7q7")
+volume_db = -10.0
+max_db = 0.0

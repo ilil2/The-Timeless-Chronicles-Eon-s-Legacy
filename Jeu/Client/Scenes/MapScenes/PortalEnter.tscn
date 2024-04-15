@@ -94,6 +94,7 @@ PlayOpen = true
 
 [node name="Portal" parent="." instance=ExtResource("2_exb35")]
 transform = Transform3D(-0.5, -4.37114e-08, 0, 4.2222e-08, -0.482963, 0.12941, -1.13133e-08, 0.12941, 0.482963, 0, 4, 0)
+script = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.707107, 0.5, 0.5, 0, 0.707107, -0.707107, -0.707107, 0.5, 0.5, 2.23369, 0.207107, 2.23369)

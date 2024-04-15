@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://cgf1r4oxf8vto"]
+[gd_scene load_steps=23 format=3 uid="uid://cgf1r4oxf8vto"]
 
+[ext_resource type="Script" path="res://Scripts/MapScript/Object/Portal.cs" id="1_gwp2d"]
 [ext_resource type="Texture2D" uid="uid://ybpfxcwkjwem" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_baseColor.jpeg" id="1_gyuvr"]
 [ext_resource type="Texture2D" uid="uid://bnc15xd5id7b3" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_normal.png" id="2_5irka"]
 [ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_baseColor.jpeg" id="3_eacal"]
 [ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_normal.png" id="4_qn2yb"]
+[ext_resource type="AudioStream" uid="uid://b543u6giiv6xw" path="res://Ressources/Sound_Design/Sound/Portal/portal_idle-34022.mp3" id="6_deavd"]
 
 [sub_resource type="Animation" id="Animation_n76gx"]
 resource_name = "Close"
@@ -300,6 +302,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_l2a2y")
 
 [node name="Portal" type="Node3D"]
+script = ExtResource("1_gwp2d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -337,3 +340,8 @@ transform = Transform3D(-0.500004, 0.866023, -3.13499e-06, 0, -3.61999e-06, -1, 
 [node name="Ring_02 - Default_0" type="MeshInstance3D" parent="Mesh/Stargate/Ring"]
 mesh = SubResource("ArrayMesh_ne1ap")
 skeleton = NodePath("")
+
+[node name="Idle" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_deavd")
+volume_db = -10.0
+max_db = 0.0
