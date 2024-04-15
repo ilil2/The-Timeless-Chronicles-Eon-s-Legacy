@@ -27,10 +27,12 @@ public partial class NoMansLand : Area3D
 			AddChild(Stone);
 			Stone.Rotation = player.GetNode<Node3D>("Player").Rotation;
 			(Stone as Gravestone).Pseudo.Text = player.Pseudo;
-			Map.CamOnPlayer = false;
-			//debug
-			Stone.GetNode<Camera3D>("Camera3D").Current = true;;
-			
+
+			if (player is ClassScript)
+			{
+				Stone.GetNode<Camera3D>("Camera3D").Current = true;
+				Map.CamOnPlayer = false;
+			}
 		}
 	}
 
