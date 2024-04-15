@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgf1r4oxf8vto"]
+[gd_scene load_steps=25 format=3 uid="uid://cgf1r4oxf8vto"]
 
 [ext_resource type="Texture2D" uid="uid://ybpfxcwkjwem" path="res://Ressources/Map/Global/Portal/textures/02_-_Default_baseColor.jpeg" id="1_adqfj"]
 [ext_resource type="Script" path="res://Scripts/MapScript/Object/Portal.cs" id="1_ml823"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dhfdrs6a3o5xg" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_baseColor.jpeg" id="3_fwx5h"]
 [ext_resource type="Texture2D" uid="uid://bs2lf4niviu2q" path="res://Ressources/Map/Global/Portal/textures/01_-_Default_normal.png" id="4_4hgfj"]
 [ext_resource type="AudioStream" uid="uid://b543u6giiv6xw" path="res://Ressources/Sound_Design/Sound/Portal/portal_idle-34022.mp3" id="6_1g7q7"]
+[ext_resource type="AudioStream" uid="uid://cp01xepyxtr05" path="res://Ressources/Sound_Design/Sound/Portal/teleport-90137 (mp3cut.net) (1).mp3" id="7_p5rn6"]
+[ext_resource type="AudioStream" uid="uid://bk4dbq7080unl" path="res://Ressources/Sound_Design/Sound/Portal/teleport-90137 (mp3cut.net).mp3" id="8_aqlvg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l136o"]
 resource_name = "02_-_Default"
@@ -341,3 +343,11 @@ libraries = {
 stream = ExtResource("6_1g7q7")
 volume_db = -10.0
 max_db = 0.0
+
+[node name="Open" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_p5rn6")
+volume_db = -10.0
+max_db = 0.0
+
+[node name="Close" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_aqlvg")
