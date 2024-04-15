@@ -40,7 +40,7 @@ public partial class Laser : Node3D
 			_laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
 			
 			_rangeMax.Visible = false;
-			if (_laserId != -1)
+			if (_laserId == -1)
 			{
 				if(CanAtk && _laserRay.GetCollider() is MobScript mob)
 				{
