@@ -164,6 +164,8 @@ text = "Info"
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.30473e-08, -0.173648, 0.984808, -7.5904e-09, 0.984808, 0.173648, -1, 0, -4.37114e-08, 0.8, 0.6, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419591, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_ihj5l")
