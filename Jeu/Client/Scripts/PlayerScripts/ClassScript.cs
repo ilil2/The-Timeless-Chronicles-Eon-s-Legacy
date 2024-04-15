@@ -185,6 +185,8 @@ public abstract partial class ClassScript : PlayerScript
 		SetHealth(GetMaxHealth());
 		SetStamina(GetMaxStamina());
 		IsDead = false;
+		GD.Print("Revive");
+		GD.Print($"HP {Heath} MP {Stamina} IsDead {IsDead}");
 	}
 	
 	protected abstract void Move(double delta);
@@ -216,6 +218,7 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			Heath = health;
 		}
+		GD.Print($"HP:{Heath}");
 	}
 	
 	public int GetMaxHealth()
@@ -232,7 +235,11 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		if(stamina>MaxStamina)
 		{
-			stamina = MaxStamina;
+			Stamina = MaxStamina;
+		}
+		else
+		{
+			Stamina = stamina;
 		}
 	}
 	
