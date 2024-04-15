@@ -101,10 +101,11 @@ public partial class Boss1Map : IMap
 	public void MapAtk()
 	{
 		PackedScene Ball = GD.Load<PackedScene>("res://Scenes/EntityScenes/SmartBall.tscn");
-		for(int i = 0; i<BallPos.Count;i++)
+		List<int> random = MapTool.GenerateRandomArray(0,BallPos.Count,10);
+		for(int i = 0; i<random.Count;i++)
 		{
 			Node3D ball = Ball.Instantiate<Node3D>();
-			ball.Position = BallPos[i];
+			ball.Position = BallPos[random[i]];
 			AddChild(ball);
 		}
 	}

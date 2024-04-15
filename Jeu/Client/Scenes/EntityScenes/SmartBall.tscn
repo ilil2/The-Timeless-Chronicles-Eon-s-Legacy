@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb4l0vueagx7l"]
+[gd_scene load_steps=5 format=3 uid="uid://bb4l0vueagx7l"]
 
+[ext_resource type="Script" path="res://Scripts/EntityScripts/SmartBall.cs" id="1_h4wjp"]
 [ext_resource type="PackedScene" uid="uid://bsxpfpeww7nwe" path="res://Scenes/EntityScenes/weapon.tscn" id="1_t6mls"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_imljv"]
@@ -7,6 +8,7 @@
 [sub_resource type="SphereMesh" id="SphereMesh_imqtn"]
 
 [node name="SmartBall" type="Node3D"]
+script = ExtResource("1_h4wjp")
 
 [node name="Corps" type="Area3D" parent="."]
 

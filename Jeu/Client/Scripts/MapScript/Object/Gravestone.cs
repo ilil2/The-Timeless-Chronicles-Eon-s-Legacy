@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Gravestone : Node3D
+public partial class Gravestone : StaticBody3D
 {
 	public Label3D Pseudo;
 	public Label3D Info;

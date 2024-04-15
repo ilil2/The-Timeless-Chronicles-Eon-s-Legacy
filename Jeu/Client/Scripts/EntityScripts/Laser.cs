@@ -60,7 +60,12 @@ public partial class Laser : Node3D
 					CanAtk = false;
 					int id = int.Parse(gravestone.Name);
 					Atk.Start();
+					GD.Print("Revive");
 					GameManager.InfoJoueur["attack"] = "revive";
+				}
+				else
+				{
+					GD.Print($"getcollider {_laserRay.GetCollider()}");
 				}
 			}
 		}

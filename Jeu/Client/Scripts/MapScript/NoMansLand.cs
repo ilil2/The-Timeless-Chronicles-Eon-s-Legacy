@@ -21,7 +21,7 @@ public partial class NoMansLand : Area3D
 	{
 		if (body is PlayerScript player)
 		{
-			Node3D Stone = Grave.Instantiate<Node3D>();
+			StaticBody3D Stone = Grave.Instantiate<StaticBody3D>();
 			Stone.Name = $"{player.GetId()}";
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			AddChild(Stone);
@@ -41,7 +41,7 @@ public partial class NoMansLand : Area3D
 	{
 		if (body is PlayerScript player)
 		{
-			GetNode<Node3D>($"{player.GetId}").QueueFree();
+			GetNode<StaticBody3D>($"{player.GetId}").QueueFree();
 		}
 	
 	}
