@@ -26,7 +26,7 @@ public partial class NoMansLand : Area3D
 			Stone.Name = $"{player.GetId()}";
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			AddChild(Stone);
-			GraveArray[player.GetId()] = stone;
+			GraveArray[player.GetId()] = Stone;
 			Stone.Rotation = player.GetNode<Node3D>("Player").Rotation;
 			(Stone as Gravestone).Pseudo.Text = player.Pseudo;
 
@@ -44,6 +44,7 @@ public partial class NoMansLand : Area3D
 		if (body is PlayerScript player)
 		{
 			GraveArray[player.GetId()].QueueFree();
+			Map.CamOnPlayer = true;
 		}
 	
 	}
