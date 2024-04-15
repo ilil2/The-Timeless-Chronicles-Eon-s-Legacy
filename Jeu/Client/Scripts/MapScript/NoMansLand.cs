@@ -5,6 +5,7 @@ using JeuClient.Scripts.PlayerScripts;
 public partial class NoMansLand : Area3D
 {
 	private IMap Map;
+	private StaticBody3D[] GraveArray = new StaticBody3D[4];
 	private PackedScene Grave = GD.Load<PackedScene>("res://Ressources/Map/Global/Object/Gravestone/Gravestone.tscn");
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,6 +26,7 @@ public partial class NoMansLand : Area3D
 			Stone.Name = $"{player.GetId()}";
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			AddChild(Stone);
+			GraveArray[player.GetId()] = stone;
 			Stone.Rotation = player.GetNode<Node3D>("Player").Rotation;
 			(Stone as Gravestone).Pseudo.Text = player.Pseudo;
 
@@ -41,7 +43,7 @@ public partial class NoMansLand : Area3D
 	{
 		if (body is PlayerScript player)
 		{
-			GetNode<StaticBody3D>($"{player.GetId}").QueueFree();
+			GraveArray[player.GetId()].QueueFree();
 		}
 	
 	}
