@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://0rk02j3cj0tg"]
+[gd_scene load_steps=7 format=3 uid="uid://0rk02j3cj0tg"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/PortalEnter.cs" id="1_vwxjw"]
 [ext_resource type="PackedScene" uid="uid://cgf1r4oxf8vto" path="res://Ressources/Map/Global/Portal/Portal.tscn" id="2_exb35"]
+[ext_resource type="AudioStream" uid="uid://cp01xepyxtr05" path="res://Ressources/Sound_Design/Sound/Portal/teleport-90137 (mp3cut.net) (1).mp3" id="3_nd55u"]
 
 [sub_resource type="Animation" id="Animation_0ffov"]
 resource_name = "Enter"
@@ -119,3 +120,8 @@ transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 
 libraries = {
 "": SubResource("AnimationLibrary_kk5uq")
 }
+
+[node name="Open" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_nd55u")
+volume_db = -10.0
+max_db = 0.0
