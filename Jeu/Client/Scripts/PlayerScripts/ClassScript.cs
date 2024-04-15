@@ -48,7 +48,6 @@ public abstract partial class ClassScript : PlayerScript
 	
 	protected int _uiTimer;
 	
-	
 	public SpringArm3D GetCameraVect()
 	{
 		return CameraV;
@@ -110,9 +109,13 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		for (int i = 0; i < GameManager._nbJoueur; i++)
 		{
-			if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"heal={i}")
+			if (GameManager.InfoAutreJoueur.ContainsKey($"attack{i}"))
 			{
-				SetHealth(Heath + 20);
+				if (GameManager.InfoAutreJoueur[$"attack{i}"] == "heal")
+				{
+					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+					SetHealth(Heath + 20);
+				}
 			}
 		}
 	}

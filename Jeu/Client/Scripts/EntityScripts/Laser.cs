@@ -46,11 +46,11 @@ public partial class Laser : Node3D
 				mob.TakeDamage(damage);
 				
 			}
-			if(CanAtk && _laserRay.GetCollider() is OtherClassScript player)
+			if(CanAtk && _laserRay.GetCollider() is OtherClassScript)
 			{
 				CanAtk = false;
 				Atk.Start();
-				GameManager.InfoJoueur["attack"] = $"heal={player.Id}";
+				GameManager.InfoJoueur["attack"] = "heal";
 			}
 		}
 		else
