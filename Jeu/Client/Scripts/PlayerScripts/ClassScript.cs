@@ -184,7 +184,7 @@ public abstract partial class ClassScript : PlayerScript
 		Position+= new Vector3(0,10,0);
 		SetHealth(GetMaxHealth());
 		SetStamina(GetMaxStamina());
-		Alive = true;
+		IsDead = false;
 	}
 	
 	protected abstract void Move(double delta);
