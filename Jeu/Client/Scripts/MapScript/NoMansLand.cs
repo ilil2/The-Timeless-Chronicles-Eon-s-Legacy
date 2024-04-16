@@ -24,6 +24,7 @@ public partial class NoMansLand : Area3D
 		{
 			StaticBody3D Stone = Grave.Instantiate<StaticBody3D>();
 			Stone.Name = $"{player.GetId()}";
+			(Stone as Gravestone).ID = player.GetId();
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			AddChild(Stone);
 			GraveArray[player.GetId()] = Stone;

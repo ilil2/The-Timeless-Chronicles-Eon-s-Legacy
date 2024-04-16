@@ -24,16 +24,21 @@ public partial class LobbyManager : Control
 	public static bool JoinGameWithID = false;
 	public static bool kill = false;
 	
+	public DirectionalLight3D Sun;
+	
 	public override void _Ready()
 	{
 		PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyUI.tscn");
 		Control LobbyMenu = LobbyScene.Instantiate<Control>();
 		AddChild(LobbyMenu);
 		GetNode<AnimationPlayer>("Lobby3D/AnimationPlayer").Play("Enter");
+		Sun = GetNode<DirectionalLight3D>("Lobby3D/Sun");
 	}
 
 	public override void _Process(double delta)
 	{
+		GD.Print(GetMouseAngle());
+		RotateSun();
 		IDConnectGame = GameManager.IDGame;
 		ValidID = GameManager.ValidIDGame;
 		
@@ -98,5 +103,25 @@ public partial class LobbyManager : Control
 			InRunning = true;
 			GameManager.LobbyReset = false;
 		}
+	}
+	public Vector2 GetMouseAngle()
+	{
+		Vector2 screenSize = GetViewportRect().Size / 2; // Taille de l'écran divisée par 2
+		Vector2 mousePosition = GetGlobalMousePosition(); // Position de la souris globale
+
+		// Calculer la position de la souris avec (0, 0) au milieu de l'écran
+		Vector2 centeredPosition = mousePosition - screenSize;
+
+		// Calculer l'angle en radians
+		float angleX = Mathf.Atan2(centeredPosition.X, screenSize.X);
+		float angleY = Mathf.Atan2(centeredPosition.Y, screenSize.Y);
+
+
+		return new Vector2(angleX, angleY);
+	}
+	public void RotateSun()
+	{
+		Vector2 Rotation = GetMouseAngle();
+		Sun.Rotation = new Vector3(Sun.Rotation.X,-Rotation.X/10,0);
 	}
 }
