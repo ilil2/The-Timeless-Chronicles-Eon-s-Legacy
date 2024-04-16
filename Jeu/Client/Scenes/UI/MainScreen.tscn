@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ed7p3474xcnx"]
+[gd_scene load_steps=8 format=3 uid="uid://ed7p3474xcnx"]
 
 [ext_resource type="Texture2D" uid="uid://jtpv2mqbc8hf" path="res://Ressources/Graphismes/Background2.png" id="1_e6ngw"]
+[ext_resource type="Script" path="res://Scripts/UI/MainScreen.cs" id="1_otbd3"]
 [ext_resource type="Texture2D" uid="uid://b2dg6u2mi3g3i" path="res://Ressources/Graphismes/LogoTTC_1.png" id="2_qkoqp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lls64"]
@@ -51,6 +52,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_otbd3")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -78,13 +80,13 @@ expand_mode = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.174
-anchor_top = 0.691
+anchor_top = 0.728
 anchor_right = 0.833
-anchor_bottom = 0.785
+anchor_bottom = 0.823
 offset_left = -0.448011
-offset_top = 0.231971
+offset_top = 0.255971
 offset_right = 0.383926
-offset_bottom = 0.319983
+offset_bottom = -0.304009
 text = "PRESS ENTER TO PLAY"
 label_settings = SubResource("LabelSettings_lls64")
 horizontal_alignment = 1
@@ -94,3 +96,5 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_emd6a")
 }
+
+[connection signal="resized" from="Title" to="." method="OnResize"]
