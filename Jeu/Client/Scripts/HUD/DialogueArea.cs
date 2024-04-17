@@ -38,7 +38,7 @@ public partial class DialogueArea : Area3D
 			var data = GetData();
 			string[] index = data["Emax"].Split(";");
 			string Cur1 = index[0];
-			string Cur2 = "1";
+			string Cur2 = "0";
 			data["Emax"] = Cur1+";"+Cur2;
 			UpdateJson(data);
 			
@@ -67,7 +67,6 @@ public partial class DialogueArea : Area3D
 		Hud.Visible = false;
 		Parent.GetParent().GetNode<Control>("GameHUD").Visible = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;	
-		GD.Print("Close");
 	}
 	
 	private Dictionary<string,string> GetData()
@@ -89,13 +88,15 @@ public partial class DialogueArea : Area3D
 			Cur1 = (int.Parse(index[0])+1).ToString();
 			Cur2 = "1";
 		}
+		data["Emax"] = Cur1+";"+Cur2;
+		UpdateJson(data);
+		GD.Print(Cur2);
 		return Dialogue[Cur1][Cur2];
 	}
 
 	private void _on_skip_button_pressed()
 	{
 		Line.Text = GetDialogue(GetData());
-		GD.Print("Skip");
 	}
 	private void UpdateJson(Dictionary<string,string> obj)
 	{

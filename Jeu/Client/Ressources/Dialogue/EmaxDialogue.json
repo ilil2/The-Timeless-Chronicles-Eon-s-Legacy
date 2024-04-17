@@ -1,16 +1,14 @@
 {
   "1": {
-	"1": "Première phrase.",
-	"2": "Deuxième phrase.",
-	"3": "Troisième phrase.",
-	"4": "Quatrième phrase.",
-	"5": "NEXT"
+	"1": "Never gonna give you up",
+	"2": "Never gonna let you down",
+	"3": "Never gonna run around and desert you",
+	"4": "Never gonna make you cry",
+	"5": "Never gonna say goodbye",
+	"6": "NEXT"
   },
   "2": {
-	"1": "Première phrase.",
-	"2": "Deuxième phrase.",
-	"3": "Troisième phrase.",
-	"4": "Quatrième phrase.",
-	"5": "END"
+	"1": "Never gonna tell a lie and hurt you",
+	"2": "END"
   }
 }

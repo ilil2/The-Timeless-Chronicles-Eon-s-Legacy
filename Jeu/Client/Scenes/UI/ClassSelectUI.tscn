@@ -33,6 +33,22 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_o312c"]
 resource_name = "Exit"
 
+[sub_resource type="Animation" id="Animation_eg1nt"]
+resource_name = "Left"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClassSelect3D/ButtonLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.921, 0.618, -1.766), Vector3(0.921, 0.568, -1.716), Vector3(0.921, 0.618, -1.766)]
+}
+
 [sub_resource type="Animation" id="Animation_bq8pu"]
 length = 0.001
 tracks/0/type = "value"
@@ -144,38 +160,6 @@ tracks/8/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_eg1nt"]
-resource_name = "Left"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ClassSelect3D/ButtonLeft:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.921, 0.618, -1.766), Vector3(0.921, 0.568, -1.716), Vector3(0.921, 0.618, -1.766)]
-}
-
-[sub_resource type="Animation" id="Animation_ukm5x"]
-resource_name = "Right"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ClassSelect3D/ButtonRight:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.921243, 0.617605, -1.76617), Vector3(-0.921, 0.568, -1.716), Vector3(-0.921243, 0.617605, -1.76617)]
-}
-
 [sub_resource type="Animation" id="Animation_qoe58"]
 resource_name = "Ready"
 length = 0.3
@@ -238,6 +222,22 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ukm5x"]
+resource_name = "Right"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ClassSelect3D/ButtonRight:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.921243, 0.617605, -1.76617), Vector3(-0.921, 0.568, -1.716), Vector3(-0.921243, 0.617605, -1.76617)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4xwvr"]
