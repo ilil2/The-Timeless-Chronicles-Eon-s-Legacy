@@ -14,6 +14,8 @@ public partial class DialogueArea : Area3D
 	private Label Line;
 	private Dictionary<string,Dictionary<string,string>> Dialogue;
 	private AnimationPlayer Ani;
+	private string TargetText = "";
+	private int indexLetter = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -30,6 +32,7 @@ public partial class DialogueArea : Area3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		CompleteText();
 		
 	}
 	
@@ -89,7 +92,17 @@ public partial class DialogueArea : Area3D
 
 	private void _on_skip_button_pressed()
 	{
-		Line.Text = GetDialogue();
+		Line.Text = "";
+		indexLetter = 0;
+		TargetText = GetDialogue();
+	}
+	private void CompleteText()
+	{
+		if(Line.Text!=TargetText)
+		{
+			Line.Text+=TargetText[indexLetter];
+			indexLetter++;
+		}
 	}
 }
 
