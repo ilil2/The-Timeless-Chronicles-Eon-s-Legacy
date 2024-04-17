@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dc36p4sfw2iub"]
+[gd_scene load_steps=24 format=3 uid="uid://dc36p4sfw2iub"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_kgg25"]
 [ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b5einq1tsrldj" path="res://Scenes/MapScenes/InteractionShop.tscn" id="7_epgtk"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_r0qgr"]
 [ext_resource type="PackedScene" uid="uid://0rk02j3cj0tg" path="res://Scenes/MapScenes/PortalEnter.tscn" id="9_usxab"]
+[ext_resource type="PackedScene" uid="uid://dpgvp3pu0se7" path="res://Scenes/HUD/DialogueArea.tscn" id="11_w4g4o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oifs2"]
 shader = ExtResource("1_qts26")
@@ -294,3 +295,6 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -5, 0, -50
 [node name="PortalEnter" parent="." instance=ExtResource("9_usxab")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.35441)
 PlayOpen = false
+
+[node name="DialogueArea" parent="." instance=ExtResource("11_w4g4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -49)

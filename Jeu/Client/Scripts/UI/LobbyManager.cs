@@ -37,7 +37,6 @@ public partial class LobbyManager : Control
 
 	public override void _Process(double delta)
 	{
-		GD.Print(GetMouseAngle());
 		RotateSun();
 		IDConnectGame = GameManager.IDGame;
 		ValidID = GameManager.ValidIDGame;

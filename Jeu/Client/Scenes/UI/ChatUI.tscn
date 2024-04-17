@@ -7,19 +7,18 @@ font_size = 12
 
 [node name="ChatUI" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.222
+anchor_bottom = 0.296
+offset_right = 0.255981
+offset_bottom = 0.192001
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_14cyn")
 
 [node name="Chat" type="Control" parent="."]
 layout_mode = 1
-anchor_right = 0.278
-anchor_bottom = 0.296
-offset_right = -0.256042
-offset_bottom = 0.192001
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="Chat"]
 layout_mode = 1
