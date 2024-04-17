@@ -13,6 +13,7 @@ public partial class DialogueArea : Area3D
 	private Control Hud;
 	private Label Line;
 	private Dictionary<string,Dictionary<string,string>> Dialogue;
+	private AnimationPlayer Ani;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -21,6 +22,7 @@ public partial class DialogueArea : Area3D
 		Hud = GetNode<Control>("DialogueHud");
 		Line = Hud.GetNode<Label>("Line");
 		Dialogue = JsonSerializer.Deserialize<Dictionary<string,Dictionary<string,string>>>(File.ReadAllText("Ressources/Dialogue/EmaxDialogue.json"));
+		Ani = GetNode<AnimationPlayer>("AnimationPlayer");
 		//ResetData();
 		
 	}
@@ -35,12 +37,8 @@ public partial class DialogueArea : Area3D
 	{
 		if(body is ClassScript)
 		{
-			var data = GetData();
-			string[] index = data["Emax"].Split(";");
-			string Cur1 = index[0];
-			string Cur2 = "0";
-			data["Emax"] = Cur1+";"+Cur2;
-			UpdateJson(data);
+			Ani.Play("Open");
+			SaveDialogue.Emax = (SaveDialogue.Emax.c1,0);
 			
 			_on_skip_button_pressed();
 			
@@ -61,6 +59,7 @@ public partial class DialogueArea : Area3D
 	}
 	private void _on_close_button_pressed()
 	{
+		Ani.Play("Close");
 		Near = false;
 		Cam.Current = false;
 		Parent.CamOnPlayer = true;
@@ -69,38 +68,28 @@ public partial class DialogueArea : Area3D
 		Input.MouseMode = Input.MouseModeEnum.Captured;	
 	}
 	
-	private Dictionary<string,string> GetData()
+	private string GetDialogue()
 	{
-		var data = JsonSerializer.Deserialize<Dictionary<string,string>>(File.ReadAllText("Ressources/Dialogue/SaveDialogue.json"));
-		return data;
-	}
-	private string GetDialogue(Dictionary<string,string> data)
-	{
-		string[] index = data["Emax"].Split(";");
-		string Cur1 = index[0];
-		string Cur2 = (int.Parse(index[1])+1).ToString();
-		if(Dialogue[Cur1][Cur2]=="END")
+		(int c1, int c2) = SaveDialogue.Emax;
+		c2++;
+		if(Dialogue[c1.ToString()][c2.ToString()]=="END")
 		{
 			_on_close_button_pressed();
 		}
-		if(Dialogue[Cur1][Cur2]=="NEXT")
+		if(Dialogue[c1.ToString()][c2.ToString()]=="NEXT")
 		{
-			Cur1 = (int.Parse(index[0])+1).ToString();
-			Cur2 = "1";
+			c1++;
+			c2 = 1;
 		}
-		data["Emax"] = Cur1+";"+Cur2;
-		UpdateJson(data);
-		GD.Print(Cur2);
-		return Dialogue[Cur1][Cur2];
+
+		SaveDialogue.Emax = (c1, c2);
+		GD.Print($"{c1} {c2}");
+		return Dialogue[c1.ToString()][c2.ToString()];
 	}
 
 	private void _on_skip_button_pressed()
 	{
-		Line.Text = GetDialogue(GetData());
-	}
-	private void UpdateJson(Dictionary<string,string> obj)
-	{
-		File.WriteAllText("Ressources/Dialogue/SaveDialogue.json", JsonSerializer.Serialize(obj));
+		Line.Text = GetDialogue();
 	}
 }
 

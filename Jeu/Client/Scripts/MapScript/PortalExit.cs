@@ -41,7 +41,7 @@ public partial class PortalExit : Node3D
 			OnCam = true;
 		}
 		double dist = GetMinDist();
-		if(dist>10)
+		if(dist>10 || SaveDialogue.Emax.c1==1)
 		{
 			if(Open)
 			{

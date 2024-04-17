@@ -26,7 +26,7 @@ public partial class InteractionShop : Node3D
 	}
 	private void _on_shop_body_entered(Node3D body)
 	{
-		if(body is ClassScript)
+		if(body is ClassScript && SaveDialogue.Emax.c1>1)
 		{
 			OnShop = true;
 			Ani.Play("Open");
@@ -37,7 +37,7 @@ public partial class InteractionShop : Node3D
 
 	private void _on_shop_body_exited(Node3D body)
 	{
-		if(body is ClassScript)
+		if(body is ClassScript && SaveDialogue.Emax.c1>1)
 		{
 			OnShop = false;
 			Ani.Play("Close");	
