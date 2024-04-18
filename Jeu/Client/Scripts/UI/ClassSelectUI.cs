@@ -10,7 +10,7 @@ public partial class ClassSelectUI : Control
 	private bool _isReady = false;
 	private List<string> _classList = new List<string>{"Knight","Scientist","Assassin","Archer"};
 	private int _classID = 0;
-	private int _angleTarget = 0;
+	private int _angleTarget = -180;
 	
 	private Node3D _pivot;
 	private Node3D _buttonReady;

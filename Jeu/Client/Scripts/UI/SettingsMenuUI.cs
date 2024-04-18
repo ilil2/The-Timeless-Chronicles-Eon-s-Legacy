@@ -179,7 +179,8 @@ public partial class SettingsMenuUI : Control
         GameManager.InputManger.SetControlName(12, _languageDict["settingsMenuControlsInventory"]);
         GameManager.InputManger.SetControlName(13, _languageDict["settingsMenuControlsReload"]);
         GameManager.InputManger.SetControlName(14, _languageDict["settingsMenuControlsChat"]);
-        GameManager.InputManger.SetControlName(15, _languageDict["settingsMenuControlsPause"]);
+        GameManager.InputManger.SetControlName(15, _languageDict["settingsMenuControlsEnableChat"]);
+        GameManager.InputManger.SetControlName(16, _languageDict["settingsMenuControlsPause"]);
     }
     
     public void OnResize()

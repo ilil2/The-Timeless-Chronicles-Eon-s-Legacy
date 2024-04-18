@@ -26,10 +26,13 @@ public partial class KnightScript : ClassScript
 	public override void _Process(double delta)
 	{
 		SendPosition();
+		HeathPlayer();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_uiTimer += 1;
+		
 		Pause();
 		PhysicsReset();
 		Gravity(delta);
@@ -37,8 +40,16 @@ public partial class KnightScript : ClassScript
 		{
 			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 			{
+				Inventory();
 				Animation();
-				Move(delta);
+				if (_isBlocking)
+				{
+					Velocity = new Vector3(0, 0, 0);
+				}
+				else
+				{
+					Move(delta);
+				}
 			}
 			else
 			{
@@ -92,39 +103,45 @@ public partial class KnightScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && UseStamina(50))
+		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
+		
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
 		{
+			DirectionControl = (0,0);
 			AnimationState = 3;
 			
 			AnimationSet(false, false, true, true);
 			
 			GameManager.InfoJoueur["animation"] = "hit";
 		}
-		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && AnimationState != 1)
+		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != 1)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 2;
 			
 			AnimationSet(false, true, false, false);
 			
 			GameManager.InfoJoueur["animation"] = "protection";
 		}
-		else if ((left || right || forward || backward) && AnimationState != 1 && AnimationState != 2)
+		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != 2)
 		{
 			AnimationState = 1;
-			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			DirectionControl = direction;
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			AnimationSet(true, false, false, false);
 
-			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
-			{
-				GameManager.InfoJoueur["animation"] = "walkside";
-			}
-			else
+			if (direction.Item2 != 0)
 			{
 				GameManager.InfoJoueur["animation"] = "walk";
 			}
+			else
+			{
+				GameManager.InfoJoueur["animation"] = "walkside";
+			}
 		}
-		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && !(left || right || forward || backward) && AnimationState != 0)
+		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 0;
 			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "idle";
@@ -146,8 +163,8 @@ public partial class KnightScript : ClassScript
 	{
 		if (!_isBlocking)
 		{
-			Heath -= damage;
-			if (Heath <= 0)
+			Health -= damage;
+			if (Health <= 0 && !IsDead)
 			{
 				IsDead = true;
 				AnimationState = -1;
@@ -160,8 +177,8 @@ public partial class KnightScript : ClassScript
 		{
 			if (!UseStamina(damage*20))
 			{
-				Heath -= damage;
-				if (Heath <= 0)
+				Health -= damage;
+				if (Health <= 0 && !IsDead)
 				{
 					IsDead = true;
 					AnimationState = -1;

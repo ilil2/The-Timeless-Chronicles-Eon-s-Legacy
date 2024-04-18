@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class HealPotion : Potion
 {	
@@ -12,5 +13,7 @@ public partial class HealPotion : Potion
 	public override void UsePotion()
 	{
 		GD.Print("I use HealPotion");
+		int newHealth = (GameManager.Joueur1 as ClassScript).GetHealth()+50;
+		(GameManager.Joueur1 as ClassScript).SetHealth(newHealth);
 	}
 }

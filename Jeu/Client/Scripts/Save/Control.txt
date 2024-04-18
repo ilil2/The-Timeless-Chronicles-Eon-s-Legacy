@@ -7,9 +7,9 @@ Dash;32
 Capacity 1;65
 Capacity 2;69
 Capacity 3;70
-Item 1;49
+Item 1;38
 Item 2;50
-Item 3;51
+Item 3;34
 Inventory;73
 Reload;82
 Chat;84

@@ -78,4 +78,11 @@ public partial class ShopInventory : Panel
 		Inventory[i] = potion;
 		UpdateSlot();
 	}
+	public static Potion RemovePotion(int ID)
+	{
+		Potion res = Inventory[ID];
+		Inventory[ID] = null;
+		UpdateSlot();
+		return res;
+	}
 }

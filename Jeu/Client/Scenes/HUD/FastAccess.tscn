@@ -1,0 +1,132 @@
+[gd_scene load_steps=4 format=3 uid="uid://cky4r8mnxetki"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/FastAccess.cs" id="1_8kkip"]
+[ext_resource type="PackedScene" uid="uid://n81bw3yhdfso" path="res://Scenes/HUD/ShopInventoryButton.tscn" id="2_p5l5o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_keioj"]
+font_size = 20
+
+[node name="FastAccess" type="Panel"]
+anchors_preset = -1
+anchor_right = 0.333
+anchor_bottom = 0.198
+offset_right = 0.384003
+offset_bottom = -0.304016
+script = ExtResource("1_8kkip")
+
+[node name="Slot1" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.333
+anchor_bottom = 1.0
+offset_right = 0.127998
+
+[node name="Logo" type="TextureRect" parent="Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 0.937
+anchor_bottom = 1.0
+offset_right = 0.0639954
+offset_bottom = -1.0
+text = "1"
+label_settings = SubResource("LabelSettings_keioj")
+
+[node name="1" parent="Slot1" instance=ExtResource("2_p5l5o")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot2" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.125
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_right = 160.0
+offset_bottom = 8.0
+
+[node name="Logo" type="TextureRect" parent="Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.977
+anchor_bottom = 0.941
+offset_right = -0.0560074
+offset_bottom = 0.0239944
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.706
+anchor_right = 1.0
+anchor_bottom = 0.949
+offset_top = -0.0160065
+offset_bottom = -0.0640106
+text = "2 "
+label_settings = SubResource("LabelSettings_keioj")
+
+[node name="2" parent="Slot2" instance=ExtResource("2_p5l5o")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Slot3" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.667
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.128021
+
+[node name="Logo" type="TextureRect" parent="Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Quantity" type="Label" parent="Slot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 0.992
+offset_bottom = 0.0239944
+text = "3 "
+label_settings = SubResource("LabelSettings_keioj")
+
+[node name="3" parent="Slot3" instance=ExtResource("2_p5l5o")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://gqlj6nxemhah"]
+[gd_scene load_steps=21 format=3 uid="uid://gqlj6nxemhah"]
 
 [ext_resource type="Texture2D" uid="uid://ceam854ro6hn0" path="res://Ressources/Map/Global/Object/Gravestone/Down_Baked.png" id="1_6ie24"]
 [ext_resource type="Script" path="res://Scripts/MapScript/Object/Gravestone.cs" id="1_8ssgq"]
@@ -125,7 +125,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_v4v83")
 
-[node name="Gravestone" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ihj5l"]
+size = Vector3(0.272988, 0.765415, 0.664865)
+
+[node name="Gravestone" type="StaticBody3D"]
 script = ExtResource("1_8ssgq")
 
 [node name="Mesh" type="Node3D" parent="."]
@@ -160,3 +163,7 @@ text = "Info"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.30473e-08, -0.173648, 0.984808, -7.5904e-09, 0.984808, 0.173648, -1, 0, -4.37114e-08, 0.8, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419591, 0)
+shape = SubResource("BoxShape3D_ihj5l")

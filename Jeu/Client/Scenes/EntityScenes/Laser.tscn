@@ -25,8 +25,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 99)
 shape = SubResource("BoxShape3D_dte0i")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 0.9
 one_shot = true
 autostart = true
 
+[node name="Atk" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="TimeOut"]
+[connection signal="timeout" from="Atk" to="." method="_on_atk_timeout"]

@@ -211,6 +211,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_vo7at"]
 resource_name = "Exit"
@@ -482,6 +494,18 @@ tracks/10/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ColorRect:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mjmwp"]
 _data = {
@@ -530,7 +554,7 @@ mesh = SubResource("ArrayMesh_vuigq")
 skeleton = NodePath("")
 
 [node name="Tunnel" type="Node3D" parent="Ground"]
-transform = Transform3D(0.08, 0, 0, 0, -3.49691e-09, -0.08, 0, 0.08, -3.49691e-09, 0, 3.80075e-08, -0.86951)
+transform = Transform3D(0.077, 0, 0, 0, -3.36578e-09, -0.077, 0, 0.077, -3.36578e-09, 0, 3.61703e-08, -0.82748)
 metadata/_edit_group_ = true
 
 [node name="Wall_mesh_heiroglyphics" type="Node3D" parent="Ground/Tunnel"]
@@ -1038,6 +1062,7 @@ libraries = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Animation"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

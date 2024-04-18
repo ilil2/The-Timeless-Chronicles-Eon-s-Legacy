@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using JeuClient.Scripts.PlayerScripts;
 using Lib;
 
 [Tool]
@@ -13,6 +14,7 @@ public partial class Boss1Map : IMap
 	private PackedScene Pi = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl1/BossScenes/p.tscn");
 	private NavigationRegion3D Nav;
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
+	private List<Vector3> BallPos = new List<Vector3>();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -42,12 +44,14 @@ public partial class Boss1Map : IMap
 			Wall.Position = new Vector3((float)X*Rayon,0,(float)Z*Rayon);
 			Wall.Rotation += new Vector3(0,-rot,0);
 			Nav.AddChild(Wall);
+			BallPos.Add(Wall.GetNode<Node3D>("Spawn").GlobalPosition);
 		}
 	}
 
 	public override void _Process(double delta)
 	{
-		//t.Text = $"CamOnPlayer = {CamOnPlayer}\n Cam1 = {GetNode<Camera3D>("Animation/Cam1").Current}\n Cam2 = {GetNode<Camera3D>("PortalExit/Cam").Current} \n CA = {Ani.CurrentAnimation}";
+		SyncCam();
+		GetNode<Label>("t").Text = $"CamOnPlayer = {CamOnPlayer}\n Cam1 = {GetNode<Camera3D>("Animation/Cam1").Current}\n Cam2 = {GetNode<Camera3D>("PortalExit/Cam").Current} \n CA = {Ani.CurrentAnimation}";
 		if (!MapReady)
 		{
 			MapReady = true;
@@ -93,5 +97,25 @@ public partial class Boss1Map : IMap
 			}
 		}
 	}
+	
+	public void MapAtk()
+	{
+		PackedScene Ball = GD.Load<PackedScene>("res://Scenes/EntityScenes/SmartBall.tscn");
+		List<int> random = MapTool.GenerateRandomArray(0,BallPos.Count,10);
+		for(int i = 0; i<random.Count;i++)
+		{
+			Node3D ball = Ball.Instantiate<Node3D>();
+			ball.Position = BallPos[random[i]];
+			AddChild(ball);
+		}
+	}
+	private void _on_area_3d_body_entered(Node3D body)
+	{
+		if(body is PlayerScript)
+		{
+			MapAtk();
+		}
+	}
 
 }
+

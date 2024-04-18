@@ -90,4 +90,18 @@ public partial class MapTool : Node
 
 		return res;
 	}
+	public static List<int> GenerateRandomArray(int d, int f, int n)
+	{
+		Random rand = new Random();
+		List<int> res = new List<int>();
+		while(res.Count<n)
+		{
+			int r = rand.Next(d,f);
+			if(!res.Contains(r))
+			{
+				res.Add(r);
+			}
+		}
+		return res;
+	}
 }

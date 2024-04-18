@@ -6,13 +6,9 @@ namespace JeuClient.Scripts.PlayerScripts;
 
 public abstract partial class ClassScript : PlayerScript
 {
-	//Variable de base du joueur
-	protected int Id;
-	public string Pseudo;
-	public string Classe;
 	
 	protected int MaxHealth = 100;
-	protected int Heath = 100;
+	protected int Health = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
 	public int Gold = 5000;
@@ -36,6 +32,8 @@ public abstract partial class ClassScript : PlayerScript
 	protected float GravityValue = 9.8f;
 	protected float WalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
+	
+	protected (int, int) DirectionControl = (0, 0);
 
 	protected bool IsWalking;
 	protected bool IsRunning;
@@ -48,12 +46,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected float AngularAcceleration = 10;
 	protected int Acceleration = 15;
 	
-	private int _pauseTimer;
-	
-	public int GetId()
-	{
-		return Id;
-	}
+	protected int _uiTimer;
 	
 	public SpringArm3D GetCameraVect()
 	{
@@ -107,32 +100,67 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
-		GameManager.InfoJoueur["hp"] = $"{Heath}";
+		GameManager.InfoJoueur["hp"] = $"{Health}";
 		GameManager.InfoJoueur["mp"] = $"{Stamina}";
 		PlayerIsHere = true;
+	}
 
+	protected void HeathPlayer()
+	{
+		for (int i = 0; i < GameManager._nbJoueur; i++)
+		{
+			if (GameManager.InfoAutreJoueur.ContainsKey($"attack{i}"))
+			{
+				if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"heal{Id}")
+				{
+					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+					SetHealth(Health + 20);
+				}
+				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"revive")
+				{
+					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+					Revive();
+				}
+			}
+		}
 	}
 
 	protected void Pause()
 	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _pauseTimer > 20)
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _uiTimer > 20)
 		{
 			GameManager.InfoJoueur["animation"] = "idle";
 			CameraV.SpringLength = -4;
-			_pauseTimer = 0;
+			_uiTimer = 0;
 			GameManager._pausemode = true;
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
 			Control pauseMenu = pauseUI.Instantiate<Control>();
 			AddChild(pauseMenu);
 		}
-		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _pauseTimer > 20)
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _uiTimer > 20)
 		{
-			_pauseTimer = 0;
+			_uiTimer = 0;
 			GameManager._pausemode = false;
 		}
-		
-		_pauseTimer += 1;
+	}
+	
+	protected void Inventory()
+	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[12].Item2) && !GameHUD.OnInventory && _uiTimer > 20)
+		{
+			GameManager.InfoJoueur["animation"] = "idle";
+			CameraV.SpringLength = -4;
+			_uiTimer = 0;
+			GameHUD.OnInventory = true;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[12].Item2) && GameHUD.OnInventory && _uiTimer > 20)
+		{
+			_uiTimer = 0;
+			GameHUD.OnInventory = false;
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
 	}
 
 	protected void PhysicsReset()
@@ -150,6 +178,15 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			VerticalVelocity = Vector3.Down * GravityValue / 10 * (float)delta;
 		}
+	}
+	public override void Revive()
+	{
+		Position+= new Vector3(0,10,0);
+		SetHealth(GetMaxHealth());
+		SetStamina(GetMaxStamina());
+		IsDead = false;
+		GD.Print("Revive");
+		GD.Print($"HP {Health} MP {Stamina} IsDead {IsDead}");
 	}
 	
 	protected abstract void Move(double delta);
@@ -169,7 +206,18 @@ public abstract partial class ClassScript : PlayerScript
 	
 	public int GetHealth()
 	{
-		return Heath;
+		return Health;
+	}
+	public void SetHealth(int health)
+	{
+		if (health > MaxHealth)
+		{
+			Health = MaxHealth;
+		}
+		else
+		{
+			Health = health;
+		}
 	}
 	
 	public int GetMaxHealth()
@@ -180,6 +228,18 @@ public abstract partial class ClassScript : PlayerScript
 	public int GetStamina()
 	{
 		return Stamina;
+	}
+	
+	public void SetStamina(int stamina)
+	{
+		if(stamina>MaxStamina)
+		{
+			Stamina = MaxStamina;
+		}
+		else
+		{
+			Stamina = stamina;
+		}
 	}
 	
 	public int GetMaxStamina()

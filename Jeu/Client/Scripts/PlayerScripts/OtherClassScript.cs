@@ -10,10 +10,7 @@ public abstract partial class OtherClassScript : PlayerScript
 	protected AnimationPlayer AnimationOtherPlayer;
 	protected AnimationTree AnimationOtherTree;
 
-	public int Id;
 	public bool isAlive = true;
-	public string Classe;
-	private string Pseudo;
 	
 	private int Maxhealth = 100;
 	private int Maxstamina = 1000;
@@ -76,10 +73,6 @@ public abstract partial class OtherClassScript : PlayerScript
 		Id = id;
 	}
 	
-	public int GetID()
-	{
-		return Id;
-	}
 	
 	public void SetClasse(string classe)
 	{

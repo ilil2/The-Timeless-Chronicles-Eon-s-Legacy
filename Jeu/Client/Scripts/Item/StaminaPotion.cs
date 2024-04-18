@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class StaminaPotion : Potion
 {
@@ -12,5 +13,7 @@ public partial class StaminaPotion : Potion
 	public override void UsePotion()
 	{
 		GD.Print("I use StaminaPotion");
+		int newStamina = (GameManager.Joueur1 as ClassScript).GetStamina()+50;
+		(GameManager.Joueur1 as ClassScript).SetStamina(newStamina);
 	}
 }

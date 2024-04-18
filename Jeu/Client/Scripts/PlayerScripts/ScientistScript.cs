@@ -34,10 +34,13 @@ public partial class ScientistScript : ClassScript
 	public override void _Process(double delta)
 	{
 		SendPosition();
+		HeathPlayer();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_uiTimer += 1;
+		
 		Pause();
 		PhysicsReset();
 		Gravity(delta);
@@ -46,8 +49,9 @@ public partial class ScientistScript : ClassScript
 		{
 			if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 			{
-				Animation();
+				Inventory();
 				ShootLaser();
+				Animation();
 				
 				if (!_isShooting)
 				{
@@ -163,8 +167,11 @@ public partial class ScientistScript : ClassScript
 		bool forward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2);
 		bool backward = Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2);
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && AnimationState != 2)
+		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
+
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
+			DirectionControl = (0,0);
 			AnimationState = 2;
 			
 			AnimationSet(false, true, false);
@@ -174,27 +181,27 @@ public partial class ScientistScript : ClassScript
 			_shootCooldown = 0;
 			_isShooting = true;
 		}
-		else if ((left || right || forward || backward) && AnimationState != 1)
+		else if ((left || right || forward || backward) && direction != DirectionControl)
 		{
 			AnimationState = 1;
-			
-			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward)));
+			DirectionControl = direction;
+			AnimationTree.Set("parameters/Walk/blend_position", new Vector2(direction.Item1, direction.Item2));
 			
 			AnimationSet(true, false, false);
 
-			if (Conversions.BtoI(left) - Conversions.BtoI(right) != 0)
-			{
-				GameManager.InfoJoueur["animation"] = "walkside";
-			}
-			else
+			if (direction.Item2 != 0)
 			{
 				GameManager.InfoJoueur["animation"] = "walk";
 			}
+			else
+			{
+				GameManager.InfoJoueur["animation"] = "walkside";
+			}
 		}
-		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && !(left || right || forward || backward) && AnimationState != 0)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
 		{
 			AnimationState = 0;
-			
+			DirectionControl = (0,0);
 			AnimationSet(false, false, true);
 			
 			GameManager.InfoJoueur["animation"] = "idle";
@@ -211,13 +218,14 @@ public partial class ScientistScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Heath -= damage;
-		if (Heath <= 0)
+		Health -= damage;
+		if (Health <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;
-			//AnimationSet(false, false, false, true); TODO: Add death animation
+			AnimationSet(false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
+			GetNode<Timer>("DeathTimer").Start();
 		}
 	}
 	
@@ -227,5 +235,10 @@ public partial class ScientistScript : ClassScript
 		{
 			Stamina += 5;
 		}
+	}
+	
+	private void _on_death_timer_timeout()
+	{
+		Position -= new Vector3(0,10,0);
 	}
 }
