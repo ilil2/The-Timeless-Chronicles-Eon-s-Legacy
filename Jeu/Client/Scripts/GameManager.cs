@@ -50,7 +50,7 @@ public partial class GameManager : Node3D
 	protected static bool conn = true;					//connexion au serveur principal
 	private bool join = false;					//partie rejointe
 	
-	public static int state = 0;
+	public static int state = -1;
 	
 	public static Socket soc2;
 	public static IPEndPoint iep2;
@@ -178,6 +178,10 @@ public partial class GameManager : Node3D
 
 		PackedScene Music = GD.Load<PackedScene>("res://Scenes/SoundManager.tscn");
 		AddChild(Music.Instantiate<Node>());
+		
+		PackedScene MainScreenScene = GD.Load<PackedScene>("res://Scenes/UI/MainScreen.tscn");
+		Control MainScreen = MainScreenScene.Instantiate<Control>();
+		AddChild(MainScreen);
 	}
 	
 	//process
@@ -189,7 +193,6 @@ public partial class GameManager : Node3D
 			{
 				State0.State();
 			}
-
 			else if (state == 1)
 			{
 				PackedScene LobbyScene = GD.Load<PackedScene>("res://Scenes/UI/LobbyManager.tscn");
