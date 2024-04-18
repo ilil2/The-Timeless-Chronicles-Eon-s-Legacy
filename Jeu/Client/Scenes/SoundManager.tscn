@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbwftioepqmbx"]
+
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="1_b33dg"]
+[ext_resource type="AudioStream" uid="uid://q371chwrwsa4" path="res://Ressources/Sound_Design/Music/TheShopSong.wav" id="2_bk7g2"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_b33dg")
+
+[node name="Shop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bk7g2")

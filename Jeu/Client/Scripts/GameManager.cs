@@ -175,6 +175,9 @@ public partial class GameManager : Node3D
 		
 		PackedScene GameHud = GD.Load<PackedScene>("res://Scenes/HUD/GameHUD.tscn");
 		_GameHud = GameHud.Instantiate<Control>();
+
+		PackedScene Music = GD.Load<PackedScene>("res://Scenes/SoundManager.tscn");
+		AddChild(Music.Instantiate<Node>());
 	}
 	
 	//process

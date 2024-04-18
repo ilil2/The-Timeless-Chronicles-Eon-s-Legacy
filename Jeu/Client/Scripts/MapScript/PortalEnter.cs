@@ -10,6 +10,8 @@ public partial class PortalEnter : Node3D
 	[Export] private bool PlayOpen = false;
 	private bool open = false;
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
+    private AudioStreamPlayer3D _openSound;
+    
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,7 +21,7 @@ public partial class PortalEnter : Node3D
 		}
 		AnimationPortal = GetNode<AnimationPlayer>("Portal/AnimationPlayer");
 		Animationn = GetNode<AnimationPlayer>("AnimationPlayer");
-		
+		_openSound = GetNode<AudioStreamPlayer3D>("Open");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +31,7 @@ public partial class PortalEnter : Node3D
 		{
 			AnimationPortal.Play("Open");
 			Animationn.Play("Enter");
+			_openSound.Play();
 			PlayOpen = false;
 			open = true;
 		}
