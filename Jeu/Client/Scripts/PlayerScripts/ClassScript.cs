@@ -116,7 +116,7 @@ public abstract partial class ClassScript : PlayerScript
 					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
 					SetHealth(Health + 20);
 				}
-				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"revive")
+				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"revive{Id}")
 				{
 					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
 					Revive();

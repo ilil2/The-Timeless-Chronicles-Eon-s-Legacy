@@ -60,8 +60,7 @@ public partial class Laser : Node3D
 					CanAtk = false;
 					Atk.Start();
 					GD.Print("Revive");
-					GameManager.InfoJoueur["attack"] = $"revive";
-					//GameManager.InfoJoueur["attack"] = $"revive{gravestone.Pseudo}";
+					GameManager.InfoJoueur["attack"] = $"revive{gravestone.ID}";
 				}
 				else
 				{

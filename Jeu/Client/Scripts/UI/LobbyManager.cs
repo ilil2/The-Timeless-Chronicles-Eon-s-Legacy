@@ -121,6 +121,6 @@ public partial class LobbyManager : Control
 	public void RotateSun()
 	{
 		Vector2 Rotation = GetMouseAngle();
-		Sun.Rotation = new Vector3(Sun.Rotation.X,-Rotation.X/10,0);
+		Sun.Rotation = new Vector3(-Rotation.Y/20,-Rotation.X/10,0);
 	}
 }
