@@ -36,9 +36,9 @@ public partial class Mummy : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
+	public override void TakeDamage(int damage, bool send = false)
 	{
-		GameManager.InfoJoueur["ia"] += $"{ID}°TK§{damage}=";
+		
 		if(Alive)
 		{
 			HP -= damage;
@@ -54,6 +54,12 @@ public partial class Mummy : MobScript
 			{
 				Ani.Play("Hit");
 			}
+
+			if (send)
+			{
+				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}=";
+			}
+			
 		}
 	}
 }

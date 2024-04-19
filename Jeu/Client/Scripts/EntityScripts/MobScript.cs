@@ -198,7 +198,7 @@ public abstract partial class MobScript : CharacterBody3D
 		}
 	}
 	
-	public virtual void TakeDamage(int damage)
+	public virtual void TakeDamage(int damage, bool send = false)
 	{
 		HP -= damage;
 		GD.Print("Je suis la");
@@ -300,7 +300,7 @@ public abstract partial class MobScript : CharacterBody3D
 					if(id==ID)
 					{
 						GD.Print(damage);
-						TakeDamage(damage);
+						TakeDamage(damage,true);
 					}
 				}
 			}

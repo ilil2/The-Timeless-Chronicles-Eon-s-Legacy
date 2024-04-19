@@ -62,7 +62,7 @@ public partial class Listen2 : GameManager
 
 			if (InfoJoueur["id"] != id)
 			{
-				InfoAutreJoueur["ia"] = rep;
+				InfoAutreJoueur[$"ia{id}"] = rep;
 			}
 		}
 		

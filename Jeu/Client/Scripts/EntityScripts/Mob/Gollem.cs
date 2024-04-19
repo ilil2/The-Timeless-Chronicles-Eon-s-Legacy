@@ -43,7 +43,7 @@ public partial class Gollem : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
+	public override void TakeDamage(int damage, bool send = false)
 	{
 		if(Alive)
 		{

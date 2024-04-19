@@ -36,7 +36,7 @@ public partial class Skeleton : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
+	public override void TakeDamage(int damage, bool send = false)
 	{
 		if(Alive)
 		{
