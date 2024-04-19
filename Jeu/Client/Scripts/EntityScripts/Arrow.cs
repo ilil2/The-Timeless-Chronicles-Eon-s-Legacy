@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class Arrow : RigidBody3D
 {
@@ -8,6 +9,8 @@ public partial class Arrow : RigidBody3D
 	
 	private float _changeRotationValue;
 	private bool _isHit;
+	public bool IsPlayer = false;
+	public int Damage = 10;
 	public override void _PhysicsProcess(double delta)
 	{
 		if (LinearVelocity.Y < 0 && _changeRotationValue < 1f)
@@ -40,9 +43,17 @@ public partial class Arrow : RigidBody3D
 				LinearVelocity = new Vector3(0, 0, 0);
 			}
 		}
-		else if (body is not ArcherScript && body is not ScientistScript && body is not KnightScript && body is not AssassinScript && body is not Arrow)
+		else if (body is not ClassScript && body is not Arrow && body is not PlayerWeapon)
 		{
-			QueueFree();
+			if (body is OtherClassScript)
+			{
+				QueueFree();
+			}
+			else if (body is MobScript mob)
+			{
+				mob.TakeDamage(Damage);
+				QueueFree();
+			}
 		}
 	}
 }
