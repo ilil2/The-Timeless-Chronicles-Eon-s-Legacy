@@ -66,6 +66,10 @@ public abstract partial class MobScript : CharacterBody3D
 		
 		if(Alive)
 		{
+			if(state==1 || state==2 || state == 3)
+			{
+				receive();
+			}
 			if(Player!=null)
 			{
 				LastPlayer = Player;
@@ -279,12 +283,14 @@ public abstract partial class MobScript : CharacterBody3D
 	public void receive()
 	{
 		string rec = GameManager.InfoAutreJoueur["ia"];
+		GD.Print(rec);
 		GameManager.InfoAutreJoueur["ia"] = "";
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
 			if (a!="")
 			{
+				GD.Print(a);
 				string[] firstline = a.Split("°");
 				string[] secondline = firstline[1].Split("§");
 				int id = int.Parse(firstline[0]);
@@ -293,6 +299,7 @@ public abstract partial class MobScript : CharacterBody3D
 					int damage = int.Parse(secondline[1]);
 					if(id==ID)
 					{
+						GD.Print(damage);
 						TakeDamage(damage);
 					}
 				}

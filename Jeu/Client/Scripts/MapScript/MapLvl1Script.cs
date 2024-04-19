@@ -164,11 +164,11 @@ public partial class MapLvl1Script : IMap
 						string name = "";
 						if(m==0)
 						{
-							name = "FogSkeleton";
+							name = "Mummy";
 						}
 						else
 						{
-							name = "Gollem";
+							name = "Mummy";
 						}
 						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();
@@ -182,25 +182,6 @@ public partial class MapLvl1Script : IMap
 		}
 	}
 	
-	private string UpdateMob()
-	{
-		string res = "";
-		foreach (var mob in MobList)
-		{
-			string sub = "";
-			sub += (mob as MobScript).ID.ToString();
-			sub += "°";
-			sub += (mob as MobScript).state.ToString();
-			sub += "=";
-			sub += $"{mob.Position.X}t{mob.Rotation.Z}";
-			sub += "§";
-			res += sub;
-			string rec = GameManager.InfoAutreJoueur["ia"];
-			
-		}
-
-		return res;
-	}
 	private void DayCycle()
 	{
 		DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");

@@ -237,7 +237,6 @@ bind/64/pose = Transform3D(-98.8727, 8.2036, -12.526, -13.3529, -10.4571, 98.551
 [sub_resource type="Animation" id="Animation_p8n18"]
 resource_name = "Atk"
 length = 2.33333
-loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = true
