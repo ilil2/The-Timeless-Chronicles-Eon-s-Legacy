@@ -45,13 +45,13 @@ public partial class Arrow : RigidBody3D
 		}
 		else if (body is not ClassScript && body is not Arrow && body is not PlayerWeapon)
 		{
-			if (body is OtherClassScript)
-			{
-				QueueFree();
-			}
-			else if (body is MobScript mob)
+			if (body is MobScript mob && IsPlayer)
 			{
 				mob.TakeDamage(Damage);
+				QueueFree();
+			}
+			else
+			{
 				QueueFree();
 			}
 		}
