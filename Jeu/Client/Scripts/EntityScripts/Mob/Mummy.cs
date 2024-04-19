@@ -38,6 +38,7 @@ public partial class Mummy : MobScript
 	}
 	public override void TakeDamage(int damage)
 	{
+		GameManager.InfoJoueur["ia"] += $"{ID}°TK§{damage}=";
 		if(Alive)
 		{
 			HP -= damage;

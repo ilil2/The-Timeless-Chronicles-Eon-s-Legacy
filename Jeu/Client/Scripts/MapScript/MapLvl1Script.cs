@@ -119,6 +119,7 @@ public partial class MapLvl1Script : IMap
 			//CreateFog();
 			DayCycle();
 			//RenderDist();
+			//GameManager.InfoJoueur["ia"] = UpdateMob();
 		}
 		
 	}
@@ -181,6 +182,25 @@ public partial class MapLvl1Script : IMap
 		}
 	}
 	
+	private string UpdateMob()
+	{
+		string res = "";
+		foreach (var mob in MobList)
+		{
+			string sub = "";
+			sub += (mob as MobScript).ID.ToString();
+			sub += "°";
+			sub += (mob as MobScript).state.ToString();
+			sub += "=";
+			sub += $"{mob.Position.X}t{mob.Rotation.Z}";
+			sub += "§";
+			res += sub;
+			string rec = GameManager.InfoAutreJoueur["ia"];
+			
+		}
+
+		return res;
+	}
 	private void DayCycle()
 	{
 		DirectionalLight3D Sun = GetNode<DirectionalLight3D>("Sun");

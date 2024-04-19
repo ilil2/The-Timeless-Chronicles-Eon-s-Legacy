@@ -18,6 +18,7 @@ public abstract partial class MobScript : CharacterBody3D
 	public bool Alive = true;
 	private float TimerDeath = -0.1f;
 	protected AnimationPlayer Ani;
+	public bool CanChange = false;
 	
 	//debug
 	public bool DebugMode = true; // variable debug mode
@@ -62,6 +63,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
+		
 		if(Alive)
 		{
 			if(Player!=null)
@@ -190,48 +192,6 @@ public abstract partial class MobScript : CharacterBody3D
 				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 			}
 		}
-		/*
-		if(PlayerSet && Alive)
-		{
-			if(Distance(Player.Position,this.Position)<=DistVue)
-			{
-				if (IsTooFar && Agro > 0) Agro -= 1;
-				if (Agro <= 0) 
-				{
-					state = 0;
-					if (Distance(Position,PosInnit)<1 && state == 0) state = -1;
-					else Nav.TargetPosition = PosInnit;
-				}
-				if (state == -1) 
-				{
-					Rotation = RotInnit;
-				}
-				else
-				{
-					var dir = new Vector3();  //Pathfiding
-					var NextPos = Nav.GetNextPathPosition();
-					dir = NextPos - GlobalPosition;
-					dir = dir.Normalized();
-					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
-					MoveAndSlide();
-					
-					try
-					{
-						LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-					}
-					catch
-					{
-						GD.Print("Still Error");
-					}
-					Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);  
-				}
-			}
-		}
-		if(!PlayerSet && GameManager.Joueur1!=null && GameManager.Joueur1.IsInsideTree())
-		{
-			PlayerSet = true;
-			GD.Print("Player Set !");
-		}*/
 	}
 	
 	public virtual void TakeDamage(int damage)
@@ -314,6 +274,30 @@ public abstract partial class MobScript : CharacterBody3D
 			}
 		}
 		return res;
+	}
+
+	public void receive()
+	{
+		string rec = GameManager.InfoAutreJoueur["ia"];
+		GameManager.InfoAutreJoueur["ia"] = "";
+		string[] ia = rec.Split("=");
+		foreach (var a in ia)
+		{
+			if (a!="")
+			{
+				string[] firstline = a.Split("°");
+				string[] secondline = firstline[1].Split("§");
+				int id = int.Parse(firstline[0]);
+				if(secondline[0]=="TK")
+				{
+					int damage = int.Parse(secondline[1]);
+					if(id==ID)
+					{
+						TakeDamage(damage);
+					}
+				}
+			}
+		}
 	}
 	
 }

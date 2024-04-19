@@ -1,3 +1,4 @@
+using Godot;
 using Lib;
 
 public partial class Listen2 : GameManager
@@ -61,7 +62,7 @@ public partial class Listen2 : GameManager
 
 			if (InfoJoueur["id"] != id)
 			{
-				InfoAutreJoueur[$"ia{id}"] = rep;
+				InfoAutreJoueur[$"ia"] = rep;
 			}
 		}
 		
