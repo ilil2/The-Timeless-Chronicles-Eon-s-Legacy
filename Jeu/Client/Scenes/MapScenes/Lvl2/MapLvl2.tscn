@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_mb11d"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5dgw"]
+height = 4.0
+radius = 4.0
+
 [sub_resource type="Environment" id="Environment_pdaq0"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
@@ -48,24 +52,31 @@ top_radius = 300.0
 bottom_radius = 300.0
 height = 0.5
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5dgw"]
-height = 4.0
-radius = 4.0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_2aotq"]
 radius = 4.0
 
 [sub_resource type="Animation" id="Animation_lx3cg"]
 resource_name = "Exit"
-length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../RotationGate/DwarfGate/Exit:exit")
+tracks/0/path = NodePath("../Exit:exit")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../RotationGate/DwarfGate:PlayOpen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -76,7 +87,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../RotationGate/DwarfGate/Exit:exit")
+tracks/0/path = NodePath("../Exit:exit")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -84,6 +95,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../RotationGate/DwarfGate:PlayOpen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jhhj"]
@@ -94,6 +117,13 @@ _data = {
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
+
+[node name="Exit" parent="." instance=ExtResource("8_mb11d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, -0.0493798)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_i5dgw")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.693377, 0.437999, -0.572176, 5.6933e-09, 0.794055, 0.607846, 0.720575, 0.421467, -0.550579, 0, 2.76815, 9.26053)
@@ -119,13 +149,7 @@ mesh = SubResource("CylinderMesh_7pr53")
 
 [node name="DwarfGate" parent="RotationGate" instance=ExtResource("9_la0ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
-
-[node name="Exit" parent="RotationGate/DwarfGate" instance=ExtResource("8_mb11d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0493798)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationGate/DwarfGate/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("CylinderShape3D_i5dgw")
+PlayOpen = true
 
 [node name="Spawn" type="Node3D" parent="."]
 

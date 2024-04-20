@@ -87,7 +87,16 @@ public partial class DialogueArea : Area3D
 
 		SaveDialogue.Emax = (c1, c2);
 		GD.Print($"{c1} {c2}");
-		return Dialogue[c1.ToString()][c2.ToString()];
+		if (Dialogue.ContainsKey(c1.ToString()))
+		{
+			if (Dialogue[c1.ToString()].ContainsKey(c2.ToString()))
+			{
+				return Dialogue[c1.ToString()][c2.ToString()];
+			}
+		}
+
+		return "Dialogue not found";
+
 	}
 
 	private void _on_skip_button_pressed()
