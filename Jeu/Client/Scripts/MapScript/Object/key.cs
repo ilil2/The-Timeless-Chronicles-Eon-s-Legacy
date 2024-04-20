@@ -36,7 +36,7 @@ public partial class key : IRender
 		if(body is ClassScript || body is OtherClassScript)
 		{
 			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
-			QueueFree();
+			Visible = false;
 		}
 	}
 }

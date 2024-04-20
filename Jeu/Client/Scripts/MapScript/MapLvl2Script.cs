@@ -93,7 +93,10 @@ public partial class MapLvl2Script : IMap
 	{
 		//GD.Print(LoadingStage);
 		SyncCam();
-		CamOnPlayer = true;
+		if(!CanExit && KeyCollected()==3)
+		{
+			CanExit = true;
+		}
 	}
 	
 	public override List<(int, int, int)> GetSpawnLocation()
@@ -293,6 +296,19 @@ public partial class MapLvl2Script : IMap
 		StaticBody3D SafeArea = GetNode<StaticBody3D>("SafeArea");
 		RemoveChild(SafeArea);
 		SafeArea.QueueFree();
+	}
+	
+	private int KeyCollected()
+	{
+		int res = 0;
+		for(int i = 0; i<KeyList.Count;i++)
+		{
+			if(!KeyList[i].Visible)
+			{
+				res++;
+			}
+		}
+		return res;
 	}
 	
 	
