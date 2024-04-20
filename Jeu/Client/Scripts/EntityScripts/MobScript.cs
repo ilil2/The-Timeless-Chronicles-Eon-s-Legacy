@@ -198,13 +198,29 @@ public abstract partial class MobScript : CharacterBody3D
 		}
 	}
 	
-	public virtual void TakeDamage(int damage, bool send = false)
+	public virtual void TakeDamage(int damage, bool send = true)
 	{
-		HP -= damage;
-		GD.Print("Je suis la");
-		if(HP<=0)
+		if(Alive)
 		{
-			Ani.Stop();
+			HP -= damage;
+			GD.Print(HP);
+			if(HP<=0)
+			{
+				GD.Print("Mort");
+				Alive = false;
+				Ani.Stop();
+				Ani.Play("Death");
+			}
+			else
+			{
+				Ani.Play("Hit");
+			}
+
+			if (send)
+			{
+				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}=";
+			}
+			
 		}
 	}
 	
@@ -300,7 +316,7 @@ public abstract partial class MobScript : CharacterBody3D
 					if(id==ID)
 					{
 						GD.Print(damage);
-						TakeDamage(damage,true);
+						TakeDamage(damage,false);
 					}
 				}
 			}
