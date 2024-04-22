@@ -3,13 +3,17 @@ using System;
 
 public partial class FogSkeleton : MobScript
 {
+	private AnimationTree AniTree;
+	private bool Fog;
 	public override void _Ready()
 	{
 		Ready();
+		AniTree = GetNode<AnimationTree>("AnimationTree");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
 		PhysicsProcess(delta);
+		Fog = (GetParent() as TestFog).Fog;
 	}
 	public override void _Process(double delta) 
 	{

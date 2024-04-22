@@ -1414,7 +1414,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0yxut"]
 advance_mode = 2
-advance_condition = &"WhenStandUp"
+advance_condition = &"Show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehjyc"]
 switch_mode = 2
@@ -1422,7 +1422,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xdc66"]
 advance_mode = 2
-advance_condition = &"WhenStandDown"
+advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8l8km"]
 switch_mode = 2
@@ -1460,11 +1460,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nrjl7"]
 advance_mode = 2
-advance_condition = &"WhenStandDown"
+advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_foq8o"]
 advance_mode = 2
-advance_condition = &"WhenStandDown"
+advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fi5uo"]
 states/Atk/node = SubResource("AnimationNodeAnimation_1mi8a")
@@ -1739,8 +1739,8 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_fi5uo")
 anim_player = NodePath("../Animation")
-parameters/conditions/WhenStandDown = false
-parameters/conditions/WhenStandUp = false
+parameters/conditions/Hide = false
+parameters/conditions/Show = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
