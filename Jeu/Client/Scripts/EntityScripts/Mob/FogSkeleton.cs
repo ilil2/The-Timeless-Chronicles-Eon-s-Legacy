@@ -5,6 +5,7 @@ public partial class FogSkeleton : MobScript
 {
 	private AnimationTree AniTree;
 	private bool Fog;
+	private bool IsHide = true;
 	public override void _Ready()
 	{
 		Ready();
@@ -14,25 +15,38 @@ public partial class FogSkeleton : MobScript
 	{
 		PhysicsProcess(delta);
 		Fog = (GetParent() as TestFog).Fog;
+		CanDo = !IsHide;
 	}
 	public override void _Process(double delta) 
 	{
 		Process(delta);
-		if(Alive&&(state == 1 || state == 3 || state == 0))
+		if(!Fog && !IsHide)
+		{
+			AniTree.Set("parameters/conditions/Hide",true);
+			AniTree.Set("parameters/conditions/Show",false);
+			IsHide = true;
+		}
+		else if(Fog && IsHide)
+		{
+			AniTree.Set("parameters/conditions/Hide",false);
+			AniTree.Set("parameters/conditions/Show",true);
+			IsHide = false;
+		}
+		if(!IsHide&&Alive&&(state == 1 || state == 3 || state == 0))
 		{
 			if(Ani.CurrentAnimation != "Hit" && Ani.CurrentAnimation!="Walk")
 			{
 				Ani.Play("Walk");
 			}
 		}
-		if(state == 2)
+		if(!IsHide&&state == 2)
 		{
 			if(Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Hit" && Alive)
 			{
 				Ani.Play("Atk");
 			}
 		}
-		if(state == -1)
+		if(!IsHide&&state == -1)
 		{
 			
 		}

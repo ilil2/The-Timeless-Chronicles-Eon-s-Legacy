@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdqj78jpma7ha"]
+[gd_scene load_steps=8 format=3 uid="uid://cf6tlli31st37"]
 
 [ext_resource type="Script" path="res://TestFog.cs" id="1_dammg"]
 [ext_resource type="PackedScene" uid="uid://8yb22krhjsle" path="res://Scenes/EntityScenes/Mob/FogSkeleton.tscn" id="3_gym6a"]
@@ -58,3 +58,4 @@ shadow_enabled = true
 environment = SubResource("Environment_7ugp7")
 
 [node name="FogSkeleton" parent="." instance=ExtResource("3_gym6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.646064, 0)

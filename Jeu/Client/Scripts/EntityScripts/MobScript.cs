@@ -21,6 +21,7 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	//debug
 	public bool DebugMode = true; // variable debug mode
+	public bool CanDo = true;
 	
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
@@ -156,7 +157,7 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
-		if(Alive)
+		if(CanDo&&Alive)
 		{
 			if(state==0 || state==1 || state == 3)
 			{
@@ -191,7 +192,7 @@ public abstract partial class MobScript : CharacterBody3D
 			}
 		}
 		/*
-		if(PlayerSet && Alive)
+		if(CanDo && PlayerSet && Alive)
 		{
 			if(Distance(Player.Position,this.Position)<=DistVue)
 			{

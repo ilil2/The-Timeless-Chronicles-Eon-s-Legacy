@@ -163,7 +163,7 @@ public partial class MapLvl1Script : IMap
 						string name = "";
 						if(m==0)
 						{
-							name = "FogSkeleton";
+							name = "Mummy";
 						}
 						else
 						{
