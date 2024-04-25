@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class OtherKnightScript : OtherClassScript
 {
@@ -52,12 +51,10 @@ public partial class OtherKnightScript : OtherClassScript
 			case "damage":
 				OtherAnimationSet(false, false, false, false, true);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
-				GD.Print("damage");
 				break;
 			case "damageblock":
 				OtherAnimationSet(false, false, false, false, false, true);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
-				GD.Print("damageblock");
 				break;
 		}
 	}

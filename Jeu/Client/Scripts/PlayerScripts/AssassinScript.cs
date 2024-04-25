@@ -14,9 +14,6 @@ public partial class AssassinScript : ClassScript
 	{
 		InitPlayer();
 		
-		AnimationTree = GetNode<AnimationTree>("AnimationTree");
-		AnimationTree.Active = true;
-		
 		WalkSpeed = 5f;
 		RunSpeed = 8f;
 		DashPower = 120.0f;
@@ -143,7 +140,7 @@ public partial class AssassinScript : ClassScript
 
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 2;
@@ -155,14 +152,14 @@ public partial class AssassinScript : ClassScript
 				Stamina += 100;
 			}
 		}
-		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3)
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3 && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
 			AnimationSet(false, true, false, false);
 			GameManager.InfoJoueur["animation"] = "sprint";
 		}
-		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && direction != DirectionControl)
+		else if (!Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && (left || right || forward || backward) && direction != DirectionControl && AnimationState != -2)
 		{
 			AnimationState = 1;
 			DirectionControl = direction;
@@ -179,7 +176,7 @@ public partial class AssassinScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && (!(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward) || AnimationState != 3) && AnimationState != 0)
+		else if (!Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && (!(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward) || AnimationState != 3) && AnimationState != 0 && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;
@@ -188,13 +185,14 @@ public partial class AssassinScript : ClassScript
 		}
 	}
 	
-	private void AnimationSet(bool walk, bool sprint, bool hit, bool idle, bool death = false)
+	private void AnimationSet(bool walk, bool sprint, bool hit, bool idle, bool damage = false, bool death = false)
 	{
 		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
 		AnimationTree.Set("parameters/conditions/WhenSprint", sprint);
 		AnimationTree.Set("parameters/conditions/WhenHit", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
+		AnimationTree.Set("parameters/conditions/Damage", damage);
 	}
 	
 	public override void TakeDamage(int damage)
@@ -204,9 +202,16 @@ public partial class AssassinScript : ClassScript
 		{
 			IsDead = true;
 			AnimationState = -1;
-			AnimationSet(false, false, false, false, true);
+			AnimationSet(false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 			GetNode<Timer>("DeathTimer").Start();
+		}
+		else
+		{
+			AnimationState = -2;
+			AnimationSet(false, false, false, false, true);
+			GameManager.InfoJoueur["animation"] = "damage";
+			DamageTimer.Start();
 		}
 	}
 	
@@ -232,5 +237,10 @@ public partial class AssassinScript : ClassScript
 	private void _on_death_timer_timeout()
 	{
 		Position -= new Vector3(0,10,0);
+	}
+	
+	private void _on_damage_timer_timeout()
+	{
+		AnimationState = -3;
 	}
 }

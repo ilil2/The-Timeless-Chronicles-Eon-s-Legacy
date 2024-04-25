@@ -6,16 +6,10 @@ using Lib;
 public partial class KnightScript : ClassScript
 {
 	private bool _isBlocking;
-	private Timer _damageTimer;
 
 	public override void _Ready()
 	{
 		InitPlayer();
-		
-		_damageTimer = GetNode<Timer>("DamageTimer");
-		
-		AnimationTree = GetNode<AnimationTree>("AnimationTree");
-		AnimationTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -182,7 +176,7 @@ public partial class KnightScript : ClassScript
 				AnimationState = -2;
 				AnimationSet(false, false, false, false, true);
 				GameManager.InfoJoueur["animation"] = "damage";
-				_damageTimer.Start();
+				DamageTimer.Start();
 			}
 		}
 		else
@@ -203,7 +197,7 @@ public partial class KnightScript : ClassScript
 					AnimationState = -2;
 					AnimationSet(false, false, false, false, false, true);
 					GameManager.InfoJoueur["animation"] = "damageblock";
-					_damageTimer.Start();
+					DamageTimer.Start();
 				}
 			}
 			else
@@ -211,7 +205,7 @@ public partial class KnightScript : ClassScript
 				AnimationState = -2;
 				AnimationSet(false, false, false, false, false, true);
 				GameManager.InfoJoueur["animation"] = "damageblock";
-				_damageTimer.Start();
+				DamageTimer.Start();
 			}
 		}
 	}

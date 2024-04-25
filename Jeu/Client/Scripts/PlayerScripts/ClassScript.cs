@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using Lib;
 
@@ -11,7 +10,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected int Health = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
-	protected int damage = 10;
+	protected int Damage = 10;
 	public int Gold = 5000;
 	
 	//Variable des objets
@@ -23,6 +22,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected Node3D PlayerMesh;
 	protected AnimationPlayer AnimationPlayer;
 	protected AnimationTree AnimationTree;
+	protected Timer DamageTimer;
 	protected int AnimationState = -1;
 	
 	//Variable de camera
@@ -77,6 +77,10 @@ public abstract partial class ClassScript : PlayerScript
 		Direction = Vector3.Back.Rotated(Vector3.Up, CameraH.GlobalTransform.Basis.GetEuler().Y);
 		
 		PlayerMesh = GetNode<Node3D>("Player");
+		
+		DamageTimer = GetNode<Timer>("DamageTimer");
+		AnimationTree = GetNode<AnimationTree>("AnimationTree");
+		AnimationTree.Active = true;
 	}
 
 	protected void Zoom(InputEvent @event)
