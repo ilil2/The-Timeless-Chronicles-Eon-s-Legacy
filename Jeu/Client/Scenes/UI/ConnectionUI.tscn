@@ -86,6 +86,13 @@ grow_vertical = 2
 texture = ExtResource("2_7w2oe")
 expand_mode = 1
 
+[node name="BackgroundColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0823529, 0.0823529, 0.0823529, 0.407843)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_miaq4")
@@ -418,7 +425,7 @@ offset_left = 0.384004
 offset_top = -0.111992
 offset_right = 0.255997
 offset_bottom = -0.240058
-color = Color(0.145098, 0.145098, 0.145098, 0.756863)
+color = Color(0.145098, 0.145098, 0.145098, 0.921569)
 
 [node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningBackground"]
 layout_mode = 1

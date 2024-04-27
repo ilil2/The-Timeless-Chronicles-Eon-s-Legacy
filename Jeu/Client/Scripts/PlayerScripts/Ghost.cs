@@ -1,30 +1,30 @@
-using System;
 using Godot;
+using System;
 
-public partial class SpecCam : Camera3D
+public partial class Ghost : Camera3D
 {
 	private float _shiftMultiplier = 2.5f;
 	private float _altMultiplier = 1.0f / 2.5f; 
 	private float sensitivity = 0.25f;
 
-	private Vector2 _mousePosition = new Vector2(0.0f, 0.0f);
-	private float _totalPitch = 0.0f;
+	private Vector2 _mousePosition;
+	private float _totalPitch;
 
-	private Vector3 _direction = new Vector3(0.0f, 0.0f, 0.0f);
-	private Vector3 _lastDirection = new Vector3(0.0f, 0.0f, 0.0f);
-	private Vector3 _velocity = new Vector3(0.0f, 0.0f, 0.0f);
+	private Vector3 _direction;
+	private Vector3 _lastDirection;
+	private Vector3 _velocity;
 	private int _acceleration = 30;
 	private int _deceleration = -10;
 	private int _velMultiplier = 4;
 
-	private bool _z = false;
-	private bool _s = false;
-	private bool _q = false;
-	private bool _d = false;
-	private bool _a = false;
-	private bool _e = false;
-	private bool _shift = false;
-	private bool _alt = false;
+	private bool _z;
+	private bool _s;
+	private bool _q;
+	private bool _d;
+	private bool _a;
+	private bool _e;
+	private bool _shift;
+	private bool _alt;
 
 	public override void _Input(InputEvent @event)
 	{
@@ -78,7 +78,6 @@ public partial class SpecCam : Camera3D
 				case Key.Space:
 					_e = eventInputKey.Pressed;
 					break;
-					
 			}
 		}
 	}
@@ -87,7 +86,6 @@ public partial class SpecCam : Camera3D
 	{
 		_updateMouseLook();
 		_updateMovement(delta);
-		UpdateLabel(delta);
 	}
 	
 	private float _booltofloat(bool b)
@@ -154,13 +152,5 @@ public partial class SpecCam : Camera3D
 			RotateObjectLocal(new Vector3(1f,0f,0f), Mathf.DegToRad(-pitch));
 			
 		}
-	}
-	private void UpdateLabel(double delta)
-	{
-		Label FPS = GetNode<Label>("FPS");
-		Label POS = GetNode<Label>("POS");
-		
-		FPS.Text = $"FPS: {(int)(1/delta)}";
-		POS.Text = $"X: {MathF.Round(Position.X,2)}  Y: {MathF.Round(Position.Y,2)}  Z: {MathF.Round(Position.Z,2)}";
 	}
 }
