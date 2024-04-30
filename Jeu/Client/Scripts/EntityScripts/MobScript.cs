@@ -77,6 +77,7 @@ public abstract partial class MobScript : CharacterBody3D
 				LastPlayer = Player;
 			}
 			Player = GetPlayer(SetRay());
+			SendInfo();
 			if(Player == null && state!=0)
 			{
 				if(Agro<=0)
@@ -164,7 +165,6 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
-		SendInfo();
 		if(CanDo&&Alive)
 		{
 			if(state==0 || state==1 || state == 3)
@@ -272,7 +272,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void SendInfo()
 	{
-		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript)
+		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript && LastPlayer!=Player)
 		{
 			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
 		}
