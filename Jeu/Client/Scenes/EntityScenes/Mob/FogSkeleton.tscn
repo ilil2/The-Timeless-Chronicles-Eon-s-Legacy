@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://8yb22krhjsle"]
+[gd_scene load_steps=41 format=3 uid="uid://8yb22krhjsle"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/FogSkeleton.cs" id="1_5spwe"]
 [ext_resource type="Texture2D" uid="uid://c2a5j8nf7mgeb" path="res://Ressources/Entity/Skeleton2/skeleton2_DiffMap.png" id="1_rq30v"]
@@ -755,6 +755,18 @@ tracks/28/path = NodePath("Armature/Skeleton3D:mixamorig_RightToeBase")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = PackedFloat32Array(0, 1, 0.688784, -0.0224071, -0.00592818, 0.724596)
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Armature:position")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.4, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2j51g"]
 resource_name = "Idle"
@@ -963,6 +975,45 @@ tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = PackedFloat32Array(0, 1, 0.236171, -0.10664, 0.021506, 0.965603)
 
+[sub_resource type="Animation" id="Animation_irtxe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:IsHide")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_7sv0j"]
 resource_name = "StandUp"
 length = 3.1
@@ -1169,10 +1220,47 @@ tracks/28/path = NodePath("Armature/Skeleton3D:mixamorig_RightToeBase")
 tracks/28/interp = 1
 tracks/28/loop_wrap = true
 tracks/28/keys = PackedFloat32Array(0, 1, 0.688784, -0.0224071, -0.00592818, 0.724596, 0.0333333, 1, 0.688784, -0.0224071, -0.00592818, 0.724596, 0.0666667, 1, 0.68917, -0.021312, -0.00552243, 0.724265, 0.1, 1, 0.689618, -0.0200822, -0.0050925, 0.723877, 0.133333, 1, 0.690051, -0.018655, -0.00460561, 0.723506, 0.166667, 1, 0.690511, -0.0170257, -0.00407248, 0.72311, 0.2, 1, 0.691278, -0.0154931, -0.0036805, 0.722413, 0.233333, 1, 0.692205, -0.0140051, -0.00340589, 0.721557, 0.266667, 1, 0.693335, -0.0126719, -0.00331756, 0.720496, 0.3, 1, 0.694746, -0.0115976, -0.00348649, 0.719153, 0.333333, 1, 0.696509, -0.0107947, -0.00393833, 0.717456, 0.366667, 1, 0.698794, -0.0103148, -0.00471731, 0.715234, 0.4, 1, 0.701416, -0.00979989, -0.00563943, 0.712662, 0.433333, 1, 0.704397, -0.00899053, -0.00660285, 0.709719, 0.466667, 1, 0.707972, -0.00782565, -0.00760938, 0.706157, 0.5, 1, 0.711832, -0.0062058, -0.00843891, 0.702271, 0.533333, 1, 0.714385, -0.00380136, -0.00845247, 0.699692, 0.566667, 1, 0.710287, -0.00321634, -0.00747812, 0.703865, 0.6, 1, 0.698203, -0.00538638, -0.00559323, 0.715857, 0.633333, 1, 0.686817, -0.00614252, -0.00296639, 0.726798, 0.666667, 1, 0.682172, -0.00420012, -0.000554377, 0.731179, 0.7, 1, 0.679486, -0.00146722, 0.0011255, 0.733686, 0.733333, 1, 0.669223, -0.0111835, -0.00149358, 0.742976, 0.766667, 1, 0.659338, -0.0236793, -0.00545262, 0.751454, 0.8, 1, 0.656046, -0.0388542, -0.0124256, 0.753618, 0.833333, 1, 0.659346, -0.0567632, -0.0246368, 0.749289, 0.866667, 1, 0.659513, -0.0735581, -0.0371136, 0.747164, 0.9, 1, 0.655559, -0.0836281, -0.044146, 0.749199, 0.933333, 1, 0.652553, -0.0871174, -0.0462748, 0.751294, 0.966667, 1, 0.653193, -0.0857316, -0.0456524, 0.750936, 1, 1, 0.656775, -0.0805874, -0.043071, 0.74853, 1.06667, 1, 0.665721, -0.064887, -0.0345865, 0.74257, 1.1, 1, 0.668734, -0.0591149, -0.0313707, 0.740484, 1.13333, 1, 0.670747, -0.0564066, -0.0301003, 0.738925, 1.16667, 1, 0.672851, -0.0556947, -0.030522, 0.737047, 1.2, 1, 0.675569, -0.055963, -0.0320324, 0.734472, 1.23333, 1, 0.678327, -0.0561791, -0.033595, 0.731839, 1.26667, 1, 0.680324, -0.0559316, -0.0345213, 0.729958, 1.3, 1, 0.681196, -0.0552027, -0.0345737, 0.729198, 1.33333, 1, 0.681545, -0.0538306, -0.0337813, 0.729012, 1.36667, 1, 0.683298, -0.0510753, -0.0323337, 0.727633, 1.4, 1, 0.688456, -0.0461732, -0.0304914, 0.723164, 1.43333, 1, 0.696084, -0.0392298, -0.0278907, 0.716345, 1.46667, 1, 0.701347, -0.0312648, -0.0231968, 0.711757, 1.5, 1, 0.701484, -0.0231042, -0.0160724, 0.712129, 1.53333, 1, 0.70118, -0.0134771, -0.00769643, 0.712816, 1.56667, 1, 0.705186, 0.00176238, 0.00279319, 0.709015, 1.6, 1, 0.700367, 0.011998, 0.0138425, 0.713548, 1.63333, 1, 0.679778, 0.00980419, 0.021103, 0.733048, 1.66667, 1, 0.646814, 0.000942516, 0.0240342, 0.762268, 1.7, 1, 0.610337, -0.0109623, 0.0235926, 0.791714, 1.73333, 1, 0.579009, -0.0210099, 0.0224184, 0.814742, 1.76667, 1, 0.559642, -0.0249122, 0.0222903, 0.82806, 1.8, 1, 0.55312, -0.0217649, 0.0233945, 0.832488, 1.83333, 1, 0.554427, -0.0149598, 0.0245728, 0.831735, 1.86667, 1, 0.561296, -0.00723361, 0.0251162, 0.827203, 1.9, 1, 0.562504, -0.00305545, 0.0250116, 0.826411, 1.93333, 1, 0.54696, -0.021031, 0.0211478, 0.836627, 1.96667, 1, 0.532126, -0.034791, 0.018604, 0.845745, 2, 1, 0.512707, -0.0393113, 0.0190478, 0.857451, 2.03333, 1, 0.487706, -0.0527281, 0.016815, 0.871252, 2.06667, 1, 0.468657, -0.0692106, 0.012607, 0.880575, 2.1, 1, 0.4498, -0.0882466, 0.00662756, 0.888734, 2.13333, 1, 0.43864, -0.0990326, 0.00285513, 0.893185, 2.23333, 1, 0.43871, -0.0990278, 0.00284735, 0.893151, 2.26667, 1, 0.428348, -0.0997462, 0.00397997, 0.898083, 2.3, 1, 0.394119, -0.101999, 0.00767335, 0.913349, 2.33333, 1, 0.35474, -0.104372, 0.0118366, 0.929046, 2.36667, 1, 0.326839, -0.105917, 0.0147331, 0.939011, 2.4, 1, 0.313242, -0.10663, 0.0161291, 0.94353, 2.43333, 1, 0.301787, -0.107212, 0.0172973, 0.94717, 2.46667, 1, 0.292196, -0.107685, 0.0182702, 0.950101, 2.5, 1, 0.284231, -0.108068, 0.0190744, 0.952455, 2.53333, 1, 0.277641, -0.108379, 0.0197371, 0.954348, 2.56667, 1, 0.272171, -0.108633, 0.0202859, 0.955882, 2.6, 1, 0.267561, -0.108844, 0.0207468, 0.957149, 2.63333, 1, 0.26355, -0.109025, 0.0211471, 0.958232, 2.66667, 1, 0.259875, -0.109189, 0.0215131, 0.959208, 2.7, 1, 0.256272, -0.109348, 0.0218713, 0.960151, 2.73333, 1, 0.252474, -0.109514, 0.022248, 0.961129, 2.76667, 1, 0.248216, -0.109697, 0.0226699, 0.962206, 2.8, 1, 0.24323, -0.10991, 0.0231622, 0.963443, 2.83333, 1, 0.237246, -0.11016, 0.0237517, 0.964891, 2.86667, 1, 0.229973, -0.110458, 0.0244656, 0.966599, 2.9, 1, 0.224367, -0.110683, 0.0250143, 0.967875, 2.93333, 1, 0.220107, -0.110852, 0.02543, 0.968823, 2.96667, 1, 0.217658, -0.110948, 0.0256687, 0.969359, 3.1, 1, 0.217873, -0.11094, 0.0256478, 0.969312)
+tracks/29/type = "value"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Armature:position")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0, -0.4, 0), Vector3(0, 0, 0)]
+}
+tracks/30/type = "value"
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/path = NodePath("CollisionShape3D:disabled")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/31/type = "value"
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/path = NodePath(".:IsHide")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_rayth"]
 resource_name = "Walk"
 length = 0.566667
+loop_mode = 1
 tracks/0/type = "position_3d"
 tracks/0/imported = true
 tracks/0/enabled = false
@@ -1383,6 +1471,7 @@ _data = {
 "Death": SubResource("Animation_c6s8p"),
 "Hide": SubResource("Animation_2hjic"),
 "Idle": SubResource("Animation_2j51g"),
+"RESET": SubResource("Animation_irtxe"),
 "StandUp": SubResource("Animation_7sv0j"),
 "Walk": SubResource("Animation_rayth")
 }
@@ -1413,7 +1502,6 @@ animation = &"Walk"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0yxut"]
-advance_mode = 2
 advance_condition = &"Show"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehjyc"]
@@ -1421,7 +1509,6 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xdc66"]
-advance_mode = 2
 advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8l8km"]
@@ -1429,41 +1516,30 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_82cgi"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hvrc2"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i13v5"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kaw7x"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nekix"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8fw4k"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0g3ty"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_blkum"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vddft"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h3c4t"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nrjl7"]
-advance_mode = 2
 advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_foq8o"]
-advance_mode = 2
 advance_condition = &"Hide"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fi5uo"]
@@ -1484,7 +1560,7 @@ states/Start/position = Vector2(260, 105)
 states/Walk/node = SubResource("AnimationNodeAnimation_wll4e")
 states/Walk/position = Vector2(912, 23)
 transitions = ["Start", "Hide", SubResource("AnimationNodeStateMachineTransition_n3v7k"), "Hide", "StandUp", SubResource("AnimationNodeStateMachineTransition_0yxut"), "StandUp", "Idle", SubResource("AnimationNodeStateMachineTransition_ehjyc"), "Idle", "StandDown", SubResource("AnimationNodeStateMachineTransition_xdc66"), "StandDown", "Hide", SubResource("AnimationNodeStateMachineTransition_8l8km"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_82cgi"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hvrc2"), "Idle", "Atk", SubResource("AnimationNodeStateMachineTransition_i13v5"), "Atk", "Idle", SubResource("AnimationNodeStateMachineTransition_kaw7x"), "Atk", "Walk", SubResource("AnimationNodeStateMachineTransition_nekix"), "Walk", "Atk", SubResource("AnimationNodeStateMachineTransition_8fw4k"), "Atk", "Death", SubResource("AnimationNodeStateMachineTransition_0g3ty"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_blkum"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vddft"), "Death", "End", SubResource("AnimationNodeStateMachineTransition_h3c4t"), "Walk", "StandDown", SubResource("AnimationNodeStateMachineTransition_nrjl7"), "Atk", "StandDown", SubResource("AnimationNodeStateMachineTransition_foq8o")]
-graph_offset = Vector2(1, -85)
+graph_offset = Vector2(107, 45)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0go"]
 
@@ -1746,6 +1822,7 @@ parameters/conditions/Show = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_iw0go")
+disabled = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_use_custom = true
