@@ -20,6 +20,7 @@ public partial class NavMeshScript : NavigationRegion3D
 	{
 		this.NavigationMesh = null;
 		NavigationMesh Nav = new NavigationMesh();
+		Nav.CellHeight = 0.01f;
 		this.NavigationMesh = Nav;
 	}
 	

@@ -36,24 +36,5 @@ public partial class Boss1 : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage, bool send = true)
-	{
-		if(Alive)
-		{
-			HP -= damage;
-			GD.Print(HP);
-			if(HP<=0)
-			{
-				GD.Print("Mort");
-				Alive = false;
-				Ani.Stop();
-				Ani.Play("Death");
-			}
-			else
-			{
-				Ani.Play("Hit");
-			}
-		}
-	}
 }
 

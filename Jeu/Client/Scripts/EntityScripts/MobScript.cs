@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using JeuClient.Scripts.PlayerScripts;
+using System.Diagnostics;
 using Lib;
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
@@ -42,9 +43,11 @@ public abstract partial class MobScript : CharacterBody3D
 	private bool PlayerSet = false;
 	private float StateDeath = -0.1f;
 	private List<RayCast3D> RayList = new List<RayCast3D>();
-	
+
+	private Stopwatch stopwatch = new Stopwatch();
 	public void Ready()
 	{
+		stopwatch.Start();
 		Parent = GetParent().GetParent();
 		for(int i = 0; i<GameManager._nbJoueur; i++)
 		{
@@ -272,8 +275,9 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void SendInfo()
 	{
-		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript && LastPlayer!=Player)
+		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript && LastPlayer!=Player || stopwatch.ElapsedMilliseconds>1000)
 		{
+			stopwatch.Restart();
 			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
 		}
 	}
