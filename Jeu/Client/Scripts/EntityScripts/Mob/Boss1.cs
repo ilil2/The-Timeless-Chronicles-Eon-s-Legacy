@@ -36,7 +36,7 @@ public partial class Boss1 : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
+	public override void TakeDamage(int damage, bool send = true)
 	{
 		if(Alive)
 		{
