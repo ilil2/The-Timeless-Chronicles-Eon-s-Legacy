@@ -264,7 +264,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 			if (send)
 			{
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
 			}
 			
 		}
@@ -352,8 +352,15 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void receive()
 	{
-		string rec = GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["id"]}"];
-		GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["id"]}"] = "";
+		string rec = "";
+		for(int i = 0;i<GameManager._nbJoueur;i++)
+		{
+			if (GameManager.InfoJoueur["id"]!=i.ToString())
+			{
+				rec += GameManager.InfoAutreJoueur[$"ia{i}"];
+				GameManager.InfoAutreJoueur[$"ia{i}"] = "";
+			}
+		}
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
