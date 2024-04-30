@@ -59,11 +59,7 @@ public partial class Listen2 : GameManager
 			rep = rep.Substring(3);
 			string id = rep.Split('|')[0];
 			rep = rep.Split('|')[1];
-
-			if (InfoJoueur["id"] != id)
-			{
-				InfoAutreJoueur[$"ia{id}"] = rep;
-			}
+			InfoAutreJoueur[$"ia{id}"] = rep;
 		}
 		
 		else if (rep.Length > 4 && rep.Substring(0,4) == "chat")
