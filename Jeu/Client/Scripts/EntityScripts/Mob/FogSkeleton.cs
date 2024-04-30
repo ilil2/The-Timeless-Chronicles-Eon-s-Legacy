@@ -56,6 +56,7 @@ public partial class FogSkeleton : MobScript
 		}
 		
 	}
+  
 	public override void TakeDamage(int damage)
 	{
 		if(Alive)
@@ -75,5 +76,6 @@ public partial class FogSkeleton : MobScript
 			}
 		}
 	}
+
 }
 

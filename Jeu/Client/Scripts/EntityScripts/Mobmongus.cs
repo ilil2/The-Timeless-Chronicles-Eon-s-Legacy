@@ -32,7 +32,7 @@ public partial class Mobmongus : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
+	public override void TakeDamage(int damage, bool send = false)
 	{
 		HP -= damage;
 		Hp.Text = $"HP: {HP}/{HpMax}";

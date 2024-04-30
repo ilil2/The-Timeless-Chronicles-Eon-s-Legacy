@@ -18,6 +18,7 @@ public abstract partial class MobScript : CharacterBody3D
 	public bool Alive = true;
 	private float TimerDeath = -0.1f;
 	protected AnimationPlayer Ani;
+	public bool CanChange = false;
 	
 	//debug
 	public bool DebugMode = true; // variable debug mode
@@ -63,8 +64,13 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
+		
 		if(Alive)
 		{
+			if(state==1 || state==2 || state == 3)
+			{
+				receive();
+			}
 			if(Player!=null)
 			{
 				LastPlayer = Player;
@@ -191,6 +197,7 @@ public abstract partial class MobScript : CharacterBody3D
 				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 			}
 		}
+
 		/*
 		if(CanDo && PlayerSet && Alive)
 		{
@@ -233,15 +240,32 @@ public abstract partial class MobScript : CharacterBody3D
 			PlayerSet = true;
 			GD.Print("Player Set !");
 		}*/
+
 	}
 	
-	public virtual void TakeDamage(int damage)
+	public virtual void TakeDamage(int damage, bool send = true)
 	{
-		HP -= damage;
-		GD.Print("Je suis la");
-		if(HP<=0)
+		if(Alive)
 		{
-			Ani.Stop();
+			HP -= damage;
+			GD.Print(HP);
+			if(HP<=0)
+			{
+				GD.Print("Mort");
+				Alive = false;
+				Ani.Stop();
+				Ani.Play("Death");
+			}
+			else
+			{
+				Ani.Play("Hit");
+			}
+
+			if (send)
+			{
+				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}=";
+			}
+			
 		}
 	}
 	
@@ -315,6 +339,33 @@ public abstract partial class MobScript : CharacterBody3D
 			}
 		}
 		return res;
+	}
+
+	public void receive()
+	{
+		string rec = GameManager.InfoAutreJoueur["ia"];
+		GD.Print(rec);
+		GameManager.InfoAutreJoueur["ia"] = "";
+		string[] ia = rec.Split("=");
+		foreach (var a in ia)
+		{
+			if (a!="")
+			{
+				GD.Print(a);
+				string[] firstline = a.Split("°");
+				string[] secondline = firstline[1].Split("§");
+				int id = int.Parse(firstline[0]);
+				if(secondline[0]=="TK")
+				{
+					int damage = int.Parse(secondline[1]);
+					if(id==ID)
+					{
+						GD.Print(damage);
+						TakeDamage(damage,false);
+					}
+				}
+			}
+		}
 	}
 	
 }
