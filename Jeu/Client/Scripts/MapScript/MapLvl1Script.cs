@@ -119,6 +119,7 @@ public partial class MapLvl1Script : IMap
 			//CreateFog();
 			DayCycle();
 			//RenderDist();
+			//GameManager.InfoJoueur["ia"] = UpdateMob();
 		}
 		
 	}
@@ -163,11 +164,11 @@ public partial class MapLvl1Script : IMap
 						string name = "";
 						if(m==0)
 						{
-							name = "FogSkeleton";
+							name = "Mummy";
 						}
 						else
 						{
-							name = "Gollem";
+							name = "Mummy";
 						}
 						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();

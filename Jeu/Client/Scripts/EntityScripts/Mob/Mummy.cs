@@ -36,23 +36,4 @@ public partial class Mummy : MobScript
 		}
 		
 	}
-	public override void TakeDamage(int damage)
-	{
-		if(Alive)
-		{
-			HP -= damage;
-			GD.Print(HP);
-			if(HP<=0)
-			{
-				GD.Print("Mort");
-				Alive = false;
-				Ani.Stop();
-				Ani.Play("Death");
-			}
-			else
-			{
-				Ani.Play("Hit");
-			}
-		}
-	}
 }

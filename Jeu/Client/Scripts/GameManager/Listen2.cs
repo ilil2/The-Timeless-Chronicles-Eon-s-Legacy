@@ -1,3 +1,4 @@
+using Godot;
 using Lib;
 
 public partial class Listen2 : GameManager
