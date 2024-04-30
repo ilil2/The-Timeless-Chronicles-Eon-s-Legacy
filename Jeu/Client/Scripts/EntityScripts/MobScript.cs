@@ -164,6 +164,7 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
+		SendInfo();
 		if(CanDo&&Alive)
 		{
 			if(state==0 || state==1 || state == 3)
@@ -249,7 +250,6 @@ public abstract partial class MobScript : CharacterBody3D
 		if(Alive)
 		{
 			HP -= damage;
-			GD.Print(HP);
 			if(HP<=0)
 			{
 				GD.Print("Mort");
@@ -358,9 +358,9 @@ public abstract partial class MobScript : CharacterBody3D
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
-			if (a!="")
+			if (!string.IsNullOrEmpty(a))
 			{
-				GD.Print(a);
+				GD.Print("Received: " + a);
 				string[] firstline = a.Split("°");
 				
 				string[] pos = firstline[2].Split("?");
