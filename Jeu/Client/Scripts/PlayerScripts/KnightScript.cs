@@ -10,9 +10,6 @@ public partial class KnightScript : ClassScript
 	public override void _Ready()
 	{
 		InitPlayer();
-		
-		AnimationTree = GetNode<AnimationTree>("AnimationTree");
-		AnimationTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -105,7 +102,7 @@ public partial class KnightScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(50))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
@@ -114,7 +111,7 @@ public partial class KnightScript : ClassScript
 			
 			GameManager.InfoJoueur["animation"] = "hit";
 		}
-		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != 1)
+		else if (Input.IsMouseButtonPressed(MouseButton.Right) && AnimationState != 2 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != 1 && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 2;
@@ -123,7 +120,7 @@ public partial class KnightScript : ClassScript
 			
 			GameManager.InfoJoueur["animation"] = "protection";
 		}
-		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != 2)
+		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != 2 && AnimationState != -2)
 		{
 			AnimationState = 1;
 			DirectionControl = direction;
@@ -139,7 +136,7 @@ public partial class KnightScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0)
+		else if (!Input.IsMouseButtonPressed(MouseButton.Right) && !Input.IsMouseButtonPressed(MouseButton.Left) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0 && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;
@@ -148,13 +145,15 @@ public partial class KnightScript : ClassScript
 		}
 	}
 	
-	private void AnimationSet(bool walk, bool block, bool hit, bool idle, bool death = false)
+	private void AnimationSet(bool walk, bool block, bool hit, bool idle, bool damage = false, bool damageblock = false, bool death = false)
 	{
 		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
 		AnimationTree.Set("parameters/conditions/WhenBlock", block);
 		AnimationTree.Set("parameters/conditions/WhenHit", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
+		AnimationTree.Set("parameters/conditions/Damage", damage);
+		AnimationTree.Set("parameters/conditions/DamageBlock", damageblock);
 
 		_isBlocking = block;
 	}
@@ -168,9 +167,16 @@ public partial class KnightScript : ClassScript
 			{
 				IsDead = true;
 				AnimationState = -1;
-				AnimationSet(false, false, false, false, true);
+				AnimationSet(false, false, false, false, false, false, true);
 				GameManager.InfoJoueur["animation"] = "death";
 				GetNode<Timer>("DeathTimer").Start();
+			}
+			else
+			{
+				AnimationState = -2;
+				AnimationSet(false, false, false, false, true);
+				GameManager.InfoJoueur["animation"] = "damage";
+				DamageTimer.Start();
 			}
 		}
 		else
@@ -182,10 +188,24 @@ public partial class KnightScript : ClassScript
 				{
 					IsDead = true;
 					AnimationState = -1;
-					AnimationSet(false, false, false, false, true);
+					AnimationSet(false, false, false, false, false, false, true);
 					GameManager.InfoJoueur["animation"] = "death";
 					GetNode<Timer>("DeathTimer").Start();
 				}
+				else
+				{
+					AnimationState = -2;
+					AnimationSet(false, false, false, false, false, true);
+					GameManager.InfoJoueur["animation"] = "damageblock";
+					DamageTimer.Start();
+				}
+			}
+			else
+			{
+				AnimationState = -2;
+				AnimationSet(false, false, false, false, false, true);
+				GameManager.InfoJoueur["animation"] = "damageblock";
+				DamageTimer.Start();
 			}
 		}
 	}
@@ -204,6 +224,11 @@ public partial class KnightScript : ClassScript
 				Stamina += 5;
 			}
 		}
+	}
+	
+	private void _on_damage_timer_timeout()
+	{
+		AnimationState = -3;
 	}
 }
 

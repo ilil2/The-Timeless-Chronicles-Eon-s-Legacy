@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class OtherArcherScript : OtherClassScript
 {
@@ -74,15 +73,18 @@ public partial class OtherArcherScript : OtherClassScript
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 break;
             case "death":
-                OtherAnimationSet(false, false, false, false, false, false, true);
+                OtherAnimationSet(false, false, false, false, false, false, false, true);
                 GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
                 isAlive = false;
                 break;
-            
+            case "damage":
+                OtherAnimationSet(false, false, false, false, false, false, true);
+                GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+                break;
         }
     }
     
-    private void OtherAnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool death = false)
+    private void OtherAnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool damage = false, bool death = false)
     {
         AnimationOtherTree.Set("parameters/conditions/WhenWalk", walk);
         AnimationOtherTree.Set("parameters/conditions/WhenAimWalk", aimwalk);
@@ -91,5 +93,8 @@ public partial class OtherArcherScript : OtherClassScript
         AnimationOtherTree.Set("parameters/conditions/WhenHitBow", hit);
         AnimationOtherTree.Set("parameters/conditions/Idle", idle);
         AnimationOtherTree.Set("parameters/conditions/Death", death);
+        AnimationOtherTree.Set("parameters/conditions/Damage", damage);
+        
+        
     }
 }

@@ -11,6 +11,7 @@ public partial class SpecCam : Camera3D
 	private float _totalPitch = 0.0f;
 
 	private Vector3 _direction = new Vector3(0.0f, 0.0f, 0.0f);
+	private Vector3 _lastDirection = new Vector3(0.0f, 0.0f, 0.0f);
 	private Vector3 _velocity = new Vector3(0.0f, 0.0f, 0.0f);
 	private int _acceleration = 30;
 	private int _deceleration = -10;
@@ -115,6 +116,17 @@ public partial class SpecCam : Camera3D
 		if (_direction == Vector3.Zero)
 		{
 			_velocity = Vector3.Zero;
+		}
+		else if(_lastDirection != _direction)
+		{
+			_velocity = Vector3.Zero;
+			_velocity.X = Mathf.Clamp(_velocity.X + offset.X, -_velMultiplier, _velMultiplier);
+			_velocity.Y = Mathf.Clamp(_velocity.Y + offset.Y, -_velMultiplier, _velMultiplier);
+			_velocity.Z = Mathf.Clamp(_velocity.Z + offset.Z, -_velMultiplier, _velMultiplier);
+			
+			Translate(_velocity * (float)delta * speedMulti);
+
+			_lastDirection = _direction;
 		}
 		else
 		{

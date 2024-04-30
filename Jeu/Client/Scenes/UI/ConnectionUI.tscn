@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bukpc7fa40grn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ConnectionUI.cs" id="1_u3ff4"]
-[ext_resource type="Texture2D" uid="uid://cfcb30q3mtvtn" path="res://Ressources/Graphismes/Background.jpg" id="2_7w2oe"]
+[ext_resource type="Texture2D" uid="uid://clcdd4m8hatqf" path="res://Ressources/Graphismes/Background.jpg" id="2_7w2oe"]
 
 [sub_resource type="Animation" id="Animation_nv1or"]
 length = 0.001
@@ -81,8 +81,17 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_7w2oe")
 expand_mode = 1
+
+[node name="BackgroundColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0823529, 0.0823529, 0.0823529, 0.407843)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -416,7 +425,7 @@ offset_left = 0.384004
 offset_top = -0.111992
 offset_right = 0.255997
 offset_bottom = -0.240058
-color = Color(0.145098, 0.145098, 0.145098, 0.756863)
+color = Color(0.145098, 0.145098, 0.145098, 0.921569)
 
 [node name="FastConnectionWarningText" type="Label" parent="FastConnectionWarningBackground"]
 layout_mode = 1

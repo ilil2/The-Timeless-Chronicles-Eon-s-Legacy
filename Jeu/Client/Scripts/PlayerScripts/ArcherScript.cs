@@ -16,9 +16,6 @@ public partial class ArcherScript : ClassScript
 	public override void _Ready()
 	{
 		InitPlayer();
-
-		AnimationTree = GetNode<AnimationTree>("AnimationTree");
-		AnimationTree.Active = true;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -143,6 +140,8 @@ public partial class ArcherScript : ClassScript
 			arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y, (arrowPosition.Z + GlobalPosition.Z) / 2);
 			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
 			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+			((Arrow)arrow).IsPlayer = true;
+			((Arrow)arrow).Damage = Damage;
 			
 			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
@@ -160,14 +159,14 @@ public partial class ArcherScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(50))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 6;
 			AnimationSet(false, false, false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hitbow";
 		}
-		else if (!_isAiming && IsShooting && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory)
+		else if (!_isAiming && IsShooting && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
@@ -175,7 +174,7 @@ public partial class ArcherScript : ClassScript
 			GameManager.InfoJoueur["animation"] = "shoot";
 			IsShooting = false;
 		}
-		else if (_isAiming)
+		else if (_isAiming && AnimationState != -2)
 		{
 			if ((left || right || forward || backward) && direction != DirectionControl)
 			{
@@ -202,7 +201,7 @@ public partial class ArcherScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "aim";
 			}
 		}
-		else if ((left || right || forward || backward) && direction != DirectionControl)
+		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != -2)
 		{
 			AnimationState = 4;
 			if (_isAiming)
@@ -238,7 +237,7 @@ public partial class ArcherScript : ClassScript
 				AnimationSet(true, false, false, false, false, false);
 			}
 		}
-		else if ((_isAiming || !IsShooting) && !_isAiming && (!(left || right || forward || backward) || AnimationState != 4) && AnimationState != 0)
+		else if ((_isAiming || !IsShooting) && !_isAiming && (!(left || right || forward || backward) || AnimationState != 4) && AnimationState != 0 && AnimationState != -2)
 		{
 			DirectionControl = (0,0);
 			AnimationState = 0;
@@ -247,7 +246,7 @@ public partial class ArcherScript : ClassScript
 		}
 	}
 	
-	private void AnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool death = false)
+	private void AnimationSet(bool walk, bool aimwalk, bool aim, bool shoot, bool hit, bool idle, bool damage = false, bool death = false)
 	{
 		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
 		AnimationTree.Set("parameters/conditions/WhenAimWalk", aimwalk);
@@ -256,6 +255,7 @@ public partial class ArcherScript : ClassScript
 		AnimationTree.Set("parameters/conditions/WhenHitBow", hit);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
+		AnimationTree.Set("parameters/conditions/Damage", damage);
 	}
 	
 	public override void TakeDamage(int damage)
@@ -265,9 +265,16 @@ public partial class ArcherScript : ClassScript
 		{
 			IsDead = true;
 			AnimationState = -1;
-			AnimationSet(false, false, false, false, false, false, true);
+			AnimationSet(false, false, false, false, false, false, false, true);
 			GameManager.InfoJoueur["animation"] = "death";
 			GetNode<Timer>("DeathTimer").Start();
+		}
+		else
+		{
+			AnimationState = -2;
+			AnimationSet(false, false, false, false, false, false, true);
+			GameManager.InfoJoueur["animation"] = "damage";
+			DamageTimer.Start();
 		}
 	}
 	
@@ -281,5 +288,10 @@ public partial class ArcherScript : ClassScript
 	private void _on_death_timer_timeout()
 	{
 		Position -= new Vector3(0,10,0);
+	}
+	
+	private void _on_damage_timer_timeout()
+	{
+		AnimationState = -3;
 	}
 }

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf7b6xvlkmr0f"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerScripts/Ghost.cs" id="1_7acih"]
+
+[node name="Ghost" type="Camera3D"]
+script = ExtResource("1_7acih")
