@@ -1466,3 +1466,8 @@ Damage = 15
 transform = Transform3D(-3.61999e-06, -1, 0, 1, -3.61999e-06, 0, 0, 0, 1, -0.1, 0, 1.5)
 shape = SubResource("CapsuleShape3D_1wen8")
 disabled = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301825, 0)
+radius = 1.0
+use_3d_avoidance = true

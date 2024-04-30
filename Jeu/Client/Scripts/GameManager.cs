@@ -158,7 +158,7 @@ public partial class GameManager : Node3D
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
 		EnqueueMap($"res://Scenes/MapScenes/Shop.tscn");
-		for (int i = 1; i <= 4; i++)
+		for (int i = 2; i <= 4; i++)
 		{
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/MapLvl{i}.tscn");
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/BossScenes/Boss{i}Map.tscn");

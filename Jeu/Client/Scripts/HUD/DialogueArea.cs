@@ -13,7 +13,6 @@ public partial class DialogueArea : Area3D
 	private Control Hud;
 	private Label Line;
 	private Dictionary<string,Dictionary<string,string>> Dialogue;
-	private AnimationPlayer Ani;
 	private string TargetText = "";
 	private int indexLetter = 0;
 	// Called when the node enters the scene tree for the first time.
@@ -24,7 +23,6 @@ public partial class DialogueArea : Area3D
 		Hud = GetNode<Control>("DialogueHud");
 		Line = Hud.GetNode<Label>("Line");
 		Dialogue = JsonSerializer.Deserialize<Dictionary<string,Dictionary<string,string>>>(File.ReadAllText("Ressources/Dialogue/EmaxDialogue.json"));
-		Ani = GetNode<AnimationPlayer>("AnimationPlayer");
 		//ResetData();
 		
 	}
@@ -40,7 +38,7 @@ public partial class DialogueArea : Area3D
 	{
 		if(body is ClassScript)
 		{
-			Ani.Play("Open");
+			Hud.Visible = true;
 			SaveDialogue.Emax = (SaveDialogue.Emax.c1,0);
 			
 			_on_skip_button_pressed();
@@ -62,7 +60,7 @@ public partial class DialogueArea : Area3D
 	}
 	private void _on_close_button_pressed()
 	{
-		Ani.Play("Close");
+		Hud.Visible = false;
 		Near = false;
 		Cam.Current = false;
 		Parent.CamOnPlayer = true;
@@ -87,7 +85,16 @@ public partial class DialogueArea : Area3D
 
 		SaveDialogue.Emax = (c1, c2);
 		GD.Print($"{c1} {c2}");
-		return Dialogue[c1.ToString()][c2.ToString()];
+		if (Dialogue.ContainsKey(c1.ToString()))
+		{
+			if (Dialogue[c1.ToString()].ContainsKey(c2.ToString()))
+			{
+				return Dialogue[c1.ToString()][c2.ToString()];
+			}
+		}
+
+		return "Dialogue not found";
+
 	}
 
 	private void _on_skip_button_pressed()

@@ -18,9 +18,9 @@ public partial class NavMeshScript : NavigationRegion3D
 	}
 	public void InitNavMesh()
 	{
+		this.NavigationMesh = null;
 		NavigationMesh Nav = new NavigationMesh();
-		Nav.CellHeight = 0.01f;
-		NavigationMesh = Nav;
+		this.NavigationMesh = Nav;
 	}
 	
 	private void _on_bake_finished()

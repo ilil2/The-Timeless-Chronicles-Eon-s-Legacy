@@ -15,6 +15,7 @@ public partial class MapLvl2Script : IMap
 	public int FrameCount = 0;
 	private int StartTimer = 0;
 	private NavigationRegion3D NavMesh;
+	private Area3D Exit;
 	private Dictionary<int,float> IdToRadius = new Dictionary<int,float>
 	{
 		{1,2.5f},
@@ -34,6 +35,7 @@ public partial class MapLvl2Script : IMap
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Exit = GetNode<Area3D>("Exit");
 		LoadingStage = "Create Border";
 		CreateBorder();
 		LoadingStage = "Create PseudoMap";
@@ -42,6 +44,7 @@ public partial class MapLvl2Script : IMap
 		CreatePseudoKey();
 		LoadingStage = "Create NavMesh";
 		NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
+		Ani = GetNode<AnimationPlayer>("Animation/AnimationPlayer");
 		
 		
 	}
@@ -58,11 +61,7 @@ public partial class MapLvl2Script : IMap
 				MeshInstance3D GR = GetNode<MeshInstance3D>("Ground");
 				MeshInstance3D LR = GR.GetNode<MeshInstance3D>("ForNav");
 				GR.RemoveChild(LR);
-				NavMesh.NavigationMesh = new NavigationMesh();
-				NavMesh.NavigationMesh.AgentMaxClimb = 0;
-				NavMesh.NavigationMesh.AgentHeight = 0.5f;
-				NavMesh.NavigationMesh.AgentRadius = 0f;
-				NavMesh.NavigationMesh.AgentMaxSlope = 0.1f;
+				((NavMeshScript)NavMesh).InitNavMesh();
 				NavMesh.AddChild(LR);
 				LoadingStage = "Create Map";
 				CreateForest();
@@ -89,6 +88,15 @@ public partial class MapLvl2Script : IMap
 			
 		}
 		
+	}
+	public override void _PhysicsProcess(double delta)
+	{
+		//GD.Print(LoadingStage);
+		SyncCam();
+		if(!CanExit && KeyCollected()==3)
+		{
+			CanExit = true;
+		}
 	}
 	
 	public override List<(int, int, int)> GetSpawnLocation()
@@ -128,6 +136,7 @@ public partial class MapLvl2Script : IMap
 		Node3D RotGate = GetNode<Node3D>("RotationGate");
 		float rotG = Mathf.DegToRad(Rand.Next(0,181)*2);
 		RotGate.Rotation = new Vector3(0,rotG,0);
+		Exit.GlobalPosition = RotGate.GetNode<Node3D>("DwarfGate").GlobalPosition;
 	}
 	
 	
@@ -240,17 +249,18 @@ public partial class MapLvl2Script : IMap
 	{
 		for (int i = 0; i<PseudoTreeList.Count;i++)
 		{
-			Vector3 Pos = PseudoTreeList[i].Position;
+			Vector3 Pos = PseudoTreeList[i].GlobalPosition;
 			float Sp = ((SphereShape3D)PseudoTreeList[i].GetNode<CollisionShape3D>("Coll").Shape).Radius;
 			RemoveChild(PseudoTreeList[i]);
+			PseudoTreeList[i].QueueFree();
 			Node3D tree = GD.Load<PackedScene>($"res://Ressources/Map/Global/tre2/Model/Tree{RadiusToId[Sp]}.tscn").Instantiate<Node3D>();
-			tree.Position = Pos + new Vector3(0,Rand.Next(-10,1)/10f,0);
+			tree.Position = Pos;
 			tree.Rotation = new Vector3(0,Mathf.DegToRad(Rand.Next(0,361)),0);
 			MeshInstance3D ForNav = tree.GetNode<MeshInstance3D>("ForNav");
 			tree.RemoveChild(ForNav);
-			ForNav.Position = tree.Position;
-			NavMesh.AddChild(ForNav);
 			AddChild(tree);
+			ForNav.Position = tree.GlobalPosition;
+			NavMesh.AddChild(ForNav);
 			
 		}
 	}
@@ -259,12 +269,13 @@ public partial class MapLvl2Script : IMap
 	{
 		for (int i = 0; i<SpawnPoint.Count;i++)
 		{
-			Vector3 Pos = SpawnPoint[i].Position;
+			Vector3 Pos = SpawnPoint[i].GlobalPosition;
 			RemoveChild(SpawnPoint[i]);
-			CharacterBody3D Mob = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob.tscn").Instantiate<CharacterBody3D>();
+			CharacterBody3D Mob = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Gollem.tscn").Instantiate<CharacterBody3D>();
 			Mob.Position = Pos;
 			AddChild(Mob);
 		}
+		GD.Print("Spaw Use !");
 	}
 	
 	private void CreateKey()
@@ -285,6 +296,19 @@ public partial class MapLvl2Script : IMap
 		StaticBody3D SafeArea = GetNode<StaticBody3D>("SafeArea");
 		RemoveChild(SafeArea);
 		SafeArea.QueueFree();
+	}
+	
+	private int KeyCollected()
+	{
+		int res = 0;
+		for(int i = 0; i<KeyList.Count;i++)
+		{
+			if(!KeyList[i].Visible)
+			{
+				res++;
+			}
+		}
+		return res;
 	}
 	
 	

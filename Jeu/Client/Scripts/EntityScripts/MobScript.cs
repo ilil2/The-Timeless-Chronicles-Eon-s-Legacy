@@ -22,6 +22,7 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	//debug
 	public bool DebugMode = true; // variable debug mode
+	public bool CanDo = true;
 	
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
@@ -162,7 +163,7 @@ public abstract partial class MobScript : CharacterBody3D
 	}
 	public void Process(double delta) //NavMesh
 	{
-		if(Alive)
+		if(CanDo&&Alive)
 		{
 			if(state==0 || state==1 || state == 3)
 			{
@@ -196,6 +197,50 @@ public abstract partial class MobScript : CharacterBody3D
 				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 			}
 		}
+
+		/*
+		if(CanDo && PlayerSet && Alive)
+		{
+			if(Distance(Player.Position,this.Position)<=DistVue)
+			{
+				if (IsTooFar && Agro > 0) Agro -= 1;
+				if (Agro <= 0) 
+				{
+					state = 0;
+					if (Distance(Position,PosInnit)<1 && state == 0) state = -1;
+					else Nav.TargetPosition = PosInnit;
+				}
+				if (state == -1) 
+				{
+					Rotation = RotInnit;
+				}
+				else
+				{
+					var dir = new Vector3();  //Pathfiding
+					var NextPos = Nav.GetNextPathPosition();
+					dir = NextPos - GlobalPosition;
+					dir = dir.Normalized();
+					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+					MoveAndSlide();
+					
+					try
+					{
+						LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+					}
+					catch
+					{
+						GD.Print("Still Error");
+					}
+					Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);  
+				}
+			}
+		}
+		if(!PlayerSet && GameManager.Joueur1!=null && GameManager.Joueur1.IsInsideTree())
+		{
+			PlayerSet = true;
+			GD.Print("Player Set !");
+		}*/
+
 	}
 	
 	public virtual void TakeDamage(int damage, bool send = true)

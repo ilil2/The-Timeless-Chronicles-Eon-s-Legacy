@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_mb11d"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="9_la0ss"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5dgw"]
+height = 4.0
+radius = 4.0
+
 [sub_resource type="Environment" id="Environment_pdaq0"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
@@ -26,7 +30,7 @@ volumetric_fog_temporal_reprojection_amount = 0.99
 adjustment_enabled = true
 adjustment_saturation = 1.15
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m73o"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kp3pv"]
 albedo_texture = ExtResource("3_dyqhn")
 normal_enabled = true
 normal_texture = ExtResource("6_ybwmf")
@@ -37,7 +41,7 @@ heightmap_texture = ExtResource("5_1syy5")
 uv1_scale = Vector3(500, 500, 500)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mnbuv"]
-material = SubResource("StandardMaterial3D_6m73o")
+material = SubResource("StandardMaterial3D_kp3pv")
 size = Vector2(600, 600)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y5n1f"]
@@ -48,24 +52,79 @@ top_radius = 300.0
 bottom_radius = 300.0
 height = 0.5
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_i5dgw"]
-height = 4.0
-radius = 4.0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_2aotq"]
 radius = 4.0
 
 [sub_resource type="Animation" id="Animation_lx3cg"]
 resource_name = "Exit"
-length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../RotationGate/DwarfGate/Exit:exit")
+tracks/0/path = NodePath("../Exit:exit")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../RotationGate/DwarfGate:PlayOpen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../RotationGate/Camera3D:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:CamOnPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -76,10 +135,70 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../RotationGate/DwarfGate/Exit:exit")
+tracks/0/path = NodePath("../Exit:exit")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../RotationGate/DwarfGate:PlayOpen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../RotationGate/Camera3D:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:CamOnPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -94,6 +213,14 @@ _data = {
 
 [node name="MapLvl2" type="Node3D"]
 script = ExtResource("1_iykwk")
+CamOnPlayer = true
+
+[node name="Exit" parent="." instance=ExtResource("8_mb11d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, -0.0493798)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_i5dgw")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.693377, 0.437999, -0.572176, 5.6933e-09, 0.794055, 0.607846, 0.720575, 0.421467, -0.550579, 0, 2.76815, 9.26053)
@@ -120,12 +247,8 @@ mesh = SubResource("CylinderMesh_7pr53")
 [node name="DwarfGate" parent="RotationGate" instance=ExtResource("9_la0ss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
 
-[node name="Exit" parent="RotationGate/DwarfGate" instance=ExtResource("8_mb11d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0493798)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RotationGate/DwarfGate/Exit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("CylinderShape3D_i5dgw")
+[node name="Camera3D" type="Camera3D" parent="RotationGate"]
+transform = Transform3D(-0.258819, 0.25, -0.933013, 0, 0.965926, 0.258819, 0.965926, 0.0669873, -0.25, 289.78, 5.4, -2.3)
 
 [node name="Spawn" type="Node3D" parent="."]
 
@@ -152,3 +275,11 @@ shape = SubResource("SphereShape3D_2aotq")
 libraries = {
 "": SubResource("AnimationLibrary_7jhhj")
 }
+
+[node name="ColorRect" type="ColorRect" parent="Animation"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
