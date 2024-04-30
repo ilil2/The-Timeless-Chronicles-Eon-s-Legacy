@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using JeuClient.Scripts.PlayerScripts;
+using Lib;
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
 {
@@ -263,9 +264,17 @@ public abstract partial class MobScript : CharacterBody3D
 
 			if (send)
 			{
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}=";
+				GameManager.InfoJoueur[$"ia"] += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
 			}
 			
+		}
+	}
+
+	public void SendInfo()
+	{
+		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript)
+		{
+			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
 		}
 	}
 	
@@ -353,17 +362,42 @@ public abstract partial class MobScript : CharacterBody3D
 			{
 				GD.Print(a);
 				string[] firstline = a.Split("°");
-				string[] secondline = firstline[1].Split("§");
+				
+				string[] pos = firstline[2].Split("?");
 				int id = int.Parse(firstline[0]);
-				if(secondline[0]=="TK")
+				if (firstline[1].Contains("§"))
 				{
-					int damage = int.Parse(secondline[1]);
-					if(id==ID)
+					string[] secondline = firstline[1].Split("§");
+					if (secondline[0] == "TK")
 					{
-						GD.Print(damage);
-						TakeDamage(damage,false);
+						int damage = int.Parse(secondline[1]);
+						if (id == ID)
+						{
+							GD.Print(damage);
+							TakeDamage(damage, false);
+						}
 					}
 				}
+				else
+				{
+					if (ID == id)
+					{
+						if (firstline[1]=="1")
+						{
+							state = 1;
+						}
+						if (firstline[1]=="1")
+						{
+							state = 2;
+						}
+						if (firstline[1]=="1")
+						{
+							state = 3;
+						}
+					}
+				}
+
+				Position = new Vector3(float.Parse(pos[0]), Position.Y, float.Parse(pos[1]));
 			}
 		}
 	}
