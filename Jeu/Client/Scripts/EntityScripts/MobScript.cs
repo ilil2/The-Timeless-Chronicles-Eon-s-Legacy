@@ -352,8 +352,8 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void receive()
 	{
-		string rec = GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["ID"]}"];
-		GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["ID"]}"] = "";
+		string rec = GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["id"]}"];
+		GameManager.InfoAutreJoueur[$"ia{GameManager.InfoJoueur["id"]}"] = "";
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
