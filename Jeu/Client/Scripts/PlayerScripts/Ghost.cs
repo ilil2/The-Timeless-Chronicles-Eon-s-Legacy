@@ -1,156 +1,118 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Lib;
 
-public partial class Ghost : Camera3D
+public partial class Ghost : CharacterBody3D
 {
-	private float _shiftMultiplier = 2.5f;
-	private float _altMultiplier = 1.0f / 2.5f; 
-	private float sensitivity = 0.25f;
-
-	private Vector2 _mousePosition;
-	private float _totalPitch;
-
+	private Camera3D _camera;
+	private Node3D _cameraH;
+	private Node3D _playerMesh;
+	
 	private Vector3 _direction;
-	private Vector3 _lastDirection;
-	private Vector3 _velocity;
-	private int _acceleration = 30;
-	private int _deceleration = -10;
-	private int _velMultiplier = 4;
-
-	private bool _z;
-	private bool _s;
-	private bool _q;
-	private bool _d;
-	private bool _a;
-	private bool _e;
-	private bool _shift;
-	private bool _alt;
-
-	public override void _Input(InputEvent @event)
+	private Vector3 _horizontalVelocity;
+	private Vector3 _movement;
+	private Vector3 _verticalVelocity;
+	
+	private float _walkSpeed = 4.2f;
+	private int _acceleration = 15;
+	private float _fovMax = 80;
+	private float _fovMin = 40;
+	private int _uiTimer;
+	
+	public override void _Ready()
 	{
-		if (@event is InputEventMouseMotion eventMouseMotion)
-		{
-			_mousePosition = eventMouseMotion.Relative;
-		}
-
-		if (@event is InputEventMouseButton eventMouseButton)
-		{
-			switch (eventMouseButton.ButtonIndex)
-			{
-				case MouseButton.Right:
-					if (eventMouseButton.Pressed)
-					{
-						Input.MouseMode = Input.MouseModeEnum.Captured;
-					}
-					else
-					{
-						Input.MouseMode = Input.MouseModeEnum.Visible;
-					}
-					break;
-				case MouseButton.WheelUp:
-					_velMultiplier = (int)Mathf.Clamp(_velMultiplier + 1.1f, 0.2f, 20f);
-					break;
-				case MouseButton.WheelDown:
-					_velMultiplier = (int)Mathf.Clamp(_velMultiplier / 1.1f, 0.2f, 20f);
-					break;
-			}
-		}
-
-		if (@event is InputEventKey eventInputKey)
-		{
-			switch (eventInputKey.Keycode)
-			{
-				case Key.Z:
-					_z = eventInputKey.Pressed;
-					break;
-				case Key.S:
-					_s = eventInputKey.Pressed;
-					break;
-				case Key.Q:
-					_q = eventInputKey.Pressed;
-					break;
-				case Key.D:
-					_d = eventInputKey.Pressed;
-					break;
-				case Key.Ctrl:
-					_a = eventInputKey.Pressed;
-					break;
-				case Key.Space:
-					_e = eventInputKey.Pressed;
-					break;
-			}
-		}
-	}
-
-	public override void _Process(double delta)
-	{
-		_updateMouseLook();
-		_updateMovement(delta);
+		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		_cameraH = GetNode<Node3D>("CameraPlayer/h");
+		_direction = Vector3.Back.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y);
+		
+		_playerMesh = GetNode<Node3D>("Ghost");
 	}
 	
-	private float _booltofloat(bool b)
+	public override void _Input(InputEvent @event)
 	{
-		return b ? 1.0f : 0.0f;
+		if (_camera.Current && !GameManager._pausemode)
+		{
+			Zoom(@event);
+		}
 	}
 
-	private void _updateMovement(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-		_direction = new Vector3(_booltofloat(_d) - _booltofloat(_q), _booltofloat(_e) - _booltofloat(_a), _booltofloat(_s) - _booltofloat(_z));
+		_uiTimer += 1;
 		
-		Vector3 offset = _direction.Normalized() * _acceleration * (float)delta * _velMultiplier;
-
-		float speedMulti = 1;
-
-		if (_shift)
+		
+		if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
-			speedMulti *= _shiftMultiplier;
-		}
-
-		if (_alt)
-		{
-			speedMulti *= _altMultiplier;
-		}
-
-		if (_direction == Vector3.Zero)
-		{
-			_velocity = Vector3.Zero;
-		}
-		else if(_lastDirection != _direction)
-		{
-			_velocity = Vector3.Zero;
-			_velocity.X = Mathf.Clamp(_velocity.X + offset.X, -_velMultiplier, _velMultiplier);
-			_velocity.Y = Mathf.Clamp(_velocity.Y + offset.Y, -_velMultiplier, _velMultiplier);
-			_velocity.Z = Mathf.Clamp(_velocity.Z + offset.Z, -_velMultiplier, _velMultiplier);
-			
-			Translate(_velocity * (float)delta * speedMulti);
-
-			_lastDirection = _direction;
+			Move(delta);
 		}
 		else
 		{
-			_velocity.X = Mathf.Clamp(_velocity.X + offset.X, -_velMultiplier, _velMultiplier);
-			_velocity.Y = Mathf.Clamp(_velocity.Y + offset.Y, -_velMultiplier, _velMultiplier);
-			_velocity.Z = Mathf.Clamp(_velocity.Z + offset.Z, -_velMultiplier, _velMultiplier);
-			
-			Translate(_velocity * (float)delta * speedMulti);
+			Velocity = new Vector3(0, 0, 0);
 		}
 	}
-
-	private void _updateMouseLook()
+	
+	protected void Zoom(InputEvent @event)
 	{
-		if (Input.MouseMode == Input.MouseModeEnum.Captured)
+		if (@event.AsText() == "Mouse Wheel Down")
 		{
-			_mousePosition *= sensitivity;
-			float yaw = _mousePosition.X;
-			float pitch = _mousePosition.Y;
-			_mousePosition = Vector2.Zero;
-			
-			pitch = Mathf.Clamp(pitch, -90.0f - _totalPitch, 90.0f - _totalPitch);
-			_totalPitch += pitch;
-			
-			RotateY(Mathf.DegToRad(-yaw));
-			RotateObjectLocal(new Vector3(1f,0f,0f), Mathf.DegToRad(-pitch));
-			
+			if (_camera.Fov <= _fovMax)
+			{
+				_camera.Fov  += 2;
+			}
 		}
+		else if (@event.AsText() == "Mouse Wheel Up")
+		{
+			if (_camera.Fov >= _fovMin)
+			{
+				_camera.Fov -= 2;
+			}
+		}
+	}
+	
+	protected void Pause()
+	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && !GameManager._pausemode && _uiTimer > 20)
+		{
+			_uiTimer = 0;
+			GameManager._pausemode = true;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
+			Control pauseMenu = pauseUI.Instantiate<Control>();
+			AddChild(pauseMenu);
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _uiTimer > 20)
+		{
+			_uiTimer = 0;
+			GameManager._pausemode = false;
+		}
+	}
+	
+	private void Move(double delta)
+	{
+		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
+		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
+		    Input.IsKeyPressed(controls[3].Item2))
+		{
+			int left = Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2));
+			int right = Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2)); 
+			int forward = Conversions.BtoI(Input.IsKeyPressed(controls[0].Item2));
+			int backward = Conversions.BtoI(Input.IsKeyPressed(controls[1].Item2));
+					
+			_direction = new Vector3(left - right, 0, forward - backward);
+			_direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
+		}
+
+		_playerMesh.Rotation = new Vector3(0, _cameraH.Rotation.Y + (float) Math.PI, 0);
+		
+		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _walkSpeed, (float)(_acceleration * delta));
+		
+		Vector3 velocity = Velocity;
+		velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;
+		velocity.X = _horizontalVelocity.X + _verticalVelocity.X;
+		velocity.Y = _verticalVelocity.Y;
+		
+		Velocity = velocity;
+		MoveAndSlide();
 	}
 }
