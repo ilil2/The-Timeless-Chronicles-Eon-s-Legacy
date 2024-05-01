@@ -29,6 +29,7 @@ public abstract partial class MobScript : CharacterBody3D
 	// Pour le pathfiding... ?
 	private NavigationAgent3D Nav; // Cible du pathfiding
 	public int state; // -1 = repos | 0 = retour à position initiale | 1 = suivre joueur | 2 = attaque | 3 = suivre sans vue
+	public int LastState;
 	private Vector3 PosInnit; // position initiale
 	private Vector3 RotInnit; // rotation innitiale
 	private bool SkipFrame = true; // RayCast3D ne fonctionne pas à la première frame
@@ -68,7 +69,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
-		
+		LastState = state;
 		if(Alive)
 		{
 			if(state==1 || state==2 || state == 3)
@@ -80,7 +81,6 @@ public abstract partial class MobScript : CharacterBody3D
 				LastPlayer = Player;
 			}
 			Player = GetPlayer(SetRay());
-			SendInfo();
 			if(Player == null && state!=0)
 			{
 				if(Agro<=0)
@@ -111,6 +111,7 @@ public abstract partial class MobScript : CharacterBody3D
 			{
 				state=2;
 			}
+			SendInfo();
 		}
 		else
 		{
@@ -275,7 +276,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void SendInfo()
 	{
-		if((state == 1 || state == 2 | state == 3) && Player is PlayerScript && LastPlayer!=Player || stopwatch.ElapsedMilliseconds>1000)
+		if((state == 1 || state == 2 | state == 3) && ((Player is PlayerScript && LastPlayer!=Player) || stopwatch.ElapsedMilliseconds>1000 || LastState!=state))
 		{
 			stopwatch.Restart();
 			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
