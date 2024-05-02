@@ -980,19 +980,19 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Armature:position")
+tracks/0/path = NodePath("CollisionShape3D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape3D:disabled")
+tracks/1/path = NodePath(".:IsHide")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1004,14 +1004,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:IsHide")
+tracks/2/path = NodePath("Armature:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_7sv0j"]
@@ -1223,34 +1223,22 @@ tracks/28/keys = PackedFloat32Array(0, 1, 0.688784, -0.0224071, -0.00592818, 0.7
 tracks/29/type = "value"
 tracks/29/imported = false
 tracks/29/enabled = true
-tracks/29/path = NodePath("Armature:position")
+tracks/29/path = NodePath("CollisionShape3D:disabled")
 tracks/29/interp = 1
 tracks/29/loop_wrap = true
 tracks/29/keys = {
 "times": PackedFloat32Array(0, 3.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector3(0, -0.4, 0), Vector3(0, 0, 0)]
+"values": [true, false]
 }
 tracks/30/type = "value"
 tracks/30/imported = false
 tracks/30/enabled = true
-tracks/30/path = NodePath("CollisionShape3D:disabled")
+tracks/30/path = NodePath(".:IsHide")
 tracks/30/interp = 1
 tracks/30/loop_wrap = true
 tracks/30/keys = {
-"times": PackedFloat32Array(0, 3.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/31/type = "value"
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/path = NodePath(".:IsHide")
-tracks/31/interp = 1
-tracks/31/loop_wrap = true
-tracks/31/keys = {
 "times": PackedFloat32Array(0, 3.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -1560,7 +1548,7 @@ states/Start/position = Vector2(260, 105)
 states/Walk/node = SubResource("AnimationNodeAnimation_wll4e")
 states/Walk/position = Vector2(912, 23)
 transitions = ["Start", "Hide", SubResource("AnimationNodeStateMachineTransition_n3v7k"), "Hide", "StandUp", SubResource("AnimationNodeStateMachineTransition_0yxut"), "StandUp", "Idle", SubResource("AnimationNodeStateMachineTransition_ehjyc"), "Idle", "StandDown", SubResource("AnimationNodeStateMachineTransition_xdc66"), "StandDown", "Hide", SubResource("AnimationNodeStateMachineTransition_8l8km"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_82cgi"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hvrc2"), "Idle", "Atk", SubResource("AnimationNodeStateMachineTransition_i13v5"), "Atk", "Idle", SubResource("AnimationNodeStateMachineTransition_kaw7x"), "Atk", "Walk", SubResource("AnimationNodeStateMachineTransition_nekix"), "Walk", "Atk", SubResource("AnimationNodeStateMachineTransition_8fw4k"), "Atk", "Death", SubResource("AnimationNodeStateMachineTransition_0g3ty"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_blkum"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vddft"), "Death", "End", SubResource("AnimationNodeStateMachineTransition_h3c4t"), "Walk", "StandDown", SubResource("AnimationNodeStateMachineTransition_nrjl7"), "Atk", "StandDown", SubResource("AnimationNodeStateMachineTransition_foq8o")]
-graph_offset = Vector2(107, 45)
+graph_offset = Vector2(104, -27)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0go"]
 

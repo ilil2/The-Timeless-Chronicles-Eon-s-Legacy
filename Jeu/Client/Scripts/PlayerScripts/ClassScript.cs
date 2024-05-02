@@ -202,7 +202,7 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
 		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
-		    Input.IsKeyPressed(controls[3].Item2))
+			Input.IsKeyPressed(controls[3].Item2))
 		{
 			int left = Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2));
 			int right = Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2));
@@ -282,5 +282,9 @@ public abstract partial class ClassScript : PlayerScript
 	public int GetMaxStamina()
 	{
 		return MaxStamina;
+	}
+	private void _on_potion_timer_timeout()
+	{
+		GD.Print("PotionTimer !");
 	}
 }

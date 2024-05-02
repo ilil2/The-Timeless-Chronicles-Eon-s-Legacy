@@ -20,7 +20,7 @@ public partial class FogSkeleton : MobScript
 			PlayBack = (AnimationNodeStateMachinePlayback)AniTree.Get("parameters/playback");
 		}
 		PhysicsProcess(delta);
-		Fog = (GetParent() as TestFog).Fog;
+		Fog = (GetParent() as MapLvl1Script).FogState != 0;
 		CanDo = !IsHide;
 	}
 	public override void _Process(double delta) 

@@ -21,13 +21,14 @@ public partial class MapLvl1Script : IMap
 	private PackedScene AssetC = GD.Load<PackedScene>("res://Ressources/Map/Egypt/Temple/Asset/Small_gate.tscn");
 	private Node3D SpawnRoom;
 	private double MaxSpawnDist = 0;
-	private int FogState = 0;
+	public int FogState = 0;
 	private int StartTime = 0;
 	private int Duration = 0;
 	private int FrameCount = 0;
 	private int StartInput = 0;
 	private NavigationRegion3D NavMesh = GD.Load<PackedScene>("res://Scenes/NavMesh.tscn").Instantiate<NavigationRegion3D>();
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
+	public Godot.Environment env;
 	private Dictionary<int,(int,int)> IdToLen = new Dictionary<int,(int,int)>
 	{
 		{1,(3,3)},
@@ -47,6 +48,8 @@ public partial class MapLvl1Script : IMap
 
 	public override void _Ready()
 	{
+		WorldEnvironment world = GetNode<WorldEnvironment>("World");
+		env = world.Environment;
 		foreach(Node3D s in GetNode<Node3D>("AnimationSpawn").GetChildren())
 		{
 			AnimationSpawn.Add(s);
@@ -164,7 +167,7 @@ public partial class MapLvl1Script : IMap
 						string name = "";
 						if(m==0)
 						{
-							name = "Mummy";
+							name = "FogSkeleton";
 						}
 						else
 						{

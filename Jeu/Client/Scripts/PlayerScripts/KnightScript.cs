@@ -198,4 +198,3 @@ public partial class KnightScript : ClassScript
 		AnimationState = -3;
 	}
 }
-

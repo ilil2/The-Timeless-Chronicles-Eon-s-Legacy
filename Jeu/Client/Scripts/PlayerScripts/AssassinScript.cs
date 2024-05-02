@@ -96,7 +96,7 @@ public partial class AssassinScript : ClassScript
 	{
 		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
 		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
-		    Input.IsKeyPressed(controls[3].Item2))
+			Input.IsKeyPressed(controls[3].Item2))
 		{
 			Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2)), 0,
 				Conversions.BtoI(Input.IsKeyPressed(controls[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(controls[1].Item2)));
@@ -248,3 +248,4 @@ public partial class AssassinScript : ClassScript
 		AnimationState = -3;
 	}
 }
+
