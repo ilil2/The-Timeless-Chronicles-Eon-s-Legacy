@@ -9,7 +9,6 @@ public partial class Laser : Node3D
 	private StaticBody3D _rangeMax;
 	private Timer Atk;
 	private bool CanAtk = true;
-	[Export] private int damage = 10;
 	
 	private Vector3 _startPoint;
 
@@ -42,18 +41,25 @@ public partial class Laser : Node3D
 			_rangeMax.Visible = false;
 			if (_laserId == -1)
 			{
+				ScientistScript player = (ScientistScript)GameManager.Joueur1;
 				if(CanAtk && _laserRay.GetCollider() is MobScript mob)
 				{
 					CanAtk = false;
 					Atk.Start();
-					mob.TakeDamage(damage);
-				
+					if (new Random().Next(0, player.CriticalChance) != 1)
+					{
+						mob.TakeDamage(player.Damage);
+					}
+					else
+					{
+						mob.TakeDamage((int)(player.Damage * 1.5));
+					}
 				}
-				if(CanAtk && _laserRay.GetCollider() is OtherClassScript player)
+				if(CanAtk && _laserRay.GetCollider() is OtherClassScript otherplayer)
 				{
 					CanAtk = false;
 					Atk.Start();
-					GameManager.InfoJoueur["attack"] = $"heal{player.Id}";
+					GameManager.InfoJoueur["attack"] = $"heal{otherplayer.Id}*{player.healspeed}";
 				}
 				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
 				{

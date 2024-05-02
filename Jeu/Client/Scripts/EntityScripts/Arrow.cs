@@ -10,7 +10,8 @@ public partial class Arrow : RigidBody3D
 	private float _changeRotationValue;
 	private bool _isHit;
 	public bool IsPlayer = false;
-	public int Damage = 10;
+	public float ShootPower;
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		if (LinearVelocity.Y < 0 && _changeRotationValue < 1f)
@@ -47,7 +48,15 @@ public partial class Arrow : RigidBody3D
 		{
 			if (body is MobScript mob && IsPlayer)
 			{
-				mob.TakeDamage(Damage);
+				ClassScript player = (ClassScript)GameManager.Joueur1;
+				if (new Random().Next(0, player.CriticalChance) != 1)
+				{
+					mob.TakeDamage(player.Damage);
+				}
+				else
+				{
+					mob.TakeDamage((int)(player.Damage * 1.5));
+				}
 				QueueFree();
 			}
 			else

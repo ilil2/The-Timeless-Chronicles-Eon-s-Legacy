@@ -1,23 +1,22 @@
 using Godot;
 using System;
+using JeuClient.Scripts.PlayerScripts;
 
 public partial class PlayerWeapon : Area3D
 {
-	[Export] private int Damage = 10;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
 	private void _on_body_entered(Node3D body)
 	{
 		if(body is MobScript mob)
 		{
-			mob.TakeDamage(Damage);
+			ClassScript player = (ClassScript)GameManager.Joueur1;
+			if (new Random().Next(0, player.CriticalChance) != 1)
+			{
+				mob.TakeDamage(player.Damage);
+			}
+			else
+			{
+				mob.TakeDamage((int)(player.Damage * 1.5));
+			}
 		}
 	}
 }
