@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using JeuClient.Scripts.PlayerScripts;
 using Lib;
 public partial class MapLvl2Script : IMap
 {
@@ -32,6 +33,9 @@ public partial class MapLvl2Script : IMap
 		{3.5f,4},
 		{1f,5},
 	};
+
+	public int NbrKey = 0;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -83,9 +87,24 @@ public partial class MapLvl2Script : IMap
 			MapReady = true;
 			LoadingStage = "En attente des autres joueurs :(";
 		}
-		else
+		else //Process
 		{
-			
+			for (int i = 0; i < GameManager._nbJoueur; i++)
+			{
+				if (i != ((PlayerScript)GameManager.Joueur1).Id)
+				{
+					if (GameManager.InfoAutreJoueur[$"attack{i}"] == "key")
+					{
+						NbrKey += 1;
+						GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+
+						if (NbrKey == 3)
+						{
+							CanExit = true;
+						}
+					}
+				}
+			}
 		}
 		
 	}
@@ -198,7 +217,7 @@ public partial class MapLvl2Script : IMap
 	
 	private void CreatePseudoKey()
 	{
-		const int nbKey = 4;
+		const int nbKey = 200;
 		const float radius = 1f;
 		for (int i = 0; i < nbKey; i++)
 		{

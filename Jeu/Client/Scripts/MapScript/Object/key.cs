@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Xml.Serialization;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class key : IRender
@@ -33,10 +34,16 @@ public partial class key : IRender
 	
 	private void _on_area_3d_body_entered(Node3D body)
 	{
-		if(body is ClassScript || body is OtherClassScript)
+		if(body is PlayerScript)
 		{
 			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
-			Visible = false;
+			GameManager.InfoJoueur["attack"] = "key";
+			MapLvl2Script map = ((MapLvl2Script)GameManager.Map);
+			map.NbrKey += 1;
+			if (map.NbrKey == 3)
+			{
+				map.CanExit = true;
+			}
 		}
 	}
 }
