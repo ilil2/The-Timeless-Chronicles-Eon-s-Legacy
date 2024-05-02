@@ -51,7 +51,10 @@ public partial class GameManager : Node3D
 	private bool join = false;					//partie rejointe
 	
 	public static int state = -1;
-	
+
+	public static int xp = 0;
+	public static int level => xp / 100;
+
 	public static Socket soc2;
 	public static IPEndPoint iep2;
 	
