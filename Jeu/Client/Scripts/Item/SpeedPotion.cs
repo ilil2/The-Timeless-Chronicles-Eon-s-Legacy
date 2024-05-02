@@ -5,7 +5,7 @@ using JeuClient.Scripts.PlayerScripts;
 
 public partial class SpeedPotion : Potion
 {
-	public int time = 30000;
+	public int time = 20;
 	public SpeedPotion()
 	{
 		ID = 2;
@@ -15,7 +15,11 @@ public partial class SpeedPotion : Potion
 	public override void UsePotion()
 	{
 		GD.Print("I use SpeedPotion");
-		(GameManager.Joueur1 as ClassScript).GetNode<Timer>("PotionTimer").Start();
-		
+		Timer timer = (GameManager.Joueur1 as ClassScript).GetNode<Timer>("PotionTimer");
+		(GameManager.Joueur1 as ClassScript).CurrentWalkSpeed = (GameManager.Joueur1 as ClassScript).WalkSpeed;
+		(GameManager.Joueur1 as ClassScript).WalkSpeed *= 1.5f;
+		timer.WaitTime = time;
+		timer.Start();
+
 	}
 }

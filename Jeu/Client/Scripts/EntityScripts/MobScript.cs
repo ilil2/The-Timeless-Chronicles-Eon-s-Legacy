@@ -260,6 +260,8 @@ public abstract partial class MobScript : CharacterBody3D
 				Alive = false;
 				Ani.Stop();
 				Ani.Play("Death");
+				GameManager.Gold += 10;
+				GameManager.xp += 1;
 			}
 			else
 			{

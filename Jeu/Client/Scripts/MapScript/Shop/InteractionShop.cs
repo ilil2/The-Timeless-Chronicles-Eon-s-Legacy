@@ -21,7 +21,7 @@ public partial class InteractionShop : Node3D
 	{
 		if(OnShop)
 		{
-			Gold.Text = $"Gold: {((ClassScript)GameManager.Joueur1).Gold}";
+			Gold.Text = $"Gold: {GameManager.Gold}";
 		}
 	}
 	private void _on_shop_body_entered(Node3D body)

@@ -7,18 +7,20 @@ namespace JeuClient.Scripts.PlayerScripts;
 
 public abstract partial class ClassScript : PlayerScript
 {
-	protected int MaxHealth = 100;
-	protected int Health = 100;
-	protected int MaxStamina = 1000;
-	protected int Stamina = 1000;
+	public int MaxHealth = 100;
+	public int Health = 100;
+	public int MaxStamina = 1000;
+	public int CurrentHealth = 100;
+	public int CurrentMaxHealth = 100;
+	public int Stamina = 1000;
 	protected int ManaUse = 50;
 	public int Damage = 10;
 	public int CriticalChance = 20;
 	protected int ChargeSpeed = 5;
-	public int Gold = 5000;
 	
 	protected float GravityValue = 9.8f;
-	protected float WalkSpeed = 4.2f;
+	public float WalkSpeed = 4.2f;
+	public float CurrentWalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
 	
 	public string[] Skills = new string[3];
@@ -52,6 +54,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected float MovementSpeed;
 	protected float AngularAcceleration = 10;
 	protected int Acceleration = 15;
+	
 	
 	protected int _uiTimer;
 	
@@ -286,5 +289,8 @@ public abstract partial class ClassScript : PlayerScript
 	private void _on_potion_timer_timeout()
 	{
 		GD.Print("PotionTimer !");
+		Health = CurrentHealth;
+		MaxHealth = CurrentMaxHealth;
+		WalkSpeed = CurrentWalkSpeed;
 	}
 }

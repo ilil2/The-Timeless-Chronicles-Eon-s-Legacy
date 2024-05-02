@@ -219,7 +219,7 @@ offset_right = 0.383911
 offset_bottom = 0.039978
 PotionLogo = ExtResource("3_2ev6e")
 Title = "Potion de resistance"
-Description = "Divise les degats subit par 2 pendant 30 secondes "
+Description = "Divise les degats subit par 2 pendant 20 secondes "
 Price = 300
 ID = 3
 
@@ -263,7 +263,7 @@ offset_right = 0.511963
 offset_bottom = 0.0799866
 PotionLogo = ExtResource("6_o08xi")
 Title = "Potion de vitesse"
-Description = "Multiplie la vitesse par 1.5 pendant 30 secondes "
+Description = "Multiplie la vitesse par 1.5 pendant 20 secondes "
 Price = 100
 ID = 2
 
