@@ -34,7 +34,7 @@ public partial class key : IRender
 	
 	private void _on_area_3d_body_entered(Node3D body)
 	{
-		if(body is PlayerScript)
+		if (body is ClassScript)
 		{
 			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
 			GameManager.InfoJoueur["attack"] = "key";
@@ -44,6 +44,10 @@ public partial class key : IRender
 			{
 				map.CanExit = true;
 			}
+		}
+		if (body is PlayerScript)
+		{
+			QueueFree();
 		}
 	}
 }

@@ -91,7 +91,7 @@ public partial class MapLvl2Script : IMap
 		{
 			for (int i = 0; i < GameManager._nbJoueur; i++)
 			{
-				if (i != ((PlayerScript)GameManager.Joueur1).Id)
+				if (i != ((ClassScript)GameManager.Joueur1).Id)
 				{
 					if (GameManager.InfoAutreJoueur[$"attack{i}"] == "key")
 					{
