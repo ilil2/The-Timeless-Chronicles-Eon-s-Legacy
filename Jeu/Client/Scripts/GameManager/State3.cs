@@ -22,7 +22,9 @@ public partial class State3 : GameManager
 		iep2 = new IPEndPoint(IPAddress.Parse(IP), port_serv_jeu);                //nouvelle ip
 		
 		UDP.Send(soc2,"connect",iep2);    //envoie requette de connection au serveur secondaire
+		soc2.ReceiveTimeout = 2000;
 		InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
+		soc2.ReceiveTimeout = 6000000;
 		Seed = Conversions.AtoI(InfoJoueur["id"].Split('*')[0].Substring(1));
 		AleateSeed = Conversions.AtoI(InfoJoueur["id"].Split('*')[1]);
 		Map.SetSeed(Seed,AleateSeed);
