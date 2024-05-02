@@ -175,6 +175,12 @@ public class Serveur
                     ID -= 1;
                     
                     SendAll(soc, $"deco:{id}");
+
+                    if (ID == 0)
+                    {
+                        Console.WriteLine("Tout les joueurs sont déconnectés");
+                        throw new StopException();
+                    }
                 }
                 else
                 {
@@ -182,6 +188,11 @@ public class Serveur
                 }
 
                 SendAll(soc, GetInfo());
+            }
+            catch (StopException)
+            {
+                Console.WriteLine("fin");
+                break;
             }
             catch 
             {
