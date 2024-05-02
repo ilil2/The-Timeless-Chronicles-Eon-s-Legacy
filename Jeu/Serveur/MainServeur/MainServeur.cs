@@ -318,7 +318,7 @@ public class MainServeur
                 
                 if (player_games.ContainsKey(cc.game_id) == false)
                 {
-                    tw.WriteLine("remove");
+                    tw.WriteLine("ID inconnu");
                     tw.Flush();
                     
                     master = false;
