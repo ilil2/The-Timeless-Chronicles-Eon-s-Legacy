@@ -107,7 +107,7 @@ public partial class MapLvl1Script : IMap
 			GD.Print($"{NbRoom} Room");
 			GD.Print($"Map crée en {stopwatch.Elapsed}");
 				
-			Duration = Rand2.Next(120,260);
+			Duration = Rand2.Next(20,60);
 			fogwatch.Start();
 			GD.Print($"Fog Start in {Duration}");	
 			
@@ -226,7 +226,7 @@ public partial class MapLvl1Script : IMap
 			{
 				env.VolumetricFogDensity=(float)0.1;
 				FogState=2;
-				Duration = Rand2.Next(120,260);
+				Duration = Rand2.Next(20,60);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog Start! End in {Duration} seconde");
 			}
@@ -249,7 +249,7 @@ public partial class MapLvl1Script : IMap
 			{
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
-				Duration = Rand2.Next(120,260);
+				Duration = Rand2.Next(20,60);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
 				GD.Print($"Fog End! Next Fog in {Duration} seconde");		
 			}

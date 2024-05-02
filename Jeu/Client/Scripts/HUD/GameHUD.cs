@@ -36,10 +36,18 @@ public partial class GameHUD : Control
 	
 	private Color _deathColor = new Color(0.4f,0.4f,0.4f);
 	
+	private ProgressBar _xpBar;
+	private Label _level;
+	private Label _gold;
+	
 	public override void _Ready()
 	{
 		OnInventory = false;
 		_inventory = GetNode<Panel>("ShopInventory");
+		
+		_xpBar = GetNode<ProgressBar>("XpBar");
+		_level = GetNode<Label>("Level");
+		_gold = GetNode<Label>("Money");
 		
 		_hpBar = GetNode<ProgressBar>("HpBar");
 		_mpBar = GetNode<ProgressBar>("MpBar");
@@ -63,6 +71,10 @@ public partial class GameHUD : Control
 
 	public override void _Process(double delta)
 	{
+		_gold.Text = $"{GameManager.Gold}";
+		_xpBar.Value = GameManager.xp % 100;
+		_level.Text = $"Level {GameManager.level}";
+		
 		ClassScript player = (ClassScript)GameManager.Joueur1;
 		OtherClassScript otherPlayer1 = (OtherClassScript)GameManager.Joueur2;
 		OtherClassScript otherPlayer2 = (OtherClassScript)GameManager.Joueur3;
