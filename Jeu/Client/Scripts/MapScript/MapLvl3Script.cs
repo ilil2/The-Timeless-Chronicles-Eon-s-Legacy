@@ -60,6 +60,14 @@ public partial class MapLvl3Script : IMap
 			MapReady = true;
 			LoadingStage = "En attente des autres joueurs :(";
 		}
+		else
+		{
+			if (SkillsMenu)
+			{
+				SkillsMenu = false;
+				ShowSkillsMenu();
+			}
+		}
 	}
 
 	public override List<(int, int, int)> GetSpawnLocation()

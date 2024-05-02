@@ -89,6 +89,12 @@ public partial class MapLvl2Script : IMap
 		}
 		else //Process
 		{
+			if (SkillsMenu)
+			{
+				SkillsMenu = false;
+				ShowSkillsMenu();
+			}
+			
 			for (int i = 0; i < GameManager._nbJoueur; i++)
 			{
 				if (i != ((ClassScript)GameManager.Joueur1).Id)

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://b50mk46t7i3lg"]
+
+[ext_resource type="Script" path="res://Scripts/HUD/Skills.cs" id="1_ar3d4"]
+[ext_resource type="Texture2D" uid="uid://cu38eitxacnwm" path="res://Ressources/Graphismes/Card/CardTemplate.png" id="3_b6we4"]
+
+[node name="Skills" type="Control"]
+layout_mode = 3
+anchor_right = 0.111
+anchor_bottom = 0.099
+offset_right = 0.12799
+offset_bottom = -0.152004
+script = ExtResource("1_ar3d4")
+
+[node name="Skill1" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.286
+anchor_bottom = 1.0
+offset_right = -0.0320031
+texture = ExtResource("3_b6we4")
+expand_mode = 1
+
+[node name="Skill2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.357
+anchor_right = 0.643
+anchor_bottom = 1.0
+offset_left = 0.0159977
+offset_right = -0.0160016
+texture = ExtResource("3_b6we4")
+expand_mode = 1
+
+[node name="Skill3" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.714
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0319955
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_b6we4")
+expand_mode = 1

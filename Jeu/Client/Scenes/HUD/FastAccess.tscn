@@ -53,12 +53,12 @@ grow_vertical = 2
 
 [node name="Slot2" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.125
-anchor_right = 0.25
+anchor_left = 0.333
+anchor_right = 0.667
 anchor_bottom = 1.0
-offset_left = 80.0
-offset_right = 160.0
-offset_bottom = 8.0
+offset_left = 0.127998
+offset_right = -0.128021
+offset_bottom = 1.52588e-05
 
 [node name="Logo" type="TextureRect" parent="Slot2"]
 layout_mode = 1
@@ -75,11 +75,9 @@ expand_mode = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.75
-anchor_top = 0.706
+anchor_top = 0.75
 anchor_right = 1.0
-anchor_bottom = 0.949
-offset_top = -0.0160065
-offset_bottom = -0.0640106
+anchor_bottom = 1.0
 text = "2 "
 label_settings = SubResource("LabelSettings_keioj")
 

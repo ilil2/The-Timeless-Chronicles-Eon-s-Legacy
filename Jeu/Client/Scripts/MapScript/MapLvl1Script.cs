@@ -118,6 +118,11 @@ public partial class MapLvl1Script : IMap
 		}
 		else
 		{
+			if (SkillsMenu)
+			{
+				SkillsMenu = false;
+				ShowSkillsMenu();
+			}
 			//Process
 			//CreateFog();
 			DayCycle();

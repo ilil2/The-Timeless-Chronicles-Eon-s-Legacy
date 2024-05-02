@@ -123,16 +123,19 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		for (int i = 0; i < GameManager._nbJoueur; i++)
 		{
-			string[] attack = GameManager.InfoAutreJoueur[$"attack{i}"].Split("*");
-			if (attack[0] == $"heal{Id}")
+			if (i != Id)
 			{
-				GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-				SetHealth(Health + Conversions.AtoI(attack[1]));
-			}
-			else if (attack[0] == $"revive{Id}")
-			{
-				GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-				Revive();
+				string[] attack = GameManager.InfoAutreJoueur[$"attack{i}"].Split("*");
+				if (attack[0] == $"heal{Id}")
+				{
+					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+					SetHealth(Health + Conversions.AtoI(attack[1]));
+				}
+				else if (attack[0] == $"revive{Id}")
+				{
+					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+					Revive();
+				}
 			}
 		}
 	}

@@ -41,16 +41,16 @@ public partial class PotionUI : Panel
 	}
 	private void _on_button_pressed()
 	{
-		if(((ClassScript)GameManager.Joueur1).Gold>=Price && !ShopInventory.IsFull())
+		if(GameManager.Gold>=Price && !ShopInventory.IsFull())
 		{
 			GD.Print($"Achat {Title}");
-			((ClassScript)GameManager.Joueur1).Gold-=Price;
+			GameManager.Gold-=Price;
 			ShopInventory.AddPotion(ID);
 		}
 	}
 	private void UpdatePrice()
 	{
-		if(((ClassScript)GameManager.Joueur1).Gold<Price)
+		if(GameManager.Gold<Price)
 		{
 			((LabelSettings)Pri.LabelSettings).FontColor = new Color(1,0,0);
 			((BaseButton)Buy).Disabled = true;

@@ -16,6 +16,8 @@ public abstract partial class IMap : Node3D
 	public AnimationPlayer Ani;
 	[Export] public bool CamOnPlayer = false;
 	public string LoadingStage = "rien pour l'instant";
+	[Export]public bool SkillsMenu = false;
+	
 	public int Step()
 	{
 		return step;
@@ -100,5 +102,12 @@ public abstract partial class IMap : Node3D
 			}
 		}
 			
+	}
+	
+	public void ShowSkillsMenu()
+	{
+		Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+		AddChild(skillmenu);
+		Input.MouseMode = Input.MouseModeEnum.Visible;	
 	}
 }
