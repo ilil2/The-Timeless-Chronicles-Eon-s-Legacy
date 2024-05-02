@@ -22,6 +22,7 @@ public partial class Shop : IMap
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		CanExit = true;
 		SyncCam();
 		if (!MapReady)
 		{

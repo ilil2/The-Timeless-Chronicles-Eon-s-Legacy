@@ -53,7 +53,7 @@ public partial class PortalExit : Node3D
 				Portal.Visible = false;
 			}
 		}
-		else
+		else if((GetParent() as IMap).CanExit)
 		{
 			if(!Open)
 			{

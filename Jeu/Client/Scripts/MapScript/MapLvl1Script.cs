@@ -118,6 +118,7 @@ public partial class MapLvl1Script : IMap
 		}
 		else
 		{
+			CanExit = true;
 			if (SkillsMenu)
 			{
 				SkillsMenu = false;
