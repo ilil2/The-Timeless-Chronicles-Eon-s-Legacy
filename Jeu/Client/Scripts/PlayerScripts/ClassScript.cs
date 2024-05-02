@@ -54,7 +54,8 @@ public abstract partial class ClassScript : PlayerScript
 	protected float MovementSpeed;
 	protected float AngularAcceleration = 10;
 	protected int Acceleration = 15;
-	
+
+	public Control _inventory = GD.Load<PackedScene>("res://Scenes/HUD/Inventory.tscn").Instantiate<Control>();
 	
 	protected int _uiTimer;
 	
@@ -169,12 +170,15 @@ public abstract partial class ClassScript : PlayerScript
 			_uiTimer = 0;
 			GameHUD.OnInventory = true;
 			Input.MouseMode = Input.MouseModeEnum.Visible;
+			AddChild(_inventory);
+			
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[12].Item2) && GameHUD.OnInventory && _uiTimer > 20)
 		{
 			_uiTimer = 0;
 			GameHUD.OnInventory = false;
 			Input.MouseMode = Input.MouseModeEnum.Captured;
+			RemoveChild(_inventory);
 		}
 	}
 

@@ -23,10 +23,9 @@ public partial class FogSkeleton : MobScript
 		Fog = (GetParent() as MapLvl1Script).FogState != 0;
 		CanDo = !IsHide;
 	}
-	public override void _Process(double delta) 
+	public override void _Process(double delta)
 	{
 		Process(delta);
-		GD.Print(IsHide);
 		if(!Fog && !IsHide)
 		{
 			PlayBack.Travel("StandDown");

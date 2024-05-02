@@ -37,7 +37,7 @@ public abstract partial class IMap : Node3D
 	public abstract void DebugMode(CharacterBody3D Player, bool DebugMode);
 	public void SetSeed(int seed, int seed2)
 	{
-		Rand = new Random(seed);
+		Rand = new Random(12);
 		Rand2 = new Random(seed2);
 		GD.Print($"Seed1 set : {seed}");
 		GD.Print($"Seed2 set : {seed2}");

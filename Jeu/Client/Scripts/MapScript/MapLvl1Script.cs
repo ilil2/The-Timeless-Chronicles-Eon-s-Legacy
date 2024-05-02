@@ -171,7 +171,7 @@ public partial class MapLvl1Script : IMap
 					{
 						int m = Rand.Next(0,2);
 						string name = "";
-						if(m==0)
+						if(m==0 && false)
 						{
 							name = "FogSkeleton";
 						}
@@ -189,6 +189,7 @@ public partial class MapLvl1Script : IMap
 					}
 				}
 		}
+		GD.Print(id);
 	}
 	
 	private void DayCycle()

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using JeuClient.Scripts.PlayerScripts;
 using System.Diagnostics;
 using Lib;
+using static Godot.Input;
+
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
 {
@@ -37,8 +39,8 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	// Autre
 	private Node Parent;
-	private CharacterBody3D Player = null;
-	private CharacterBody3D LastPlayer = null;
+	protected CharacterBody3D Player = null;
+	protected CharacterBody3D LastPlayer = null;
 	private Vector3 Me = new Vector3();
 	private Vector3 PlayerPos = new Vector3();
 	private bool PlayerSet = false;
@@ -69,138 +71,104 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
-		LastState = state;
-		if(Alive)
+		if(Input.IsKeyPressed((Key)MouseButton.Left))
 		{
-			if(state==1 || state==2 || state == 3)
-			{
-				receive();
-			}
-			if(Player!=null)
-			{
-				LastPlayer = Player;
-			}
-			Player = GetPlayer(SetRay());
-			if(Player == null && state!=0)
-			{
-				if(Agro<=0)
-				{
-					state = 0;
-					Nav.TargetPosition = PosInnit;
-				}
-				else
-				{
-					Agro-=1;
-					Nav.TargetPosition = LastPlayer.GlobalPosition;
-					state = 3;
-				}
-			}
-			if(state==0)
-			{
-				if(Distance(Position,PosInnit)<=0.1)
-				{
-					state = -1;
-				}
-			}
-			if(Player!=null && state!=1 && (Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2"))
-			{
-				Nav.TargetPosition = Player.GlobalPosition;
-				state = 1;
-			}
-			if(Player!=null && state==1 && Distance(Player.GlobalPosition,GlobalPosition)<DistAtk)
-			{
-				state=2;
-			}
-			SendInfo();
+			DebugMode = !DebugMode;
 		}
-		else
+		if (DebugMode)
 		{
-			//Death();
-			if(Ani.CurrentAnimation=="")
+			LastState = state;
+			if(Alive)
 			{
-				QueueFree();
-			}
-		}
-		/*
-		if(PlayerSet)
-		{
-			if(Distance(Player.Position,this.Position)<=DistVue)
-			{
-				if (Distance(Player.Position,this.Position)<=2 && Alive)
+				if(state==1 || state==2 || state == 3)
 				{
-					state = 2;
+					receive();
 				}
-				else if(state == 2)
+				if(Player!=null)
 				{
+					LastPlayer = Player;
+				}
+				Player = GetPlayer(SetRay());
+				if(Player == null && state!=0)
+				{
+					if(Agro<=0)
+					{
+						state = 0;
+						Nav.TargetPosition = PosInnit;
+					}
+					else
+					{
+						Agro-=1;
+						Nav.TargetPosition = LastPlayer.GlobalPosition;
+						state = 3;
+					}
+				}
+				if(state==0)
+				{
+					if(Distance(Position,PosInnit)<=0.1)
+					{
+						state = -1;
+					}
+				}
+				if(Player!=null && state!=1 && (Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2"))
+				{
+					Nav.TargetPosition = Player.GlobalPosition;
 					state = 1;
 				}
-				if(!Alive)
+				if(Player!=null && state==1 && Distance(Player.GlobalPosition,GlobalPosition)<DistAtk)
 				{
-					Death();
+					state=2;
 				}
-				if (Alive) 
-				{
-					IsTooFar = !(Distance(Player.Position,this.Position)<=DistVue);
-					Ray.Rotation = new Vector3(0,-Rotation.Y,0);
-					if (state == 0 || state == -1) // Si ne suit pas le joueur
-					{
-						if (PlayerVisible(Player) && !IsTooFar) // si rien entre mob et joueur
-						{
-							state = 1;
-							//GD.Print("not colliding");
-							Nav.TargetPosition = Player.GlobalPosition;
-							Agro = AgroMax;
-						}
-					}
-					if (state == 1 && !IsTooFar) // si suit le joueur
-					{
-						Nav.TargetPosition = Player.GlobalPosition;
-						if (!PlayerVisible(Player)) // si qqc entre mob et joueur
-						{
-							Agro -=1; 
-							//GD.Print("colliding");
-						}
-						else Agro = AgroMax; // si rien entre mob et joueur
-					}
-				}
-				SkipFrame = false; // Faire la prochaine frame
+				SendInfo();
 			}
-		}*/
+			else
+			{
+				//Death();
+				if(Ani.CurrentAnimation=="")
+				{
+					QueueFree();
+				}
+			}
+		}
+		
 	}
 	public void Process(double delta) //NavMesh
 	{
-		if(CanDo&&Alive)
+		if (DebugMode)
 		{
-			if(state==0 || state==1 || state == 3)
+			if(CanDo&&Alive)
 			{
-				var dir = new Vector3();  //Pathfiding
-				var NextPos = Nav.GetNextPathPosition();
-				dir = NextPos - GlobalPosition;
-				dir = dir.Normalized();
-				Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
-				MoveAndSlide();
-				//LookAt(new Vector3(Nav.TargetPosition.X, 0, Nav.TargetPosition.Z)); //Orientation
-				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
-			}
-			if(state==1)
-			{
-				Nav.TargetPosition = Player.GlobalPosition;
-				Agro = AgroMax;
-			}
-			if(state==-1)
-			{
-				Rotation = RotInnit;
-				if(Ani.CurrentAnimation!="Idle")
+				if(state==0 || state==1 || state == 3)
 				{
-					Ani.Play("Idle");
+					var dir = new Vector3();  //Pathfiding
+					var NextPos = Nav.GetNextPathPosition();
+					dir = NextPos - GlobalPosition;
+					dir = dir.Normalized();
+					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+					MoveAndSlide();
+					//LookAt(new Vector3(Nav.TargetPosition.X, 0, Nav.TargetPosition.Z)); //Orientation
+					LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+					Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
 				}
-			}
-			if(state==2 && Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2")
-			{
-				var NextPos = Nav.GetNextPathPosition();
-				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+				if(state==1)
+				{
+					Nav.TargetPosition = Player.GlobalPosition;
+					Agro = AgroMax;
+				}
+				if(state==-1)
+				{
+					Rotation = RotInnit;
+					if(Ani.CurrentAnimation!="Idle")
+					{
+						Ani.Play("Idle");
+					}
+				}
+				if(state==2 && Ani.CurrentAnimation!="Atk" && Ani.CurrentAnimation!="Atk2")
+				{
+					var NextPos = Nav.GetNextPathPosition();
+					LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+					Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+				}
 			}
 		}
 
@@ -278,10 +246,10 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void SendInfo()
 	{
-		if((state == 1 || state == 2 | state == 3) && (Player is PlayerScript && (LastPlayer!=Player || stopwatch.ElapsedMilliseconds>1000 || LastState!=state)))
+		if((state == 1 || state == 2 | state == 3) && (Player is ClassScript) && (LastPlayer!=Player || stopwatch.ElapsedMilliseconds>1000 || LastState!=state))
 		{
 			stopwatch.Restart();
-			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
+			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
 	}
 	
@@ -375,42 +343,44 @@ public abstract partial class MobScript : CharacterBody3D
 			{
 				GD.Print("Received: " + a);
 				string[] firstline = a.Split("°");
-				
-				string[] pos = firstline[2].Split("?");
 				int id = int.Parse(firstline[0]);
-				if (firstline[1].Contains("§"))
+				if(id == ID)
 				{
-					string[] secondline = firstline[1].Split("§");
-					if (secondline[0] == "TK")
+					
+					if (firstline[1].Contains("§"))
 					{
-						int damage = int.Parse(secondline[1]);
-						if (id == ID)
+						string[] secondline = firstline[1].Split("§");
+						if (secondline[0] == "TK")
 						{
-							GD.Print(damage);
+							int damage = int.Parse(secondline[1]);
 							TakeDamage(damage, false);
 						}
 					}
-				}
-				else
-				{
-					if (ID == id)
+					else
 					{
+						
 						if (firstline[1]=="1")
 						{
 							state = 1;
 						}
-						if (firstline[1]=="1")
+						if (firstline[1]=="2")
 						{
 							state = 2;
 						}
-						if (firstline[1]=="1")
+						if (firstline[1]=="3")
 						{
 							state = 3;
 						}
+						
+					}
+					string[] pos = firstline[2].Split("?");
+					Vector3 NPosition = new Vector3(float.Parse(pos[0]), Position.Y, float.Parse(pos[1]));
+					if(MapTool.Distance(Position,NPosition)>0.1)
+					{
+						Position = NPosition;
 					}
 				}
-
-				Position = new Vector3(float.Parse(pos[0]), Position.Y, float.Parse(pos[1]));
+				
 			}
 		}
 	}

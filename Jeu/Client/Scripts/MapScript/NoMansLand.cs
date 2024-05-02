@@ -32,7 +32,6 @@ public partial class NoMansLand : Area3D
 			Stone.Position = new Vector3(player.Position.X,0,player.Position.Z);
 			ghost.Position = new Vector3(player.Position.X,1,player.Position.Z);
 			AddChild(Stone);
-			AddChild(ghost);
 			GraveArray[player.GetId()] = Stone;
 			GhostArray[player.GetId()] = ghost;
 			Stone.Rotation = player.GetNode<Node3D>("Player").Rotation;
@@ -40,6 +39,7 @@ public partial class NoMansLand : Area3D
 
 			if (player is ClassScript)
 			{
+				AddChild(ghost);
 				//Stone.GetNode<Camera3D>("Camera3D").Current = true;
 				(ghost as Ghost).Camera.Current = true;
 				Map.CamOnPlayer = false;

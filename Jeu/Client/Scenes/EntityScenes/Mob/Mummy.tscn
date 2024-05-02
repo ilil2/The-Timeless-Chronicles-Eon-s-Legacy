@@ -4509,3 +4509,11 @@ shape = SubResource("CapsuleShape3D_va1gh")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
+
+[node name="ID" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61852, 0)
+text = "ID: -1"
+
+[node name="TARGET" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8225, 0)
+text = "Target: null"

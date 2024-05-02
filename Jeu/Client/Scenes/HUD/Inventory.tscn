@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://d33bf7w56lyfs"]
+
+[ext_resource type="PackedScene" uid="uid://ybgpeisrpnbi" path="res://Scenes/HUD/ShopInventory.tscn" id="1_hoxxg"]
+[ext_resource type="PackedScene" uid="uid://dmdhjbevh4fyd" path="res://Scenes/HUD/FastAccessInventory.tscn" id="3_64j5s"]
+[ext_resource type="PackedScene" uid="uid://b50mk46t7i3lg" path="res://Scenes/HUD/Skills.tscn" id="3_ajt5u"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopInventory" parent="." instance=ExtResource("1_hoxxg")]
+layout_mode = 1
+anchor_left = 0.056
+anchor_top = 0.494
+anchor_right = 0.944
+anchor_bottom = 0.691
+offset_left = -0.512001
+offset_top = -0.112
+offset_right = 0.511963
+offset_bottom = 0.231964
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Skills" parent="." instance=ExtResource("3_ajt5u")]
+layout_mode = 1
+anchor_left = 0.333
+anchor_top = 0.099
+anchor_right = 0.667
+anchor_bottom = 0.395
+offset_left = 0.384003
+offset_top = -0.152008
+offset_right = -0.384033
+offset_bottom = 0.0399933
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.451
+anchor_top = 0.704
+anchor_right = 0.556
+anchor_bottom = 0.741
+offset_left = 0.447937
+offset_top = -0.192047
+offset_right = 0.487915
+offset_bottom = 1.83197
+text = "Fast Access Slot"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.431
+anchor_top = 0.444
+anchor_right = 0.562
+anchor_bottom = 0.485
+offset_left = -0.512024
+offset_top = 0.287964
+offset_right = -0.424072
+offset_bottom = -0.279999
+text = "Shop Inventory Slot"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.472
+anchor_top = 0.049
+anchor_right = 0.529
+anchor_bottom = 0.086
+offset_left = 0.255981
+offset_top = 0.247999
+offset_right = -0.408081
+offset_bottom = 2.272
+text = "Skill Slot"
+
+[node name="FastAccessInventory" parent="." instance=ExtResource("3_64j5s")]
+layout_mode = 1
+offset_left = 384.0
+offset_top = 488.0
+offset_right = 384.384
+offset_bottom = 487.696
+grow_horizontal = 1
+grow_vertical = 1
