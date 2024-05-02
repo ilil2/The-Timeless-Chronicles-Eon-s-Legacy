@@ -47,7 +47,7 @@ public class Serveur
         sr.Close();
     }
 
-    public void MainProgram(int n)
+    public void MainProgram(int n,int nbr)
     {
         GetSeed();
         //Prog pr = (Prog)o;
@@ -57,7 +57,7 @@ public class Serveur
         
         Console.WriteLine("Serveur en marche");
 
-        while (joueur_ready < ID || clients[0] == null)
+        while (joueur_ready < ID && ID < nbr)
         {
             (string s,EndPoint ep) = UDP.FirstReceive(soc);
             if (s == "connect" && ID < 4)

@@ -8,8 +8,9 @@ static void Main(string?[]? args)
     string? port = sr.ReadLine();
     sr.Close();
     Console.WriteLine(port);
+    string[] line = port.Split(';');
     global::Serveur.Serveur ms = new global::Serveur.Serveur(); 
-    ms.MainProgram(Conversion.AtoI(port));
+    ms.MainProgram(Conversion.AtoI(line[0]),Conversion.AtoI(line[1]));
 }
 
 {

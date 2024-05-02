@@ -193,7 +193,7 @@ public class MainServeur
                     //p1.StartInfo.Arguments = "exec.sh";
                     p1.StartInfo.FileName = "execwin.bat";
                     
-                    sw.Write(ports[0]);
+                    sw.Write($"{ports[0]};{cc.in_my_game.Length}");
                     sw.Close();
                     p1.Start(); /* Cette instruction ouvre un invite de commande n°2 */
                     
