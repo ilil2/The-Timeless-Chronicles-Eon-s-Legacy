@@ -5,7 +5,7 @@ using Lib;
 
 public partial class Ghost : CharacterBody3D
 {
-	private Camera3D _camera;
+	public Camera3D Camera;
 	private Node3D _cameraH;
 	private Node3D _playerMesh;
 	
@@ -19,10 +19,11 @@ public partial class Ghost : CharacterBody3D
 	private float _fovMax = 80;
 	private float _fovMin = 40;
 	private int _uiTimer;
+	private float _movementSpeed;
 	
 	public override void _Ready()
 	{
-		_camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
+		Camera = GetNode<Camera3D>("CameraPlayer/h/v/Camera3D");
 		_cameraH = GetNode<Node3D>("CameraPlayer/h");
 		_direction = Vector3.Back.Rotated(Vector3.Up, _cameraH.GlobalTransform.Basis.GetEuler().Y);
 		
@@ -31,7 +32,7 @@ public partial class Ghost : CharacterBody3D
 	
 	public override void _Input(InputEvent @event)
 	{
-		if (_camera.Current && !GameManager._pausemode)
+		if (Camera.Current && !GameManager._pausemode)
 		{
 			Zoom(@event);
 		}
@@ -40,9 +41,9 @@ public partial class Ghost : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		_uiTimer += 1;
-		
-		
-		if (_camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
+		_movementSpeed = 0f;
+		Pause();
+		if (Camera.Current && !GameManager._pausemode && !((ChatUI)GameManager._chat).IsOnChat())
 		{
 			Move(delta);
 		}
@@ -56,16 +57,16 @@ public partial class Ghost : CharacterBody3D
 	{
 		if (@event.AsText() == "Mouse Wheel Down")
 		{
-			if (_camera.Fov <= _fovMax)
+			if (Camera.Fov <= _fovMax)
 			{
-				_camera.Fov  += 2;
+				Camera.Fov  += 2;
 			}
 		}
 		else if (@event.AsText() == "Mouse Wheel Up")
 		{
-			if (_camera.Fov >= _fovMin)
+			if (Camera.Fov >= _fovMin)
 			{
-				_camera.Fov -= 2;
+				Camera.Fov -= 2;
 			}
 		}
 	}
@@ -101,11 +102,12 @@ public partial class Ghost : CharacterBody3D
 					
 			_direction = new Vector3(left - right, 0, forward - backward);
 			_direction = _direction.Rotated(Vector3.Up, _cameraH.Rotation.Y).Normalized();
+			_movementSpeed = _walkSpeed;
 		}
 
 		_playerMesh.Rotation = new Vector3(0, _cameraH.Rotation.Y + (float) Math.PI, 0);
 		
-		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _walkSpeed, (float)(_acceleration * delta));
+		_horizontalVelocity = _horizontalVelocity.Lerp(_direction.Normalized() * _movementSpeed, (float)(_acceleration * delta));
 		
 		Vector3 velocity = Velocity;
 		velocity.Z = _horizontalVelocity.Z + _verticalVelocity.Z;

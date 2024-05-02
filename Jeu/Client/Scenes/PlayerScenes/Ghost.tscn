@@ -53,10 +53,13 @@ script = ExtResource("1_7acih")
 [node name="CameraPlayer" parent="." instance=ExtResource("2_ye35e")]
 
 [node name="Ghost" type="Node3D" parent="."]
-transform = Transform3D(-0.01, 0, -8.74228e-10, 0, 0.01, 0, 8.74228e-10, 0, -0.01, 0, 0, 0)
+transform = Transform3D(0.01, 0, 1.74846e-09, 0, 0.01, 0, -1.74846e-09, 0, 0.01, 0, 0, 0)
 
-[node name="polySurface26_lambert2_0" type="MeshInstance3D" parent="Ghost"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 80, -140)
+[node name="Mesh" type="Node3D" parent="Ghost"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="polySurface26_lambert2_0" type="MeshInstance3D" parent="Ghost/Mesh"]
+transform = Transform3D(1, 0, 2.72139e-14, 0, 1, 0, -2.62013e-14, 0, 1, -4.41864e-12, 80, -140)
 mesh = SubResource("ArrayMesh_puel0")
 skeleton = NodePath("")
 
