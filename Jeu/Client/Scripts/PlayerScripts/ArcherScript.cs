@@ -12,6 +12,7 @@ public partial class ArcherScript : ClassScript
 	private bool _shootAnimation;
 	
 	public static bool IsShooting;
+	private float shootspeed = 0.015f;
 	
 	public override void _Ready()
 	{
@@ -63,38 +64,6 @@ public partial class ArcherScript : ClassScript
 		}
 	}
 
-	protected override void Move(double delta)
-	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-		{
-			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
-			int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-			int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
-					
-			Direction = new Vector3(left - right, 0, forward - backward);
-			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-			IsWalking = true;
-			MovementSpeed = WalkSpeed;
-		}
-			
-		//Calcul de la rotation du joueur
-		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-			
-		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-		
-		//Calcul du movement du joueur
-		Vector3 velocity = Velocity;
-		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-		velocity.Y = VerticalVelocity.Y;
-			
-		//Application du mouvement au joueur
-		Velocity = velocity;
-		MoveAndSlide();
-	}
-
 	private void ShootArrow()
 	{
 		_shootTimer += 1;
@@ -116,7 +85,7 @@ public partial class ArcherScript : ClassScript
 			
 			if (_shootPower <= 3)
 			{
-				_shootPower += 0.015f;
+				_shootPower += shootspeed;
 			}
 			
 			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/HUD/ViewFinder.tscn");
@@ -129,7 +98,7 @@ public partial class ArcherScript : ClassScript
 			_shootTimer = 0;
 		}
 		
-		if (!_isAiming && IsShooting && UseStamina(50))
+		if (!_isAiming && IsShooting && UseStamina(ManaUse))
 		{
 			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
 			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
@@ -141,7 +110,7 @@ public partial class ArcherScript : ClassScript
 			arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
 			arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
 			((Arrow)arrow).IsPlayer = true;
-			((Arrow)arrow).Damage = Damage;
+			((Arrow)arrow).ShootPower = _shootPower;
 			
 			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
@@ -159,7 +128,7 @@ public partial class ArcherScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 6;
@@ -280,9 +249,9 @@ public partial class ArcherScript : ClassScript
 	
 	private void _on_stamina_timeout()
 	{
-		if (Stamina + 5 <= MaxStamina)
+		if (Stamina + ChargeSpeed <= MaxStamina)
 		{
-			Stamina += 5;
+			Stamina += ChargeSpeed;
 		}
 	}
 	private void _on_death_timer_timeout()

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using JeuClient.Scripts.PlayerScripts;
 using Lib;
 
@@ -17,6 +18,8 @@ public partial class AssassinScript : ClassScript
 		WalkSpeed = 5f;
 		RunSpeed = 8f;
 		DashPower = 120.0f;
+
+		ManaUse = 15;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -65,7 +68,7 @@ public partial class AssassinScript : ClassScript
 	{
 		if (CanDash && DashCount > 0)
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(300))
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(ManaUse * 20))
 			{
 				if (!IsWalking)
 				{
@@ -91,11 +94,12 @@ public partial class AssassinScript : ClassScript
 	
 	protected override void Move(double delta)
 	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
+		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
+		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
+		    Input.IsKeyPressed(controls[3].Item2))
 		{
-			Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)), 0,
-				Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2)));
+			Direction = new Vector3(Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2)) - Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2)), 0,
+				Conversions.BtoI(Input.IsKeyPressed(controls[0].Item2)) - Conversions.BtoI(Input.IsKeyPressed(controls[1].Item2)));
 			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
 			IsWalking = true;
 			
@@ -227,7 +231,7 @@ public partial class AssassinScript : ClassScript
 	{
 		if (IsRunning)
 		{
-			if (!UseStamina(15))
+			if (!UseStamina(ManaUse))
 			{
 				TakeDamage(1);
 			}

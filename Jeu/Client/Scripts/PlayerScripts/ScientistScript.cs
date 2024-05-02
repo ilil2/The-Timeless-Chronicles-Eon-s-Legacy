@@ -12,6 +12,8 @@ public partial class ScientistScript : ClassScript
 	
 	private int _shootCooldownValue = 100;
 	public static bool IsAiming;
+
+	public int healspeed = 10;
 	
 	public override void _Ready()
 	{
@@ -72,38 +74,6 @@ public partial class ScientistScript : ClassScript
 				Velocity = new Vector3(0, 0, 0);
 			}
 		}
-	}
-	
-	protected override void Move(double delta)
-	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-		{
-			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2));
-			int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-			int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
-					
-			Direction = new Vector3(left - right, 0, forward - backward);
-			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-			IsWalking = true;
-			MovementSpeed = WalkSpeed;
-		}
-			
-		//Calcul de la rotation du joueur
-		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-			
-		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-		
-		//Calcul du movement du joueur
-		Vector3 velocity = Velocity;
-		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-		velocity.Y = VerticalVelocity.Y;
-			
-		//Application du mouvement au joueur
-		Velocity = velocity;
-		MoveAndSlide();
 	}
 	
 	private void ShootLaser()
@@ -236,9 +206,9 @@ public partial class ScientistScript : ClassScript
 	
 	private void _on_stamina_timeout()
 	{
-		if (Stamina + 5 <= MaxStamina)
+		if (Stamina + ChargeSpeed <= MaxStamina)
 		{
-			Stamina += 5;
+			Stamina += ChargeSpeed;
 		}
 	}
 	

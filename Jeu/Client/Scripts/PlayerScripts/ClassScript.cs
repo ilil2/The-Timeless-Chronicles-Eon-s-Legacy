@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 using Lib;
 
@@ -5,13 +7,21 @@ namespace JeuClient.Scripts.PlayerScripts;
 
 public abstract partial class ClassScript : PlayerScript
 {
-	
 	protected int MaxHealth = 100;
 	protected int Health = 100;
 	protected int MaxStamina = 1000;
 	protected int Stamina = 1000;
-	protected int Damage = 10;
+	protected int ManaUse = 50;
+	public int Damage = 10;
+	public int CriticalChance = 20;
+	protected int ChargeSpeed = 5;
 	public int Gold = 5000;
+	
+	protected float GravityValue = 9.8f;
+	protected float WalkSpeed = 4.2f;
+	protected float RunSpeed = 7.5f;
+	
+	public string[] Skills = new string[3];
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;
@@ -30,10 +40,6 @@ public abstract partial class ClassScript : PlayerScript
 	private float _fovMin = 40;
 	
 	//Variable de mouvement
-	protected float GravityValue = 9.8f;
-	protected float WalkSpeed = 4.2f;
-	protected float RunSpeed = 7.5f;
-	
 	protected (int, int) DirectionControl = (0, 0);
 
 	protected bool IsWalking;
@@ -114,18 +120,16 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		for (int i = 0; i < GameManager._nbJoueur; i++)
 		{
-			if (GameManager.InfoAutreJoueur.ContainsKey($"attack{i}"))
+			string[] attack = GameManager.InfoAutreJoueur[$"attack{i}"].Split("*");
+			if (attack[0] == $"heal{Id}")
 			{
-				if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"heal{Id}")
-				{
-					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-					SetHealth(Health + 20);
-				}
-				else if (GameManager.InfoAutreJoueur[$"attack{i}"] == $"revive{Id}")
-				{
-					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-					Revive();
-				}
+				GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+				SetHealth(Health + Conversions.AtoI(attack[1]));
+			}
+			else if (attack[0] == $"revive{Id}")
+			{
+				GameManager.InfoAutreJoueur[$"attack{i}"] = "";
+				Revive();
 			}
 		}
 	}
@@ -194,7 +198,35 @@ public abstract partial class ClassScript : PlayerScript
 		GD.Print($"HP {Health} MP {Stamina} IsDead {IsDead}");
 	}
 	
-	protected abstract void Move(double delta);
+	protected virtual void Move(double delta)
+	{
+		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
+		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
+		    Input.IsKeyPressed(controls[3].Item2))
+		{
+			int left = Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2));
+			int right = Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2));
+			int forward = Conversions.BtoI(Input.IsKeyPressed(controls[0].Item2));
+			int backward = Conversions.BtoI(Input.IsKeyPressed(controls[1].Item2));
+					
+			Direction = new Vector3(left - right, 0, forward - backward);
+			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
+			IsWalking = true;
+			MovementSpeed = WalkSpeed;
+		}
+			
+		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
+			
+		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
+		
+		Vector3 velocity = Velocity;
+		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
+		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
+		velocity.Y = VerticalVelocity.Y;
+		
+		Velocity = velocity;
+		MoveAndSlide();
+	}
 	
 	public abstract void TakeDamage(int damage);
 	

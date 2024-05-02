@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using JeuClient.Scripts.PlayerScripts;
 using Lib;
 
@@ -60,38 +59,6 @@ public partial class KnightScript : ClassScript
 			}
 		}
 	}
-	
-	protected override void Move(double delta)
-	{
-		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2) || Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2) ||
-			Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2))
-		{
-			int left = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[2].Item2));
-			int right = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[3].Item2)); 
-			int forward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[0].Item2));
-			int backward = Conversions.BtoI(Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[1].Item2));
-					
-			Direction = new Vector3(left - right, 0, forward - backward);
-			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
-			IsWalking = true;
-			MovementSpeed = WalkSpeed;
-		}
-
-		//Calcul de la rotation du joueur
-		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
-				
-		HorizontalVelocity = HorizontalVelocity.Lerp(Direction.Normalized() * MovementSpeed, (float)(Acceleration * delta));
-				
-		//Calcul du movement du joueur
-		Vector3 velocity = Velocity;
-		velocity.Z = HorizontalVelocity.Z + VerticalVelocity.Z;
-		velocity.X = HorizontalVelocity.X + VerticalVelocity.X;
-		velocity.Y = VerticalVelocity.Y;
-			
-		//Application du mouvement au joueur
-		Velocity = velocity;
-		MoveAndSlide();
-	}
 
 	private void Animation()
 	{
@@ -102,7 +69,7 @@ public partial class KnightScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(50))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
@@ -219,9 +186,9 @@ public partial class KnightScript : ClassScript
 	{
 		if (!_isBlocking)
 		{
-			if (Stamina + 5 <= MaxStamina)
+			if (Stamina + ChargeSpeed <= MaxStamina)
 			{
-				Stamina += 5;
+				Stamina += ChargeSpeed;
 			}
 		}
 	}
