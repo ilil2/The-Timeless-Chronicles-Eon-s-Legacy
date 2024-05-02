@@ -93,7 +93,7 @@ public partial class Ghost : CharacterBody3D
 	{
 		List<(string, Key)> controls = GameManager.InputManger.GetAllControl();
 		if (Input.IsKeyPressed(controls[0].Item2) || Input.IsKeyPressed(controls[1].Item2) || Input.IsKeyPressed(controls[2].Item2) ||
-		    Input.IsKeyPressed(controls[3].Item2))
+			Input.IsKeyPressed(controls[3].Item2))
 		{
 			int left = Conversions.BtoI(Input.IsKeyPressed(controls[2].Item2));
 			int right = Conversions.BtoI(Input.IsKeyPressed(controls[3].Item2)); 

@@ -276,7 +276,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void SendInfo()
 	{
-		if((state == 1 || state == 2 | state == 3) && ((Player is PlayerScript && LastPlayer!=Player) || stopwatch.ElapsedMilliseconds>1000 || LastState!=state))
+		if((state == 1 || state == 2 | state == 3) && (Player is PlayerScript && (LastPlayer!=Player || stopwatch.ElapsedMilliseconds>1000 || LastState!=state)))
 		{
 			stopwatch.Restart();
 			GameManager.InfoJoueur[$"ia"] += $"{ID}°{state}°{Position.X}?{Position.Z}=";
