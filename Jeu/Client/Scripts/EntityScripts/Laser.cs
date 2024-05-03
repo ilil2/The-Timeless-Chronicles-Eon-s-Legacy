@@ -46,6 +46,7 @@ public partial class Laser : Node3D
 				{
 					CanAtk = false;
 					Atk.Start();
+					if (player.Vampire) player.SetHealth(player.Health + player.Damage / 5);
 					if (new Random().Next(0, player.CriticalChance) != 1)
 					{
 						mob.TakeDamage(player.Damage);

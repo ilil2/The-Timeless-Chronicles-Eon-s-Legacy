@@ -16,6 +16,7 @@ public partial class SelectSkills : Control
 	
 	private TextureRect[] _skills = new TextureRect[3];
 	private (string, int)[][][] _skillsName;
+	private ClassScript _player;
 	
 	public override void _Ready()
 	{
@@ -26,6 +27,8 @@ public partial class SelectSkills : Control
 		_animationPlayer1 = GetNode<AnimationPlayer>("AnimationPlayer1");
 		_animationPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
 		_animationPlayer3 = GetNode<AnimationPlayer>("AnimationPlayer3");
+
+		_player = (ClassScript)GameManager.Joueur1;
 
 		_skillsName = new []
 		{
@@ -139,7 +142,7 @@ public partial class SelectSkills : Control
 				new []
 				{
 					("staminause", 5),
-					("dashdega", 5),
+					("dashdegat", 5),
 					RandomSkill(1)
 				},
 				new []
@@ -151,7 +154,7 @@ public partial class SelectSkills : Control
 				new []
 				{
 					("invisibility", 0),
-					("dashdega", 10),
+					("dashdegat", 10),
 					RandomSkill(2)
 				},
 				new []
@@ -263,16 +266,137 @@ public partial class SelectSkills : Control
 
 	private void _on_skill_control_1_pressed()
 	{
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][0];
+		ApplySkill(skill);
 		UDP.OneShot("next");
 	}
 	
 	private void _on_skill_control_2_pressed()
 	{
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][1];
+		ApplySkill(skill);
 		UDP.OneShot("next");
 	}
 	
 	private void _on_skill_control_3_pressed()
 	{
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][2];
+		ApplySkill(skill);
 		UDP.OneShot("next");
+	}
+	
+	private int ClassToInt(string classe)
+	{
+		switch (classe)
+		{
+			case "Archer":
+				return 0;
+			case "Scientist":
+				return 1;
+			case "Knight":
+				return 2;
+			case "Assassin":
+				return 3;
+			default:
+				return -1;
+		}
+	}
+	
+	private void ApplySkill((string, int) skill, bool reverse = false)
+	{
+		switch (skill.Item1)
+		{
+			case "damage":
+				_player.Damage += skill.Item2;
+				break;
+			case "health":
+				_player.MaxHealth += skill.Item2;
+				_player.Health += skill.Item2;
+				break;
+			case "stamina":
+				_player.MaxStamina += skill.Item2;
+				_player.Stamina += skill.Item2;
+				break;
+			case "speed":
+				_player.WalkSpeed += skill.Item2;
+				break;
+			default:
+				switch (skill.Item1)
+				{
+					case "reload":
+						_player.ChargeSpeed += skill.Item2;
+						break;
+					case "staminause":
+						_player.ManaUse -= skill.Item2;
+						break;
+					case "crit":
+						_player.CriticalChance -= skill.Item2;
+						break;
+					case "arrow":
+						((ArcherScript)_player).nbArrow += skill.Item2; 
+						break;
+					case "shootspeed":
+						((ArcherScript)_player).shootspeed += skill.Item2 / 100f;
+						break;
+					case "arrowpoison":
+						((ArcherScript)_player).PoisonArrow = !((ArcherScript)_player).PoisonArrow;
+						break;
+					case "arrowgel":
+						((ArcherScript)_player).GelArrow = !((ArcherScript)_player).GelArrow;
+						break;
+					case "healspeed":
+						((ScientistScript)_player).healspeed += skill.Item2;
+						break;
+					case "lasermove":
+						((ScientistScript)_player).LaserMove = !((ScientistScript)_player).LaserMove;
+						break;
+					case "vampire":
+						((ScientistScript)_player).Vampire = !((ScientistScript)_player).Vampire;
+						break;
+					case "reloadprotection":
+						((ScientistScript)_player).RealoadProtection = !((ScientistScript)_player).RealoadProtection;
+						break;
+					case "range":
+						CollisionShape3D sword = ((KnightScript)_player).Sword;
+						sword.Scale = new Vector3(1, sword.Scale.Y + skill.Item2 / 4f, 1);
+						break;
+					case "spike":
+						((KnightScript)_player).Spike = !((KnightScript)_player).Spike;
+						break;
+					case "escalibur":
+						((KnightScript)_player).Escalibur = !((KnightScript)_player).Escalibur;
+						break;
+					case "dashdegat":
+						((AssassinScript)_player).DashDegat += skill.Item2;
+						break;
+					case "doubleattack":
+						((AssassinScript)_player).DoubleAttack = !((AssassinScript)_player).DoubleAttack;
+						break;
+					case "poison":
+						((AssassinScript)_player).Poison = !((AssassinScript)_player).Poison;
+						break;
+				}
+
+				if (reverse)
+				{
+					int i = 0;
+					while (i < 3 && _player.Skills[i].Item1 != skill.Item1)
+					{
+						i++;
+					}
+
+					if (i != 3)
+					{
+						_player.Skills[i] = ("", 0);
+						_player.Skillnumber--;
+					}
+				}
+				else
+				{
+					_player.Skills[_player.Skillnumber] = skill;
+					_player.Skillnumber++;
+				}
+				break;
+		}
 	}
 }

@@ -15,6 +15,10 @@ public partial class ScientistScript : ClassScript
 
 	public int healspeed = 10;
 	
+	public bool LaserMove;
+	public bool Vampire;
+	public bool RealoadProtection;
+	
 	public override void _Ready()
 	{
 		InitPlayer();

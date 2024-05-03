@@ -11,6 +11,10 @@ public partial class AssassinScript : ClassScript
 	protected bool CanDash = true;
 	protected int DashTimer;
 	
+	public int DashDegat = 0;
+	public bool DoubleAttack;
+	public bool Poison;
+	
 	public override void _Ready()
 	{
 		InitPlayer();

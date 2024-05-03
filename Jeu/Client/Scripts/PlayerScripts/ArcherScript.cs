@@ -12,7 +12,11 @@ public partial class ArcherScript : ClassScript
 	private bool _shootAnimation;
 	
 	public static bool IsShooting;
-	private float shootspeed = 0.015f;
+	public float shootspeed = 0.015f;
+	public int nbArrow = 3;
+	
+	public bool PoisonArrow;
+	public bool GelArrow;
 	
 	public override void _Ready()
 	{
@@ -112,10 +116,38 @@ public partial class ArcherScript : ClassScript
 			((Arrow)arrow).IsPlayer = true;
 			((Arrow)arrow).ShootPower = _shootPower;
 			
-			GameManager.InfoJoueur["attack"] = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			GetTree().Root.AddChild(arrow);
 			
+			string send = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
+
+			if (nbArrow > 1)
+			{
+				arrow = arrowScene.Instantiate<RigidBody3D>();
+				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y + 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
+				arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
+				arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+				((Arrow)arrow).IsPlayer = true;
+				((Arrow)arrow).ShootPower = _shootPower;
+				
+				GetTree().Root.AddChild(arrow);
+				send += $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
+			}
+			
+			if (nbArrow == 3)
+			{
+				arrow = arrowScene.Instantiate<RigidBody3D>();
+				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y - 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
+				arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
+				arrow.LinearVelocity = new Vector3((float)(Math.Sin(rotationY)*10), -Mathf.RadToDeg(CameraV.Rotation.X) / 5, (float)(Math.Cos(rotationY)*10)) * _shootPower;
+				((Arrow)arrow).IsPlayer = true;
+				((Arrow)arrow).ShootPower = _shootPower;
+				
+				GetTree().Root.AddChild(arrow);
+				send += $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
+			}
+			
 			_shootPower = 1;
+			GameManager.InfoJoueur["attack"] = send;
 		}
 	}
 	

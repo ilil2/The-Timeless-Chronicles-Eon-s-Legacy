@@ -5,10 +5,15 @@ using Lib;
 public partial class KnightScript : ClassScript
 {
 	private bool _isBlocking;
+	public CollisionShape3D Sword;
+	
+	public bool Spike;
+	public bool Escalibur;
 
 	public override void _Ready()
 	{
 		InitPlayer();
+		Sword = GetNode<CollisionShape3D>("Player/PlayerWeapon/CollisionShape3D");
 	}
 
 	public override void _Input(InputEvent @event)

@@ -13,17 +13,18 @@ public abstract partial class ClassScript : PlayerScript
 	public int CurrentHealth = 100;
 	public int CurrentMaxHealth = 100;
 	public int Stamina = 1000;
-	protected int ManaUse = 50;
+	public int ManaUse = 50;
 	public int Damage = 10;
 	public int CriticalChance = 20;
-	protected int ChargeSpeed = 5;
+	public int ChargeSpeed = 5;
 	
 	protected float GravityValue = 9.8f;
 	public float WalkSpeed = 4.2f;
 	public float CurrentWalkSpeed = 4.2f;
 	protected float RunSpeed = 7.5f;
 	
-	public string[] Skills = new string[3];
+	public (string, int)[] Skills = new (string, int)[3];
+	public int Skillnumber = 0;
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;
