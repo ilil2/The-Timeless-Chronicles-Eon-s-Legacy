@@ -5,9 +5,11 @@ public partial class ShopInventory : Panel
 {
 	public static Potion[] Inventory = new Potion[8];
 	public static TextureRect[] Slot = new TextureRect[8];
+	public static FastAccess _fastaccess;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_fastaccess = (FastAccess)(GetParent().GetNode<Panel>("FastAccess"));
 		for(int i = 0;i<8;i++)
 		{
 			Control slot = GetNode<Control>($"Slot{i+1}");
@@ -25,13 +27,16 @@ public partial class ShopInventory : Panel
 	{
 		for(int i = 0; i<8 ; i++)
 		{
-			if(Inventory[i]!=null)
+			if(Slot[i]!=null)
 			{
-				(Slot[i] as TextureRect).Texture = GD.Load<Texture2D>(Inventory[i].img);
-			}
-			else
-			{
-				(Slot[i] as TextureRect).Texture = null;
+				if(Inventory[i]!=null)
+				{
+					(Slot[i] as TextureRect).Texture = GD.Load<Texture2D>(Inventory[i].img);
+				}
+				else
+				{
+					(Slot[i] as TextureRect).Texture = null;
+				}
 			}
 		}
 	}

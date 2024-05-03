@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.HUD;
 using Lib;
 
 public partial class ShopInventoryButton : Button
@@ -20,20 +21,20 @@ public partial class ShopInventoryButton : Button
 	private void _on_pressed()
 	{
 		GD.Print($"{Name}!");
-		if(Parent is FastAccess)
+		if(Parent is FastAccess F)
 		{
-			if((FastAccess.Access[id-1])!=null && !ShopInventory.IsFull())
+			if((Access.AccessArray[id-1])!=null && !ShopInventory.IsFull())
 			{
-				Potion potion = FastAccess.RemovePotion(id-1);
+				Potion potion = F.RemovePotion(id-1);
 				ShopInventory.AddPotion(potion.ID);
 			}
 		}
 		else
 		{
-			if((ShopInventory.Inventory[id-1])!=null && !FastAccess.IsFull())
+			if((ShopInventory.Inventory[id-1])!=null && !(ShopInventory._fastaccess).IsFull())
 			{
 				Potion potion = ShopInventory.RemovePotion(id-1);
-				FastAccess.AddPotion(potion.ID);
+				(ShopInventory._fastaccess).AddPotion(potion.ID);
 			}	
 		}
 	}

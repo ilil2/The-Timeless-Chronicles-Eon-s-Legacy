@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d33bf7w56lyfs"]
 
 [ext_resource type="PackedScene" uid="uid://ybgpeisrpnbi" path="res://Scenes/HUD/ShopInventory.tscn" id="1_hoxxg"]
-[ext_resource type="PackedScene" uid="uid://dmdhjbevh4fyd" path="res://Scenes/HUD/FastAccessInventory.tscn" id="3_64j5s"]
+[ext_resource type="PackedScene" uid="uid://cky4r8mnxetki" path="res://Scenes/HUD/FastAccess.tscn" id="2_cvj3b"]
 [ext_resource type="PackedScene" uid="uid://b50mk46t7i3lg" path="res://Scenes/HUD/Skills.tscn" id="3_ajt5u"]
 
 [node name="Inventory" type="Control"]
@@ -75,11 +75,13 @@ offset_right = -0.408081
 offset_bottom = 2.272
 text = "Skill Slot"
 
-[node name="FastAccessInventory" parent="." instance=ExtResource("3_64j5s")]
+[node name="FastAccess" parent="." instance=ExtResource("2_cvj3b")]
 layout_mode = 1
-offset_left = 384.0
-offset_top = 488.0
-offset_right = 384.384
-offset_bottom = 487.696
-grow_horizontal = 1
-grow_vertical = 1
+anchor_left = 0.333
+anchor_top = 0.753
+anchor_right = 0.667
+anchor_bottom = 0.951
+offset_left = 0.384003
+offset_top = 0.0559998
+offset_right = -0.384033
+offset_bottom = -0.248047

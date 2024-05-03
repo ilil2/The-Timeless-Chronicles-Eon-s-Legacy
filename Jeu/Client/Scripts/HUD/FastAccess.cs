@@ -1,11 +1,11 @@
 using Godot;
 using System;
+using JeuClient.Scripts.HUD;
 using Lib;
 
 public partial class FastAccess : Panel
 {
-	public static Potion[] Access = new Potion[8];
-	public static TextureRect[] FastSlot = new TextureRect[8];
+	public TextureRect[] FastSlot = new TextureRect[3];
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,40 +23,44 @@ public partial class FastAccess : Panel
 	{
 		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[9].Item2))
 		{
-			if (Access[0] != null)
+			if (Access.AccessArray[0] != null)
 			{
-				Access[0].UsePotion();
-				Access[0] = null;
+				Access.AccessArray[0].UsePotion();
+				Access.AccessArray[0] = null;
 				UpdateSlot();
 			}
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[10].Item2))
 		{
-			if (Access[1] != null)
+			if (Access.AccessArray[1] != null)
 			{
-				Access[1].UsePotion();
-				Access[1] = null;
+				Access.AccessArray[1].UsePotion();
+				Access.AccessArray[1] = null;
 				UpdateSlot();
 			}
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[11].Item2))
 		{
-			if (Access[2] != null)
+			if (Access.AccessArray[2] != null)
 			{
-				Access[2].UsePotion();
-				Access[2] = null;
+				Access.AccessArray[2].UsePotion();
+				Access.AccessArray[2] = null;
 				UpdateSlot();
 			}
 		}
+		else
+		{
+			UpdateSlot();
+		}
 	}
 	
-	private static void UpdateSlot()
+	private void UpdateSlot()
 	{
 		for(int i = 0; i<3 ; i++)
 		{
-			if(Access[i]!=null)
+			if(Access.AccessArray[i]!=null)
 			{
-				(FastSlot[i] as TextureRect).Texture = GD.Load<Texture2D>(Access[i].img);
+				(FastSlot[i] as TextureRect).Texture = GD.Load<Texture2D>(Access.AccessArray[i].img);
 			}
 			else
 			{
@@ -64,7 +68,7 @@ public partial class FastAccess : Panel
 			}
 		}
 	}
-	private static Potion NewPotion(int ID)
+	private Potion NewPotion(int ID)
 	{
 		switch (ID)
 		{
@@ -85,32 +89,32 @@ public partial class FastAccess : Panel
 				
 		}
 	}
-	public static bool IsFull()
+	public bool IsFull()
 	{
 		for(int i = 0; i<3 ; i++)
 		{
-			if(Access[i]==null)
+			if(Access.AccessArray[i]==null)
 			{
 				return false;
 			}
 		}
 		return true;
 	}
-	public static void AddPotion(int ID)
+	public void AddPotion(int ID)
 	{
 		Potion potion = NewPotion(ID);
 		int i = 0;
-		while(Access[i]!=null)
+		while(Access.AccessArray[i]!=null)
 		{
 			i++;
 		}
-		Access[i] = potion;
+		Access.AccessArray[i] = potion;
 		UpdateSlot();
 	}
-	public static Potion RemovePotion(int ID)
+	public Potion RemovePotion(int ID)
 	{
-		Potion res = Access[ID];
-		Access[ID] = null;
+		Potion res = Access.AccessArray[ID];
+		Access.AccessArray[ID] = null;
 		UpdateSlot();
 		return res;
 	}
