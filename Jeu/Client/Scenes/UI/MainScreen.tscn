@@ -6,6 +6,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_lls64"]
 font_size = 42
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_7hkov"]
 length = 0.001

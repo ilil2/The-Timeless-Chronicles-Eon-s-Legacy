@@ -28,6 +28,8 @@ events = [SubResource("InputEventKey_3jpwc")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5516u"]
 font_size = 20
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="InputEventKey" id="InputEventKey_fu2le"]
 pressed = true
@@ -37,6 +39,8 @@ keycode = 4194309
 events = [SubResource("InputEventKey_fu2le")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q76ao"]
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ai3o8"]
 
@@ -46,6 +50,8 @@ font_color = Color(0.678431, 0.141176, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yb5ta"]
 font_size = 45
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_71d1n"]
 font_size = 20
@@ -53,13 +59,19 @@ font_color = Color(0.678431, 0.141176, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gnhab"]
 font_size = 20
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_t0gts"]
 font_size = 15
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_opm2v"]
 font_size = 10
 font_color = Color(0.729412, 0.168627, 0.0941176, 1)
+shadow_size = 10
+shadow_color = Color(0.14902, 0.14902, 0.14902, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rr8lj"]
 font_size = 20
