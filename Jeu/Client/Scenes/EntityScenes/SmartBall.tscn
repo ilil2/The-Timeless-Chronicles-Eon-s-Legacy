@@ -22,3 +22,5 @@ shape = SubResource("SphereShape3D_imljv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_imqtn")
+
+[connection signal="body_entered" from="Corps" to="." method="_on_corps_body_entered"]

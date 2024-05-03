@@ -44,7 +44,7 @@ public partial class PotionUI : Panel
 		if(GameManager.Gold>=Price && !ShopInventory.IsFull())
 		{
 			GD.Print($"Achat {Title}");
-			GameManager.Gold-=Price;
+			GameManager.Gold=GameManager.Gold-Price;
 			ShopInventory.AddPotion(ID);
 		}
 	}

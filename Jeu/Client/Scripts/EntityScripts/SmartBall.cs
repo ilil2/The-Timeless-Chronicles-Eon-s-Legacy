@@ -9,11 +9,18 @@ public partial class SmartBall : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
+		LookAt(TargetPosition);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		LookAt(TargetPosition);
+		Vector3 direction = (TargetPosition - GlobalTransform.Origin).Normalized();
+
+		// Déplacer l'objet dans la direction de la cible
+		Translate(direction * 1);
 	}
 	private CharacterBody3D GetPlayer()
 	{
@@ -33,4 +40,9 @@ public partial class SmartBall : Node3D
 		}
 		return res;
 	}
+	private void _on_corps_body_entered(Node3D body)
+	{
+		QueueFree();
+	}
 }
+

@@ -52,8 +52,27 @@ public partial class GameManager : Node3D
 	
 	public static int state = -1;
 
-	public static int xp = 0;
-	public static int Gold = 5000;
+	private static int _xp = 0;
+	private static int _qxp = 0;
+	public static int xp
+	{
+		get => _xp;
+		set => _qxp=value;
+	}
+
+	private static int _gold = 5000;
+	private static int _qgold = 0;
+
+	public static int Gold
+	{
+		get => _gold;
+		set
+		{
+			GD.Print($"set gold {_gold} => {value}");
+			_qgold = value;
+		}
+	}
+
 	public static int level => xp / 100;
 
 	public static Socket soc2;
@@ -187,6 +206,31 @@ public partial class GameManager : Node3D
 		Control MainScreen = MainScreenScene.Instantiate<Control>();
 		AddChild(MainScreen);
 	}
+
+	public static void UpdateXpAndGold()
+	{
+		if(_qxp>_xp)
+		{
+			_xp++;
+			_qxp--;
+		}
+		else if(_qxp<_xp)
+		{
+			_xp--;
+			_qxp++;
+		}
+		if(_qgold>_gold)
+		{
+			_gold++;
+			_qgold--;
+		}
+		else if (_qgold<_gold)
+		{
+			_gold--;
+			_qgold++;
+		}
+	}
+	
 	
 	//process
 	public override void _Process(double delta)
@@ -266,6 +310,7 @@ public partial class GameManager : Node3D
 			else if (state == 6)
 			{
 				State6.State(delta);
+				UpdateXpAndGold();
 			}
 			
 			else if (state == 7)

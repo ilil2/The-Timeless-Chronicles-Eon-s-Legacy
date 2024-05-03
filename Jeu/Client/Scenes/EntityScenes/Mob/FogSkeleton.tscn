@@ -1,8 +1,8 @@
 [gd_scene load_steps=41 format=3 uid="uid://8yb22krhjsle"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/FogSkeleton.cs" id="1_5spwe"]
-[ext_resource type="Texture2D" uid="uid://c2a5j8nf7mgeb" path="res://Ressources/Entity/Skeleton2/skeleton2_DiffMap.png" id="1_rq30v"]
-[ext_resource type="Texture2D" uid="uid://couv1kh5lsox8" path="res://Ressources/Entity/Skeleton2/skeleton2_NormMap.png" id="2_jml7q"]
+[ext_resource type="Texture2D" uid="uid://b4ju88xi6pma" path="res://Ressources/Entity/Skeleton2/skeleton2_DiffMap.png" id="1_rq30v"]
+[ext_resource type="Texture2D" uid="uid://b580tneuj2mge" path="res://Ressources/Entity/Skeleton2/skeleton2_NormMap.png" id="2_jml7q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr0ps"]
 resource_name = "Material.001"
@@ -1522,6 +1522,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vddft"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h3c4t"]
+switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nrjl7"]
