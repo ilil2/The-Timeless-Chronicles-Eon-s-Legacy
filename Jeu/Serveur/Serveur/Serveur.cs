@@ -56,11 +56,13 @@ public class Serveur
         soc.Bind(iep); //connection depuis n'importe ou
         
         Console.WriteLine("Serveur en marche");
-
-        while (joueur_ready < ID && ID < nbr)
+        Console.WriteLine(nbr);
+        Console.WriteLine(ID);
+        while (joueur_ready < ID || ID < nbr)
         {
+            Console.WriteLine(ID);
             (string s,EndPoint ep) = UDP.FirstReceive(soc);
-            if (s == "connect" && ID < 4)
+            if (s == "connect")
             {
                 ClientCom clicom = new ClientCom(soc,ID,ep);         //creation de l'objet client
                 clients[ID] = clicom;
