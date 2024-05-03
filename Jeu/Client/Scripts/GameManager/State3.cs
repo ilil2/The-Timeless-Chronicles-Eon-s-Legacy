@@ -24,13 +24,12 @@ public partial class State3 : GameManager
 		UDP.Send(soc2,"connect",iep2);    //envoie requette de connection au serveur secondaire
 		soc2.ReceiveTimeout = 2000;
 		InfoJoueur["id"] = UDP.Receive(soc2);    //reception de l'ID du serveur secondaire
-		soc2.ReceiveTimeout = 6000000;
 		Seed = Conversions.AtoI(InfoJoueur["id"].Split('*')[0].Substring(1));
 		AleateSeed = Conversions.AtoI(InfoJoueur["id"].Split('*')[1]);
 		Map.SetSeed(Seed,AleateSeed);
 		InfoJoueur["id"] = InfoJoueur["id"].Substring(0,1);
 		UDP.Send(soc2,$"{InfoJoueur["id"]}/{InfoJoueur["pseudo"]}",iep2);    //envoie du pseudo au serveur secondaire
-		
+		soc2.ReceiveTimeout = 60000;
 
 		th2 = new Thread(Listen2);    //initialisation thread
 		th2.Start();                        //debut du thread
