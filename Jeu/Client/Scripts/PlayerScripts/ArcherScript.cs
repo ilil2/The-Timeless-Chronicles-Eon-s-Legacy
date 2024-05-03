@@ -13,7 +13,7 @@ public partial class ArcherScript : ClassScript
 	
 	public static bool IsShooting;
 	public float shootspeed = 0.015f;
-	public int nbArrow = 3;
+	public int nbArrow = 1;
 	
 	public bool PoisonArrow;
 	public bool GelArrow;
