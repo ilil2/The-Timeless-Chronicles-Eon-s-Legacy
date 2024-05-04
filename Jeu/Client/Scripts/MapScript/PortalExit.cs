@@ -111,7 +111,9 @@ public partial class PortalExit : Node3D
 				PlayerIn = true;
 				GameManager.SettingsManager.SetSetting("enableChat",0);
 			}
+			
 			body.Visible = false;
+			GD.Print($"{body.Name} is Visible {body.Visible}");
 			body.Position-=new Vector3(0,3,0);
 			GD.Print("Player Enter Portal!");
 			NbPlayer++;

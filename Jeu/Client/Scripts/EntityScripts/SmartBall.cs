@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 public partial class SmartBall : Node3D
 {
+	private Node3D MeshSkin;
 	private Vector3 TargetPosition = new Vector3(0,0,0);
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		MeshSkin = GetNode<Node3D>("Skin");
 		TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
 		LookAt(TargetPosition);
 	}
@@ -17,6 +19,8 @@ public partial class SmartBall : Node3D
 	public override void _Process(double delta)
 	{
 		LookAt(TargetPosition);
+		MeshSkin.Rotation+=new Vector3(0.1f,0.1f,0.1f);
+		TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
 		Vector3 direction = (TargetPosition - GlobalTransform.Origin).Normalized();
 
 		// Déplacer l'objet dans la direction de la cible

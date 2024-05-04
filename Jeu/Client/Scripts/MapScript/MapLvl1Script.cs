@@ -169,11 +169,11 @@ public partial class MapLvl1Script : IMap
 					Node3D SpawnPoint = Room.GetChild<Node3D>(j);
 					if(Rand.Next(1,5)==1)
 					{
-						int m = Rand.Next(0,2);
+						int m = Rand.Next(0,3);
 						string name = "";
-						if(m==0 && false)
+						if(m<=1)
 						{
-							name = "FogSkeleton";
+							name = "Pharaon";
 						}
 						else
 						{

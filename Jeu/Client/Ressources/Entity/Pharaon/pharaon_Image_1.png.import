@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6ifxlbuvlol3"
-path.s3tc="res://.godot/imported/pharaon_Image_8.png-17bb541192d86f5b9e8ea259b832b225.s3tc.ctex"
+uid="uid://mtrusq2nuxnr"
+path.s3tc="res://.godot/imported/pharaon_Image_1.png-c8ff7a1573522c9c2ea558396b4e4479.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Ressources/Entity/Boss1/pharaon_Image_8.png"
-dest_files=["res://.godot/imported/pharaon_Image_8.png-17bb541192d86f5b9e8ea259b832b225.s3tc.ctex"]
+source_file="res://Ressources/Entity/Pharaon/pharaon_Image_1.png"
+dest_files=["res://.godot/imported/pharaon_Image_1.png-c8ff7a1573522c9c2ea558396b4e4479.s3tc.ctex"]
 
 [params]
 
@@ -21,12 +21,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Ressources/Entity/Boss1/pharaon_Image_8.png"
+roughness/mode=8
+roughness/src_normal="res://Ressources/Entity/Boss1/pharaon_Image_2.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

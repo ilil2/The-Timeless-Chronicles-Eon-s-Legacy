@@ -1,32 +1,33 @@
-[gd_scene load_steps=36 format=3 uid="uid://dokfk8l6tujxi"]
+[gd_scene load_steps=38 format=3 uid="uid://bgritu33lk2ji"]
 
-[ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/Boss1.cs" id="1_v4ef7"]
-[ext_resource type="Texture2D" uid="uid://cp2sibcjlbp6s" path="res://Ressources/Entity/Pharaon/pharaon_Image_3.png" id="2_uct7n"]
-[ext_resource type="Texture2D" uid="uid://uu2h7hyr3h3s" path="res://Ressources/Entity/Pharaon/pharaon_Image_4.png" id="3_tbgll"]
-[ext_resource type="Texture2D" uid="uid://b1ymejh61o7pk" path="res://Ressources/Entity/Pharaon/pharaon_Image_5.png" id="4_uerra"]
-[ext_resource type="Texture2D" uid="uid://dhgohgs70log2" path="res://Ressources/Entity/Pharaon/pharaon_Image_0.png" id="5_hik7l"]
-[ext_resource type="Texture2D" uid="uid://mtrusq2nuxnr" path="res://Ressources/Entity/Pharaon/pharaon_Image_1.png" id="6_lx2th"]
-[ext_resource type="Texture2D" uid="uid://cx4x7jwn6p7o4" path="res://Ressources/Entity/Pharaon/pharaon_Image_2.png" id="7_k14hh"]
-[ext_resource type="Texture2D" uid="uid://dni618186k3xw" path="res://Ressources/Entity/Pharaon/pharaon_Image_6.png" id="8_onexo"]
-[ext_resource type="Texture2D" uid="uid://co1wvsn2weunt" path="res://Ressources/Entity/Pharaon/pharaon_Image_7.png" id="9_81x71"]
-[ext_resource type="Texture2D" uid="uid://6ifxlbuvlol3" path="res://Ressources/Entity/Pharaon/pharaon_Image_8.png" id="10_sg7nm"]
+[ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/Pharaon.cs" id="1_pu7er"]
+[ext_resource type="Texture2D" uid="uid://cp2sibcjlbp6s" path="res://Ressources/Entity/Pharaon/pharaon_Image_3.png" id="2_53fwo"]
+[ext_resource type="Texture2D" uid="uid://uu2h7hyr3h3s" path="res://Ressources/Entity/Pharaon/pharaon_Image_4.png" id="3_1sxp5"]
+[ext_resource type="Texture2D" uid="uid://b1ymejh61o7pk" path="res://Ressources/Entity/Pharaon/pharaon_Image_5.png" id="4_k4k51"]
+[ext_resource type="Texture2D" uid="uid://dhgohgs70log2" path="res://Ressources/Entity/Pharaon/pharaon_Image_0.png" id="5_i44ld"]
+[ext_resource type="Texture2D" uid="uid://mtrusq2nuxnr" path="res://Ressources/Entity/Pharaon/pharaon_Image_1.png" id="6_i4ca3"]
+[ext_resource type="Texture2D" uid="uid://cx4x7jwn6p7o4" path="res://Ressources/Entity/Pharaon/pharaon_Image_2.png" id="7_b7dfn"]
+[ext_resource type="Texture2D" uid="uid://dni618186k3xw" path="res://Ressources/Entity/Pharaon/pharaon_Image_6.png" id="8_rtp8b"]
+[ext_resource type="Texture2D" uid="uid://co1wvsn2weunt" path="res://Ressources/Entity/Pharaon/pharaon_Image_7.png" id="9_ufts4"]
+[ext_resource type="Texture2D" uid="uid://6ifxlbuvlol3" path="res://Ressources/Entity/Pharaon/pharaon_Image_8.png" id="10_rtjcp"]
+[ext_resource type="PackedScene" uid="uid://bsxpfpeww7nwe" path="res://Scenes/EntityScenes/weapon.tscn" id="11_ko21n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybaxy"]
 resource_name = "Cloth1"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_uct7n")
+albedo_texture = ExtResource("2_53fwo")
 metallic = 1.0
-metallic_texture = ExtResource("3_tbgll")
+metallic_texture = ExtResource("3_1sxp5")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("3_tbgll")
+roughness_texture = ExtResource("3_1sxp5")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("4_uerra")
+normal_texture = ExtResource("4_k4k51")
 ao_enabled = true
-ao_texture = ExtResource("3_tbgll")
+ao_texture = ExtResource("3_1sxp5")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_11xqy"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_cp3lg"]
 resource_name = "pharaon_defaultMaterial_007mesh"
 _surfaces = [{
 "aabb": AABB(-0.00154253, 0.0115023, -0.00123193, 0.002395, 0.00112001, 0.00202117),
@@ -45,7 +46,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_oxkyl"]
+[sub_resource type="Skin" id="Skin_f1mk0"]
 resource_name = "Skin"
 bind_count = 65
 bind/0/name = &"mixamorig_Hips"
@@ -244,7 +245,7 @@ bind/64/name = &"mixamorig_RightToe_End"
 bind/64/bone = -1
 bind/64/pose = Transform3D(-99.1194, -4.77224, 12.3523, 12.4077, -0.882065, 99.2234, -4.62622, 99.8822, 1.46643, -0.177153, -0.13897, -0.00173155)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_2ujnn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_hvlvi"]
 resource_name = "pharaon_defaultMaterial_009mesh"
 _surfaces = [{
 "aabb": AABB(-0.00263207, 0.00630615, -0.00148979, 0.00457408, 0.00610154, 0.00245577),
@@ -267,18 +268,18 @@ blend_shape_mode = 0
 resource_name = "Skin1"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("5_hik7l")
+albedo_texture = ExtResource("5_i44ld")
 metallic = 1.0
-metallic_texture = ExtResource("6_lx2th")
+metallic_texture = ExtResource("6_i4ca3")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("6_lx2th")
+roughness_texture = ExtResource("6_i4ca3")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("7_k14hh")
+normal_texture = ExtResource("7_b7dfn")
 ao_enabled = true
-ao_texture = ExtResource("6_lx2th")
+ao_texture = ExtResource("6_i4ca3")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_gfc3o"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0ot0q"]
 resource_name = "pharaon_defaultMaterial_001mesh"
 _surfaces = [{
 "aabb": AABB(-0.00115136, 0.00581669, 0.000500659, 0.00161266, 0.00596526, 0.00055129),
@@ -301,18 +302,18 @@ blend_shape_mode = 0
 resource_name = "Gold1"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("8_onexo")
+albedo_texture = ExtResource("8_rtp8b")
 metallic = 1.0
-metallic_texture = ExtResource("9_81x71")
+metallic_texture = ExtResource("9_ufts4")
 metallic_texture_channel = 2
-roughness_texture = ExtResource("9_81x71")
+roughness_texture = ExtResource("9_ufts4")
 roughness_texture_channel = 1
 normal_enabled = true
-normal_texture = ExtResource("10_sg7nm")
+normal_texture = ExtResource("10_rtjcp")
 ao_enabled = true
-ao_texture = ExtResource("9_81x71")
+ao_texture = ExtResource("9_ufts4")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_357u6"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lvmny"]
 resource_name = "pharaon_defaultMaterial_005mesh"
 _surfaces = [{
 "aabb": AABB(-0.00349051, 0.0154417, -0.000967441, 0.00629096, 0.00162246, 0.00235147),
@@ -331,7 +332,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_fug82"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_py2e2"]
 resource_name = "pharaon_defaultMaterial_003mesh"
 _surfaces = [{
 "aabb": AABB(-0.00093619, 0.0172182, 0.00136106, 0.00118232, 0.000647129, 0.00058518),
@@ -350,7 +351,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ww4wj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_uup15"]
 resource_name = "pharaon_defaultMaterial_011mesh"
 _surfaces = [{
 "aabb": AABB(-0.0041257, 0.0106025, -0.00168428, 0.00756131, 0.00258576, 0.00140358),
@@ -369,7 +370,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_lyvqf"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2lpm8"]
 resource_name = "pharaon_defaultMaterialmesh"
 _surfaces = [{
 "aabb": AABB(-0.0020623, 0.00585314, -0.00185671, 0.00343454, 0.00623025, 0.00095852),
@@ -388,7 +389,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_jfqga"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_viv3q"]
 resource_name = "pharaon_defaultMaterial_012mesh"
 _surfaces = [{
 "aabb": AABB(-0.00434182, -0.00015169, -0.00170764, 0.00799358, 0.019512, 0.00396929),
@@ -407,7 +408,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_j3pnd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7mtql"]
 resource_name = "pharaon_defaultMaterial_006mesh"
 _surfaces = [{
 "aabb": AABB(-0.00260397, 0.015094, -0.000922181, 0.00454435, 0.00218348, 0.00260213),
@@ -426,7 +427,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_liqhq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_o66lh"]
 resource_name = "pharaon_defaultMaterial_008mesh"
 _surfaces = [{
 "aabb": AABB(-0.00068929, 0.0147912, 0.00162619, 0.00068853, 0.00225754, 0.00051758),
@@ -445,7 +446,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_i137y"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fjcfv"]
 resource_name = "pharaon_defaultMaterial_010mesh"
 _surfaces = [{
 "aabb": AABB(-0.00229995, 0.016154, -4.63812e-05, 0.00390984, 0.00369434, 0.00219562),
@@ -464,7 +465,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_jbjjn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7hp0f"]
 resource_name = "pharaon_defaultMaterial_004mesh"
 _surfaces = [{
 "aabb": AABB(-0.00109009, 0.0173301, 0.00104033, 0.00149608, 0.00074666, 0.0007712),
@@ -483,7 +484,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_oj21q"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_n4icw"]
 resource_name = "pharaon_defaultMaterial_002mesh"
 _surfaces = [{
 "aabb": AABB(-0.0026859, 0.0013463, -0.00114939, 0.00468176, 0.00386361, 0.00180351),
@@ -2438,10 +2439,12 @@ _data = {
 "Walk": SubResource("Animation_5i003")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ov2cb"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fpfns"]
 
-[node name="Boss1" type="CharacterBody3D"]
-script = ExtResource("1_v4ef7")
+[sub_resource type="SphereShape3D" id="SphereShape3D_21frd"]
+
+[node name="Pharaon" type="CharacterBody3D"]
+script = ExtResource("1_pu7er")
 
 [node name="Armature" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -2904,56 +2907,56 @@ bones/64/rotation = Quaternion(3.25963e-09, -1.99332e-07, 2.28007e-07, 1)
 bones/64/scale = Vector3(1, 1, 1)
 
 [node name="defaultMaterial_013" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_11xqy")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_cp3lg")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_014" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_2ujnn")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_hvlvi")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_015" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_gfc3o")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_0ot0q")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_016" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_357u6")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_lvmny")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_017" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_fug82")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_py2e2")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_018" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_ww4wj")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_uup15")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_019" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_lyvqf")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_2lpm8")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_020" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_jfqga")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_viv3q")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_021" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_j3pnd")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_7mtql")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_022" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_liqhq")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_o66lh")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_023" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_i137y")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_fjcfv")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_024" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_jbjjn")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_7hp0f")
+skin = SubResource("Skin_f1mk0")
 
 [node name="defaultMaterial_025" type="MeshInstance3D" parent="Armature/Skeleton3D"]
-mesh = SubResource("ArrayMesh_oj21q")
-skin = SubResource("Skin_oxkyl")
+mesh = SubResource("ArrayMesh_n4icw")
+skin = SubResource("Skin_f1mk0")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -2962,8 +2965,16 @@ libraries = {
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_ov2cb")
+shape = SubResource("CapsuleShape3D_fpfns")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
+
+[node name="Weapon" parent="." instance=ExtResource("11_ko21n")]
+Damage = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986456, 1.00278)
+shape = SubResource("SphereShape3D_21frd")
+disabled = true

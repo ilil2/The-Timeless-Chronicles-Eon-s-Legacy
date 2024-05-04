@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b73fabuoe1nct"
-path="res://.godot/imported/pharaon.glb-67015bf8d0a89864c34dfc3aada912f3.scn"
+path="res://.godot/imported/pharaon.glb-37c4c8bba50adec2b694a3f7f2c5b2c9.scn"
 
 [deps]
 
-source_file="res://Ressources/Entity/Boss1/pharaon.glb"
-dest_files=["res://.godot/imported/pharaon.glb-67015bf8d0a89864c34dfc3aada912f3.scn"]
+source_file="res://Ressources/Entity/Pharaon/pharaon.glb"
+dest_files=["res://.godot/imported/pharaon.glb-37c4c8bba50adec2b694a3f7f2c5b2c9.scn"]
 
 [params]
 

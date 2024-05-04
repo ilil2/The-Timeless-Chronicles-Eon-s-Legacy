@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhgohgs70log2"
-path.s3tc="res://.godot/imported/pharaon_Image_0.png-6b90b1d34045a488997910247dd8cbbd.s3tc.ctex"
+uid="uid://cp2sibcjlbp6s"
+path.s3tc="res://.godot/imported/pharaon_Image_3.png-15bad1ff84dfeb4600302d527736e53c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Ressources/Entity/Boss1/pharaon_Image_0.png"
-dest_files=["res://.godot/imported/pharaon_Image_0.png-6b90b1d34045a488997910247dd8cbbd.s3tc.ctex"]
+source_file="res://Ressources/Entity/Pharaon/pharaon_Image_3.png"
+dest_files=["res://.godot/imported/pharaon_Image_3.png-15bad1ff84dfeb4600302d527736e53c.s3tc.ctex"]
 
 [params]
 

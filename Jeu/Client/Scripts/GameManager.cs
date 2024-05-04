@@ -61,7 +61,7 @@ public partial class GameManager : Node3D
 	}
 
 	private static int _gold = 5000;
-	private static int _qgold = 0;
+	private static int _qgold = 5000;
 
 	public static int Gold
 	{
@@ -211,23 +211,67 @@ public partial class GameManager : Node3D
 	{
 		if(_qxp>_xp)
 		{
-			_xp++;
-			_qxp--;
+			if(_qxp-_xp>100)
+			{
+				_xp+=100;
+			}
+			else if(_qxp-_xp>10)
+			{
+				_xp+=10;
+			}
+			else
+			{
+				_xp++;
+			}
+			
 		}
 		else if(_qxp<_xp)
 		{
-			_xp--;
-			_qxp++;
+			if(-(_qxp-_xp)>100)
+			{
+				_xp-=100;
+			}
+			else if(-(_qxp-_xp)>10)
+			{
+				_xp-=10;
+			}
+			else
+			{
+				_xp--;
+			}
+			
 		}
 		if(_qgold>_gold)
 		{
-			_gold++;
-			_qgold--;
+			if(_qgold-_gold>100)
+			{
+				_gold+=100;
+			}
+			else if(_qgold-_gold>10)
+			{
+				_gold+=10;
+			}
+			else
+			{
+				_gold++;
+			}
+			
 		}
-		else if (_qgold<_gold)
+		else if(_qgold<_gold)
 		{
-			_gold--;
-			_qgold++;
+			if(-(_qgold-_gold)>100)
+			{
+				_gold-=100;
+			}
+			else if(-(_qxp-_gold)>10)
+			{
+				_gold-=10;
+			}
+			else
+			{
+				_gold--;
+			}
+			
 		}
 	}
 	
