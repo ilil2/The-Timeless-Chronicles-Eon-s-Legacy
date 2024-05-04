@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="11_ugkqj"]
 [ext_resource type="PackedScene" uid="uid://x4qvhw8gjj5q" path="res://Scenes/MapScenes/NoMan'sLand.tscn" id="13_ocr2g"]
 
-[sub_resource type="Environment" id="Environment_vrgge"]
+[sub_resource type="Environment" id="Environment_ilahe"]
 background_mode = 2
 background_color = Color(0.647059, 0.909804, 0.917647, 1)
 sky = ExtResource("9_jpwn4")
@@ -523,7 +523,7 @@ transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0
 shadow_enabled = true
 
 [node name="World" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_vrgge")
+environment = SubResource("Environment_ilahe")
 
 [node name="Exit" parent="." instance=ExtResource("10_gbivg")]
 

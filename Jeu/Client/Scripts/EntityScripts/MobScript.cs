@@ -71,10 +71,6 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
-		if(Input.IsKeyPressed((Key)MouseButton.Left))
-		{
-			DebugMode = !DebugMode;
-		}
 		if (DebugMode)
 		{
 			LastState = state;
@@ -124,7 +120,7 @@ public abstract partial class MobScript : CharacterBody3D
 			else
 			{
 				//Death();
-				if(Ani.CurrentAnimation=="")
+				if(!Ani.IsPlaying())
 				{
 					QueueFree();
 				}
@@ -138,7 +134,7 @@ public abstract partial class MobScript : CharacterBody3D
 		{
 			if(CanDo&&Alive&&Ani.CurrentAnimation!="Hit")
 			{
-				if(state==0 || state==1 || state == 3)
+				if((state==0 || state==1 || state == 3))
 				{
 					var dir = new Vector3();  //Pathfiding
 					var NextPos = Nav.GetNextPathPosition();

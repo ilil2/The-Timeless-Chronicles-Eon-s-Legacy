@@ -9,6 +9,7 @@ public partial class FogSkeleton : MobScript
 	private AnimationNodeStateMachinePlayback PlayBack;
 	public override void _Ready()
 	{
+		speed = 5;
 		Ready();
 		AniTree = GetNode<AnimationTree>("AnimationTree");
 		
@@ -20,8 +21,12 @@ public partial class FogSkeleton : MobScript
 			PlayBack = (AnimationNodeStateMachinePlayback)AniTree.Get("parameters/playback");
 		}
 		PhysicsProcess(delta);
-		Fog = (GetParent() as MapLvl1Script).FogState != 0;
+		Fog = (GetParent() as MapLvl1Script).FogState == 2;
 		CanDo = !IsHide;
+		if(PlayBack.GetCurrentNode()=="Atk"||PlayBack.GetCurrentNode()=="Hit")
+		{
+			CanDo = false;
+		}
 	}
 	public override void _Process(double delta)
 	{
@@ -44,14 +49,15 @@ public partial class FogSkeleton : MobScript
 		}
 		if(!IsHide&&state == 2)
 		{
-			if(Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Hit" && Alive)
+			if(Ani.CurrentAnimation != "Hit" && Alive)
 			{
 				PlayBack.Travel("Atk");
+				
 			}
 		}
 		if(!IsHide&&state == -1)
 		{
-			
+			PlayBack.Travel("Idle");
 		}
 		
 	}
@@ -61,18 +67,27 @@ public partial class FogSkeleton : MobScript
 		if(Alive)
 		{
 			HP -= damage;
-			GD.Print(HP);
 			if(HP<=0)
 			{
 				GD.Print("Mort");
 				Alive = false;
 				Ani.Stop();
 				PlayBack.Travel("Death");
+				GameManager.Gold += 10;
+				GameManager.xp += 1;
 			}
 			else
 			{
-				Ani.Play("Hit");
+				PlayBack.Stop();
+				GD.Print("Hit");
+				PlayBack.Travel("Hit");
 			}
+
+			if (send)
+			{
+				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+			}
+			
 		}
 	}
 
