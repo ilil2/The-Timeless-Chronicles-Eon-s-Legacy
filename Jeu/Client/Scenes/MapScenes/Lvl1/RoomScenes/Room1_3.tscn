@@ -95,7 +95,7 @@ size = Vector3(18, 0.1, 18)
 [node name="Misc" type="Node3D" parent="."]
 
 [node name="Scarrab_sun_disk_mesh" type="Node3D" parent="Misc"]
-transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0.0561271, 0)
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -0.0623297, 0)
 metadata/_edit_group_ = true
 
 [node name="Scarrab_sun_disk_mesh_Egiptian_wall_1_0" type="MeshInstance3D" parent="Misc/Scarrab_sun_disk_mesh"]

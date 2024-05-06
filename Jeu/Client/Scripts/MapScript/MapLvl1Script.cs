@@ -125,7 +125,7 @@ public partial class MapLvl1Script : IMap
 				ShowSkillsMenu();
 			}
 			//Process
-			CreateFog();
+			//CreateFog();
 			DayCycle();
 			//RenderDist();
 			//GameManager.InfoJoueur["ia"] = UpdateMob();
@@ -169,15 +169,19 @@ public partial class MapLvl1Script : IMap
 					Node3D SpawnPoint = Room.GetChild<Node3D>(j);
 					if(Rand.Next(1,5)==1)
 					{
-						int m = Rand.Next(0,3);
+						int m = Rand.Next(0,6);
 						string name = "";
-						if(m<=1)
+						if(m==0)
 						{
-							name = "Pharaon";
+							name = "FogSkeleton";
+						}
+						else if(m<=2)
+						{
+							name = "Mummy";
 						}
 						else
 						{
-							name = "FogSkeleton";
+							name = "Pharaon";
 						}
 						PackedScene M = GD.Load<PackedScene>($"res://Scenes/EntityScenes/Mob/{name}.tscn");
 						CharacterBody3D Mob = M.Instantiate<CharacterBody3D>();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://8yb22krhjsle"]
+[gd_scene load_steps=17 format=3 uid="uid://8yb22krhjsle"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/FogSkeleton.cs" id="1_5spwe"]
 
@@ -1652,108 +1652,6 @@ _data = {
 "Walk": SubResource("Animation_rayth")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1mi8a"]
-animation = &"Atk"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sq6vt"]
-animation = &"Death"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_si5ey"]
-animation = &"Hide"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tpi3w"]
-animation = &"Hit"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l5iw6"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1kq26"]
-animation = &"StandUp"
-play_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q81ad"]
-animation = &"StandUp"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wll4e"]
-animation = &"Walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n3v7k"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0yxut"]
-advance_condition = &"Show"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehjyc"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xdc66"]
-advance_condition = &"Hide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8l8km"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_82cgi"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hvrc2"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i13v5"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kaw7x"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nekix"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8fw4k"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0g3ty"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_blkum"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vddft"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h3c4t"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nrjl7"]
-advance_condition = &"Hide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_foq8o"]
-advance_condition = &"Hide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p7thp"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ai07x"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d3xk8"]
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fi5uo"]
-states/Atk/node = SubResource("AnimationNodeAnimation_1mi8a")
-states/Atk/position = Vector2(912, 190)
-states/Death/node = SubResource("AnimationNodeAnimation_sq6vt")
-states/Death/position = Vector2(1045, 105)
-states/End/position = Vector2(1244, 105)
-states/Hide/node = SubResource("AnimationNodeAnimation_si5ey")
-states/Hide/position = Vector2(429, 105)
-states/Hit/node = SubResource("AnimationNodeAnimation_tpi3w")
-states/Hit/position = Vector2(716, -62)
-states/Idle/node = SubResource("AnimationNodeAnimation_l5iw6")
-states/Idle/position = Vector2(716, 23)
-states/StandDown/node = SubResource("AnimationNodeAnimation_1kq26")
-states/StandDown/position = Vector2(517, 190)
-states/StandUp/node = SubResource("AnimationNodeAnimation_q81ad")
-states/StandUp/position = Vector2(517, 23)
-states/Start/position = Vector2(260, 105)
-states/Walk/node = SubResource("AnimationNodeAnimation_wll4e")
-states/Walk/position = Vector2(912, 23)
-transitions = ["Start", "Hide", SubResource("AnimationNodeStateMachineTransition_n3v7k"), "Hide", "StandUp", SubResource("AnimationNodeStateMachineTransition_0yxut"), "StandUp", "Idle", SubResource("AnimationNodeStateMachineTransition_ehjyc"), "Idle", "StandDown", SubResource("AnimationNodeStateMachineTransition_xdc66"), "StandDown", "Hide", SubResource("AnimationNodeStateMachineTransition_8l8km"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_82cgi"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_hvrc2"), "Idle", "Atk", SubResource("AnimationNodeStateMachineTransition_i13v5"), "Atk", "Idle", SubResource("AnimationNodeStateMachineTransition_kaw7x"), "Atk", "Walk", SubResource("AnimationNodeStateMachineTransition_nekix"), "Walk", "Atk", SubResource("AnimationNodeStateMachineTransition_8fw4k"), "Atk", "Death", SubResource("AnimationNodeStateMachineTransition_0g3ty"), "Walk", "Death", SubResource("AnimationNodeStateMachineTransition_blkum"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vddft"), "Death", "End", SubResource("AnimationNodeStateMachineTransition_h3c4t"), "Walk", "StandDown", SubResource("AnimationNodeStateMachineTransition_nrjl7"), "Atk", "StandDown", SubResource("AnimationNodeStateMachineTransition_foq8o"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_p7thp"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_ai07x"), "Atk", "Hit", SubResource("AnimationNodeStateMachineTransition_d3xk8")]
-graph_offset = Vector2(153, -156)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iw0go"]
 
 [node name="FogSkeleton" type="CharacterBody3D"]
@@ -2003,13 +1901,6 @@ skin = SubResource("Skin_60pv6")
 libraries = {
 "": SubResource("AnimationLibrary_vmf0b")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_fi5uo")
-anim_player = NodePath("../Animation")
-active = true
-parameters/conditions/Hide = false
-parameters/conditions/Show = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

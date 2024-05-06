@@ -297,6 +297,7 @@ public partial class MapLvl2Script : IMap
 			Vector3 Pos = SpawnPoint[i].GlobalPosition;
 			RemoveChild(SpawnPoint[i]);
 			CharacterBody3D Mob = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Gollem.tscn").Instantiate<CharacterBody3D>();
+			(Mob as MobScript).ID = i;
 			Mob.Position = Pos;
 			AddChild(Mob);
 		}
