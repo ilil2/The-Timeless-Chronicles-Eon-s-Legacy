@@ -117,6 +117,7 @@ public partial class State6 : GameManager
 					{
 						InfoJoueur["attack"] = "next";
 					}
+					
 				}
 				else if (commandchat == "cheat on")
 				{
@@ -127,6 +128,19 @@ public partial class State6 : GameManager
 				else if (commandchat == "help")
 				{
 					((ChatUI)_chat).Outputaddtext = "effectuez \"/cheat on\" pour passer en mode triche";
+				}
+				
+				string[] line = commandchat.Split(" ");
+				if (line[0] == "give")
+				{
+					if (line[1] == "gold")
+					{
+						GameManager.Gold+= int.Parse(line[2]);
+					}
+					else if (line[1] == "xp")
+					{
+						GameManager.xp+= int.Parse(line[2]);
+					}
 				}
 			}
 			else
