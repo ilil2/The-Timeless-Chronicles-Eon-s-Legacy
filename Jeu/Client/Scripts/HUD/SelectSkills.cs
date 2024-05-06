@@ -14,6 +14,10 @@ public partial class SelectSkills : Control
 	private AnimationPlayer _animationPlayer2;
 	private AnimationPlayer _animationPlayer3;
 	
+	private Label _labelSkill1;
+	private Label _labelSkill2;
+	private Label _labelSkill3;
+	
 	private TextureRect[] _skills = new TextureRect[3];
 	private (string, int)[][][] _skillsName;
 	private ClassScript _player;
@@ -23,6 +27,10 @@ public partial class SelectSkills : Control
 		_skills[0] = GetNode<TextureRect>("Skill1");
 		_skills[1] = GetNode<TextureRect>("Skill2");
 		_skills[2] = GetNode<TextureRect>("Skill3");
+		
+		_labelSkill1 = GetNode<Label>("Label1");
+		_labelSkill2 = GetNode<Label>("Label2");
+		_labelSkill3 = GetNode<Label>("Label3");
 		
 		_animationPlayer1 = GetNode<AnimationPlayer>("AnimationPlayer1");
 		_animationPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
@@ -196,6 +204,77 @@ public partial class SelectSkills : Control
 		else
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
+		}
+		
+		_labelSkill1.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1);
+		_labelSkill2.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1);
+		_labelSkill3.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1);
+		
+	}
+
+	private string GetSkillName(string skill)
+	{
+		switch (skill)
+		{
+			case "speed":
+				return "Speed";
+			case "health":
+				return "Health";
+			case "damage":
+				return "Damage";
+			case "stamina":
+				return "Stamina";
+			case "reload":
+				return "Reload";
+			case "staminause":
+				return "Stamina Use";
+			case "arrow":
+				return "New Arrow";
+			case "shootspeed":
+				return "Shoot Speed";
+			case "arrowpoison":
+				return "Poison Arrow";
+			case "arrowgel":
+				return "Gel Arrow";
+			case "healspeed":
+				return "Heal Speed";
+			case "lasermove":
+				return "Laser Move";
+			case "revive":
+				return "Revive";
+			case "vampire":
+				return "Vampire";
+			case "reviveall":
+				return "Revive All";
+			case "reloadprotection":
+				return "Reload Protection";
+			case "crit":
+				return "Critical Chance";
+			case "range":
+				return "Range";
+			case "agro":
+				return "Agro";
+			case "spike":
+				return "Spike";
+			case "absorption":
+				return "Absorption";
+			case "invincibility":
+				return "Invincibility";
+			case "escalibur":
+				return "Escalibur";
+			case "dashdegat":
+				return "Dash Degat";
+			case "dague":
+				return "Dague";
+			case "invisibility":
+				return "Invisibility";
+			case "doubleattack":
+				return "Double Attack";
+			case "poison":
+				return "Poison";
+			default:
+				GD.Print(skill);
+				return "ERROR";
 		}
 	}
 	

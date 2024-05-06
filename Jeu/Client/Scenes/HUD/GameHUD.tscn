@@ -500,14 +500,14 @@ offset_bottom = 0.0
 
 [node name="Skills" parent="." instance=ExtResource("8_18biw")]
 layout_mode = 1
-anchor_left = 0.778
+anchor_left = 0.771
 anchor_top = 0.593
-anchor_right = 1.0
+anchor_right = 0.993
 anchor_bottom = 0.79
-offset_left = -0.256126
-offset_top = -0.264066
-offset_right = -127.872
-offset_bottom = -63.72
+offset_left = -0.192032
+offset_top = -0.264035
+offset_right = -127.808
+offset_bottom = -63.7199
 scale = Vector2(2, 2)
 
 [node name="XpBar" type="ProgressBar" parent="."]
