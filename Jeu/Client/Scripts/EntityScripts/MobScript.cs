@@ -182,6 +182,7 @@ public abstract partial class MobScript : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
+				GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
 			else
 			{
@@ -322,6 +323,12 @@ public abstract partial class MobScript : CharacterBody3D
 						if (firstline[1]=="3")
 						{
 							state = 3;
+						}
+
+						if (firstline[0] == "42")
+						{
+							TakeDamage(10000);
+							GD.Print("Rec Mort");
 						}
 						
 					}
