@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://cyrrhnv1d1piu"]
 
-[ext_resource type="Script" path="res://Scenes/Debug/WIP.cs" id="1_rd8e8"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Boss2Map.cs" id="1_wcncp"]
 [ext_resource type="Texture2D" uid="uid://dcrl5r0yvbv4y" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass.PNG" id="3_c1ixv"]
 [ext_resource type="Texture2D" uid="uid://imjob5grvv77" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-ao.png" id="4_i8b4o"]
 [ext_resource type="Texture2D" uid="uid://dl8eaglt7hq2e" path="res://Ressources/Map/Global/tre2/Textures/Nature_Grass/Nature_Grass-height.png" id="5_mbwig"]
@@ -190,7 +190,7 @@ _data = {
 size = Vector3(4, 4, 4)
 
 [node name="Boss2Scenes" type="Node3D"]
-script = ExtResource("1_rd8e8")
+script = ExtResource("1_wcncp")
 CamOnPlayer = true
 
 [node name="Ground" type="MeshInstance3D" parent="."]
