@@ -181,7 +181,7 @@ public partial class GameManager : Node3D
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
 		EnqueueMap($"res://Scenes/MapScenes/Shop.tscn");
-		for (int i = 1; i <= 4; i++)
+		for (int i = 2; i <= 3; i++)
 		{
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/MapLvl{i}.tscn");
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/BossScenes/Boss{i}Map.tscn");
@@ -211,34 +211,12 @@ public partial class GameManager : Node3D
 	{
 		if(_qxp>_xp)
 		{
-			if(_qxp-_xp>100)
-			{
-				_xp+=100;
-			}
-			else if(_qxp-_xp>10)
-			{
-				_xp+=10;
-			}
-			else
-			{
 				_xp++;
-			}
 			
 		}
 		else if(_qxp<_xp)
 		{
-			if(-(_qxp-_xp)>100)
-			{
-				_xp-=100;
-			}
-			else if(-(_qxp-_xp)>10)
-			{
-				_xp-=10;
-			}
-			else
-			{
 				_xp--;
-			}
 			
 		}
 		if(_qgold>_gold)

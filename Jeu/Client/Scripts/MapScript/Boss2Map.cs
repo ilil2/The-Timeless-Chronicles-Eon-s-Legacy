@@ -4,7 +4,7 @@ using Lib;
 using Godot;
 namespace JeuClient.Scripts.MapScript;
 
-public class Boss2Map : IMap
+public partial class Boss2Map : IMap
 {
 	private PackedScene Wa = GD.Load<PackedScene>("res://Scenes/MapScenes/Lvl2/R.tscn");
 	private NavigationRegion3D Nav;

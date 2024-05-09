@@ -313,6 +313,7 @@ public partial class MapLvl2Script : IMap
 			RealKey.Position = Key.Position;
 			RemoveChild(Key);
 			Key.QueueFree();
+			KeyList[i] = RealKey;
 			AddChild(RealKey);
 		}
 	}

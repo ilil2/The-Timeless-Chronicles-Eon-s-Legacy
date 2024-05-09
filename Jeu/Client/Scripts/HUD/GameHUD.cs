@@ -39,7 +39,7 @@ public partial class GameHUD : Control
 	private Label _level;
 	private Label _gold;
 	
-	public bool IsVisible = true;
+	public static bool IsVisible = true;
 	
 	public override void _Ready()
 	{
@@ -70,7 +70,7 @@ public partial class GameHUD : Control
 
 	public override void _Process(double delta)
 	{
-		if (OnInventory || !IsVisible)
+		if (!IsVisible)
 		{
 			Visible = false;
 		}

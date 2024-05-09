@@ -21,7 +21,11 @@ public partial class InteractionShop : Node3D
 	{
 		if(OnShop)
 		{
-			Gold.Text = $"Gold: {GameManager.Gold}";
+			GameHUD.IsVisible = false;
+		}
+		else
+		{
+			GameHUD.IsVisible = true;
 		}
 	}
 	private void _on_shop_body_entered(Node3D body)

@@ -31,6 +31,14 @@ public partial class DialogueArea : Area3D
 	public override void _Process(double delta)
 	{
 		CompleteText();
+		if (Near)
+		{
+			GameHUD.IsVisible = false;
+		}
+		else
+		{
+			GameHUD.IsVisible = true;
+		}
 		
 	}
 	
@@ -38,7 +46,7 @@ public partial class DialogueArea : Area3D
 	{
 		if(body is ClassScript)
 		{
-			Hud.Visible = true;
+			GameHUD.IsVisible = false;
 			SaveDialogue.Emax = (SaveDialogue.Emax.c1,0);
 			
 			_on_skip_button_pressed();
@@ -47,7 +55,6 @@ public partial class DialogueArea : Area3D
 			Cam.Current = true;
 			Parent.CamOnPlayer = false;
 			Hud.Visible = true;
-			Parent.GetParent().GetNode<Control>("GameHUD").Visible = false;
 			Input.MouseMode = Input.MouseModeEnum.Visible;	
 			GD.Print("Enter");
 		}
@@ -57,6 +64,7 @@ public partial class DialogueArea : Area3D
 	private void _on_body_exited(Node3D body)
 	{
 		GD.Print("Exit");
+		GameHUD.IsVisible = true;
 	}
 	private void _on_close_button_pressed()
 	{
@@ -65,6 +73,7 @@ public partial class DialogueArea : Area3D
 		Cam.Current = false;
 		Parent.CamOnPlayer = true;
 		Hud.Visible = false;
+		GameHUD.IsVisible = false;
 		Parent.GetParent().GetNode<Control>("GameHUD").Visible = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;	
 	}
