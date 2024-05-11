@@ -21,7 +21,8 @@ public abstract partial class ClassScript : PlayerScript
 	protected float GravityValue = 9.8f;
 	public float WalkSpeed = 4.2f;
 	public float CurrentWalkSpeed = 4.2f;
-	protected float RunSpeed = 7.5f;
+	public float RunSpeed = 7.5f;
+	public float CurrentRunSpeed = 7.5f;
 	
 	public (string, int)[] Skills = new (string, int)[3];
 	public int Skillnumber = 0;
@@ -300,5 +301,6 @@ public abstract partial class ClassScript : PlayerScript
 		Health = CurrentHealth;
 		MaxHealth = CurrentMaxHealth;
 		WalkSpeed = CurrentWalkSpeed;
+		RunSpeed = CurrentRunSpeed;
 	}
 }
