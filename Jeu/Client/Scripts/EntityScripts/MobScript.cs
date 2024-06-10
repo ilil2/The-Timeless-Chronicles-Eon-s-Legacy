@@ -53,6 +53,8 @@ public abstract partial class MobScript : CharacterBody3D
 	private bool _poison = false;
 	private int _geltime;
 	private int _poisontime;
+	private int _init_speed;
+	private int _poisonint;
 	
 	public MobHealthBar HealthBar;
 	
@@ -77,7 +79,7 @@ public abstract partial class MobScript : CharacterBody3D
 		
 		Ani = GetNode<AnimationPlayer>("Animation");
 		state = -1;
-		
+		_init_speed = speed;
 	}
 
 	public void PhysicsProcess(double delta) //Raycast
@@ -368,6 +370,7 @@ public abstract partial class MobScript : CharacterBody3D
 			
 			if (_geltime - t2 > 5)
 			{
+				speed = _init_speed;
 				_gel = false;
 			}
 		}
@@ -376,7 +379,14 @@ public abstract partial class MobScript : CharacterBody3D
 			var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
 			int t2  = (int) t.TotalSeconds;
 			
-			if (_poisontime - t2 > 5)
+			if (_poisontime - t2 > 1)
+			{
+				_poisontime  = t2;
+				_poisonint++;
+				TakeDamage(5);
+			}
+
+			if (_poisonint == 5)
 			{
 				_poison = false;
 			}
@@ -388,6 +398,7 @@ public abstract partial class MobScript : CharacterBody3D
 		_gel = true;
 		var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
 		_geltime  = (int) t.TotalSeconds;
+		speed = (int)(speed * 0.5f);
 	}
 	
 	public void PoisonMob()
@@ -395,6 +406,7 @@ public abstract partial class MobScript : CharacterBody3D
 		_poison = true;
 		var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
 		_poisontime  = (int) t.TotalSeconds;
+		_poisonint = 0;
 	}
 	
 }
