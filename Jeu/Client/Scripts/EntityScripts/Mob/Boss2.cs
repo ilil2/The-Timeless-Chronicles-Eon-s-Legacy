@@ -10,8 +10,8 @@ public partial class Boss2 : Boss
 	public override void _Ready()
 	{
 		Ready();
-		DistAtk*=Scale.X
-		
+		DistAtk = (int)(DistAtk*Scale.X);
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

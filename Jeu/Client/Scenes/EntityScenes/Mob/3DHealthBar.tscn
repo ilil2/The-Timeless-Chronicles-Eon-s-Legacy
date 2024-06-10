@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://6d02rf75m7si"]
+
+[ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/MobHealthBar.cs" id="1_pbija"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_am2dg"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4px06"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0c2a"]
+bg_color = Color(1, 0, 0.0196078, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_bottom = 10
+
+[node name="3DHealthBar" type="Node3D"]
+script = ExtResource("1_pbija")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_am2dg")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.37
+anchor_right = 0.965
+anchor_bottom = 0.62
+offset_left = -21.76
+offset_top = -159.6
+offset_right = -17.1841
+offset_bottom = -159.6
+theme_override_styles/background = SubResource("StyleBoxFlat_4px06")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p0c2a")
+value = 50.0
+show_percentage = false

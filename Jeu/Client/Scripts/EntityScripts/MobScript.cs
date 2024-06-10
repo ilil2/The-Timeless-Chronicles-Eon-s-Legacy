@@ -54,8 +54,13 @@ public abstract partial class MobScript : CharacterBody3D
 	private int _geltime;
 	private int _poisontime;
 	
+	public MobHealthBar HealthBar;
+	
 	public void Ready()
 	{
+		HealthBar = GetNode<MobHealthBar>("3DHealthBar");
+		HealthBar.Max = HpMax;
+		HealthBar.Value = HpMax;
 		stopwatch.Start();
 		Parent = GetParent().GetParent();
 		for(int i = 0; i<GameManager._nbJoueur; i++)
@@ -77,6 +82,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
+		HealthBar.Process(delta);
 		if (DebugMode)
 		{
 			LastState = state;
@@ -181,6 +187,8 @@ public abstract partial class MobScript : CharacterBody3D
 		if(Alive)
 		{
 			HP -= damage;
+			HealthBar.Value = HP;
+			HealthBar.Show = true;
 			if(HP<=0)
 			{
 				GD.Print("Mort");
