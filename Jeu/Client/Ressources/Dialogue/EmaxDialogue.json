@@ -1,50 +1,95 @@
 {
   "1": {
-	"1": "Never gonna give you up",
-	"2": "Never gonna let you down",
-	"3": "Never gonna run around and desert you",
-	"4": "Never gonna make you cry",
-	"5": "Never gonna say goodbye",
-	"6": "NEXT"
+	"1": "Welcome, Hero.",
+	"2": "My name is Emax, and for the time being I will be your host.",
+	"3": "You may wonder: \"Where am I?\"",
+	"4": "This is the Shadow Realm, an area outside of the space-time continuum.",
+	"5": "Long ago, the God of Time, Eon the Magnificent, was born in this place.",
+	"7": "In 6 days, he built time itself by creating portals in 4 differant times, each protected by a guardian.",
+	"8": "The 7th day however, a jalous god used dark magic to corrupt Eon and the guardians, effectivly turning them evil.",
+	"9": "That's why I summoned you here. As the hero of your times, you must stop him.",
+	"10": "You shall kill the corrupted god and save the world!",
+	"11": "I will be helping you in this task.",
+	"12": "I will give you potions that will make your adventure easier.",
+	"13": "But don't forget to pay in cash. ( Inflation huts me too. )",
+	"14": "You may earn money and even new skills by killing the monsters you may find along the way.",
+	"16": "Your adventure will start the moment you enter the portal that will appear near me.",
+	"17": "After you go in, you will find said monsters.",
+	"18": "Reasearch for a monster of overwhelmingly superior strength, this is probably the guardian.",
+	"19": "Once you kill the guardian, an other portal will appear taking you here once again.",
+	"20": "After defeating all the guardians, Eon will appear.",
+	"21": "Destroy him once for all, and save us all!",
+	"17": "NEXT"
   },
   "2": {
-	"1": "Never gonna tell a lie and hurt you",
+	"1": "Your first destination is in Egypt, year 3157 BC.",
+	"2": "You may know some respectable historians theorised about egyptians being in contact with aliens.",
+	"3": "Those aliens were in reality Eon's servants, lead by the first guardian.",
+	"4": "I guess you already know what to do with him, right?",
+	"5": "Now, go in the portal and save the world!",
 	"2": "END"
   },
   "3": {
-	"1": "Never gonna give you up",
-	"2": "Never gonna let you down",
-	"3": "Never gonna run around and desert you",
-	"4": "Never gonna make you cry",
-	"5": "Never gonna say goodbye",
-	"6": "NEXT"
+	"1": "Wow, you really did this guardian dirty!",
+	"2": "I never expected you to be so mercyless.",
+	"3": "You made him a mess!",
+	"4": "I mean... you murdered him in a way you can't even tell it's his corpse!",
+	"5": "He had a wife and 2 children waiting for him at home, you know?",
+	"6": "You monster.",
+	"7": "Anyway...",
+	"8": "Next, you will go to the Kigdom of France, in the year of our Lord 1257.",
+	"9": "That's where the next guardian is.",
+	"10": "You have to kill him to save the world.",
+	"11": "But please...",
+	"12": "Don't be as cruel as you were with the last one.",
+	"13": "I can't forget as he was screaming in agony...",
+	"7": "NEXT"
   },
   "4": {
-	"1": "Never gonna tell a lie and hurt you",
+	"1": "Go in the portal.",
 	"2": "END"
   },
   "5": {
-	"1": "Never gonna give you up",
-	"2": "Never gonna let you down",
-	"3": "Never gonna run around and desert you",
-	"4": "Never gonna make you cry",
-	"5": "Never gonna say goodbye",
-	"6": "NEXT"
+	"1": "I can't believe you did this guardian even worse than the last one.",
+	"2": "He surrendered!",
+	"3": "Yet you did him... THAT!!!",
+	"4": "That's a war crime according to the Geneva Convention!",
+	"5": "I am starting to wonder if tasking YOU with this mission was the right choice...",
+	"6": "Well, now that you started it I guess you should finish it...",
+	"7": "...",
+	"8": "The next portal will take you to New-New-York, late XXI century.",
+	"9": "But please kill him in a... less hurtfull way.",
+	"10": "It's the last chance I give you, so don't waste it.",
+	"9": "NEXT"
   },
   "6": {
-	"1": "Never gonna tell a lie and hurt you",
+	"1": "Go to the portal, you monster.",
 	"2": "END"
   },
   "7": {
-	"1": "Never gonna give you up",
-	"2": "Never gonna let you down",
-	"3": "Never gonna run around and desert you",
-	"4": "Never gonna make you cry",
-	"5": "Never gonna say goodbye",
-	"6": "NEXT"
+	"1": "WHAT THE HELL?!!!",
+	"2": "WHY?!!!",
+	"3": "YOU PSYCHOPATH!!!",
+	"4": "I GAVE YOU ONE LAST CHANCE!",
+	"5": "AND THAT'S WHAT YOU DID!",
+	"6": "And even after he died... why did you do THAT to his corpse!",
+	"7": "You know what?",
+	"8": "I am starting to think you are a much bigger threat to the world than Eon!",
+	"9": "I was to supposed to send you fight the last guardian in XXII century New-New-York ruins.",
+	"10": "That's where the last guardian is.",
+	"11": "But I won't let you go there.",
+	"12": "You won't be able to hurt anyone if you are trapped here!",
+	"13": "Wait...",
+	"14": "That's impossible...",
+	"15": "He's not supposed to know of this place!",
+	"16": "He's here!",
+	"17": "Eon's here!",
+	"18": "I know we just had an argument, but we will need to rely on each other!",
+	"19": "Eon is here to fight us, so we will fight back!",
+	"20": "NEXT"
   },
   "8": {
-	"1": "Never gonna tell a lie and hurt you",
+	"1": "Go fight Eon, and prove you are not the bad guy!",
 	"2": "END"
   }
 }
