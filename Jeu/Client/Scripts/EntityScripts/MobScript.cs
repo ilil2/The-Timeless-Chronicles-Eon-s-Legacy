@@ -48,6 +48,12 @@ public abstract partial class MobScript : CharacterBody3D
 	private List<RayCast3D> RayList = new List<RayCast3D>();
 
 	private Stopwatch stopwatch = new Stopwatch();
+	
+	private bool _gel = false;
+	private bool _poison = false;
+	private int _geltime;
+	private int _poisontime;
+	
 	public void Ready()
 	{
 		stopwatch.Start();
@@ -167,6 +173,7 @@ public abstract partial class MobScript : CharacterBody3D
 				}
 			}
 		}
+		ApplyMalus();
 	}
 	
 	public virtual void TakeDamage(int damage, bool send = true)
@@ -342,6 +349,44 @@ public abstract partial class MobScript : CharacterBody3D
 				
 			}
 		}
+	}
+
+	private void ApplyMalus()
+	{
+		if (_gel)
+		{
+			var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+			int t2  = (int) t.TotalSeconds;
+			
+			if (_geltime - t2 > 5)
+			{
+				_gel = false;
+			}
+		}
+		if (_poison)
+		{
+			var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+			int t2  = (int) t.TotalSeconds;
+			
+			if (_poisontime - t2 > 5)
+			{
+				_poison = false;
+			}
+		}
+	}
+
+	public void GelMob()
+	{
+		_gel = true;
+		var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+		_geltime  = (int) t.TotalSeconds;
+	}
+	
+	public void PoisonMob()
+	{
+		_poison = true;
+		var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
+		_poisontime  = (int) t.TotalSeconds;
 	}
 	
 }
