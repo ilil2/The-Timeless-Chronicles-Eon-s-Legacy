@@ -115,11 +115,11 @@ public partial class State6 : GameManager
 
 					else if (commandchat.Substring(0,3) == "end")
 					{
-						string i = commandchat.Substring(3);
+						string i = commandchat.Substring(4);
 
 						if (i == "1")
 						{
-							Joueur1.Position = new Vector3(0,0,0);
+							Joueur1.Position = new Vector3(0,1,0);
 						}
 					}
 					
