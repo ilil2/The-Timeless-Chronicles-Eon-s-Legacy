@@ -80,6 +80,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SkillImage1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.343, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_ticj2"]
 length = 0.001
@@ -130,6 +142,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SkillImage1:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gelh1"]
@@ -190,6 +214,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SkillImage2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_mbyvl"]
 resource_name = "RESET"
@@ -241,6 +277,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SkillImage2:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_atbtf"]
@@ -301,6 +349,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SkillImage3:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_j2e47"]
 resource_name = "RESET"
@@ -353,6 +413,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SkillImage3:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bl667"]
 _data = {
@@ -388,10 +460,10 @@ anchor_left = 0.111
 anchor_top = 0.198
 anchor_right = 0.333
 anchor_bottom = 0.79
-offset_left = 128.0
-offset_top = 128.0
-offset_right = 384.0
-offset_bottom = 512.0
+offset_left = 0.127998
+offset_top = -0.303999
+offset_right = 0.383995
+offset_bottom = 0.0799861
 texture = ExtResource("2_fg6ov")
 expand_mode = 1
 
@@ -402,10 +474,10 @@ anchor_left = 0.389
 anchor_top = 0.198
 anchor_right = 0.611
 anchor_bottom = 0.79
-offset_left = 448.0
-offset_top = 128.0
-offset_right = 704.0
-offset_bottom = 512.0
+offset_left = -0.127998
+offset_top = -0.303999
+offset_right = 0.127998
+offset_bottom = 0.0799861
 texture = ExtResource("3_o04ht")
 expand_mode = 1
 
@@ -416,14 +488,15 @@ anchor_left = 0.667
 anchor_top = 0.198
 anchor_right = 0.889
 anchor_bottom = 0.79
-offset_left = 768.0
-offset_top = 128.0
-offset_right = 1024.0
-offset_bottom = 512.0
+offset_left = -0.383995
+offset_top = -0.303999
+offset_right = -0.127998
+offset_bottom = 0.0799861
 texture = SubResource("CompressedTexture2D_pe1qh")
 expand_mode = 1
 
 [node name="SkillImage1" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.167
@@ -434,6 +507,7 @@ offset_left = -0.384012
 offset_top = 0.167998
 offset_right = -0.256031
 offset_bottom = -0.136011
+expand_mode = 1
 
 [node name="SkillDescription" type="Label" parent="SkillImage1"]
 layout_mode = 1
@@ -446,8 +520,10 @@ offset_left = -0.0639992
 offset_top = 0.0639954
 offset_right = 0.0639954
 label_settings = SubResource("LabelSettings_ui8v4")
+autowrap_mode = 3
 
 [node name="SkillImage2" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.444
@@ -458,6 +534,7 @@ offset_left = 0.511959
 offset_top = 0.167998
 offset_right = -0.512062
 offset_bottom = -0.136011
+expand_mode = 1
 
 [node name="SkillDescription" type="Label" parent="SkillImage2"]
 layout_mode = 1
@@ -470,8 +547,10 @@ offset_left = -0.0639992
 offset_top = 0.0639954
 offset_right = 0.0639954
 label_settings = SubResource("LabelSettings_7vxyn")
+autowrap_mode = 3
 
 [node name="SkillImage3" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.722
@@ -495,6 +574,7 @@ offset_left = -0.0639992
 offset_top = 0.0639954
 offset_right = 0.0639954
 label_settings = SubResource("LabelSettings_xec10")
+autowrap_mode = 3
 
 [node name="Label1" type="Label" parent="."]
 layout_mode = 1
@@ -546,7 +626,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SkillControl1" type="Button" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -560,7 +639,6 @@ offset_right = 0.383995
 offset_bottom = 0.0799861
 
 [node name="SkillControl2" type="Button" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -574,7 +652,6 @@ offset_right = 0.127998
 offset_bottom = 0.0799861
 
 [node name="SkillControl3" type="Button" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1

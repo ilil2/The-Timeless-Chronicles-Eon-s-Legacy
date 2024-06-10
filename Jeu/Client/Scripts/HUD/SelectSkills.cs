@@ -45,6 +45,11 @@ public partial class SelectSkills : Control
 		_animationPlayer[0] = GetNode<AnimationPlayer>("AnimationPlayer1");
 		_animationPlayer[1] = GetNode<AnimationPlayer>("AnimationPlayer2");
 		_animationPlayer[2] = GetNode<AnimationPlayer>("AnimationPlayer3");
+		
+		_animationPlayer[0].Play("RESET");
+		_animationPlayer[1].Play("RESET");
+		_animationPlayer[2].Play("RESET");
+		
 
 		_player = (ClassScript)GameManager.Joueur1;
 		_languageDict = GameManager.LanguageManager.GetLanguage(GameManager.SettingsManager.GetAllSettings()["language"]);
@@ -193,40 +198,28 @@ public partial class SelectSkills : Control
 		if (_isRecto1)
 		{
 			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
-			_skillImage[0].Visible = false;
-			_skillDescription[0].Visible = false;
 		}
 		else
 		{
 			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
-			_skillImage[0].Visible = true;
-			_skillDescription[0].Visible = true;
 		}
 		
 		if (_isRecto2)
 		{
 			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
-			_skillImage[1].Visible = false;
-			_skillDescription[1].Visible = false;
 		}
 		else
 		{
 			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
-			_skillImage[1].Visible = true;
-			_skillDescription[1].Visible = true;
 		}
 		
 		if (_isRecto3)
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
-			_skillImage[2].Visible = false;
-			_skillDescription[2].Visible = false;
 		}
 		else
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
-			_skillImage[2].Visible = true;
-			_skillDescription[2].Visible = true;
 		}
 		
 		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1));
@@ -461,6 +454,7 @@ public partial class SelectSkills : Control
 	private void _on_skill_control_1_mouse_entered()
 	{
 		_animationPlayer[0].Play("Card1");
+		GD.Print("test");
 	}
 	
 	private void _on_skill_control_2_mouse_entered()
