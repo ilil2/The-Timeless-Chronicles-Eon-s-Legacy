@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ifhchr0sewog"]
+[gd_scene load_steps=29 format=3 uid="uid://ifhchr0sewog"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/Gollem.cs" id="1_akyw2"]
 [ext_resource type="Texture2D" uid="uid://davfckxuom65s" path="res://Ressources/Entity/Gollem/Gollem_diffuso.png" id="2_ujggi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d08c5avrudbq0" path="res://Ressources/Entity/Gollem/Gollem_diffuso_3.png" id="5_fe1ko"]
 [ext_resource type="Texture2D" uid="uid://6esfw0pwe6qc" path="res://Ressources/Entity/Gollem/Gollem_rough_4.png" id="6_oprse"]
 [ext_resource type="PackedScene" uid="uid://bsxpfpeww7nwe" path="res://Scenes/EntityScenes/weapon.tscn" id="7_fuwwb"]
+[ext_resource type="PackedScene" uid="uid://6d02rf75m7si" path="res://Scenes/EntityScenes/Mob/3DHealthBar.tscn" id="8_uteeb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h0jc7"]
 radius = 1.0
@@ -1471,3 +1472,6 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301825, 0)
 radius = 1.0
 use_3d_avoidance = true
+
+[node name="3DHealthBar" parent="." instance=ExtResource("8_uteeb")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 2.59282, 0)

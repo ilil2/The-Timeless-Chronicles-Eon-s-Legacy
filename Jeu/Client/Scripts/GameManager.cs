@@ -73,7 +73,20 @@ public partial class GameManager : Node3D
 		}
 	}
 
-	public static int level => xp / 100;
+	public static int level
+	{
+		get
+		{
+			if (xp / 100 > 5)
+			{
+				return 5;
+			}
+			else
+			{
+				return xp / 100;
+			}
+		}
+	}
 
 	public static Socket soc2;
 	public static IPEndPoint iep2;
@@ -181,7 +194,7 @@ public partial class GameManager : Node3D
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
 		EnqueueMap($"res://Scenes/MapScenes/Shop.tscn");
-		for (int i = 2; i <= 3; i++)
+		for (int i = 1; i <= 3; i++)
 		{
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/MapLvl{i}.tscn");
 			EnqueueMap($"res://Scenes/MapScenes/Lvl{i}/BossScenes/Boss{i}Map.tscn");

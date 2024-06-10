@@ -10,17 +10,19 @@ public partial class SelectSkills : Control
 	[Export] private bool _isRecto2;
 	[Export] private bool _isRecto3;
 	
-	private AnimationPlayer _animationPlayer1;
-	private AnimationPlayer _animationPlayer2;
-	private AnimationPlayer _animationPlayer3;
+	private AnimationPlayer[] _animationPlayer = new AnimationPlayer[3];
 	
-	private Label _labelSkill1;
-	private Label _labelSkill2;
-	private Label _labelSkill3;
+	private Label[] _labelSkill  = new Label[3];
+
+	private TextureRect[] _skillImage = new TextureRect[3];
+	
+	private Label[] _skillDescription = new Label[3];
 	
 	private TextureRect[] _skills = new TextureRect[3];
 	private (string, int)[][][] _skillsName;
 	private ClassScript _player;
+
+	private Dictionary<string, string> _languageDict;
 	
 	public override void _Ready()
 	{
@@ -28,15 +30,24 @@ public partial class SelectSkills : Control
 		_skills[1] = GetNode<TextureRect>("Skill2");
 		_skills[2] = GetNode<TextureRect>("Skill3");
 		
-		_labelSkill1 = GetNode<Label>("Label1");
-		_labelSkill2 = GetNode<Label>("Label2");
-		_labelSkill3 = GetNode<Label>("Label3");
+		_labelSkill[0] = GetNode<Label>("Label1");
+		_labelSkill[1] = GetNode<Label>("Label2");
+		_labelSkill[2] = GetNode<Label>("Label3");
 		
-		_animationPlayer1 = GetNode<AnimationPlayer>("AnimationPlayer1");
-		_animationPlayer2 = GetNode<AnimationPlayer>("AnimationPlayer2");
-		_animationPlayer3 = GetNode<AnimationPlayer>("AnimationPlayer3");
+		_skillImage[0] = GetNode<TextureRect>("SkillImage1");
+		_skillImage[1] = GetNode<TextureRect>("SkillImage2");
+		_skillImage[2] = GetNode<TextureRect>("SkillImage3");
+		
+		_skillDescription[0] = GetNode<Label>("SkillImage1/SkillDescription");
+		_skillDescription[1] = GetNode<Label>("SkillImage2/SkillDescription");
+		_skillDescription[2] = GetNode<Label>("SkillImage3/SkillDescription");
+		
+		_animationPlayer[0] = GetNode<AnimationPlayer>("AnimationPlayer1");
+		_animationPlayer[1] = GetNode<AnimationPlayer>("AnimationPlayer2");
+		_animationPlayer[2] = GetNode<AnimationPlayer>("AnimationPlayer3");
 
 		_player = (ClassScript)GameManager.Joueur1;
+		_languageDict = GameManager.LanguageManager.GetLanguage(GameManager.SettingsManager.GetAllSettings()["language"]);
 
 		_skillsName = new []
 		{
@@ -182,34 +193,53 @@ public partial class SelectSkills : Control
 		if (_isRecto1)
 		{
 			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skillImage[0].Visible = false;
+			_skillDescription[0].Visible = false;
 		}
 		else
 		{
 			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
+			_skillImage[0].Visible = true;
+			_skillDescription[0].Visible = true;
 		}
 		
 		if (_isRecto2)
 		{
 			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skillImage[1].Visible = false;
+			_skillDescription[1].Visible = false;
 		}
 		else
 		{
 			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
+			_skillImage[1].Visible = true;
+			_skillDescription[1].Visible = true;
 		}
 		
 		if (_isRecto3)
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skillImage[2].Visible = false;
+			_skillDescription[2].Visible = false;
 		}
 		else
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
+			_skillImage[2].Visible = true;
+			_skillDescription[2].Visible = true;
 		}
 		
-		_labelSkill1.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1);
-		_labelSkill2.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1);
-		_labelSkill3.Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1);
+		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1));
+		_skillImage[1].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1));
+		_skillImage[2].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1));
+
+		_labelSkill[0].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1);
+		_labelSkill[1].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1);
+		_labelSkill[2].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1);
 		
+		_skillDescription[0].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][0]);
+		_skillDescription[1].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][1]);
+		_skillDescription[2].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][2]);
 	}
 
 	private string GetSkillName(string skill)
@@ -282,14 +312,129 @@ public partial class SelectSkills : Control
 	{
 		switch (skill)
 		{
-			case "skill1":
-				return "res://Assets/Textures/Skills/Attack.png";
-			case "skill2":
-				return "res://Assets/Textures/Skills/Block.png";
-			case "skill3":
-				return "res://Assets/Textures/Skills/Charge.png";
+			case "speed":
+				return "res://Ressources/Icons/Other/Speed.png";
+			case "health":
+				return "res://Ressources/Icons/Other/Heath.png";
+			case "damage":
+				return "res://Ressources/Icons/Other/Damage.png";
+			case "stamina":
+				return "res://Ressources/Icons/Other/Mana.png";
+			case "reload":
+				return "res://Ressources/Icons/Other/Reload.png";
+			case "staminause":
+				return "res://Ressources/Icons/Other/ManaUse.png";
+			case "arrow":
+				return "res://Ressources/Icons/Archer/Arrow.png";
+			case "shootspeed":
+				return "res://Ressources/Icons/Archer/ArrowSpeed.png";
+			case "arrowpoison":
+				return "res://Ressources/Icons/Archer/PoisonArrow.png";
+			case "arrowgel":
+				return "res://Ressources/Icons/Archer/GelArrow.png";
+			case "healspeed":
+				return "res://Ressources/Icons/Scientist/Heal.png";
+			case "lasermove":
+				return "res://Ressources/Icons/Scientist/LaserMove.png";
+			case "revive":
+				return "res://Ressources/Icons/Scientist/Revive.png";
+			case "vampire":
+				return "res://Ressources/Icons/Scientist/Vampire.png";
+			case "reviveall":
+				return "res://Ressources/Icons/Scientist/BigRevive.png";
+			case "reloadprotection":
+				return "res://Ressources/Icons/Scientist/ReloadProtection.png";
+			case "crit":
+				return "res://Ressources/Icons/Other/Crit.png";
+			case "range":
+				return "res://Ressources/Icons/Knight/Range.png";
+			case "agro":
+				return "res://Ressources/Icons/Knight/Agro.png";
+			case "spike":
+				return "res://Ressources/Icons/Knight/Thorns.png";
+			case "absorption":
+				return "res://Ressources/Icons/Knight/Absorption.png";
+			case "invincibility":
+				return "res://Ressources/Icons/Knight/Invinsibility.png";
+			case "escalibur":
+				return "res://Ressources/Icons/Knight/Escalibur.png";
+			case "dashdegat":
+				return "res://Ressources/Icons/Assassin/DashDegat.png";
+			case "dague":
+				return "res://Ressources/Icons/Assassin/Dague.png";
+			case "invisibility":
+				return "res://Ressources/Icons/Assassin/Invisibility.png";
+			case "doubleattack":
+				return "res://Ressources/Icons/Assassin/DoubleDague.png";
+			case "poison":
+				return "res://Ressources/Icons/Assassin/Poison.png";
 			default:
-				return "";
+				return "res://Ressources/Icons/Error.png";
+		}
+	}
+
+	private string GetSkillDescription((string, int) skill)
+	{
+		switch (skill.Item1)
+		{
+		    case "speed":
+			    return _languageDict["skillDescriptionSpeed"] + "+" + skill.Item2;
+		    case "health":
+		        return _languageDict["skillDescriptionHealth"] + "+" + skill.Item2;
+		    case "damage":
+			    return _languageDict["skillDescriptionDamage"] + "+" + skill.Item2;
+		    case "stamina":
+		        return _languageDict["skillDescriptionStamina"] + "+" + skill.Item2;
+		    case "reload":
+		        return _languageDict["skillDescriptionReload"] + "+" + skill.Item2;
+		    case "staminause":
+		        return _languageDict["skillDescriptionStaminaUse"] + "-" + skill.Item2;
+		    case "arrow":
+		        return _languageDict["skillDescriptionArrow"];
+		    case "shootspeed":
+		        return _languageDict["skillDescriptionShootSpeed"] + "+" + skill.Item2 + "%";
+		    case "arrowpoison":
+		        return _languageDict["skillDescriptionArrowPoison"];
+		    case "arrowgel":
+		        return _languageDict["skillDescriptionArrowGel"];
+		    case "healspeed":
+		        return _languageDict["skillDescriptionHealSpeed"] + "+" + skill.Item2;
+		    case "lasermove":
+		        return _languageDict["skillDescriptionLaserMove"];
+		    case "revive":
+		        return _languageDict["skillDescriptionRevive"];
+		    case "vampire":
+		        return _languageDict["skillDescriptionVampire"];
+		    case "reviveall":
+		        return _languageDict["skillDescriptionReviveAll"];
+		    case "reloadprotection":
+		        return _languageDict["skillDescriptionReloadProtection"];
+		    case "crit":
+			    return _languageDict["skillDescriptionCrit"] + "+" + skill.Item2 + "%";
+		    case "range":
+		        return _languageDict["skillDescriptionRange"];
+		    case "agro":
+		        return _languageDict["skillDescriptionAgro"];
+		    case "spike":
+		        return _languageDict["skillDescriptionSpike"];
+		    case "absorption":
+		        return _languageDict["skillDescriptionAbsorption"];
+		    case "invincibility":
+		        return _languageDict["skillDescriptionInvincibility"];
+		    case "escalibur":
+		        return _languageDict["skillDescriptionEscalibur"];
+		    case "dashdegat":
+		        return _languageDict["skillDescriptionDashDegat"];
+		    case "dague":
+		        return _languageDict["skillDescriptionDague"];
+		    case "invisibility":
+		        return _languageDict["skillDescriptionInvisibility"];
+		    case "doubleattack":
+		        return _languageDict["skillDescriptionDoubleAttack"];
+		    case "poison":
+		        return _languageDict["skillDescriptionPoison"];
+		    default:
+		        return "res://Ressources/Icons/Error.png";
 		}
 	}
 	
@@ -315,32 +460,32 @@ public partial class SelectSkills : Control
 	
 	private void _on_skill_control_1_mouse_entered()
 	{
-		_animationPlayer1.Play("Card1");
+		_animationPlayer[0].Play("Card1");
 	}
 	
 	private void _on_skill_control_2_mouse_entered()
 	{
-		_animationPlayer2.Play("Card2");
+		_animationPlayer[1].Play("Card2");
 	}
 	
 	private void _on_skill_control_3_mouse_entered()
 	{
-		_animationPlayer3.Play("Card3");
+		_animationPlayer[2].Play("Card3");
 	}
 
 	private void _on_skill_control_1_mouse_exited()
 	{
-		_animationPlayer1.PlayBackwards("Card1");
+		_animationPlayer[0].PlayBackwards("Card1");
 	}
 	
 	private void _on_skill_control_2_mouse_exited()
 	{
-		_animationPlayer2.PlayBackwards("Card2");
+		_animationPlayer[1].PlayBackwards("Card2");
 	}
 	
 	private void _on_skill_control_3_mouse_exited()
 	{
-		_animationPlayer3.PlayBackwards("Card3");
+		_animationPlayer[2].PlayBackwards("Card3");
 	}
 
 	private void _on_skill_control_1_pressed()

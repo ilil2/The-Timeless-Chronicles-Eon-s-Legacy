@@ -2026,6 +2026,33 @@ tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, 0.306237, 0.0378383, -0.0123683, 0.951123)
 
+[sub_resource type="Animation" id="Animation_jju8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon/CollisionShape3D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon/CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.986456, 1.00278)]
+}
+
 [sub_resource type="Animation" id="Animation_5i003"]
 resource_name = "Walk"
 length = 1.06667
@@ -2400,33 +2427,6 @@ tracks/52/path = NodePath("Armature/Skeleton3D:mixamorig_RightToeBase")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, 0.342214, 0.039122, -0.0172219, 0.938649, 0.0333333, 1, 0.342214, 0.039122, -0.0172219, 0.938649, 0.0666667, 1, 0.344351, 0.037651, -0.0178267, 0.937916, 0.1, 1, 0.345489, 0.0379542, -0.0186655, 0.937469, 0.133333, 1, 0.359432, 0.036581, -0.0206773, 0.932225, 0.166667, 1, 0.381797, 0.0332703, -0.0246784, 0.923318, 0.2, 1, 0.420139, 0.025458, -0.0286762, 0.906649, 0.233333, 1, 0.468112, 0.0185708, -0.0314983, 0.882912, 0.266667, 1, 0.504031, 0.011821, -0.0373632, 0.862796, 0.3, 1, 0.524484, 0.022383, -0.0326585, 0.8505, 0.333333, 1, 0.594895, 0.0083571, -0.0317209, 0.803134, 0.366667, 1, 0.639018, 0.00674446, -0.0148464, 0.769019, 0.4, 1, 0.601008, 0.0363226, 0.0148934, 0.798279, 0.433333, 1, 0.46153, 0.0383084, -0.0135378, 0.886194, 0.466667, 1, 0.395633, 0.0397037, -0.0307475, 0.917035, 0.5, 1, 0.37466, 0.0625606, -0.0311117, 0.924526, 0.533333, 1, 0.359699, 0.0654586, -0.0351648, 0.930105, 0.566667, 1, 0.361866, 0.0616046, -0.0318509, 0.929647, 0.6, 1, 0.366495, 0.0546635, -0.0281969, 0.928385, 0.633333, 1, 0.387024, 0.0517298, -0.0268881, 0.920225, 0.666667, 1, 0.391402, 0.0437586, -0.0222053, 0.918911, 0.7, 1, 0.39983, 0.0351103, -0.0277658, 0.915496, 0.733333, 1, 0.416792, 0.038779, -0.0207479, 0.907937, 0.766667, 1, 0.402896, 0.0280054, -0.0163259, 0.914672, 0.8, 1, 0.438019, 0.0128325, -0.0169429, 0.898714, 0.833333, 1, 0.46906, 0.0154909, -0.0202181, 0.882799, 0.866667, 1, 0.388791, 0.0348634, -0.0169772, 0.92051, 0.9, 1, 0.324738, 0.04213, -0.015973, 0.94473, 0.933333, 1, 0.349475, 0.0367587, -0.01723, 0.936066, 0.966667, 1, 0.346436, 0.0379772, -0.0173928, 0.937143, 1, 1, 0.341232, 0.0394811, -0.0173372, 0.93899, 1.03333, 1, 0.341322, 0.0394448, -0.0173071, 0.938959, 1.06667, 1, 0.342214, 0.039122, -0.0172219, 0.938649)
-
-[sub_resource type="Animation" id="Animation_jju8q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Weapon/CollisionShape3D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Weapon/CollisionShape3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.986456, 1.00278)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wt0l4"]
 _data = {

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b07dtvpcsjeld"
-path="res://.godot/imported/DashDega.png-60af09c0451bd99dae08a52e8f1f6415.ctex"
+uid="uid://bh3dgsi64bhde"
+path="res://.godot/imported/Error.png-b3baf2956f185b3f52d4c50bf903eb4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ressources/Icons/Assassin/DashDega.png"
-dest_files=["res://.godot/imported/DashDega.png-60af09c0451bd99dae08a52e8f1f6415.ctex"]
+source_file="res://Ressources/Icons/Error.png"
+dest_files=["res://.godot/imported/Error.png-b3baf2956f185b3f52d4c50bf903eb4b.ctex"]
 
 [params]
 

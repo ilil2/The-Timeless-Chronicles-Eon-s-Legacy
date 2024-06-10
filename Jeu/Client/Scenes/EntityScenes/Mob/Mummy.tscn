@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bgbirrfxhtrxn"]
+[gd_scene load_steps=24 format=3 uid="uid://bgbirrfxhtrxn"]
 
 [ext_resource type="Texture2D" uid="uid://ww0hawixsf65" path="res://Ressources/Entity/Mummy/mummy_t_ch_egypt_mummy_01_01_D.png" id="1_a3pc2"]
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/Mummy.cs" id="1_fit17"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b3f7hokp7wylx" path="res://Ressources/Map/Egypt/Ground/ground_0024_height_1k.png" id="4_j2qcp"]
 [ext_resource type="Texture2D" uid="uid://dd4t7lodr4sb0" path="res://Ressources/Map/Egypt/Ground/ground_0024_normal_opengl_1k.png" id="5_n0qo1"]
 [ext_resource type="Texture2D" uid="uid://dx8ilcyx3bipw" path="res://Ressources/Map/Egypt/Ground/ground_0024_roughness_1k.jpg" id="6_igh66"]
+[ext_resource type="PackedScene" uid="uid://6d02rf75m7si" path="res://Scenes/EntityScenes/Mob/3DHealthBar.tscn" id="9_3lr33"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_he3hu"]
 resource_name = "mi_ch_egypt_mummy_01_01"
@@ -4517,3 +4518,6 @@ text = "ID: -1"
 [node name="TARGET" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8225, 0)
 text = "Target: null"
+
+[node name="3DHealthBar" parent="." instance=ExtResource("9_3lr33")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.89416, 0)

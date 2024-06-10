@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6378v7uwmpwi"]
+[gd_scene load_steps=19 format=3 uid="uid://c6378v7uwmpwi"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/Skeleton.cs" id="1_5gtqu"]
 [ext_resource type="Texture2D" uid="uid://dyrid45bwklu5" path="res://Ressources/Entity/Skeleton/skeleton_animate_Difusse.png" id="1_nof8x"]
 [ext_resource type="Texture2D" uid="uid://fkucp6y4kswu" path="res://Ressources/Entity/Skeleton/skeleton_animate_Metallic_map.png" id="2_s1ewb"]
 [ext_resource type="Texture2D" uid="uid://cjx0k6ol2ow7v" path="res://Ressources/Entity/Skeleton/skeleton_animate_Normal_map.png" id="3_d2177"]
 [ext_resource type="PackedScene" uid="uid://bsxpfpeww7nwe" path="res://Scenes/EntityScenes/weapon.tscn" id="5_18wht"]
+[ext_resource type="PackedScene" uid="uid://6d02rf75m7si" path="res://Scenes/EntityScenes/Mob/3DHealthBar.tscn" id="6_tarw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vltoc"]
 resource_name = "Main_Texture.001"
@@ -1510,3 +1511,6 @@ Damage = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271668, 1.45494, 0.146446)
 shape = SubResource("SphereShape3D_lkrvg")
 disabled = true
+
+[node name="3DHealthBar" parent="." instance=ExtResource("6_tarw0")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.84748, 0)

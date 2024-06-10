@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://8yb22krhjsle"]
+[gd_scene load_steps=18 format=3 uid="uid://8yb22krhjsle"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/FogSkeleton.cs" id="1_5spwe"]
+[ext_resource type="PackedScene" uid="uid://6d02rf75m7si" path="res://Scenes/EntityScenes/Mob/3DHealthBar.tscn" id="2_h34d1"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dpv1p"]
 load_path = "res://.godot/imported/skeleton2_DiffMap.png-adf3380c140269e5ef9c4d0647ae124e.s3tc.ctex"
@@ -1885,3 +1886,6 @@ shape = SubResource("CapsuleShape3D_iw0go")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_use_custom = true
 debug_path_custom_color = Color(0, 1, 1, 1)
+
+[node name="3DHealthBar" parent="." instance=ExtResource("2_h34d1")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.94098, 0)
