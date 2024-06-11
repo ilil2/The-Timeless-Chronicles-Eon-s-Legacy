@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbwftioepqmbx"]
+[gd_scene load_steps=6 format=3 uid="uid://dbwftioepqmbx"]
 
 [ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="1_b33dg"]
 [ext_resource type="AudioStream" uid="uid://q371chwrwsa4" path="res://Ressources/Sound_Design/Music/TheShopSong.wav" id="2_bk7g2"]
+[ext_resource type="AudioStream" uid="uid://h07vgbvi6qtr" path="res://Ressources/Sound_Design/Music/Menu_Song.wav" id="3_83osn"]
+[ext_resource type="AudioStream" uid="uid://b3r37iio3tpk8" path="res://Ressources/Sound_Design/Music/Egypt_song.wav" id="4_uewxm"]
+[ext_resource type="AudioStream" uid="uid://cn88qk3f66bbp" path="res://Ressources/Sound_Design/Music/Mediaval_Song.wav" id="5_vhvbr"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_b33dg")
 
 [node name="Shop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_bk7g2")
+
+[node name="Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_83osn")
+
+[node name="Lvl1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_uewxm")
+
+[node name="Lvl2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vhvbr")
