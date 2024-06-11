@@ -319,3 +319,18 @@ transform = Transform3D(1, 4.8191e-08, 4.41586e-08, -6.38138e-08, 0.573576, 0.81
 
 [node name="Teleporter" parent="." instance=ExtResource("5_nhirv")]
 transform = Transform3D(2.12132, 0, 2.12132, 0, 3, 0, -2.12132, 0, 2.12132, 0, 34.3657, 0)
+
+[node name="END" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.4663, 0)
+
+[node name="Node3D" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D2" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Node3D3" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Node3D4" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

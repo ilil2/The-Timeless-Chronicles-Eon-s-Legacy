@@ -21,9 +21,10 @@ public partial class MobHealthBar : Node3D
 	public void Process(double delta)
 	{
 		Hp.MaxValue = Max;
+		CanvasItem _hp = Hp;
 		if (Show)
 		{
-			(Hp as CanvasItem).Modulate = new Color((Hp as CanvasItem).Modulate.R, (Hp as CanvasItem).Modulate.G, (Hp as CanvasItem).Modulate.B, 100);
+			_hp.Modulate = new Color(_hp.Modulate.R, _hp.Modulate.G, _hp.Modulate.B, 100);
 			Show = false;
 		}
 		if(Hp.Value!=Value)
@@ -31,9 +32,9 @@ public partial class MobHealthBar : Node3D
 			Hp.Value = Value;
 		}
 
-		if ((Hp as CanvasItem).Modulate.A != 0)
+		if (_hp.Modulate.A != 0)
 		{
-			(Hp as CanvasItem).Modulate = new Color((Hp as CanvasItem).Modulate.R, (Hp as CanvasItem).Modulate.G, (Hp as CanvasItem).Modulate.B, (Hp as CanvasItem).Modulate.A-0.2f);
+			_hp.Modulate = new Color(_hp.Modulate.R, _hp.Modulate.G, _hp.Modulate.B, _hp.Modulate.A-1f);
 		}
 	}
 }

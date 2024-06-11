@@ -115,22 +115,7 @@ public partial class State6 : GameManager
 
 					else if (commandchat == "end")
 					{
-						if (Map is Shop p)
-						{
-							Joueur1.Position = new Vector3(0, 1, -48);
-						}
-						else if (Map is MapLvl1Script)
-						{
-							Joueur1.Position = new Vector3(0,1,7);
-						}
-						else if (Map is MapLvl2Script)
-						{
-							Joueur1.Position = new Vector3(0,1,293);
-						}
-						else if (Map is MapLvl3Script)
-						{
-							Joueur1.Position = new Vector3(0,1,0);
-						}
+						Joueur1.Position = Map.GetEndLocation()[0];
 					}
 					
 					else if (commandchat == "next")

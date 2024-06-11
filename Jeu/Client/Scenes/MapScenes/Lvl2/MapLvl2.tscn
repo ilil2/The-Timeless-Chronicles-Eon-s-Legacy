@@ -251,6 +251,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297, 0, 0)
 [node name="Camera3D" type="Camera3D" parent="RotationGate"]
 transform = Transform3D(-0.258819, 0.25, -0.933013, 0, 0.965926, 0.258819, 0.965926, 0.0669873, -0.25, 289.78, 5.4, -2.3)
 
+[node name="END" type="Node3D" parent="RotationGate"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 291.01, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="RotationGate/END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D2" type="Node3D" parent="RotationGate/END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Node3D3" type="Node3D" parent="RotationGate/END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Node3D4" type="Node3D" parent="RotationGate/END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
 [node name="Spawn" type="Node3D" parent="."]
 
 [node name="Node3D" type="Node3D" parent="Spawn"]

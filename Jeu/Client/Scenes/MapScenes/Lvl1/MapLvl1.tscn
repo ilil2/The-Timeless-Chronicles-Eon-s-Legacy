@@ -1075,3 +1075,17 @@ color = Color(0, 0, 0, 1)
 transform = Transform3D(-3.61696e-06, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, 9.25209e-07, -3.49664e-06, 10, 5, 0)
 
 [node name="NoMan\'sLand" parent="." instance=ExtResource("13_ocr2g")]
+
+[node name="END" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D2" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Node3D3" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Node3D4" type="Node3D" parent="END"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
