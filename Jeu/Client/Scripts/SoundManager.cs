@@ -50,12 +50,11 @@ public partial class SoundManager : Node
 		}
 		else
 		{
-			_shop.Stop();
-			_map1.Stop();
-			_map2.Stop();
-
-			if (_menu.Playing == false)
+			if (GameManager.state <= 3 && _menu.Playing == false)
 			{
+				_shop.Stop();
+				_map1.Stop();
+				_map2.Stop();
 				_menu.Play();
 			}
 		}
