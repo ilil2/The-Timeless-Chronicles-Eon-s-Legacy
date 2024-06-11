@@ -16,7 +16,9 @@ public partial class Shop : IMap
 		EmaxAnimation = Emax.GetNode<AnimationPlayer>("AnimationPlayer");
 		EmaxAnimation.Play("Animation");
 		Ani.Play("Enter");
-		
+		(int c1,int c2) = SaveDialogue.Emax;
+		c1++;
+		SaveDialogue.Emax = (c1,c2);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
