@@ -1,15 +1,18 @@
-using Godot;
 using System;
 
-public partial class NoahException : Node
+//NECESSAIRE
+public partial class NoahException : Exception
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public NoahException()
 	{
+		//RATIO
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public NoahException(string message) : base(message)
 	{
+		//RATIO + message
+	}
+	public NoahException(string message, Exception inner) : base(message, inner)
+	{
+		//RATIO + message + inner (C quoi ce truc ???)
 	}
 }

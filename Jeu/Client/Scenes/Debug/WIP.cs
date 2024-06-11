@@ -38,7 +38,7 @@ public partial class WIP : IMap
 		return res;
 	}
 
-	public override List<Vector3> GetEndLocation()
+	public override Vector3 GetEndLocation()
 	{
 		throw new NotImplementedException();
 	}
