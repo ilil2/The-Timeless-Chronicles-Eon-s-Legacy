@@ -32,7 +32,7 @@ public abstract partial class IMap : Node3D
 	}
 	public abstract List<(int,int,int)> GetSpawnLocation();
 	
-	public abstract List<Vector3> GetEndLocation();
+	public abstract Vector3 GetEndLocation();
 	public bool MapIsReady()
 	{
 		return MapReady;

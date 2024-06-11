@@ -83,16 +83,9 @@ public partial class MapLvl3Script : IMap
 		return Res;
 	}
 	
-	public override List<Vector3> GetEndLocation()
+	public override Vector3 GetEndLocation()
 	{
-		List<Vector3> res = new List<Vector3>();
-		Node3D Spawn = GetNode<Node3D>("END");
-		for(int i = 0; i<Spawn.GetChildCount();i++)
-		{
-			Vector3 Pos = Spawn.GetChild<Node3D>(i).GlobalPosition;
-			res.Add(Pos);
-		}
-		return res;
+		return new Vector3(0,0,0);
 	}
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
