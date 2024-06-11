@@ -1,0 +1,62 @@
+{
+  "1": {
+	"1": "You...",
+	"2": "You have... disturbed... my sleep...",
+	"3": "My curse... shall befall on you... for 12 generations...",
+	"4": "DIE!",
+	"5": "NEXT"
+  },
+  "2": {
+	"1": "You have... defeated me...",
+	"2": "But the other... guardians... shall avange me...",
+	"3": "Eon will thrive... in you death...",
+	"4": "ARGH!!!",
+	"5": "END"
+  },
+  "3": {
+	"1": "Oh! Hello! I am the guardian of this realm.",
+	"2": "You are probably the one how want to defeat Eon.",
+	"4": "I have heard a lot about you.",
+	"5": "To be honest, I really don't want to fight you.",
+	"6": "Eon used to be a good guy, you know?",
+	"7": "But my job is to fight you...",
+	"8": "And you really look like you're ready to fight.",
+	"9": "Seems like we don't have the choice, do we?",
+	"10": "END"
+  },
+  "4": {
+	"1": "Please... I surrender!",
+	"2": "PHave mercy!",
+	"3": "Please don't kill me!",
+	"4": "PLEASE STOP! PLEASE, OH GOD, STOP!",
+	"5": "STOOOOOOOOOOP!!!!!!!!!!",
+	"4": "ARGH",
+	"5": "END"
+  },
+  "5": {
+	"1": "a c t i v a t i o n",
+	"2": "p o w e r    s e t    a t    8 4 %",
+	"3": "e n e m y    d e t e c t e d",
+	"4": "t a r g e t    s e t",
+	"5": "e x t e r m i n a t i o n",
+	"6": "END"
+  },
+  "6": {
+	"1": "f a t a l    e r r o r",
+	"2": "I n d e x O u t O f R a n g e E x c e p t i o n ( )",
+	"3": "s e l f    d e s t r u c t i o n    a c t i v a t e d",
+	"4": "e r r o r",
+	"5": "c o u l d    n o t    f i n d    f i l e    \" S e l f D e s t r u c t i o n . m l \"",
+	"6": "s e l f    d e s t r u c t i o n    c a n c e l l e d",
+	"7": "s t a r t e d    r e b o o t",
+	"8": "W i n d o w s 1 2    r e l o a d i n g",
+	"9": "e r r o r",
+	"10": "e   r   r   o   r",
+	"11": "e    r  ro        r",
+	"12": " e r       or r",
+	"13": "er r",
+	"14": "o r",
+	"15": ". . .",
+	"16": "END"
+  }
+}
