@@ -16,7 +16,7 @@ public abstract partial class ClassScript : PlayerScript
 	public int ManaUse = 50;
 	public int Damage = 10;
 	public int CriticalChance = 20;
-	public int ChargeSpeed = 5;
+	public int ChargeSpeed = 7;
 	
 	protected float GravityValue = 9.8f;
 	public float WalkSpeed = 4.2f;

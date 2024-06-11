@@ -205,8 +205,6 @@ offset_top = -0.304001
 offset_right = 0.511963
 offset_bottom = 0.039978
 PotionLogo = ExtResource("2_jwpxp")
-Title = "Potion de Vie"
-Description = "Soigne 40% de la vie du joueur "
 Price = 150
 
 [node name="Potion2" parent="." instance=ExtResource("1_038po")]
@@ -218,8 +216,6 @@ offset_top = -0.304016
 offset_right = 0.383911
 offset_bottom = 0.039978
 PotionLogo = ExtResource("3_2ev6e")
-Title = "Potion de resistance"
-Description = "Divise les degats subit par 2 pendant 20 secondes "
 Price = 300
 ID = 3
 
@@ -233,8 +229,6 @@ offset_top = 0.0399933
 offset_right = 0.511963
 offset_bottom = -0.264038
 PotionLogo = ExtResource("4_vrufw")
-Title = "Potion d'energie"
-Description = "Redonne 60% de l’energie du joueur "
 Price = 150
 ID = 1
 
@@ -247,8 +241,6 @@ offset_top = 0.0399933
 offset_right = 0.383911
 offset_bottom = -0.264038
 PotionLogo = ExtResource("5_eeyew")
-Title = "Potion de résurrection "
-Description = "Ressusite un joueur a proximité (à 50% de vie) "
 Price = 1500
 ID = 4
 
@@ -262,8 +254,6 @@ offset_top = -0.264038
 offset_right = 0.511963
 offset_bottom = 0.0799866
 PotionLogo = ExtResource("6_o08xi")
-Title = "Potion de vitesse"
-Description = "Multiplie la vitesse par 1.5 pendant 20 secondes "
 Price = 100
 ID = 2
 
@@ -276,7 +266,5 @@ offset_top = -0.264038
 offset_right = 0.383911
 offset_bottom = 0.0799866
 PotionLogo = ExtResource("7_d3j3j")
-Title = "Potion d’amnésie"
-Description = "Supprime une compétence aquises par le joueur"
 Price = 1000
 ID = 5

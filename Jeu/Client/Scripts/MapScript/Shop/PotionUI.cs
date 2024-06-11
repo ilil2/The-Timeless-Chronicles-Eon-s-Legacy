@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using JeuClient.Scripts.PlayerScripts;
 [Tool]
 public partial class PotionUI : Panel
@@ -13,8 +14,6 @@ public partial class PotionUI : Panel
 	private Button _buy;
 
 	[Export] private CompressedTexture2D PotionLogo;
-	[Export] private string Title;
-	[Export] private string Description;
 	[Export] private int Price;
 	[Export] public int ID;
 	
@@ -22,15 +21,11 @@ public partial class PotionUI : Panel
 	private float _labelDefaultSize = 16;
 	private float _titleDefaultSize = 23;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_img = GetNode<TextureRect>("Img");
 		_buy = GetNode<Button>("Button");
 		_img.Texture = PotionLogo;
-		_desc.Text = Description;
-		_price.Text = $"Price: {Price}";
-		_title.Text = Title;
 	}
 	
 	public void OnResize()
@@ -46,26 +41,36 @@ public partial class PotionUI : Panel
 		_title.LabelSettings.FontSize = (int)(_titleDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if(InteractionShop.OnShop)
 		{
 			UpdatePrice();
+			Translation();
 		}
 	}
+
+	private void Translation()
+	{
+		Dictionary<string, string> _languageDict = GameManager.LanguageManager.GetLanguage(GameManager.SettingsManager.GetAllSettings()["language"]);
+
+		_title.Text = _languageDict["PotionTitle" + ID];
+		_desc.Text = _languageDict["PotionDescription" + ID];
+		_price.Text = _languageDict["PotionPrice"] + Price;
+	}
+	
 	private void _on_button_pressed()
 	{
-		if(GameManager.Gold>=Price && !ShopInventory.IsFull())
+		if(GameManager.Gold >= Price && !ShopInventory.IsFull())
 		{
-			GD.Print($"Achat {Title}");
-			GameManager.Gold=GameManager.Gold-Price;
+			GameManager.Gold -= Price;
 			ShopInventory.AddPotion(ID);
 		}
 	}
+	
 	private void UpdatePrice()
 	{
-		if(GameManager.Gold<Price)
+		if(GameManager.Gold < Price)
 		{
 			_price.LabelSettings.FontColor = new Color(1,0,0);
 			_buy.Disabled = true;
@@ -74,7 +79,7 @@ public partial class PotionUI : Panel
 		}
 		else
 		{
-			_price.LabelSettings.FontColor= new Color(1,1,1);
+			_price.LabelSettings.FontColor = new Color(1,1,1);
 			_buy.Disabled = false;
 			_buy.MouseDefaultCursorShape = CursorShape.Arrow;
 		}

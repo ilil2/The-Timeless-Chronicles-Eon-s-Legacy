@@ -17,6 +17,7 @@ public partial class SelectSkills : Control
 	private TextureRect[] _skillImage = new TextureRect[3];
 	
 	private Label[] _skillDescription = new Label[3];
+	private Label _title;
 	
 	private TextureRect[] _skills = new TextureRect[3];
 	private (string, int)[][][] _skillsName;
@@ -50,6 +51,7 @@ public partial class SelectSkills : Control
 		_animationPlayer[1].Play("RESET");
 		_animationPlayer[2].Play("RESET");
 		
+		_title = GetNode<Label>("Title");
 
 		_player = (ClassScript)GameManager.Joueur1;
 		_languageDict = GameManager.LanguageManager.GetLanguage(GameManager.SettingsManager.GetAllSettings()["language"]);
@@ -189,15 +191,29 @@ public partial class SelectSkills : Control
 				}
 			}
 		};
+		
+		_player = (ClassScript)GameManager.Joueur1;
+		
+		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][0].Item1));
+		_skillImage[1].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][1].Item1));
+		_skillImage[2].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][2].Item1));
+
+		_labelSkill[0].Text = GetSkillName(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][0].Item1);
+		_labelSkill[1].Text = GetSkillName(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][1].Item1);
+		_labelSkill[2].Text = GetSkillName(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][2].Item1);
+		
+		_skillDescription[0].Text = GetSkillDescription(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][0]);
+		_skillDescription[1].Text = GetSkillDescription(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][1]);
+		_skillDescription[2].Text = GetSkillDescription(_skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][2]);
+		
+		_title.Text = _languageDict["skillChooseTitle"];
 	}
 
 	public override void _Process(double delta)
 	{
-		ClassScript player = (ClassScript)GameManager.Joueur1;
-		
 		if (_isRecto1)
 		{
-			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skills[0].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{_player.Classe}Power.png");
 		}
 		else
 		{
@@ -206,7 +222,7 @@ public partial class SelectSkills : Control
 		
 		if (_isRecto2)
 		{
-			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skills[1].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{_player.Classe}Power.png");
 		}
 		else
 		{
@@ -215,24 +231,12 @@ public partial class SelectSkills : Control
 		
 		if (_isRecto3)
 		{
-			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{player.Classe}Power.png");
+			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/{_player.Classe}Power.png");
 		}
 		else
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
 		}
-		
-		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0].Item1));
-		_skillImage[1].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1].Item1));
-		_skillImage[2].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2].Item1));
-
-		_labelSkill[0].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0].Item1);
-		_labelSkill[1].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1].Item1);
-		_labelSkill[2].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2].Item1);
-		
-		_skillDescription[0].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0]);
-		_skillDescription[1].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1]);
-		_skillDescription[2].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2]);
 	}
 
 	private string GetSkillName(string skill)

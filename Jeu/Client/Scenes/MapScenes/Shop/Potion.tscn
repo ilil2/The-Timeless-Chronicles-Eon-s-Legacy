@@ -5,24 +5,25 @@
 [ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="3_4i8n5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qigbf"]
-font_size = 23
+font_size = 0
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hsx0u"]
 font = ExtResource("3_4i8n5")
+font_size = 0
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kxkmn"]
 font = ExtResource("3_4i8n5")
-font_size = 23
+font_size = 0
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gai1x"]
 font = ExtResource("3_4i8n5")
-font_size = 34
+font_size = 0
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 1)
 

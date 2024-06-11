@@ -147,6 +147,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Enables the character to perform double attacks."},
             {"skillDescriptionPoison", "Imbues attacks with poison, causing damage over time.\nPoison Time: 5s"},
             {"skillChooseTitle", "Choose your new skill"},
+            
+            //Potion
+            {"PotionBuy", "Buy"},
+            {"PotionPrice", "Price: "},
+            {"PotionTitle0", "Health Potion"},
+            {"PotionDescription0", "Restores 40% of the player's health."},
+            {"PotionTitle1", "Stamina Potion"},
+            {"PotionDescription1", "Restores 60% of the player's stamina"},
+            {"PotionTitle2", "Speed Potion"},
+            {"PotionDescription2", "Multiplies speed by 1.5 for 20 seconds "},
+            {"PotionTitle3", "Resistance Potion"},
+            {"PotionDescription3", "Divides damage by 2 for 20 seconds "},
+            {"PotionTitle4", "Resurrection potion"},
+            {"PotionDescription4", "Revives a nearby player (at 50% health)"},
+            {"PotionTitle5", "Amnesia potion"},
+            {"PotionDescription5", "Removes a skill acquired by the player"},
         },
         
         new Dictionary<string, string>
@@ -290,6 +306,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permet au personnage d'effectuer des attaques doubles."},
             {"skillDescriptionPoison", "Imprègne les attaques de poison, infligeant des dégâts sur la durée.\nDurée du poison : 5s"},
             {"skillChooseTitle", "Choisissez votre nouvelle compétence"},
+            
+            //Potion
+            {"PotionBuy", "Acheter"},
+            {"PotionPrice", "Prix : "},
+            {"PotionTitle0", "Potion de Vie"},
+            {"PotionDescription0", "Restaure 40% de la vie du joueur."},
+            {"PotionTitle1", "Potion d'Endurance"},
+            {"PotionDescription1", "Restaure 60% de l'endurance du joueur"},
+            {"PotionTitle2", "Potion de Vitesse"},
+            {"PotionDescription2", "Multiplie la vitesse par 1.5 pendant 20 secondes "},
+            {"PotionTitle3", "Potion de Résistance"},
+            {"PotionDescription3", "Divise les dégâts par 2 pendant 20 secondes "},
+            {"PotionTitle4", "Potion de Résurrection"},
+            {"PotionDescription4", "Ressuscite un joueur proche (à 50% de vie)"},
+            {"PotionTitle5", "Potion d'Amnésie"},
+            {"PotionDescription5", "Supprime une compétence acquise par le joueur"},
         },
         
         new Dictionary<string, string>
@@ -433,6 +465,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Aotren d'ar c'hemennadenn da gomz eilenn."},
             {"skillDescriptionPoison", "Ar c'hemennadenn a vez lakaet gant gwez, a zegas dazont war ar c'hemennadenn.\nAmzer gwez : 5s"},
             {"skillChooseTitle", "Choazit ho kempennadenn nevez"},
+            
+            //Potion
+            {"PotionBuy", "Prañ"},
+            {"PotionPrice", "Priz : "},
+            {"PotionTitle0", "Potion Buhez"},
+            {"PotionDescription0", "Adsevel 40% eus buhez ar c'hemennadenn."},
+            {"PotionTitle1", "Potion Endurans"},
+            {"PotionDescription1", "Adsevel 60% eus endurans ar c'hemennadenn"},
+            {"PotionTitle2", "Potion Vitesse"},
+            {"PotionDescription2", "Gwiriañ an vitesse gant 1.5 evit 20 eilenn "},
+            {"PotionTitle3", "Potion Digeriad"},
+            {"PotionDescription3", "Rannan an dazont gant 2 evit 20 eilenn "},
+            {"PotionTitle4", "Potion Adsevel"},
+            {"PotionDescription4", "Adsevel ur c'hemennadenn a zo a bep seurt (da 50% eus buhez)"},
+            {"PotionTitle5", "Potion Memoria"},
+            {"PotionDescription5", "Lakaat da benn ur c'hemennadenn bet graet"},
         },
         
         new Dictionary<string, string>
@@ -576,6 +624,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Ermöglicht es dem Charakter, Doppelangriffe auszuführen."},
             {"skillDescriptionPoison", "Tränkt die Angriffe mit Gift, das über einen bestimmten Zeitraum Schaden verursacht.\nGiftzeit : 5s"},
             {"skillChooseTitle", "Wählen Sie Ihre neue Fähigkeit"},
+            
+            //Potion
+            {"PotionBuy", "Kaufen"},
+            {"PotionPrice", "Preis : "},
+            {"PotionTitle0", "Lebenspotion"},
+            {"PotionDescription0", "Stellt 40% der Lebenspunkte des Spielers wieder her."},
+            {"PotionTitle1", "Ausdauerpotion"},
+            {"PotionDescription1", "Stellt 60% der Ausdauer des Spielers wieder her"},
+            {"PotionTitle2", "Geschwindigkeitspotion"},
+            {"PotionDescription2", "Multipliziert die Geschwindigkeit um 1,5 für 20 Sekunden "},
+            {"PotionTitle3", "Widerstandspotion"},
+            {"PotionDescription3", "Teilt den Schaden für 20 Sekunden durch 2 "},
+            {"PotionTitle4", "Wiederbelebungspotion"},
+            {"PotionDescription4", "Belebt einen nahegelegenen Spieler wieder (auf 50% Leben)"},
+            {"PotionTitle5", "Amnesiepotion"},
+            {"PotionDescription5", "Löscht eine vom Spieler erworbene Fähigkeit"},
         },
         
         new Dictionary<string, string>
@@ -719,6 +783,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permite al personaje realizar ataques dobles."},
             {"skillDescriptionPoison", "Impregna los ataques con veneno, que inflige daño durante un período de tiempo.\nTiempo de veneno : 5s"},
             {"skillChooseTitle", "Elige tu nueva habilidad"},
+            
+            //Potion
+            {"PotionBuy", "Comprar"},
+            {"PotionPrice", "Precio : "},
+            {"PotionTitle0", "Poción de vida"},
+            {"PotionDescription0", "Restaura el 40% de la vida del personaje."},
+            {"PotionTitle1", "Poción de resistencia"},
+            {"PotionDescription1", "Restaura el 60% de la resistencia del personaje"},
+            {"PotionTitle2", "Poción de velocidad"},
+            {"PotionDescription2", "Multiplica la velocidad por 1,5 durante 20 segundos "},
+            {"PotionTitle3", "Poción de resistencia"},
+            {"PotionDescription3", "Reduce el daño a la mitad durante 20 segundos "},
+            {"PotionTitle4", "Poción de resurrección"},
+            {"PotionDescription4", "Revive a un jugador cercano (al 50% de vida)"},
+            {"PotionTitle5", "Poción de amnesia"},
+            {"PotionDescription5", "Elimina una habilidad adquirida por el jugador"},
         },
         
         new Dictionary<string, string>
@@ -862,6 +942,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permesas al la karaktero fari duoblajn atakojn."},
             {"skillDescriptionPoison", "Impregnas la atakojn per veneno, kiu kaŭzas damaĝon dum difinita tempo.\nVeneno tempo : 5s"},
             {"skillChooseTitle", "Elektu vian novan kapablon"},
+            
+            //Potion
+            {"PotionBuy", "Aĉeti"},
+            {"PotionPrice", "Prezo : "},
+            {"PotionTitle0", "Vivpocio"},
+            {"PotionDescription0", "Restarigas 40% de la vivpunktoj de la ludanto."},
+            {"PotionTitle1", "Rezistopocio"},
+            {"PotionDescription1", "Restarigas 60% de la rezisto de la ludanto"},
+            {"PotionTitle2", "Rapidopocio"},
+            {"PotionDescription2", "Multiplikas la rapidon per 1,5 dum 20 sekundoj "},
+            {"PotionTitle3", "Rezistopocio"},
+            {"PotionDescription3", "Duobligas la damaĝon dum 20 sekundoj "},
+            {"PotionTitle4", "Revivopocio"},
+            {"PotionDescription4", "Revivas proksiman ludanton (ĉe 50% de vivo)"},
+            {"PotionTitle5", "Amnezopocio"},
+            {"PotionDescription5", "Forigas akiritan kapablon de la ludanto"},
         },
         
         new Dictionary<string, string>
@@ -1005,6 +1101,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permittebat characteri facere ictus duplices."},
             {"skillDescriptionPoison", "Impregnat ictus veneno, quod damnum inferre tempus.\nTempus veneni : 5s"},
             {"skillChooseTitle", "Elige tu nueva habilidad"},
+            
+            //Potion
+            {"PotionBuy", "Emere"},
+            {"PotionPrice", "Pretium : "},
+            {"PotionTitle0", "Vita Potio"},
+            {"PotionDescription0", "Restaurat 40% vitam characteris."},
+            {"PotionTitle1", "Resistentia Potio"},
+            {"PotionDescription1", "Restaurat 60% characteris resistentiam"},
+            {"PotionTitle2", "Velocitas Potio"},
+            {"PotionDescription2", "Multiplicat velocitatem per 1,5 per 20 secundis "},
+            {"PotionTitle3", "Resistentia Potio"},
+            {"PotionDescription3", "Reducit damnum ad dimidium per 20 secundis "},
+            {"PotionTitle4", "Revivificatio Potio"},
+            {"PotionDescription4", "Revivificat proximum ludantem (ad 50% vitam)"},
+            {"PotionTitle5", "Amnesia Potio"},
+            {"PotionDescription5", "Delet unam acquisitam abilitatem a ludante"},
         },
         
         new Dictionary<string, string>
@@ -1148,6 +1260,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Izimisele ukwenza izinto ezimbalwa."},
             {"skillDescriptionPoison", "Izisagidi zifakwe ngezinja, ezinjalo zenza umsebenzi.\nIsikhathi sezinja : 5s"},
             {"skillChooseTitle", "Khetha umsebenzi wakho omtsha"},
+            
+            //Potion
+            {"PotionBuy", "Thenga"},
+            {"PotionPrice", "Isilinganiso : "},
+            {"PotionTitle0", "I-Potion ye-Vita"},
+            {"PotionDescription0", "Iphindisela 40% imali yezinkinga yomuntu."},
+            {"PotionTitle1", "I-Potion ye-Resist"},
+            {"PotionDescription1", "Iphindisela 60% imali yezinkinga yomuntu"},
+            {"PotionTitle2", "I-Potion ye-Velocitas"},
+            {"PotionDescription2", "Iphindisela 1,5 imali yezinkinga yomuntu ngosuku olulandelayo "},
+            {"PotionTitle3", "I-Potion ye-Resist"},
+            {"PotionDescription3", "Iphindisela 50% imali yezinkinga yomuntu"},
+            {"PotionTitle4", "I-Potion ye-Revive"},
+            {"PotionDescription4", "Iphindisela umuntu ophakathi (nangaphandle kwe-50% imali)"},
+            {"PotionTitle5", "I-Potion ye-Amnesia"},
+            {"PotionDescription5", "Iphindisela umsebenzi omuntu omnye ophakathi"},
         },
         
         new Dictionary<string, string>
@@ -1291,6 +1419,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "允许角色进行双重攻击。"},
             {"skillDescriptionPoison", "使攻击带有毒液，在一段时间内造成伤害。\n毒液时间 : 5s"},
             {"skillChooseTitle", "选择你的新技能"},
+            
+            //Potion
+            {"PotionBuy", "购买"},
+            {"PotionPrice", "价格 : "},
+            {"PotionTitle0", "生命药水"},
+            {"PotionDescription0", "恢复角色40%的生命值。"},
+            {"PotionTitle1", "抗性药水"},
+            {"PotionDescription1", "恢复角色60%的抗性"},
+            {"PotionTitle2", "速度药水"},
+            {"PotionDescription2", "增加1.5倍角色的速度20秒 "},
+            {"PotionTitle3", "抗性药水"},
+            {"PotionDescription3", "减少50%角色的伤害"},
+            {"PotionTitle4", "复活药水"},
+            {"PotionDescription4", "复活最近的玩家（50%生命）"},
+            {"PotionTitle5", "失忆药水"},
+            {"PotionDescription5", "删除一个玩家的已获得技能"},
         },
         
         new Dictionary<string, string>
@@ -1434,6 +1578,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Επιτρέπει στο χαρακτήρα να κάνει διπλή επίθεση."},
             {"skillDescriptionPoison", "Επιτρέπει στην επίθεση να προκαλέσει ζημιά για μια περίοδο.\nΔιάρκεια δηλητηρίας : 5s"},
             {"skillChooseTitle", "Επιλέξτε τη νέα σας δεξιότητα"},
+            
+            //Potion
+            {"PotionBuy", "Αγορά"},
+            {"PotionPrice", "Τιμή : "},
+            {"PotionTitle0", "Φίλτρο Ζωής"},
+            {"PotionDescription0", "Ανακτά το 40% της ζωής του χαρακτήρα."},
+            {"PotionTitle1", "Φίλτρο Αντοχής"},
+            {"PotionDescription1", "Ανακτά το 60% της αντοχής του χαρακτήρα."},
+            {"PotionTitle2", "Φίλτρο Ταχύτητας"},
+            {"PotionDescription2", "Αυξάνει την ταχύτητα του χαρακτήρα κατά 1,5 φορά για 20 δευτερόλεπτα."},
+            {"PotionTitle3", "Φίλτρο Αντοχής"},
+            {"PotionDescription3", "Μειώνει τη ζημιά του χαρακτήρα κατά 50%"},
+            {"PotionTitle4", "Φίλτρο Αναβίωσης"},
+            {"PotionDescription4", "Αναβιώνει τον πιο πρόσφατο παίκτη (50% ζωή)"},
+            {"PotionTitle5", "Φίλτρο Λήθης"},
+            {"PotionDescription5", "Διαγράφει μια δεξιότητα που έχει αποκτήσει ένας παίκτης"},
         },
         
         new Dictionary<string, string>
@@ -1577,6 +1737,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Позволяет персонажу совершить двойную атаку."},
             {"skillDescriptionPoison", "Позволяет атаке нанести урон в течение определенного времени.\nДлительность яда : 5s"},
             {"skillChooseTitle", "Выберите ваш новый навык"},
+            
+            //Potion
+            {"PotionBuy", "Купить"},
+            {"PotionPrice", "Цена : "},
+            {"PotionTitle0", "Зелье Жизни"},
+            {"PotionDescription0", "Восстанавливает 40% здоровья персонажа."},
+            {"PotionTitle1", "Зелье Выносливости"},
+            {"PotionDescription1", "Восстанавливает 60% выносливости персонажа."},
+            {"PotionTitle2", "Зелье Скорости"},
+            {"PotionDescription2", "Увеличивает скорость персонажа в 1,5 раза на 20 секунд."},
+            {"PotionTitle3", "Зелье Защиты"},
+            {"PotionDescription3", "Уменьшает урон персонажа на 50%"},
+            {"PotionTitle4", "Зелье Воскрешения"},
+            {"PotionDescription4", "Воскрешает последнего игрока (50% здоровья)"},
+            {"PotionTitle5", "Зелье Забвения"},
+            {"PotionDescription5", "Удаляет навык, полученный игроком"},
         },
         
         new Dictionary<string, string>
@@ -1720,6 +1896,22 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "5065726d69747320746865207573657220746f20636f6d6d697420646f75626c652061747461636b2e"},
             {"skillDescriptionPoison", "5065726d697473207468652061747461636b2063617573652064616d61676520666f722061206365727461696e2074696d652e0a44616d6167653a203573"},
             {"skillChooseTitle", "5669657720656e74657220796f7572206e657720736b696c6c"},
+            
+            //Potion
+            {"PotionBuy", "4b756f666972"},
+            {"PotionPrice", "43a0726963653a20"},
+            {"PotionTitle0", "5a656c6965205a69686573"},
+            {"PotionDescription0", "566f7374616e7469616c732034302525207a65646f7276e6f7374696120"},
+            {"PotionTitle1", "5a656c69652056696e746f6c6576"},
+            {"PotionDescription1", "566f7374616e7469616c7320363025252076696e746f6c657669646164206f6e"},
+            {"PotionTitle2", "5a656c69652053636f727465"},
+            {"PotionDescription2", "556e76656c6963686976657420736b6f72757320646520706172616d65747220696e20312c352072617a61206e61202073656b756e642e"},
+            {"PotionTitle3", "5a656c6965205a617368697474652"},
+            {"PotionDescription3", "556d656e73686165742075646f6e20706172616d657472206f6e20353025"},
+            {"PotionTitle4", "5a656c696520566f736b7265736572"},
+            {"PotionDescription4", "566f736b726573657220706f736c65646e206a657472205025207a646f726f766e657220706c617965722835302525206865616c7468"},
+            {"PotionTitle5", "5a656c6965205a61626c657469"},
+            {"PotionDescription5", "4469616772617669656d206d69656e6f206465206d69656e2064616e73206c6520736f757620656e7465722e"},
         }
     };
     
