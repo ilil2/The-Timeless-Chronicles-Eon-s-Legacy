@@ -136,16 +136,28 @@ public partial class MapLvl2Script : IMap
 		return res;
 	}
 	
-	public override List<Vector3> GetEndLocation()
+	public override Vector3 GetEndLocation()
 	{
-		List<Vector3> res = new List<Vector3>();
-		Node3D Spawn = GetNode<Node3D>("RotateGate/END");
-		for(int i = 0; i<Spawn.GetChildCount();i++)
+		Vector3 Spawn = GetNode<Node3D>("RotateGate/END").GlobalPosition;
+		if (Spawn.X < 0)
 		{
-			Vector3 Pos = Spawn.GetChild<Node3D>(i).GlobalPosition;
-			res.Add(Pos);
+			Spawn.X += 3f;
 		}
-		return res;
+		else
+		{
+			Spawn.X -= 3f;
+		}
+
+		if (Spawn.Z < 0)
+		{
+			Spawn.Z += 3f;
+		}
+		else
+		{
+			Spawn.Z -= 3f;
+		}
+
+		return Spawn;
 	}
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)

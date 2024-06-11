@@ -115,7 +115,7 @@ public partial class State6 : GameManager
 
 					else if (commandchat == "end")
 					{
-						Joueur1.Position = Map.GetEndLocation()[0];
+						Joueur1.Position = Map.GetEndLocation();
 					}
 					
 					else if (commandchat == "next")

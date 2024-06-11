@@ -45,7 +45,7 @@ public partial class Boss2Map : IMap
 		return res;
 	}
 
-	public override List<Vector3> GetEndLocation()
+	public override Vector3 GetEndLocation()
 	{
 		throw new NotImplementedException();
 	}
