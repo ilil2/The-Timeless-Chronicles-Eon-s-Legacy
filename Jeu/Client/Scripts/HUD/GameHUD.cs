@@ -41,31 +41,46 @@ public partial class GameHUD : Control
 	
 	public static bool IsVisible = true;
 	
+	private float _screenDefaultWidth = 1152;
+	private float _labelDefaultSize = 22;
+	private float _levelDefaultSize = 20;
+	
 	public override void _Ready()
 	{
 		OnInventory = false;
 		_xpBar = GetNode<ProgressBar>("XpBar");
-		_level = GetNode<Label>("Level");
-		_gold = GetNode<Label>("Money");
 		
 		_hpBar = GetNode<ProgressBar>("HpBar");
 		_mpBar = GetNode<ProgressBar>("MpBar");
-		_pseudo = GetNode<Label>("Pseudo");
 
 		_otherPlayer1 = GetNode<Control>("OtherPlayer1");
 		_otherPlayer1HpBar = GetNode<ProgressBar>("OtherPlayer1/HpBar");
 		_otherPlayer1MpBar = GetNode<ProgressBar>("OtherPlayer1/MpBar");
-		_otherPlayer1Pseudo = GetNode<Label>("OtherPlayer1/Pseudo");
 		
 		_otherPlayer2 = GetNode<Control>("OtherPlayer2");
 		_otherPlayer2HpBar = GetNode<ProgressBar>("OtherPlayer2/HpBar");
 		_otherPlayer2MpBar = GetNode<ProgressBar>("OtherPlayer2/MpBar");
-		_otherPlayer2Pseudo = GetNode<Label>("OtherPlayer2/Pseudo");
 		
 		_otherPlayer3 = GetNode<Control>("OtherPlayer3");
 		_otherPlayer3HpBar = GetNode<ProgressBar>("OtherPlayer3/HpBar");
 		_otherPlayer3MpBar = GetNode<ProgressBar>("OtherPlayer3/MpBar");
+	}
+	
+	public void OnResize()
+	{
+		_level = GetNode<Label>("Level");
+		_gold = GetNode<Label>("Money");
+		_pseudo = GetNode<Label>("Pseudo");
+		_otherPlayer1Pseudo = GetNode<Label>("OtherPlayer1/Pseudo");
+		_otherPlayer2Pseudo = GetNode<Label>("OtherPlayer2/Pseudo");
 		_otherPlayer3Pseudo = GetNode<Label>("OtherPlayer3/Pseudo");
+		
+		_level.LabelSettings.FontSize = (int)(_levelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
+		_gold.LabelSettings.FontSize = (int)(_labelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
+		_pseudo.LabelSettings.FontSize = (int)(_labelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
+		_otherPlayer1Pseudo.LabelSettings.FontSize = (int)(_labelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
+		_otherPlayer2Pseudo.LabelSettings.FontSize = (int)(_labelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
+		_otherPlayer3Pseudo.LabelSettings.FontSize = (int)(_labelDefaultSize * (GetViewportRect().Size.X / _screenDefaultWidth));
 	}
 
 	public override void _Process(double delta)
@@ -78,7 +93,6 @@ public partial class GameHUD : Control
 		{
 			Visible = true;
 		}
-		
 		
 		_gold.Text = $"{GameManager.Gold}";
 		_xpBar.Value = GameManager.xp % 100;

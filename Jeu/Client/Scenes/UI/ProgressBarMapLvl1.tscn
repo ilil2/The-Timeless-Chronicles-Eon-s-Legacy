@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ncihb7skoci"]
+[gd_scene load_steps=5 format=3 uid="uid://b1ncihb7skoci"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ProgressBarMapLvl1.cs" id="1_ro5ai"]
 [ext_resource type="Texture2D" uid="uid://c6ddibqcl8xqq" path="res://Ressources/Graphismes/logoG.png" id="2_t3nyo"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="2_wcrh6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cvhed"]
-font_size = 30
+font = ExtResource("2_wcrh6")
+font_size = 40
+shadow_size = 10
+shadow_color = Color(0.188235, 0.188235, 0.188235, 1)
 
 [node name="ProgressBar" type="Control"]
 layout_mode = 3
@@ -38,14 +42,14 @@ offset_bottom = -0.223999
 [node name="wait" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.09
+anchor_left = 0.111
 anchor_top = 0.815
-anchor_right = 0.924
+anchor_right = 0.944
 anchor_bottom = 0.961
-offset_left = 0.319992
-offset_top = -0.120056
-offset_right = -0.447998
-offset_bottom = 0.271973
+offset_left = 0.127982
+offset_top = -0.120098
+offset_right = 0.511925
+offset_bottom = 0.271984
 text = "Chargement de la map : 0%"
 label_settings = SubResource("LabelSettings_cvhed")
 vertical_alignment = 1

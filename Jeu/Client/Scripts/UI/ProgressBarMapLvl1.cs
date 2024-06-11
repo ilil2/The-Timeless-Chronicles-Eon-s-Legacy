@@ -8,7 +8,7 @@ public partial class ProgressBarMapLvl1 : Control
 	private Label _label;
 	
 	private float _screenDefalutWidth = 1152;
-	private float _textDefaultSize = 30;
+	private float _textDefaultSize = 40;
 	
 	//Language
 	private int _language;

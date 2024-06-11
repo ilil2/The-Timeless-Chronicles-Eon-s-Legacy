@@ -38,9 +38,9 @@ public partial class SelectSkills : Control
 		_skillImage[1] = GetNode<TextureRect>("SkillImage2");
 		_skillImage[2] = GetNode<TextureRect>("SkillImage3");
 		
-		_skillDescription[0] = GetNode<Label>("SkillImage1/SkillDescription");
-		_skillDescription[1] = GetNode<Label>("SkillImage2/SkillDescription");
-		_skillDescription[2] = GetNode<Label>("SkillImage3/SkillDescription");
+		_skillDescription[0] = GetNode<Label>("SkillDescription1");
+		_skillDescription[1] = GetNode<Label>("SkillDescription2");
+		_skillDescription[2] = GetNode<Label>("SkillDescription3");
 		
 		_animationPlayer[0] = GetNode<AnimationPlayer>("AnimationPlayer1");
 		_animationPlayer[1] = GetNode<AnimationPlayer>("AnimationPlayer2");

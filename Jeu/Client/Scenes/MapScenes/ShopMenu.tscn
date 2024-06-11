@@ -280,10 +280,3 @@ Title = "Potion d’amnésie"
 Description = "Supprime une compétence aquises par le joueur"
 Price = 1000
 ID = 5
-
-[node name="Gold" type="Label" parent="."]
-offset_left = 896.0
-offset_top = 80.0
-offset_right = 1064.0
-offset_bottom = 112.0
-text = "Gold:"

@@ -27,7 +27,7 @@ keycode = 4194309
 events = [SubResource("InputEventKey_3jpwc")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5516u"]
-font_size = 20
+font_size = 23
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 
@@ -39,10 +39,14 @@ keycode = 4194309
 events = [SubResource("InputEventKey_fu2le")]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q76ao"]
+font_size = 18
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ai3o8"]
+font_size = 18
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jctv"]
 font_size = 20
@@ -121,7 +125,7 @@ offset_left = 0.12796
 offset_top = -0.184006
 offset_right = -0.128052
 offset_bottom = -0.136017
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Pseudo"
 max_length = 16
 
@@ -136,7 +140,7 @@ offset_left = 0.12796
 offset_top = -0.312042
 offset_right = -0.128052
 offset_bottom = -0.264038
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Password"
 max_length = 32
 secret = true
@@ -154,7 +158,7 @@ offset_left = 0.12796
 offset_top = -0.112
 offset_right = -0.128052
 offset_bottom = -0.0640259
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Password"
 max_length = 32
 secret = true
@@ -172,7 +176,7 @@ offset_left = 0.12796
 offset_top = 0.18396
 offset_right = -0.128052
 offset_bottom = 0.231964
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Confirm password"
 max_length = 32
 secret = true
@@ -191,7 +195,7 @@ offset_top = 0.23999
 offset_right = -0.128052
 offset_bottom = 0.287964
 theme = SubResource("Theme_wjygb")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Pseudo"
 max_length = 16
 
@@ -276,7 +280,8 @@ flat = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 1.067
+offset_bottom = -0.015034
 grow_horizontal = 2
 grow_vertical = 2
 text = "Pas de compte ?"

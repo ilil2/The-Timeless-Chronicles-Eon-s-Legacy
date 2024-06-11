@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ybgpeisrpnbi"]
+[gd_scene load_steps=6 format=3 uid="uid://ybgpeisrpnbi"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/ShopInventory.cs" id="1_fj2ls"]
 [ext_resource type="PackedScene" uid="uid://n81bw3yhdfso" path="res://Scenes/HUD/ShopInventoryButton.tscn" id="2_g8d8c"]
+[ext_resource type="Texture2D" uid="uid://l612nbnn3syv" path="res://Ressources/Icons/Inventory.png" id="2_nfrmd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj3f1"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
@@ -10,6 +11,7 @@ bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 font_size = 20
 
 [node name="ShopInventory" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_right = 0.889
 anchor_bottom = 0.198
@@ -24,6 +26,18 @@ script = ExtResource("1_fj2ls")
 layout_mode = 1
 anchor_right = 0.125
 anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Slot1"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot1"]
 layout_mode = 1
@@ -61,6 +75,18 @@ layout_mode = 1
 anchor_left = 0.125
 anchor_right = 0.25
 anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Slot2"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot2"]
 layout_mode = 1
@@ -100,6 +126,18 @@ anchor_right = 0.375
 anchor_bottom = 1.0
 offset_right = -3.05176e-05
 
+[node name="Background" type="TextureRect" parent="Slot3"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Slot3"]
 layout_mode = 1
 anchors_preset = 15
@@ -138,6 +176,18 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -3.05176e-05
 
+[node name="Background" type="TextureRect" parent="Slot4"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Slot4"]
 layout_mode = 1
 anchors_preset = 15
@@ -174,6 +224,18 @@ layout_mode = 1
 anchor_left = 0.5
 anchor_right = 0.625
 anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Slot5"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot5"]
 layout_mode = 1
@@ -212,6 +274,18 @@ anchor_left = 0.625
 anchor_right = 0.75
 anchor_bottom = 1.0
 offset_right = -6.10352e-05
+
+[node name="Background" type="TextureRect" parent="Slot6"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot6"]
 layout_mode = 1
@@ -252,6 +326,18 @@ anchor_bottom = 1.0
 offset_left = -6.10352e-05
 offset_right = -6.10352e-05
 
+[node name="Background" type="TextureRect" parent="Slot7"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Slot7"]
 layout_mode = 1
 anchors_preset = 15
@@ -289,6 +375,18 @@ anchor_left = 0.875
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -6.10352e-05
+
+[node name="Background" type="TextureRect" parent="Slot8"]
+modulate = Color(0.701961, 0.701961, 0.701961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nfrmd")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot8"]
 layout_mode = 1

@@ -146,6 +146,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Allows the character to become invisible for a short period.\nInvisibility Time: 10s"},
             {"skillDescriptionDoubleAttack", "Enables the character to perform double attacks."},
             {"skillDescriptionPoison", "Imbues attacks with poison, causing damage over time.\nPoison Time: 5s"},
+            {"skillChooseTitle", "Choose your new skill"},
         },
         
         new Dictionary<string, string>
@@ -288,6 +289,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Permet au personnage de devenir invisible pendant une courte période.\nTemps d'invisibilité : 10s"},
             {"skillDescriptionDoubleAttack", "Permet au personnage d'effectuer des attaques doubles."},
             {"skillDescriptionPoison", "Imprègne les attaques de poison, infligeant des dégâts sur la durée.\nDurée du poison : 5s"},
+            {"skillChooseTitle", "Choisissez votre nouvelle compétence"},
         },
         
         new Dictionary<string, string>
@@ -430,6 +432,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Aotren d'ar c'hemennadenn da vezañ dremenet evit un nebeud eilenn.\nAmzer dremenet : 10s"},
             {"skillDescriptionDoubleAttack", "Aotren d'ar c'hemennadenn da gomz eilenn."},
             {"skillDescriptionPoison", "Ar c'hemennadenn a vez lakaet gant gwez, a zegas dazont war ar c'hemennadenn.\nAmzer gwez : 5s"},
+            {"skillChooseTitle", "Choazit ho kempennadenn nevez"},
         },
         
         new Dictionary<string, string>
@@ -572,6 +575,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Ermöglicht es dem Charakter, für kurze Zeit unsichtbar zu werden.\nUnsichtbarkeitszeit : 10s"},
             {"skillDescriptionDoubleAttack", "Ermöglicht es dem Charakter, Doppelangriffe auszuführen."},
             {"skillDescriptionPoison", "Tränkt die Angriffe mit Gift, das über einen bestimmten Zeitraum Schaden verursacht.\nGiftzeit : 5s"},
+            {"skillChooseTitle", "Wählen Sie Ihre neue Fähigkeit"},
         },
         
         new Dictionary<string, string>
@@ -714,6 +718,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Permite al personaje volverse invisible por un corto período de tiempo.\nTiempo de invisibilidad : 10s"},
             {"skillDescriptionDoubleAttack", "Permite al personaje realizar ataques dobles."},
             {"skillDescriptionPoison", "Impregna los ataques con veneno, que inflige daño durante un período de tiempo.\nTiempo de veneno : 5s"},
+            {"skillChooseTitle", "Elige tu nueva habilidad"},
         },
         
         new Dictionary<string, string>
@@ -856,6 +861,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Permesas al la karaktero malaperi dum mallonga tempo.\nMalaperi tempo : 10s"},
             {"skillDescriptionDoubleAttack", "Permesas al la karaktero fari duoblajn atakojn."},
             {"skillDescriptionPoison", "Impregnas la atakojn per veneno, kiu kaŭzas damaĝon dum difinita tempo.\nVeneno tempo : 5s"},
+            {"skillChooseTitle", "Elektu vian novan kapablon"},
         },
         
         new Dictionary<string, string>
@@ -998,6 +1004,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Permittebat characteri evanescere per breve tempus.\nInvisibilitas tempus : 10s"},
             {"skillDescriptionDoubleAttack", "Permittebat characteri facere ictus duplices."},
             {"skillDescriptionPoison", "Impregnat ictus veneno, quod damnum inferre tempus.\nTempus veneni : 5s"},
+            {"skillChooseTitle", "Elige tu nueva habilidad"},
         },
         
         new Dictionary<string, string>
@@ -1140,6 +1147,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Izimisele ukufihla umuntu ekuseni.\nIsikhathi sokufihla : 10s"},
             {"skillDescriptionDoubleAttack", "Izimisele ukwenza izinto ezimbalwa."},
             {"skillDescriptionPoison", "Izisagidi zifakwe ngezinja, ezinjalo zenza umsebenzi.\nIsikhathi sezinja : 5s"},
+            {"skillChooseTitle", "Khetha umsebenzi wakho omtsha"},
         },
         
         new Dictionary<string, string>
@@ -1282,6 +1290,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "允许角色在短时间内消失。\n隐形时间 : 10s"},
             {"skillDescriptionDoubleAttack", "允许角色进行双重攻击。"},
             {"skillDescriptionPoison", "使攻击带有毒液，在一段时间内造成伤害。\n毒液时间 : 5s"},
+            {"skillChooseTitle", "选择你的新技能"},
         },
         
         new Dictionary<string, string>
@@ -1424,6 +1433,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Επιτρέπει στο χαρακτήρα να εξαφανιστεί για ένα σύντομο χρονικό διάστημα.\nΧρόνος αφαίρεσης : 10s"},
             {"skillDescriptionDoubleAttack", "Επιτρέπει στο χαρακτήρα να κάνει διπλή επίθεση."},
             {"skillDescriptionPoison", "Επιτρέπει στην επίθεση να προκαλέσει ζημιά για μια περίοδο.\nΔιάρκεια δηλητηρίας : 5s"},
+            {"skillChooseTitle", "Επιλέξτε τη νέα σας δεξιότητα"},
         },
         
         new Dictionary<string, string>
@@ -1566,6 +1576,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "Позволяет персонажу исчезнуть на короткое время.\nВремя исчезновения : 10s"},
             {"skillDescriptionDoubleAttack", "Позволяет персонажу совершить двойную атаку."},
             {"skillDescriptionPoison", "Позволяет атаке нанести урон в течение определенного времени.\nДлительность яда : 5s"},
+            {"skillChooseTitle", "Выберите ваш новый навык"},
         },
         
         new Dictionary<string, string>
@@ -1708,6 +1719,7 @@ public class LanguageControl
             {"skillDescriptionInvisibility", "5065726d69747320746865207573657220746f20696e76697369626c6520666f72206120636f72746f6e742074696d652e0a56656d6520616661697265733a20313073"},
             {"skillDescriptionDoubleAttack", "5065726d69747320746865207573657220746f20636f6d6d697420646f75626c652061747461636b2e"},
             {"skillDescriptionPoison", "5065726d697473207468652061747461636b2063617573652064616d61676520666f722061206365727461696e2074696d652e0a44616d6167653a203573"},
+            {"skillChooseTitle", "5669657720656e74657220796f7572206e657720736b696c6c"},
         }
     };
     

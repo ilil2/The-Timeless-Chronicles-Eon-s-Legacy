@@ -13,9 +13,9 @@ public partial class SettingsMenuUI : Control
     
     private float _screenDefalutWidth = 1152;
     private float _screenDefalutHight = 648;
-    private float _titleDefaultSize = 40;
-    private float _buttonDefaultSize = 25;
-    private float _textDefaultSize = 20;
+    private float _titleDefaultSize = 45;
+    private float _buttonDefaultSize = 30;
+    private float _textDefaultSize = 23;
     
     private bool _isChangingInput;
     

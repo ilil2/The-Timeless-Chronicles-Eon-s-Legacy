@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0tqtc6qy0o1t"]
+[gd_scene load_steps=8 format=3 uid="uid://c0tqtc6qy0o1t"]
 
 [ext_resource type="Script" path="res://Scripts/UI/PauseMenuUI.cs" id="1_vc0bv"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="2_yar3v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dtv2i"]
-font_size = 25
+font = ExtResource("2_yar3v")
+font_size = 30
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7aqcr"]
-font_size = 40
+font = ExtResource("2_yar3v")
+font_size = 45
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_d7qa3"]
+font = ExtResource("2_yar3v")
 font_size = 30
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x7826"]
+font = ExtResource("2_yar3v")
 font_size = 30
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_46htk"]
-font_size = 30
+font = ExtResource("2_yar3v")
+font_size = 32
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3

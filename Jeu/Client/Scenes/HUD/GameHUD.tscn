@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cngf2783qgwxk"]
+[gd_scene load_steps=16 format=3 uid="uid://cngf2783qgwxk"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/GameHUD.cs" id="1_qiq70"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="2_o1744"]
 [ext_resource type="Texture2D" uid="uid://bxm5dmkny8a63" path="res://Ressources/Graphismes/KnightLogo.png" id="2_sb6ih"]
 [ext_resource type="Texture2D" uid="uid://ccb26fwbcojcq" path="res://Ressources/Graphismes/ArcherLogo.png" id="3_vc7hb"]
 [ext_resource type="Texture2D" uid="uid://c7wgky611jnqt" path="res://Ressources/Graphismes/AssasinLogo.png" id="4_s05g6"]
@@ -10,20 +11,36 @@
 [ext_resource type="Texture2D" uid="uid://b1vs24qrrveah" path="res://Ressources/Graphismes/Coin.png" id="9_pjp0g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_adaw3"]
-font_size = 20
+font = ExtResource("2_o1744")
+font_size = 22
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rarrg"]
-font_size = 15
+font = ExtResource("2_o1744")
+font_size = 17
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2fu1n"]
-font_size = 15
+font = ExtResource("2_o1744")
+font_size = 17
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_86uie"]
-font_size = 15
+font = ExtResource("2_o1744")
+font_size = 17
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_pl0t5"]
+font = ExtResource("2_o1744")
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_dnlqd"]
+font = ExtResource("2_o1744")
+font_size = 23
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 1)
 
@@ -517,11 +534,11 @@ show_percentage = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.479
-anchor_top = 0.025
+anchor_top = 0.022
 anchor_right = 0.528
 anchor_bottom = 0.065
-offset_left = 0.191963
-offset_top = -0.2
+offset_left = 0.191998
+offset_top = -0.256001
 offset_right = -0.255997
 offset_bottom = -0.120003
 text = "Level 1"
@@ -531,14 +548,14 @@ vertical_alignment = 1
 [node name="Money" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.944
-anchor_top = 0.025
-anchor_right = 0.979
-anchor_bottom = 0.065
-offset_left = 0.511925
-offset_top = -0.2
-offset_right = 0.191963
-offset_bottom = -0.120003
+anchor_left = 0.94
+anchor_top = 0.02
+anchor_right = 0.989
+anchor_bottom = 0.069
+offset_left = 0.119934
+offset_top = 0.0399991
+offset_right = -0.328026
+offset_bottom = 0.287996
 text = "5000"
 label_settings = SubResource("LabelSettings_dnlqd")
 vertical_alignment = 1
@@ -567,3 +584,5 @@ offset_left = 0.12793
 offset_top = -0.0640121
 offset_right = 0.12793
 offset_bottom = 0.0799861
+
+[connection signal="resized" from="." to="." method="OnResize"]

@@ -21,9 +21,9 @@ public partial class PauseMenuUI : Control
     private Label _leaveCancelButtonText;
     
     private float _screenDefalutWidth = 1152;
-    private float _titleDefaultSize = 40;
-    private float _leaveConfirmDefaultSize = 30;
-    private float _buttonDefaultSize = 25;
+    private float _titleDefaultSize = 45;
+    private float _leaveConfirmDefaultSize = 32;
+    private float _buttonDefaultSize = 30;
     
     public override void _Ready()
     {

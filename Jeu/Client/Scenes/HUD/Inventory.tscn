@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://d33bf7w56lyfs"]
+[gd_scene load_steps=8 format=3 uid="uid://d33bf7w56lyfs"]
 
 [ext_resource type="PackedScene" uid="uid://ybgpeisrpnbi" path="res://Scenes/HUD/ShopInventory.tscn" id="1_hoxxg"]
 [ext_resource type="PackedScene" uid="uid://cky4r8mnxetki" path="res://Scenes/HUD/FastAccess.tscn" id="2_cvj3b"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="3_21pj7"]
 [ext_resource type="PackedScene" uid="uid://b50mk46t7i3lg" path="res://Scenes/HUD/Skills.tscn" id="3_ajt5u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fiyqf"]
+font = ExtResource("3_21pj7")
+font_size = 30
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jvoqb"]
+font = ExtResource("3_21pj7")
+font_size = 30
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0ti0g"]
+font = ExtResource("3_21pj7")
+font_size = 30
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -15,13 +34,13 @@ grow_vertical = 2
 [node name="ShopInventory" parent="." instance=ExtResource("1_hoxxg")]
 layout_mode = 1
 anchor_left = 0.056
-anchor_top = 0.494
+anchor_top = 0.481
 anchor_right = 0.944
-anchor_bottom = 0.691
-offset_left = -0.512001
-offset_top = -0.112
-offset_right = 0.511963
-offset_bottom = 0.231964
+anchor_bottom = 0.679
+offset_left = -0.512002
+offset_top = 0.311977
+offset_right = 0.511993
+offset_bottom = 0.00792599
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -39,49 +58,56 @@ offset_bottom = 0.0399933
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.451
+anchor_left = 0.417
 anchor_top = 0.704
-anchor_right = 0.556
-anchor_bottom = 0.741
-offset_left = 0.447937
-offset_top = -0.192047
-offset_right = 0.487915
-offset_bottom = 1.83197
+anchor_right = 0.584
+anchor_bottom = 0.765
+offset_left = -0.384029
+offset_top = -0.192036
+offset_right = 0.231941
+offset_bottom = 1.27997
 text = "Fast Access Slot"
+label_settings = SubResource("LabelSettings_fiyqf")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.431
-anchor_top = 0.444
-anchor_right = 0.562
-anchor_bottom = 0.485
-offset_left = -0.512024
-offset_top = 0.287964
-offset_right = -0.424072
-offset_bottom = -0.279999
+anchor_left = 0.396
+anchor_top = 0.407
+anchor_right = 0.604
+anchor_bottom = 0.471
+offset_left = -0.192062
+offset_top = 0.263966
+offset_right = 1.19196
+offset_bottom = -0.208041
 text = "Shop Inventory Slot"
+label_settings = SubResource("LabelSettings_jvoqb")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.472
-anchor_top = 0.049
-anchor_right = 0.529
-anchor_bottom = 0.086
-offset_left = 0.255981
-offset_top = 0.247999
-offset_right = -0.408081
-offset_bottom = 2.272
+anchor_left = 0.451
+anchor_top = 0.025
+anchor_right = 0.55
+anchor_bottom = 0.09
+offset_left = 0.44796
+offset_top = -0.199998
+offset_right = 0.399986
+offset_bottom = -0.320002
 text = "Skill Slot"
+label_settings = SubResource("LabelSettings_0ti0g")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FastAccess" parent="." instance=ExtResource("2_cvj3b")]
 layout_mode = 1
 anchor_left = 0.333
-anchor_top = 0.753
+anchor_top = 0.765
 anchor_right = 0.667
-anchor_bottom = 0.951
-offset_left = 0.384003
-offset_top = 0.0559998
-offset_right = -0.384033
-offset_bottom = -0.248047
+anchor_bottom = 0.963
+offset_left = 0.383995
+offset_top = 0.279971
+offset_right = -0.384056
+offset_bottom = -0.0240993
