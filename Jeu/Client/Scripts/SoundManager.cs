@@ -27,23 +27,24 @@ public partial class SoundManager : Node
 				if (GameManager.Map is Shop && _shop.Playing == false)
 				{
 					_shop.Play();
+					_map1.Stop();
+					_map2.Stop();
 				}
 
 				else if (GameManager.Map is MapLvl1Script && _map1.Playing == false)
 				{
 					_map1.Play();
+					_shop.Stop();
 				}
 				
 				else if (GameManager.Map is MapLvl2Script && _map2.Playing == false)
 				{
 					_map2.Play();
+					_shop.Stop();
 				}
 
 				else
 				{
-					_shop.Stop();
-					_map1.Stop();
-					_map2.Stop();
 					_menu.Stop();
 				}
 			}
