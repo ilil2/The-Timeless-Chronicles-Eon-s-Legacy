@@ -77,6 +77,11 @@ public partial class Boss1Map : IMap
 		return res;
 	}
 
+	public override List<Vector3> GetEndLocation()
+	{
+		throw new NotImplementedException();
+	}
+
 
 	public override void DebugMode(CharacterBody3D Player, bool DebugMode)
 	{

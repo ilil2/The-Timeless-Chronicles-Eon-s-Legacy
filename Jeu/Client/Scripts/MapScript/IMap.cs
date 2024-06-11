@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using JeuClient.Scripts.PlayerScripts;
+using Lib;
 
 public abstract partial class IMap : Node3D
 {
@@ -108,8 +109,15 @@ public abstract partial class IMap : Node3D
 	
 	public void ShowSkillsMenu()
 	{
-		Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
-		AddChild(skillmenu);
-		Input.MouseMode = Input.MouseModeEnum.Visible;	
+		if (GameManager.levelStart < GameManager.level)
+		{
+			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+			AddChild(skillmenu);
+			Input.MouseMode = Input.MouseModeEnum.Visible;	
+		}
+		else
+		{
+			UDP.OneShot("next");
+		}
 	}
 }

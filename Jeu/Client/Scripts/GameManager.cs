@@ -72,7 +72,8 @@ public partial class GameManager : Node3D
 			_qgold = value;
 		}
 	}
-
+	
+	public static int levelStart = 0;
 	public static int level
 	{
 		get
@@ -87,6 +88,9 @@ public partial class GameManager : Node3D
 			}
 		}
 	}
+	
+	public static (string, int)[] Skills = new (string, int)[3];
+	public static int Skillnumber = 0;
 
 	public static Socket soc2;
 	public static IPEndPoint iep2;
@@ -306,8 +310,6 @@ public partial class GameManager : Node3D
 					AddChild(ProgressBar);
 					AddChild(Map);
 					AddChild(_chat);
-					AddChild(_GameHud);
-					_GameHud.Visible = false;
 					_chat.Visible = false;
 					
 					MapOnLoad = true;
@@ -321,6 +323,7 @@ public partial class GameManager : Node3D
 					Joueur1,Joueur2,Joueur3,Joueur4
 				};	
 				AddChild(Joueur1);
+				AddChild(_GameHud);
 				switch (_nbJoueur)
 				{
 					case 2:

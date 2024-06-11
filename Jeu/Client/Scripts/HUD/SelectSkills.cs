@@ -222,17 +222,17 @@ public partial class SelectSkills : Control
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
 		}
 		
-		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1));
-		_skillImage[1].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1));
-		_skillImage[2].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1));
+		_skillImage[0].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0].Item1));
+		_skillImage[1].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1].Item1));
+		_skillImage[2].Texture = GD.Load<Texture2D>(GetSkillTexture(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2].Item1));
 
-		_labelSkill[0].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][0].Item1);
-		_labelSkill[1].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][1].Item1);
-		_labelSkill[2].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.level][2].Item1);
+		_labelSkill[0].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0].Item1);
+		_labelSkill[1].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1].Item1);
+		_labelSkill[2].Text = GetSkillName(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2].Item1);
 		
-		_skillDescription[0].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][0]);
-		_skillDescription[1].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][1]);
-		_skillDescription[2].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.level][2]);
+		_skillDescription[0].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][0]);
+		_skillDescription[1].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][1]);
+		_skillDescription[2].Text = GetSkillDescription(_skillsName[ClassToInt(player.Classe)][GameManager.levelStart][2]);
 	}
 
 	private string GetSkillName(string skill)
@@ -484,23 +484,53 @@ public partial class SelectSkills : Control
 
 	private void _on_skill_control_1_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][0];
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][0];
 		ApplySkill(skill);
-		UDP.OneShot("next");
+		GameManager.levelStart += 1;
+		if (GameManager.levelStart < GameManager.level)
+		{
+			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+			GetParent().AddChild(skillmenu);
+		}
+		else
+		{
+			GameManager.levelStart = GameManager.level;
+			UDP.OneShot("next");
+		}
 	}
 	
 	private void _on_skill_control_2_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][1];
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][1];
 		ApplySkill(skill);
-		UDP.OneShot("next");
+		GameManager.levelStart += 1;
+		if (GameManager.levelStart < GameManager.level)
+		{
+			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+			GetParent().AddChild(skillmenu);
+		}
+		else
+		{
+			GameManager.levelStart = GameManager.level;
+			UDP.OneShot("next");
+		}
 	}
 	
 	private void _on_skill_control_3_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.level][2];
+		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][2];
 		ApplySkill(skill);
-		UDP.OneShot("next");
+		GameManager.levelStart += 1;
+		if (GameManager.levelStart < GameManager.level)
+		{
+			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+			GetParent().AddChild(skillmenu);
+		}
+		else
+		{
+			GameManager.levelStart = GameManager.level;
+			UDP.OneShot("next");
+		}
 	}
 	
 	private int ClassToInt(string classe)
@@ -598,21 +628,21 @@ public partial class SelectSkills : Control
 				if (reverse)
 				{
 					int i = 0;
-					while (i < 3 && _player.Skills[i].Item1 != skill.Item1)
+					while (i < 3 && GameManager.Skills[i].Item1 != skill.Item1)
 					{
 						i++;
 					}
 
 					if (i != 3)
 					{
-						_player.Skills[i] = ("", 0);
-						_player.Skillnumber--;
+						GameManager.Skills[i] = ("", 0);
+						GameManager.Skillnumber--;
 					}
 				}
 				else
 				{
-					_player.Skills[_player.Skillnumber] = skill;
-					_player.Skillnumber++;
+					GameManager.Skills[GameManager.Skillnumber] = skill;
+					GameManager.Skillnumber++;
 				}
 				break;
 		}

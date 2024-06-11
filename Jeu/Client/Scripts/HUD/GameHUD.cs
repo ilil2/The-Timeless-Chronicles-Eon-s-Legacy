@@ -70,7 +70,7 @@ public partial class GameHUD : Control
 
 	public override void _Process(double delta)
 	{
-		if (!IsVisible)
+		if (!IsVisible || OnInventory)
 		{
 			Visible = false;
 		}

@@ -122,7 +122,6 @@ public partial class ArcherScript : ClassScript
 
 			if (nbArrow > 1)
 			{
-				GD.Print("2");
 				arrow = arrowScene.Instantiate<RigidBody3D>();
 				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y + 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
 				arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);
@@ -136,7 +135,6 @@ public partial class ArcherScript : ClassScript
 			
 			if (nbArrow == 3)
 			{
-				GD.Print("3");
 				arrow = arrowScene.Instantiate<RigidBody3D>();
 				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y - 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
 				arrow.Rotation = new Vector3(arrow.Rotation.X, (float)(rotationY + Math.PI / 2f), CameraV.Rotation.X);

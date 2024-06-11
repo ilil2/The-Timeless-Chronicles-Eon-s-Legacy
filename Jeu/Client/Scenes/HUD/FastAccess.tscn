@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cky4r8mnxetki"]
+[gd_scene load_steps=5 format=3 uid="uid://cky4r8mnxetki"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/FastAccess.cs" id="1_8kkip"]
+[ext_resource type="Texture2D" uid="uid://l612nbnn3syv" path="res://Ressources/Icons/Inventory.png" id="2_1r2n5"]
 [ext_resource type="PackedScene" uid="uid://n81bw3yhdfso" path="res://Scenes/HUD/ShopInventoryButton.tscn" id="2_p5l5o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keioj"]
 font_size = 20
 
 [node name="FastAccess" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_right = 0.333
 anchor_bottom = 0.198
@@ -19,6 +21,18 @@ layout_mode = 1
 anchor_right = 0.333
 anchor_bottom = 1.0
 offset_right = 0.127998
+
+[node name="Background" type="TextureRect" parent="Slot1"]
+modulate = Color(0.596078, 0.596078, 0.596078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1r2n5")
+expand_mode = 1
 
 [node name="Logo" type="TextureRect" parent="Slot1"]
 layout_mode = 1
@@ -60,13 +74,24 @@ offset_left = 0.127998
 offset_right = -0.128021
 offset_bottom = 1.52588e-05
 
+[node name="Background" type="TextureRect" parent="Slot2"]
+modulate = Color(0.596078, 0.596078, 0.596078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1r2n5")
+expand_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Slot2"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.977
-anchor_bottom = 0.941
-offset_right = -0.0560074
-offset_bottom = 0.0239944
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.52588e-05
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -98,11 +123,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -0.128021
 
+[node name="Background" type="TextureRect" parent="Slot3"]
+modulate = Color(0.596078, 0.596078, 0.596078, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1r2n5")
+expand_mode = 1
+
 [node name="Logo" type="TextureRect" parent="Slot3"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1.52588e-05
+offset_bottom = 1.52588e-05
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1

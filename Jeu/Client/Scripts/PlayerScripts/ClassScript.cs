@@ -24,9 +24,6 @@ public abstract partial class ClassScript : PlayerScript
 	public float RunSpeed = 7.5f;
 	public float CurrentRunSpeed = 7.5f;
 	
-	public (string, int)[] Skills = new (string, int)[3];
-	public int Skillnumber = 0;
-	
 	//Variable des objets
 	public bool PlayerIsHere = false;
 	protected Node3D CameraH;
@@ -154,7 +151,7 @@ public abstract partial class ClassScript : PlayerScript
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 			PackedScene pauseUI = GD.Load<PackedScene>("res://Scenes/UI/PauseMenuManager.tscn");
 			Control pauseMenu = pauseUI.Instantiate<Control>();
-			AddChild(pauseMenu);
+			GetParent().AddChild(pauseMenu);
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[16].Item2) && GameManager._pausemode && _uiTimer > 20)
 		{
