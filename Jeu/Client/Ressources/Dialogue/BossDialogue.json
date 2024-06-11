@@ -46,10 +46,10 @@
 	"2": "I n d e x O u t O f R a n g e E x c e p t i o n ( )",
 	"3": "s e l f    d e s t r u c t i o n    a c t i v a t e d",
 	"4": "e r r o r",
-	"5": "c o u l d    n o t    f i n d    f i l e    \" S e l f D e s t r u c t i o n . m l \"",
+	"5": "c o u l d    n o t    f i n d    f i l e    \" S e l f D e s t r u c t i o n . p y \"",
 	"6": "s e l f    d e s t r u c t i o n    c a n c e l l e d",
 	"7": "s t a r t e d    r e b o o t",
-	"8": "W i n d o w s 1 2    r e l o a d i n g",
+	"8": "W i n d o w s 1 2    r e l o a d i n g . . .",
 	"9": "e r r o r",
 	"10": "e   r   r   o   r",
 	"11": "e    r  ro        r",
@@ -58,5 +58,27 @@
 	"14": "o r",
 	"15": ". . .",
 	"16": "END"
+  },
+  "7": {
+	"1": "TMPRAL YHW HON SM! ARTRR ME ST, D ST TU ?",
+	"2": "LRS MRTM IN BLLM PRPRS... You do not speak the gods'language?",
+	"3": "I said: I am the God of Time, Eon.",
+	"4": "You are the one trying to stop me, aren't you?",
+	"5": "Then get ready to die in battle.",
+	"6": "END"
+  },
+  "8": {
+	"1": "My sanity... It's comming back!",
+	"2": "Thank you, hero.",
+	"3": "I guess you deserve to know the truth.",
+	"4": "Long ago, a jalous god used a curse on me to corrupt my soul.",
+	"5": "But you got rid of the corruption, and I am once again myself.",
+	"6": "In reality, a part of me was still intact, uncorrupted.",
+	"7": "That part of me, you have already meet, under the name of \"Emax\" ;;",
+	"8": "Yes, Emacs was a part of my soul and helped you save me ;;",
+	"9": "Now I shall return you to where you are from, or else a paradox would be created ;;",
+	"10":"You will live you life in the times you originate from, but don't forget the lessons you learned here ;;",
+	"11": "Goodbye, Hero. It's been good to meet you... ;;",
+	"12": "END"
   }
 }
