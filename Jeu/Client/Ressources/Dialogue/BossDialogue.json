@@ -30,15 +30,15 @@
 	"3": "Please don't kill me!",
 	"4": "PLEASE STOP! PLEASE, OH GOD, STOP!",
 	"5": "STOOOOOOOOOOP!!!!!!!!!!",
-	"4": "ARGH",
-	"5": "END"
+	"6": "ARGH",
+	"7": "END"
   },
   "5": {
 	"1": "a c t i v a t i o n",
 	"2": "p o w e r    s e t    a t    8 4 %",
 	"3": "e n e m y    d e t e c t e d",
 	"4": "t a r g e t    s e t",
-	"5": "e x t e r m i n a t i o n",
+	"5": "e x t e r m i n a t e",
 	"6": "END"
   },
   "6": {
