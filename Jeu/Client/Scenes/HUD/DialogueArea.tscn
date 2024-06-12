@@ -5,11 +5,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ja60h"]
 size = Vector3(1, 1, 2)
 
-[sub_resource type="Gradient" id="Gradient_1i58p"]
+[sub_resource type="Gradient" id="Gradient_g8jis"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3inqj"]
-gradient = SubResource("Gradient_1i58p")
+gradient = SubResource("Gradient_g8jis")
 fill_from = Vector2(1, 1)
 fill_to = Vector2(1, 0.689655)
 
@@ -27,7 +27,6 @@ shape = SubResource("BoxShape3D_ja60h")
 transform = Transform3D(0.811747, -0.0563465, 0.581285, -0.0593912, 0.98221, 0.178148, -0.580981, -0.179134, 0.793959, 1.65606, 1.93969, 1.65606)
 
 [node name="DialogueHud" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
