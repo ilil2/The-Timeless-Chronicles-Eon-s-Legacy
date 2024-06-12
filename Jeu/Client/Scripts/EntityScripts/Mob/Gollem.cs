@@ -5,9 +5,9 @@ public partial class Gollem : MobScript
 {
 	public override void _Ready()
 	{
-		Ready();
 		speed = 3;
 		DistAtk = 2;
+		Ready();
 	}
 	public override void _PhysicsProcess(double delta)
 	{

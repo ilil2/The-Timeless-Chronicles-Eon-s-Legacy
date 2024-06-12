@@ -5,9 +5,9 @@ public partial class Pharaon : MobScript
 {
 	public override void _Ready()
 	{
-		Ready();
 		speed = 3;
 		HP = 30;
+		Ready();
 	}
 	public override void _PhysicsProcess(double delta)
 	{

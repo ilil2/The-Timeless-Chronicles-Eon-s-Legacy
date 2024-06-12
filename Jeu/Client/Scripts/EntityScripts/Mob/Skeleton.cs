@@ -5,9 +5,9 @@ public partial class Skeleton : MobScript
 {
 	public override void _Ready()
 	{
-		Ready();
 		speed = 3;
 		HP = 20;
+		Ready();
 	}
 	public override void _PhysicsProcess(double delta)
 	{

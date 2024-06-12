@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://2qn0lpduuw4x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4s51p"]
+bg_color = Color(0.517647, 0.517647, 0.517647, 0.211765)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nw25s"]
+bg_color = Color(1, 0.882353, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfguj"]
+bg_color = Color(0.517647, 0.517647, 0.517647, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eh3me"]
+bg_color = Color(0.819608, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ew8ok"]
+resource_name = "test"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [100.0, 100.0, 80.0, 60.0, 40.0, 20.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [100.0, 80.0, 60.0, 40.0, 20.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5rcwe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [100.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [100.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vy2um"]
+_data = {
+"RESET": SubResource("Animation_5rcwe"),
+"test": SubResource("Animation_ew8ok")
+}
+
+[node name="BossHealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.012
+anchor_right = 0.833
+anchor_bottom = 0.054
+offset_top = 0.224
+offset_right = 0.383911
+offset_bottom = 0.00799942
+theme_override_styles/background = SubResource("StyleBoxFlat_4s51p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nw25s")
+value = 100.0
+show_percentage = false
+
+[node name="Bar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.012
+anchor_right = 0.833
+anchor_bottom = 0.054
+offset_top = 0.224
+offset_right = 0.383911
+offset_bottom = 0.00799942
+theme_override_styles/background = SubResource("StyleBoxFlat_mfguj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_eh3me")
+value = 100.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vy2um")
+}

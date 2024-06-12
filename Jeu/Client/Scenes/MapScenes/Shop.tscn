@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dc36p4sfw2iub"]
+[gd_scene load_steps=27 format=3 uid="uid://dc36p4sfw2iub"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Shop.cs" id="1_kgg25"]
 [ext_resource type="Shader" path="res://Ressources/Map/Shop/Space.gdshader" id="1_qts26"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drrwd38pct32e" path="res://Ressources/Map/Shop/Cart/Cart.tscn" id="6_424vs"]
 [ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://Scenes/MapScenes/PortalExit.tscn" id="6_n3v2o"]
 [ext_resource type="PackedScene" uid="uid://b5einq1tsrldj" path="res://Scenes/MapScenes/InteractionShop.tscn" id="7_epgtk"]
+[ext_resource type="Texture2D" uid="uid://bskbjnl1iq72h" path="res://Ressources/Graphismes/NotaRickRoll.jpg" id="8_d18f2"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="8_r0qgr"]
 [ext_resource type="PackedScene" uid="uid://0rk02j3cj0tg" path="res://Scenes/MapScenes/PortalEnter.tscn" id="9_usxab"]
 [ext_resource type="PackedScene" uid="uid://dpgvp3pu0se7" path="res://Scenes/HUD/DialogueArea.tscn" id="11_w4g4o"]
@@ -35,6 +36,13 @@ material = SubResource("StandardMaterial3D_xdcvb")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ri28c"]
 size = Vector3(7, 4, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpbm2"]
+albedo_texture = ExtResource("8_d18f2")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1u1bl"]
+material = SubResource("StandardMaterial3D_bpbm2")
+size = Vector2(2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dpv76"]
 size = Vector3(4, 3, 4)
@@ -264,6 +272,13 @@ font_size = 200
 
 [node name="InteractionShop" parent="Shop" instance=ExtResource("7_epgtk")]
 transform = Transform3D(0.906308, 0, -0.422618, 0, 1, 0, 0.422618, 0, 0.906308, 2.36252, 0, 0.169044)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Shop"]
+transform = Transform3D(-0.906308, 0.422618, 1.49012e-08, -2.59744e-09, 2.96889e-08, -1, -0.422618, -0.906308, -2.58096e-08, 2.76874, 1.7, -0.690739)
+mesh = SubResource("PlaneMesh_1u1bl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Shop"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18143, 1.7617, -1.30676)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

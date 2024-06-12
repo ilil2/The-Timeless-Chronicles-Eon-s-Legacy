@@ -8,11 +8,14 @@ public partial class MobHealthBar : Node3D
 	[Export] public int Value = 50;
 	[Export] public bool Show = false;
 	
+	private AnimationPlayer Ani;
+	
 	private ProgressBar Hp;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Hp = GetNode<ProgressBar>("SubViewport/ProgressBar");
+		Ani = GetNode<AnimationPlayer>("AnimationPlayer");
 		Hp.MaxValue = Max;
 		Hp.Value = Max;
 	}
@@ -24,17 +27,12 @@ public partial class MobHealthBar : Node3D
 		CanvasItem _hp = Hp;
 		if (Show)
 		{
-			_hp.Modulate = new Color(_hp.Modulate.R, _hp.Modulate.G, _hp.Modulate.B, 100);
+			Ani.Play("show");
 			Show = false;
 		}
 		if(Hp.Value!=Value)
 		{
 			Hp.Value = Value;
-		}
-
-		if (_hp.Modulate.A != 0)
-		{
-			_hp.Modulate = new Color(_hp.Modulate.R, _hp.Modulate.G, _hp.Modulate.B, _hp.Modulate.A-1f);
 		}
 	}
 }

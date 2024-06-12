@@ -7,11 +7,11 @@ public partial class Mummy : MobScript
 	private Label3D Tar;
 	public override void _Ready()
 	{
-		Ready();
 		DistAtk = 2;
 		HP = 40;
 		Tar = GetNode<Label3D>("TARGET");
 		GetNode<Label3D>("ID").Text = $"ID: {ID}";
+		Ready();
 	}
 	public override void _PhysicsProcess(double delta)
 	{

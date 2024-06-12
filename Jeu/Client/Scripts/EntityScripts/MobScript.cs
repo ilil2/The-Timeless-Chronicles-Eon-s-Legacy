@@ -61,6 +61,7 @@ public abstract partial class MobScript : CharacterBody3D
 	public void Ready()
 	{
 		HealthBar = GetNode<MobHealthBar>("3DHealthBar");
+		HpMax = HP;
 		HealthBar.Max = HpMax;
 		HealthBar.Value = HpMax;
 		stopwatch.Start();

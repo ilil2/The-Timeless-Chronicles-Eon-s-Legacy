@@ -5,9 +5,9 @@ public partial class FogSkeleton : MobScript
 {   
 	public override void _Ready()
 	{
-		Ready();
 		speed = 4;
 		HP = 30;
+		Ready();
 	}
 	public override void _PhysicsProcess(double delta)
 	{

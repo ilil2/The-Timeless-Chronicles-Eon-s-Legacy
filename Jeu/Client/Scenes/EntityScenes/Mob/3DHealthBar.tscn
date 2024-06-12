@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://6d02rf75m7si"]
+[gd_scene load_steps=8 format=3 uid="uid://6d02rf75m7si"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Mob/MobHealthBar.cs" id="1_pbija"]
 
@@ -18,6 +18,42 @@ border_width_left = 10
 border_width_top = 10
 border_width_bottom = 10
 
+[sub_resource type="Animation" id="Animation_61gc3"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/ProgressBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1ei61"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/ProgressBar:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wct2l"]
+_data = {
+"RESET": SubResource("Animation_1ei61"),
+"show": SubResource("Animation_61gc3")
+}
+
 [node name="3DHealthBar" type="Node3D"]
 script = ExtResource("1_pbija")
 
@@ -29,16 +65,22 @@ transparent_bg = true
 size = Vector2i(1920, 1080)
 
 [node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.028
-anchor_top = 0.37
-anchor_right = 0.965
-anchor_bottom = 0.62
+anchor_top = 0.383
+anchor_right = 0.969
+anchor_bottom = 0.506
 offset_left = -21.76
-offset_top = -159.6
-offset_right = -17.1841
-offset_bottom = -159.6
+offset_top = -165.64
+offset_right = -21.7921
+offset_bottom = -165.344
 theme_override_styles/background = SubResource("StyleBoxFlat_4px06")
 theme_override_styles/fill = SubResource("StyleBoxFlat_p0c2a")
 value = 50.0
 show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wct2l")
+}
