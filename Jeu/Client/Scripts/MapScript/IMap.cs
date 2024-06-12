@@ -9,8 +9,8 @@ public abstract partial class IMap : Node3D
 {
 	protected bool MapReady = false;
 	protected bool SetUp = false;
-	protected Random Rand = new Random(69);
-	protected Random Rand2 = new Random(69);
+	public Random Rand = new Random(69);
+	public Random Rand2 = new Random(69);
 	protected int step = 0;
 	public bool PlayerSet = false;
 	public bool CanExit = false;

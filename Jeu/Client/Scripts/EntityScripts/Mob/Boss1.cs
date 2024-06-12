@@ -5,13 +5,17 @@ using JeuClient.Scripts.PlayerScripts;
 
 public partial class Boss1 : Boss
 {
-	private PackedScene Son = GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Boss2.tscn");
+	private PackedScene[] Mob = {GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Mummy.tscn"),GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Pharaon.tscn"),GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/FogSkeleton.tscn")};
+	[Export] private bool CastSpell;
+	[Export] private bool SummonMob;
+	private Random Rand;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Ready();
-		DistAtk = (int)(DistAtk*Scale.X);
-
+		DistAtk = 10;
+		Map = (IMap)GetParent();
+		Rand = Map.Rand;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +27,19 @@ public partial class Boss1 : Boss
 	public override void _PhysicsProcess(double delta)
 	{
 		PhysicsProcess(delta);
+		if(CastSpell)
+		{
+			(Map as Boss1Map).MapAtk();
+			CastSpell = false;
+		}
+		if(SummonMob)
+		{
+			SummonMob = false;
+			MobScript SMob = Mob[Rand.Next(0,3)].Instantiate<MobScript>();
+			SMob.Position = GlobalPosition+new Vector3(2,0,2);
+			Map.AddChild(SMob);
+			
+		}
 	}
 
 	public override void TakeDamage(int damage, int id, bool send = true)
@@ -55,6 +72,6 @@ public partial class Boss1 : Boss
 	
 	public override void AtDeath()
 	{
-		//Do nothing
+		Map.CanExit = true;
 	}
 }

@@ -12,15 +12,15 @@ public partial class SmartBall : Node3D
 	{
 		MeshSkin = GetNode<Node3D>("Skin");
 		TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
-		LookAt(TargetPosition);
+		//LookAt(TargetPosition);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		LookAt(TargetPosition);
 		MeshSkin.Rotation+=new Vector3(0.1f,0.1f,0.1f);
-		TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
+		//TargetPosition = GetPlayer().GlobalPosition+new Vector3(0,1,0);
 		Vector3 direction = (TargetPosition - GlobalTransform.Origin).Normalized();
 
 		// Déplacer l'objet dans la direction de la cible

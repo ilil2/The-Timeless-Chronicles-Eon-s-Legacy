@@ -15,6 +15,8 @@ public abstract partial class Boss : CharacterBody3D
 	protected int accel = 10;
 	public int DistAtk = 1;
 	public bool Alive = true;
+	public IMap Map;
+	public Random Rand;
 
 	public int[] Agro = { -1, -1, -1, -1 };
 	protected CharacterBody3D Player;
@@ -29,6 +31,8 @@ public abstract partial class Boss : CharacterBody3D
 	{
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
 		Ani = GetNode<AnimationPlayer>("Animation");
+		Map = (IMap)GetParent();
+		Rand = Map.Rand;
 	}
 
 	public void Process(double delta)
@@ -38,7 +42,7 @@ public abstract partial class Boss : CharacterBody3D
 			var NextPos = Nav.GetNextPathPosition();
 			LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
 			Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
-			if (State == 0)
+			if (State == 0 &&  (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 			{
 				var dir = new Vector3();  //Pathfiding
 				dir = NextPos - GlobalPosition;
@@ -47,10 +51,17 @@ public abstract partial class Boss : CharacterBody3D
 				MoveAndSlide();
 				Ani.Play("Walk");
 			}
-			else if (State == 1)
+			else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 			{
 				//Attack
-				Ani.Play("Atk");
+				if(Rand.Next(0,2)==1)
+				{
+					Ani.Play("Atk");
+				}
+				else
+				{
+					Ani.Play("Atk2");
+				}
 			}
 		}
 		else

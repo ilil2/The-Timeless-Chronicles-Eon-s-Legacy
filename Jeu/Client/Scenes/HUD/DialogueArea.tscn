@@ -1,17 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpgvp3pu0se7"]
+[gd_scene load_steps=4 format=3 uid="uid://dpgvp3pu0se7"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/DialogueArea.cs" id="1_lf21b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ja60h"]
 size = Vector3(1, 1, 2)
-
-[sub_resource type="Gradient" id="Gradient_g8jis"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_3inqj"]
-gradient = SubResource("Gradient_g8jis")
-fill_from = Vector2(1, 1)
-fill_to = Vector2(1, 0.689655)
 
 [sub_resource type="LabelSettings" id="LabelSettings_u7j0w"]
 font_size = 20
@@ -33,12 +25,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="DialogueHud"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-texture = SubResource("GradientTexture2D_3inqj")
 
 [node name="Line" type="Label" parent="DialogueHud"]
 layout_mode = 1
