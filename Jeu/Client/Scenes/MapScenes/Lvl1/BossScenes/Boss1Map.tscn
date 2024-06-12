@@ -1,4 +1,4 @@
-[gd_scene load_steps=287 format=3 uid="uid://bnmjhfrfx7ohn"]
+[gd_scene load_steps=288 format=3 uid="uid://bnmjhfrfx7ohn"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://Scenes/MapScenes/PortalExit.tscn" id="9_ymb4d"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_ldyb2"]
 [ext_resource type="PackedScene" uid="uid://dokfk8l6tujxi" path="res://Scenes/EntityScenes/Mob/Boss1.tscn" id="11_1rbad"]
+[ext_resource type="PackedScene" uid="uid://x4qvhw8gjj5q" path="res://Scenes/MapScenes/NoMan'sLand.tscn" id="12_t13ev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk88x"]
 resource_name = "Rocks"
@@ -5194,5 +5195,7 @@ shape = SubResource("CylinderShape3D_23tby")
 
 [node name="Boss1" parent="." instance=ExtResource("11_1rbad")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31)
+
+[node name="NoMan\'sLand" parent="." instance=ExtResource("12_t13ev")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

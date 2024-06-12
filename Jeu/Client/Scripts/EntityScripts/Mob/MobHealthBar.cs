@@ -12,7 +12,7 @@ public partial class MobHealthBar : Node3D
 	
 	private ProgressBar Hp;
 	private ProgressBar SubBar;
-	// Called when the node enters the scene tree for the first time.
+	
 	public override void _Ready()
 	{
 		Hp = GetNode<ProgressBar>("SubViewport/ProgressBar");
@@ -40,5 +40,13 @@ public partial class MobHealthBar : Node3D
 		{
 			SubBar.Value-=0.5;
 		}
+	}
+	
+	public void SetValue()
+	{
+		Hp.MaxValue = Max;
+		Hp.Value = Max;
+		SubBar.MaxValue = Max;
+		SubBar.Value = Max;
 	}
 }

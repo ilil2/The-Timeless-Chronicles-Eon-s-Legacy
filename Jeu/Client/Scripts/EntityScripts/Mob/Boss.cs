@@ -17,6 +17,8 @@ public abstract partial class Boss : CharacterBody3D
 	public bool Alive = true;
 	public IMap Map;
 	public Random Rand;
+	
+	[Export] public bool Active = false;
 
 	public int[] Agro = { -1, -1, -1, -1 };
 	protected CharacterBody3D Player;
@@ -25,10 +27,12 @@ public abstract partial class Boss : CharacterBody3D
 	//Godot Node
 	protected NavigationAgent3D Nav;
 	protected AnimationPlayer Ani;
+	public Control _Hp;
 	
 
 	public void Ready()
 	{
+		_Hp = GetNode<Control>("BossHealthBar");
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
 		Ani = GetNode<AnimationPlayer>("Animation");
 		Map = (IMap)GetParent();
@@ -37,40 +41,43 @@ public abstract partial class Boss : CharacterBody3D
 
 	public void Process(double delta)
 	{
-		if(Alive)
+		if(Active)
 		{
-			var NextPos = Nav.GetNextPathPosition();
-			LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
-			Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
-			if (State == 0 &&  (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
+			if(Alive)
 			{
-				var dir = new Vector3();  //Pathfiding
-				dir = NextPos - GlobalPosition;
-				dir = dir.Normalized();
-				Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
-				MoveAndSlide();
-				Ani.Play("Walk");
-			}
-			else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
-			{
-				//Attack
-				if(Rand.Next(0,2)==1)
+				var NextPos = Nav.GetNextPathPosition();
+				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+				if (State == 0 &&  (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					Ani.Play("Atk");
+					var dir = new Vector3();  //Pathfiding
+					dir = NextPos - GlobalPosition;
+					dir = dir.Normalized();
+					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+					MoveAndSlide();
+					Ani.Play("Walk");
 				}
-				else
+				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					Ani.Play("Atk2");
+					//Attack
+					if(Rand.Next(0,2)==1)
+					{
+						Ani.Play("Atk");
+					}
+					else
+					{
+						Ani.Play("Atk2");
+					}
 				}
 			}
-		}
-		else
-		{
-			//Death();
-			if(!Ani.IsPlaying())
+			else
 			{
-				AtDeath();
-				QueueFree();
+				//Death();
+				if(!Ani.IsPlaying())
+				{
+					AtDeath();
+					QueueFree();
+				}
 			}
 		}
 	}
@@ -82,18 +89,22 @@ public abstract partial class Boss : CharacterBody3D
 	
 	public void PhysicsProcess(double delta)
 	{
-		Player = GetPlayer();
-		if(Player is not null && Alive)
+		(_Hp as BossHealthBar).Process(delta);
+		if(Active)
 		{
-			Nav.TargetPosition = Player.GlobalPosition;
-			UpdateAgro();
-			if (State == 0 && MapTool.Distance(GlobalPosition,Player.GlobalPosition)<DistAtk)
+			Player = GetPlayer();
+			if(Player is not null && Alive)
 			{
-				State = 1;
-			}
-			else if (State == 1 && MapTool.Distance(GlobalPosition,Player.GlobalPosition)>DistAtk)
-			{
-				State = 0;
+				Nav.TargetPosition = Player.GlobalPosition;
+				UpdateAgro();
+				if (State == 0 && MapTool.Distance(GlobalPosition,Player.GlobalPosition)<DistAtk)
+				{
+					State = 1;
+				}
+				else if (State == 1 && MapTool.Distance(GlobalPosition,Player.GlobalPosition)>DistAtk)
+				{
+					State = 0;
+				}
 			}
 		}
 	}
@@ -126,13 +137,6 @@ public abstract partial class Boss : CharacterBody3D
 			if(Agro[i]>-1) Agro[i]--;
 		}
 		
-		//Print Agro
-		string res = "";
-		foreach (var a in Agro)
-		{
-			res+=" "+a;
-		}
-		GD.Print(res);
 	}
 	
 	public virtual void TakeDamage(int damage, int id, bool send = true)
@@ -141,6 +145,7 @@ public abstract partial class Boss : CharacterBody3D
 		if(Alive)
 		{
 			HP -= damage;
+			(_Hp as BossHealthBar).Value = HP;
 			if(HP<=0)
 			{
 				GD.Print("Mort");
@@ -152,7 +157,7 @@ public abstract partial class Boss : CharacterBody3D
 			}
 			else
 			{
-				Ani.Play("Hit");
+				
 			}
 
 			if (send)

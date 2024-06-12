@@ -64,6 +64,7 @@ public abstract partial class MobScript : CharacterBody3D
 		HpMax = HP;
 		HealthBar.Max = HpMax;
 		HealthBar.Value = HpMax;
+		HealthBar.SetValue();
 		stopwatch.Start();
 		Parent = GetParent().GetParent();
 		for(int i = 0; i<GameManager._nbJoueur; i++)

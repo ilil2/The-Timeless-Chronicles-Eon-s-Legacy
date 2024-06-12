@@ -12,8 +12,10 @@ public partial class Boss1 : Boss
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		HP = 300;
+		MaxHP = 300;
 		Ready();
-		DistAtk = 10;
+		DistAtk = 7;
 		Map = (IMap)GetParent();
 		Rand = Map.Rand;
 	}
@@ -21,7 +23,36 @@ public partial class Boss1 : Boss
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Process(delta);
+		if(Active)
+		{
+			if(Alive)
+			{
+				var NextPos = Nav.GetNextPathPosition();
+				LookAt(new Vector3(NextPos.X, 1, NextPos.Z)); //Orientation
+				Rotation = new Vector3(0,Rotation.Y+(float)Math.PI,0);
+				if (State == 0 &&  (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
+				{
+					var dir = new Vector3();  //Pathfiding
+					dir = NextPos - GlobalPosition;
+					dir = dir.Normalized();
+					Velocity = Velocity.Lerp(dir*speed,(float)(accel*delta));
+					MoveAndSlide();
+					Ani.Play("Walk");
+				}
+				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
+				{
+					//Attack
+					if(Rand.Next(0,4)!=1)
+					{
+						Ani.Play("Atk");
+					}
+					else
+					{
+						Ani.Play("Atk2");
+					}
+				}
+			}
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -48,6 +79,7 @@ public partial class Boss1 : Boss
 		if(Alive)
 		{
 			HP -= damage;
+			(_Hp as BossHealthBar).Value = HP;
 			GD.Print("HP" + HP);
 			if(HP<=0)
 			{
