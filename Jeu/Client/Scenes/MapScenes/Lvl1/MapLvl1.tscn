@@ -516,6 +516,7 @@ _data = {
 
 [node name="MapLvl1" type="Node3D"]
 script = ExtResource("1_faj1b")
+CamOnPlayer = true
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.892271, -0.274443, 0.358516, 2.02684e-08, 0.794054, 0.607847, -0.451501, 0.542364, -0.708511, 0, 2.76815, 9.26053)

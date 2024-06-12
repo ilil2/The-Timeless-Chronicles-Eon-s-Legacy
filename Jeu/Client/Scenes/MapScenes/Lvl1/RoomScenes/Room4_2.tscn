@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://bj8rilpef5eb"]
+[gd_scene load_steps=41 format=3 uid="uid://bj8rilpef5eb"]
 
 [ext_resource type="Texture2D" uid="uid://cg4gsfoccsuyq" path="res://Ressources/Map/Egypt/sphynx/10085_egyptSphinxDiffuseMap.jpg" id="1_bdecf"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Room.cs" id="1_yhjb8"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="2_osxtw"]
 [ext_resource type="ArrayMesh" uid="uid://cxqnj2ghwv7n1" path="res://Ressources/Map/Egypt/sphynx/10085_egypt_sphinx_iterations-2.obj" id="2_wx3u6"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="3_w0t2c"]
@@ -315,6 +316,7 @@ bottom_radius = 0.2
 size = Vector3(1, 2, 5)
 
 [node name="Room4" type="Node3D"]
+script = ExtResource("1_yhjb8")
 
 [node name="Misc" type="Node3D" parent="."]
 

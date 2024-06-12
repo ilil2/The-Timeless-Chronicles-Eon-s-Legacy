@@ -13,7 +13,6 @@ public partial class InteractionShop : Node3D
 	{
 		Ani = GetNode<AnimationPlayer>("Shop/AnimationPlayer");
 		Ani.Play("Reset");
-		Gold = GetNode<Label>("Shop/Gold");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

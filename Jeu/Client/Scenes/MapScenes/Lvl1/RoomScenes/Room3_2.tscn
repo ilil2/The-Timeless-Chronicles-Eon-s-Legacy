@@ -1,5 +1,6 @@
-[gd_scene load_steps=57 format=3 uid="uid://b5euwiavawhnn"]
+[gd_scene load_steps=58 format=3 uid="uid://b5euwiavawhnn"]
 
+[ext_resource type="Script" path="res://Scripts/MapScript/Room.cs" id="1_4t72n"]
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_xk8sj"]
 [ext_resource type="Texture2D" uid="uid://bemwyk5i1tjjt" path="res://Ressources/Map/Egypt/pot/egyptian_pottery_9.png" id="2_7sdxa"]
 [ext_resource type="Texture2D" uid="uid://cqv7tm02sri8b" path="res://Ressources/Map/Global/tree/Textures/Colorsheet Tree Normal.png" id="2_m12go"]
@@ -466,6 +467,7 @@ size = Vector3(18, 2, 6)
 size = Vector3(2.5, 1, 3)
 
 [node name="Room3" type="Node3D"]
+script = ExtResource("1_4t72n")
 
 [node name="Misc" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)

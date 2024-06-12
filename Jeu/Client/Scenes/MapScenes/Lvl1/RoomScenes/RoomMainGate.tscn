@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://7v06sckafrc8"]
+[gd_scene load_steps=7 format=3 uid="uid://7v06sckafrc8"]
 
 [ext_resource type="Texture2D" uid="uid://bb34db4hxww7x" path="res://Ressources/Map/Egypt/Temple/textures/Egiptian_wall_1_diffuse.png" id="1_ci2pi"]
+[ext_resource type="Script" path="res://Scripts/MapScript/Room.cs" id="1_gq6nv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oabrn"]
 resource_name = "blinn3"
@@ -45,6 +46,7 @@ shadow_mesh = SubResource("ArrayMesh_u45jn")
 size = Vector3(0.328, 2, 4)
 
 [node name="RoomMainGate" type="Node3D"]
+script = ExtResource("1_gq6nv")
 
 [node name="Misc" type="Node3D" parent="."]
 
