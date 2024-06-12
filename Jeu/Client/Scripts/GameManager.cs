@@ -111,6 +111,8 @@ public partial class GameManager : Node3D
 	public static float CurrentWalkSpeed = 4.2f;
 	public static float RunSpeed = 7.5f;
 	public static float CurrentRunSpeed = 7.5f;
+	
+	public static int NextNbPlayer = 1;
 
 	public static Socket soc2;
 	public static IPEndPoint iep2;

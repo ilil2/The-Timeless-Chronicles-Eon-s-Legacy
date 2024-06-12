@@ -38,7 +38,14 @@ public partial class Listen2 : GameManager
 			}
 			else if (InfoJoueur["id"] != id)
 			{
-				InfoAutreJoueur[$"attack{id}"] = rep;
+				if (rep == "skill")
+				{
+					NextNbPlayer += 1;
+				}
+				else
+				{
+					InfoAutreJoueur[$"attack{id}"] = rep;	
+				}
 			}
 		}
 		

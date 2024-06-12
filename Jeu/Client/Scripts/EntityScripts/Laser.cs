@@ -5,7 +5,7 @@ using JeuClient.Scripts.PlayerScripts;
 public partial class Laser : Node3D
 {
 	private RayCast3D _laserRay;
-	private MeshInstance3D _laserMesh;
+	private Node3D _laserMesh;
 	private StaticBody3D _rangeMax;
 	private Timer Atk;
 	private bool CanAtk = true;
@@ -19,7 +19,7 @@ public partial class Laser : Node3D
 	public override void _Ready()
 	{
 		_laserRay = GetNode<RayCast3D>("LaserRay");
-		_laserMesh = GetNode<MeshInstance3D>("LaserRay/LaserMesh");
+		_laserMesh = GetNode<Node3D>("LaserRay/LaserMesh");
 		_rangeMax = GetNode<StaticBody3D>("Range");
 		Atk = GetNode<Timer>("Atk");
 		

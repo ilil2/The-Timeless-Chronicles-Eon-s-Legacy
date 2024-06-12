@@ -490,20 +490,20 @@ public partial class SelectSkills : Control
 
 	private void _on_skill_control_1_pressed()
 	{
-		skillSelected(0);
+		SkillSelected(0);
 	}
 	
 	private void _on_skill_control_2_pressed()
 	{
-		skillSelected(1);
+		SkillSelected(1);
 	}
 	
 	private void _on_skill_control_3_pressed()
 	{
-		skillSelected(2);
+		SkillSelected(2);
 	}
 
-	private void skillSelected(int skillid)
+	private void SkillSelected(int skillid)
 	{
 		if (GameManager.Skillnumber < 3 || skillid == 2)
 		{
@@ -514,11 +514,24 @@ public partial class SelectSkills : Control
 			{
 				Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
 				GetParent().AddChild(skillmenu);
+				QueueFree();
 			}
 			else
 			{
 				GameManager.levelStart = GameManager.level;
-				UDP.OneShot("next");
+				GameManager.InfoJoueur["attack"] = "skill";
+				if (GameManager.NextNbPlayer == GameManager._nbJoueur)
+				{
+					GameManager.NextNbPlayer = 0;
+					UDP.OneShot("next");
+				}
+				else
+				{
+					GameManager.NextNbPlayer = 0;
+					Control skillwaiting = GD.Load<PackedScene>("res://Scenes/HUD/SkillWaiting.tscn").Instantiate<Control>();
+					GetParent().AddChild(skillwaiting);
+					QueueFree();
+				}
 			}	
 		}
 		else

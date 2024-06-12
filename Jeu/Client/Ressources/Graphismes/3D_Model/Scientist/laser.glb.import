@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://coitwyd70wbh4"
-path="res://.godot/imported/lightning.glb-74f7e594d6292317f6e9cdefd9227311.scn"
+uid="uid://cmokl0i5g6qne"
+path="res://.godot/imported/laser.glb-2cea3b3ed8ed7bfc24a1ebf29d7e704a.scn"
 
 [deps]
 
-source_file="res://Ressources/Graphismes/3D_Model/Scientist/lightning.glb"
-dest_files=["res://.godot/imported/lightning.glb-74f7e594d6292317f6e9cdefd9227311.scn"]
+source_file="res://Ressources/Graphismes/3D_Model/Scientist/laser.glb"
+dest_files=["res://.godot/imported/laser.glb-2cea3b3ed8ed7bfc24a1ebf29d7e704a.scn"]
 
 [params]
 
