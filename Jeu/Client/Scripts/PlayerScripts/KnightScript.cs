@@ -6,11 +6,13 @@ public partial class KnightScript : ClassScript
 {
 	private bool _isBlocking;
 	public CollisionShape3D Sword;
+	private Timer _animationTimer;
 
 	public override void _Ready()
 	{
 		InitPlayer();
 		Sword = GetNode<CollisionShape3D>("Player/PlayerWeapon/CollisionShape3D");
+		_animationTimer = GetNode<Timer>("AnimationTimer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -71,10 +73,12 @@ public partial class KnightScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(GameManager.ManaUse))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && !IsAttacking && UseStamina(GameManager.ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
+			IsAttacking = true;
+			_animationTimer.Start();
 			
 			AnimationSet(false, false, true, true);
 			
@@ -198,5 +202,10 @@ public partial class KnightScript : ClassScript
 	private void _on_damage_timer_timeout()
 	{
 		AnimationState = -3;
+	}
+
+	private void _on_animation_timer_timeout()
+	{
+		IsAttacking = false;
 	}
 }

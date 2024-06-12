@@ -20,6 +20,7 @@ public abstract partial class ClassScript : PlayerScript
 	protected AnimationTree AnimationTree;
 	protected Timer DamageTimer;
 	protected int AnimationState = -1;
+	protected bool IsAttacking;
 	
 	//Variable de camera
 	private float _fovMax = 80;
@@ -75,6 +76,7 @@ public abstract partial class ClassScript : PlayerScript
 		DamageTimer = GetNode<Timer>("DamageTimer");
 		AnimationTree = GetNode<AnimationTree>("AnimationTree");
 		AnimationTree.Active = true;
+		AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	protected void Zoom(InputEvent @event)

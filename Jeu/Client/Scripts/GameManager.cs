@@ -101,7 +101,7 @@ public partial class GameManager : Node3D
 	public static int ManaUse = 50;
 	public static int Damage = 10;
 	public static int CriticalChance = 20;
-	public static int ChargeSpeed = 7;
+	public static int ChargeSpeed = 5;
 	public static int HealSpeed = 10;
 	public static float ShootSpeed = 0.015f;
 	public static int NbArrow = 1;

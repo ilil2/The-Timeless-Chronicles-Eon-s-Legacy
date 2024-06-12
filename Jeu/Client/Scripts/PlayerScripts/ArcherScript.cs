@@ -10,12 +10,14 @@ public partial class ArcherScript : ClassScript
 	private float _shootPower = 0.25f;
 	private bool _isAiming;
 	private bool _shootAnimation;
+	private Timer _animationTimer;
 	
 	public static bool IsShooting;
 	
 	public override void _Ready()
 	{
 		InitPlayer();
+		_animationTimer = GetNode<Timer>("AnimationTimer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -155,10 +157,13 @@ public partial class ArcherScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(GameManager.ManaUse))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && !IsAttacking && UseStamina(GameManager.ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 6;
+			IsAttacking = true;
+			_animationTimer.Start();
+			
 			AnimationSet(false, false, false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hitbow";
 		}
@@ -289,5 +294,10 @@ public partial class ArcherScript : ClassScript
 	private void _on_damage_timer_timeout()
 	{
 		AnimationState = -3;
+	}
+	
+	private void _on_animation_timer_timeout()
+	{
+		IsAttacking = false;
 	}
 }
