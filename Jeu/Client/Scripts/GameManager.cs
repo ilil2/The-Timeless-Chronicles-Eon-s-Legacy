@@ -215,7 +215,8 @@ public partial class GameManager : Node3D
 		ns = new NetworkStream(soc);
 		tw = new StreamWriter(ns);	//lecture requette serveur principal
 		tr = new StreamReader(ns);	//ecriture requette serveur principal
-		
+
+		Lvls = new Queue<IMap>();
 		PackedScene connectionUI = GD.Load<PackedScene>("res://Scenes/UI/ConnectionUI.tscn");
 		Control connectionMenu = connectionUI.Instantiate<Control>();
 		AddChild(connectionMenu);
@@ -408,6 +409,33 @@ public partial class GameManager : Node3D
 					
 				}
 				State4.State();
+			}
+			else if (state == 8)
+			{
+				Map.QueueFree();
+				RemoveChild(Joueur1);
+				switch (_nbJoueur)
+				{
+					case 2:
+						RemoveChild(Joueur2);
+						break;
+					case 3:
+						RemoveChild(Joueur2);
+						RemoveChild(Joueur3);
+						break;
+					case 4:
+						RemoveChild(Joueur2);
+						RemoveChild(Joueur3);
+						RemoveChild(Joueur4);
+						break;
+				}
+				_chat.QueueFree();
+				_GameHud.QueueFree();
+				
+				UDP.Send(soc2, $"{InfoJoueur["id"]}_deco", iep2);
+				
+				state = 0;
+				_Ready();
 			}
 		}
 		catch (Exception e)
