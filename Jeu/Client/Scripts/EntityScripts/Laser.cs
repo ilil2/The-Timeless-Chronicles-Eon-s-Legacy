@@ -46,21 +46,26 @@ public partial class Laser : Node3D
 				{
 					CanAtk = false;
 					Atk.Start();
-					if (player.Vampire) player.SetHealth(player.Health + player.Damage / 5);
-					if (new Random().Next(0, player.CriticalChance) != 1)
+					
+					foreach (var skill in GameManager.Skills)
 					{
-						mob.TakeDamage(player.Damage);
+						if (skill.Item1 == "vampire") player.SetHealth(GameManager.Health + GameManager.Damage / 5);
+					}
+					
+					if (new Random().Next(0, GameManager.CriticalChance) != 1)
+					{
+						mob.TakeDamage(GameManager.Damage);
 					}
 					else
 					{
-						mob.TakeDamage((int)(player.Damage * 1.5));
+						mob.TakeDamage((int)(GameManager.Damage * 1.5));
 					}
 				}
 				if(CanAtk && _laserRay.GetCollider() is OtherClassScript otherplayer)
 				{
 					CanAtk = false;
 					Atk.Start();
-					GameManager.InfoJoueur["attack"] = $"heal{otherplayer.Id}*{player.healspeed}";
+					GameManager.InfoJoueur["attack"] = $"heal{otherplayer.Id}*{GameManager.HealSpeed}";
 				}
 				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
 				{

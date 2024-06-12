@@ -12,12 +12,6 @@ public partial class ScientistScript : ClassScript
 	
 	private int _shootCooldownValue = 100;
 	public static bool IsAiming;
-
-	public int healspeed = 10;
-	
-	public bool LaserMove;
-	public bool Vampire;
-	public bool RealoadProtection;
 	
 	public override void _Ready()
 	{
@@ -91,7 +85,7 @@ public partial class ScientistScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Right))
 		{
-			if (CameraV.SpringLength <= 0)
+			if (CameraV.SpringLength <= -1)
 			{
 				CameraV.SpringLength += 0.1f;
 			}
@@ -190,8 +184,8 @@ public partial class ScientistScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Health -= damage;
-		if (Health <= 0 && !IsDead)
+		GameManager.Health -= damage;
+		if (GameManager.Health <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;
@@ -210,9 +204,9 @@ public partial class ScientistScript : ClassScript
 	
 	private void _on_stamina_timeout()
 	{
-		if (Stamina + ChargeSpeed <= MaxStamina)
+		if (GameManager.Stamina + GameManager.ChargeSpeed <= GameManager.MaxStamina)
 		{
-			Stamina += ChargeSpeed;
+			GameManager.Stamina += GameManager.ChargeSpeed;
 		}
 	}
 	

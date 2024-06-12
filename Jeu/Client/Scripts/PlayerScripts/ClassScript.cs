@@ -7,22 +7,7 @@ namespace JeuClient.Scripts.PlayerScripts;
 
 public abstract partial class ClassScript : PlayerScript
 {
-	public int MaxHealth = 100;
-	public int Health = 100;
-	public int MaxStamina = 1000;
-	public int CurrentHealth = 100;
-	public int CurrentMaxHealth = 100;
-	public int Stamina = 1000;
-	public int ManaUse = 50;
-	public int Damage = 10;
-	public int CriticalChance = 20;
-	public int ChargeSpeed = 7;
-	
 	protected float GravityValue = 9.8f;
-	public float WalkSpeed = 4.2f;
-	public float CurrentWalkSpeed = 4.2f;
-	public float RunSpeed = 7.5f;
-	public float CurrentRunSpeed = 7.5f;
 	
 	//Variable des objets
 	public bool PlayerIsHere = false;
@@ -114,8 +99,8 @@ public abstract partial class ClassScript : PlayerScript
 	{
 		GameManager.InfoJoueur["co"] = $"{Position.X};{Position.Y};{Position.Z}";
 		GameManager.InfoJoueur["orientation"] = $"{PlayerMesh.Rotation.X};{PlayerMesh.Rotation.Y};{PlayerMesh.Rotation.Z}";
-		GameManager.InfoJoueur["hp"] = $"{Health}";
-		GameManager.InfoJoueur["mp"] = $"{Stamina}";
+		GameManager.InfoJoueur["hp"] = $"{GameManager.Health}";
+		GameManager.InfoJoueur["mp"] = $"{GameManager.Stamina}";
 		PlayerIsHere = true;
 	}
 
@@ -129,7 +114,7 @@ public abstract partial class ClassScript : PlayerScript
 				if (attack[0] == $"heal{Id}")
 				{
 					GameManager.InfoAutreJoueur[$"attack{i}"] = "";
-					SetHealth(Health + Conversions.AtoI(attack[1]));
+					SetHealth(GameManager.Health + Conversions.AtoI(attack[1]));
 				}
 				else if (attack[0] == $"revive{Id}")
 				{
@@ -204,7 +189,7 @@ public abstract partial class ClassScript : PlayerScript
 		SetStamina(GetMaxStamina());
 		IsDead = false;
 		GD.Print("Revive");
-		GD.Print($"HP {Health} MP {Stamina} IsDead {IsDead}");
+		GD.Print($"HP {GameManager.Health} MP {GameManager.Stamina} IsDead {IsDead}");
 	}
 	
 	protected virtual void Move(double delta)
@@ -221,7 +206,7 @@ public abstract partial class ClassScript : PlayerScript
 			Direction = new Vector3(left - right, 0, forward - backward);
 			Direction = Direction.Rotated(Vector3.Up, CameraH.Rotation.Y).Normalized();
 			IsWalking = true;
-			MovementSpeed = WalkSpeed;
+			MovementSpeed = GameManager.WalkSpeed;
 		}
 			
 		PlayerMesh.Rotation = new Vector3(0, CameraH.Rotation.Y + (float) Math.PI, 0);
@@ -241,9 +226,9 @@ public abstract partial class ClassScript : PlayerScript
 	
 	public bool UseStamina(int stamina)
 	{
-		if (Stamina >= stamina)
+		if (GameManager.Stamina >= stamina)
 		{
-			Stamina -= stamina;
+			GameManager.Stamina -= stamina;
 			return true;
 		}
 
@@ -252,52 +237,52 @@ public abstract partial class ClassScript : PlayerScript
 	
 	public int GetHealth()
 	{
-		return Health;
+		return GameManager.Health;
 	}
 	public void SetHealth(int health)
 	{
-		if (health > MaxHealth)
+		if (health > GameManager.MaxHealth)
 		{
-			Health = MaxHealth;
+			GameManager.Health = GameManager.MaxHealth;
 		}
 		else
 		{
-			Health = health;
+			GameManager.Health = health;
 		}
 	}
 	
 	public int GetMaxHealth()
 	{
-		return MaxHealth;
+		return GameManager.MaxHealth;
 	}
 	
 	public int GetStamina()
 	{
-		return Stamina;
+		return GameManager.Stamina;
 	}
 	
 	public void SetStamina(int stamina)
 	{
-		if(stamina>MaxStamina)
+		if(stamina > GameManager.MaxStamina)
 		{
-			Stamina = MaxStamina;
+			GameManager.Stamina =GameManager.MaxStamina;
 		}
 		else
 		{
-			Stamina = stamina;
+			GameManager.Stamina = stamina;
 		}
 	}
 	
 	public int GetMaxStamina()
 	{
-		return MaxStamina;
+		return GameManager.MaxStamina;
 	}
 	private void _on_potion_timer_timeout()
 	{
 		GD.Print("PotionTimer !");
-		Health = CurrentHealth;
-		MaxHealth = CurrentMaxHealth;
-		WalkSpeed = CurrentWalkSpeed;
-		RunSpeed = CurrentRunSpeed;
+		GameManager.Health = GameManager.CurrentHealth;
+		GameManager.MaxHealth = GameManager.CurrentMaxHealth;
+		GameManager.WalkSpeed = GameManager.CurrentWalkSpeed;
+		GameManager.RunSpeed = GameManager.CurrentRunSpeed;
 	}
 }

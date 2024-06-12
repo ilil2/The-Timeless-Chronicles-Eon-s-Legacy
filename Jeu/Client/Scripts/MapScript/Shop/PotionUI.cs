@@ -57,6 +57,7 @@ public partial class PotionUI : Panel
 		_title.Text = _languageDict["PotionTitle" + ID];
 		_desc.Text = _languageDict["PotionDescription" + ID];
 		_price.Text = _languageDict["PotionPrice"] + Price;
+		_buttonText.Text = _languageDict["PotionBuy"];
 	}
 	
 	private void _on_button_pressed()

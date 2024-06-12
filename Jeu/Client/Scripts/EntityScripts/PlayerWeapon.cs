@@ -9,27 +9,42 @@ public partial class PlayerWeapon : Area3D
 	{
 		if(body is MobScript mob)
 		{
-			ClassScript player = (ClassScript)GameManager.Joueur1;
-			if (new Random().Next(0, player.CriticalChance) != 1)
+			if (new Random().Next(0, GameManager.CriticalChance) != 1)
 			{
-				mob.TakeDamage(player.Damage);
+				mob.TakeDamage(GameManager.Damage);
 			}
 			else
 			{
-				mob.TakeDamage((int)(player.Damage * 1.5));
+				mob.TakeDamage((int)(GameManager.Damage * 1.5));
+			}
+			
+			foreach (var skill in GameManager.Skills)
+			{
+				if (skill.Item1 == "escalibur" && new Random().Next(0, 5) == 1)
+				{
+					mob.GelMob();
+				}
+				else if (skill.Item1 == "poison")
+				{
+					mob.PoisonMob();
+				}
+				else if (skill.Item1 == "doubleattack")
+				{
+					mob.TakeDamage(GameManager.Damage);
+				}
 			}
 		}
 
 		if (body is Boss boss)
 		{
 			ClassScript player = (ClassScript)GameManager.Joueur1;
-			if (new Random().Next(0, player.CriticalChance) != 1)
+			if (new Random().Next(0, GameManager.CriticalChance) != 1)
 			{
-				boss.TakeDamage(player.Damage,player.Id);
+				boss.TakeDamage(GameManager.Damage,player.Id);
 			}
 			else
 			{
-				boss.TakeDamage((int)(player.Damage * 1.5),player.Id);
+				boss.TakeDamage((int)(GameManager.Damage * 1.5),player.Id);
 			}
 		}
 	}

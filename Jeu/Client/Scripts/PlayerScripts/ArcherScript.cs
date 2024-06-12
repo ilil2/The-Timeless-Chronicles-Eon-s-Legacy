@@ -12,11 +12,6 @@ public partial class ArcherScript : ClassScript
 	private bool _shootAnimation;
 	
 	public static bool IsShooting;
-	public float shootspeed = 0.015f;
-	public int nbArrow = 1;
-	
-	public bool PoisonArrow;
-	public bool GelArrow;
 	
 	public override void _Ready()
 	{
@@ -79,7 +74,7 @@ public partial class ArcherScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Right) && _shootTimer > 30)
 		{
-			if (CameraV.SpringLength <= 0)
+			if (CameraV.SpringLength <= -1)
 			{
 				CameraV.SpringLength += 0.1f;
 			}
@@ -89,7 +84,7 @@ public partial class ArcherScript : ClassScript
 			
 			if (_shootPower <= 3)
 			{
-				_shootPower += shootspeed;
+				_shootPower += GameManager.ShootSpeed;
 			}
 			
 			PackedScene crossHairScene = GD.Load<PackedScene>("res://Scenes/HUD/ViewFinder.tscn");
@@ -102,7 +97,7 @@ public partial class ArcherScript : ClassScript
 			_shootTimer = 0;
 		}
 		
-		if (!_isAiming && IsShooting && UseStamina(ManaUse))
+		if (!_isAiming && IsShooting && UseStamina(GameManager.ManaUse))
 		{
 			PackedScene arrowScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Arrow.tscn");
 			RigidBody3D arrow = arrowScene.Instantiate<RigidBody3D>();
@@ -120,7 +115,7 @@ public partial class ArcherScript : ClassScript
 			
 			string send = $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 
-			if (nbArrow > 1)
+			if (GameManager.NbArrow > 1)
 			{
 				arrow = arrowScene.Instantiate<RigidBody3D>();
 				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y + 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
@@ -133,7 +128,7 @@ public partial class ArcherScript : ClassScript
 				send += $"{arrow.Position.X};{arrow.Position.Y};{arrow.Position.Z};{arrow.Rotation.X};{arrow.Rotation.Y};{arrow.Rotation.Z};{arrow.LinearVelocity.X};{arrow.LinearVelocity.Y};{arrow.LinearVelocity.Z}";
 			}
 			
-			if (nbArrow == 3)
+			if (GameManager.NbArrow == 3)
 			{
 				arrow = arrowScene.Instantiate<RigidBody3D>();
 				arrow.Position = new Vector3((arrowPosition.X + GlobalPosition.X) / 2, arrowPosition.Y - 0.25f, (arrowPosition.Z + GlobalPosition.Z) / 2);
@@ -160,7 +155,7 @@ public partial class ArcherScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(ManaUse))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 6 && !_isAiming && !InteractionShop.OnShop && !GameHUD.OnInventory && AnimationState != -2 && UseStamina(GameManager.ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 6;
@@ -261,8 +256,8 @@ public partial class ArcherScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Health -= damage;
-		if (Health <= 0 && !IsDead)
+		GameManager.Health -= damage;
+		if (GameManager.Health <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;
@@ -281,9 +276,9 @@ public partial class ArcherScript : ClassScript
 	
 	private void _on_stamina_timeout()
 	{
-		if (Stamina + ChargeSpeed <= MaxStamina)
+		if (GameManager.Stamina + GameManager.ChargeSpeed <= GameManager.MaxStamina)
 		{
-			Stamina += ChargeSpeed;
+			GameManager.Stamina += GameManager.ChargeSpeed;
 		}
 	}
 	private void _on_death_timer_timeout()

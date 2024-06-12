@@ -6,9 +6,6 @@ public partial class KnightScript : ClassScript
 {
 	private bool _isBlocking;
 	public CollisionShape3D Sword;
-	
-	public bool Spike;
-	public bool Escalibur;
 
 	public override void _Ready()
 	{
@@ -74,7 +71,7 @@ public partial class KnightScript : ClassScript
 		
 		(int, int) direction = (Conversions.BtoI(left) - Conversions.BtoI(right), Conversions.BtoI(forward) - Conversions.BtoI(backward));
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(ManaUse))
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && AnimationState != 3 && !InteractionShop.OnShop && !GameHUD.OnInventory  && AnimationState != -2 && UseStamina(GameManager.ManaUse))
 		{
 			DirectionControl = (0,0);
 			AnimationState = 3;
@@ -134,8 +131,8 @@ public partial class KnightScript : ClassScript
 	{
 		if (!_isBlocking)
 		{
-			Health -= damage;
-			if (Health <= 0 && !IsDead)
+			GameManager.Health -= damage;
+			if (GameManager.Health <= 0 && !IsDead)
 			{
 				IsDead = true;
 				AnimationState = -1;
@@ -155,8 +152,8 @@ public partial class KnightScript : ClassScript
 		{
 			if (!UseStamina(damage*20))
 			{
-				Health -= damage;
-				if (Health <= 0 && !IsDead)
+				GameManager.Health -= damage;
+				if (GameManager.Health <= 0 && !IsDead)
 				{
 					IsDead = true;
 					AnimationState = -1;
@@ -191,9 +188,9 @@ public partial class KnightScript : ClassScript
 	{
 		if (!_isBlocking)
 		{
-			if (Stamina + ChargeSpeed <= MaxStamina)
+			if (GameManager.Stamina + GameManager.ChargeSpeed <= GameManager.MaxStamina)
 			{
-				Stamina += ChargeSpeed;
+				GameManager.Stamina += GameManager.ChargeSpeed;
 			}
 		}
 	}

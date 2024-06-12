@@ -18,6 +18,7 @@ public partial class SelectSkills : Control
 	
 	private Label[] _skillDescription = new Label[3];
 	private Label _title;
+	private Label _error;
 	
 	private TextureRect[] _skills = new TextureRect[3];
 	private (string, int)[][][] _skillsName;
@@ -52,6 +53,7 @@ public partial class SelectSkills : Control
 		_animationPlayer[2].Play("RESET");
 		
 		_title = GetNode<Label>("Title");
+		_error = GetNode<Label>("Error");
 
 		_player = (ClassScript)GameManager.Joueur1;
 		_languageDict = GameManager.LanguageManager.GetLanguage(GameManager.SettingsManager.GetAllSettings()["language"]);
@@ -488,52 +490,40 @@ public partial class SelectSkills : Control
 
 	private void _on_skill_control_1_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][0];
-		ApplySkill(skill);
-		GameManager.levelStart += 1;
-		if (GameManager.levelStart < GameManager.level)
-		{
-			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
-			GetParent().AddChild(skillmenu);
-		}
-		else
-		{
-			GameManager.levelStart = GameManager.level;
-			UDP.OneShot("next");
-		}
+		skillSelected(0);
 	}
 	
 	private void _on_skill_control_2_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][1];
-		ApplySkill(skill);
-		GameManager.levelStart += 1;
-		if (GameManager.levelStart < GameManager.level)
-		{
-			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
-			GetParent().AddChild(skillmenu);
-		}
-		else
-		{
-			GameManager.levelStart = GameManager.level;
-			UDP.OneShot("next");
-		}
+		skillSelected(1);
 	}
 	
 	private void _on_skill_control_3_pressed()
 	{
-		(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][2];
-		ApplySkill(skill);
-		GameManager.levelStart += 1;
-		if (GameManager.levelStart < GameManager.level)
+		skillSelected(2);
+	}
+
+	private void skillSelected(int skillid)
+	{
+		if (GameManager.Skillnumber < 3 || skillid == 2)
 		{
-			Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
-			GetParent().AddChild(skillmenu);
+			(string, int) skill = _skillsName[ClassToInt(_player.Classe)][GameManager.levelStart][skillid];
+			ApplySkill(skill);
+			GameManager.levelStart += 1;
+			if (GameManager.levelStart < GameManager.level)
+			{
+				Control skillmenu = GD.Load<PackedScene>("res://Scenes/HUD/SelectSkills.tscn").Instantiate<Control>();
+				GetParent().AddChild(skillmenu);
+			}
+			else
+			{
+				GameManager.levelStart = GameManager.level;
+				UDP.OneShot("next");
+			}	
 		}
 		else
 		{
-			GameManager.levelStart = GameManager.level;
-			UDP.OneShot("next");
+			_error.Text = _languageDict["skillError"];
 		}
 	}
 	
@@ -559,73 +549,46 @@ public partial class SelectSkills : Control
 		switch (skill.Item1)
 		{
 			case "damage":
-				_player.Damage += skill.Item2;
+				GameManager.Damage += skill.Item2;
 				break;
 			case "health":
-				_player.MaxHealth += skill.Item2;
-				_player.Health += skill.Item2;
+				GameManager.MaxHealth += skill.Item2;
+				GameManager.Health += skill.Item2;
 				break;
 			case "stamina":
-				_player.MaxStamina += skill.Item2;
-				_player.Stamina += skill.Item2;
+				GameManager.MaxStamina += skill.Item2;
+				GameManager.Stamina += skill.Item2;
 				break;
 			case "speed":
-				_player.WalkSpeed += skill.Item2;
+				GameManager.WalkSpeed += skill.Item2;
 				break;
 			default:
 				switch (skill.Item1)
 				{
 					case "reload":
-						_player.ChargeSpeed += skill.Item2;
+						GameManager.ChargeSpeed += skill.Item2;
 						break;
 					case "staminause":
-						_player.ManaUse -= skill.Item2;
+						GameManager.ManaUse -= skill.Item2;
 						break;
 					case "crit":
-						_player.CriticalChance -= skill.Item2;
+						GameManager.CriticalChance -= skill.Item2;
 						break;
 					case "arrow":
-						((ArcherScript)_player).nbArrow += skill.Item2; 
+						GameManager.NbArrow += skill.Item2; 
 						break;
 					case "shootspeed":
-						((ArcherScript)_player).shootspeed += skill.Item2 / 100f;
-						break;
-					case "arrowpoison":
-						((ArcherScript)_player).PoisonArrow = !((ArcherScript)_player).PoisonArrow;
-						break;
-					case "arrowgel":
-						((ArcherScript)_player).GelArrow = !((ArcherScript)_player).GelArrow;
+						GameManager.ShootSpeed += skill.Item2 / 100f;
 						break;
 					case "healspeed":
-						((ScientistScript)_player).healspeed += skill.Item2;
-						break;
-					case "lasermove":
-						((ScientistScript)_player).LaserMove = !((ScientistScript)_player).LaserMove;
-						break;
-					case "vampire":
-						((ScientistScript)_player).Vampire = !((ScientistScript)_player).Vampire;
-						break;
-					case "reloadprotection":
-						((ScientistScript)_player).RealoadProtection = !((ScientistScript)_player).RealoadProtection;
+						GameManager.HealSpeed += skill.Item2;
 						break;
 					case "range":
 						CollisionShape3D sword = ((KnightScript)_player).Sword;
 						sword.Scale = new Vector3(1, sword.Scale.Y + skill.Item2 / 4f, 1);
 						break;
-					case "spike":
-						((KnightScript)_player).Spike = !((KnightScript)_player).Spike;
-						break;
-					case "escalibur":
-						((KnightScript)_player).Escalibur = !((KnightScript)_player).Escalibur;
-						break;
 					case "dashdegat":
-						((AssassinScript)_player).DashDegat += skill.Item2;
-						break;
-					case "doubleattack":
-						((AssassinScript)_player).DoubleAttack = !((AssassinScript)_player).DoubleAttack;
-						break;
-					case "poison":
-						((AssassinScript)_player).Poison = !((AssassinScript)_player).Poison;
+						GameManager.DashDegat += skill.Item2;
 						break;
 				}
 

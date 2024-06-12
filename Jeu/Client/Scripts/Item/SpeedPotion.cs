@@ -16,8 +16,8 @@ public partial class SpeedPotion : Potion
 	{
 		GD.Print("I use SpeedPotion");
 		Timer timer = (GameManager.Joueur1 as ClassScript).GetNode<Timer>("PotionTimer");
-		(GameManager.Joueur1 as ClassScript).WalkSpeed *= 1.5f;
-		(GameManager.Joueur1 as ClassScript).RunSpeed *= 1.5f;
+		GameManager.WalkSpeed *= 1.5f;
+		GameManager.RunSpeed *= 1.5f;
 		timer.WaitTime = time;
 		timer.Start();
 

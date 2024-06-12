@@ -48,15 +48,27 @@ public partial class Arrow : RigidBody3D
 		{
 			if (body is MobScript mob && IsPlayer)
 			{
-				ClassScript player = (ClassScript)GameManager.Joueur1;
-				if (new Random().Next(0, player.CriticalChance) != 1)
+				if (new Random().Next(0, GameManager.CriticalChance) != 1)
 				{
-					mob.TakeDamage(player.Damage);
+					mob.TakeDamage(GameManager.Damage);
 				}
 				else
 				{
-					mob.TakeDamage((int)(player.Damage * 1.5));
+					mob.TakeDamage((int)(GameManager.Damage * 1.5));
 				}
+				
+				foreach (var skill in GameManager.Skills)
+				{
+					if (skill.Item1 == "arrowpoison")
+					{
+						mob.PoisonMob();
+					}
+					else if (skill.Item1 == "arrowgel")
+					{
+						mob.GelMob();
+					}
+				}
+				
 				QueueFree();
 			}
 			else

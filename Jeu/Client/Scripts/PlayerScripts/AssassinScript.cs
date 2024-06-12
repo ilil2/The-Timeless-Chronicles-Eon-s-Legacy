@@ -11,19 +11,11 @@ public partial class AssassinScript : ClassScript
 	protected bool CanDash = true;
 	protected int DashTimer;
 	
-	public int DashDegat = 0;
-	public bool DoubleAttack;
-	public bool Poison;
-	
 	public override void _Ready()
 	{
 		InitPlayer();
 		
-		WalkSpeed = 5f;
-		RunSpeed = 8f;
 		DashPower = 120.0f;
-
-		ManaUse = 15;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -72,7 +64,7 @@ public partial class AssassinScript : ClassScript
 	{
 		if (CanDash && DashCount > 0)
 		{
-			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(ManaUse * 20))
+			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[5].Item2) && UseStamina(GameManager.ManaUse * 6))
 			{
 				if (!IsWalking)
 				{
@@ -109,12 +101,12 @@ public partial class AssassinScript : ClassScript
 			
 			if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && IsWalking)
 			{ 
-				MovementSpeed = RunSpeed;
+				MovementSpeed = GameManager.RunSpeed + 1f;
 				IsRunning = true;
 			}
 			else
 			{
-				MovementSpeed = WalkSpeed;
+				MovementSpeed = GameManager.WalkSpeed + 0.7f;
 				IsRunning = false;
 			}
 		}
@@ -155,9 +147,9 @@ public partial class AssassinScript : ClassScript
 			AnimationSet(false, false, true, true);
 			GameManager.InfoJoueur["animation"] = "hit";
 			
-			if (Stamina + 100 <= MaxStamina)
+			if (GameManager.Stamina + 100 <= GameManager.MaxStamina)
 			{
-				Stamina += 100;
+				GameManager.Stamina += 100;
 			}
 		}
 		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[4].Item2) && forward && AnimationState != 3 && AnimationState != -2)
@@ -205,8 +197,8 @@ public partial class AssassinScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		Health -= damage;
-		if (Health <= 0 && !IsDead)
+		GameManager.Health -= damage;
+		if (GameManager.Health <= 0 && !IsDead)
 		{
 			IsDead = true;
 			AnimationState = -1;
@@ -235,7 +227,7 @@ public partial class AssassinScript : ClassScript
 	{
 		if (IsRunning)
 		{
-			if (!UseStamina(ManaUse))
+			if (!UseStamina(GameManager.ManaUse / 4))
 			{
 				TakeDamage(1);
 			}

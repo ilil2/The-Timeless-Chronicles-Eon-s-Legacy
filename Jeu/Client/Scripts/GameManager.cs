@@ -89,8 +89,28 @@ public partial class GameManager : Node3D
 		}
 	}
 	
+	//Variables de joueur
 	public static (string, int)[] Skills = new (string, int)[3];
 	public static int Skillnumber = 0;
+	public static int MaxHealth = 100;
+	public static int Health = 100;
+	public static int MaxStamina = 1000;
+	public static int CurrentHealth = 100;
+	public static int CurrentMaxHealth = 100;
+	public static int Stamina = 1000;
+	public static int ManaUse = 50;
+	public static int Damage = 10;
+	public static int CriticalChance = 20;
+	public static int ChargeSpeed = 7;
+	public static int HealSpeed = 10;
+	public static float ShootSpeed = 0.015f;
+	public static int NbArrow = 1;
+	public static int DashDegat = 0;
+	
+	public static float WalkSpeed = 4.2f;
+	public static float CurrentWalkSpeed = 4.2f;
+	public static float RunSpeed = 7.5f;
+	public static float CurrentRunSpeed = 7.5f;
 
 	public static Socket soc2;
 	public static IPEndPoint iep2;

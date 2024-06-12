@@ -147,6 +147,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Enables the character to perform double attacks."},
             {"skillDescriptionPoison", "Imbues attacks with poison, causing damage over time.\nPoison Time: 5s"},
             {"skillChooseTitle", "Choose your new skill"},
+            {"skillError", "Error: You can only have 3 skills at a time."},
             
             //Potion
             {"PotionBuy", "Buy"},
@@ -306,6 +307,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permet au personnage d'effectuer des attaques doubles."},
             {"skillDescriptionPoison", "Imprègne les attaques de poison, infligeant des dégâts sur la durée.\nDurée du poison : 5s"},
             {"skillChooseTitle", "Choisissez votre nouvelle compétence"},
+            {"skillError", "Erreur : Vous ne pouvez avoir que 3 compétences à la fois."},
             
             //Potion
             {"PotionBuy", "Acheter"},
@@ -465,6 +467,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Aotren d'ar c'hemennadenn da gomz eilenn."},
             {"skillDescriptionPoison", "Ar c'hemennadenn a vez lakaet gant gwez, a zegas dazont war ar c'hemennadenn.\nAmzer gwez : 5s"},
             {"skillChooseTitle", "Choazit ho kempennadenn nevez"},
+            {"skillError", "Fazi : Ne c'hallit ket bezañ gant 3 kempennadenn a bep seurt e-pad un hini."},
             
             //Potion
             {"PotionBuy", "Prañ"},
@@ -624,6 +627,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Ermöglicht es dem Charakter, Doppelangriffe auszuführen."},
             {"skillDescriptionPoison", "Tränkt die Angriffe mit Gift, das über einen bestimmten Zeitraum Schaden verursacht.\nGiftzeit : 5s"},
             {"skillChooseTitle", "Wählen Sie Ihre neue Fähigkeit"},
+            {"skillError", "Fehler : Sie können nur 3 Fähigkeiten gleichzeitig haben."},
             
             //Potion
             {"PotionBuy", "Kaufen"},
@@ -783,6 +787,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permite al personaje realizar ataques dobles."},
             {"skillDescriptionPoison", "Impregna los ataques con veneno, que inflige daño durante un período de tiempo.\nTiempo de veneno : 5s"},
             {"skillChooseTitle", "Elige tu nueva habilidad"},
+            {"skillError", "Error : No puedes tener más de 3 habilidades de cada tipo a la vez."},
             
             //Potion
             {"PotionBuy", "Comprar"},
@@ -942,6 +947,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permesas al la karaktero fari duoblajn atakojn."},
             {"skillDescriptionPoison", "Impregnas la atakojn per veneno, kiu kaŭzas damaĝon dum difinita tempo.\nVeneno tempo : 5s"},
             {"skillChooseTitle", "Elektu vian novan kapablon"},
+            {"skillError", "Eraro : Vi nur povas havi 3 kapablojn de ĉiu tipo samtempe."},
             
             //Potion
             {"PotionBuy", "Aĉeti"},
@@ -1101,6 +1107,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Permittebat characteri facere ictus duplices."},
             {"skillDescriptionPoison", "Impregnat ictus veneno, quod damnum inferre tempus.\nTempus veneni : 5s"},
             {"skillChooseTitle", "Elige tu nueva habilidad"},
+            {"skillError", "Error : No puedes tener más de 3 habilidades de cada tipo a la vez."},
             
             //Potion
             {"PotionBuy", "Emere"},
@@ -1260,6 +1267,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Izimisele ukwenza izinto ezimbalwa."},
             {"skillDescriptionPoison", "Izisagidi zifakwe ngezinja, ezinjalo zenza umsebenzi.\nIsikhathi sezinja : 5s"},
             {"skillChooseTitle", "Khetha umsebenzi wakho omtsha"},
+            {"skillError", "Isiphetho : Awufanele ukuba nezinye izimisebenzi ezintathu ezimbalwa ngosuku olulandelayo."},
             
             //Potion
             {"PotionBuy", "Thenga"},
@@ -1419,6 +1427,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "允许角色进行双重攻击。"},
             {"skillDescriptionPoison", "使攻击带有毒液，在一段时间内造成伤害。\n毒液时间 : 5s"},
             {"skillChooseTitle", "选择你的新技能"},
+            {"skillError", "错误 : 你不能同时拥有超过3种每种技能。"},
             
             //Potion
             {"PotionBuy", "购买"},
@@ -1578,6 +1587,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Επιτρέπει στο χαρακτήρα να κάνει διπλή επίθεση."},
             {"skillDescriptionPoison", "Επιτρέπει στην επίθεση να προκαλέσει ζημιά για μια περίοδο.\nΔιάρκεια δηλητηρίας : 5s"},
             {"skillChooseTitle", "Επιλέξτε τη νέα σας δεξιότητα"},
+            {"skillError", "Σφάλμα : Δεν μπορείτε να έχετε περισσότερες από 3 δεξιότητες ταυτόχρονα."},
             
             //Potion
             {"PotionBuy", "Αγορά"},
@@ -1737,6 +1747,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "Позволяет персонажу совершить двойную атаку."},
             {"skillDescriptionPoison", "Позволяет атаке нанести урон в течение определенного времени.\nДлительность яда : 5s"},
             {"skillChooseTitle", "Выберите ваш новый навык"},
+            {"skillError", "Ошибка : Вы не можете иметь более 3 навыков одновременно."},
             
             //Potion
             {"PotionBuy", "Купить"},
@@ -1896,6 +1907,7 @@ public class LanguageControl
             {"skillDescriptionDoubleAttack", "5065726d69747320746865207573657220746f20636f6d6d697420646f75626c652061747461636b2e"},
             {"skillDescriptionPoison", "5065726d697473207468652061747461636b2063617573652064616d61676520666f722061206365727461696e2074696d652e0a44616d6167653a203573"},
             {"skillChooseTitle", "5669657720656e74657220796f7572206e657720736b696c6c"},
+            {"skillError", "4572726f72203a20596f75206e652063616e742068617665206d6f7265203320736b696c6c73206f6e65206174612074696d652e"},
             
             //Potion
             {"PotionBuy", "4b756f666972"},

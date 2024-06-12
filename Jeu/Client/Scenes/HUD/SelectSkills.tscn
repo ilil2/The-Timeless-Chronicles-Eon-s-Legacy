@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cfinch137sfmw"]
+[gd_scene load_steps=23 format=3 uid="uid://cfinch137sfmw"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/SelectSkills.cs" id="1_cp4e3"]
 [ext_resource type="Texture2D" uid="uid://kps4o4yhia3w" path="res://Ressources/Graphismes/Card/ArcherPower.png" id="2_fg6ov"]
@@ -17,6 +17,11 @@ load_path = "res://.godot/imported/CardTemplate.png-2713a36271cd141eb9416de2c452
 [sub_resource type="LabelSettings" id="LabelSettings_rch7l"]
 font = ExtResource("4_6uycy")
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_dpg5y"]
+font = ExtResource("4_6uycy")
+font_size = 30
+font_color = Color(0.807843, 0, 0.0352941, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1dp6n"]
 font = ExtResource("4_6uycy")
@@ -540,10 +545,10 @@ anchor_left = 0.111
 anchor_top = 0.198
 anchor_right = 0.333
 anchor_bottom = 0.79
-offset_left = 0.127998
-offset_top = -0.303999
-offset_right = 0.383995
-offset_bottom = 0.0799861
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 512.0
 texture = ExtResource("2_fg6ov")
 expand_mode = 1
 
@@ -554,10 +559,10 @@ anchor_left = 0.389
 anchor_top = 0.198
 anchor_right = 0.611
 anchor_bottom = 0.79
-offset_left = -0.127998
-offset_top = -0.303999
-offset_right = 0.127998
-offset_bottom = 0.0799861
+offset_left = 448.0
+offset_top = 128.0
+offset_right = 704.0
+offset_bottom = 512.0
 texture = ExtResource("3_o04ht")
 expand_mode = 1
 
@@ -569,10 +574,10 @@ anchor_left = 0.667
 anchor_top = 0.198
 anchor_right = 0.889
 anchor_bottom = 0.79
-offset_left = -0.383995
-offset_top = -0.303999
-offset_right = -0.127998
-offset_bottom = 0.0799861
+offset_left = 768.0
+offset_top = 128.0
+offset_right = 1024.0
+offset_bottom = 512.0
 texture = SubResource("CompressedTexture2D_pe1qh")
 expand_mode = 1
 
@@ -676,6 +681,21 @@ offset_right = 0.44796
 offset_bottom = 0.319993
 text = "Choose your skill"
 label_settings = SubResource("LabelSettings_rch7l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Error" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.111
+anchor_top = 0.852
+anchor_right = 0.889
+anchor_bottom = 0.938
+offset_left = 0.12799
+offset_top = -0.0960374
+offset_right = -0.128067
+offset_bottom = 0.175985
+label_settings = SubResource("LabelSettings_dpg5y")
 horizontal_alignment = 1
 vertical_alignment = 1
 
