@@ -76,7 +76,7 @@ public partial class ArcherScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Right) && _shootTimer > 30)
 		{
-			if (CameraV.SpringLength <= -1)
+			if (CameraV.SpringLength <= -1.5f)
 			{
 				CameraV.SpringLength += 0.1f;
 			}

@@ -13,11 +13,17 @@ public partial class ScientistScript : ClassScript
 	private int _shootCooldownValue = 100;
 	public static bool IsAiming;
 	
+	private Timer _manaTimer;
+	private Timer _reloadTimer;
+	private bool _reload;
+	
 	public override void _Ready()
 	{
 		InitPlayer();
 
 		_shootCooldown = _shootCooldownValue - 50;
+		_manaTimer = GetNode<Timer>("StaminaTimer");
+		_reloadTimer = GetNode<Timer>("ReloadTimer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -49,8 +55,24 @@ public partial class ScientistScript : ClassScript
 				Inventory();
 				ShootLaser();
 				Animation();
+				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[13].Item2))
+				{
+					if (!_reload)
+					{
+						_reloadTimer.Start();	
+					}
+					_reload = true;
+				}
+				else
+				{
+					if (_reload)
+					{
+						_reloadTimer.Stop();	
+					}
+					_reload = false;
+				}
 				
-				if (!_isShooting)
+				if (!_isShooting && !_reload)
 				{
 					Move(delta);
 				}
@@ -85,7 +107,7 @@ public partial class ScientistScript : ClassScript
 		
 		if (Input.IsMouseButtonPressed(MouseButton.Right))
 		{
-			if (CameraV.SpringLength <= -1)
+			if (CameraV.SpringLength <= -1.5f)
 			{
 				CameraV.SpringLength += 0.1f;
 			}
@@ -101,7 +123,7 @@ public partial class ScientistScript : ClassScript
 			IsAiming = false;
 		}
 		
-		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting)
+		if (Input.IsMouseButtonPressed(MouseButton.Left) && _shootCooldown > _shootCooldownValue && IsAiming && !_isShooting && UseStamina(GameManager.ManaUse / 4))
 		{
 			PackedScene laserScene = GD.Load<PackedScene>("res://Scenes/EntityScenes/Laser.tscn");
 			Node3D laser = laserScene.Instantiate<Node3D>();
@@ -114,14 +136,16 @@ public partial class ScientistScript : ClassScript
 			GetTree().Root.AddChild(laser);
 			
 			GameManager.LockCamera = true;
+			_manaTimer.Start();
 		}
 		
-		if (!Input.IsMouseButtonPressed(MouseButton.Left) && _isShooting)
+		if (!Input.IsMouseButtonPressed(MouseButton.Left) && (_isShooting || GameManager.Stamina <= 0))
 		{
 			GameManager.InfoJoueur["attack"] = "stop";
 			GameManager.InfoJoueur["animation"] = "stop";
 			_isShooting = false;
 			GameManager.LockCamera = false;
+			_manaTimer.Stop();
 		}
 	}
 	
@@ -204,10 +228,7 @@ public partial class ScientistScript : ClassScript
 	
 	private void _on_stamina_timeout()
 	{
-		if (GameManager.Stamina + GameManager.ChargeSpeed <= GameManager.MaxStamina)
-		{
-			GameManager.Stamina += GameManager.ChargeSpeed;
-		}
+		UseStamina(GameManager.ManaUse / 6);
 	}
 	
 	private void _on_death_timer_timeout()
@@ -218,5 +239,13 @@ public partial class ScientistScript : ClassScript
 	private void _on_damage_timer_timeout()
 	{
 		AnimationState = -3;
+	}
+
+	private void _on_reload_timer_timeout()
+	{
+		if (GameManager.Stamina + GameManager.ChargeSpeed <= GameManager.MaxStamina)
+		{
+			GameManager.Stamina += GameManager.ChargeSpeed;
+		}
 	}
 }

@@ -65,6 +65,7 @@ public partial class MapLvl3Script : IMap
 		{
 			if (SkillsMenu)
 			{
+				Visible = false;
 				SkillsMenu = false;
 				ShowSkillsMenu();
 			}

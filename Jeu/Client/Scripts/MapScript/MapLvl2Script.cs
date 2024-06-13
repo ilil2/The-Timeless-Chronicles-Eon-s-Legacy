@@ -92,6 +92,7 @@ public partial class MapLvl2Script : IMap
 			if (SkillsMenu)
 			{
 				SkillsMenu = false;
+				Visible = false;
 				ShowSkillsMenu();
 			}
 			

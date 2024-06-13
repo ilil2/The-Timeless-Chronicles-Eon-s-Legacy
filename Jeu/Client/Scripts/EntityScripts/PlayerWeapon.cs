@@ -38,14 +38,7 @@ public partial class PlayerWeapon : Area3D
 		if (body is Boss boss)
 		{
 			ClassScript player = (ClassScript)GameManager.Joueur1;
-			if (new Random().Next(0, GameManager.CriticalChance) != 1)
-			{
-				boss.TakeDamage(GameManager.Damage,player.Id);
-			}
-			else
-			{
-				boss.TakeDamage((int)(GameManager.Damage * 1.5),player.Id);
-			}
+			boss.TakeDamage(GameManager.Damage, player.Id);
 		}
 	}
 }

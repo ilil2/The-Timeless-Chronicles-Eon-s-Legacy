@@ -122,6 +122,7 @@ public partial class MapLvl1Script : IMap
 			if (SkillsMenu)
 			{
 				SkillsMenu = false;
+				Visible = false;
 				ShowSkillsMenu();
 			}
 			//Process

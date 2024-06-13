@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.EntityScripts.Mob;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class Laser : Node3D
@@ -61,22 +62,34 @@ public partial class Laser : Node3D
 						mob.TakeDamage((int)(GameManager.Damage * 1.5));
 					}
 				}
+				
+				if(CanAtk && _laserRay.GetCollider() is Boss boss)
+				{
+					CanAtk = false;
+					Atk.Start();
+					
+					foreach (var skill in GameManager.Skills)
+					{
+						if (skill.Item1 == "vampire") player.SetHealth(GameManager.Health + GameManager.Damage / 5);
+					}
+					
+					boss.TakeDamage(GameManager.Damage, Lib.Conversions.AtoI(GameManager.InfoJoueur["id"]));
+					
+				}
+				
 				if(CanAtk && _laserRay.GetCollider() is OtherClassScript otherplayer)
 				{
 					CanAtk = false;
 					Atk.Start();
 					GameManager.InfoJoueur["attack"] = $"heal{otherplayer.Id}*{GameManager.HealSpeed}";
 				}
+				
 				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
 				{
 					CanAtk = false;
 					Atk.Start();
 					GD.Print("Revive");
 					GameManager.InfoJoueur["attack"] = $"revive{gravestone.ID}";
-				}
-				else
-				{
-					GD.Print($"getcollider {_laserRay.GetCollider()}");
 				}
 			}
 		}

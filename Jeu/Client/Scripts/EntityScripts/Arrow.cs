@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JeuClient.Scripts.EntityScripts.Mob;
 using JeuClient.Scripts.PlayerScripts;
 
 public partial class Arrow : RigidBody3D
@@ -70,6 +71,10 @@ public partial class Arrow : RigidBody3D
 				}
 				
 				QueueFree();
+			}
+			else if (body is Boss boss && IsPlayer)
+			{
+				boss.TakeDamage(GameManager.Damage, Lib.Conversions.AtoI(GameManager.InfoJoueur["id"]));
 			}
 			else
 			{
