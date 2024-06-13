@@ -13,6 +13,14 @@ public partial class KnightScript : ClassScript
 		InitPlayer();
 		Sword = GetNode<CollisionShape3D>("Player/PlayerWeapon/CollisionShape3D");
 		_animationTimer = GetNode<Timer>("AnimationTimer");
+
+		foreach (var skill in GameManager.Skills)
+		{
+			if (skill.Item1 == "range")
+			{
+				Sword.Scale = new Vector3(1, Sword.Scale.Y + skill.Item2 / 4f, 1);
+			}
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -42,6 +50,7 @@ public partial class KnightScript : ClassScript
 			{
 				Inventory();
 				Animation();
+				ActiveSkills();
 				if (_isBlocking)
 				{
 					Velocity = new Vector3(0, 0, 0);
@@ -133,28 +142,9 @@ public partial class KnightScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		if (!_isBlocking)
+		if (!Invincibility)
 		{
-			GameManager.Health -= damage;
-			if (GameManager.Health <= 0 && !IsDead)
-			{
-				IsDead = true;
-				AnimationState = -1;
-				AnimationSet(false, false, false, false, false, false, true);
-				GameManager.InfoJoueur["animation"] = "death";
-				GetNode<Timer>("DeathTimer").Start();
-			}
-			else
-			{
-				AnimationState = -2;
-				AnimationSet(false, false, false, false, true);
-				GameManager.InfoJoueur["animation"] = "damage";
-				DamageTimer.Start();
-			}
-		}
-		else
-		{
-			if (!UseStamina(damage*20))
+			if (!_isBlocking)
 			{
 				GameManager.Health -= damage;
 				if (GameManager.Health <= 0 && !IsDead)
@@ -168,17 +158,39 @@ public partial class KnightScript : ClassScript
 				else
 				{
 					AnimationState = -2;
-					AnimationSet(false, false, false, false, false, true);
-					GameManager.InfoJoueur["animation"] = "damageblock";
+					AnimationSet(false, false, false, false, true);
+					GameManager.InfoJoueur["animation"] = "damage";
 					DamageTimer.Start();
 				}
 			}
 			else
 			{
-				AnimationState = -2;
-				AnimationSet(false, false, false, false, false, true);
-				GameManager.InfoJoueur["animation"] = "damageblock";
-				DamageTimer.Start();
+				if (!UseStamina(damage*20))
+				{
+					GameManager.Health -= damage;
+					if (GameManager.Health <= 0 && !IsDead)
+					{
+						IsDead = true;
+						AnimationState = -1;
+						AnimationSet(false, false, false, false, false, false, true);
+						GameManager.InfoJoueur["animation"] = "death";
+						GetNode<Timer>("DeathTimer").Start();
+					}
+					else
+					{
+						AnimationState = -2;
+						AnimationSet(false, false, false, false, false, true);
+						GameManager.InfoJoueur["animation"] = "damageblock";
+						DamageTimer.Start();
+					}
+				}
+				else
+				{
+					AnimationState = -2;
+					AnimationSet(false, false, false, false, false, true);
+					GameManager.InfoJoueur["animation"] = "damageblock";
+					DamageTimer.Start();
+				}
 			}
 		}
 	}

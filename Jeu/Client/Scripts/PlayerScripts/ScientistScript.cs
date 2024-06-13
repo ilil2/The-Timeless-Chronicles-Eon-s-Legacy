@@ -16,6 +16,9 @@ public partial class ScientistScript : ClassScript
 	private Timer _manaTimer;
 	private Timer _reloadTimer;
 	private bool _reload;
+
+	public bool ReloadProtection;
+	public bool ReviveAll;
 	
 	public override void _Ready()
 	{
@@ -24,6 +27,18 @@ public partial class ScientistScript : ClassScript
 		_shootCooldown = _shootCooldownValue - 50;
 		_manaTimer = GetNode<Timer>("StaminaTimer");
 		_reloadTimer = GetNode<Timer>("ReloadTimer");
+		
+		foreach (var skill in GameManager.Skills)
+		{
+			if (skill.Item1 == "reloadprotection")
+			{
+				ReloadProtection = true;
+			}
+			else if (skill.Item1 == "reviveall")
+			{
+				ReviveAll = true;
+			}
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -55,7 +70,8 @@ public partial class ScientistScript : ClassScript
 				Inventory();
 				ShootLaser();
 				Animation();
-				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[13].Item2))
+				ActiveSkills();
+				if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[13].Item2) && !(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming))
 				{
 					if (!_reload)
 					{
@@ -170,7 +186,7 @@ public partial class ScientistScript : ClassScript
 			_shootCooldown = 0;
 			_isShooting = true;
 		}
-		else if (_reload && AnimationState != 3 && AnimationState != -2)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && _reload && AnimationState != 3 && AnimationState != -2)
 		{
 			AnimationState = 3;
 			DirectionControl = (0,0);
@@ -215,7 +231,15 @@ public partial class ScientistScript : ClassScript
 	
 	public override void TakeDamage(int damage)
 	{
-		GameManager.Health -= damage;
+		if (ReloadProtection && _reload)
+		{
+			GameManager.Health -= damage / 2;
+		}
+		else
+		{
+			GameManager.Health -= damage;	
+		}
+		
 		if (GameManager.Health <= 0 && !IsDead)
 		{
 			IsDead = true;

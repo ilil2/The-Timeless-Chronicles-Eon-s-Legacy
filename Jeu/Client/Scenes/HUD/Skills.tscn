@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b50mk46t7i3lg"]
+[gd_scene load_steps=9 format=3 uid="uid://b50mk46t7i3lg"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/Skills.cs" id="1_ar3d4"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="2_wlajp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5bc7m"]
 load_path = "res://.godot/imported/CardTemplate.png-2713a36271cd141eb9416de2c45217ba.ctex"
@@ -10,6 +11,24 @@ load_path = "res://.godot/imported/CardTemplate.png-2713a36271cd141eb9416de2c452
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0ku0n"]
 load_path = "res://.godot/imported/CardTemplate.png-2713a36271cd141eb9416de2c45217ba.ctex"
+
+[sub_resource type="LabelSettings" id="LabelSettings_qxcwh"]
+font = ExtResource("2_wlajp")
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghg1e"]
+font = ExtResource("2_wlajp")
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yp38i"]
+font = ExtResource("2_wlajp")
+font_size = 30
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="Skills" type="Control"]
 layout_mode = 3
@@ -83,3 +102,72 @@ anchor_bottom = 0.75
 offset_left = 0.00325073
 offset_right = -0.000758787
 expand_mode = 1
+
+[node name="SkillCooldown1" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.289
+anchor_bottom = 1.0
+offset_right = 0.00800162
+offset_bottom = 1.14441e-05
+color = Color(0.211765, 0.211765, 0.211765, 0.509804)
+
+[node name="Label" type="Label" parent="SkillCooldown1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+label_settings = SubResource("LabelSettings_qxcwh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillCooldown2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.359
+anchor_right = 0.648
+anchor_bottom = 1.0
+offset_left = 0.0479993
+offset_right = 0.0560047
+offset_bottom = 1.14441e-05
+color = Color(0.211765, 0.211765, 0.211765, 0.509804)
+
+[node name="Label" type="Label" parent="SkillCooldown2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+label_settings = SubResource("LabelSettings_ghg1e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SkillCooldown3" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.711
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.00799781
+offset_bottom = 1.14441e-05
+color = Color(0.211765, 0.211765, 0.211765, 0.509804)
+
+[node name="Label" type="Label" parent="SkillCooldown3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_yp38i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownTimer1" type="Timer" parent="."]
+
+[node name="CooldownTimer2" type="Timer" parent="."]
+
+[node name="CooldownTimer3" type="Timer" parent="."]
+
+[connection signal="timeout" from="CooldownTimer1" to="." method="_on_cooldown_timer_1_timeout"]
+[connection signal="timeout" from="CooldownTimer2" to="." method="_on_cooldown_timer_2_timeout"]
+[connection signal="timeout" from="CooldownTimer3" to="." method="_on_cooldown_timer_3_timeout"]

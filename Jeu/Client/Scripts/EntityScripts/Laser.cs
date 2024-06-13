@@ -55,11 +55,11 @@ public partial class Laser : Node3D
 					
 					if (new Random().Next(0, GameManager.CriticalChance) != 1)
 					{
-						mob.TakeDamage(GameManager.Damage);
+						mob.TakeDamage((int)(GameManager.Damage / 1.5));
 					}
 					else
 					{
-						mob.TakeDamage((int)(GameManager.Damage * 1.5));
+						mob.TakeDamage(GameManager.Damage);
 					}
 				}
 				
@@ -73,7 +73,7 @@ public partial class Laser : Node3D
 						if (skill.Item1 == "vampire") player.SetHealth(GameManager.Health + GameManager.Damage / 5);
 					}
 					
-					boss.TakeDamage(GameManager.Damage, Lib.Conversions.AtoI(GameManager.InfoJoueur["id"]));
+					boss.TakeDamage(GameManager.Damage / 2, Lib.Conversions.AtoI(GameManager.InfoJoueur["id"]));
 					
 				}
 				
@@ -86,10 +86,16 @@ public partial class Laser : Node3D
 				
 				if(CanAtk && _laserRay.GetCollider() is Gravestone gravestone)
 				{
-					CanAtk = false;
-					Atk.Start();
-					GD.Print("Revive");
-					GameManager.InfoJoueur["attack"] = $"revive{gravestone.ID}";
+					foreach (var skill in GameManager.Skills)
+					{
+						if (skill.Item1 == "revive")
+						{
+							CanAtk = false;
+							Atk.Start();
+							GD.Print("Revive");
+							GameManager.InfoJoueur["attack"] = $"revive{gravestone.ID}";		
+						}
+					}
 				}
 			}
 		}

@@ -44,6 +44,10 @@ public abstract partial class ClassScript : PlayerScript
 	
 	protected int _uiTimer;
 	
+	public bool Invincibility;
+	public bool Agro;
+	public bool Absorption;
+	
 	public SpringArm3D GetCameraVect()
 	{
 		return CameraV;
@@ -165,6 +169,75 @@ public abstract partial class ClassScript : PlayerScript
 			GameHUD.OnInventory = false;
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 			RemoveChild(_inventory);
+		}
+	}
+
+	protected void ActiveSkills()
+	{
+		if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[6].Item2))
+		{
+			ActiveSkill(0);
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[7].Item2))
+		{
+			ActiveSkill(1);
+		}
+		else if (Input.IsKeyPressed(GameManager.InputManger.GetAllControl()[8].Item2))
+		{
+			ActiveSkill(2);
+		}
+	}
+
+	private void ActiveSkill(int nbskill)
+	{
+		string skill = GameManager.Skills[nbskill].Item1;
+		if (skill == "reviveall")
+		{
+			if (UseStamina(1000) && !GameManager.ReviveAll)
+			{
+				foreach (var player in GameManager.ListJoueur)
+				{
+					ClassScript playerScript = (ClassScript)player;
+					if (playerScript.IsDead)
+					{
+						playerScript.Revive();
+					}
+
+					player.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y + new Random().Next(2, 5), GlobalPosition.Z);
+				}
+			}
+		}
+		else if (skill == "invincibility")
+		{
+			if (GameHUD.Skills.IsCooldown(nbskill))
+			{
+				GameHUD.Skills.StartCooldown(nbskill, 300);
+				Invincibility = true;
+			}
+		}
+		else if (skill == "invisibility")
+		{
+			if (GameHUD.Skills.IsCooldown(nbskill))
+			{
+				GameHUD.Skills.StartCooldown(nbskill, 300);
+				Visible = false;
+			}
+		}
+		else if (skill == "agro")
+		{
+			if (GameHUD.Skills.IsCooldown(nbskill))
+			{
+				GameHUD.Skills.StartCooldown(nbskill, 200);
+				Agro = true;
+			}
+		}
+		else if (skill == "absorption")
+		{
+			if (GameHUD.Skills.IsCooldown(nbskill))
+			{
+				GameHUD.Skills.StartCooldown(nbskill, 150);
+				Absorption = true;
+			}
 		}
 	}
 
