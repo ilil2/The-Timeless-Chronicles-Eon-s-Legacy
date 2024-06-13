@@ -170,6 +170,12 @@ public partial class ScientistScript : ClassScript
 			_shootCooldown = 0;
 			_isShooting = true;
 		}
+		else if (_reload && AnimationState != 3 && AnimationState != -2)
+		{
+			AnimationState = 3;
+			DirectionControl = (0,0);
+			AnimationSet(false, false, false, false, false, true);
+		}
 		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != -2)
 		{
 			AnimationState = 1;
@@ -187,7 +193,7 @@ public partial class ScientistScript : ClassScript
 				GameManager.InfoJoueur["animation"] = "walkside";
 			}
 		}
-		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0 && AnimationState != -2)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && (!(left || right || forward || backward) || AnimationState != 1) && AnimationState != 0 && AnimationState != -2 && !_reload)
 		{
 			AnimationState = 0;
 			DirectionControl = (0,0);
@@ -197,13 +203,14 @@ public partial class ScientistScript : ClassScript
 		}
 	}
 	
-	private void AnimationSet(bool walk, bool shoot, bool idle, bool damage = false, bool death = false)
+	private void AnimationSet(bool walk, bool shoot, bool idle, bool damage = false, bool death = false, bool reload = false)
 	{
 		AnimationTree.Set("parameters/conditions/WhenWalk", walk);
 		AnimationTree.Set("parameters/conditions/WhenShoot", shoot);
 		AnimationTree.Set("parameters/conditions/Idle", idle);
 		AnimationTree.Set("parameters/conditions/Death", death);
 		AnimationTree.Set("parameters/conditions/Damage", damage);
+		AnimationTree.Set("parameters/conditions/WhenReload", reload);
 	}
 	
 	public override void TakeDamage(int damage)
