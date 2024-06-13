@@ -36,7 +36,7 @@ public abstract partial class Boss : CharacterBody3D
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
 		Ani = GetNode<AnimationPlayer>("Animation");
 		Map = (IMap)GetParent();
-		Rand = Map.Rand;
+		Rand = Map.Rand2;
 	}
 
 	public void Process(double delta)
@@ -112,7 +112,7 @@ public abstract partial class Boss : CharacterBody3D
 
 	protected void SendInfo()
 	{
-		if (Alive)
+		if (Alive && GameManager.InfoJoueur["ia"] == "")
 		{
 			GameManager.InfoJoueur["ia"] = $"B{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
@@ -162,12 +162,13 @@ public abstract partial class Boss : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
-				if (send) GameManager.InfoJoueur[$"ia"] += $"B{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+				if (send) GameManager.InfoJoueur[$"ia"] = $"B{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
 
 			if (send && Alive)
 			{
-				GameManager.InfoJoueur[$"ia"]  += $"B{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GameManager.InfoJoueur[$"ia"] = $"B{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GD.Print(GameManager.InfoJoueur["ia"]);
 			}
 			
 		}
@@ -205,7 +206,7 @@ public abstract partial class Boss : CharacterBody3D
 						{
 							int damage = int.Parse(secondline[1]);
 							TakeDamage(damage, Conversions.AtoI(secondline[1]),false);
-							//GD.Print("TK: " + damage);
+							GD.Print("TK: " + damage);
 						}
 					}
 					else
