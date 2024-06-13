@@ -214,6 +214,7 @@ public abstract partial class MobScript : CharacterBody3D
 			if (send && Alive)
 			{
 				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GD.Print("Send TK: " + damage);
 			}
 			
 		}
@@ -329,6 +330,7 @@ public abstract partial class MobScript : CharacterBody3D
 						{
 							int damage = int.Parse(secondline[1]);
 							TakeDamage(damage, false);
+							GD.Print("TK: " + damage);
 						}
 					}
 					else
@@ -349,7 +351,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 						if (firstline[0] == "42")
 						{
-							TakeDamage(10000);
+							TakeDamage(10000, false);
 							GD.Print("Rec Mort");
 						}
 						
