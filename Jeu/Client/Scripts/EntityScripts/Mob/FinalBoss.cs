@@ -15,10 +15,10 @@ public partial class FinalBoss : Boss
 		Map = (IMap)GetParent();
 		Rand = Map.Rand;
 		Spawn = GetNode<Node3D>("Spawn");
-		HP = 300;
-		MaxHP = 300;
+		HP = 1000;
+		MaxHP = 1000;
 		Ready();
-		DistAtk = 7;
+		DistAtk = 5;
 		Ani.Play("Idle");
 		
 	}
