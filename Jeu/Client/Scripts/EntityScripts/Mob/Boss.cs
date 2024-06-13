@@ -60,7 +60,7 @@ public abstract partial class Boss : CharacterBody3D
 				}
 				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					Attack()
+					Attack();
 				}
 			}
 			else

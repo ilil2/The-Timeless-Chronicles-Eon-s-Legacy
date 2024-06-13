@@ -3,7 +3,7 @@ using System;
 using JeuClient.Scripts.EntityScripts.Mob;
 using JeuClient.Scripts.PlayerScripts;
 
-public partial class Boss1 : Boss
+public partial class FinalBoss : Boss
 {
 	private PackedScene[] Mob = {GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Mummy.tscn"),GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/Pharaon.tscn"),GD.Load<PackedScene>("res://Scenes/EntityScenes/Mob/FogSkeleton.tscn")};
 	private Random Rand;
@@ -45,7 +45,7 @@ public partial class Boss1 : Boss
 				}
 				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					Attack()
+					Attack();
 				}
 			}
 		}
@@ -53,7 +53,7 @@ public partial class Boss1 : Boss
 
 	public override void Attack()
 	{
-		x = Rand.Next(0,4);
+		var x = Rand.Next(0,4);
 		if (x == 1)
 			Ani.Play("AttackDown");
 		if (x == 2)

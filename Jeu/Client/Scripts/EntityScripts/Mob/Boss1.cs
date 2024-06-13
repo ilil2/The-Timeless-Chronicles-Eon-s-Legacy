@@ -47,7 +47,7 @@ public partial class Boss1 : Boss
 				}
 				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					Attack()
+					Attack();
 				}
 			}
 		}
