@@ -204,14 +204,14 @@ public abstract partial class MobScript : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+				if (send) GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
 			else
 			{
 				Ani.Play("Hit");
 			}
 
-			if (send)
+			if (send && Alive)
 			{
 				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
 			}
@@ -316,7 +316,7 @@ public abstract partial class MobScript : CharacterBody3D
 		{
 			if (!string.IsNullOrEmpty(a))
 			{
-				GD.Print("Received: " + a);
+				//GD.Print("Received: " + a);
 				string[] firstline = a.Split("°");
 				int id = int.Parse(firstline[0]);
 				if(id == ID)
