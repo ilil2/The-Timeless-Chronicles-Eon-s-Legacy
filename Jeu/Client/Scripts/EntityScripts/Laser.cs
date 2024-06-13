@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using JeuClient.Scripts.EntityScripts.Mob;
-using JeuClient.Scripts.PlayerScripts;
 
 public partial class Laser : Node3D
 {
@@ -26,6 +25,7 @@ public partial class Laser : Node3D
 		
 		_startPoint = GlobalPosition;
 		_laserRay.Enabled = false;
+		_rangeMax.Visible = false;
 		Visible = false;
 	}
 	
@@ -39,7 +39,6 @@ public partial class Laser : Node3D
 			_laserMesh.GlobalPosition = middle;
 			_laserMesh.Scale = new Vector3(_laserSize, _startPoint.DistanceTo(middle), _laserSize);
 			
-			_rangeMax.Visible = false;
 			if (_laserId == -1)
 			{
 				ScientistScript player = (ScientistScript)GameManager.Joueur1;

@@ -75,17 +75,17 @@ public partial class ScientistScript : ClassScript
 				{
 					if (!_reload)
 					{
-						_reloadTimer.Start();	
+						_reloadTimer.Start();
+						_reload = true;
 					}
-					_reload = true;
 				}
 				else
 				{
 					if (_reload)
 					{
-						_reloadTimer.Stop();	
+						_reloadTimer.Stop();
+						_reload = false;
 					}
-					_reload = false;
 				}
 				
 				if (!_isShooting && !_reload)
@@ -186,7 +186,7 @@ public partial class ScientistScript : ClassScript
 			_shootCooldown = 0;
 			_isShooting = true;
 		}
-		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && _reload && AnimationState != 3 && AnimationState != -2)
+		else if (!(Input.IsMouseButtonPressed(MouseButton.Left) && IsAiming) && _reload && AnimationState != 3 && AnimationState != -2 && !InteractionShop.OnShop && !GameHUD.OnInventory)
 		{
 			AnimationState = 3;
 			DirectionControl = (0,0);

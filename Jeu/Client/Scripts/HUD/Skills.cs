@@ -49,7 +49,15 @@ public partial class Skills : Control
 				_skills[i].Texture = GD.Load<Texture2D>(skill);
 			}
 
-			_skillCooldownLabel[i].Text = _cooldown[i].ToString();
+			if (skill == "reviveall" && GameManager.ReviveAll)
+			{
+				_skillCooldownLabel[i].Text = "X";
+				_skillCooldown[i].Visible = true;
+			}
+			else
+			{
+				_skillCooldownLabel[i].Text = _cooldown[i].ToString();
+			}
 		}
 	}
 	
@@ -142,7 +150,7 @@ public partial class Skills : Control
 			_skillCooldown[skill].Visible = false;
 		}
 
-		if (_cooldown[skill] % 5 == 1)
+		if (_cooldown[skill] % 20 == 1)
 		{
 			StopSkill(GameManager.Skills[skill].Item1);
 		}

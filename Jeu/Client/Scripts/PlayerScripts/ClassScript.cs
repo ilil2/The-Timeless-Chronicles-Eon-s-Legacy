@@ -211,7 +211,7 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (GameHUD.Skills.IsCooldown(nbskill))
 			{
-				GameHUD.Skills.StartCooldown(nbskill, 300);
+				GameHUD.Skills.StartCooldown(nbskill, 250);
 				Invincibility = true;
 			}
 		}
@@ -219,7 +219,7 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (GameHUD.Skills.IsCooldown(nbskill))
 			{
-				GameHUD.Skills.StartCooldown(nbskill, 300);
+				GameHUD.Skills.StartCooldown(nbskill, 200);
 				Visible = false;
 			}
 		}
@@ -227,7 +227,7 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (GameHUD.Skills.IsCooldown(nbskill))
 			{
-				GameHUD.Skills.StartCooldown(nbskill, 200);
+				GameHUD.Skills.StartCooldown(nbskill, 100);
 				Agro = true;
 			}
 		}
@@ -235,7 +235,7 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (GameHUD.Skills.IsCooldown(nbskill))
 			{
-				GameHUD.Skills.StartCooldown(nbskill, 150);
+				GameHUD.Skills.StartCooldown(nbskill, 80);
 				Absorption = true;
 			}
 		}

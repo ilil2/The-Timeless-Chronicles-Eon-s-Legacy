@@ -597,8 +597,7 @@ public partial class SelectSkills : Control
 						GameManager.HealSpeed += skill.Item2;
 						break;
 					case "range":
-						CollisionShape3D sword = ((KnightScript)_player).Sword;
-						sword.Scale = new Vector3(1, sword.Scale.Y + skill.Item2 / 4f, 1);
+						GameManager.Range += skill.Item2;
 						break;
 					case "dashdegat":
 						GameManager.DashDegat += skill.Item2;

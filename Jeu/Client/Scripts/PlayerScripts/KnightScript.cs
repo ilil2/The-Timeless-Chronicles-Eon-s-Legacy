@@ -18,7 +18,7 @@ public partial class KnightScript : ClassScript
 		{
 			if (skill.Item1 == "range")
 			{
-				Sword.Scale = new Vector3(1, Sword.Scale.Y + skill.Item2 / 4f, 1);
+				Sword.Scale = new Vector3(1, Sword.Scale.Y + GameManager.Range / 4f, 1);
 			}
 		}
 	}

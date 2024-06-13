@@ -107,6 +107,7 @@ public partial class GameManager : Node3D
 	public static int NbArrow = 1;
 	public static int DashDegat = 0;
 	public static bool ReviveAll = false;
+	public static float Range = 0;
 	
 	public static float WalkSpeed = 4.2f;
 	public static float CurrentWalkSpeed = 4.2f;
