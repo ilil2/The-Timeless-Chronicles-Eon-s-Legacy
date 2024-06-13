@@ -55,7 +55,7 @@ public partial class PortalExit : Node3D
 		}
 		else if((GetParent() as IMap).CanExit)
 		{
-			if(!Open && SaveDialogue.Emax.c1 != 0 && SaveDialogue.Emax.c1 % 2 == 0)
+			if(!Open && (!(GetParent() is Shop) || (SaveDialogue.Emax.c1 != 0 && SaveDialogue.Emax.c1 % 2 == 0)))
 			{
 				Portal.Visible = true;
 				AnimationPortal.Play("Open");
