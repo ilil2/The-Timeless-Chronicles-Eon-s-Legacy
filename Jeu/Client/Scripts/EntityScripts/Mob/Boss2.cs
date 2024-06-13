@@ -25,35 +25,6 @@ public partial class Boss2 : Boss
 		PhysicsProcess(delta);
 	}
 
-	public override void TakeDamage(int damage, int id, bool send = true)
-	{
-		Agro[id] += 10;
-		if(Alive)
-		{
-			HP -= damage;
-			GD.Print("HP" + HP);
-			if(HP<=0)
-			{
-				GD.Print("Mort");
-				Alive = false;
-				Ani.Play("Death");
-				GameManager.Gold += 10;
-				GameManager.xp += 1;
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
-			}
-			else
-			{
-				//Ani.Play("Hit");
-			}
-
-			if (send)
-			{
-				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
-			}
-			
-		}
-	}
-
 	private void SpawnSon()
 	{
 		if (MaxHP>25)
