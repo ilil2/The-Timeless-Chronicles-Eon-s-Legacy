@@ -57,6 +57,7 @@ public class MainServeur
         CSV();
         
         Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp);
+        
         IPEndPoint iep = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 9191);
         soc.Bind(iep); //connection depuis n'importe ou
         
@@ -74,7 +75,7 @@ public class MainServeur
             Thread th = new Thread(com);                    //mise en place de la connection
             th.Start(clicom); //demarage de la connection
             
-            Thread th2 = new Thread(lunch_game);                    
+            Thread th2 = new Thread(lunch_game);               
             th2.Start(clicom);
         }
     }
