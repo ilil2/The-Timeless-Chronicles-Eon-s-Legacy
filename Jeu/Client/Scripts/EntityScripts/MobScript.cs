@@ -204,7 +204,11 @@ public abstract partial class MobScript : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
-				if (send) GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+				if (send)
+				{
+					GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+					//GD.Print("send death");
+				}
 			}
 			else
 			{
@@ -214,7 +218,7 @@ public abstract partial class MobScript : CharacterBody3D
 			if (send && Alive)
 			{
 				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
-				GD.Print("Send TK: " + damage);
+				//GD.Print("Send TK: " + damage);
 			}
 			
 		}
@@ -330,29 +334,29 @@ public abstract partial class MobScript : CharacterBody3D
 						{
 							int damage = int.Parse(secondline[1]);
 							TakeDamage(damage, false);
-							GD.Print("TK: " + damage);
+							//GD.Print("TK: " + damage);
 						}
 					}
 					else
 					{
-						
+						//GD.Print(firstline[1]);	
 						if (firstline[1]=="1")
 						{
 							state = 1;
 						}
-						if (firstline[1]=="2")
+						else if (firstline[1]=="2")
 						{
 							state = 2;
 						}
-						if (firstline[1]=="3")
+						else if (firstline[1]=="3")
 						{
 							state = 3;
 						}
 
-						if (firstline[0] == "42")
+						else if (firstline[1] == "42")
 						{
 							TakeDamage(10000, false);
-							GD.Print("Rec Mort");
+							//GD.Print("Rec Mort");
 						}
 						
 					}
