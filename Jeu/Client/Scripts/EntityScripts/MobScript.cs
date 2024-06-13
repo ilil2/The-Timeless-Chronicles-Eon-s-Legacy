@@ -9,6 +9,8 @@ using static Godot.Input;
 //Ceci est un commentaire
 public abstract partial class MobScript : CharacterBody3D
 {
+	
+	public int RenderDist = 100;
 	//stats
 	public int ID = -1;
 	protected int speed = 2; // vitesse
@@ -86,6 +88,7 @@ public abstract partial class MobScript : CharacterBody3D
 
 	public void PhysicsProcess(double delta) //Raycast
 	{
+		Render();
 		HealthBar.Process(delta);
 		if (DebugMode)
 		{
@@ -409,6 +412,22 @@ public abstract partial class MobScript : CharacterBody3D
 		var t = (DateTime.UtcNow - new DateTime(1970, 1, 1));
 		_poisontime  = (int) t.TotalSeconds;
 		_poisonint = 0;
+	}
+	
+	public void Render()
+	{
+		if(GameManager.ListJoueur[0]!=null)
+		{
+			double dist = Distance(GlobalPosition,GameManager.ListJoueur[0].GlobalPosition);
+			if(dist<RenderDist)
+			{
+				Visible = true;
+			}
+			else
+			{
+				Visible = false;
+			}
+		}
 	}
 	
 }
