@@ -63,7 +63,7 @@ public partial class Boss2 : Boss
 				GD.Print("NewSpawn");
 				Boss2 son = Son.Instantiate<Boss2>();
 				GetParent().AddChild(son);
-				son.Scale -= new Vector3(0.5f, 0.5f, 0.5f);
+				son.Scale = new Vector3(0.5f, 0.5f, 0.5f);
 				son.GlobalPosition = new Vector3(new Random().Next(-10,10)/10.0f,0,0)+GlobalPosition;
 				son.MaxHP = MaxHP / 2;
 				son.HP = son.MaxHP;

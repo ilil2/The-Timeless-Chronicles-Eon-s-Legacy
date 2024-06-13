@@ -8,7 +8,7 @@
 [ext_resource type="Sky" uid="uid://cbbdl23q60wak" path="res://Ressources/Map/Egypt/SkyBox.res" id="7_f3eo2"]
 [ext_resource type="PackedScene" uid="uid://dtxs11ub2f3pg" path="res://Ressources/Map/Medival/DwarfGate/Model/DwarfGate.tscn" id="8_0e3ry"]
 [ext_resource type="PackedScene" uid="uid://cade40hgg6crx" path="res://Scenes/MapScenes/PortalExit.tscn" id="9_apu7b"]
-[ext_resource type="PackedScene" uid="uid://dmuni2w3bymsh" path="res://Scenes/EntityScenes/Mob/Boss2.tscn" id="10_dwjv0"]
+[ext_resource type="PackedScene" uid="uid://b45pakn6wg8aw" path="res://Scenes/EntityScenes/Mob/Boss2.tscn" id="10_dwjv0"]
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_s0ewh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwlfw"]
@@ -250,4 +250,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49, -3.1, 0)
 shape = SubResource("BoxShape3D_3iub8")
 
 [node name="Boss2" parent="." instance=ExtResource("10_dwjv0")]
-transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0, 0, 0)
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 0, 0)
