@@ -9,6 +9,8 @@ public partial class Boss1 : Boss
 	[Export] private bool CastSpell;
 	[Export] private bool SummonMob;
 	private Random Rand;
+	private Node3D Spawn;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -18,6 +20,7 @@ public partial class Boss1 : Boss
 		DistAtk = 7;
 		Map = (IMap)GetParent();
 		Rand = Map.Rand;
+		Spawn = GetNode<Node3D>("Spawn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,7 +70,7 @@ public partial class Boss1 : Boss
 		{
 			SummonMob = false;
 			MobScript SMob = Mob[Rand.Next(0,3)].Instantiate<MobScript>();
-			SMob.Position = GlobalPosition+new Vector3(2,0,2);
+			SMob.Position = Spawn.GlobalPosition;
 			Map.AddChild(SMob);
 			
 		}
