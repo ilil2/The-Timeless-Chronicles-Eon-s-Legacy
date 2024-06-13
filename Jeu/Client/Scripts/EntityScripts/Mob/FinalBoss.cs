@@ -48,6 +48,7 @@ public partial class FinalBoss : Boss
 					Attack();
 				}
 			}
+			SendInfo();
 		}
 	}
 
@@ -67,35 +68,6 @@ public partial class FinalBoss : Boss
 	public override void _PhysicsProcess(double delta)
 	{
 		PhysicsProcess(delta);
-	}
-
-	public override void TakeDamage(int damage, int id, bool send = true)
-	{
-		Agro[id] += 10;
-		if(Alive)
-		{
-			HP -= damage;
-			(_Hp as BossHealthBar).Value = HP;
-			GD.Print("HP" + HP);
-			if(HP<=0)
-			{
-				GD.Print("Mort");
-				Alive = false;
-				Ani.Play("Death");
-				GameManager.Gold += 10;
-				GameManager.xp += 1;
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
-			}
-			else
-			{
-				//Ani.Play("Hit");
-			}
-			if (send)
-			{
-				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
-			}
-			
-		}
 	}
 	
 	public override void AtDeath()

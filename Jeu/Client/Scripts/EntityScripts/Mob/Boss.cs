@@ -7,7 +7,7 @@ namespace JeuClient.Scripts.EntityScripts.Mob;
 
 public abstract partial class Boss : CharacterBody3D
 {
-	public int ID = 1;
+	public int ID;
 	public int HP = 100;
 	public int MaxHP = 100;
 	public int State = 0;
@@ -106,6 +106,15 @@ public abstract partial class Boss : CharacterBody3D
 					State = 0;
 				}
 			}
+			SendInfo();
+		}
+	}
+
+	protected void SendInfo()
+	{
+		if (Alive)
+		{
+			GameManager.InfoJoueur["ia"] = $"B{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
 	}
 
@@ -153,19 +162,79 @@ public abstract partial class Boss : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
-				GameManager.InfoJoueur[$"ia"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
-			}
-			else
-			{
-				
+				if (send) GameManager.InfoJoueur[$"ia"] += $"B{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
 
-			if (send)
+			if (send && Alive)
 			{
-				GameManager.InfoJoueur[$"ia"]  += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GameManager.InfoJoueur[$"ia"]  += $"B{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
 			}
 			
 		}
 	}
+	
+	public void receive()
+	{
+		string rec = "";
+		for(int i = 0;i<GameManager._nbJoueur;i++)
+		{
+			if (GameManager.InfoJoueur["id"]!=i.ToString())
+			{
+				if (GameManager.InfoAutreJoueur[$"ia{i}"] != "" && GameManager.InfoAutreJoueur[$"ia{i}"][0] == 'B')
+				{
+					rec += GameManager.InfoAutreJoueur[$"ia{i}"];
+					GameManager.InfoAutreJoueur[$"ia{i}"] = "";
+				}
+			}
+		}
+		string[] ia = rec.Split("=");
+		foreach (var a in ia)
+		{
+			if (!string.IsNullOrEmpty(a))
+			{
+				//GD.Print("Received: " + a);
+				string[] firstline = a.Split("°");
+				int id = Lib.Conversions.AtoI(firstline[0].Substring(1));
 
+				if (id == ID)
+				{
+					if (firstline[1].Contains("§"))
+					{
+						string[] secondline = firstline[1].Split("§");
+						if (secondline[0] == "TK")
+						{
+							int damage = int.Parse(secondline[1]);
+							TakeDamage(damage, Conversions.AtoI(secondline[1]),false);
+							//GD.Print("TK: " + damage);
+						}
+					}
+					else
+					{
+						//GD.Print(firstline[1]);	
+						if (firstline[1]=="0")
+						{
+							State = 0;
+						}
+						else if (firstline[1]=="1")
+						{
+							State = 1;
+						}
+
+						else if (firstline[1] == "42")
+						{
+							TakeDamage(10000, 0,false);
+							//GD.Print("Rec Mort");
+						}
+						
+					}
+				}
+				string[] pos = firstline[2].Split("?");
+				Vector3 NPosition = new Vector3(float.Parse(pos[0]), Position.Y, float.Parse(pos[1]));
+				if(MapTool.Distance(Position,NPosition)>0.1)
+				{
+					Position = NPosition;
+				}
+			}
+		}
+	}
 }
