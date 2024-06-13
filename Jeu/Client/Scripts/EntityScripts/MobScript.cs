@@ -416,7 +416,7 @@ public abstract partial class MobScript : CharacterBody3D
 	
 	public void Render()
 	{
-		if(GameManager.ListJoueur[0]!=null)
+		if(GameManager.ListJoueur[0]!=null && GameManager.ListJoueur[0].IsInsideTree())
 		{
 			double dist = Distance(GlobalPosition,GameManager.ListJoueur[0].GlobalPosition);
 			if(dist<RenderDist)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://blye5t622lvct"]
+[gd_scene load_steps=4 format=3 uid="uid://blye5t622lvct"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/BossDialogue.cs" id="1_cmw4j"]
+[ext_resource type="FontFile" uid="uid://b3t8au484t6un" path="res://Ressources/Font/Font.ttf" id="2_0rksq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qqjep"]
+font = ExtResource("2_0rksq")
 font_size = 20
 
 [node name="BossDialogue" type="Control"]
