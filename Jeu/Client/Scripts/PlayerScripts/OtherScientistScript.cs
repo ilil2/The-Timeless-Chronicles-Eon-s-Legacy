@@ -65,15 +65,20 @@ public partial class OtherScientistScript : OtherClassScript
 				OtherAnimationSet(false, false, false, true);
 				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
 				break;
+			case "reload":
+				OtherAnimationSet(false, false, false, false, false, true);
+				GameManager.InfoAutreJoueur[$"animation{Id}"] = "";
+				break;
 		}
     }
-    
-    private void OtherAnimationSet(bool walk, bool shoot, bool idle, bool damage = false, bool death = false)
+
+    private void OtherAnimationSet(bool walk, bool shoot, bool idle, bool damage = false, bool death = false, bool reload = false)
     {
 	    AnimationOtherTree.Set("parameters/conditions/WhenWalk", walk);
 	    AnimationOtherTree.Set("parameters/conditions/WhenShoot", shoot);
 	    AnimationOtherTree.Set("parameters/conditions/Idle", idle);
 	    AnimationOtherTree.Set("parameters/conditions/Death", death);
 	    AnimationOtherTree.Set("parameters/conditions/Damage", damage);
+	    AnimationOtherTree.Set("parameters/conditions/WhenReload", reload);
     }
 }

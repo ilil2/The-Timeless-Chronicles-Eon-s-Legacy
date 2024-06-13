@@ -45,6 +45,7 @@ public partial class AssassinScript : ClassScript
 			{
 				Inventory();
 				Animation();
+				ActiveSkills();
 				Move(delta);
 			}
 			else

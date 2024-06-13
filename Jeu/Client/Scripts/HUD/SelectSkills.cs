@@ -603,6 +603,12 @@ public partial class SelectSkills : Control
 					case "dashdegat":
 						GameManager.DashDegat += skill.Item2;
 						break;
+					case "reloadprotection":
+						((ScientistScript)GameManager.Joueur1).ReloadProtection = true;
+						break;
+					case "reviveall":
+						((ScientistScript)GameManager.Joueur1).ReviveAll = true;
+						break;
 				}
 
 				if (reverse)

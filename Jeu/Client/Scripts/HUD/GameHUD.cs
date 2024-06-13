@@ -40,6 +40,7 @@ public partial class GameHUD : Control
 	private Label _gold;
 	
 	public static bool IsVisible = true;
+	public static Skills Skills;
 	
 	private float _screenDefaultWidth = 1152;
 	private float _labelDefaultSize = 22;
@@ -64,6 +65,8 @@ public partial class GameHUD : Control
 		_otherPlayer3 = GetNode<Control>("OtherPlayer3");
 		_otherPlayer3HpBar = GetNode<ProgressBar>("OtherPlayer3/HpBar");
 		_otherPlayer3MpBar = GetNode<ProgressBar>("OtherPlayer3/MpBar");
+		
+		Skills = GetNode<Skills>("Skills");
 	}
 	
 	public void OnResize()

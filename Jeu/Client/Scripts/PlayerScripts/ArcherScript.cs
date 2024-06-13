@@ -286,6 +286,7 @@ public partial class ArcherScript : ClassScript
 			GameManager.Stamina += GameManager.ChargeSpeed;
 		}
 	}
+	
 	private void _on_death_timer_timeout()
 	{
 		Position -= new Vector3(0,10,0);
