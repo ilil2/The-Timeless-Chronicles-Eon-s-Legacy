@@ -312,11 +312,8 @@ public abstract partial class MobScript : CharacterBody3D
 		{
 			if (GameManager.InfoJoueur["id"]!=i.ToString())
 			{
-				if (GameManager.InfoAutreJoueur[$"ia{i}"] != "" && GameManager.InfoAutreJoueur[$"ia{i}"][0] != 'B')
-				{
-					rec += GameManager.InfoAutreJoueur[$"ia{i}"];
-					GameManager.InfoAutreJoueur[$"ia{i}"] = "";
-				}
+				rec += GameManager.InfoAutreJoueur[$"ia{i}"];
+				GameManager.InfoAutreJoueur[$"ia{i}"] = "";
 			}
 		}
 		string[] ia = rec.Split("=");

@@ -20,6 +20,7 @@ public partial class State5 : GameManager
 		InfoJoueur["hp"] = "100";
 		InfoJoueur["mp"] = "1000";
 		InfoJoueur["ia"] = "";
+		InfoJoueur["boss"] = "";
 				
 		switch (_nbJoueur)
 		{
@@ -201,5 +202,6 @@ public partial class State5 : GameManager
 		InfoAutreJoueur[$"hp{id}"] = "100";
 		InfoAutreJoueur[$"mp{id}"] = "1000";
 		InfoAutreJoueur[$"ia{id}"] = "";
+		InfoAutreJoueur[$"boss{id}"] = "";
 	}
 }

@@ -112,9 +112,9 @@ public abstract partial class Boss : CharacterBody3D
 
 	protected void SendInfo()
 	{
-		if (Alive && GameManager.InfoJoueur["ia"] == "")
+		if (Alive && GameManager.InfoJoueur["boss"] == "")
 		{
-			GameManager.InfoJoueur["ia"] = $"B{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+			GameManager.InfoJoueur["boss"] = $"{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
 	}
 
@@ -162,13 +162,13 @@ public abstract partial class Boss : CharacterBody3D
 				Ani.Play("Death");
 				GameManager.Gold += 10;
 				GameManager.xp += 1;
-				if (send) GameManager.InfoJoueur[$"ia"] = $"B{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
+				if (send) GameManager.InfoJoueur[$"boss"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
 
 			if (send && Alive)
 			{
-				GameManager.InfoJoueur[$"ia"] = $"B{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
-				GD.Print(GameManager.InfoJoueur["ia"]);
+				GameManager.InfoJoueur[$"boss"] += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
+				GD.Print(GameManager.InfoJoueur["boss"]);
 			}
 			
 		}
@@ -181,11 +181,8 @@ public abstract partial class Boss : CharacterBody3D
 		{
 			if (GameManager.InfoJoueur["id"]!=i.ToString())
 			{
-				if (GameManager.InfoAutreJoueur[$"ia{i}"] != "" && GameManager.InfoAutreJoueur[$"ia{i}"][0] == 'B')
-				{
-					rec += GameManager.InfoAutreJoueur[$"ia{i}"];
-					GameManager.InfoAutreJoueur[$"ia{i}"] = "";
-				}
+				rec += GameManager.InfoAutreJoueur[$"boss{i}"]; 
+				GameManager.InfoAutreJoueur[$"boss{i}"] = "";
 			}
 		}
 		string[] ia = rec.Split("=");
@@ -193,9 +190,9 @@ public abstract partial class Boss : CharacterBody3D
 		{
 			if (!string.IsNullOrEmpty(a))
 			{
-				//GD.Print("Received: " + a);
+				GD.Print("Received: " + a);
 				string[] firstline = a.Split("°");
-				int id = Lib.Conversions.AtoI(firstline[0].Substring(1));
+				int id = Lib.Conversions.AtoI(firstline[0]);
 
 				if (id == ID)
 				{
