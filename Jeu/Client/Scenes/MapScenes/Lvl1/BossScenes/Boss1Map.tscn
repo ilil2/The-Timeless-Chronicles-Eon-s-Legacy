@@ -3328,7 +3328,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 31, 0), Vector3(0, -0.2, 0)]
+"values": [Vector3(0, 31, 0), Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -3557,6 +3557,18 @@ tracks/19/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0.174533, 0), Vector3(0, 0.404916, 0)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("../AnimationSpawn/S1:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 31, 2), Vector3(0, 0, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_wnbm8"]
@@ -5318,7 +5330,7 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0.34641
 current = true
 
 [node name="Cam2" type="Camera3D" parent="Animation"]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -6.11959e-07, 2, -7)
+transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, -6.11959e-07, 2, -7)
 
 [node name="Cam3" type="Camera3D" parent="Animation"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.452094, 0.6, -29.8954)
@@ -5327,7 +5339,7 @@ transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.2, 0)
 
 [node name="S1" type="Node3D" parent="AnimationSpawn"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 31, 2)
 
 [node name="S2" type="Node3D" parent="AnimationSpawn"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, 31, -2)
@@ -5357,8 +5369,8 @@ font_size = 60
 offset_right = 40.0
 offset_bottom = 23.0
 text = "CamOnPlayer = False
- Cam1 = False
- Cam2 = True 
+ Cam1 = True
+ Cam2 = False 
  CA = "
 
 [node name="Area3D" type="Area3D" parent="."]

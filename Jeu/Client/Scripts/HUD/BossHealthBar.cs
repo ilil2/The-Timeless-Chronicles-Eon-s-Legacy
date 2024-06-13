@@ -9,12 +9,15 @@ public partial class BossHealthBar : Control
 	
 	private ProgressBar Hp;
 	private ProgressBar SubBar;
+	public Label Name;
+	[Export] public string _name = "";
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Hp = GetNode<ProgressBar>("Bar");
 		SubBar = GetNode<ProgressBar>("SubBar");
+		Name = GetNode<Label>("Name");
 		Hp.MaxValue = Max;
 		SubBar.MaxValue = Max;
 		Hp.Value = Max;
@@ -24,6 +27,10 @@ public partial class BossHealthBar : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public void Process(double delta)
 	{
+		if(Name.Text!=_name)
+		{
+			Name.Text = _name;
+		}
 		GD.Print("Value "+Value);
 		if(Hp.Value!=Value)
 		{

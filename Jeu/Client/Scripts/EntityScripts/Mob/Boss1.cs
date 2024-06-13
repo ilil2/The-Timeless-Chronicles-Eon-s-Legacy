@@ -14,13 +14,14 @@ public partial class Boss1 : Boss
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Map = (IMap)GetParent();
+		Rand = Map.Rand;
+		Spawn = GetNode<Node3D>("Spawn");
 		HP = 300;
 		MaxHP = 300;
 		Ready();
 		DistAtk = 7;
-		Map = (IMap)GetParent();
-		Rand = Map.Rand;
-		Spawn = GetNode<Node3D>("Spawn");
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

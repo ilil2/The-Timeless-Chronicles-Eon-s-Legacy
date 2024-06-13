@@ -27,12 +27,12 @@ public abstract partial class Boss : CharacterBody3D
 	//Godot Node
 	protected NavigationAgent3D Nav;
 	protected AnimationPlayer Ani;
-	public Control _Hp;
+	public BossHealthBar _Hp;
 	
 
 	public void Ready()
 	{
-		_Hp = GetNode<Control>("BossHealthBar");
+		_Hp = (BossHealthBar)GetNode<Control>("BossHealthBar");
 		Nav = GetNode<NavigationAgent3D>("NavigationAgent3D");
 		Ani = GetNode<AnimationPlayer>("Animation");
 		Map = (IMap)GetParent();
