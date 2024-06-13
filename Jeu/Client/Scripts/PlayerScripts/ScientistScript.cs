@@ -191,6 +191,8 @@ public partial class ScientistScript : ClassScript
 			AnimationState = 3;
 			DirectionControl = (0,0);
 			AnimationSet(false, false, false, false, false, true);
+			
+			GameManager.InfoJoueur["animation"] = "reload";
 		}
 		else if ((left || right || forward || backward) && direction != DirectionControl && AnimationState != -2)
 		{
