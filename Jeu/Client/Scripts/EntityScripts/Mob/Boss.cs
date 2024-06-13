@@ -41,6 +41,7 @@ public abstract partial class Boss : CharacterBody3D
 
 	public void Process(double delta)
 	{
+		(_Hp as Control).Visible = Map.ShowHud; 
 		if(Active)
 		{
 			if(Alive)

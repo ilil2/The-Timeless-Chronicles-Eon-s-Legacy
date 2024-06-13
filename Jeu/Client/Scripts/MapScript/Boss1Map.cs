@@ -15,6 +15,8 @@ public partial class Boss1Map : IMap
 	private NavigationRegion3D Nav;
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
 	private List<Vector3> BallPos = new List<Vector3>();
+	
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -51,7 +53,6 @@ public partial class Boss1Map : IMap
 	public override void _Process(double delta)
 	{
 		SyncCam();
-		GetNode<Label>("t").Text = $"CamOnPlayer = {CamOnPlayer}\n Cam1 = {GetNode<Camera3D>("Animation/Cam1").Current}\n Cam2 = {GetNode<Camera3D>("PortalExit/Cam").Current} \n CA = {Ani.CurrentAnimation}";
 		if (!MapReady)
 		{
 			MapReady = true;

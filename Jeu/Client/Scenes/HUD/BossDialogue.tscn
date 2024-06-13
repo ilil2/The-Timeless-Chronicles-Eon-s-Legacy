@@ -1,14 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://blye5t622lvct"]
+[gd_scene load_steps=3 format=3 uid="uid://blye5t622lvct"]
 
 [ext_resource type="Script" path="res://Scripts/HUD/BossDialogue.cs" id="1_cmw4j"]
-
-[sub_resource type="Gradient" id="Gradient_1i58p"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_c5nxq"]
-gradient = SubResource("Gradient_1i58p")
-fill_from = Vector2(1, 1)
-fill_to = Vector2(1, 0.689655)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qqjep"]
 font_size = 20
@@ -22,21 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cmw4j")
 
-[node name="DialogueHud" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="DialogueHud"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-texture = SubResource("GradientTexture2D_c5nxq")
-
-[node name="Line" type="Label" parent="DialogueHud"]
+[node name="Line" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.007
@@ -50,11 +28,3 @@ offset_bottom = -0.296021
 label_settings = SubResource("LabelSettings_qqjep")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="SkipButton" type="Button" parent="DialogueHud"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-text = ">"

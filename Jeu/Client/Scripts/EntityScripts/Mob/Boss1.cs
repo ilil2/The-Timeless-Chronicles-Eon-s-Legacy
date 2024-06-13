@@ -21,6 +21,7 @@ public partial class Boss1 : Boss
 		MaxHP = 300;
 		Ready();
 		DistAtk = 7;
+		Ani.Play("Idle");
 		
 	}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=288 format=3 uid="uid://bnmjhfrfx7ohn"]
+[gd_scene load_steps=289 format=3 uid="uid://bnmjhfrfx7ohn"]
 
 [ext_resource type="Script" path="res://Scripts/MapScript/Boss1Map.cs" id="1_atvld"]
 [ext_resource type="Texture2D" uid="uid://bphcmx4do5y7d" path="res://Ressources/Map/Egypt/Ground/ground_0024_color_1k.jpg" id="1_ygejy"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brgiv8w85t52d" path="res://Scenes/MapScenes/Exit.tscn" id="10_ldyb2"]
 [ext_resource type="PackedScene" uid="uid://dokfk8l6tujxi" path="res://Scenes/EntityScenes/Mob/Boss1.tscn" id="11_1rbad"]
 [ext_resource type="PackedScene" uid="uid://x4qvhw8gjj5q" path="res://Scenes/MapScenes/NoMan'sLand.tscn" id="12_t13ev"]
+[ext_resource type="PackedScene" uid="uid://blye5t622lvct" path="res://Scenes/HUD/BossDialogue.tscn" id="13_svcgb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk88x"]
 resource_name = "Rocks"
@@ -3315,14 +3316,19 @@ size = Vector2(120, 120)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jb1v2"]
 data = PackedVector3Array(1530, 0, 1530, -1530, 0, 1530, 1530, 0, -1530, -1530, 0, 1530, -1530, 0, -1530, 1530, 0, -1530)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ttc0l"]
+size = Vector3(4, 3, 4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_23tby"]
+
 [sub_resource type="Animation" id="Animation_f8db0"]
 resource_name = "Enter"
-length = 15.0
+length = 22.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("../Exit:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 5),
@@ -3333,203 +3339,203 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AnimationSpawn/S2:position")
+tracks/1/path = NodePath("ColorRect:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 21.5, 22),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-8.74228e-08, 31, -2), Vector3(0, 0, -2)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../AnimationSpawn/S3:position")
+tracks/2/path = NodePath("../PortalExit:PlayClose")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 22),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-2, 31, 0), Vector3(-2, 0, 0)]
+"update": 1,
+"values": [false, false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../AnimationSpawn/S4:position")
+tracks/3/path = NodePath("../PortalExit:OnCam")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 22),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(2, 31, 0), Vector3(2, 0, 0)]
+"update": 1,
+"values": [false, false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ColorRect:modulate")
+tracks/4/path = NodePath("Cam1:current")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 0.1, 0.2, 5.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../PortalExit:PlayClose")
+tracks/5/path = NodePath("..:CamOnPlayer")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("../PortalExit:OnCam")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Cam1:current")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 5.9, 6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("..:CamOnPlayer")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 14.9, 15),
+"times": PackedFloat32Array(0, 21.9, 22),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, false, true]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Cam1:position")
-tracks/9/interp = 2
-tracks/9/loop_wrap = true
-tracks/9/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Cam1:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 3.5, 5.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0.34641, 16.2), Vector3(0, 9.81051, 7.8077), Vector3(0, 14.7603, 12.7574)]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Cam1:rotation")
-tracks/10/interp = 2
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Cam1:rotation")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0, 3.5, 5.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0.523599, 0, 0), Vector3(0.2618, 0, 0), Vector3(-0.785398, 0, 0)]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("../AnimationSpawn:position")
-tracks/11/interp = 2
-tracks/11/loop_wrap = true
-tracks/11/keys = {
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../AnimationSpawn:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 31.2, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 31, 0), Vector3(0, 0, 0)]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("ColorRect:visible")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ColorRect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5, 21.5, 22),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [true, false, true, false]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("../Boss1:Active")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0, 15),
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../Boss1:Active")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 22),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Cam2:position")
-tracks/14/interp = 2
-tracks/14/loop_wrap = true
-tracks/14/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Cam2:position")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(6, 7.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-6.11959e-07, 2, -7), Vector3(-4.38685e-06, 2, -32)]
 }
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Cam2:rotation")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Cam2:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "times": PackedFloat32Array(6, 7.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, -3.14159, 0), Vector3(0, -3.14159, 0)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Cam2:current")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 5.9, 6, 8.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Cam3:current")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 8.4, 8.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Cam3:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(8.5, 10.5, 19.5, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.452094, 0.6, -29.8954), Vector3(-0.452094, 2.29703, -29.8954), Vector3(-0.452094, 2.29703, -29.8954), Vector3(-0.452094, 2.29703, 6.3533)]
+}
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Cam2:current")
+tracks/16/path = NodePath("Cam3:rotation")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(5.9, 6, 7.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
+"times": PackedFloat32Array(8.5, 10.5, 19.5, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.174533, 0), Vector3(0, 0.404916, 0), Vector3(0, 0.404916, 0), Vector3(0, -0.0172966, 0)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Cam3:current")
+tracks/17/path = NodePath("..:ShowHud")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
-"times": PackedFloat32Array(7.4, 8.5),
+"times": PackedFloat32Array(0, 22),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -3537,38 +3543,26 @@ tracks/17/keys = {
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Cam3:position")
+tracks/18/path = NodePath("../BossDialogue:visible")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
-"times": PackedFloat32Array(8.5, 10.5),
+"times": PackedFloat32Array(0, 22),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(-0.452094, 0.6, -29.8954), Vector3(-0.452094, 2.29703, -29.8954)]
+"update": 1,
+"values": [true, false]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Cam3:rotation")
+tracks/19/path = NodePath("../BossDialogue:_next")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
-"times": PackedFloat32Array(8.5, 10.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0.174533, 0), Vector3(0, 0.404916, 0)]
-}
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("../AnimationSpawn/S1:position")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 31, 2), Vector3(0, 0, 2)]
+"times": PackedFloat32Array(10.5, 11.5, 14.5, 18, 19.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, true, true, true]
 }
 
 [sub_resource type="Animation" id="Animation_wnbm8"]
@@ -3628,43 +3622,43 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../AnimationSpawn/S2:position")
+tracks/1/path = NodePath("../Exit2:exit")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-8.74228e-08, 31, -2)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../AnimationSpawn/S3:position")
+tracks/2/path = NodePath("ColorRect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-2, 31, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../AnimationSpawn/S4:position")
+tracks/3/path = NodePath("../PortalExit:OnCam")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2, 31, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../Exit2:exit")
+tracks/4/path = NodePath("../PortalExit:PlayClose")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -3676,19 +3670,19 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ColorRect:modulate")
+tracks/5/path = NodePath("Cam1:current")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("../PortalExit:OnCam")
+tracks/6/path = NodePath("..:CamOnPlayer")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -3700,91 +3694,91 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../PortalExit:PlayClose")
+tracks/7/path = NodePath("Cam1:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0, 0.34641, 16.2)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Cam1:current")
+tracks/8/path = NodePath("Cam1:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector3(0.523599, 0, 0)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("..:CamOnPlayer")
+tracks/9/path = NodePath("../AnimationSpawn:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0, 31.2, 0)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Cam1:position")
+tracks/10/path = NodePath("ColorRect:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.34641, 16.2)]
+"update": 1,
+"values": [true]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Cam1:rotation")
+tracks/11/path = NodePath("../Boss1:Active")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.523599, 0, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("../AnimationSpawn:position")
+tracks/12/path = NodePath("Cam2:position")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 31.2, 0)]
+"values": [Vector3(-6.11959e-07, 2, -7)]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("ColorRect:visible")
+tracks/13/path = NodePath("Cam2:rotation")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("../Boss1:Active")
+tracks/14/path = NodePath("Cam2:current")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
@@ -3796,74 +3790,74 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Cam2:position")
+tracks/15/path = NodePath("Cam3:current")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-6.11959e-07, 2, -7)]
+"update": 1,
+"values": [false]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Cam2:rotation")
+tracks/16/path = NodePath("Cam3:position")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -3.14159, 0)]
+"values": [Vector3(-0.452094, 0.6, -29.8954)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Cam2:current")
+tracks/17/path = NodePath("Cam3:rotation")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector3(0, 0.174533, 0)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Cam3:current")
+tracks/18/path = NodePath("..:ShowHud")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Cam3:position")
+tracks/19/path = NodePath("../BossDialogue:visible")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.452094, 0.6, -29.8954)]
+"update": 1,
+"values": [false]
 }
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Cam3:rotation")
+tracks/20/path = NodePath("../BossDialogue:_next")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.174533, 0)]
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vos03"]
@@ -3872,11 +3866,6 @@ _data = {
 "Exit": SubResource("Animation_wnbm8"),
 "RESET": SubResource("Animation_rpa2t")
 }
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ttc0l"]
-size = Vector3(4, 3, 4)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_23tby"]
 
 [node name="Boss1Map" type="Node3D"]
 script = ExtResource("1_atvld")
@@ -5310,6 +5299,50 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nav/Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_jb1v2")
 
+[node name="AnimationSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.2, 0)
+
+[node name="S1" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 2)
+
+[node name="S2" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2)
+
+[node name="S3" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="S4" type="Node3D" parent="AnimationSpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Exit2" parent="." instance=ExtResource("10_ldyb2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, -3.6, 0)
+shape = SubResource("BoxShape3D_ttc0l")
+
+[node name="PortalExit" parent="." instance=ExtResource("9_ymb4d")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.9936, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="PortalExit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54747e-13, 1.8, -0.5)
+text = "Exit
+ ˯"
+font_size = 60
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.58299)
+shape = SubResource("CylinderShape3D_23tby")
+
+[node name="Boss1" parent="." instance=ExtResource("11_1rbad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -31)
+
+[node name="NoMan\'sLand" parent="." instance=ExtResource("12_t13ev")]
+
+[node name="BossDialogue" parent="." instance=ExtResource("13_svcgb")]
+visible = false
+
 [node name="Animation" type="Node3D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Animation"]
@@ -5334,54 +5367,5 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, -6.119
 
 [node name="Cam3" type="Camera3D" parent="Animation"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.452094, 0.6, -29.8954)
-
-[node name="AnimationSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.2, 0)
-
-[node name="S1" type="Node3D" parent="AnimationSpawn"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 31, 2)
-
-[node name="S2" type="Node3D" parent="AnimationSpawn"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.74228e-08, 31, -2)
-
-[node name="S3" type="Node3D" parent="AnimationSpawn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 31, 0)
-
-[node name="S4" type="Node3D" parent="AnimationSpawn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 31, 0)
-
-[node name="Exit2" parent="." instance=ExtResource("10_ldyb2")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, -3.6, 0)
-shape = SubResource("BoxShape3D_ttc0l")
-
-[node name="PortalExit" parent="." instance=ExtResource("9_ymb4d")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -40.9936, 0, 0)
-
-[node name="Label3D" type="Label3D" parent="PortalExit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54747e-13, 1.8, -0.5)
-text = "Exit
- ˯"
-font_size = 60
-
-[node name="t" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "CamOnPlayer = False
- Cam1 = True
- Cam2 = False 
- CA = "
-
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.58299)
-shape = SubResource("CylinderShape3D_23tby")
-
-[node name="Boss1" parent="." instance=ExtResource("11_1rbad")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -31)
-
-[node name="NoMan\'sLand" parent="." instance=ExtResource("12_t13ev")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

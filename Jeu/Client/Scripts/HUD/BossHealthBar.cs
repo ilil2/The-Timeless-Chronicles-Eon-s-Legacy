@@ -31,7 +31,6 @@ public partial class BossHealthBar : Control
 		{
 			Name.Text = _name;
 		}
-		GD.Print("Value "+Value);
 		if(Hp.Value!=Value)
 		{
 			Hp.Value = Value;

@@ -18,6 +18,7 @@ public abstract partial class IMap : Node3D
 	[Export] public bool CamOnPlayer = false;
 	public string LoadingStage = "rien pour l'instant";
 	[Export]public bool SkillsMenu = false;
+	[Export] public bool ShowHud = true;
 	
 	public int Step()
 	{
@@ -29,6 +30,7 @@ public abstract partial class IMap : Node3D
 		{
 			GameManager.Joueur1.GetNode<Camera3D>("CameraPlayer/h/v/Camera3D").Current = CamOnPlayer;
 		}
+		GameHUD.IsVisible = ShowHud;
 	}
 	public abstract List<(int,int,int)> GetSpawnLocation();
 	

@@ -5,24 +5,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-public partial class BossDialogue : Area3D
+public partial class BossDialogue : Control
 {
 	public bool Near = false;
 	private IMap Parent;
-	//private Camera3D Cam;
 	private Control Hud;
 	private Label Line;
 	private Dictionary<string,Dictionary<string,string>> Dialogue;
 	private string TargetText = "";
 	private int indexLetter = 0;
+	[Export] public bool _next = false;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		(int c1, int c2) = SaveDialogue.Boss;
+		c1++;
+		SaveDialogue.Boss = (c1, c2);
 		Parent = GetParent<IMap>();
-		//Cam = GetNode<Camera3D>("Cam");
-		Hud = GetNode<Control>("DialogueHud");
-		Line = Hud.GetNode<Label>("Line");
+		Line = GetNode<Label>("Line");
 		Dialogue = JsonSerializer.Deserialize<Dictionary<string,Dictionary<string,string>>>(File.ReadAllText("Ressources/Dialogue/BossDialogue.json"));
 		//ResetData();
 	}
@@ -31,13 +32,10 @@ public partial class BossDialogue : Area3D
 	public override void _Process(double delta)
 	{
 		CompleteText();
-		if (Near)
+		if(_next)
 		{
-			GameHUD.IsVisible = false;
-		}
-		else
-		{
-			GameHUD.IsVisible = true;
+			Next();
+			_next = false;
 		}
 	}
 	
@@ -47,14 +45,8 @@ public partial class BossDialogue : Area3D
 		c2++;
 		if(Dialogue[c1.ToString()][c2.ToString()]=="END")
 		{	
-			Hud.Visible = false;
-			Near = false;
-			//Cam.Current = false;
-			Parent.CamOnPlayer = true;
-			Hud.Visible = false;
-			GameHUD.IsVisible = false;
-			Parent.GetParent().GetNode<Control>("GameHUD").Visible = true;
-			Input.MouseMode = Input.MouseModeEnum.Captured;	
+			c1++;
+			return "";
 		}
 		SaveDialogue.Boss = (c1, c2);
 		GD.Print($"{c1} {c2}");
@@ -66,6 +58,13 @@ public partial class BossDialogue : Area3D
 			}
 		}
 		return "Dialogue not found";
+	}
+	
+	public void Next()
+	{
+		indexLetter = 0;
+		Line.Text = "";
+		TargetText = GetDialogue();
 	}
 	
 	private void CompleteText()
