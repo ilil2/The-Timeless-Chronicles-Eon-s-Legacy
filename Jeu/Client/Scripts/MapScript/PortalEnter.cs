@@ -10,8 +10,8 @@ public partial class PortalEnter : Node3D
 	[Export] private bool PlayOpen = false;
 	private bool open = false;
 	private List<Node3D> AnimationSpawn = new List<Node3D>();
-    private AudioStreamPlayer3D _openSound;
-    
+	private AudioStreamPlayer3D _openSound;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
