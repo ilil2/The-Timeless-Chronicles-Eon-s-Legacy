@@ -28,6 +28,7 @@ public partial class Boss1 : Boss
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		(_Hp as Control).Visible = Map.ShowHud; 
 		if(Active)
 		{
 			if(Alive)
@@ -46,20 +47,20 @@ public partial class Boss1 : Boss
 				}
 				else if (State == 1 && (Ani.CurrentAnimation != "Atk" && Ani.CurrentAnimation != "Atk2"))
 				{
-					//Attack
-					if(Rand.Next(0,4)!=1)
-					{
-						Ani.Play("Atk");
-					}
-					else
-					{
-						Ani.Play("Atk2");
-					}
+					Attack()
 				}
 			}
 		}
 	}
 
+	public override void Attack()
+	{
+		if(Rand.Next(0,4)!=1)
+			Ani.Play("Atk");
+		else
+			Ani.Play("Atk2");
+	}
+	
 	public override void _PhysicsProcess(double delta)
 	{
 		PhysicsProcess(delta);
