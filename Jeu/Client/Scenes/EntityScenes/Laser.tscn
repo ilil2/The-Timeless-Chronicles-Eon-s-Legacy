@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://552kalt50wa4"]
+[gd_scene load_steps=5 format=3 uid="uid://552kalt50wa4"]
 
 [ext_resource type="Script" path="res://Scripts/EntityScripts/Laser.cs" id="1_qy3ms"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vag2"]
+resource_name = "lambert2"
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.894118, 0.894118, 0.682353)
+emission_enabled = true
+emission = Color(0, 0.72549, 0.854902, 1)
+emission_energy_multiplier = 10.0
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_13ddu"]
+material = SubResource("StandardMaterial3D_7vag2")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dte0i"]
 
