@@ -5,7 +5,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_qqjep"]
 font = ExtResource("2_0rksq")
-font_size = 20
+font_size = 35
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="BossDialogue" type="Control"]
 layout_mode = 3
@@ -30,3 +32,6 @@ offset_bottom = -0.296021
 label_settings = SubResource("LabelSettings_qqjep")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="resized" from="." to="." method="OnResize"]

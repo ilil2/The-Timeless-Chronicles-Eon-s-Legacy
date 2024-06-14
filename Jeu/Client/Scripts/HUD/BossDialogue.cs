@@ -16,19 +16,16 @@ public partial class BossDialogue : Control
 	private int indexLetter = 0;
 	[Export] public bool _next = false;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		(int c1, int c2) = SaveDialogue.Boss;
 		c1++;
 		SaveDialogue.Boss = (c1, c2);
 		Parent = GetParent<IMap>();
-		Line = GetNode<Label>("Line");
 		Dialogue = JsonSerializer.Deserialize<Dictionary<string,Dictionary<string,string>>>(File.ReadAllText("Ressources/Dialogue/BossDialogue.json"));
 		//ResetData();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		CompleteText();
@@ -37,6 +34,12 @@ public partial class BossDialogue : Control
 			Next();
 			_next = false;
 		}
+	}
+
+	private void OnResize()
+	{
+		Line = GetNode<Label>("Line");
+		Line.LabelSettings.FontSize = (int)(35 * (GetViewportRect().Size.X / 1152));
 	}
 	
 	private string GetDialogue()

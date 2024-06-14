@@ -93,12 +93,9 @@ public partial class ClassSelectUI : Control
 		if (!_isReady)
 		{
 			_animation.Play("Left");
-			_angleTarget += 90;
-			_classID -= 1;
-			if (_classID < 0)
-			{
-				_classID += 4;
-			}
+			_angleTarget -= 90;
+			_classID += 1;
+			_classID %= 4;
 		}
 	}
 
@@ -108,9 +105,12 @@ public partial class ClassSelectUI : Control
 		if (!_isReady)
 		{
 			_animation.Play("Right");
-			_angleTarget -= 90;
-			_classID += 1;
-			_classID %= 4;
+			_angleTarget += 90;
+			_classID -= 1;
+			if (_classID < 0)
+			{
+				_classID += 4;
+			}
 		}
 	}
 }

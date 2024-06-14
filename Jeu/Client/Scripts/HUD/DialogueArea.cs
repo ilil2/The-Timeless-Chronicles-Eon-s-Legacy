@@ -15,19 +15,16 @@ public partial class DialogueArea : Area3D
 	private Dictionary<string,Dictionary<string,string>> Dialogue;
 	private string TargetText = "";
 	private int indexLetter = 0;
-	// Called when the node enters the scene tree for the first time.
+	
 	public override void _Ready()
 	{
 		Parent = GetParent<IMap>();
 		Cam = GetNode<Camera3D>("Cam");
-		Hud = GetNode<Control>("DialogueHud");
-		Line = Hud.GetNode<Label>("Line");
 		Dialogue = JsonSerializer.Deserialize<Dictionary<string,Dictionary<string,string>>>(File.ReadAllText("Ressources/Dialogue/EmaxDialogue.json"));
 		//ResetData();
 		
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		CompleteText();
@@ -40,6 +37,13 @@ public partial class DialogueArea : Area3D
 			GameHUD.IsVisible = true;
 		}
 		
+	}
+	
+	private void OnResize()
+	{
+		Hud = GetNode<Control>("DialogueHud");
+		Line = Hud.GetNode<Label>("Line");
+		Line.LabelSettings.FontSize = (int)(30 * (Hud.GetViewportRect().Size.X / 1152));
 	}
 	
 	private void _on_body_entered(Node3D body)
