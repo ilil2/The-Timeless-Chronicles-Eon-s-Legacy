@@ -13,7 +13,6 @@ public partial class ResistancePotion : Potion
 
 	public override void UsePotion()
 	{
-		GD.Print("I use ResistancePotion");
 		Timer timer = (GameManager.Joueur1 as ClassScript).GetNode<Timer>("PotionTimer");
 		GameManager.CurrentHealth = GameManager.Health;
 		GameManager.MaxHealth *= 2;

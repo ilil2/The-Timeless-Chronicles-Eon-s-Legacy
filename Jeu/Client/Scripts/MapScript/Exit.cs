@@ -20,7 +20,7 @@ public partial class Exit : Area3D
 		if(exit)
 		{
 			UDP.OneShot("next");
-			GD.Print("Next Actif ---------------------------------------------------------");
+			//GD.Print("Next Actif ---------------------------------------------------------");
 			exit = false;
 		}
 	}

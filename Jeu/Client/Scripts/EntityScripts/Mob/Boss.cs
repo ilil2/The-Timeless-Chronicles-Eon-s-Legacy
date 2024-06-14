@@ -84,7 +84,6 @@ public abstract partial class Boss : CharacterBody3D
 	
 	public virtual void AtDeath()
 	{
-		GD.Print("The Boss is Dead");
 	}
 	
 	public void PhysicsProcess(double delta)
@@ -158,7 +157,6 @@ public abstract partial class Boss : CharacterBody3D
 			(_Hp as BossHealthBar).Value = HP;
 			if(HP<=0)
 			{
-				GD.Print("Mort");
 				Alive = false;
 				Ani.Play("Death");
 				GameManager.Gold += 10;
@@ -168,7 +166,6 @@ public abstract partial class Boss : CharacterBody3D
 			if (send && Alive)
 			{
 				GameManager.InfoJoueur[$"boss"] += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
-				GD.Print(GameManager.InfoJoueur["boss"]);
 			}
 			
 		}
@@ -202,7 +199,6 @@ public abstract partial class Boss : CharacterBody3D
 						{
 							int damage = int.Parse(secondline[1]);
 							TakeDamage(damage, Conversions.AtoI(secondline[1]),false);
-							GD.Print("TK: " + damage);
 						}
 					}
 					else

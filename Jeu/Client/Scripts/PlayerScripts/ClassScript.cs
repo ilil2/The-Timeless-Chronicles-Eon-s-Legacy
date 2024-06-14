@@ -263,8 +263,6 @@ public abstract partial class ClassScript : PlayerScript
 		SetHealth(GetMaxHealth());
 		SetStamina(GetMaxStamina());
 		IsDead = false;
-		GD.Print("Revive");
-		GD.Print($"HP {GameManager.Health} MP {GameManager.Stamina} IsDead {IsDead}");
 	}
 	
 	protected virtual void Move(double delta)
@@ -354,7 +352,6 @@ public abstract partial class ClassScript : PlayerScript
 	}
 	private void _on_potion_timer_timeout()
 	{
-		GD.Print("PotionTimer !");
 		GameManager.Health = GameManager.CurrentHealth;
 		GameManager.MaxHealth = GameManager.CurrentMaxHealth;
 		GameManager.WalkSpeed = GameManager.CurrentWalkSpeed;

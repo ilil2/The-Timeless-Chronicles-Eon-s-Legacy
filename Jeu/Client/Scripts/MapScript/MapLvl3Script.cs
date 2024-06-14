@@ -37,7 +37,6 @@ public partial class MapLvl3Script : IMap
 		CreateCity();
 		LoadingStage = "Get SpawnPoint";
 		S = GetSpawnBuilding();
-		GD.Print($"x: {S.x}, y: {S.y}");
 		MapGrid[16, 16] = 2;
 		MapGrid[S.x, S.y] = 2;
 		PrintMatrix(MapGrid);
@@ -155,7 +154,6 @@ public partial class MapLvl3Script : IMap
 						break;
 				}
 			}
-			GD.Print(res);
 		}
 	}
 	

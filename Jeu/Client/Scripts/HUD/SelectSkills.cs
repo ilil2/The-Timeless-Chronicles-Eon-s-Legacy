@@ -317,7 +317,6 @@ public partial class SelectSkills : Control
 			case "poison":
 				return "Poison";
 			default:
-				GD.Print(skill);
 				return "ERROR";
 		}
 	}

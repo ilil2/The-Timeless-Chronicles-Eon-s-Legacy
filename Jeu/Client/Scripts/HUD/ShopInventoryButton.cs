@@ -20,7 +20,6 @@ public partial class ShopInventoryButton : Button
 	}
 	private void _on_pressed()
 	{
-		GD.Print($"{Name}!");
 		if(Parent is FastAccess F)
 		{
 			if((Access.AccessArray[id-1])!=null && !ShopInventory.IsFull())

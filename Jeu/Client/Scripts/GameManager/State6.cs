@@ -92,7 +92,6 @@ public partial class State6 : GameManager
 					else if (commandchat.Length >= 8 && commandchat.Substring(0, 7) == "setrule")
 					{
 						commandchat = commandchat.Substring(8);
-						GD.Print(commandchat);
 						if (commandchat.Length >= 4 && commandchat.Substring(0,3) == "fog")
 						{
 							commandchat = commandchat.Substring(4);

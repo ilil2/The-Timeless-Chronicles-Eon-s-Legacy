@@ -335,7 +335,6 @@ public partial class MapLvl2Script : IMap
 			Mob.Position = Pos;
 			AddChild(Mob);
 		}
-		GD.Print("Spaw Use !");
 	}
 	
 	private void CreateKey()

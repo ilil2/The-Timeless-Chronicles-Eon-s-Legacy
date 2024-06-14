@@ -14,7 +14,6 @@ public partial class SpeedPotion : Potion
 
 	public override void UsePotion()
 	{
-		GD.Print("I use SpeedPotion");
 		Timer timer = (GameManager.Joueur1 as ClassScript).GetNode<Timer>("PotionTimer");
 		GameManager.WalkSpeed *= 1.5f;
 		GameManager.RunSpeed *= 1.5f;

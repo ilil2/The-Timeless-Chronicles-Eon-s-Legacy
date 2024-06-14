@@ -23,7 +23,6 @@ public partial class WIP : IMap
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		//GD.Print(LoadingStage);
 		SyncCam();
 	}
 

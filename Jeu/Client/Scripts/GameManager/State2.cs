@@ -60,7 +60,6 @@ public partial class State2 : GameManager
 							
 			if (LobbyManager.BackButtonPressed && OnJoin)
 			{
-				GD.Print("back");
 				LobbyReset = true;
 				OnJoin = false;
 				thread = false;

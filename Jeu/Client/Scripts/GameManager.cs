@@ -68,7 +68,6 @@ public partial class GameManager : Node3D
 		get => _gold;
 		set
 		{
-			GD.Print($"set gold {_gold} => {value}");
 			_qgold = value;
 		}
 	}
@@ -187,7 +186,7 @@ public partial class GameManager : Node3D
 		}
 		catch
 		{
-			GD.Print("deco");
+			//GD.Print("deco");
 		}
 		Console.WriteLine("quit");
 	}
@@ -443,7 +442,7 @@ public partial class GameManager : Node3D
 		catch (Exception e)
 		{
 			//GD.Print("serveur hors ligne");	//si le serveur est hors ligne
-			GD.Print(e);
+			//GD.Print(e);
 		}
 	}
 	

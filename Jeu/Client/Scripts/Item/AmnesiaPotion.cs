@@ -11,6 +11,5 @@ public partial class AmnesiaPotion : Potion
 
 	public override void UsePotion()
 	{
-		GD.Print("I use AmnesiaPotion");
 	}
 }

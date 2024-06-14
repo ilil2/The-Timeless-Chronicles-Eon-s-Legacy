@@ -198,7 +198,6 @@ public abstract partial class MobScript : CharacterBody3D
 			HealthBar.Show = true;
 			if(HP<=0)
 			{
-				GD.Print("Mort");
 				Alive = false;
 				Ani.Stop();
 				Ani.Play("Death");

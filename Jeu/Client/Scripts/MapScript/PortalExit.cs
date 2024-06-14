@@ -82,7 +82,6 @@ public partial class PortalExit : Node3D
 				}
 				else
 				{
-					GD.Print("ERROR: Player Non set (PortalExit)");
 					dist = Min+1;
 				}
 				if(Min>dist)
@@ -113,9 +112,7 @@ public partial class PortalExit : Node3D
 			}
 			
 			body.Visible = false;
-			GD.Print($"{body.Name} is Visible {body.Visible}");
 			body.Position-=new Vector3(0,3,0);
-			GD.Print("Player Enter Portal!");
 			NbPlayer++;
 		}
 	}

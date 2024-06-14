@@ -31,7 +31,6 @@ public partial class Boss2 : Boss
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				GD.Print("NewSpawn");
 				Boss2 son = Son.Instantiate<Boss2>();
 				GetParent().AddChild(son);
 				son.Scale = new Vector3(0.5f, 0.5f, 0.5f);

@@ -103,13 +103,9 @@ public partial class MapLvl1Script : IMap
 		else if (!MapReady && (NavMesh as NavMeshScript).NavMeshReady)
 		{
 			stopwatch.Stop();
-		
-			GD.Print($"{NbRoom} Room");
-			GD.Print($"Map crée en {stopwatch.Elapsed}");
 				
 			Duration = Rand2.Next(20,60);
 			fogwatch.Start();
-			GD.Print($"Fog Start in {Duration}");	
 			
 			MapReady = true;
 			LoadingStage = "En attente des autres joueurs :(";
@@ -143,7 +139,6 @@ public partial class MapLvl1Script : IMap
 		{
 			Node3D Pos = SpawnPoint.GetChild<Node3D>(i);
 			(int,int,int) res = ((int)Pos.GlobalPosition.X,(int)Pos.GlobalPosition.Y,(int)Pos.GlobalPosition.Z);
-			GD.Print(res);
 			Spawn.Add(res); 
 		}
 		return Spawn;
@@ -199,7 +194,6 @@ public partial class MapLvl1Script : IMap
 					}
 				}
 		}
-		GD.Print(id);
 	}
 	
 	private void DayCycle()
@@ -224,7 +218,6 @@ public partial class MapLvl1Script : IMap
 			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)
 			{
 					FogState=1;
-					GD.Print("Starting Fog....");
 			}
 		}
 		else if (FogState==1)
@@ -239,7 +232,6 @@ public partial class MapLvl1Script : IMap
 				FogState=2;
 				Duration = Rand2.Next(20,60);
 				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
-				GD.Print($"Fog Start! End in {Duration} seconde");
 			}
 		}
 		else if (FogState==2)
@@ -247,7 +239,6 @@ public partial class MapLvl1Script : IMap
 			if ((int)fogwatch.Elapsed.TotalSeconds-StartTime>=Duration)
 			{
 					FogState=3;
-					GD.Print("Ending Fog...");
 			}
 		}
 		else if (FogState==3)
@@ -261,8 +252,7 @@ public partial class MapLvl1Script : IMap
 				env.VolumetricFogDensity=(float)0;
 				FogState=0;
 				Duration = Rand2.Next(20,60);
-				StartTime = (int)fogwatch.Elapsed.TotalSeconds;
-				GD.Print($"Fog End! Next Fog in {Duration} seconde");		
+				StartTime = (int)fogwatch.Elapsed.TotalSeconds;	
 			}
 		}
 	}

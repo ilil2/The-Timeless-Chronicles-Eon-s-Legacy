@@ -12,7 +12,6 @@ public partial class StaminaPotion : Potion
 
 	public override void UsePotion()
 	{
-		GD.Print("I use StaminaPotion");
 		int newStamina = (GameManager.Joueur1 as ClassScript).GetStamina()+500;
 		(GameManager.Joueur1 as ClassScript).SetStamina(newStamina);
 	}

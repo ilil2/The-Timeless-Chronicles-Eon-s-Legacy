@@ -30,11 +30,10 @@ public partial class ResurectionPotion : Potion
 
 		if (player == null)
 		{
-			GD.Print("No player to resurect");
+			//GD.Print("No player to resurect");
 		}
 		else
 		{
-			GD.Print("Revive");
 			GameManager.InfoJoueur["attack"] = $"revive{player.Id}";
 		}
 	}

@@ -44,8 +44,6 @@ public abstract partial class IMap : Node3D
 	{
 		Rand = new Random(12);
 		Rand2 = new Random(seed2);
-		GD.Print($"Seed1 set : {seed}");
-		GD.Print($"Seed2 set : {seed2}");
 	}
 	public void SetUpCursor(CharacterBody3D Player, bool t)
 	{
@@ -58,7 +56,6 @@ public abstract partial class IMap : Node3D
 					pointer1.Name = "Pointer";
 					Player.AddChild(pointer1);
 					(pointer1 as pointer).SetTarget(GameManager.Joueur2);
-					GD.Print($"nb J = {GameManager._nbJoueur}");
 					break;
 				case 3:
 					Node3D p2ointer1 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
@@ -69,7 +66,6 @@ public abstract partial class IMap : Node3D
 					p2ointer2.Name = "Pointer";
 					Player.AddChild(p2ointer2);
 					(p2ointer2 as pointer).SetTarget(GameManager.Joueur3);
-					GD.Print($"nb J = {GameManager._nbJoueur}");
 					break;
 				case 4:
 					Node3D p3ointer1 = GD.Load<PackedScene>($"res://Scenes/HUD/pointer.tscn").Instantiate<Node3D>();
@@ -84,10 +80,6 @@ public abstract partial class IMap : Node3D
 					p3ointer3.Name = "Pointer";
 					Player.AddChild(p3ointer3);
 					(p3ointer3 as pointer).SetTarget(GameManager.Joueur4);
-					GD.Print($"nb J = {GameManager._nbJoueur}");
-					break;
-				default:
-					GD.Print($"nb J = {GameManager._nbJoueur}");
 					break;
 					
 			}
@@ -98,10 +90,6 @@ public abstract partial class IMap : Node3D
 			{
 				case 2:
 					Player.RemoveChild(Player.GetNode<Node3D>("Pointer"));
-					GD.Print($"nb J = {GameManager._nbJoueur}");
-					break;
-				default:
-					GD.Print($"nb J = {GameManager._nbJoueur}");
 					break;
 					
 			}

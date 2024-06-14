@@ -59,15 +59,13 @@ public partial class DialogueArea : Area3D
 			Cam.Current = true;
 			Parent.CamOnPlayer = false;
 			Hud.Visible = true;
-			Input.MouseMode = Input.MouseModeEnum.Visible;	
-			GD.Print("Enter");
+			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		
 	}
 	
 	private void _on_body_exited(Node3D body)
 	{
-		GD.Print("Exit");
 		GameHUD.IsVisible = true;
 	}
 	private void _on_close_button_pressed()
@@ -97,7 +95,6 @@ public partial class DialogueArea : Area3D
 		}
 
 		SaveDialogue.Emax = (c1, c2);
-		GD.Print($"{c1} {c2}");
 		if (Dialogue.ContainsKey(c1.ToString()))
 		{
 			if (Dialogue[c1.ToString()].ContainsKey(c2.ToString()))

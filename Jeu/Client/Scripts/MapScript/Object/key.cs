@@ -36,7 +36,6 @@ public partial class key : IRender
 	{
 		if (body is ClassScript)
 		{
-			GD.Print($"Key find by {(body as ClassScript).Pseudo}");
 			GameManager.InfoJoueur["attack"] = "key";
 			MapLvl2Script map = ((MapLvl2Script)GameManager.Map);
 			map.NbrKey += 1;

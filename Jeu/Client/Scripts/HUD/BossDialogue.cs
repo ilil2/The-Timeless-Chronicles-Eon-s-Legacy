@@ -52,7 +52,6 @@ public partial class BossDialogue : Control
 			return "";
 		}
 		SaveDialogue.Boss = (c1, c2);
-		GD.Print($"{c1} {c2}");
 		if (Dialogue.ContainsKey(c1.ToString()))
 		{
 			if (Dialogue[c1.ToString()].ContainsKey(c2.ToString()))
