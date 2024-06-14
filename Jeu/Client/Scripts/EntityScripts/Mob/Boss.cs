@@ -113,7 +113,7 @@ public abstract partial class Boss : CharacterBody3D
 
 	protected void SendInfo()
 	{
-		if (Alive && GameManager.InfoJoueur["boss"] == "" && (Player is ClassScript))
+		if (Alive && GameManager.InfoJoueur["boss"] == "" && GameManager.InfoJoueur["id"]=="0")
 		{
 			GameManager.InfoJoueur["boss"] = $"{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
@@ -180,9 +180,9 @@ public abstract partial class Boss : CharacterBody3D
 		string rec = "";
 		for(int i = 0;i<GameManager._nbJoueur;i++)
 		{
-			if (GameManager.InfoJoueur["id"]!=i.ToString() && GameManager.InfoAutreJoueur[$"boss{i}"]!="")
+			if (GameManager.InfoJoueur["id"]!=i.ToString())
 			{
-				rec = GameManager.InfoAutreJoueur[$"boss{i}"]; 
+				rec += GameManager.InfoAutreJoueur[$"boss{i}"]; 
 				GameManager.InfoAutreJoueur[$"boss{i}"] = "";
 			}
 		}
