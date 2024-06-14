@@ -121,17 +121,17 @@ public abstract partial class Boss : CharacterBody3D
 
 	private CharacterBody3D GetPlayer()
 	{
-		double MaxAgro = 0;
-		CharacterBody3D BestPlayer = GameManager.Joueur1;
+		double Min = 99999999999999;
+		CharacterBody3D BestPlayer = null;
 		foreach (var characterBody3D in GameManager.ListJoueur)
 		{
 			if(characterBody3D!=null)
 			{
 				var player = (PlayerScript)characterBody3D;
-				int PersonalAgro = (int)(Agro[player.Id]-MapTool.Distance(GlobalPosition,player.GlobalPosition));
-				if(PersonalAgro>MaxAgro)
+				double PersonalAgro = MapTool.Distance(GlobalPosition,player.GlobalPosition);
+				if(PersonalAgro<Min)
 				{
-					MaxAgro = PersonalAgro;
+					Min = PersonalAgro;
 					BestPlayer = player;
 				}
 			}
@@ -186,6 +186,7 @@ public abstract partial class Boss : CharacterBody3D
 				GameManager.InfoAutreJoueur[$"boss{i}"] = "";
 			}
 		}
+		GD.Print("Rec "+rec);
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
