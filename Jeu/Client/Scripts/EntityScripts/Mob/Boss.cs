@@ -151,7 +151,7 @@ public abstract partial class Boss : CharacterBody3D
 	
 	public virtual void TakeDamage(int damage, int id, bool send = true)
 	{
-		Agro[id] += 10;
+		//Agro[id] += 10;
 		if(Alive)
 		{
 			HP -= damage;
@@ -165,7 +165,6 @@ public abstract partial class Boss : CharacterBody3D
 				GameManager.xp += 1;
 				if (send) GameManager.InfoJoueur[$"boss"] += $"{ID}°{42}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 			}
-
 			if (send && Alive)
 			{
 				GameManager.InfoJoueur[$"boss"] += $"{ID}°TK§{damage}°{Position.X}?{Position.Z}=";
@@ -191,13 +190,11 @@ public abstract partial class Boss : CharacterBody3D
 		{
 			if (!string.IsNullOrEmpty(a))
 			{
-				GD.Print("Received: " + a);
 				string[] firstline = a.Split("°");
 				int id = Lib.Conversions.AtoI(firstline[0]);
 
 				if (id == ID)
 				{
-					GD.Print("TK is Not "+firstline[1]);
 					if (firstline[1].Contains("§"))
 					{
 						string[] secondline = firstline[1].Split("§");
