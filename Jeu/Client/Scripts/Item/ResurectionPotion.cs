@@ -17,7 +17,7 @@ public partial class ResurectionPotion : Potion
 		double distMin = 1000000;
 		for (int i = 0; i < GameManager._nbJoueur; i++)
 		{
-			if (GameManager.ListJoueur[i] is  OtherClassScript && (GameManager.ListJoueur[i] as OtherClassScript).isAlive == false)
+			if (GameManager.ListJoueur[i] is  OtherClassScript && (GameManager.ListJoueur[i] as OtherClassScript).IsDead == false)
 			{
 				double dist = MapTool.Distance(GameManager.ListJoueur[i].Position,GameManager.Joueur1.Position);
 				if (dist < distMin)

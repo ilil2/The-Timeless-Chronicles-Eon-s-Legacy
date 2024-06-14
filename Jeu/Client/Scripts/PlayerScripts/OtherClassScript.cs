@@ -9,8 +9,6 @@ public abstract partial class OtherClassScript : PlayerScript
 	
 	protected AnimationPlayer AnimationOtherPlayer;
 	protected AnimationTree AnimationOtherTree;
-
-	public bool isAlive = true;
 	
 	private int Maxhealth = 100;
 	private int Maxstamina = 1000;

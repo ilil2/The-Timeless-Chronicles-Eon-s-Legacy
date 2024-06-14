@@ -166,7 +166,7 @@ public partial class GameHUD : Control
 				_otherClassChoose1 = true;
 			}
 			
-			if (otherPlayer1.isAlive)
+			if (otherPlayer1.IsDead)
 			{
 				_otherPlayer1Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer1.Id}"];
 				_otherPlayer1HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer1.Id}"]) / otherPlayer1.GetMaxHealth() * 100;
@@ -213,7 +213,7 @@ public partial class GameHUD : Control
 					_otherClassChoose2 = true;
 				}
 				
-				if (otherPlayer2.isAlive)
+				if (otherPlayer2.IsDead)
 				{
 					_otherPlayer2Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer2.Id}"];
 					_otherPlayer2HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer2.Id}"]) / otherPlayer2.GetMaxHealth() * 100;
@@ -260,7 +260,7 @@ public partial class GameHUD : Control
 						_otherClassChoose3 = true;
 					}
 					
-					if (otherPlayer3.isAlive)
+					if (otherPlayer3.IsDead)
 					{
 						_otherPlayer3Pseudo.Text = GameManager.InfoAutreJoueur[$"pseudo{otherPlayer3.Id}"];
 						_otherPlayer3HpBar.Value = Lib.Conversions.AtoF(GameManager.InfoAutreJoueur[$"hp{otherPlayer3.Id}"]) / otherPlayer3.GetMaxHealth() * 100;
