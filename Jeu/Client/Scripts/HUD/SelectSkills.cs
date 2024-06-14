@@ -9,6 +9,12 @@ public partial class SelectSkills : Control
 	[Export] private bool _isRecto1;
 	[Export] private bool _isRecto2;
 	[Export] private bool _isRecto3;
+	[Export] private int _skillPosition1;
+	[Export] private int _skillPosition2;
+	[Export] private int _skillPosition3;
+	[Export] private int _skillSize1;
+	[Export] private int _skillSize2;
+	[Export] private int _skillSize3;
 	
 	private AnimationPlayer[] _animationPlayer = new AnimationPlayer[3];
 	
@@ -26,11 +32,13 @@ public partial class SelectSkills : Control
 
 	private Dictionary<string, string> _languageDict;
 	
+	private float _screenDefalutWidth = 1152;
+	
 	public override void _Ready()
 	{
-		_skills[0] = GetNode<TextureRect>("Skill1");
-		_skills[1] = GetNode<TextureRect>("Skill2");
-		_skills[2] = GetNode<TextureRect>("Skill3");
+		_skills[0] = GetNode<TextureRect>("Skill1/Skill");
+		_skills[1] = GetNode<TextureRect>("Skill2/Skill");
+		_skills[2] = GetNode<TextureRect>("Skill3/Skill");
 		
 		_labelSkill[0] = GetNode<Label>("Label1");
 		_labelSkill[1] = GetNode<Label>("Label2");
@@ -239,6 +247,13 @@ public partial class SelectSkills : Control
 		{
 			_skills[2].Texture = GD.Load<Texture2D>($"res://Ressources/Graphismes/Card/CardTemplate.png");
 		}
+		
+		_skills[0].Position = new Vector2(_skillPosition1 * (GetViewportRect().Size.X / _screenDefalutWidth), 0);
+		_skills[0].Size = new Vector2(_skillSize1 * (GetViewportRect().Size.X / _screenDefalutWidth), 384 * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_skills[1].Position = new Vector2(_skillPosition2 * (GetViewportRect().Size.X / _screenDefalutWidth), 0);
+		_skills[1].Size = new Vector2(_skillSize2 * (GetViewportRect().Size.X / _screenDefalutWidth), 384 * (GetViewportRect().Size.X / _screenDefalutWidth));
+		_skills[2].Position = new Vector2(_skillPosition3 * (GetViewportRect().Size.X / _screenDefalutWidth), 0);
+		_skills[2].Size = new Vector2(_skillSize3 * (GetViewportRect().Size.X / _screenDefalutWidth), 384 * (GetViewportRect().Size.X / _screenDefalutWidth));
 	}
 
 	private string GetSkillName(string skill)
@@ -460,7 +475,6 @@ public partial class SelectSkills : Control
 	private void _on_skill_control_1_mouse_entered()
 	{
 		_animationPlayer[0].Play("Card1");
-		GD.Print("test");
 	}
 	
 	private void _on_skill_control_2_mouse_entered()
