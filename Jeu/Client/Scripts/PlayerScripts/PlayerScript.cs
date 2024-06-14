@@ -8,10 +8,13 @@ public abstract partial class PlayerScript : CharacterBody3D
 	public string Pseudo;
 	public string Classe;
 	public bool IsDead = false;
+	
 	public virtual void Revive()
 	{
-		Position+= new Vector3(0,10,0);
+		Position += new Vector3(0,10,0);
+		IsDead = false;
 	}
+	
 	public int GetId()
 	{
 		return Id;

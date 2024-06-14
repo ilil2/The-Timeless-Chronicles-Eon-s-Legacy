@@ -195,14 +195,14 @@ public abstract partial class ClassScript : PlayerScript
 		{
 			if (UseStamina(1000) && !GameManager.ReviveAll)
 			{
+				
 				foreach (var player in GameManager.ListJoueur)
 				{
-					ClassScript playerScript = (ClassScript)player;
-					if (playerScript.IsDead)
-					{
-						playerScript.Revive();
+					PlayerScript playerscripts = (PlayerScript)player;
+					if (playerscripts.IsDead)
+					{ 
+						playerscripts.Revive();
 					}
-
 					player.GlobalPosition = new Vector3(GlobalPosition.X, GlobalPosition.Y + new Random().Next(2, 5), GlobalPosition.Z);
 				}
 			}

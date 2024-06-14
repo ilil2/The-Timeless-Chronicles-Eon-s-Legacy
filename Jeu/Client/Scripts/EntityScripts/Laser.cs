@@ -12,7 +12,7 @@ public partial class Laser : Node3D
 	
 	private Vector3 _startPoint;
 
-	private float _laserSize = 0.8f;
+	private float _laserSize = 0.4f;
 
 	private int _laserId = -1;
 	
@@ -101,6 +101,11 @@ public partial class Laser : Node3D
 		else
 		{
 			_rangeMax.Visible = true;
+		}
+
+		if (GameManager.Stamina <= 0)
+		{
+			GameManager.InfoJoueur["attack"] = "stop";
 		}
 
 		if (_laserId != -1)
