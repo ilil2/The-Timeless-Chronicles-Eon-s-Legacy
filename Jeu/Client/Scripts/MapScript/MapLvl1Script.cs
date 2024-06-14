@@ -183,7 +183,7 @@ public partial class MapLvl1Script : IMap
 						}
 						else if(m<=2)
 						{
-							name = "Mummy";
+							name = "Drone";
 						}
 						else
 						{

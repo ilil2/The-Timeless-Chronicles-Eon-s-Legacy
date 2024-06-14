@@ -218,7 +218,7 @@ public partial class MapLvl2Script : IMap
 	
 	private void CreatePseudoSpawnPoint()
 	{
-		const int nbMob = 100;
+		const int nbMob = 200;
 		const float radius = 2f;
 		for (int i = 0; i < nbMob; i++)
 		{
@@ -248,7 +248,7 @@ public partial class MapLvl2Script : IMap
 	
 	private void CreatePseudoKey()
 	{
-		const int nbKey = 200;
+		const int nbKey = 20;
 		const float radius = 1f;
 		for (int i = 0; i < nbKey; i++)
 		{

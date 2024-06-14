@@ -7,7 +7,7 @@ namespace JeuClient.Scripts.EntityScripts.Mob;
 
 public abstract partial class Boss : CharacterBody3D
 {
-	public int ID;
+	public int ID = 0;
 	public int HP = 100;
 	public int MaxHP = 100;
 	public int State = 0;
@@ -186,7 +186,6 @@ public abstract partial class Boss : CharacterBody3D
 				GameManager.InfoAutreJoueur[$"boss{i}"] = "";
 			}
 		}
-		GD.Print("Rec "+rec);
 		string[] ia = rec.Split("=");
 		foreach (var a in ia)
 		{
@@ -198,6 +197,7 @@ public abstract partial class Boss : CharacterBody3D
 
 				if (id == ID)
 				{
+					GD.Print("TK is Not "+firstline[1]);
 					if (firstline[1].Contains("§"))
 					{
 						string[] secondline = firstline[1].Split("§");
