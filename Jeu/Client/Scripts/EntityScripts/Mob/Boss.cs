@@ -92,6 +92,7 @@ public abstract partial class Boss : CharacterBody3D
 		(_Hp as BossHealthBar).Process(delta);
 		if(Active)
 		{
+			receive();
 			Player = GetPlayer();
 			if(Player is not null && Alive)
 			{
@@ -112,7 +113,7 @@ public abstract partial class Boss : CharacterBody3D
 
 	protected void SendInfo()
 	{
-		if (Alive && GameManager.InfoJoueur["boss"] == "")
+		if (Alive && GameManager.InfoJoueur["boss"] == "" && (Player is ClassScript))
 		{
 			GameManager.InfoJoueur["boss"] = $"{ID}°{State}°{Position.X}?{Position.Z}°{(GameManager.Joueur1 as ClassScript).Id}=";
 		}
@@ -179,9 +180,9 @@ public abstract partial class Boss : CharacterBody3D
 		string rec = "";
 		for(int i = 0;i<GameManager._nbJoueur;i++)
 		{
-			if (GameManager.InfoJoueur["id"]!=i.ToString())
+			if (GameManager.InfoJoueur["id"]!=i.ToString() && GameManager.InfoAutreJoueur[$"boss{i}"]!="")
 			{
-				rec += GameManager.InfoAutreJoueur[$"boss{i}"]; 
+				rec = GameManager.InfoAutreJoueur[$"boss{i}"]; 
 				GameManager.InfoAutreJoueur[$"boss{i}"] = "";
 			}
 		}

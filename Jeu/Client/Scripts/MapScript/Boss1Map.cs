@@ -119,7 +119,7 @@ public partial class Boss1Map : IMap
 	{
 		if(body is PlayerScript)
 		{
-			MapAtk();
+			
 		}
 	}
 
